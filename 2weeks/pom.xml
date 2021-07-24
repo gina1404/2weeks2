@@ -204,6 +204,13 @@
 		    <version>2.12.3</version>
 		</dependency>
 		
+		<!-- xmlMapper -->
+		<dependency>
+	<groupId>com.fasterxml.jackson.dataformat</groupId>
+	<artifactId>jackson-dataformat-xml</artifactId>
+	<version>2.10.1</version>
+</dependency>
+		
 		<!-- 웹소켓 모듈 적용 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
