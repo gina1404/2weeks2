@@ -25,7 +25,7 @@
 			</ul>
 			<ul>= 오픈 채팅</ul>
 			<ul>= 챗봇</ul>
-			<ul>= 관리자</ul>
+			<ul><a class="" href="${path }/admin/adminPageList">= 관리자</a></ul>
 	</div>		
 </section>
 		
