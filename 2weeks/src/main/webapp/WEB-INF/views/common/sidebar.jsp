@@ -10,7 +10,7 @@
 				<li><a class="" href="${path }/covidUpdate/domestic.do">국내 확산 현황</a></li>
 				<li>국내 백신 접종 현황</li>
 				<li>해외 감염/접종 현황</li>
-				<li>보도자료 및 뉴스</li>
+				<li><a class="" href="${path }/covidUpdate/report.do">보도자료 및 뉴스</a></li>
 			</ul>
 			<ul>= 코로나 정보
 				<li>기본 정보, 자가진단</li>
