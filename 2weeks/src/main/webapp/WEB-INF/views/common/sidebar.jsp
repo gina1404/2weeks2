@@ -21,7 +21,7 @@
 			<ul>= 지식인</ul>
 			<ul>= 커뮤니티
 				<li>인증</li>
-				<li>자유</li>
+				<li><a class="" href="${path }/board/freeBoard.do">자유</a></li>
 			</ul>
 			<ul>= 오픈 채팅</ul>
 			<ul>= 챗봇</ul>
