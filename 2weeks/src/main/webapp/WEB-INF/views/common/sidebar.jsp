@@ -9,7 +9,7 @@
 		<ul>= 코로나 감염 현황
 				<li><a class="" href="${path }/covidUpdate/domestic.do">국내 확산 현황</a></li>
 				<li>국내 백신 접종 현황</li>
-				<li>해외 감염/접종 현황</li>
+				<li><a class="" href="${path }/covid/overseas.do">해외 감염/접종 현황</a></li>
 				<li>보도자료 및 뉴스</li>
 			</ul>
 			<ul>= 코로나 정보
