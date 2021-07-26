@@ -1,4 +1,4 @@
-package com.twoweeks.spring.covid.domestic.model.Service;
+package com.twoweeks.spring.covid.domestic.model.service;
 
 import java.net.URI;
 
