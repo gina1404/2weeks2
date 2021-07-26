@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+<style>
+	.sidebar-default {
+        width:100%;
+        overflow: hidden;
+		left:0;
+	}
+	.wrap_sub_list{
+		margin:0;
+		padding:0;
+        background-color: #E1E6FF;
+	}
+	.sidebar-list{
+        align-items: center;
+        display: flex;
+        height: 40px;
+        cursor:point;
+        width:100%;
+        padding-left:5px;
+	}
+	.sidebar-list-hide{
+		display:none;
+        width:100%;
+	}
+
+	.sidebar-list-sub{
+        align-items: center;
+        display: flex;
+        height: 40px;
+        width:100%;
+        padding-left:20px;
+	}
+	.sidebar-icon {
+        height: 24px;
+        width: 24px;
+	}
+	.sidebar-title {
+        padding-left: 10px;
+	}
+    .sidebar-divider {
+        height: 4px;
+        width:100%;
+	}
+
+	
+</style>

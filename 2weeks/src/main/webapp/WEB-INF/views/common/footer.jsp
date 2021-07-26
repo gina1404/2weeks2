@@ -7,8 +7,6 @@
 		<footer>
 			<p>2weeks footer</p>
 		</footer>
-	</div>
-	
 
 
 </body>
