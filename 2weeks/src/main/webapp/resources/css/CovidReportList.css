@@ -1,0 +1,25 @@
+@charset "EUC-KR";
+
+p{
+	font-size: 13px;
+    margin-left: 10px;	
+}
+span{
+	color:red;	
+}
+#reportTab{
+	font-size: 13px;	
+}
+table th{
+	font-weight: bolder;
+	text-align: center;	
+}
+table td{
+	text-align: center;	
+}
+td:nth-child(2) {
+	text-align: left;
+}
+#reportPageBar{
+	text-align: center;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="newsReport">
+
+	<insert id="insertReport">
+		INSERT INTO NEWS_REPORT VALUES(#{no}, #{title}, #{team}, #{attachment}, #{date})
+	</insert>
+
+	<select id="selectReportList" resultMap="newsReportMap">
+		SELECT * FROM NEWS_REPORT
+	</select>
+
+	<select id="reportListCount" resultType="_int">
+		SELECT COUNT(*) FROM NEWS_REPORT
+	</select>
+	
+	<resultMap type="newsReport" id="newsReportMap">
+		<id column="report_no" property="no" />
+		<id column="report_date" property="date" />
+	</resultMap>
+
+</mapper>

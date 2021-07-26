@@ -4,5 +4,6 @@
 	<typeAliases>
 		<typeAlias type="com.twoweeks.spring.user.model.vo.User" alias="user"/>
 		<typeAlias type="com.twoweeks.spring.common.StringArrayTypeHandler" alias="strArr"/>
+		<typeAlias type="com.twoweeks.spring.covid.report.model.vo.NewsReport" alias="newsReport"/>
 	</typeAliases>
 </configuration>
