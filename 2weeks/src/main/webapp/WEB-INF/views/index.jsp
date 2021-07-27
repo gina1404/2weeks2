@@ -30,4 +30,7 @@
 	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 	
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+
