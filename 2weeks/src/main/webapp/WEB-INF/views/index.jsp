@@ -7,15 +7,27 @@
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-<main id="home">		
-	<section id="home-covid-domestic">test</section>
-	<section id="home-covid-global"></section>
-	<section id="home-covid-chart"></section>
+<section class="container">		
+	<section id="home-covid-domestic" style="display:inline-block;width:45%; border:1px solid green;" >
+		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 1</div>
+		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 2</div>
+		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 3</div>
+		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 4</div>
+	</section>
+	<section id="home-covid-global" style="display:inline-block;width:45%;border:1px solid green;" >
+		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 1</div>
+		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 2</div>
+		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 3</div>
+		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 4</div>
+	</section>
+	<section id="home-covid-chart" style="width:800px; height:500px; border:1px solid green;">
+		
+	</section>
 	<section id="home-report&news"></section>
 	<section id="home-community"></section>
-</main>
+</section>
 	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
-		
-<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
+	
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
