@@ -10,14 +10,12 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
-<link href="${pageContext.request.contextPath }/resources/css/center.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/resources/css/covidCenter.css" rel="stylesheet" />
 
-<main>
-	<section id="content">
-		<h2>선별진료소 지도</h2>
-	
-		<div id="map" style="width:800px;height:550px;"></div>
-	</section>
+<main>	
+	<h2>선별진료소 지도</h2>
+
+	<div id="map" style="width:800px;height:550px;"></div>	
 </main>
 
 <script>
