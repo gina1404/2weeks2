@@ -1,6 +1,10 @@
 package com.twoweeks.spring.overseas.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +27,19 @@ public class CovidOverseasController {
 	private CovidOverseasService service;
 	
 	@RequestMapping("/covid/overseas.do")
-	public ModelAndView OverseasList(ModelAndView mv) {
-		ResponseEntity<String> responseEntity = service.getApi();
-		Response response = service.parser(responseEntity.getBody());
+	public ModelAndView OverseasList(ModelAndView mv,HttpServletRequest hs) {
+	
 		
-		List<Item> items = response.getBody().getItems();
-		
-		mv.addObject("items", items);
-		mv.setViewName("covidUpdate/overseas");
+			ResponseEntity<String> responseEntity = service.getApi();
+			Response response = service.parser(responseEntity.getBody());
+			
+			List<Item> items = response.getBody().getItems();
+			
+			mv.addObject("items", items.get(0).getNationNm());
+			
+			mv.setViewName("covidUpdate/overseas");
+			System.out.println(items.get(1).getAreaNmCn());
+			System.out.println(items.get(1).getNationNm());
 		return mv;
 	}
 

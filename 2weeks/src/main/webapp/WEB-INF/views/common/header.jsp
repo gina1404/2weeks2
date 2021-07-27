@@ -15,22 +15,37 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="${path }/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/common/header.css">
 </head>
-<body>
-
-<div id="container">
-	<header>
-		<div id="search"  style="display:inline-block;">
-			<input type="text"/> 검색
+<body style="margin:0; padding:0;">
+	<header id="header">
+		<!-- 로고 -->
+		<div class="header-logo-area"><div class="header-logo">2weeks</div></div>
+				
+		<!-- 검색 -->
+		<div class="header-search-area">
+			<input type="text" class="header-search">
+			<img class="icon-header"src="${path }/resources/images/icons/search.svg"/>
 		</div>
-		<div id="darkmode"  style="display:inline-block;">
-			<a href="">다크모드</a>
-		</div>
-		<div id="multiLanguage"  style="display:inline-block;">
-			<a href="">다국어</a>
-		</div>
-		<div id="profile"  style="display:inline-block;">
-			<a href="">프로필 사진</a>
-		</div>
-	</header>
-</div>
+	            
+		<!-- 기본 아이콘 -->
+		<div class="header-icon-area">
+			<div>
+				<img class="header-divider" src="${path }/resources/images/icons/divider-virtical.svg"/>
+			</div>
+			<div class="header-icon">
+				<img class="" src="${path }/resources/images/icons/darkmode.svg" />
+			</div>
+			<div class="header-icon">
+				<img class="" src="${path }/resources/images/icons/language.svg"/>  
+				</div>
+	                <div class="header-profile-text">join us</div>
+	                <div class="header-profile-icon">
+	                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
+	                </div>
+	                <!-- member profile 사진 받아올 경우 -->
+	                <div class="header-profile-photo">
+	                	<img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
+	                </div>
+	            </div>
+	</header>     

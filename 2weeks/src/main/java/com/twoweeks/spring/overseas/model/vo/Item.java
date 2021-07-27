@@ -9,7 +9,7 @@ public class Item {
 
 	private int totalCount;
 	private int SEQ;
-	private Date stdDay;
+	private String stdDay;
 	private String areaNm;
 	private String areaNmEn;
 	private String areaNmCn;
@@ -19,7 +19,7 @@ public class Item {
 	private int natDefCnt;
 	private int natDeathCnt;
 	private Double natDeathRate;
-	private Date createDt;
-	private Date updateDt;
+	private String createDt;
+	private String updateDt;
 	
 }

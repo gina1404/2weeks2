@@ -1,14 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<p>
-	
-	</p>
-</body>
-</html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<c:set var="path" value="${pageContext.request.contextPath }"/>    
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param name="title" value="2weeks"/>
+</jsp:include>
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+<style>
+
+	.st-mainbar{
+		background-color: gray;
+		border: 1px solid rgb(207,207,207,0,25);
+		box-shadow: rgba(0,0,0,0,024) -1px 1px 1px;
+		z-index: -1;
+		padding: 12px;
+		border-radius: 16px;
+		margin-bottom: 18px;
+	}
+	.st-bar1{
+		margin: 0px 10px;
+		padding: 6px 8px;
+		border-radius: 12px;
+		justify-content: space-around;
+		display: flex;
+		flex-direction: row;
+	}
+	.st-bar-decide{
+		-webkit-box-pack: center;
+	    justify-content: center;
+	    -webkit-box-align: center;
+	    align-items: center;
+	}
+	.st-bar-decide-title{
+		text-align: center;
+		font-size: 12px;
+		opacity: 0.7;
+		margin-bottom: 0px;
+		display: flex;
+		flex-direction: row;
+	}
+	.st-bar-decide-count{
+		text-align: center;
+		font-size: 18px;
+		font-weight: bold;
+		opacity: 1;
+		margin-bottom: 4px;
+		color: rgb(235,83,116);
+		display: flex;
+		flex-direction: row;
+	}
+</style>
+
+<section class="container">
+	<div class="st-mainbar">
+		<div class="st-bar1">
+			<div class="st-bar-decide">
+				<div class="st-bar-decide-title">확진자</div>
+				<div class="st-bar-decide-count">1000</div>
+			</div>
+			<div class="st-bar-death">
+				<div class="st-bar-death-title">사망자</div>
+				<div class="st-bat-death-count">1000</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+
+
+<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
+		

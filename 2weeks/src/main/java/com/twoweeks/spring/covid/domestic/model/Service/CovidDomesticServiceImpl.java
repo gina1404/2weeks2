@@ -1,4 +1,4 @@
-package com.twoweeks.spring.overseas.model.sevice;
+package com.twoweeks.spring.covid.domestic.model.Service;
 
 import java.net.URI;
 
@@ -16,20 +16,18 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twoweeks.spring.covid.domestic.model.vo.Response;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.twoweeks.spring.overseas.model.vo.Response;
-
 @Service
-public class CovidOverseasServiceImpl implements CovidOverseasService{
+public class CovidDomesticServiceImpl implements CovidDomesticService {
 
 	@Override
 	public ResponseEntity<String> getApi() {
-		// TODO Auto-generated method stub
 		Date today = new Date();
 		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
 		System.out.println(date.format(today));
 		String realtoday = date.format(today);
-		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=9pnmHJmbkUpNSmMy%2FGw4uRkhWrEvJq1AIuZmpisXpZ2On4uPUVtQgWKq%2FNYBzMEccRQJLCmov7%2Brh%2BAbJQ4eyg%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+realtoday+"&endCreateDt="+realtoday;
+		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=sklG4ffg0dLw22C3ideuBi5dyS%2FqK5%2F6YymY5LMR9PiSQhzt3w8aqVAwqS70rOvlGVGl7MctP%2BWC1OMzPgjmUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt=20210721&endCreateDt="+realtoday;
 		
 		RestTemplate restTemplate = new RestTemplate(); //API를 호출하기 위한 클래스
 		
@@ -53,8 +51,8 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		}catch(JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		return response;		
+		return response;
 	}
-	
 
+	
 }
