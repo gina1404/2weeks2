@@ -17,7 +17,7 @@
 <script src="${path }/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/header.css">
 </head>
-<body>
+<body style="margin:0; padding:0;">
 	<header id="header">
 		<!-- 로고 -->
 		<div class="header-logo-area"><div class="header-logo">2weeks</div></div>

@@ -3,7 +3,6 @@
 	body{
 		margin:0;
 		padding:0;
-		display: flex;
 	}
 	
 	/* 기본 header, nav, main, aside 영역 나누기  */
@@ -26,29 +25,29 @@
 		left:0;
 		top:60px; /* header 높이에 따라 변경해야 됨 */
 		position:fixed;
+		margin:0;
+		padding:0;
+		height:100%;
 	}
-	main {
-		display: flex;
+	.container {	 
+		margin-left:15%; /* 사이드바 너비만큼 띄움 */
+		margin-top:60px; /* 헤더 높이만큼 띄움 */
 		background-color: #F7F8FC;
-		top:60px; /* header 높이와 동일하게 맞춰줘야 됨 */
-		left:15%; /* 사이드바 너비와 동일하게 맞춰줘야 됨 */
-		position:fixed;
-		min-height:400px;
+		min-height:800px;
 		width:80%; /* 본문 너비 */
-	}
+		padding:15px;
+	}  	
 	#aside {
 		display: flex;
 		background-color: #EEF0FE; 
 		width: 5%; /* 페이지 스크롤 영역 너비 */
-		top:60px; /* header 높이와 동일하게 맞춰줘야 됨 */
+		top:60px; /*  header 높이와 동일하게 맞춰줘야 됨 */
 		right:0;
 		position:fixed;
 		min-height:400px;
-		padding:0;
-		margin:0;
-    }        
-	
-	
+		height:100%;
+    }   
+    
 	/* header css 속성 */
 	.header-logo-area {
 		align-items: center;

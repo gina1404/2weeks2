@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <c:set var="path" value="${pageContext.request.contextPath }"/>     
 
-		<footer>
+		<footer style="color:red;">
 			<p>2weeks footer</p>
 		</footer>
 
