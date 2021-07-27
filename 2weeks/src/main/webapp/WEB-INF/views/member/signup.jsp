@@ -29,8 +29,21 @@
                 <label><input type="radio" name="gender" value="women">여</label><br/>
                 <label><input type="radio" name="gender" value="men">남</label><br/>
                 <input type='tel' name='phone' placeholder="전화번호"/><br/>
-                <input type='email' name='email' placeholder="이메일"/><button>인증</button><br/>
-                <input type="text" name ='emailauth'placeholder='이메일인증번호'/><button>확인</button><br/>
+               <div class="email_box">
+               	<div class="email_input_box">               	
+                	<input class="email_input" type='email' name='email' placeholder="이메일"/>
+                	<button type="button" class="email_check_button">인증번호 전송</button>
+                </div>
+<!--            <div class="email_check_button">
+                	<span>인증번호 전송</span>
+                </div> -->
+                <div class="email_check_input_box" id="email_check_input_fail">
+                	<input class ="email_check_input" type="text" name ='emailcheck 'placeholder='인증번호를 입력해주세요' disabled="disabled"/>
+                </div>
+                <div class="clearfix"></div>
+                    <span id="mail_check_input_box_warn"></span>
+                </div>
+               </div>
                 <button id ='submit' type="submit">회원가입하기 </button>
             </form>
         </div>
@@ -87,6 +100,39 @@
 				}
 			}
 		});
+	});
+	
+	//인증번호 이메일 전송
+	let code = "";
+	$(".email_check_button").click(function(){
+		const email = $(".email_input").val(); //입력이메일
+		const checkBox = $(".email_check_input"); // 인증번호 입력란
+		const box = $(".email_check_input_box"); //인증번호 입력란 box
+		
+		$.ajax({
+			url:'${pageContext.request.contextPath}/member/mailCheck?email='+email,
+		    type:'get',
+		    success:function(data){
+		    	
+		    	console.log(data);
+		    	checkBox.attr("disabled",false);
+		    	box.attr("id","email_check_input_success");
+		    	code = data;		    	
+		    }
+		});
+	});
+	//인증번호 비교
+	$(".email_check_input").blur(function(){
+		const inputCode = $(".email_check_input").val(); //사용자가 입력한 인증번호
+		const checkResult =$("#mail_check_input_box_warn"); //비교 결과
+		
+		if(inputCode==code){ //비교 일치
+			checkResult.html("인증번호가 일치합니다 :)");
+			checkResult.attr("class","correct");
+		}else{ 				//불일치
+			checkResult.html("인증번호를 다시 확인해주세요!");
+			checkResult.attr("class","incorrect");
+		}
 	});
 	
 </script>
