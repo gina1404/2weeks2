@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix ="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <script src="${path }/resources/js/jquery-3.6.0.min.js"></script>
 
@@ -10,28 +13,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.user_Id_errors{
+	color:red;
+}
+</style>
 </head>
 <body>
 	<section id="signup">   
         <div class="signup">
             회원가입 테스트
-            <form action="" class="signup__form">
+            <form:form modelAttribute="member" class="signup form" method="post" action="${path}/signup">
                 프로필 사진 <button>등록</button><br/>
-                <input type='text' id='user_id' name='userId' placeholder="아이디"/><br/>
+                <form:errors path='user_Id' class="user_Id_errors"/><br/>
+                <form:input path='user_Id' type='text' id='user_id' name='user_Id' placeholder="아이디"/><br/>
                 <div id="id_check"></div>
-                <input id ='pw1' type='password' name='password'placeholder="비밀번호"/><br/>
-                <input id ='pw2' type='password' name='password2' placeholder="비밀번호 확인"/><br/>
+               
+                <input id ='pw1' type='password' name='user_Pw' placeholder="비밀번호"/><br/>
+                <input id ='pw2' type='password' name='user_Pw' placeholder="비밀번호 확인"/><br/>
                 <div id="pw_success">비밀번호가 일치합니다.</div> 
                 <div id="pw_fail">비밀번호가 일치하지 않습니다.</div>
-                <input type='text' name='userName' placeholder="이름"/><br/>
-                <input type='text' name='nickName' placeholder="닉네임"/><br/>
+                <input type='text' name='user_Nm' placeholder="이름"/><br/>
+                <input type='text' name='user_Nic' placeholder="닉네임"/><br/>
                 성별선택<br/>
-                <label><input type="radio" name="gender" value="women">여</label><br/>
-                <label><input type="radio" name="gender" value="men">남</label><br/>
+                <label><input type="radio" name="user_Gender" value="women"/>여</label><br/>
+                <label><input type="radio" name="user_Gender" value="men"/>남</label><br/>
                 <input type='tel' name='phone' placeholder="전화번호"/><br/>
                <div class="email_box">
                	<div class="email_input_box">               	
-                	<input class="email_input" type='email' name='email' placeholder="이메일"/>
+                	<input class="email_input" type='email' name='user_Email' placeholder="이메일"/>
                 	<button type="button" class="email_check_button">인증번호 전송</button>
                 </div>
 <!--            <div class="email_check_button">
@@ -45,7 +55,7 @@
                 </div>
                </div>
                 <button id ='submit' type="submit">회원가입하기 </button>
-            </form>
+            </form:form>
         </div>
     </section>
 
@@ -56,7 +66,7 @@
 		const user_id=$('#user_id').val();
 		
 		$.ajax({
-			url : '${pageContext.request.contextPath}/member/idCheck?userId='+user_id,
+			url : '${pageContext.request.contextPath}/member/idCheck?user_Id='+user_id,
 			type : 'get',
 			success: function(data) {
 				console.log(data);

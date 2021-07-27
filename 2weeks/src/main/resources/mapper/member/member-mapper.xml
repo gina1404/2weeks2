@@ -5,5 +5,13 @@
 	<select id="idCheck" resultType="int">
 		SELECT COUNT(*) FROM MEMBER2 WHERE USER_ID = #{userId}
 	</select>
+	
+	<insert id="insertMember">
+		INSERT INTO MEMBER2(USER_ID,USER_NM,USER_PW,USER_NIC,USER_GENDER,USER_PHONE,USER_EMAIL,ENROLL_DT)
+			VALUES(#{user_Id},#{user_Nm},#{user_Pw},#{user_Nic},#{user_Gender},#{user_Phone},#{user_Email},SYSDATE)
+		
+
+	</insert>
+
   
 </mapper>

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.twoweeks.spring.member.model.dao.MemberDao;
+import com.twoweeks.spring.member.model.vo.Member;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -19,6 +20,12 @@ public class MemberServiceImpl implements MemberService {
 	public int idCheck(String userId) {
 		return memberDao.idCheck(userId,session);
 	}
+
+	@Override
+	public int insertMember(Member member) {		
+		return memberDao.insertMember(member,session);
+	}
+	
 	
 
 }
