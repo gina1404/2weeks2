@@ -211,7 +211,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>    
 		
-		<!-- 메일 인증을 위한 라이브러리 mail, spring-context-support -->
+		<!-- 메일 인증을 위한 라이브러리 mail, spring-context-support (동욱)-->
 		<dependency>
 		    <groupId>javax.mail</groupId>
 		    <artifactId>mail</artifactId>
@@ -224,9 +224,20 @@
 		    <version>${org.springframework-version}</version>
 		</dependency>
 		
+		<!-- 유효성 검사를 위한 라이브러리 validation-api, hibernate-validator (동욱) -->
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		    <version>2.0.1.Final</version>
+		</dependency>
 		
+		<dependency>
+		    <groupId>org.hibernate.validator</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>6.2.0.Final</version>
+		</dependency>
 		
-		 
+
 	</dependencies>
     <build>
         <plugins>
