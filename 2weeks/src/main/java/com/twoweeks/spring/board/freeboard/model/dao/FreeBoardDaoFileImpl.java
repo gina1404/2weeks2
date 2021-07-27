@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class FreeBoardDaoImpl implements FreeBoardDao{
+public class FreeBoardDaoFileImpl implements FreeBoardFileDao{
 
 	@Autowired
 	private SqlSession session;
