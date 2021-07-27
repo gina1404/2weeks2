@@ -9,7 +9,7 @@
 	/* 기본 header, nav, main, aside 영역 나누기  */
 	#header{
 		align-items: center;
-		background-color: #EEF0FE;
+		background-color: #F7F8FC;
 		display: flex;
 		width: 100%;
 		position:fixed;
@@ -29,7 +29,7 @@
 	}
 	main {
 		display: flex;
-		background-color: darkorange;
+		background-color: #F7F8FC;
 		top:60px; /* header 높이와 동일하게 맞춰줘야 됨 */
 		left:15%; /* 사이드바 너비와 동일하게 맞춰줘야 됨 */
 		position:fixed;
@@ -37,14 +37,15 @@
 		width:80%; /* 본문 너비 */
 	}
 	#aside {
-		float:right;
 		display: flex;
-		background-color: blue;
+		background-color: #EEF0FE; 
 		width: 5%; /* 페이지 스크롤 영역 너비 */
 		top:60px; /* header 높이와 동일하게 맞춰줘야 됨 */
-		vertical-align: middle;
 		right:0;
+		position:fixed;
 		min-height:400px;
+		padding:0;
+		margin:0;
     }        
 	
 	
