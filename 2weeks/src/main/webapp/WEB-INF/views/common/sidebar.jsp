@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <<<<<<< HEAD
 <c:set var="path" value="${pageContext.request.contextPath }"/>   
-
+<%-- 
 <section id="content">
 	<div id="sidebar">
 		<ul>= 코로나 감염 현황
@@ -28,7 +28,7 @@
 			<ul>= 챗봇</ul>
 			<ul>= 관리자</ul>
 	</div>		
-</section>
+</section> --%>
 		
 
 
@@ -60,7 +60,9 @@
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">News & Reports</div>
+			                <a class="" href="${path }/covidUpdate/report.do">
+			                	<div class="sidebar-title">News & Reports</div>
+		                	</a>
 			            </div>
 		            </div>
 				</div>  
@@ -82,7 +84,9 @@
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Covid Test</div>
+			                <a class="" href="${path }/covidInfo/center.do">
+			                	<div class="sidebar-title">Covid Test</div>
+			                </a>
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>

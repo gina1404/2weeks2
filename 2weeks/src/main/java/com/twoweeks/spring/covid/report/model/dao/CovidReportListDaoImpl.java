@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.twoweeks.spring.covid.report.model.vo.Center;
 import com.twoweeks.spring.covid.report.model.vo.NewsReport;
 
 @Repository
@@ -25,6 +26,11 @@ public class CovidReportListDaoImpl implements CovidReportListDao{
 	@Override
 	public int reportListCount(SqlSession session) {
 		return session.selectOne("newsReport.reportListCount");
+	}
+
+	@Override
+	public int insertCenterList(SqlSession session, Center c) {
+		return session.insert("center.insertCenter", c);
 	}
 
 	

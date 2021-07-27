@@ -3,11 +3,16 @@ package com.twoweeks.spring.covid.report.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twoweeks.spring.common.CovidCenterExcelRead;
 import com.twoweeks.spring.covid.report.model.dao.CovidReportListDaoImpl;
+import com.twoweeks.spring.covid.report.model.vo.Center;
 import com.twoweeks.spring.covid.report.model.vo.NewsReport;
 
 import lombok.Getter;
@@ -23,6 +28,7 @@ public class CovideReportListServiceImpl implements CovideReportListService{
 	
 	List<NewsReport> reportList=new ArrayList();
 	
+//	@Override
 //	@PostConstruct
 //	public int insertReportList() throws IOException {
 //		int result=0;
@@ -50,12 +56,30 @@ public class CovideReportListServiceImpl implements CovideReportListService{
 //		return result;
 //	}
 	
+	@Override
 	public List<NewsReport> reportList(int cPage, int numPerpage){		
 		return dao.selectReportList(session, cPage, numPerpage);			
 	}
 	
+	@Override
 	public int selectReportCount() {
 		return dao.reportListCount(session);
 	}
+	
+	/////////////////////////
+	//////////center/////////
+	//@Override
+	@PostConstruct
+	public int insertCenterList(HttpServletRequest req) {
+		int result=0;
+		CovidCenterExcelRead excelReader=new CovidCenterExcelRead();
+		String path=req.getServletContext().getRealPath("/resources/upload/covidCenterList.xls");
+		List<Center> list= excelReader.xlsToCenterList(path);
+		for(Center c : list) {
+			result=dao.insertCenterList(session, c);
+		}
+		return result;
+	}
+	
 		
 }

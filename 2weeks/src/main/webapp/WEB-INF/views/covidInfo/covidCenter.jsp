@@ -12,11 +12,11 @@
 
 <link href="${pageContext.request.contextPath }/resources/css/covidCenter.css" rel="stylesheet" />
 
-<main>	
+<section class="container">	
 	<h2>선별진료소 지도</h2>
 
 	<div id="map" style="width:800px;height:550px;"></div>	
-</main>
+</section>
 
 <script>
 	// var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -49,5 +49,5 @@
 
 </script>
 
-
+<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

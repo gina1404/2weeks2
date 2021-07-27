@@ -1,8 +1,12 @@
 package com.twoweeks.spring.covid.report.model.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Center {
 
 	private int centerNo;
@@ -10,7 +14,6 @@ public class Center {
 	private String sido;
 	private String sigungu;
 	private String address;
-	private String phone;
-	private String collectionYN;
+	private String phone;	
 	
 }
