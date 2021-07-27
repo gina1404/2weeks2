@@ -30,7 +30,7 @@ public class CovidReportListController{
 				
 		mv.addObject("pageBar", PageFactory.getPageBar(totalData, cPage, numPerpage, "report.do"));
 		
-		mv.setViewName("covidUpdate/reportList");
+		mv.setViewName("covidUpdate/newsReportList");
 		
 		return mv;
 	}

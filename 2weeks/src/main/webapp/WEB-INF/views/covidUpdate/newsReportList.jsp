@@ -15,34 +15,36 @@
 
 <link href="${pageContext.request.contextPath }/resources/css/CovidReportList.css" rel="stylesheet" />
 
-<section id="content">
-	
-	<h3>보도자료</h3>
-	
-	<p>총 <span>${totalContents }</span>건</p>	
-	<table id="reportTab" class="striped">
-		<tr id="reportTh">
-			<th>번호</th>
-			<th>제목</th>
-			<th>담당</th>
-			<th>작성일시</th>
-			<th>첨부파일</th>
-		</tr>		
-		<c:forEach var="r" items="${reportList }"> 				
-			<tr>
-				<td>${r.no }</td>
-				<td>${r.title }</td>
-				<td>${r.team }</td>
-				<td>${r.date }</td>
-				<td>${r.attachment !=null?"💾":" "}
-			</tr>
-		</c:forEach>
-	</table>
-	
-	<div id="reportPageBar">
-		${pageBar }
-	</div>
-	
-</section>
+<main>
+	<section id="content">
+		
+		<h4>보도자료</h4>
+		
+		<p>총 <span>${totalContents }</span>건</p>	
+		<table id="reportTab" class="striped">
+			<tr id="reportTh">
+				<th>번호</th>
+				<th>제목</th>
+				<th>담당</th>
+				<th>작성일시</th>
+				<th>첨부파일</th>
+			</tr>		
+			<c:forEach var="r" items="${reportList }"> 				
+				<tr>
+					<td>${r.no }</td>
+					<td>${r.title }</td>
+					<td>${r.team }</td>
+					<td>${r.date }</td>
+					<td>${r.attachment !=null?"💾":" "}
+				</tr>
+			</c:forEach>
+		</table>
+		
+		<div id="reportPageBar">
+			${pageBar }
+		</div>
+		
+	</section>
+</main>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

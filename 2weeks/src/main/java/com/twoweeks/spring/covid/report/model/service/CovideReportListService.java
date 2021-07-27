@@ -11,5 +11,6 @@ public interface CovideReportListService {
 	
 	List<NewsReport> reportList(int cPage, int numPerpage) throws IOException;
 	
-	int selectReportCount();
+	int selectReportCount();	
+	
 }

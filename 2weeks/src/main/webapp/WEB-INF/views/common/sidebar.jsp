@@ -15,7 +15,7 @@
 			<ul>= 코로나 정보
 				<li>기본 정보, 자가진단</li>
 				<li>사회적 거리두기, 자가격리</li>
-				<li>검사</li>
+				<li><a class="" href="${path }/covidInfo/center.do">검사</a></li>
 				<li>백신</li>
 			</ul>
 			<ul>= 지식인</ul>

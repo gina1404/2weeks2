@@ -1,21 +1,17 @@
 package com.twoweeks.spring.covid.report.model.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.ibatis.session.SqlSession;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.twoweeks.spring.covid.report.model.dao.CovidReportListDaoImpl;
 import com.twoweeks.spring.covid.report.model.vo.NewsReport;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Service
 public class CovideReportListServiceImpl implements CovideReportListService{		
@@ -61,5 +57,5 @@ public class CovideReportListServiceImpl implements CovideReportListService{
 	public int selectReportCount() {
 		return dao.reportListCount(session);
 	}
-	
+		
 }
