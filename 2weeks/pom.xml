@@ -211,6 +211,15 @@
 	<version>2.10.1</version>
 </dependency>
 		
+		<!-- 썸네일 생성 기능 -->
+	<dependency>
+		<groupId>org.imgscalr</groupId>
+		<artifactId>imgscalr-lib</artifactId>
+		<version>4.2</version>
+	</dependency>
+
+
+		
 		<!-- 웹소켓 모듈 적용 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
