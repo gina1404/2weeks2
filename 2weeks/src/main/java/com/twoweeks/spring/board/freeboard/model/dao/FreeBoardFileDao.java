@@ -5,9 +5,6 @@ import java.util.List;
 public interface FreeBoardFileDao {
 
 	
-	
-	
-	
 	//게시글 첨부파일 추가
 	public void addAttach(String atchNew, int atchNo) throws Exception;
 	

@@ -19,14 +19,14 @@ public class FreeBoardDaoFileImpl implements FreeBoardFileDao{
 	Map<String, Object> paramMap = new HashMap<String, Object>();
 	paramMap.put("atchNew", atchNew);
 	paramMap.put("atchNo", atchNo);
-	session.insert("freeboard.addAttach", paramMap);
+	session.insert("postAttahchment.addAttach", paramMap);
 		
 	}
 
 	@Override
 	public List<String> getAttach(int atchNo) throws Exception {
 		
-		return session.selectList("freeboard.getAttach",atchNo);
+		return session.selectList("postAttahchment.getAttach",atchNo);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class FreeBoardDaoFileImpl implements FreeBoardFileDao{
 		Map<String,Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("atchNew", atchNew);
 		paramMap.put("atchNo",atchNo);
-		session.insert("freeboard.replaceAttach",paramMap);
+		session.insert("postAttahchment.replaceAttach",paramMap);
 		
 		
 		
@@ -42,19 +42,19 @@ public class FreeBoardDaoFileImpl implements FreeBoardFileDao{
 
 	@Override
 	public void deleteAttach(String atchNew) throws Exception {
-		session.delete("freeboard.deleteAttach", atchNew);
+		session.delete("postAttahchment.deleteAttach", atchNew);
 		
 	}
 
 	@Override
 	public void deleteAllAttach(int atchNo) throws Exception {
-		session.delete("freeboard.deleteAllAttach",atchNo);
+		session.delete("postAttahchment.deleteAllAttach",atchNo);
 		
 	}
 
 	@Override
 	public void updateAttachCnt(int atchNo) throws Exception {
-		session.update("freeboard.updateAttachCnt",atchNo);
+		session.update("postAttahchment.updateAttachCnt",atchNo);
 		
 	}
 

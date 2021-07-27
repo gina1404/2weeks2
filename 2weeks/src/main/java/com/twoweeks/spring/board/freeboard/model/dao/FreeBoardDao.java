@@ -6,7 +6,7 @@ import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 
 public interface FreeBoardDao {
 
-	void create(FreeBoard freeBoard) throws Exception;
+	int create(FreeBoard freeBoard) throws Exception;
 	
 	FreeBoard read(int post_Sq) throws Exception;
 	

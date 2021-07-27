@@ -10,12 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class FreeBoardFileController {
 	
 	
-	@GetMapping("/freeboard/freeboardView.do")
-	public ModelAndView freeBoardView(ModelAndView mv) {
-		
-		
-		mv.setViewName("freeBoard/freeBoardView");
-		return mv;
-	}
+	
+	  @GetMapping("/freeboard/fileupload.do") public ModelAndView
+	  freeBoardView(ModelAndView mv) {
+	  
+	  
+	  mv.setViewName("freeBoard/freeBoardView"); return mv; }
+	 
 	
 }
