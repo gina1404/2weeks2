@@ -10,28 +10,31 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class KnowledgeInController {
-	@RequestMapping("/KnowledgeIn/KnowledgeInMain.do") //Æú´õ/ÁÖ¼Ò
+	@RequestMapping("/KnowledgeIn/KnowledgeInMain.do") //ï¿½ï¿½ï¿½ï¿½/ï¿½Ö¼ï¿½
 	public String KnowledgeInMain(){
 		return "KnowledgeIn/KnowledgeInMain";
 	}
 	
-	@RequestMapping("/KnowledgeIn/KnowledgeInList.do") //Æú´õ/ÁÖ¼Ò
+	@RequestMapping("/KnowledgeIn/KnowledgeInList.do") //ï¿½ï¿½ï¿½ï¿½/ï¿½Ö¼ï¿½
 	public String KnowledgeInList(){
 		return "KnowledgeIn/KnowledgeInList";
 	}
 	
-	@RequestMapping("/KnowledgeIn/KnowledgeInA.do") //Æú´õ/ÁÖ¼Ò
+	@RequestMapping("/KnowledgeIn/KnowledgeInA.do") //ï¿½ï¿½ï¿½ï¿½/ï¿½Ö¼ï¿½
 	public String KnowledgeInA(){
 		return "KnowledgeIn/KnowledgeInA";
 
 	}
-	@RequestMapping("/KnowledgeIn/KnowledgeInQ.do") //Æú´õ/ÁÖ¼Ò
+	@RequestMapping("/KnowledgeIn/KnowledgeInQ.do") //ï¿½ï¿½ï¿½ï¿½/ï¿½Ö¼ï¿½
 	public String KnowledgeInQ(){
 		return "KnowledgeIn/KnowledgeInQ";
 	}
-	@RequestMapping("/KnowledgeIn/KnowledgeInMyList.do") //Æú´õ/ÁÖ¼Ò
+	@RequestMapping("/KnowledgeIn/KnowledgeInMyList.do") //ï¿½ï¿½ï¿½ï¿½/ï¿½Ö¼ï¿½
 	public String KnowledgeInMyList(){
 		return "KnowledgeIn/KnowledgeInMyList";
 	}
+
+		
 	
+		
 }

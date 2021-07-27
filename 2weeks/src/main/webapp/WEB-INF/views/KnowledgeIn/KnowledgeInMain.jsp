@@ -165,15 +165,17 @@ top: -10px;
 		cursor:pointer;
 	}
 #knowQ{
+
 font-weight: bold;
 position: relative;
-left: -320px;
+left: -300px;
 
 }
 #knowM{
+
 font-weight: bold;
-
-
+position: relative;
+left:20px;
 }
 
 /* 아이콘 관련 css */
@@ -205,12 +207,13 @@ a:-webkit-any-link {
     color: #fff;
     text-shadow: 0 1px 0 rgb(0 0 0 / 20%);
     font-weight: 300;
-    word-wrap: break-word;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-
+/*     word-wrap: break-word; */
+    /* -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; */
+	border:1px solid red;
     position: relative;
- 
+ 	width:120px;
+ 	height:100px;
 	
   	   
 }
@@ -235,6 +238,7 @@ background :#ffffff;
 float: left;
 position: relative;
 right:-1400px;
+top: 28px;
 }
 
 #searchkn{
@@ -265,6 +269,40 @@ background:#19ce60;
 outline:none;
 float:right;
 color:#ffffff;
+position: relative;
+top:28px;
+left:-16px;
+
+}
+
+.Myqlist{
+position: relative;
+color: #8c8c8c;
+font-family: Pretendard;
+top:-50px;
+right:-1480px;
+}
+.background1{
+background:#EFF2FB;
+
+}
+.background2{
+background:#FFFFFF;
+border:3px solid red;
+ border-radius: 24px;
+}
+
+
+.background3{
+background:#FFFFFF;
+border:3px solid red;
+ border-radius: 24px;
+position:  relative;
+top:10px;
+}
+.paginate{
+position: relative;
+right:-925px;
 }
 </style>
 
@@ -273,15 +311,14 @@ color:#ffffff;
 
 
 
-
-		
-				<a class="best_link" href="" target="_blank">	
+		<div class="background1">
+			
 				<!-- 	<div class="best_background"> -->
 		
-						<img src="${pageContext.request.contextPath}/resources/image/home_panel_expert2.png" alt=""
+						<a href="">	<img src="${pageContext.request.contextPath}/resources/image/home_panel_expert2.png" alt=""
 						width="130px" height="130px">
-							<p class="description">전문의 상담이<br>필요할 땐,<br>지식iN 엑스퍼트</p></a>
-						
+			<div class="description">전문의 상담이<br>필요할 땐,<br>지식iN 엑스퍼트</div></a>
+						<button class="Myqlist">내 질문목록</button>
 				<!-- 	</div> -->
 			
 			
@@ -291,13 +328,14 @@ color:#ffffff;
 
 
 
-	<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
-		<button id="searchkn">검색</button>
+			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
+					<button id="searchkn">검색</button>
+			</div>
+			<button id="Qsearch" >질문하기</button>
+
 	</div>
-<button id="Qsearch" >질문하기</button>
 
-
-
+<div class="background2">
 <div id="knowQ">답변을 기다리는 질문 </div>  <!-- 많이 본 Q&amp;A -->
 
 	
@@ -391,9 +429,9 @@ color:#ffffff;
         </div>
 		<div class="paginate" id="rankingPaging" >
 				
-			<a href="#" class="on" title="선택됨" onclick="">1</a>
+			<a href="" class="on" title="선택됨" onclick="">1</a>
 			
-				<a href="#" onclick="">2</a>
+				<a href="" onclick="">2</a>
 			
 		</div>
 	</div>
@@ -401,8 +439,11 @@ color:#ffffff;
 </div>
 </div>
 
+</div>
 
-<div id="knowM"> 많이 본 Q&amp;A</div>  <!-- 많이 본 Q&amp;A -->
+<div class="background3">
+
+	<div id="knowM"> 많이 본 Q&amp;A</div>  <!-- 많이 본 Q&amp;A -->
 
 
 
@@ -481,7 +522,7 @@ color:#ffffff;
 	</div>
 	
 
-
+</div>
 
 
 
