@@ -2,9 +2,12 @@ package com.twoweeks.spring.overseas.model.sevice;
 
 import java.net.URI;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,10 +20,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.twoweeks.spring.overseas.model.dao.CoivdOverseasDao;
 import com.twoweeks.spring.overseas.model.vo.Response;
 
 @Service
 public class CovidOverseasServiceImpl implements CovidOverseasService{
+	
+	@Autowired
+	private CoivdOverseasDao dao;
+	@Autowired
+	private SqlSession session;
 
 	@Override
 	public ResponseEntity<String> getApi() {
@@ -42,6 +51,7 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		return response;
 	}
 
+
 	@Override
 	public Response parser(String xml) {
 		ObjectMapper xmlMapper = new XmlMapper();
@@ -56,5 +66,10 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		return response;		
 	}
 	
-
+	@Override
+	public int insertGrData(int a) {
+		// TODO Auto-generated method stub
+		return dao.insertGrData(session,a);
+		
+	}
 }

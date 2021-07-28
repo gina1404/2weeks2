@@ -22,10 +22,12 @@
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
 			                <div class="sidebar-title">Vaccination</div>
 			            </div>
+			            <a href="${path }/covid/overseas.do">
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
 			                <div class="sidebar-title">Covid Global</div>
 			            </div>
+			            </a>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
 			                <div class="sidebar-title">News & Reports</div>

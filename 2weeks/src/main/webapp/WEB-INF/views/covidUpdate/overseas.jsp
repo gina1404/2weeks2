@@ -10,7 +10,7 @@
 <style>
 
 	.st-mainbar{
-		background-color: gray;
+		background-color: white;
 		border: 1px solid rgb(207,207,207,0,25);
 		box-shadow: rgba(0,0,0,0,024) -1px 1px 1px;
 		z-index: -1;
@@ -50,21 +50,57 @@
 		display: flex;
 		flex-direction: row;
 	}
+	.st-bar-death{
+		-webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+        display: flex;
+    flex-direction: column;
+}
+	.st-bar-death-title{
+		text-align: center;
+		font-size: 12px;
+		opacity: 0.7;
+		margin-bottom: 0;
+		    display: flex;
+    flex-direction: row;
+	}
+	.st-bat-death-count{
+		text-align: center;
+		font-size: 18px;
+    font-weight: bold;
+    opacity: 1;
+    margin-bottom: 4px;
+    display: flex;
+    flex-direction: row;
+	}
 </style>
 
 <section class="container">
+	<h2 style="text-align: center;">전세계 해외 정보</h2>
 	<div class="st-mainbar">
 		<div class="st-bar1">
 			<div class="st-bar-decide">
 				<div class="st-bar-decide-title">확진자</div>
-				<div class="st-bar-decide-count">1000</div>
+				<div class="st-bar-decide-count">${totalDef }명</div>
 			</div>
 			<div class="st-bar-death">
 				<div class="st-bar-death-title">사망자</div>
-				<div class="st-bat-death-count">1000</div>
+				<div class="st-bat-death-count">${totalDet }명</div>
 			</div>
 		</div>
 	</div>
+	<h2 style="text-align: center;">오늘의 확진자 수</h2>
+	<div>
+		<div>
+			<div>오늘의 확진자수</div>
+			<div></div>
+		</div>
+	</div>
+	
+	
+	
 
 </section>
 
