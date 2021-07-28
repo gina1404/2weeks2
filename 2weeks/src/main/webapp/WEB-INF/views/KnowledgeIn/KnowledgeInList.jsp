@@ -8,17 +8,21 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
+
 <style>
 
 .question{
-border: 1px solid blue;
-
+/* border: 1px solid blue; */
+position: relative;
+top:0px;
+background-color:white;
 }
 
 .answer{
-border: 1px solid blue;
+/* border: 1px solid blue; */
 position: relative;
 top: 10px;
+background-color:white;
 }
 #Qsearch{
 width:100px;
@@ -30,7 +34,7 @@ float:right;
 color:#ffffff;
 position: relative;
 top:-15px;
-left:-16px;
+left:-20px;
 
 }
 #Qcheck{
@@ -43,7 +47,7 @@ float:right;
 color:#ffffff;
 position: relative;
 top:0px;
-left:-16px;
+left:-20px;
 
 }
 #searchBar{
@@ -53,7 +57,7 @@ border : 1px solid #19ce60;
 background :#ffffff;
 float: left;
 position: relative;
-right:-1400px;
+right:-1050px;
 top: -15px;
 }
 .naver{
@@ -108,7 +112,7 @@ right:-20px;
 .knowmenu {
     list-style: none;
     position: relative;
-    right :-1400px;
+    right :-1000px;
     top :-70px;
 } 
 .knowmenu li{
@@ -151,30 +155,50 @@ font-family: pretendard;
 
 position: relative;
 top : -50px;
-right:-1200px;
+right:-800px;
 font-size: 13px;
 }
 
-.content{
+.content1{
 position: relative;
 right: -100px;
-border: 1px solid red;
+/* border: 1px solid red; */
+height:300px;
 
+}
+.content2{
+position: relative;
+right: -100px;
+/* border: 1px solid red; */
+height:500px;
 
 }
 #red{
+
+ 	 color: red;
+    background-color: transparent !important;
+    outline :0;
+    border : 0;
+    position: relative;
+    right: -1400px;
+    top:-30px;
+    font-family: pretendard;
+    font-weight: bold;
+    font-size: 15px;
+}
+#red1{
 
   color: red;
     background-color: transparent !important;
     outline :0;
     border : 0;
     position: relative;
-    right: -1800px;
+    right: -1400px;
+    top:-30px;
     font-family: pretendard;
     font-weight: bold;
     font-size: 15px;
 }
-
 #update{
    background-color: transparent !important;
     outline :0;
@@ -195,7 +219,7 @@ border: 1px solid red;
 }
 .qbutton{
    position: relative;
-   right: -1700px;
+   right: -1300px;
 
 }
 .Adoption_completed{
@@ -222,7 +246,7 @@ color: #A4A4A4;
 </style>
 
 
-<section id="content">
+<section class="container">	
 	<div class="question"><p id="no">NO.129	</p> 
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
@@ -232,7 +256,7 @@ color: #A4A4A4;
 					<div>	<span class="QA">Q</span> <span class="title">코로나 백신 접종 예약</span> <span class="point">100</span>
 			
 							<ul class="knowmenu"> 
-					<li>코로나19</li>
+					<li style="color: orange;">코로나19</li>
 					<li>백신</li>
 					<li>확진</li>
 					<li>해외</li>
@@ -247,14 +271,14 @@ color: #A4A4A4;
 			
 					</div>
 			
-			<div class="content">지금 50대부터 코로나 백신 접종 예약 진행중인것으로 아는데요 다음주에도 접종예정인지 궁금합니다.<br><br>
+			<div class="content1">지금 50대부터 코로나 백신 접종 예약 진행중인것으로 아는데요 다음주에도 접종예정인지 궁금합니다.<br><br>
 
  				부모님 코로나 백신 접종 예약 해드리고싶은데 절차같은게 따로 나와있지 않기때문에...<br><br>
 
  					코로나 백신 접종 예약 끝난건 아니겠죠?</div>
  					
  					
-				<button id="red">신고</button><br>
+				<button id="red1">신고</button><br>
 						<div class="qbutton">
 									<button id="update">수정</button>|<button id="delete">삭제</button> <button id="qanswer">답변하기</button>
 						</div>
@@ -273,7 +297,7 @@ color: #A4A4A4;
 					<div>	<span class="QA">A</span> <span class="title">코로나 백신 접종 예약</span> <span class="Adoption_completed">채택완료</span>
 			
 							<ul class="knowmenu"> 
-					<li>코로나19</li>
+				<li style="color: orange;">코로나19</li>
 					<li>백신</li>
 					<li>확진</li>
 					<li>해외</li>
@@ -288,7 +312,7 @@ color: #A4A4A4;
 			
 					</div>
 			
-			<div class="content">
+			<div class="content2">
 
 		지금 현재 접종 진행중입니다. 예약시스템을 살펴보면 간단한 인증을통해서 주변 근처 병원을 확인하고 백신조회를 하게됩니
 
@@ -311,5 +335,6 @@ color: #A4A4A4;
 			
 			
 </section>
-		
+<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>		
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+

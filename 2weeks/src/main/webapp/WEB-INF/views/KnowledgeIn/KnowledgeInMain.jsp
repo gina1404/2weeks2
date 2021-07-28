@@ -7,11 +7,13 @@
 	<jsp:param name="title" value="지식인나의질의응답"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 <style>
 #rankingChart{
 	position: relative;
-	top: -10px;
+	top: -15px;
 }
+
 .ranking_section .ranking_list {
     box-sizing: border-box;
     float: left;
@@ -22,6 +24,7 @@
         list-style: none;
     
 }
+
 .ranking_section .ranking_item {
     position: relative;
     margin-top: 14px;
@@ -50,7 +53,7 @@
     padding: 0 0 0 20px;
 }
 
-/* 조회수 */
+ /* 조회수 */
 .ranking_section .ranking_item .recommend_num {
     color: #5885ce;
     position:relative;
@@ -66,10 +69,10 @@
     font-size: 12px;
     line-height: 1.6;
     letter-spacing: -0.5px;
-}
+} 
 
 /*질문 목록에서의 번호 */
-.ranking_section .ranking_item .no {
+ .ranking_section .ranking_item .no {
     position: absolute;
     top: -8px;
     left: 1px;
@@ -80,11 +83,11 @@
     font-weight: bold;
     color: #26b049;
   
-}
+} 
 
 .section_headings__step1 {
     margin-top: 19px;
-}
+} 
 /* 질문 목록에서의 질문제목들  */
 .ranking_section .ranking_item .ranking_title {
     display: block;
@@ -98,16 +101,16 @@
     position : relative;
     top:-12px;
     
-}
+} 
 
 
  a {
     color: #000;
     text-decoration: none;
 } 
-
+ 
 /*질문 목록에서 답변*/
-.ranking_section .ranking_item .text {
+ .ranking_section .ranking_item .text {
     display: block;
     overflow: hidden;
     position: relative;
@@ -117,7 +120,7 @@
     white-space: nowrap;
     bottom: -5px;
     right: -14px;
-}
+} 
 
 
 .ranking_section .ranking_item .recommend_num+.reply_num:before {
@@ -128,7 +131,7 @@
     margin: 0 9px 0 9px;
     background-color: #e5e5e5;
     vertical-align: middle;
-}
+}   
 
  /* 답변수 색깔 */
 .ranking_section .ranking_item .reply_num {
@@ -136,10 +139,10 @@
      position: relative;
     right: -180px;
       bottom : -10px;
-}               
-.ranking_section .ranking_item .text:before {
+}             
+.ranking_section .ranking_item .text:before { */
  /*    content: ''; */
-    display: inline-block;
+   display: inline-block;
     width: 6px;
     height: 6px;
     border: 1px solid #ccc;
@@ -155,7 +158,7 @@ font-size:13px;
 position: relative;
 top: -10px;
 
-}
+}  
 
 
 
@@ -164,19 +167,20 @@ top: -10px;
 		color: orange;
 		cursor:pointer;
 	}
+	
 #knowQ{
 
 font-weight: bold;
-position: relative;
-left: -300px;
+
+
 
 }
+
 #knowM{
 
 font-weight: bold;
-position: relative;
-left:20px;
-}
+
+} 
 
 /* 아이콘 관련 css */
 
@@ -196,32 +200,32 @@ a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
 }
-
+ 
 .description {
   
    
-   
+
  	font-family: Pretendard;
     font-size: 18px;
     line-height: 24px;
     color: #fff;
     text-shadow: 0 1px 0 rgb(0 0 0 / 20%);
     font-weight: 300;
-/*     word-wrap: break-word; */
-    /* -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical; */
-	border:1px solid red;
     position: relative;
- 	width:120px;
+    right:-10px;
+ 	width:130px;
  	height:100px;
+	top:-100px;
 	
   	   
 }
- img {
+
+#expert {
     max-width: 100%;
     visibility: visible;
     position:relative;
     bottom: -100px;
+	top: -10px;
     background-color:#6B66FF;
     border-radius: 24px;
 }
@@ -235,11 +239,20 @@ height:38px;
 width:322px;
 border : 1px solid #19ce60;
 background :#ffffff;
-float: left;
+float: right;
 position: relative;
-right:-1400px;
-top: 28px;
-}
+top: 5px;
+right: 150px;
+} 
+.naver{
+font-size :16px;
+width:250px;
+padding:10px;
+border:0px;
+outline:none;
+float:left;
+position: absolute;
+} 
 
 #searchkn{
 
@@ -252,16 +265,10 @@ float:right;
 color:#ffffff;
 
 }
-.naver{
-font-size :16px;
-width:250px;
-padding:10px;
-border:0px;
-outline:none;
-float:left;
-} 
+
 
 #Qsearch{
+
 width:100px;
 height:40px;
 border :0px;
@@ -270,52 +277,51 @@ outline:none;
 float:right;
 color:#ffffff;
 position: relative;
-top:28px;
-left:-16px;
+right:-300px;
+top :5px;
 
 }
 
 .Myqlist{
-position: relative;
+
+position:relative;
+right:-1400px;
 color: #8c8c8c;
 font-family: Pretendard;
-top:-50px;
-right:-1480px;
-}
-.background1{
-background:#EFF2FB;
+top:-200px;
 
 }
+
 .background2{
 background:#FFFFFF;
-border:3px solid red;
- border-radius: 24px;
+/* border:3px solid red;
+ border-radius: 24px; */
+ position: relative;
+ top:-100px;
 }
 
 
 .background3{
 background:#FFFFFF;
-border:3px solid red;
- border-radius: 24px;
-position:  relative;
-top:10px;
+border:3px solid white;
+ border-radius: 24px; 
+  position: relative;
+ top:-40px;
 }
-.paginate{
+
+ .paginate{
 position: relative;
-right:-925px;
-}
+
+} 
+
+
 </style>
-
-
-<section id="content">
+<section class="container">		
 
 
 
-		<div class="background1">
-			
-				<!-- 	<div class="best_background"> -->
 		
-						<a href="">	<img src="${pageContext.request.contextPath}/resources/image/home_panel_expert2.png" alt=""
+						<a href="">	<img id="expert" src="${pageContext.request.contextPath}/resources/image/home_panel_expert2.png" alt=""
 						width="130px" height="130px">
 			<div class="description">전문의 상담이<br>필요할 땐,<br>지식iN 엑스퍼트</div></a>
 						<button class="Myqlist">내 질문목록</button>
@@ -328,14 +334,14 @@ right:-925px;
 
 
 
+
+
+<div class="background2">
+
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div>
 			<button id="Qsearch" >질문하기</button>
-
-	</div>
-
-<div class="background2">
 <div id="knowQ">답변을 기다리는 질문 </div>  <!-- 많이 본 Q&amp;A -->
 
 	
@@ -372,7 +378,7 @@ right:-925px;
                     
 					<li class="ranking_item _item_1" >
 						<span class="no">1</span>
-					<!-- 제목 -->	<a href="" class="ranking_title" target="_blank" onclick="">코로나 백신 접종 예약</a>
+					<!-- 제목 -->	<a href="" class="ranking_title" target="_blank" onclick="a">코로나 백신 접종 예약</a>
 					<!-- 타이틀 -->	<a href="" class="text" target="_blank" onclick="">지금 50대부터 코로나 백신 접종 예약 진행중인것으로 아는데요 다음주에도 접종예정인지 궁금합니다. 부모...</a>
 						<span class="recommend_num">조회수 4953</span><span class="reply_num">답변수 3</span>
 					</li>
@@ -525,20 +531,8 @@ right:-925px;
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </section>
-		
+	
+<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
+	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
