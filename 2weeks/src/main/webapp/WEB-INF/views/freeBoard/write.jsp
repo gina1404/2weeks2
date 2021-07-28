@@ -61,7 +61,17 @@
                 <span class="input-group-text" id="inputGroupFileAddon01">파일첨부</span>
               </div>
               <div class="custom-file">
-                  &nbsp;<input type="file" class="btn btn-outline-secondary" id="exampleFormControlFile1">
+              <button id="btn-upload" type="button" style="border: 1px slid #ddd"; outline:none;">파일추가</button>
+                  &nbsp;<input type="file" multiple class="btn btn-outline-secondary" id="attach">
+                  <span style="font-size:10px; color:grey;">첨부파일은 최대 5개까지 등록이 가능합니다.</span>
+              	<div class="data_file_txt" id="data_file_txt" >&nbsp;
+              	
+              	<span>첨부파일</span>
+              	<br>
+              </div>
+              <div id="articlefileChange">
+              
+              </div>
               </div>
             </div>
       </div>
@@ -78,9 +88,55 @@
 
  
 <script>
+	$(document).ready(function(){
+		$("#attach").on("change",fileCheck);
+	});
+	
+	$(function () {
+		$("#btn-upload").click(function(e){
+			e.preventDefault();
+			$("#input_file").click();
+		});
+	});
 
+	var fileCount = 0;
+	var totalCount = 5;
+	var fileNum = 0;
+	var content_files = new Array();
+	
+	function fileCheck(e){
+		var files = e.target.files;
+		var filesArr =Array.prototype.slice.call(files);
+		
+		if(fileCount+filesArr.length> totalCount){
+			$.alert('파일은 최대 ' + totalCount + '개까지 업로드 할 수 있습니다.');
+			return;
+		}else{
+			fileCount = fileCount + filesArr.length;
+		}
+		
+		//각각의 파일 배열담기 및 기타
+		filesArr.forEach(function(f){
+			var reader = new FileReader();
+		reader.onload = function (e) {
+			content_files.push(f);
+			$("#articlefileChange").append('<div id="file'+ fileNum + '" onclick="fileDelete(\'file' + fileNum + '\')">'+
+			'<font style="font-size:12px">' + f.name + '</font>' 
+			+'<img src ="/images/icon_minus.png" style="width:20px; height:Auto; vertical-align:middle; cursor: pointer;"/>'+
+			'</div>'
+			);
+			fileNum++;
+		};
+		reader.readAsDataURL(f);
+	});
+		console.log(content_files);
+		$("#attach").val("");
+}
 
-
+	
+	
+	
+	
 	CKEDITOR.replace("content",{
 		height : "300",
 		width : "880",
