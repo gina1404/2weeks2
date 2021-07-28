@@ -18,6 +18,7 @@ public class Member {
 	    private String user_Nm;
 	    // 회원 비밀번호 
 	    private String user_Pw;
+	    private String user_Pw2;
 	    // 회원 닉네임 
 	    private String user_Nic;
 	    // SNS 타입 KAKAO: 카카오톡 NAVER: 네이버

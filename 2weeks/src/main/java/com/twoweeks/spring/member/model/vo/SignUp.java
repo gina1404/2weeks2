@@ -2,6 +2,7 @@ package com.twoweeks.spring.member.model.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -14,7 +15,7 @@ import lombok.Data;
 public class SignUp {
 	 // 회원 ID 
 	@NotEmpty
-	@Length(min=6, max=10)
+	@Pattern(regexp = "^[a-zA-Z0-9]{5,10}$")
 	private String user_Id;
 	
 	@NotEmpty
@@ -22,10 +23,16 @@ public class SignUp {
 	private String user_Nm;
 
     // 회원 비밀번호 
-	@Length(min=6)	
+	@NotEmpty
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$")
 	private String user_Pw;
+	
+	@NotEmpty
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$")
+	private String user_Pw2;
 
-    // 회원 닉네임 
+    // 회원 닉네임
+	@NotEmpty
 	 private String user_Nic;
 
     // SNS 타입 KAKAO: 카카오톡 NAVER: 네이버
@@ -44,12 +51,15 @@ public class SignUp {
 	 private String user_Gender;
 
     // 회원 전화번호 
+	 
 	 private int user_Phone;
 
     // 회원 프로필사진 
 	 private String user_Pf;
 
     // 이메일 
+	 @Email
+	 @NotEmpty
 	 private String user_Email;
 	 
 	// 주소 

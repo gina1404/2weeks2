@@ -1,6 +1,7 @@
 package com.twoweeks.spring.member.controller;
 
 import java.util.Random;
+import java.util.regex.Pattern;
 
 import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;
@@ -103,12 +104,13 @@ public class MemberController {
 		}
 		
 		
+		
 		Member member = new Member();
 		member.setUser_Pw(pwEncoder.encode(signup.getUser_Pw()));
 		log.info("암호화 확인 = {}",member.getUser_Pw());
 		
 		member.setUser_Id(signup.getUser_Id());
-		member.setUser_Pw(signup.getUser_Pw());
+		//member.setUser_Pw(signup.getUser_Pw());
 		member.setUser_Nm(signup.getUser_Nm());
 		member.setUser_Nic(signup.getUser_Nic());
 		member.setUser_Gender(signup.getUser_Gender());

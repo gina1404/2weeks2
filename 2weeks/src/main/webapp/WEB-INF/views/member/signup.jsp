@@ -7,41 +7,48 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <script src="${path }/resources/js/jquery-3.6.0.min.js"></script>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <style>
-.user_Id_errors{
-	color:red;
-}
+ .profile_view{
+            border : 1px solid black;
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            }
 </style>
-</head>
-<body>
-	<section id="signup">   
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
+
+	<section id="signup" class="container">   
         <div class="signup">
-            회원가입 테스트
+            <h3>회원가입 테스트</h3><br/>
             <form:form modelAttribute="member" class="signup form" method="post" action="${path}/signup">
+            <div class="profile">   
+                <div class="profile_view"></div>
                 프로필 사진 <button>등록</button><br/>
+                </div>
                 <form:errors path='user_Id' class="user_Id_errors"/><br/>
                 <form:input path='user_Id' type='text' id='user_id' name='user_Id' placeholder="아이디"/><br/>
                 <div id="id_check"></div>
                
-                <input id ='pw1' type='password' name='user_Pw' placeholder="비밀번호"/><br/>
-                <input id ='pw2' type='password' name='user_Pw' placeholder="비밀번호 확인"/><br/>
+                <form:input path='user_Pw' id ='pw1' type='password' name='user_Pw' placeholder="비밀번호"/><br/>
+                <form:input path='user_Pw2' id ='pw2' type='password' name='user_Pw' placeholder="비밀번호 확인"/><br/>
                 <div id="pw_success">비밀번호가 일치합니다.</div> 
                 <div id="pw_fail">비밀번호가 일치하지 않습니다.</div>
-                <input type='text' name='user_Nm' placeholder="이름"/><br/>
-                <input type='text' name='user_Nic' placeholder="닉네임"/><br/>
+                <form:errors path='user_Pw' class='user_Pw_errors'/><br/>
+                <form:input path='user_Nm' type='text' name='user_Nm' placeholder="이름"/><br/>
+                <form:errors path='user_Nm' class='user_Nm_errors'/><br/>
+                <form:input path='user_Nic'  type='text' name='user_Nic' placeholder="닉네임"/><br/>
+                <form:errors path='user_Nic' class='user_Nic_errors'/>
                 성별선택<br/>
                 <label><input type="radio" name="user_Gender" value="women"/>여</label><br/>
                 <label><input type="radio" name="user_Gender" value="men"/>남</label><br/>
-                <input type='tel' name='phone' placeholder="전화번호"/><br/>
+                
+                <form:input path='user_Phone' type='tel' name='user_Phone' placeholder="전화번호"/><br/>
+                <form:errors path='user_Phone' class='user_Phone_errors'/>
                <div class="email_box">
                	<div class="email_input_box">               	
-                	<input class="email_input" type='email' name='user_Email' placeholder="이메일"/>
+                	<form:input path='user_Email' class="email_input" type='email' name='user_Email' placeholder="이메일"/>
                 	<button type="button" class="email_check_button">인증번호 전송</button>
                 </div>
 <!--            <div class="email_check_button">
@@ -144,7 +151,7 @@
 			checkResult.attr("class","incorrect");
 		}
 	});
+
 	
 </script>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
