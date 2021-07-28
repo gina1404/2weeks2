@@ -3,10 +3,17 @@
 <mapper namespace="center">
 
 	<insert id="insertCenter">
-		INSERT INTO COVID_CENTER(SEQ_CENTER.NEXTVAL, #{centerName}, #{sido}, #{sigungu}, #{address}, #{phone})
+		INSERT INTO COVID_CENTER VALUES(SEQ_CENTER.NEXTVAL, #{centerName}, #{sido}, #{sigungu}, #{address}, #{phone})
 	</insert>
 
-
+	<select id="selectCenterList" resultMap="centerMap">
+		SELECT * FROM COVID_CENTER
+	</select>
+	
+	<resultMap type="center" id="centerMap">
+		<id column="center_no" property="centerNo" />
+		<id column="center_name" property="centerName" />
+	</resultMap>
 
 
 

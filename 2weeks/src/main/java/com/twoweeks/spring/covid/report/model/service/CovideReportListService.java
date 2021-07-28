@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.twoweeks.spring.covid.report.model.vo.Center;
 import com.twoweeks.spring.covid.report.model.vo.NewsReport;
 
 public interface CovideReportListService {
@@ -15,6 +16,8 @@ public interface CovideReportListService {
 	
 	int selectReportCount();
 	
-	int insertCenterList(HttpServletRequest req);
+	int insertCenterList(Center c);
+	
+	List<Center> selectCenterList();
 	
 }

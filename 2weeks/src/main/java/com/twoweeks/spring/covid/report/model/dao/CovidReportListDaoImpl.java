@@ -28,9 +28,17 @@ public class CovidReportListDaoImpl implements CovidReportListDao{
 		return session.selectOne("newsReport.reportListCount");
 	}
 
+	
+	/////////////////////////
+	//////////center/////////	
 	@Override
 	public int insertCenterList(SqlSession session, Center c) {
 		return session.insert("center.insertCenter", c);
+	}
+
+	@Override
+	public List<Center> selectCenterList(SqlSession session) {
+		return session.selectList("center.selectCenterList");
 	}
 
 	

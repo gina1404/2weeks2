@@ -68,18 +68,17 @@ public class CovideReportListServiceImpl implements CovideReportListService{
 	
 	/////////////////////////
 	//////////center/////////
-	//@Override
-	@PostConstruct
-	public int insertCenterList(HttpServletRequest req) {
-		int result=0;
-		CovidCenterExcelRead excelReader=new CovidCenterExcelRead();
-		String path=req.getServletContext().getRealPath("/resources/upload/covidCenterList.xls");
-		List<Center> list= excelReader.xlsToCenterList(path);
-		for(Center c : list) {
-			result=dao.insertCenterList(session, c);
-		}
+	@Override	
+	public int insertCenterList(Center c) {
+		int result=dao.insertCenterList(session, c);		
 		return result;
 	}
+
+	@Override
+	public List<Center> selectCenterList() {
+		return dao.selectCenterList(session);
+	}
+	
 	
 		
 }

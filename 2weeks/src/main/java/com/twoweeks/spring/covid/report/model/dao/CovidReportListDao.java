@@ -16,4 +16,6 @@ public interface CovidReportListDao {
 	int reportListCount(SqlSession session);
 	
 	int insertCenterList(SqlSession session, Center c);
+	
+	List<Center> selectCenterList(SqlSession session);
 }
