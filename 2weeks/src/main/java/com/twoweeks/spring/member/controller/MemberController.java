@@ -112,7 +112,7 @@ public class MemberController {
 		String path=request.getServletContext().getRealPath("/resources/upload/member/profile");
 		File dir= new File(path);
 		
-		if(!dir.exists()) dir.mkdir();
+		if(!dir.exists()) dir.mkdirs();
 		
 		for(MultipartFile f : upFile) {
 			if(!f.isEmpty()) {
@@ -130,7 +130,7 @@ public class MemberController {
 					log.info("transferto 이후 originalFilename={}",f.getOriginalFilename());
 					log.info("transferto 이후 rename={}",reName);
 					signup.setUser_Pf(originalFilename);
-					signup.setUser_pfrename(reName);
+					signup.setUser_Pfrename(reName);
 				}catch(IOException e) {
 					log.info("IOexception ??????????");
 					e.printStackTrace();
@@ -139,7 +139,7 @@ public class MemberController {
 			}
 		
 		log.info("파일오리지널네임 ={}",signup.getUser_Pf());
-		log.info("파일리네임={}",signup.getUser_pfrename());
+		log.info("파일리네임={}",signup.getUser_Pfrename());
 		
 		
 		Member member = new Member();
@@ -153,7 +153,7 @@ public class MemberController {
 		member.setUser_Gender(signup.getUser_Gender());
 		member.setUser_Phone(signup.getUser_Phone());
 		member.setUser_Pf(signup.getUser_Pf());
-		member.setUser_pfrename(signup.getUser_pfrename());
+		member.setUser_Pfrename(signup.getUser_Pfrename());
 		member.setUser_Email(signup.getUser_Email());
 		System.out.println(member);
 		

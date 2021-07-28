@@ -61,7 +61,7 @@ public class SignUp {
     // 회원 프로필사진 
 	 private String user_Pf;
 	 
-	 private String user_pfrename;
+	 private String user_Pfrename;
 
     // 이메일 
 	 @Email

@@ -35,7 +35,7 @@ public class Member {
 	    private int user_Phone;
 	    // 회원 프로필사진 
 	    private String user_Pf;
-	    private String user_pfrename;
+	    private String user_Pfrename;
 	    // 글 작성 권한(확진/백신/의료) 관리자승인후 확진/백신/의료로 변경
 	    private String access_Gb;
 	    // 이메일 
