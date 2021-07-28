@@ -9,9 +9,13 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
+
+
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+
 public class SignUp {
 	 // 회원 ID 
 	@NotEmpty
@@ -24,11 +28,11 @@ public class SignUp {
 
     // 회원 비밀번호 
 	@NotEmpty
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$")
+	//@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$")
 	private String user_Pw;
 	
 	@NotEmpty
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$")
+	//@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$")
 	private String user_Pw2;
 
     // 회원 닉네임
@@ -56,6 +60,8 @@ public class SignUp {
 
     // 회원 프로필사진 
 	 private String user_Pf;
+	 
+	 private String user_pfrename;
 
     // 이메일 
 	 @Email

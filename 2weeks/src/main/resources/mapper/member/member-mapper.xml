@@ -7,8 +7,8 @@
 	</select>
 	
 	<insert id="insertMember">
-		INSERT INTO MEMBER2(USER_ID,USER_NM,USER_PW,USER_NIC,USER_GENDER,USER_PHONE,USER_EMAIL,ENROLL_DT)
-			VALUES(#{user_Id},#{user_Nm},#{user_Pw},#{user_Nic},#{user_Gender},#{user_Phone},#{user_Email},SYSDATE)
+		INSERT INTO MEMBER2(USER_ID,USER_NM,USER_PW,USER_NIC,USER_GENDER,USER_PHONE,USER_EMAIL,ENROLL_DT,USER_PF,USER_PFRENAME)
+			VALUES(#{user_Id},#{user_Nm},#{user_Pw},#{user_Nic},#{user_Gender},#{user_Phone},#{user_Email},SYSDATE,#{user_Pf},#{user_Pfrename})
 		
 
 	</insert>

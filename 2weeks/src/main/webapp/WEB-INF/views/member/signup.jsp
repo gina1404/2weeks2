@@ -9,11 +9,18 @@
 <script src="${path }/resources/js/jquery-3.6.0.min.js"></script>
 <style>
  .profile_view{
-            border : 1px solid black;
+            border : 1px solid white;
             width: 100px;
             height: 100px;
-            border-radius: 50px;
+            border-radius: 100px;
             }
+            
+ .preview_img{
+ 		width:100%;
+ 		height:100%;
+ 		border-radius:100px;
+ }
+
 </style>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
@@ -21,11 +28,14 @@
 
 	<section id="signup" class="container">   
         <div class="signup">
-            <h3>회원가입 테스트</h3><br/>
-            <form:form modelAttribute="member" class="signup form" method="post" action="${path}/signup">
+            <h3>회원가입(기능구현중)</h3><br/>
+            <form:form modelAttribute="member" class="signup form" method="post" action="${path}/signup" enctype="multipart/form-data">
             <div class="profile">   
-                <div class="profile_view"></div>
-                프로필 사진 <button>등록</button><br/>
+                <div class="profile_view">
+                	<img id='image_section' class="preview_img" src='${path }/resources/images/member/profile2.jpg' alt='my_profile'/>
+                </div>
+                프로필 사진<input id="profile_input" type="file" name="upFile"/>
+                		<%-- <form:errors path='user_Pf'/> --%>
                 </div>
                 <form:errors path='user_Id' class="user_Id_errors"/><br/>
                 <form:input path='user_Id' type='text' id='user_id' name='user_Id' placeholder="아이디"/><br/>
@@ -151,7 +161,22 @@
 			checkResult.attr("class","incorrect");
 		}
 	});
-
+	
+	//이미지 미리보기
+	function readURL(input){
+		if(input.files && input.files[0]){
+			let reader = new FileReader();
+			
+			reader.onload=function(e){
+				$("#image_section").attr('src',e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	// 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행
+	$("#profile_input").change(function(){
+		readURL(this);
+	});
 	
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

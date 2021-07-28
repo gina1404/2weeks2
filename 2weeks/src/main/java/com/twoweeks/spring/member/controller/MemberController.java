@@ -1,10 +1,12 @@
 package com.twoweeks.spring.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Random;
-import java.util.regex.Pattern;
 
 import javax.mail.internet.MimeMessage;
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,9 +19,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import com.twoweeks.spring.member.model.service.MemberService;
 import com.twoweeks.spring.member.model.vo.Member;
@@ -96,13 +99,47 @@ public class MemberController {
 	//회원가입
 	@PostMapping("/signup")
 	public String insertMember(
-					@Validated @ModelAttribute("member") SignUp signup, BindingResult bindingResult, Model model) {
+					@RequestParam MultipartFile[] upFile,			
+					@Validated @ModelAttribute("member") SignUp signup, BindingResult bindingResult, 
+					Model model,
+					
+					HttpServletRequest request) {
 		if(bindingResult.hasErrors()) {
 			log.info("가입실패 ={} ", bindingResult);
 			
 			return "/member/signup";
 		}
+		String path=request.getServletContext().getRealPath("/resources/upload/member/profile");
+		File dir= new File(path);
 		
+		if(!dir.exists()) dir.mkdir();
+		
+		for(MultipartFile f : upFile) {
+			if(!f.isEmpty()) {
+				String originalFilename = f.getOriginalFilename();
+				log.info("originalFilename={}",f.getOriginalFilename());
+				String ext=originalFilename.substring(originalFilename.lastIndexOf("."));
+			
+				SimpleDateFormat sdformat = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int ranNum=(int)(Math.random()*10000);
+				String reName = sdformat.format(System.currentTimeMillis())+"_"+ranNum+ ext;
+				log.info("rename={}",reName);
+				
+				try {
+					f.transferTo(new File(path+reName));
+					log.info("transferto 이후 originalFilename={}",f.getOriginalFilename());
+					log.info("transferto 이후 rename={}",reName);
+					signup.setUser_Pf(originalFilename);
+					signup.setUser_pfrename(reName);
+				}catch(IOException e) {
+					log.info("IOexception ??????????");
+					e.printStackTrace();
+				}
+			}
+			}
+		
+		log.info("파일오리지널네임 ={}",signup.getUser_Pf());
+		log.info("파일리네임={}",signup.getUser_pfrename());
 		
 		
 		Member member = new Member();
@@ -116,6 +153,7 @@ public class MemberController {
 		member.setUser_Gender(signup.getUser_Gender());
 		member.setUser_Phone(signup.getUser_Phone());
 		member.setUser_Pf(signup.getUser_Pf());
+		member.setUser_pfrename(signup.getUser_pfrename());
 		member.setUser_Email(signup.getUser_Email());
 		System.out.println(member);
 		
