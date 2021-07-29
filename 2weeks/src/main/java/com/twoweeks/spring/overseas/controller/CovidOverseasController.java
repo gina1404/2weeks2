@@ -5,8 +5,7 @@ package com.twoweeks.spring.overseas.controller;
 
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.List;
 
 
@@ -49,13 +48,27 @@ public class CovidOverseasController {
 			for(int i=0;i<list.size();i++) {
 				b+=list.get(i).getNatDeathCnt();
 			}
+			
+			try {
+				int result=service.insertGrData(a);				
+			}catch (Exception e) {
+				System.out.println("이미등록");
+			}
 		
-			int result=service.insertGrData(a);
+			
 			
 			DecimalFormat formatter=new DecimalFormat("###,###");
 			String totalDef=formatter.format(a);
 			String totalDet=formatter.format(b);
 			
+			
+			OverseasGr ydayDef=service.selectydayDef();
+			System.out.println(ydayDef);
+			int todayDef=a-ydayDef.getTotal();
+			//System.out.println(todayDef);
+			String realtodayDef=formatter.format(todayDef);
+			
+			mv.addObject("realtodayDef", realtodayDef);
 			mv.addObject("totalDef", totalDef);
 			mv.addObject("totalDet", totalDet);
 			mv.setViewName("covidUpdate/overseas");

@@ -95,7 +95,7 @@
 	<div>
 		<div>
 			<div>오늘의 확진자수</div>
-			<div></div>
+			<div>${realtodayDef }명</div>
 		</div>
 	</div>
 	

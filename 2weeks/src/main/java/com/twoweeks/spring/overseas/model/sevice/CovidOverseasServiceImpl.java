@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.twoweeks.spring.overseas.model.dao.CoivdOverseasDao;
+import com.twoweeks.spring.overseas.model.vo.OverseasGr;
 import com.twoweeks.spring.overseas.model.vo.Response;
 
 @Service
@@ -72,4 +73,12 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		return dao.insertGrData(session,a);
 		
 	}
+
+
+	@Override
+	public OverseasGr selectydayDef() {
+		// TODO Auto-generated method stub
+		return dao.selectydayDef(session);
+	}
+	
 }

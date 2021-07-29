@@ -5,4 +5,8 @@
 <insert id="InsertOverseasGr">
 	INSERT INTO OVERSEASGR VALUES(#{a},SYSDATE)
 </insert>
+
+	<select id="selectydayDef" resultType="com.twoweeks.spring.overseas.model.vo.OverseasGr">
+		SELECT * FROM OVERSEASGR WHERE TO_CHAR(TODAY)=TO_CHAR(SYSDATE-1)
+	</select>
 </mapper>

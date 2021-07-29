@@ -1,7 +1,7 @@
 package com.twoweeks.spring.overseas.model.sevice;
 
 
-import java.util.Date;
+
 
 import org.springframework.http.ResponseEntity;
 
@@ -13,4 +13,5 @@ public interface CovidOverseasService {
 	ResponseEntity<String> getApi();
 	Response parser(String xml);
 	int insertGrData(int a);
+	OverseasGr selectydayDef();
 }
