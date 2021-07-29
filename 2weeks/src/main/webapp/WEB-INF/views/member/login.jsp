@@ -7,11 +7,23 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
-	<div class="container">
-	로그인페이지
-	<input type='text' placeholder="아이디"/>
-	<input type='password' placeholder="비밀번호" />
-	<button type="sumbit">로그인</button>
+<div class="container">
+	<div class="member_login">
+		로그인페이지
+		<input type='text' placeholder="아이디"/>
+		<input type='password' placeholder="비밀번호" />
+		<button type="sumbit">로그인</button>
+	<br/>
+	</div>
+	<div class="kakao_login">
+		카카오 로그인<br/>
+		<a href="https://kauth.kakao.com/oauth/authorize
+		?response_type=code
+		&client_id=7b4b21f6e600d0bd834e6900c63c7084
+		&redirect_uri=http://localhost:9090/spring/kakaoLogin">
+		<img src="${path}/resources/images/member/kakao_login_medium.png" />
+		</a>
+	</div>
 </div>
 
 

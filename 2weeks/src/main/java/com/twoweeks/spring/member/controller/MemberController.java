@@ -3,10 +3,12 @@ package com.twoweeks.spring.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,11 +21,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.twoweeks.spring.member.model.service.KakaoApi;
 import com.twoweeks.spring.member.model.service.MemberService;
 import com.twoweeks.spring.member.model.vo.Member;
 import com.twoweeks.spring.member.model.vo.SignUp;
@@ -43,12 +46,50 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
 	
+	@Autowired
+	private KakaoApi kakao;
+	
 	//회원가입 페이지 이동
 	@GetMapping("/signup")
-	public String SignUp(Model model) {
+	public String signUp(Model model) {
 		model.addAttribute("member",new Member());
 		return "/member/signup";
 	}
+	//로그인 페이지 이동
+	@GetMapping("/login")
+	public String login() {
+		return "/member/login";
+	}
+	//카카오로그인
+	@RequestMapping("/kakaoLogin")
+	public String kakaoLogin(
+			@RequestParam("code") String code,HttpSession session) {
+		log.info("code넘어왔나요? ={} ",code);
+		
+		String access_Token = kakao.getAccessToken(code);
+		
+		log.info("컨트롤러 access_Token ={}",access_Token);
+		
+		HashMap<String,Object> userInfo = kakao.getUserInfo(access_Token);
+		log.info("login Controller 유저정보 ={}",userInfo);
+		
+		//이메일이 존재할때 세선에 등록
+		if(userInfo.get("email") != null) {
+			session.setAttribute("userId", userInfo.get("email"));
+			session.setAttribute("access_Token", access_Token);
+		}
+		return "/";
+	}
+	//카카오 로그아웃
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		kakao.kakaoLogout((String)session.getAttribute("access_Token"));
+		session.removeAttribute("access_Token");
+		session.removeAttribute("userId");
+		return "/";
+	}
+			
+	
 	
 	//아이디중복체크
 	@GetMapping("/member/idCheck")
