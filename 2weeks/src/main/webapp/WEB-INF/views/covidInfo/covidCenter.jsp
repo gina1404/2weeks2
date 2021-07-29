@@ -13,108 +13,58 @@
 <link href="${pageContext.request.contextPath }/resources/css/covidCenter.css" rel="stylesheet" />
 
 <section class="container">	
-	<h2>선별진료소 지도</h2>
-	
-	<%-- <table>
-		<c:forEach var="l" items="${list }">
-			<tr><td>${l.centerName } ${l.address }</td></tr>
-		</c:forEach>
-	</table> --%>	
+	<h2>선별진료소 지도</h2>	
 	
 	<div id="map" style="width:800px;height:550px;"></div>	
 </section>
 
 <script>
-	var mapContainer = document.getElementById('map'), mapOption = {// 지도를 표시할 div 		
-	    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표 //회원가입 주소
-	    level: 3 // 지도의 확대 레벨
-	};  
+	var mapContainer = document.getElementById('map'), 
+	mapOption = { // 지도를 표시할 div
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 14 // 지도의 확대 레벨
+        //lever: 3
+	};  	
+	    
+	var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성	
+	var geocoder = new kakao.maps.services.Geocoder(); ////주소-좌표 변환 객체 생성		
+	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; //마커 이미지 주소	
 	
-	//지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-	//주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	
-	//주소로 좌표를 검색합니다
-	/* $(function(){
-		var positions=[];
-		<c:forEach items="${list }" var="l">
-			var addr= "${l.address}";			
-			positions.push(addr);
-		</c:forEach>		
-		//console.log(positions);
-	}); */
-	
-	$(function(){
-		var positions=[];
-		<c:forEach items="${list }" var="l">
-			var name= "${l.centerName}";
-			var addr= "${l.address}";
-			var position ={title : "${l.centerName}", addr : "${l.address}"};
-			positions.push(position);
-		</c:forEach>		
-		console.log(positions[title]);
-	});
-	
-	//주소 title
-	$(function(){
-		var positions=[];
+	var positions=[]; //센터 이름, 주소들은 객체배열
+	$(function(){		
 		<c:forEach items="${list }" var="l">
 			var position ={title : "${l.centerName}", addr : "${l.address}"};		
-			positions.push(position);				
-		
-			geocoder.addressSearch(positions[title], function(result, status) {
-				
-				// 정상적으로 검색이 완료됐으면 
-				if (status === kakao.maps.services.Status.OK) {
-				
-					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-					
-					// 결과값으로 받은 위치를 마커로 표시합니다
-					var marker = new kakao.maps.Marker({
-					    map: map,
-					    position: coords
-					});
-					
-					// 인포윈도우로 장소에 대한 설명을 표시합니다
-					var infowindow = new kakao.maps.InfoWindow({
-					    content: '<div style="width:150px;text-align:center;padding:6px 0;">positions[addr]</div>'
-					});
-					infowindow.open(map, marker);
-					
-					// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-					map.setCenter(coords);
-				} 
-			});
+			positions.push(position);
 		</c:forEach>
 		
-	});
-	
-	/* geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-	
-		// 정상적으로 검색이 완료됐으면 
-		if (status === kakao.maps.services.Status.OK) {
+	    var clusterer = new kakao.maps.MarkerClusterer({ // 마커 클러스터러를 생성합니다 
+	        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+	        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+	        minLevel: 10 // 클러스터 할 최소 지도 레벨 
+	    });
 		
-			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-			
-			// 결과값으로 받은 위치를 마커로 표시합니다
-			var marker = new kakao.maps.Marker({
-			    map: map,
-			    position: coords
-			});
-			
-			// 인포윈도우로 장소에 대한 설명을 표시합니다
-			var infowindow = new kakao.maps.InfoWindow({
-			    content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-			});
-			infowindow.open(map, marker);
-			
-			// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-			map.setCenter(coords);
-		} 
-	});     */
-
+		for(let i=0; i<positions.length; i++){			
+			geocoder.addressSearch(positions[i].addr, function(result, status) {				
+				var imageSize = new kakao.maps.Size(20, 30); // 마커 이미지 크기 			    
+				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 이미지를 생성		
+				
+				var markers=[];
+				if (status === kakao.maps.services.Status.OK) { // 정상적으로 검색이 완료됐으면 //자료형까지 비교			
+					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);				
+					if(coords!=null){ // 결과값으로 받은 위치를 마커로 표시합니다						
+						var marker = new kakao.maps.Marker({
+						    map: map,
+						    position: coords,						    
+						    title : positions[i].title,						    
+						    image : markerImage
+						});
+						markers.push(marker);
+					}				
+				} 			
+		        clusterer.addMarkers(markers); // 클러스터러에 마커들을 추가합니다
+			});			
+		}				
+	});	
 </script>
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
