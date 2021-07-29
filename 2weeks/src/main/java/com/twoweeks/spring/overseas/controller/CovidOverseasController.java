@@ -49,10 +49,15 @@ public class CovidOverseasController {
 				b+=list.get(i).getNatDeathCnt();
 			}
 			
+			
+			OverseasGr gg=new OverseasGr();
+			gg.setTotal(a);
+			gg.setDeath(b);
 			try {
-				int result=service.insertGrData(a);				
+				int result=service.insertGrData(gg);				
 			}catch (Exception e) {
 				System.out.println("이미등록");
+				e.printStackTrace();
 			}
 		
 			
@@ -65,9 +70,32 @@ public class CovidOverseasController {
 			OverseasGr ydayDef=service.selectydayDef();
 			System.out.println(ydayDef);
 			int todayDef=a-ydayDef.getTotal();
+			int todayDeath=b-ydayDef.getDeath();
 			//System.out.println(todayDef);
 			String realtodayDef=formatter.format(todayDef);
 			
+			OverseasGr gg2=new OverseasGr();
+			gg2.setToday_Def(todayDef);
+			gg2.setToday_Death(todayDeath);
+			System.out.println(gg2);
+			try {
+				int result2=service.updateGrData(gg2);
+			}catch (Exception e) {
+				System.out.println("오늘의 확진자 등록실패");
+				e.printStackTrace();
+			}
+			
+			/*
+			 * OverseasGr gr1=service.selectToday(); OverseasGr
+			 * gr3=service.selectAgoThree(); OverseasGr gr4=service.selectAgoFour();
+			 * OverseasGr gr5=service.selectAgoFive(); OverseasGr
+			 * gr6=service.selectAgoSix(); OverseasGr gr7=service.selectAgoSeven();
+			 */
+			
+			List<OverseasGr>Grlist=service.selectGrList();
+			
+			
+			mv.addObject("Grlist", Grlist);
 			mv.addObject("realtodayDef", realtodayDef);
 			mv.addObject("totalDef", totalDef);
 			mv.addObject("totalDet", totalDet);

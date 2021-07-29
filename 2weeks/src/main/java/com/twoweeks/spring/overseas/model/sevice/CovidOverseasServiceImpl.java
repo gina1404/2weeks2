@@ -5,6 +5,7 @@ import java.net.URI;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,9 +69,9 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 	}
 	
 	@Override
-	public int insertGrData(int a) {
+	public int insertGrData(OverseasGr gg) {
 		// TODO Auto-generated method stub
-		return dao.insertGrData(session,a);
+		return dao.insertGrData(session,gg);
 		
 	}
 
@@ -80,5 +81,20 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		// TODO Auto-generated method stub
 		return dao.selectydayDef(session);
 	}
+
+
+	@Override
+	public List<OverseasGr> selectGrList() {
+		// TODO Auto-generated method stub
+		return dao.selectGrList(session);
+	}
+
+
+	@Override
+	public int updateGrData(OverseasGr gg2) {
+		// TODO Auto-generated method stub
+		return dao.updateGrData(session,gg2);
+	}
+	
 	
 }

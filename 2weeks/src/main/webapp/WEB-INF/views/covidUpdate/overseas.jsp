@@ -98,6 +98,36 @@
 			<div>${realtodayDef }명</div>
 		</div>
 	</div>
+	<!-- 그래프 영역 -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<div class="Gr">
+  		  <div id="chart_div" style="width: 900px; height: 500px;"></div>
+		 <div id="piechart" style="width: 900px; height: 500px;"></div>
+	</div>
+
+
+	<table class="table table-striped table-hover">
+		<tr>
+			<th>번호</th>
+			<th>나라</th>
+			<th>확진자</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+	</table>
 	
 	
 	
@@ -105,6 +135,70 @@
 </section>
 
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+
+
+
+
+
+/* 파이그래프 영역 */
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+
+  var data = google.visualization.arrayToDataTable([
+    ['Task', 'Hours per Day'],
+    ['kr',     15214],
+    ['mr',      1245712],
+    ['Cc',  60247],
+    ['wsa', 44712],
+    ['wasc',    74156]
+  ]);
+
+  var options = {
+    title: 'My Daily Activities'
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+  chart.draw(data, options);
+}
+
+
+/* 막대그래프 */
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawVisualization);
+
+function drawVisualization() {
+  // Some raw data (not necessarily accurate)
+  var data = google.visualization.arrayToDataTable([
+    ['Month', 'Bolivia','death'],
+    ['07/05',  ${Grlist[6].today_Def}, ${Grlist[6].today_Death}],
+    ['2005/06',  ${Grlist[5].today_Def},${Grlist[5].today_Death}],
+    ['2006/07',  ${Grlist[4].today_Def},${Grlist[4].today_Death}],
+    ['2007/08',  ${Grlist[3].today_Def},${Grlist[3].today_Death}],
+    ['2008/09',  ${Grlist[2].today_Def},${Grlist[2].today_Death}],
+    ['2009/09',  ${Grlist[1].today_Def},${Grlist[1].today_Death}],
+    ['2010/09',  ${Grlist[0].today_Def},${Grlist[0].today_Death}],
+  ]);
+
+  var options = {
+    title : '일별 총 확진자 통계',
+    vAxis: {title: 'Cups'},
+    hAxis: {title: 'Month'},
+    seriesType: 'bars',
+    series: {5: {type: 'line'}}
+  };
+
+  var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
+
+</script>
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 		
