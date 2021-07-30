@@ -28,11 +28,11 @@ public class SignUp {
 
     // 회원 비밀번호 
 	@NotEmpty
-	//@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$")
+	@Pattern(regexp = "^(?=.*[0-9a-zA-Z])(?=.*[!@#$%^&*]).{6,}$")
 	private String user_Pw;
 	
 	@NotEmpty
-	//@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$")
+	//@Pattern(regexp = "^(?=.*[0-9a-zA-Z])(?=.*[!@#$%^&*]).{6,}$")
 	private String user_Pw2;
 
     // 회원 닉네임
