@@ -3,5 +3,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.twoweeks.spring.common.StringArrayTypeHandler" alias="strArr"/>
+		<typeAlias type="com.twoweeks.spring.covid.model.vo.CovidRegionalKorData" alias="CovidRegionalKorData"/>
 	</typeAliases>
 </configuration>
