@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -49,6 +50,12 @@ public class MemberController {
 	@Autowired
 	private KakaoApi kakao;
 	
+	//메인테스트(삭제에정)
+	@GetMapping("/member/testmain")
+	public String testmain() {
+		return "/member/testmain";
+	}
+	
 	//회원가입 페이지 이동
 	@GetMapping("/signup")
 	public String signUp(Model model) {
@@ -56,7 +63,7 @@ public class MemberController {
 		return "/member/signup";
 	}
 	//로그인 페이지 이동
-	@GetMapping("/login")
+	@GetMapping("/member/login")
 	public String login() {
 		return "/member/login";
 	}
@@ -78,15 +85,15 @@ public class MemberController {
 			session.setAttribute("userId", userInfo.get("email"));
 			session.setAttribute("access_Token", access_Token);
 		}
-		return "/";
+		return "/member/testmain";
 	}
 	//카카오 로그아웃
-	@RequestMapping("/logout")
+	@RequestMapping("/kakaologout")
 	public String logout(HttpSession session) {
 		kakao.kakaoLogout((String)session.getAttribute("access_Token"));
 		session.removeAttribute("access_Token");
 		session.removeAttribute("userId");
-		return "/";
+		return "/member/testmain";
 	}
 			
 	
@@ -203,8 +210,8 @@ public class MemberController {
 		String loc="";
 		
 		if(result>0) {
-			msg="회원가입 성공";
-			loc="/";
+			msg="2WEEKS 회원가입 성공 😃";
+			loc="/member/login";
 		}else {
 			msg="회원가입실패";
 			loc="/signup";
@@ -213,7 +220,37 @@ public class MemberController {
 		model.addAttribute("loc",loc);
 		//model.addAttribute("member", new Member());
 
-			return "/member/login";
+			return "/common/msg";
 	}
+	
+	@PostMapping("/member/login")
+	public String memberLogin(
+			@RequestParam Map param , Model model, HttpSession session) {
+		
+		Member m = memberService.selectMember(param);
+		
+		String msg;
+		log.info("param.get(user_Pw) ={}",param.get("user_Pw"));
+		log.info("m 아이디 ={} " , m.getUser_Id());
+		log.info("m.getUser_Pw() ={}", m.getUser_Pw());
+		
+		if(m!=null) {			
+			if(pwEncoder.matches((String)param.get("user_Pw"), m.getUser_Pw())) {
+			model.addAttribute("loginMember",m);
+			msg="로그인성공";
+			}else {
+			msg="로그인실패";
+			}
+		}else {
+			msg="로그인실패";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc","/member/testmain");
+		
+		return "common/msg";
+		
+	}
+	
+	
 
 }

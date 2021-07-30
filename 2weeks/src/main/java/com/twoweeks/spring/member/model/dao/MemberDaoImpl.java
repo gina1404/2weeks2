@@ -1,5 +1,7 @@
 package com.twoweeks.spring.member.model.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +20,14 @@ public class MemberDaoImpl implements MemberDao {
 	public int insertMember(Member member, SqlSession session) {
 		return session.insert("member.insertMember",member);
 	}
+
+	@Override
+	public Member selectMember(Map param, SqlSession session) {
+		
+		return session.selectOne("member.selectMember",param);
+	}
+	
+	
 	
 	
 

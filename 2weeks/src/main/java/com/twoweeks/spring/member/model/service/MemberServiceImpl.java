@@ -1,5 +1,7 @@
 package com.twoweeks.spring.member.model.service;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,14 +19,24 @@ public class MemberServiceImpl implements MemberService {
 	private SqlSession session;
 
 	@Override
+	//아이디 중복체크
 	public int idCheck(String userId) {
 		return memberDao.idCheck(userId,session);
 	}
 
 	@Override
+	//회원가입
 	public int insertMember(Member member) {		
 		return memberDao.insertMember(member,session);
 	}
+
+	@Override
+	//로그인
+	public Member selectMember(Map param) {
+		return memberDao.selectMember(param,session);
+	}
+	
+	
 	
 	
 
