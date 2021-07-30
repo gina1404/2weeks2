@@ -46,7 +46,11 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_XML);
+		
+		
 		HttpEntity<HttpHeaders> entity = new HttpEntity<>(headers);
+		
+		
 		
 		ResponseEntity<String> response = restTemplate.exchange(URI.create(url), HttpMethod.GET, entity, String.class);
 		
@@ -59,6 +63,7 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		ObjectMapper xmlMapper = new XmlMapper();
 		Response response = null;
 		try {
+			
 			response= xmlMapper.readValue(xml, Response.class);
 		}catch(JsonMappingException e) {
 			e.printStackTrace();
@@ -95,6 +100,9 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		// TODO Auto-generated method stub
 		return dao.updateGrData(session,gg2);
 	}
+
+
+
 	
 	
 }

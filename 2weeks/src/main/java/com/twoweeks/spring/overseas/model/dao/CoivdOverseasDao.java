@@ -13,4 +13,5 @@ public interface CoivdOverseasDao {
 	OverseasGr selectydayDef(SqlSession session);
 	List<OverseasGr>selectGrList(SqlSession session);
 	int updateGrData(SqlSession session,OverseasGr gg2);
+
 }

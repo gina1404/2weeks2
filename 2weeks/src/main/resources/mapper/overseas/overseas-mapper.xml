@@ -3,7 +3,7 @@
 <mapper namespace="overseas">
 
 <insert id="InsertOverseasGr">
-	INSERT INTO OVERSEASGR VALUES(#{total},SYSDATE,#{death})
+	INSERT INTO OVERSEASGR VALUES(#{total},SYSDATE,#{death},NULL,NULL)
 </insert>
 
 	<select id="selectydayDef" resultType="com.twoweeks.spring.overseas.model.vo.OverseasGr">
@@ -17,4 +17,6 @@
 	<update id="updateGrData">
 		UPDATE OVERSEASGR SET today_def=#{today_Def},today_death=#{today_Death} WHERE TO_CHAR(today)=TO_CHAR(SYSDATE)
 	</update>
+	
+
 </mapper>

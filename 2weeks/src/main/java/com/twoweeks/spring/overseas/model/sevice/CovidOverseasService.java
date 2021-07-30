@@ -18,4 +18,5 @@ public interface CovidOverseasService {
 	OverseasGr selectydayDef();
 	List<OverseasGr>selectGrList();
 	int updateGrData(OverseasGr gg2);
+
 }

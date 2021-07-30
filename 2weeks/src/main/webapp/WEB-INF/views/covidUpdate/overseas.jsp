@@ -152,15 +152,17 @@ function drawChart() {
 
   var data = google.visualization.arrayToDataTable([
     ['Task', 'Hours per Day'],
-    ['kr',     15214],
-    ['mr',      1245712],
-    ['Cc',  60247],
-    ['wsa', 44712],
-    ['wasc',    74156]
+    ['${pielist[0].nationNm}',     ${pielist[0].defCount}],
+    ['${pielist[1].nationNm}',     ${pielist[1].defCount}],
+    ['${pielist[2].nationNm}',     ${pielist[2].defCount}],
+    ['${pielist[3].nationNm}',     ${pielist[3].defCount}],
+    ['${pielist[4].nationNm}',     ${pielist[4].defCount}],
+    ['${pielist[5].nationNm}',     ${pielist[5].defCount}],
+    ['${pielist[6].nationNm}',     ${pielist[6].defCount}]
   ]);
 
   var options = {
-    title: 'My Daily Activities'
+    title: 'G7 국가 확진자 비율'
   };
 
   var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -176,20 +178,20 @@ google.charts.setOnLoadCallback(drawVisualization);
 function drawVisualization() {
   // Some raw data (not necessarily accurate)
   var data = google.visualization.arrayToDataTable([
-    ['Month', 'Bolivia','death'],
-    ['07/05',  ${Grlist[6].today_Def}, ${Grlist[6].today_Death}],
-    ['2005/06',  ${Grlist[5].today_Def},${Grlist[5].today_Death}],
-    ['2006/07',  ${Grlist[4].today_Def},${Grlist[4].today_Death}],
-    ['2007/08',  ${Grlist[3].today_Def},${Grlist[3].today_Death}],
-    ['2008/09',  ${Grlist[2].today_Def},${Grlist[2].today_Death}],
-    ['2009/09',  ${Grlist[1].today_Def},${Grlist[1].today_Death}],
-    ['2010/09',  ${Grlist[0].today_Def},${Grlist[0].today_Death}],
+    ['Month', '확진자','사망자'],
+    ['${Grlist[6].today}',  ${Grlist[6].today_Def}, ${Grlist[6].today_Death}],
+    ['${Grlist[5].today}',  ${Grlist[5].today_Def},${Grlist[5].today_Death}],
+    ['${Grlist[4].today}',  ${Grlist[4].today_Def},${Grlist[4].today_Death}],
+    ['${Grlist[3].today}',  ${Grlist[3].today_Def},${Grlist[3].today_Death}],
+    ['${Grlist[2].today}',  ${Grlist[2].today_Def},${Grlist[2].today_Death}],
+    ['${Grlist[1].today}',  ${Grlist[1].today_Def},${Grlist[1].today_Death}],
+    ['${Grlist[0].today}',  ${Grlist[0].today_Def},${Grlist[0].today_Death}],
   ]);
 
   var options = {
     title : '일별 총 확진자 통계',
-    vAxis: {title: 'Cups'},
-    hAxis: {title: 'Month'},
+    vAxis: {title: '명'},
+    hAxis: {title: '일일별 통계'},
     seriesType: 'bars',
     series: {5: {type: 'line'}}
   };
