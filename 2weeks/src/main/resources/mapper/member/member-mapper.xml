@@ -8,10 +8,12 @@
 	
 	<insert id="insertMember">
 		INSERT INTO MEMBER2(USER_ID,USER_NM,USER_PW,USER_NIC,USER_GENDER,USER_PHONE,USER_EMAIL,ENROLL_DT,USER_PF,USER_PFRENAME) 
-			VALUES(#{user_Id},#{user_Nm},#{user_Pw},#{user_Nic},#{user_Gender},#{user_Phone},#{user_Email},SYSDATE,#{user_Pf},#{user_Pfrename})
-		
-
+			VALUES(#{user_Id},#{user_Nm},#{user_Pw},#{user_Nic},#{user_Gender},#{user_Phone},#{user_Email},SYSDATE,#{user_Pf},#{user_Pfrename})	
 	</insert>
+	
+	<select id="selectMember" resultType="member">
+		SELECT * FROM MEMBER2 WHERE USER_ID = #{user_Id}
+	</select>
 
   
 </mapper>
