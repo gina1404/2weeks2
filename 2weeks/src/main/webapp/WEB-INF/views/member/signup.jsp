@@ -37,11 +37,14 @@
                 프로필 사진<input id="profile_input" type="file" name="upFile"/>
                 		<%-- <form:errors path='user_Pf'/> --%>
                 </div>
-                <form:errors path='user_Id' class="user_Id_errors"/><br/>
-                <form:input path='user_Id' type='text' id='user_id' name='user_Id' placeholder="아이디"/><br/>
+                
+                <form:input path='user_Id' type='text' id='user_id' name='user_Id' placeholder="아이디"/>
+                <p>5~10자의 영문 대/소문자,숫자만 사용가능합니다.</p>
+                <form:errors color="red" path='user_Id' class="user_Id_errors"/><br/>
                 <div id="id_check"></div>
                
                 <form:input path='user_Pw' id ='pw1' type='password' name='user_Pw' placeholder="비밀번호"/><br/>
+                <p>6자 이상 숫자, 영 대/소문자, 특수문자(필수)를 사용하세요.</p>
                 <form:input path='user_Pw2' id ='pw2' type='password' name='user_Pw' placeholder="비밀번호 확인"/><br/>
                 <div id="pw_success">비밀번호가 일치합니다.</div> 
                 <div id="pw_fail">비밀번호가 일치하지 않습니다.</div>
