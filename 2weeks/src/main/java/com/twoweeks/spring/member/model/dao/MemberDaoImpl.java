@@ -20,12 +20,25 @@ public class MemberDaoImpl implements MemberDao {
 	public int insertMember(Member member, SqlSession session) {
 		return session.insert("member.insertMember",member);
 	}
+	
+
+	@Override
+	public int insertKakao(Member member, SqlSession session) {
+		return session.insert("member.insertKakao",member);
+	}
 
 	@Override
 	public Member selectMember(Map param, SqlSession session) {
 		
 		return session.selectOne("member.selectMember",param);
 	}
+
+	@Override
+	public String selectKakaoId(String sns_Id, SqlSession session) {
+		return session.selectOne("member.selectKakaoId",sns_Id);
+	}
+	
+	
 	
 	
 	

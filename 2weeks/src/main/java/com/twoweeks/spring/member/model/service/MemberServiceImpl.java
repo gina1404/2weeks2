@@ -29,12 +29,25 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMember(Member member) {		
 		return memberDao.insertMember(member,session);
 	}
+	//카카오 가입
+	public int insertKakao(Member member) {		
+		return memberDao.insertKakao(member,session);
+	}
 
 	@Override
 	//로그인
 	public Member selectMember(Map param) {
 		return memberDao.selectMember(param,session);
 	}
+
+	@Override
+	public String selectKakaoId(String sns_Id) {
+		return memberDao.selectKakaoId(sns_Id,session);
+	}
+	
+	
+
+
 	
 	
 	

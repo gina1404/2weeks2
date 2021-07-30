@@ -40,7 +40,7 @@ public class KakaoApi {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=7b4b21f6e600d0bd834e6900c63c7084");
-			sb.append("&redirect_uri=http://localhost:9090/spring/kakaoLogin"); 
+			sb.append("&redirect_uri=http://localhost:9090/spring/member/kakaoLogin"); 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();
@@ -109,14 +109,19 @@ public class KakaoApi {
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 			
+			
 			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
 			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 			
+			String id = element.getAsJsonObject().get("id").getAsString();
 			String nickname= properties.getAsJsonObject().get("nickname").getAsString();
 			String email= kakao_account.getAsJsonObject().get("email").getAsString();
+			
+			log.info("id={}",id);
 			log.info("nickname={}",nickname);
 			log.info("email ={} ",email);
 			
+			userInfo.put("id", id);
 			userInfo.put("nickname", nickname);
 			userInfo.put("email",email);
 

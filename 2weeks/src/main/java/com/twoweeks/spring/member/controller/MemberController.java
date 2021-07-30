@@ -68,27 +68,51 @@ public class MemberController {
 		return "/member/login";
 	}
 	//카카오로그인
-	@RequestMapping("/kakaoLogin")
+	@RequestMapping("/member/kakaoLogin")
 	public String kakaoLogin(
 			@RequestParam("code") String code,HttpSession session) {
 		log.info("code넘어왔나요? ={} ",code);
 		
-		String access_Token = kakao.getAccessToken(code);
-		
+		String access_Token = kakao.getAccessToken(code);		
 		log.info("컨트롤러 access_Token ={}",access_Token);
-		
+		//유저정보 Map 저장 
 		HashMap<String,Object> userInfo = kakao.getUserInfo(access_Token);
 		log.info("login Controller 유저정보 ={}",userInfo);
-		
-		//이메일이 존재할때 세선에 등록
+			
+		//이메일이 존재할때 DB 등록
 		if(userInfo.get("email") != null) {
+			
+			
+			String sns_Id= (String) userInfo.get("id");
+			String user_Nic= (String) userInfo.get("nickname");
+			String user_Nm= (String) userInfo.get("nickname");
+			String user_Email = (String) userInfo.get("email");			
+			log.info("sns_Id ={}, user_Nic={},user_Nm ={}, user_Email={}",sns_Id,user_Nic,user_Nm,user_Email);
+			
+			String dbUserId = memberService.selectKakaoId(sns_Id);
+			
+			if(dbUserId ==null) {
+			log.info("db에 데이터없음");
+			//db등록
+			Member member = new Member();
+			member.setUser_Id(sns_Id);
+			member.setSns_Id(sns_Id);
+			member.setUser_Nm(user_Nm);
+			member.setUser_Nic(user_Nic);
+			member.setUser_Email(user_Email);
+					
+			int result = memberService.insertKakao(member);
+			}
+		}
+			//세션등록	
 			session.setAttribute("userId", userInfo.get("email"));
 			session.setAttribute("access_Token", access_Token);
-		}
+			
+			
 		return "/member/testmain";
 	}
 	//카카오 로그아웃
-	@RequestMapping("/kakaologout")
+	@RequestMapping("/member/kakaologout")
 	public String logout(HttpSession session) {
 		kakao.kakaoLogout((String)session.getAttribute("access_Token"));
 		session.removeAttribute("access_Token");

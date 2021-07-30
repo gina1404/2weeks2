@@ -11,8 +11,18 @@
 			VALUES(#{user_Id},#{user_Nm},#{user_Pw},#{user_Nic},#{user_Gender},#{user_Phone},#{user_Email},SYSDATE,#{user_Pf},#{user_Pfrename})	
 	</insert>
 	
+	<insert id="insertKakao">
+		INSERT INTO MEMBER2(USER_ID,USER_NM,SNS_TYPE,SNS_ID,USER_NIC,USER_EMAIL,ENROLL_DT)
+			VALUES(#{user_Id},#{user_Nm},'KAKAO',#{sns_Id},#{user_Nic},#{user_Email},SYSDATE)
+			
+	</insert>
+	
 	<select id="selectMember" resultType="member">
 		SELECT * FROM MEMBER2 WHERE USER_ID = #{user_Id}
+	</select>
+	
+	<select id="selectKakaoId" resultType="string">
+		SELECT * FROM MEMBER2 WHERE SNS_ID = #{sns_Id}
 	</select>
 
   

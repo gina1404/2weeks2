@@ -22,7 +22,7 @@
 		<a href="https://kauth.kakao.com/oauth/authorize
 		?response_type=code
 		&client_id=7b4b21f6e600d0bd834e6900c63c7084
-		&redirect_uri=http://localhost:9090/spring/kakaoLogin">
+		&redirect_uri=http://localhost:9090/spring/member/kakaoLogin">
 		<img src="${path}/resources/images/member/kakao_login_medium.png" />
 		</a>
 	</div>

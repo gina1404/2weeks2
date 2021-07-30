@@ -11,6 +11,10 @@ public interface MemberDao {
 	public int idCheck(String userId, SqlSession session);
 	
 	public int insertMember(Member member, SqlSession session);
-
+	
+	public int insertKakao(Member member,SqlSession session);	
+	
 	public Member selectMember(Map param,SqlSession session);
+	
+	public String selectKakaoId(String sns_Id,SqlSession session);
 }

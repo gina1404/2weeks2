@@ -10,7 +10,12 @@ public interface MemberService {
 	
 	public int insertMember(Member member);
 	
+	public int insertKakao(Member member);
+	
+	
 	public Member selectMember(Map param);
+	
+	public String selectKakaoId(String sns_Id);
 	
 	
 	

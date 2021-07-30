@@ -12,12 +12,12 @@
 </head>
 <body>
 <c:if test="${userId eq null }">
-	<input type="button" value="로그인" onclick="location.href='/spring/login'"/>
+	<input type="button" value="로그인" onclick="location.href='${path}/member/login'"/>
 </c:if>
 
 <c:if test="${userId ne null}">
 	<h1>${userId }님 </h1>
-	<input type="button" value="로그아웃" onclick="location.href='spring/kakaologout'"/>
+	<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
 
 </c:if>
 
