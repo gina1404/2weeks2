@@ -130,6 +130,16 @@
 					<img class="sidebar-divider" src="${path }/resources/images/icons/divider-horizontal.svg"/>
 				</div>
 	
+				<!-- 채팅 -->
+				<div class="wrap_sub_list">
+					<div class="sidebar-list">
+						<img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
+						<a class="" href="${path }/chatting.do">
+		                	<div class="sidebar-title">chatting</div>
+		                </a>						
+					</div>
+				</div>
+				
 				<!-- 챗봇 -->
 				<div class="wrap_sub_list">
 					<div class="sidebar-list">

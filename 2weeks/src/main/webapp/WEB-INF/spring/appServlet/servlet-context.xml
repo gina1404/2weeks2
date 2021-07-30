@@ -24,7 +24,8 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.twoweeks.spring" />
-	
+
+
 	<!-- 인터셉터 등록 (아직 안 함) -->
 	
 	
@@ -51,7 +52,16 @@
 		</beans:property>
 	</beans:bean>
 	
-	<!--  웹소켓핸들러 등록 (아직 안 함)  -->
-
+	<!--  웹소켓핸들러 등록-->
+	<!-- Namespaces에서 webscket 체크해서 등록해주기 -->
+	<beans:bean id="chattingHandler" class="com.twoweeks.spring.common.ChattingServer" />
+	
+	<websocket:handlers>
+		<websocket:mapping handler="chattingHandler" path="/chatting" />
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<websocket:sockjs/>
+	</websocket:handlers>
 	
 </beans:beans>

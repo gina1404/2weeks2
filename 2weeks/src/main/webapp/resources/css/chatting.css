@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+#addGroupBtn{
+	display : block;
+}
+
+#addGroup{
+	border: 1px solid;
+    display: block;
+    height: 160px;
+    width : 300px;
+}
+
+#addBox{
+	margin: auto;
+}
+
+#title{
+	width: 200px;
+}
+#limit{
+	width: 185px;
+	text-align: right;
+}
+
+#content{
+	height: 50px;
+	width: 200px;
+	resize:none;
+}
+#addBtn{
+	float:right;
+}
+#sendBox, #chatContainer{
+	display:inline-block;
+}
