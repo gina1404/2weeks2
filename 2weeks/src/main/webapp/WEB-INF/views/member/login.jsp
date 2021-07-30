@@ -10,9 +10,11 @@
 <div class="container">
 	<div class="member_login">
 		로그인페이지
-		<input type='text' placeholder="아이디"/>
-		<input type='password' placeholder="비밀번호" />
-		<button type="sumbit">로그인</button>
+		<form action='${path}/member/login' method='post' >
+			<input type='text' name='user_Id' placeholder="아이디"/>
+			<input type='password' name='user_Pw' placeholder="비밀번호" />
+			<button type="sumbit">로그인</button>
+		</form>
 	<br/>
 	</div>
 	<div class="kakao_login">
