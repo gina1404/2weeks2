@@ -15,4 +15,6 @@ public interface FreeBoardService {
 	void delete(int post_Sq) throws Exception;
 	
 	List<FreeBoard> listAll() throws Exception;
+
+	int insertBoard(FreeBoard b) throws Exception;
 }
