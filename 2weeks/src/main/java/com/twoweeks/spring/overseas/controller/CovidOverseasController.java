@@ -4,12 +4,12 @@ package com.twoweeks.spring.overseas.controller;
 
 
 
+import java.beans.Encoder;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,7 @@ import com.twoweeks.spring.overseas.model.vo.OverseasGr;
 import com.twoweeks.spring.overseas.model.vo.OverseasPie;
 import com.twoweeks.spring.overseas.model.vo.Response;
 
+
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -34,7 +35,7 @@ public class CovidOverseasController {
 	@Autowired
 	private CovidOverseasService service;
 	
-	@RequestMapping(value = "/covid/overseas.do",produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/covid/overseas.do",produces="application/xml;charset=utf-8")
 	public ModelAndView OverseasList(ModelAndView mv,OverseasGr gr) {
 		
 			
@@ -147,10 +148,10 @@ public class CovidOverseasController {
 
 			
 			
-			
+			 System.out.println(list.get(5).getNationNm());
 
 			
-			
+			mv.addObject("list", list);
 			mv.addObject("pielist", pielist);
 			mv.addObject("Grlist", Grlist);
 			mv.addObject("realtodayDef", realtodayDef);

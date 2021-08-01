@@ -108,25 +108,19 @@
 
 	<table class="table table-striped table-hover">
 		<tr>
-			<th>번호</th>
 			<th>나라</th>
 			<th>확진자</th>
+			<th>사망자</th>
+			<th>사망률</th>
 		</tr>
-		<tr>
-			<td>1</td>
-			<td>1</td>
-			<td>1</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>1</td>
-			<td>1</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>1</td>
-			<td>1</td>
-		</tr>
+		<c:forEach items="${list }" var="c">
+			<tr>
+				<td>${c.nationNm }</td>
+				<td>${c.natDefCnt }</td>			
+				<td>${c.natDeathCnt }</td>			
+				<td>${c.natDeathRate }</td>
+			</tr>			
+		</c:forEach>
 	</table>
 	
 	
