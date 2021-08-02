@@ -14,5 +14,12 @@ public class AdminController {
 	public String adminPage() {
 		return "admin/adminMainPage";
 	}
-
+	@RequestMapping("/admin/admintable.do")
+	public String admintable() {
+		return "/admin/admintable";
+	}
+	@RequestMapping("/admon/NoticeWriter.do")
+	public String adminNotice() {
+		return "admin/adminNoticeWriter";
+	}
 }
