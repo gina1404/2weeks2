@@ -37,6 +37,20 @@ public class MemberDaoImpl implements MemberDao {
 	public String selectKakaoId(String sns_Id, SqlSession session) {
 		return session.selectOne("member.selectKakaoId",sns_Id);
 	}
+
+	@Override
+	public String findId(Member member, SqlSession session) {
+		return session.selectOne("member.findId",member);
+	}
+
+	@Override
+	public int updatePw(Member member, SqlSession session) {
+		return session.update("member.updatePw",member);
+	}
+	
+	
+	
+	
 	
 	
 	

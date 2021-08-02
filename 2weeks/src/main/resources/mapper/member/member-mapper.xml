@@ -24,6 +24,15 @@
 	<select id="selectKakaoId" resultType="string">
 		SELECT * FROM MEMBER2 WHERE SNS_ID = #{sns_Id}
 	</select>
+	
+	<select id="findId" resultType="string">
+		SELECT USER_ID FROM MEMBER2 WHERE USER_EMAIL=#{user_Email} AND USER_NM=#{user_Nm}
+	</select>
+	
+	<update id="updatePw">
+		UPDATE MEMBER2 SET USER_PW =#{user_Pw} WHERE USER_ID = #{user_Id} AND USER_EMAIL =#{user_Email}
+		
+	</update>
 
   
 </mapper>

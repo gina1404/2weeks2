@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -321,6 +323,85 @@ public class MemberController {
 		return "/member/testmain";
 	}
 	
+	//id/pw찾기 페이지
+	@GetMapping("/member/findid")
+	public String findMember() {
+		return "/member/findid";
+	}
+	
+	//id찾기
+	@PostMapping("/member/findid")
+	@ResponseBody
+	public String findId(
+			@RequestParam String user_Nm,
+			@RequestParam String user_Email) {
+		
+		log.info("파라미터 확인 ={} {}",user_Nm,user_Email);
+		Member member = new Member();
+		member.setUser_Nm(user_Nm);
+		member.setUser_Email(user_Email);
+		String user_Id = memberService.findId(member);
+		//model.addAttribute("user_Id", memberService.findId(member));
+		log.info(user_Id);
+		return user_Id;
+		
+	}
+	//pw찾기
+	@PostMapping(value="/member/findpw", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String findPw(
+			@RequestBody Member member) {
+		log.info("아이디 확인={}",member.getUser_Id());
+		log.info("이메일확인={}",member.getUser_Email());
+		
+		//임시비밀번호 생성
+		String newPw =generatePw();
+		log.info("임시비밀번호 생성 = {}",newPw);
+		member.setUser_Pw(pwEncoder.encode(newPw));
+		log.info("임시비밀번호 암호화={}",member.getUser_Pw());
+		
+		int result=memberService.updatePw(member);
+		log.info("result={}",result);
+		
+		if(result>=1) {
+			//업데이트 됬으면 임시비밀번호 이메일로 보내기
+			String setFrom= "tweeks.official.mail@gmail.com";
+			String toMail = member.getUser_Email();
+			String title = "2WEEKS 임시 비밀번호입니다";
+			String content =member.getUser_Id()+"님의 임시 비밀빈호 입니다." +
+							"<br/><br/>"+
+							"임시 비밀번호는 " + "<strong>"+newPw +"</strong>"+"입니다"+
+							"<br/><br/>"+
+							"로그인 후 비밀번호를 변경하세요!";
+			log.info("업데이트성공");
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message,true,"utf-8");
+				helper.setFrom(setFrom);
+				helper.setTo(toMail);
+				helper.setSubject(title);
+				helper.setText(content,true);
+				mailSender.send(message);
+				log.info("발송성공");
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return "임시비밀번호가 발송되었습니다";
+			
+		}else {
+			log.info("업데이트실패");
+			return "일치하는 회원정보가 없습니다";
+		}	
+		
+	}
+	
+	//임시비밀번호 생성메소드(UUID)
+	public String generatePw() {
+		String uuid = UUID.randomUUID().toString().replaceAll("-","");
+		uuid = uuid.substring(0,10); //10자리 생성
+		log.info("uuid={}",uuid);		
+		return uuid;
+	}
 	
 
 }

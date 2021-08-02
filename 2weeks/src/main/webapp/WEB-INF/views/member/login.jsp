@@ -22,7 +22,7 @@
 			</label>
 			<button type="sumbit">로그인</button>
 		</form:form>
-		<a href="#">아이디/패스워드 찾기</a>
+		<a href="${path }/member/findid">아이디/패스워드 찾기</a>
 	<br/>
 	
 	<button type="button" onclick="location.assign('${path}/signup');">회원가입</button>

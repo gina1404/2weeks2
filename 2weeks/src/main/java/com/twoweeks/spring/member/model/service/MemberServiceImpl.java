@@ -45,6 +45,20 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectKakaoId(sns_Id,session);
 	}
 	
+	//아이디찾기
+	@Override
+	public String findId(Member member) {
+		return memberDao.findId(member,session);
+	}
+
+	//임시비밀번호로 변경 
+	public int updatePw(Member member) {	
+		return memberDao.updatePw(member,session);
+	}
+	
+	
+	
+	
 	
 
 

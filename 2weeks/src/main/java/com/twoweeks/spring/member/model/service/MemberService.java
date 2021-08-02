@@ -17,6 +17,9 @@ public interface MemberService {
 	
 	public String selectKakaoId(String sns_Id);
 	
+	public String findId(Member member);
+	
+	public int updatePw(Member member);
 	
 	
 

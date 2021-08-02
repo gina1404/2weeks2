@@ -17,4 +17,8 @@ public interface MemberDao {
 	public Member selectMember(Map param,SqlSession session);
 	
 	public String selectKakaoId(String sns_Id,SqlSession session);
+	
+	public String findId(Member member,SqlSession session);
+	
+	public int updatePw(Member member,SqlSession session);
 }
