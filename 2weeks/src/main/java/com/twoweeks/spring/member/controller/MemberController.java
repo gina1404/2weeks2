@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.twoweeks.spring.member.model.service.KakaoApi;
 import com.twoweeks.spring.member.model.service.MemberService;
@@ -127,7 +128,7 @@ public class MemberController {
 	}
 	//카카오 로그아웃
 	@RequestMapping("/member/kakaologout")
-	public String logout(HttpSession session) {
+	public String kakaologout(HttpSession session) {
 		kakao.kakaoLogout((String)session.getAttribute("access_Token"));
 		session.removeAttribute("access_Token");
 		session.removeAttribute("userId");
@@ -274,11 +275,11 @@ public class MemberController {
 		log.info("map 아이디={} ",(String)param.get("user_Id"));
 		Member m = memberService.selectMember(param);
 		
-		MemberSession memberSession = new MemberSession();
-		memberSession.setUser_Id(m.getUser_Id());
-		memberSession.setUser_Nm(m.getUser_Nm());
-		memberSession.setUser_Pfrename(m.getUser_Pfrename());
-		session.setAttribute("memberSession", memberSession);
+		//MemberSession memberSession = new MemberSession();
+		//memberSession.setUser_Id(m.getUser_Id());
+		//memberSession.setUser_Nm(m.getUser_Nm());
+		//memberSession.setUser_Pfrename(m.getUser_Pfrename());
+		
 		
 		Cookie rememberCookie = new Cookie("REMEMBER",login.getUser_Id());
 		rememberCookie.setPath("/");
@@ -296,6 +297,7 @@ public class MemberController {
 		
 		if(m!=null) {			
 			if(pwEncoder.matches((String)param.get("user_Pw"), m.getUser_Pw())) {
+			session.setAttribute("member", m);
 			model.addAttribute("loginMember",m);
 			msg="로그인성공";
 			}else {
@@ -309,6 +311,14 @@ public class MemberController {
 		
 		return "common/msg";
 		
+	}
+	
+	//로그아웃
+	@RequestMapping("/member/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "/member/testmain";
 	}
 	
 	

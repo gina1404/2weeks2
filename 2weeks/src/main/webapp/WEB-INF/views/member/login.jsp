@@ -14,7 +14,9 @@
 		로그인페이지
 		<form:form role='form' modelAttribute='login' action='${path}/member/login' method='post' >
 			<form:input path='user_Id' type='text' name='user_Id' placeholder="아이디"/>
+			<form:errors path='user_Id'/>
 			<form:input path='user_Pw' type='password' name='user_Pw' placeholder="비밀번호" />
+			<form:errors path='user_Pw'/>
 			<label>
 			<form:checkbox path="rememberId" name="rememberId"/>아이디 저장
 			</label>
