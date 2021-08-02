@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+/* 버튼 */
+.regionalKor-button{
+	border:0.5px solid darkgray;
+	width:30%;
+	padding:2%;
+	margin:3%;
+	text-align:center;
+}
+
+#regionalKor-map {
+	width: 100%;
+	min-height: 500px;
+}
+#states path {
+	fill: #585858; //짙은 회색
+	stroke: #000000;
+	stroke-width: 1.5px; 
+}
+
+#states path:hover {
+	fill: #009300; //짙은초록
+}
+
+#states .active {
+	fill: #00B700; //중간 초록
+}
+
+#states .activeDetail {
+	fill: #00B700;
+}
+
+#states path {
+	cursor: pointer;
+}
+
+#states text {
+	cursor: pointer;
+	font-size: 12px;
+	fill: #fff; //하양
+}

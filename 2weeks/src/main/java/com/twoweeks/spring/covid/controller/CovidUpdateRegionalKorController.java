@@ -17,7 +17,7 @@ public class CovidUpdateRegionalKorController {
 	@Autowired
 	private CovidUpdateRegionalKorService service;
 	
-	@RequestMapping("/covidUpdate/Regional/Kor.do")
+	@RequestMapping("/covidUpdate/regional/kor/update.do")
 	//코로나 지역별 현황(한국) 데이터를 받아다가 DB에 저장
 	public void insertCovidRegionalKor() {
 		//공공데이터포털에서 한국 데이터를 받아서 ListMap에 저장

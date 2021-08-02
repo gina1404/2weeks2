@@ -224,6 +224,13 @@
 		    <artifactId>spring-context-support</artifactId>
 		    <version>4.3.4.RELEASE</version>
 		</dependency>
+		
+		<!-- json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20210307</version>
+		</dependency>				
 				  
 	</dependencies>
     <build>

@@ -53,17 +53,17 @@
 	<bean id="updateDaily" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
 		<property name="jobClass" value="com.twoweeks.spring.common.UpdateDaily"/>
 	</bean>
-		<!-- 트리거(cron 시간 설정) -->
+		<!-- 트리거(cron 시간 설정) = 언제 -->
 	<bean id="updateDailyTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="updateDaily"/>
 		<property name="cronExpression">
 			<!-- 매일 낮 12시에 실행 -->
-			<!-- <value>0 0 12 * * ?</value> -->
+			<value>0 0 12 * * ?</value>
 			<!-- 테스트용 : 매 1분마다 -->
-			 <value>0 0/1 * * * ?</value> 
+			<!-- <value>0 0/1 * * * ?</value>  -->
 		</property>
 	</bean>
-		<!-- 스케쥴러 (cron 실행) -->
+		<!-- 스케쥴러 (cron 실행) = 무엇을 -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
