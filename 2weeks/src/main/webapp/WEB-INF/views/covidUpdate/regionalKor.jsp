@@ -31,31 +31,32 @@ function fn_selectButton2(){
 	$("#regionalKor-map").hide();
 	$("#regionalKor-table").show();
 }
-/* 지역별 현황 값 가져오기 */
+
+/* 지역별 현황 출력*/
 $("#regionalKor").each(function(){
-    $.ajax({
+    $.ajax({ //0. 지역별 현황 DB 값 가져오기
         url:"${path}/covidUpdate/regional/kor.do",
         type:"post",
         dataType:"json",
         success:function(data){
-             /* 1. 지역별 현황 표 출력 */
-             /* 항목 */
+             //1. 지역별 현황 표 출력 
+             //항목
             var str="<div class='regionalKor-table-title' style='display:flex;'>";
             str+="<div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>지역</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>오늘 확진자</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>총 확진자</div></div>";
-             /* 값 */
+             //값
             var i;
-            for(i=2; i< 20;i++){ /* 검역 빼고 마지막 줄 합계까지 출력*/
+            for(i=2; i< 20;i++){ //검역 빼고 마지막 줄 합계까지 출력
                 str += "<div class='regionalKor-table-content' style='display:flex;'>";
                 str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].gubun+"</div>";
-                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].defCnt+"</div>";
                 str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].incDec+"</div>";
+                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].defCnt+"</div>";
                 str += "</div>"
-            }// 값 출력 끝
+            }//값 출력 끝
             str+="</div>";
             $("#regionalKor-table").append(str);
             
             
-            /* 2. 지도 그리기 */
+            //2. 지역별 현황 지도 출력
             var width = 100; //지도의 넓이 %
             var height = 500; //지도의 높이 px
             var scale = 4800; //확대시킬 값
@@ -64,7 +65,7 @@ $("#regionalKor").each(function(){
             var projection = d3.geo.mercator().scale(scale).center([127-1.3, 37.6-1.15]).translate([width/2,height/2]);
             var path = d3.geo.path().projection(projection);
         
-            //지도 츨력  //svg 영역 생성
+            //지도 츨력
             var svg = d3.select('#regionalKor-map').append('svg').attr('width', width + '%').attr('height', height + 'px').attr('id', 'regionalKor-map').attr('class', 'regionalKor-map');			
             var states = svg.append('g').attr('id', 'states');        
         
@@ -72,9 +73,9 @@ $("#regionalKor").each(function(){
             d3.json('${path}/resources/json/korea.json', function(json) {
                 states.selectAll('path').data(json.features).enter().append('path').attr('d', path).attr('id', function(d) { return 'path-' + d.properties.name_eng;});	//지도 표시
                  labels = states.selectAll('text').data(json.features).enter().append('text').attr('transform', render).attr('id', function(d) { return 'label-' + d.properties.name_eng;}).attr('text-anchor', 'middle').attr('dy', '.35em').text(function(d) {  return d.properties.name;}); //지역명 라벨 표시
-            });//지도 그리기 끝   
+            }); //지도 그리기 끝   
             
-          //텍스트 위치 조절 - 하드코딩으로 위치 조절을 했습니다.
+          //텍스트 위치 조절
 		    function render(d) {
 		        var arr = path.centroid(d);
 		        if (d.properties.code == 31) {
@@ -91,8 +92,8 @@ $("#regionalKor").each(function(){
 		                    : scale / height + 10;
 		        }
 	        return 'translate(' + arr + ')';
-		    }
-        }, //지역별 현황 출력 끝
+		    } //function render(d) 끝
+        }, //지역별 현황function(data))출력 끝
         error:(r,m,s)=>{
             console.log(r);
             console.log(m);
@@ -100,95 +101,4 @@ $("#regionalKor").each(function(){
         }
     }); //ajax 끝
 }); //함수 끝
-</script>		
-	
-
-<!-- 지도 그리기 -->
-<!-- <script>
-window.onload = function() {
-    drawMap('#regionalKor-map');
-};
-
-//지도 그리기
-function drawMap(target) {
-    var width = 100; //지도의 넓이 %
-    var height = 500; //지도의 높이 px
-    var scale = 4800; //확대시킬 값
-    var labels; //라벨
-
-    //geo 세팅
-    	//축척
-    var projection = d3.geo
-    	.mercator()
-        .scale(scale)
-        .center([127-1.3, 37.6-1.15]) //서울 중심 좌표를 기준으로 조금씩 움직이며 맞췃음
-    	.translate([width/2,height/2]);
-    
-    	//패스
-    var path = d3.geo.path().projection(projection);
-
-    //츨력
-    var svg = d3
-        .select(target)
-        .append('svg')
-        .attr('width', width + '%')
-        .attr('height', height + 'px') //svg 영역 생성
-        .attr('id', 'regionalKor-map') //id
-        .attr('class', 'regionalKor-map'); //class
-
-    var states = svg
-        .append('g')
-        .attr('id', 'states');
-
-
-    //geoJson데이터를 파싱하여 지도그리기
-    d3.json('${path}/resources/json/korea.json', function(json) {
-        //지도 표시
-    	states
-            .selectAll('path') //지역 설정
-            .data(json.features)
-            .enter()
-            .append('path')
-            .attr('d', path)
-            .attr('id', function(d) {
-                return 'path-' + d.properties.name_eng;
-            });
-
-        //지역명 라벨 표시
-         labels = states
-            .selectAll('text')
-            .data(json.features) //라벨표시
-            .enter()
-            .append('text')
-            .attr('transform', render)
-            .attr('id', function(d) {
-                return 'label-' + d.properties.name_eng;
-            })
-            .attr('text-anchor', 'middle')
-            .attr('dy', '.35em')
-            .text(function(d) {
-                return d.properties.name;
-            }); 
-    });
-
-    //텍스트 위치 조절 - 하드코딩으로 위치 조절을 했습니다.
-    function render(d) {
-        var arr = path.centroid(d);
-        if (d.properties.code == 31) {
-            //서울 경기도 이름 겹쳐서 경기도 내리기
-            arr[1] +=
-                d3.event && d3.event.scale
-                    ? d3.event.scale / height + 20
-                    : scale / height + 20;
-        } else if (d.properties.code == 34) {
-            //충남은 조금 더 내리기
-            arr[1] +=
-                d3.event && d3.event.scale
-                    ? d3.event.scale / height + 10
-                    : scale / height + 10;
-        }
-        return 'translate(' + arr + ')';
-    }
-
-}
-</script> -->
+</script>

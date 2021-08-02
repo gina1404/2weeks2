@@ -32,20 +32,9 @@ public class CovidUpdateRegionalKorController {
 		System.out.println(result>0?"지역별 현황 데이터 저장 : 성공":"지역별 현황 데이터 저장 : 실패");
 	}
 	
-	/*
-	 * @RequestMapping("/covidUpdate/regional/kor.do") 
-	 * public ModelAndView covidRegionalKorList() { ModelAndView mv = new ModelAndView("jsonView");
-	 * System.out.println("조회 시작"); mv.addObject("list",
-	 * service.selectCovidRegionalKorList());
-	 * mv.setViewName("/covidUpdate/regional/kor");
-	 * System.out.println(service.selectCovidRegionalKorList()); return mv; }
-	 */
-	
 	@RequestMapping("/covidUpdate/regional/kor.do")
 	@ResponseBody
 	 public List<CovidRegionalKorData> covidRegionalKorList() throws Exception {
-		System.out.println("조회 시작");
-		System.out.println(service.selectCovidRegionalKorList());
 		return service.selectCovidRegionalKorList();
 	}
 }
