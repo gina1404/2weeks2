@@ -14,21 +14,21 @@
 	min-height: 500px;
 }
 #states path {
-	fill: #585858; //짙은 회색
-	stroke: #000000;
-	stroke-width: 1.5px; 
+	fill: #EEF0FE; 
+	stroke: white;
+	stroke-width: 1.px; 
 }
 
 #states path:hover {
-	fill: #009300; //짙은초록
+	fill: #E1E6FF;
 }
 
 #states .active {
-	fill: #00B700; //중간 초록
+	fill: #E1E6FF;
 }
 
 #states .activeDetail {
-	fill: #00B700;
+	fill: #E1E6FF;
 }
 
 #states path {
@@ -38,5 +38,5 @@
 #states text {
 	cursor: pointer;
 	font-size: 12px;
-	fill: #fff; //하양
+	fill: black; //하양
 }

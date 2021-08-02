@@ -14,6 +14,7 @@ public class UpdateDaily extends QuartzJobBean{
 		//주기적으로 실행할 메소드 작성
 		Date time=new Date();
 		System.out.println("---- quartz 테스트 : "+time+"-----");
+		
 	}
 
 

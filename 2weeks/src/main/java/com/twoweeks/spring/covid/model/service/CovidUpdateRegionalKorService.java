@@ -12,4 +12,7 @@ public interface CovidUpdateRegionalKorService {
 	
 	//map을 보내서 DB에 저장	
 	int updateCovidRegionalKorData(Map<String, String> map);
+	
+	//DB에 저장된 데이터 조회
+	List<CovidRegionalKorData> selectCovidRegionalKorList();
 }

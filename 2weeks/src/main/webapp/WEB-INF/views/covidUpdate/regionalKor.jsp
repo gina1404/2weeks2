@@ -6,21 +6,32 @@
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/covid/regionalKor.css">
 <script type="text/javascript" src="${path}/resources/js/d3.js"></script>
 
-<section id="regionalKor" style="width:80%; min-height:300px; margin:10%; border:1px solid blue;">
+<section id="regionalKor" style="width:80%; min-height:300px; margin:10%; border:1px solid blue; background-color:white;">
+		<!-- 지도/표 선택 버튼 -->
 		<div style="display:flex;justify-content:space-around">
 			<div class="regionalKor-button">지도</div>
 			<div class="regionalKor-button">지역별 표</div>
 		</div>
+		<!-- 지역별 현황 지도 표시 -->
 		<div id="regionalKor-map" style="border:1.5px solid yellow;"></div>
-		<div id="regionalKor-table" style="border:1.5px solid purple;"></div>
+		
+		<!-- 지역별 현황 표 표시 -->
+		<div id="regionalKor-table" style="border:1.5px solid purple; min-height:200px;">
+			<c:forEach var="t" items="${list }">
+				<div>${t.gubun } : ${t.defCnt } : ${t.incDec }</div>
+			
+			</c:forEach>
+		</div>
 		
 		
 </section>
 
 
-
 <!-- 지도 그리기 -->
 <script>
+window.onload = function(){
+	
+}
 window.onload = function() {
     drawMap('#regionalKor-map');
 };
@@ -108,13 +119,37 @@ function drawMap(target) {
 
 }
 </script>
-<!-- 표 그리기 -->
+<!-- 지역별 현황 리스트 로딩 -->
 <script>
-window.onload = function(){
-	drawTable(''#regionalKor-table');
-}
-function drawtable(target){
-	var width = 100%;
-    var height = 500px;
-}
-</script>
+	$("#regionalKor").each(function(){
+		$.ajax({
+			url:"${path}/covidUpdate/regional/kor.do",
+			type:"post",
+			dataType:"json",
+			 success:function(data){
+				/* 항목 */
+				var str="<div class='regionalKor-table-title' style='display:flex;'>";
+				str+="<div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>지역</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>오늘 확진자</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>총 확진자</div></div>";
+				/* 값 */
+				var i;
+				for(i=2; i< 20;i++){ /* 검역 빼고 마지막 줄 합계까지 */
+					str += "<div class='regionalKor-table-content' style='display:flex;'>";
+					str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].gubun+"</div>";
+					str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].defCnt+"</div>";
+					str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].incDec+"</div>";
+					str += "</div>"
+				}
+				str+="</div>";
+				$("#regionalKor-table").append(str);
+			}, 
+			error:(r,m,s)=>{
+				console.log(r);
+				console.log(m);
+				console.log(s);
+			}
+		});
+	})
+	
+	
+		
+</script>		

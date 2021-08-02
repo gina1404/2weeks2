@@ -94,6 +94,13 @@ public class CovidUpdateRegionalKorServiceImpl implements CovidUpdateRegionalKor
 		return dao.updateCovidRegionalKorData(session, map);
 	}
 
+	//DB에 저장된 데이터를 조회해옴
+	@Override
+	public List<CovidRegionalKorData> selectCovidRegionalKorList() {
+		return dao.selectCovidRegionalKorList(session);
+	}
+
+	
 	
 	
 }
