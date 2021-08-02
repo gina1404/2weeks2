@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="chat">
+ 
+	<insert id="insertChatGroup">
+		INSERT INTO CHAT_GROUP VALUES(CHAT_GROUP_SEQ.NEXTVAL, 
+			#{maker}, #{title}, #{cnt}, #{content})
+	</insert>
+
+	<select id="selectGroupList" resultMap="groupMap">
+		SELECT * FROM CHAT_GROUP
+	</select>
+
+ 	<resultMap type="chat" id="groupMap">
+ 		<id column="chat_group_no" property="groupNo"/>
+ 		<id column="USER_ID" property="maker"/>
+ 		<id column="CHAT_GROUP_TITLE" property="title"/>
+ 		<id column="CHAT_GROUP_CNT" property="cnt"/>
+ 		<id column="CHAT_GROUP_CONTENT" property="content"/> 		
+ 	</resultMap>
+ 
+ 	
+ 
+ 
+</mapper>

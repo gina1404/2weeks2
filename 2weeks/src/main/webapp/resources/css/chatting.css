@@ -2,16 +2,18 @@
 
 #addGroupBtn{
 	display : block;
+	float:right;
 }
 
-#addGroup{
+#addGroup{	
 	border: 1px solid;
     display: block;
     height: 160px;
     width : 300px;
+    float: right;
 }
 
-#addBox{
+#addBox{	
 	margin: auto;
 }
 
@@ -33,4 +35,57 @@
 }
 #sendBox, #chatContainer{
 	display:inline-block;
+}
+
+#group, #cntLimit, #chatContent, #chatTitle, #entry{
+	/* border: 1px solid; */
+}
+
+#groupList{
+	height:auto;
+	width:470px;	
+	overflow-x: hidden;
+}
+
+#group{
+	display:inline-block;	
+}
+
+#chatTitle{
+	display:inline-block;
+	font-weight: bolder;
+    font-size: 17px;
+    width: 300px;
+    height: 30px;
+    margin: 0 0 0 10px;
+}
+
+#entry{
+	position: absolute;
+	display:inline-block;
+	font-weight: bolder;
+    font-size: 17px;
+    vertical-align: middle;
+    margin: 15px 0 0 5px;
+    cursor:pointer;
+}
+#entry:hover{
+	color:#6E6E6E;
+}
+
+#cntLimit{
+	display:inline-block;
+	width: 60px;
+    height: 25px;
+    text-align: center;
+    color:#424242;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+#chatContent{
+	margin: 0 0 0 15px;
+	width: 380px;
+	color:#424242;
+    font-size: 14px;
 }

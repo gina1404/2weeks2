@@ -23,6 +23,10 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		
+		<!-- 웹소켓 설정(동시에 여러 클라이언트이 데이터를 전송할 수 있게 함 -->
+		<async-supported>true</async-supported>
+		
 	</servlet>
 		
 	<servlet-mapping>

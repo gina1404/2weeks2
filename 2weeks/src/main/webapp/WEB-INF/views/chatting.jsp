@@ -9,11 +9,11 @@
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<link href="${pageContext.request.contextPath }/resources/css/chatting.css?after" rel="stylesheet" />
-
+<link href="${pageContext.request.contextPath }/resources/css/chatting.css" rel="stylesheet" />
+<c:set var="path" value="${pageContext.request.contextPath }"/>
 
 <section class="container">
-	<h3>chatting</h3>
+	<h3>오픈채팅</h3>
 	
 	<button id="addGroupBtn">채팅방 만들기</button>
 	<div id="addGroup" style="display:none;">
@@ -37,9 +37,23 @@
 				<td colspan="2"><button id="addBtn">생성</button></td>
 			</tr>
 		</table>		
-	</div>
+	</div>	
 	
-	<div id="sendBox">
+	<div id="groupList">
+		<c:forEach var="l" items="${list }" varStatus="status">
+			<div id="group">					
+				<div id="chatTitle">${l.title }</div>
+				<div id="cntLimit">0/${l.cnt }명</div>
+				<div id="chatContent">${l.content }</div>
+			</div>
+			<div id="entry">
+				<a href="${path }/chat/group${l.groupNo}">입장</a>
+			</div>
+			<hr>				
+		</c:forEach>			
+	</div>	
+	
+	<div id="sendBox" style="display:none;">
 		<input type="text" id="chat">
 		<button id="sendChat">전송</button>
 	</div>	
@@ -49,6 +63,12 @@
 
 <script>
 	let rootPath="${pageContext.request.contextPath}";
+		
+	const check="${check}";	
+	if(check){
+		alert(check);
+		console.log(check);
+	}	
 	
 	let sock=new SockJS("http://localhost:9090${pageContext.request.contextPath}/chatting");
 	sock.onopen=e=>{

@@ -1,25 +1,27 @@
-$("#addGroupBtn").click(e=>{		
-	$(e.target).next().show();	
+$("#addGroupBtn").click(e=>{	
+	if($(e.target).next().css('display')=='none'){
+		$(e.target).next().show();
+	}else{
+		$(e.target).next().hide();
+	}	
 });
-	
-//let path="${pageContext.request.contextPath}";
-//let loginMember=("#maker").val();
-let title=$("#title").val();
-let content=$("#content").val();
-let limit=$("#limit").val();
-
-let json={"title":title, "content": content,
-			"cnt": limit};
 
 $("#addBtn").click(e=>{	
-	console.log(title);
+	//let path="${pageContext.request.contextPath}";
+	//let loginMember=("#maker").val();
+	let title=$("#title").val();
+	let content=$("#content").val();
+	let limit=$("#limit").val();
+
+	let json={"title":title, "content": content,
+			"cnt": limit};	
 	
-	if(title.trim()==""){
-		//alert("제목을 입력해주세요");
-	}else if(title.trim()>20){
-		alert("제목을 20자 이내로 작성해주세요");
-	}else if(content.trim()>50){
-		alert("내용을 50자 이내로 작성해주세요");
+	if($.trim(title).length==0){
+		alert("제목을 입력해주세요"); return;
+	}else if($.trim(title).length>20){
+		alert("제목을 20자 이내로 작성해주세요"); return;
+	}else if($.trim(content).length>50){
+		alert("내용을 50자 이내로 작성해주세요"); return;
 	}	
 	$.ajax({
 		url: rootPath+"/chat/sendChat",
@@ -29,7 +31,7 @@ $("#addBtn").click(e=>{
 		data: JSON.stringify(json),				
 		success:data=>{
 			console.log(data);
-			$("#chatContainer").html(data);
+			$("#container").html(data);
 		}
 	});	
 });	

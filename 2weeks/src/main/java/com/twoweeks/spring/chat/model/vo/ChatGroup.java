@@ -8,7 +8,7 @@ public class ChatGroup {
 	private int groupNo;
 	private String maker;
 	private String title;
-	private String cnt;
+	private int cnt;
 	private String content;
 	
 }
