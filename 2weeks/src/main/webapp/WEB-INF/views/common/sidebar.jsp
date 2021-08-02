@@ -84,7 +84,7 @@
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title"><a href="${path }/freeboard/freeboardView.do">Free</a></div>
+			                <div class="sidebar-title"><a href="${path }/freeboard/boardList.do">Free</a></div>
 			            </div>
 		            </div>
 				</div>

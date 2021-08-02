@@ -13,7 +13,7 @@
 <section class="content">
 <div class="container" id="">
     <div class="content" style="width: 70%">
-     <form name="boardFrm" action="${path }/freeboard/boardWriteEnd.do" method="post" enctype="multipart/form-data" >
+     <form name="boardFrm"  id="dataForm" onsubmit="return registerAction();">
         
         <div class="row justify-content-md-center">
             <div class="col-sm-9">
@@ -45,41 +45,22 @@
                 </div>
             </div> 
       </div>
-      
+    <div>
+	<input type="file"  id="attach" multiple="multiple" style="border: 2px solid #ddd; outline: none;">
+	 <label for="attach"><i class="far fa-file-image"/>파일추가</label>
+	<span style="font-size: 14px; color: gray;">※첨부파일은 최대 5개까지 등록이가능합니다.</span>
+	</div>
+	<div class="data_file_txt" id="data_file_txt" >
+	</div>
+		<div id="articlefileChange" class="bg-success">
+		</div>
       <div class="row justify-content-md-center">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text"></span>
-              </div>
-              <input type="text" class="form-control">
-            </div>
-      </div>
-      
-      <div class="row justify-content-md-center">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">파일첨부</span>
-              </div>
-              <div class="custom-file">
-              <button id="btn-upload" type="button" style="border: 1px slid #ddd"; outline:none;">파일추가</button>
-                  &nbsp;<input type="file" multiple class="btn btn-outline-secondary" id="attach">
-                  <span style="font-size:10px; color:grey;">첨부파일은 최대 5개까지 등록이 가능합니다.</span>
-              	<div class="data_file_txt" id="data_file_txt" >&nbsp;
-              	
-              	<span>첨부파일</span>
-              	<br>
-              </div>
-              <div id="articlefileChange">
-              
-              </div>
-              </div>
-            </div>
-      </div>
-      <div class="row justify-content-md-center">
-        <input type="submit" class="btn btn-outline-secondary"   value="등  록" style="width: 20%; font-weight: bold">
+        <input type="submit" class="m-3 btn btn-outline-secondary"   value="등  록" style="width: 20%; font-weight: bold">
         </div>
      </form>
   </div>
+  
+
 </div>
 </section>
 
@@ -88,6 +69,9 @@
 
  
 <script>
+
+//해당 파일을 가져와서 배열에 담아주고 input file은 초기화 해준다.
+//multiple 특성상 중복파일은 업로드가 되지 않기에 최기화를 해야 중복파일도 업데이트가 가능띠
 	$(document).ready(function(){
 		$("#attach").on("change",fileCheck);
 	});
@@ -95,7 +79,7 @@
 	$(function () {
 		$("#btn-upload").click(function(e){
 			e.preventDefault();
-			$("#input_file").click();
+			$("#attach").click();
 		});
 	});
 
@@ -109,7 +93,7 @@
 		var filesArr =Array.prototype.slice.call(files);
 		
 		if(fileCount+filesArr.length> totalCount){
-			$.alert('파일은 최대 ' + totalCount + '개까지 업로드 할 수 있습니다.');
+			alert('파일은 최대 ' + totalCount + '개까지 업로드 할 수 있습니다.');
 			return;
 		}else{
 			fileCount = fileCount + filesArr.length;
@@ -118,24 +102,48 @@
 		//각각의 파일 배열담기 및 기타
 		filesArr.forEach(function(f){
 			var reader = new FileReader();
+			
 		reader.onload = function (e) {
 			content_files.push(f);
 			$("#articlefileChange").append('<div id="file'+ fileNum + '" onclick="fileDelete(\'file' + fileNum + '\')">'+
-			'<font style="font-size:12px">' + f.name + '</font>' 
-			+'<img src ="/images/icon_minus.png" style="width:20px; height:Auto; vertical-align:middle; cursor: pointer;"/>'+
+			'<font style="font-size:16px">' + f.name + '</font>' 
+			+'<img src ="${path }/resources/images/minus-5-xxl.png" style="width:20px; height:Auto; vertical-align:middle; cursor: pointer;"/>'+
 			'</div>'
 			);
 			fileNum++;
 		};
+		
 		reader.readAsDataURL(f);
 	});
 		console.log(content_files);
+		//초기화
 		$("#attach").val("");
+		
 }
-
+	//파일 부분 삭제 함수
 	
+	function fileDelete(fileNum){
+		var no = fileNum.replace(/[^0-9]/g,"");
+		content_files[no].is_delete = true;
+		$('#' + fileNum).remove();
+		fileCount --;
+		console.log(content_files);
+	}
 	
+	//폼 submit 로직
+	function registerAction(){
+		var form = $("form")[0];
+		var formData = new FormData(form);
+		for (let i = 0; i<content_files.length; i++){
+			//삭제 안한 것만 담는다.
+			if(!content_files[i].is_delete){
+				formData.append("article_file", content_files[i]);
+			}
+		}
+		
+		//파일 업로드 multiple ajax 처리
 	
+	}	
 	
 	CKEDITOR.replace("content",{
 		height : "300",
@@ -150,6 +158,7 @@
 
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 .cke_editor_editor .cke_contents{ 
      min-height:550px; 
      min-width: 900px;
@@ -158,6 +167,34 @@
 	display: block;
 	margin-top: 100px;
 	margin-left: 135px;
+}
+#articlefileChange{
+	border : solid black 1px;
+}
+
+#attach{
+   width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	
+}
+#attach + label{
+  display: inline-block;
+  padding: 10px 20px;
+  color: #999;
+  vertical-align: middle;
+  background-color: #fdfdfd;
+  cursor: pointer;
+  border: 2px solid #ebebeb;
+  border-radius: 5px;
+  font-family: 'Open Sans', sans-serif; 
+}
+#attach:focus + label,
+#attach + label:hover{
+	cursor:pointer;
 }
 </style>
 </body>
