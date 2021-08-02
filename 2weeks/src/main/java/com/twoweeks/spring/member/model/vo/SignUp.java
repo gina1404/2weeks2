@@ -14,8 +14,8 @@ import org.hibernate.validator.constraints.Length;
 import lombok.Builder;
 import lombok.Data;
 
+//회원가입 검증객체
 @Data
-
 public class SignUp {
 	 // 회원 ID 
 	@NotEmpty

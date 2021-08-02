@@ -8,7 +8,9 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +32,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.twoweeks.spring.member.model.service.KakaoApi;
 import com.twoweeks.spring.member.model.service.MemberService;
+import com.twoweeks.spring.member.model.vo.Login;
 import com.twoweeks.spring.member.model.vo.Member;
+import com.twoweeks.spring.member.model.vo.MemberSession;
 import com.twoweeks.spring.member.model.vo.SignUp;
 
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +69,16 @@ public class MemberController {
 	}
 	//로그인 페이지 이동
 	@GetMapping("/member/login")
-	public String login() {
+	public String login(
+			Model model,
+			Login login,
+			@CookieValue(value = "REMEMBER", required = false) Cookie rememberCookie) {
+		if(rememberCookie!=null) {
+			login.setUser_Id(rememberCookie.getValue());
+			login.setRememberId(true);
+		}
+		model.addAttribute("login",login);
+		
 		return "/member/login";
 	}
 	//카카오로그인
@@ -247,12 +261,34 @@ public class MemberController {
 			return "/common/msg";
 	}
 	
+	
+	///로그인
 	@PostMapping("/member/login")
 	public String memberLogin(
-			@RequestParam Map param , Model model, HttpSession session) {
-		
+			@Validated Login login, BindingResult bindingResult,
+			@RequestParam Map param , Model model, HttpSession session,HttpServletResponse response) {
+		if(bindingResult.hasErrors()) {
+			return "/member/login";
+		}
+		log.info("login 아이디 ={}",login.getUser_Id());
+		log.info("map 아이디={} ",(String)param.get("user_Id"));
 		Member m = memberService.selectMember(param);
 		
+		MemberSession memberSession = new MemberSession();
+		memberSession.setUser_Id(m.getUser_Id());
+		memberSession.setUser_Nm(m.getUser_Nm());
+		memberSession.setUser_Pfrename(m.getUser_Pfrename());
+		session.setAttribute("memberSession", memberSession);
+		
+		Cookie rememberCookie = new Cookie("REMEMBER",login.getUser_Id());
+		rememberCookie.setPath("/");
+		if(login.isRememberId()) {
+			rememberCookie.setMaxAge(60*60*24*7);
+		}else {
+			rememberCookie.setMaxAge(0);
+		}
+			response.addCookie(rememberCookie);
+			
 		String msg;
 		log.info("param.get(user_Pw) ={}",param.get("user_Pw"));
 		log.info("m 아이디 ={} " , m.getUser_Id());
@@ -263,10 +299,10 @@ public class MemberController {
 			model.addAttribute("loginMember",m);
 			msg="로그인성공";
 			}else {
-			msg="로그인실패";
+			msg="로그인 실패. 아이디 및 패스워드를 확인해주세요!";
 			}
 		}else {
-			msg="로그인실패";
+			msg="로그인 실패. 아이디 및 패스워드를 확인해주세요!";
 		}
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc","/member/testmain");

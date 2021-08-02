@@ -11,15 +11,19 @@
 <title>테스트 메인(삭제예정)</title>
 </head>
 <body>
-<c:if test="${userId eq null }">
+<c:if test="${userId eq null and memberSession.user_Nm eq null}">
 	<input type="button" value="로그인" onclick="location.href='${path}/member/login'"/>
 </c:if>
 
-<c:if test="${userId ne null}">
-	<h1>${userId }님 </h1>
-	<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
-
+<c:if test="${userId ne null}" >
+	<h1>${userId}님 로그인 확인 </h1>
+		<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
 </c:if>
+<c:if test="${memberSession.user_Nm ne null }">
+	<h1>${memberSession.user_Nm }님 로그인확인</h1>
+	
+</c:if>
+
 
 
 
