@@ -198,6 +198,7 @@
 		    <version>1.0.2</version>
 		</dependency>
 		
+		<!-- jackson -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
@@ -209,6 +210,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
 			<version>${org.springframework-version}</version>
+<<<<<<< HEAD
 		</dependency>  
 		
 		<!-- 뉴스 크롤링 -->
@@ -244,6 +246,31 @@
 		
 		
 		   
+=======
+		</dependency>   
+		
+		<!-- Quartz 스케쥴러 라이브러리 -->
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>2.3.2</version>
+		</dependency>
+
+		<!-- 스프링 Quartz 도우미 라이브러리 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>4.3.4.RELEASE</version>
+		</dependency>
+		
+		<!-- json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20210307</version>
+		</dependency>				
+				  
+>>>>>>> 8c7cd653cdab7da7d1933607c914950329ef4767
 	</dependencies>
     <build>
         <plugins>

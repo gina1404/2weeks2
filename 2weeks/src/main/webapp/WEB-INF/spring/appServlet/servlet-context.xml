@@ -54,6 +54,7 @@
 		</beans:property>
 	</beans:bean>
 	
+<<<<<<< HEAD
 	<!--  웹소켓핸들러 등록-->
 	<!-- Namespaces에서 webscket 체크해서 등록해주기 -->
 	<beans:bean id="chattingHandler" class="com.twoweeks.spring.common.ChattingServer" />
@@ -65,5 +66,11 @@
 		</websocket:handshake-interceptors>
 		<websocket:sockjs/>
 	</websocket:handlers>
+=======
+	<!--  웹소켓핸들러 등록 (아직 안 함)  -->
+	
+
+
+>>>>>>> 8c7cd653cdab7da7d1933607c914950329ef4767
 	
 </beans:beans>
