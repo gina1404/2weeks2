@@ -72,27 +72,40 @@ $("#regionalKor").each(function(){
             //geoJson데이터를 파싱하여 지도그리기
             d3.json('${path}/resources/json/korea.json', function(json) {				
             	//지도 표시
-                states.selectAll('path').data(json.features).enter().append('path').attr('d', path).attr('id', function(d) { return 'path-' + d.properties.name_eng;});       
+                states.selectAll('path').data(json.features).enter()
+                .append('path').attr('d', path).attr('id', function(d) { return 'path-' + d.properties.name_eng;})
+                .attr('fill', function(d){ //확진자 수에 따라 배경 색 변경
+                	var mapColor;
+                	for(var k=2;k<20;k++){
+                		if(d.properties.name==data[k].gubun){
+                			console.log(d.properties.name+":"+data[k].gubun);
+                			if(data[k].incDec<50) mapColor='blue';                			
+                			else if(data[k].incDec>=50 && data[k].incDec<100) mapColor='green';
+                			else mapColor='red';
+                		}
+                	}
+                	return mapColor;
+                });
                 
-                //라벨 표시
-                labels = states.selectAll('text').data(json.features).enter().append('text').attr('transform', render) //이 render가 텍스트 위치 조절 역할을 함
-                 .attr('id', function(d) { return 'label-' + d.properties.name_eng;})
-                 .attr('text-anchor', 'middle')
-                 .attr('dy', '.35em')
-                 .text(function(d) { //출력할 라벨 정보 추가
-                	 var gubun;
-                	 var incDec;
-                	 var defCnt;
-                	 for(var j=2;j<20;j++){
-                		 if(d.properties.name==data[j].gubun){ //구분값(지역명)이 일치할 경우
-                    		 incDec=data[j].incDec; //오늘 확진자 수
-                    		 defCnt=data[j].defCnt; //총 확진자 수
-                    	 }                		 
-                	 }                	 
-                	 return d.properties.name+':'+incDec+' : '+defCnt;                	 
-                 }) //라벨 표시 끝
-            }); //지도 그리기 끝
+                
             
+                //라벨 표시
+                labels = states.selectAll('text').data(json.features).enter()
+                	.append('text')
+					.text(function(d) { //출력할 값 추가
+	                	 var incDec;
+	                	 var defCnt;
+	                	 for(var j=2;j<20;j++){
+	                		 if(d.properties.name==data[j].gubun){ //구분값(지역명)이 일치할 경우
+	                    		 incDec=data[j].incDec; //오늘 확진자 수
+	                    		 defCnt=data[j].defCnt; //총 확진자 수
+	                    	 }                		 
+	                	 }                	 
+	                	 return d.properties.name+':'+incDec+':'+defCnt;                	 
+	                 })
+					.attr('transform', render) //render 값으로 위치를 조절함
+					.attr('id', function(d) { return 'label-' + d.properties.name_eng;}) //id 추가
+            }); //기본 지도 그리기 끝             
             
           //텍스트 위치 조절
 		    function render(d) {
@@ -111,7 +124,7 @@ $("#regionalKor").each(function(){
 		                    : scale / height + 10;
 		        } //if-else문 끝
 	        return 'translate(' + arr + ')';
-		    } //function render(d) 끝 
+		    } //function render(d) 끝 		    
         }, //지역별 현황function(data))출력 끝
         error:(r,m,s)=>{
             console.log(r);
