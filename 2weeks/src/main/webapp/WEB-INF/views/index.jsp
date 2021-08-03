@@ -19,9 +19,9 @@
 		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 2</div>
 		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 3</div>
 		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 4</div>
-	</section>
-	<section id="home-covid-chart" style="width:800px; height:500px; border:1px solid green;">
-		
+	</section>	
+	<section id="home-covid-chart" style="width:45%; min-height:500px; border:1px solid green;">
+		<jsp:include page="/WEB-INF/views/covidUpdate/regionalKor.jsp"></jsp:include>
 	</section>
 	<section id="home-report&news"></section>
 	<section id="home-community"></section>
