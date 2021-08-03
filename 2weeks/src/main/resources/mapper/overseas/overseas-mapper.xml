@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="overseas">
+
+<insert id="InsertOverseasGr">
+	INSERT INTO OVERSEASGR VALUES(#{total},SYSDATE,#{death},NULL,NULL)
+</insert>
+
+	<select id="selectydayDef" resultType="com.twoweeks.spring.overseas.model.vo.OverseasGr">
+		SELECT * FROM OVERSEASGR WHERE TO_CHAR(TODAY)=TO_CHAR(SYSDATE-1)
+	</select>
+	
+	<select id="selectGrList" resultType="com.twoweeks.spring.overseas.model.vo.OverseasGr">
+		SELECT * FROM OVERSEASGR ORDER BY TODAY DESC
+	</select>
+	
+	<update id="updateGrData">
+		UPDATE OVERSEASGR SET today_def=#{today_Def},today_death=#{today_Death} WHERE TO_CHAR(today)=TO_CHAR(SYSDATE)
+	</update>
+	
+
+</mapper>
