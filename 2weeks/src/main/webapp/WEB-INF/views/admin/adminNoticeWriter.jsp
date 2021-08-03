@@ -11,8 +11,15 @@
         <meta name="author" content="" />
         <title>Static Navigation - SB Admin</title>
         <link href="<%=request.getContextPath() %>/resources/AdminTem/css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
+       <style>
+	    div#board-container{width:400px; margin:0 auto; text-align:center;}
+	    div#board-container input{margin-bottom:15px;}
+    </style>
      <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -81,8 +88,42 @@
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content">
-                <main>
+        <div id="layoutSidenav_content">
+            <section id="content">
+            	<br><br><br><br>
+				<div id="board-container">
+			        <form name="boardFrm" action="<%=request.getContextPath() %>/admin/NoticeForm.do"
+			         method="post" enctype="multipart/form-data" >
+			            <input type="text" class="form-control" placeholder="제목" name="noticeTitle" id="noticeTitle" required>
+			            <input type="text" class="form-control" placeholder="아이디 (4글자이상)" name="noticeWriter" value="Admin" readonly required>
+			            <div class="input-group mb-3" style="padding:0px;">
+			                <div class="input-group-prepend" style="padding:0px;">
+			                    <span class="input-group-text">첨부파일1</span>
+			                </div>
+			                <div class="custom-file">
+			                    <input type="file" class="custom-file-input" name="upFile" id="upFile1">
+			                    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+			                </div>
+			            </div>
+			            <div class="input-group mb-3" style="padding:0px;">
+			                <div class="input-group-prepend" style="padding:0px;">
+			                    <span class="input-group-text">첨부파일2</span>
+			                </div>
+			                <div class="custom-file">
+			                    <input type="file" class="custom-file-input" name="upFile" id="upFile2">
+			                    <label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
+			                </div>
+			            </div>
+			            <textarea class="form-control" name="noticeContent" placeholder="내용" required style="resize: none;" cols="120" rows="15"></textarea>
+			            <br />
+			            <input type="submit" class="btn btn-outline-success" value="저장" style="margin-right: 20px">
+			            <input type="button" onclick="fn_cancel();" class="btn btn-outline-success" value="취소" style="margin-left: 20px;">
+			        </form>
+			    </div>
+
+
+</section>
+                <!-- <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Static Navigation</h1>
                         <ol class="breadcrumb mb-4">
@@ -103,7 +144,7 @@
                         <div style="height: 100vh"></div>
                         <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
                     </div>
-                </main>
+                </main> -->
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
@@ -120,5 +161,21 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath() %>/resources/AdminTem/js/scripts.js"></script>
+        <script>
+		$(function(){
+			$("[type=file]").on("change",e=>{
+				const fileName=$(e.target).prop("files")[0].name;
+				$(e.target).next('.custom-file-label').html(fileName);
+			});
+		});
+		const fn_cancel=()=>{
+
+	  		const result=confirm("정말로 취소하시겠습니까?");
+			if(result){
+				location.assign('<%=request.getContextPath()%>/admin/adminPageList');			
+			}	
+
+		};
+	</script>	
     </body>
 </html>
