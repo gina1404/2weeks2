@@ -9,12 +9,12 @@
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<link href="${pageContext.request.contextPath }/resources/css/chatting.css" rel="stylesheet" />
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<link href="${path }/resources/css/chatting.css?after" rel="stylesheet" />
 
 <section class="container">
 	<h3>오픈채팅</h3>
-	
+		
 	<button id="addGroupBtn">채팅방 만들기</button>
 	<div id="addGroup" style="display:none;">
 		<table id="addBox">
@@ -43,19 +43,15 @@
 		<c:forEach var="l" items="${list }" varStatus="status">
 			<div id="group">					
 				<div id="chatTitle">${l.title }</div>
-				<div id="cntLimit">0/${l.cnt }명</div>
+				<div id="cntLimit">0 / ${l.cnt }명</div>
 				<div id="chatContent">${l.content }</div>
 			</div>
 			<div id="entry">
-				<a href="${path }/chat/group${l.groupNo}">입장</a>
+				<a id="entry_a" 
+				onclick="open('${path}/GroupChatting.do', '_blank', 'width=400, height=600, resizable=no')">입장</a>
 			</div>
 			<hr>				
 		</c:forEach>			
-	</div>	
-	
-	<div id="sendBox" style="display:none;">
-		<input type="text" id="chat">
-		<button id="sendChat">전송</button>
 	</div>	
 	
 	<div id="chatContainer"></div>
@@ -70,7 +66,7 @@
 		console.log(check);
 	}	
 	
-	let sock=new SockJS("http://localhost:9090${pageContext.request.contextPath}/chatting");
+	/* let sock=new SockJS("http://localhost:9090${pageContext.request.contextPath}/chatting");
 	sock.onopen=e=>{
 		console.log(e);
 	}
@@ -85,10 +81,10 @@
 	btn.addEventListener("click", e=>{
 		const msg=document.getElementById("chat").value;
 		sock.send(msg);
-	});
+	}); */
 </script>
 
-<script src="<c:url value='/resources/js/chatting.js' />"></script>
+<script src="<c:url value='/resources/js/chat/chatting.js' />"></script>
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -3,6 +3,7 @@ package com.twoweeks.spring.chat.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,20 +12,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.twoweeks.spring.chat.model.service.ChatServiceImpl;
 import com.twoweeks.spring.chat.model.vo.ChatGroup;
+import com.twoweeks.spring.chat.model.vo.Member;
+
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class ChatController {
 
 	@Autowired
 	private ChatServiceImpl service;
 	
 	@RequestMapping("/chatting.do")
-	public String moveChatPage(Model m) {
-		List<ChatGroup> list=service.selectGroupList();
+	public String moveChatPage(Model model) {
+//		Member user=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		//user.setUserId("admin");
+//		//user.setUserName("관리자");
+//		
+//		log.info("==================");
+//		log.info("@ChatController, GET Chat / Username : "+user.getUserName());
 		
-		m.addAttribute("list", list);
+		List<ChatGroup> list=service.selectGroupList();		
+		model.addAttribute("list", list);
 		
-		return "chatting";
+		return "chat/chatting";
 	}
 	
 	@RequestMapping(value="/chat/sendChat", produces="application/json")
@@ -39,7 +51,13 @@ public class ChatController {
 		else check="채팅방만들기 실패";
 			
 		m.addAttribute("check", check);
-		return "/chatting";
+		return "chat/chatting";
+	}
+	
+	@RequestMapping("/GroupChatting.do")
+	public String groupChattingEntry() {
+		
+		return "chat/chattingEntry";
 	}
 	
 	

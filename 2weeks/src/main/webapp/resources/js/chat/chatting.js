@@ -7,7 +7,6 @@ $("#addGroupBtn").click(e=>{
 });
 
 $("#addBtn").click(e=>{	
-	//let path="${pageContext.request.contextPath}";
 	//let loginMember=("#maker").val();
 	let title=$("#title").val();
 	let content=$("#content").val();

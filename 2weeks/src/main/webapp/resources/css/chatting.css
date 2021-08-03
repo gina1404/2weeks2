@@ -43,7 +43,7 @@
 
 #groupList{
 	height:auto;
-	width:470px;	
+	width:450px;	
 	overflow-x: hidden;
 }
 
@@ -69,7 +69,13 @@
     margin: 15px 0 0 5px;
     cursor:pointer;
 }
-#entry:hover{
+
+#entry_a{
+	text-decoration:none;
+	color:black;
+}
+#entry_a:hover{
+	text-decoration: underline;
 	color:#6E6E6E;
 }
 
