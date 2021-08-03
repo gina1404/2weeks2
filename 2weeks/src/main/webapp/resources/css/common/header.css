@@ -5,7 +5,7 @@
 		padding:0;
 	}
 	
-	/* 기본 header, nav, main, aside 영역 나누기  */
+	/* 기본 header, nav, main(container), aside 영역 나누기  */
 	#header{
 		align-items: center;
 		background-color: #F7F8FC;

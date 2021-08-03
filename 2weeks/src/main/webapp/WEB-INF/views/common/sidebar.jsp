@@ -56,7 +56,9 @@
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Covid Global</div>
+			                <a href="${path }/covid/overseas.do">
+			                	<div class="sidebar-title">Covid Global</div>
+			                </a>
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
@@ -147,7 +149,18 @@
 						<div class="sidebar-title">chatBot</div>
 					</div>
 				</div>
+			</div> 
+			<!-- 관리자 페이지 -->
+			<div class="wrap_sub_list">
+					<div class="sidebar-list">
+						<img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
+						<a href="${path }/admin/adminPageList">
+							<div class="sidebar-title">Admin</div>
+						</a>
+					</div>
+				</div>
 			</div>  
+			 
 	</nav>   
  
     <script>  
