@@ -21,4 +21,8 @@ public interface MemberDao {
 	public String findId(Member member,SqlSession session);
 	
 	public int updatePw(Member member,SqlSession session);
+	
+	public int UpdateMember(Member member, SqlSession session);
+	
+	public String selectPw(String user_Id,SqlSession session);
 }

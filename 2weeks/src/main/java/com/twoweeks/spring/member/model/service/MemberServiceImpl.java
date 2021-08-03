@@ -55,6 +55,20 @@ public class MemberServiceImpl implements MemberService {
 	public int updatePw(Member member) {	
 		return memberDao.updatePw(member,session);
 	}
+
+	@Override
+	public int UpdateMember(Member member) {
+		return memberDao.UpdateMember(member, session);
+	}
+
+	@Override
+	public String selectPw(String user_Id) {
+		return memberDao.selectPw(user_Id,session);
+	}
+	
+	
+	
+	
 	
 	
 	

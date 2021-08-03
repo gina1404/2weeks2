@@ -159,9 +159,11 @@
 		if(inputCode==code){ //비교 일치
 			checkResult.html("인증번호가 일치합니다 :)");
 			checkResult.attr("class","correct");
+			$("#submit").removeAttr("disabled");
 		}else{ 				//불일치
 			checkResult.html("인증번호를 다시 확인해주세요!");
 			checkResult.attr("class","incorrect");
+			$("#submit").attr("disabled","disabled");
 		}
 	});
 	

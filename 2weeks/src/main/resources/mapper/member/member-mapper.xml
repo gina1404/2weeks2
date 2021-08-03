@@ -7,8 +7,16 @@
 	</select>
 	
 	<insert id="insertMember">
+		<choose>
+		<when test="user_Pf != null">
 		INSERT INTO MEMBER2(USER_ID,USER_NM,USER_PW,USER_NIC,USER_GENDER,USER_PHONE,USER_EMAIL,ENROLL_DT,USER_PF,USER_PFRENAME) 
 			VALUES(#{user_Id},#{user_Nm},#{user_Pw},#{user_Nic},#{user_Gender},#{user_Phone},#{user_Email},SYSDATE,#{user_Pf},#{user_Pfrename})	
+		</when>
+		<otherwise>
+		INSERT INTO MEMBER2(USER_ID,USER_NM,USER_PW,USER_NIC,USER_GENDER,USER_PHONE,USER_EMAIL,ENROLL_DT) 
+			VALUES(#{user_Id},#{user_Nm},#{user_Pw},#{user_Nic},#{user_Gender},#{user_Phone},#{user_Email},SYSDATE)		
+		</otherwise>
+		</choose>
 	</insert>
 	
 	<insert id="insertKakao">
@@ -33,6 +41,21 @@
 		UPDATE MEMBER2 SET USER_PW =#{user_Pw} WHERE USER_ID = #{user_Id} AND USER_EMAIL =#{user_Email}
 		
 	</update>
+	
+	<update id="updateMember">
+		<choose>
+		<when test="user_Pf !=null">
+		UPDATE MEMBER2 SET USER_NIC=#{user_Nic}, USER_PHONE =#{user_Phone}, USER_PF =#{user_Pf},USER_PFRENAME =#{user_Pfrename} WHERE USER_ID=#{user_Id}	
+		</when>
+		<otherwise>
+		UPDATE MEMBER2 SET USER_NIC=#{user_Nic}, USER_PHONE =#{user_Phone} WHERE USER_ID=#{user_Id}	
+		</otherwise>
+		</choose>
+	</update>
+	
+	<select id="selectPw" resultType="string">
+		SELECT USER_PW FROM MEMBER2 WHERE USER_ID=#{user_Id}
+	</select>
 
   
 </mapper>

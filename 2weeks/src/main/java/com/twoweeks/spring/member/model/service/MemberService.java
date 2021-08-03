@@ -21,6 +21,10 @@ public interface MemberService {
 	
 	public int updatePw(Member member);
 	
+	public int UpdateMember(Member member);
+	
+	public String selectPw(String user_Id);
+	
 	
 
 }

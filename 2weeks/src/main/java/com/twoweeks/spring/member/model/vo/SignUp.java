@@ -67,6 +67,8 @@ public class SignUp {
 	 @Email
 	 @NotEmpty
 	 private String user_Email;
+	 @NotEmpty
+	 private String emailcheck;
 	 
 	// 주소 
 	//private String user_Addr;

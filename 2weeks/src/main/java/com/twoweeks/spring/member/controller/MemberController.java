@@ -31,14 +31,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.twoweeks.spring.member.model.service.KakaoApi;
 import com.twoweeks.spring.member.model.service.MemberService;
 import com.twoweeks.spring.member.model.vo.Login;
 import com.twoweeks.spring.member.model.vo.Member;
-import com.twoweeks.spring.member.model.vo.MemberSession;
 import com.twoweeks.spring.member.model.vo.SignUp;
+import com.twoweeks.spring.member.model.vo.UpdateMember;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -126,7 +125,7 @@ public class MemberController {
 			session.setAttribute("access_Token", access_Token);
 			
 			
-		return "/member/testmain";
+			return "/index";
 	}
 	//카카오 로그아웃
 	@RequestMapping("/member/kakaologout")
@@ -134,7 +133,7 @@ public class MemberController {
 		kakao.kakaoLogout((String)session.getAttribute("access_Token"));
 		session.removeAttribute("access_Token");
 		session.removeAttribute("userId");
-		return "/member/testmain";
+		return "/index";
 	}
 			
 	
@@ -309,7 +308,7 @@ public class MemberController {
 			msg="로그인 실패. 아이디 및 패스워드를 확인해주세요!";
 		}
 		model.addAttribute("msg",msg);
-		model.addAttribute("loc","/member/testmain");
+		model.addAttribute("loc","/");
 		
 		return "common/msg";
 		
@@ -320,7 +319,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		
-		return "/member/testmain";
+		return "redirect:/";
 	}
 	
 	//id/pw찾기 페이지
@@ -368,7 +367,7 @@ public class MemberController {
 			String setFrom= "tweeks.official.mail@gmail.com";
 			String toMail = member.getUser_Email();
 			String title = "2WEEKS 임시 비밀번호입니다";
-			String content =member.getUser_Id()+"님의 임시 비밀빈호 입니다." +
+			String content =member.getUser_Id()+"님의 임시 비밀번호 입니다." +
 							"<br/><br/>"+
 							"임시 비밀번호는 " + "<strong>"+newPw +"</strong>"+"입니다"+
 							"<br/><br/>"+
@@ -394,6 +393,105 @@ public class MemberController {
 		}	
 		
 	}
+	//회원정보 수정 페이지이동
+	@GetMapping("/member/myinfo")
+	public String myinfo() {
+		return "/member/myinfo";
+	}
+	
+	//회원정보수정
+	@PostMapping("/member/myinfo")
+	public String updateInfo(
+			@RequestParam MultipartFile[] upFile,
+			@ModelAttribute("member") UpdateMember updateMember, BindingResult bindingResult,
+			Model model,HttpServletRequest request,HttpSession session) {
+		log.info("파일네임={}",upFile);
+		if(bindingResult.hasErrors()) {
+			log.info("수정실패 ={} ", bindingResult);		
+			return "/member/myinfo";	
+	}
+		String path=request.getServletContext().getRealPath("/resources/upload/member/profile");
+		File dir= new File(path);
+		if(!dir.exists()) dir.mkdirs();
+		for(MultipartFile f : upFile) {
+			if(!f.isEmpty()) {
+				String originalFilename = f.getOriginalFilename();
+				String ext=originalFilename.substring(originalFilename.lastIndexOf("."));
+			
+				SimpleDateFormat sdformat = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int ranNum=(int)(Math.random()*10000);
+				String reName = sdformat.format(System.currentTimeMillis())+"_"+ranNum+ ext;
+				
+				try {
+					f.transferTo(new File(path+reName));
+					updateMember.setUser_Pf(originalFilename);
+					updateMember.setUser_Pfrename(reName);
+				}catch(IOException e) {
+					e.printStackTrace();
+					}
+				}			
+			}
+		Member member= new Member();
+		member.setUser_Id(updateMember.getUser_Id());
+		member.setUser_Nic(updateMember.getUser_Nic());
+		member.setUser_Phone(updateMember.getUser_Phone());
+		member.setUser_Pf(updateMember.getUser_Pf());
+		member.setUser_Pfrename(updateMember.getUser_Pfrename());
+		
+		int result = memberService.UpdateMember(member);
+		String msg="";
+		String loc="/member/myinfo";
+		if(result>0) {
+			log.info("업데이트성공");
+			msg="회원님의 정보가 수정되었습니다.";
+			session.setAttribute("member", member);
+		}else {
+			msg="수정 실패";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return "/common/msg";
+		
+		}
+	
+	//비밀번호 변경 페이지
+	@GetMapping("/member/updatePw")
+	public String updatePw(Model model) {
+		model.addAttribute("member",new Member());
+		return "/member/updatePw";
+	}
+	
+	//비밀번호변경
+	@PostMapping("/member/findPw")
+	public String updatePw(
+			@ModelAttribute("member") UpdateMember updateMember, BindingResult bindingResult,
+			Model model,HttpSession session) {
+		log.info("기존={},뉴={}",updateMember.getOldPw(),updateMember.getUser_Pw());
+		
+		
+		if(pwEncoder.matches(updateMember.getOldPw(),memberService.selectPw(updateMember.getUser_Id()))) {
+			Member member = new Member();
+			member.setUser_Pw(pwEncoder.encode(updateMember.getUser_Pw()));
+			log.info("비번변경 확인={}",member.getUser_Pw());
+			member.setUser_Id(updateMember.getUser_Id());
+			member.setUser_Email(updateMember.getUser_Email());
+			int result = memberService.updatePw(member);
+			String msg="";
+			String loc="/member/updatePw";
+			if(result>0) {
+				msg="비밀번호가 변경되었습니다!";
+				
+				session.setAttribute("member", member);
+			}else {
+				msg="변경 실패";
+			}
+			model.addAttribute("msg",msg);
+			model.addAttribute("loc",loc);	
+		}
+			return "/common/msg";
+	}
+	
 	
 	//임시비밀번호 생성메소드(UUID)
 	public String generatePw() {
@@ -402,6 +500,8 @@ public class MemberController {
 		log.info("uuid={}",uuid);		
 		return uuid;
 	}
+	
+	
 	
 
 }

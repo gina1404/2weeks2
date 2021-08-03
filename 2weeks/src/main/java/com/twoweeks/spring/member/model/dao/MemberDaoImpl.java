@@ -47,6 +47,20 @@ public class MemberDaoImpl implements MemberDao {
 	public int updatePw(Member member, SqlSession session) {
 		return session.update("member.updatePw",member);
 	}
+
+	@Override
+	public int UpdateMember(Member member, SqlSession session) {
+		return session.update("member.updateMember",member);
+	}
+
+	@Override
+	public String selectPw(String user_Id, SqlSession session) {
+		return session.selectOne("member.selectPw",user_Id);
+	}
+	
+	
+	
+	
 	
 	
 	
