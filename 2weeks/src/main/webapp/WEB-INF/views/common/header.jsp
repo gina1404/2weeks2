@@ -48,4 +48,4 @@
 	                	<img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
 	                </div>
 	            </div>
-	</header>       
+	</header>     

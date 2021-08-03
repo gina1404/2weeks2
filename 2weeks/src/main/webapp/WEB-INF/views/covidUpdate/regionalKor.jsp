@@ -33,7 +33,7 @@ function fn_selectButton2(){
 }
 
 /* 지역별 현황 출력*/
-$("#regionalKor").each(function(){
+$("#regionalKor").each(function(){	
     $.ajax({ //0. 지역별 현황 DB 값 가져오기
         url:"${path}/covidUpdate/regional/kor.do",
         type:"post",
@@ -44,8 +44,7 @@ $("#regionalKor").each(function(){
             var str="<div class='regionalKor-table-title' style='display:flex;'>";
             str+="<div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>지역</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>오늘 확진자</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>총 확진자</div></div>";
              //값
-            var i;
-            for(i=2; i< 20;i++){ //검역 빼고 마지막 줄 합계까지 출력
+            for(var i=2; i<20;i++){ //검역 빼고 마지막 줄 합계까지 출력
                 str += "<div class='regionalKor-table-content' style='display:flex;'>";
                 str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].gubun+"</div>"; //지역
                 str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].incDec+"</div>"; //오늘 확진
