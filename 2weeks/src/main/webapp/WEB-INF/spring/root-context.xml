@@ -11,13 +11,9 @@
 	<bean id="realDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-<<<<<<< HEAD
 		<property name="username" value="spring"/>
 		<property name="password" value="spring"/>
-=======
-		<property name="username" value="FINAL"/>
-		<property name="password" value="FINAL"/>
->>>>>>> 8c7cd653cdab7da7d1933607c914950329ef4767
+
 	</bean>
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="realDataSource"/>

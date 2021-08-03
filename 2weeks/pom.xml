@@ -210,7 +210,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
 			<version>${org.springframework-version}</version>
-<<<<<<< HEAD
 		</dependency>  
 		
 		<!-- 뉴스 크롤링 -->
@@ -241,13 +240,6 @@
 		    <artifactId>xmlbeans</artifactId>
 		    <version>3.1.0</version>
 		</dependency>
-				
-		
-		
-		
-		   
-=======
-		</dependency>   
 		
 		<!-- Quartz 스케쥴러 라이브러리 -->
 		<dependency>
@@ -268,9 +260,8 @@
 		    <groupId>org.json</groupId>
 		    <artifactId>json</artifactId>
 		    <version>20210307</version>
-		</dependency>				
-				  
->>>>>>> 8c7cd653cdab7da7d1933607c914950329ef4767
+		</dependency>								  
+
 	</dependencies>
     <build>
         <plugins>
