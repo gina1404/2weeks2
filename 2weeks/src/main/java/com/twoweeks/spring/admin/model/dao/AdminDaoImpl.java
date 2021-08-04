@@ -12,13 +12,13 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public int insertNotice(Notice n, SqlSession session) {
 		// TODO Auto-generated method stub
-		return session.insert(null);
+		return session.insert("notice.insertNotice",n);
 	}
 
 	@Override
 	public int insertAttachment(SqlSession session, noticeAttachment a) {
 		// TODO Auto-generated method stub
-		return 0;
+		return session.insert("notice.insertAttachment",a);
 	}
 	
 	

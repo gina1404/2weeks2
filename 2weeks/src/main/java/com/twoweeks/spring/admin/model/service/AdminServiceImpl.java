@@ -21,15 +21,18 @@ public class AdminServiceImpl implements AdminService{
 	public int insertNotice(Notice n) {
 		// TODO Auto-generated method stub
 		int result=dao.insertNotice(n,session);
+		int NoticeNo=n.getNoticeNo();
 		if(result>0) {
 			List<noticeAttachment> attachments=n.getAttachments();
 			if(attachments.size()>0) {
 				for(noticeAttachment a:attachments) {
-					dao.insertAttachment(session,a);
+					a.setNoticeNo(NoticeNo);
+					result=dao.insertAttachment(session,a);
 				}
-			}
-		}
-		return 0;
+			}else if(result>0) return 1;
+			else return 0;
+		}else return 0;
+		return 1;
 	}
 	
 	

@@ -18,6 +18,7 @@
 
 
 
+
 	</bean>
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="realDataSource"/>
@@ -53,6 +54,28 @@
 			<aop:advisor advice-ref="txAdvice" pointcut-ref="txp"/>
 	</aop:config> -->
 	
+
+	<!-- gmail설정 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+     	<property name="host" value="smtp.gmail.com" />
+	    <property name="port" value="587" />
+ 		<property name="username" value="tweeks.official.mail@gmail.com"/> <!-- 구글이메일 아이디 -->
+ 		<property name="password" value="wjsthd1234"/> <!-- 비밀번호 -->
+ 	<!-- 보안연결 TLS과 관련된 설정 -->
+     	<property name="javaMailProperties">
+   			<props>
+       			<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true	</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+    		</props>
+     	</property>
+</bean>
+	
+	
+
 	<!-- 스케쥴러 설정 추가 -->
 		<!-- 잡 (cron의 대상이 되는 클래스) -->
 	<bean id="updateDaily" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
@@ -78,6 +101,7 @@
 		</property>
 	</bean>
 	
+
 
 	
 </beans>
