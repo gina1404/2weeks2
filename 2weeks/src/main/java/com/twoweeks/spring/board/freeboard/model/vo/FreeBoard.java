@@ -30,13 +30,5 @@ public class FreeBoard {
 	
 	private String searchType;
 	private String keyword;
-	private String t;
-	private String w;
-	private String c;
-	private String tc;
-	private String cw;
-	private String tw;
-	private String twc;
-	
 	
 }

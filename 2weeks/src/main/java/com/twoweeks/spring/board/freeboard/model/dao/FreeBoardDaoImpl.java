@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
@@ -45,20 +44,19 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 
 	@Override
 	public int insertBoard(FreeBoard b, SqlSession session) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<FreeBoard> list(SqlSession session, FreeBoard fb) {
-		
-		return session.selectList("freeboard.list",fb);
+		return session.insert("freeboard.insertBoard", b);
 	}
 
 	@Override
 	public int insertAttachment(PostAttachment a, SqlSession session) {
-		return 0;
+		return session.insert("freeboard.insertAttachment", a);
 	}
+
+	@Override
+	public List<FreeBoard> list(SqlSession session, FreeBoard fb) {
+		return session.selectList("freeboard.list",fb);
+	}
+
 
 	@Override
 	public List<FreeBoard> searchBoard(SqlSession session, Map<String,Object> param) {
@@ -68,6 +66,21 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	@Override
 	public FreeBoard read(SqlSession session, int bno) {
 		return session.selectOne("freeboard.read",bno);
+	}
+
+	@Override
+	public int update(SqlSession session, FreeBoard fb) {
+		return session.update("freeboard.update", fb);
+	}
+
+	@Override
+	public int delete(SqlSession session, int no) {
+		return session.delete("freeboard.delete", no);
+	}
+
+	@Override
+	public int updateAttachment(SqlSession session, PostAttachment a) {
+		return session.insert("freeboard.updateAttachment", a);
 	}
 
 	

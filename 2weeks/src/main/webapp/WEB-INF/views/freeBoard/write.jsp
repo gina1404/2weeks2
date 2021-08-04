@@ -13,7 +13,7 @@
 <section class="content">
 <div class="container" id="">
     <div class="content" style="width: 70%">
-     <form name="boardFrm"  id="dataForm" onsubmit="return registerAction();">
+     <form name="boardFrm"  id="dataForm" onsubmit="return registerAction();" >
         
         <div class="row justify-content-md-center">
             <div class="col-sm-9">

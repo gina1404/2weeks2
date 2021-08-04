@@ -36,4 +36,10 @@ public interface FreeBoardDao {
 		
 	public FreeBoard read(SqlSession session, int bno);
 	
+	int update(SqlSession session, FreeBoard fb); 
+	
+	int delete(SqlSession session, int no);
+
+	int updateAttachment(SqlSession session, PostAttachment a);
+	
 }

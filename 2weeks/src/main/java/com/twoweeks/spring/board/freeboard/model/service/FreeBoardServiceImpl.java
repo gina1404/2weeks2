@@ -93,6 +93,36 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	public FreeBoard read(int bno) {
 		return dao.read(session, bno);
 	}
+
+
+	@Override
+	public int update(FreeBoard fb) throws Exception {
+		try {
+			int result = dao.update(session, fb);
+			log.debug("게시글 번호 : " + fb.getPost_Sq());
+			int boardNo=fb.getPost_Sq();
+			if(result>0) {
+				List<PostAttachment> attachments = fb.getAttachments();
+					if(attachments.size()>0) {
+						for(PostAttachment a : fb.getAttachments()) {
+							a.setPost_Sq(boardNo);
+							dao.updateAttachment(session, a);
+						}
+					}else if (result > 0) return 1;
+					else return 0;
+			}else return 0;
+		}catch(RuntimeException e) {
+			throw new Exception("등록실패");
+		}
+		
+		return 1;
+	}
+
+
+	@Override
+	public int delete(int no) {
+		return dao.delete(session, no);
+	}
 	
 	
 	

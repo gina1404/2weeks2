@@ -33,6 +33,18 @@ margin-top:5%;
 .divi{
 font-size : 12px;
 }
+.col-sm-12{
+  float: left;
+}
+.outer {
+  text-align: center;
+}
+
+.inner {
+  display: inline-block;
+  margin-top: 200px;
+  margin-left: -700px;
+}
 
 </style>
 <section class="content">
@@ -40,12 +52,11 @@ font-size : 12px;
 		<div class="wrapper">
 			<div class="row ">
 				<h4>
-				<span title="category">${list.category }</span>
-				<a class="" href="${path }/freeboard/readView?no=${list.post_Sq }">${list.post_Title}</a>
+					<span title="category">${list.category }</span> <a class=""
+						href="${path }/freeboard/readView?no=${list.post_Sq }">${list.post_Title}</a>
 				</h4>
 			</div>
-			<div class="btm_area clear">
-				<div class="row">
+				<div class="row" style="border: solid blue 10px; margin-top:5px;">
 					<img src="">
 					<div class="divider "></div>
 					<span class="divi">조회 수 <b>${list.post_Cnt }</b></span>
@@ -54,13 +65,47 @@ font-size : 12px;
 					<div class="divider "></div>
 					<span class="divi">댓글 <b></b></span>
 					<div class="divider"></div>
-					<span class="fa fa-clock-o "></span> <span class="divi">${post_Dt }</span>
+					<span class="divi">${list.post_Dt }</span>
 				</div>
 			</div>
+				<div class="col-md-12 " style="border:solid black 1px; margin-top: 50px; margin-right: 500px;">
+					<p><span style="font-size:16px; ">${list.post_Content }</span></p>
+				</div>
+		<div class="row text-center" style="width: 100% ">
+			<div style="width: 100%; float: none; margin: 0 auto;">
+				<button class="btn btn btn-danger btn-round" style="width: 100px; margin-top: 300px;">추천 수</button>
+				<div></div>
+			</div>
 		</div>
+		<div class="outer">
+  
+    <div class="inner">
+      <span class="absolute">
+      <button type="submit" class="update_btn">수정</button>
+	<button type="submit" class="delete_btn">삭제</button>
+	<button type="submit" class="list_btn">목록</button>	
+      </span>
+    </div>
+  </div>
 	</div>
+
+
+
+
+
 </section>
+
+<script>
+	function backList(){
+	window.history.back();	
+		
+	}
+	$(".update_btn").on("click",function(){
+		location.href="${path}/freeboard/updateBoard.do?no=${list.post_Sq }";
+	})
 	
+</script>
+
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

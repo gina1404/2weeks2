@@ -1,8 +1,8 @@
 package com.twoweeks.spring.board.freeboard.controller;
 
 import java.io.File;
+
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -135,6 +136,79 @@ public class FreeBoardController {
 	}
 	
 	
+	@PostMapping("/freeboard/delete")
+	public String delete(int no) {
+		log.info("delete");
+		
+		service.delete(no);
+		
+		return "redirect:/freeBoard/boardList";
+	}
+	
+	
+	
+	@RequestMapping("/freeboard/update")
+	public ModelAndView update(ModelAndView mv,FreeBoard fb,@RequestParam("article_file") MultipartFile[] upload, HttpServletRequest request) {
+		log.info("update 수정좀하자");
+		
+		String path = request.getServletContext().getRealPath("/resources/upload"); //resources/upload 경로 설정하여 path에 저장
+		File dir = new File(path); //폴더
+		String reName="";
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
+		System.out.println("이거 돌아가니");
+		
+		for(MultipartFile f : upload) {
+			//파일 있니
+			if(!f.isEmpty()) {
+				String oriFileName = f.getOriginalFilename();
+				String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rndNum=(int)Math.random()*10000000;
+				String front = "2Weeks_";
+				reName = front+sdf.format(System.currentTimeMillis())+"_"+rndNum+ext;
+				try {
+					f.transferTo(new File(path+reName));
+					fb.getAttachments().add(PostAttachment.builder().atch_Ori(oriFileName).atch_New(reName).build());
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+		  }
+		String msg ="등록성공";
+		try {
+			service.update(fb);
+		}catch(Exception e) {
+			FileUtils.deleteQuietly(new File(path+reName));  //저장된 현재 파일 삭제
+			msg= e.getMessage();
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc","/freeboard/readView");
+		mv.addObject("no", request.getParameter("no"));
+		mv.setViewName("freeBoard/readView");
+		return mv;
+		}
+		
+	
+	
+	@RequestMapping("/freeboard/updateBoard.do")
+	public String updateEnd(FreeBoard fb, Model model,  HttpServletRequest request) {
+		
+		log.info("updateEnd");
+		
+		int no = Integer.parseInt(request.getParameter("no"));
+		System.out.println(no+"인가요?");
+		fb.setPost_Sq(Integer.parseInt(request.getParameter("no")));
+				
+		model.addAttribute("list", service.read(fb.getPost_Sq()));
+		
+		
+		
+		return "freeBoard/updateView";
+				
+		
+	}
 	
 }
 	

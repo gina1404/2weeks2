@@ -30,4 +30,8 @@ public interface FreeBoardService {
 	
 	FreeBoard read(int bno);
 	
+	int update(FreeBoard fb) throws Exception;
+	
+	int delete(int no);
+	
 }
