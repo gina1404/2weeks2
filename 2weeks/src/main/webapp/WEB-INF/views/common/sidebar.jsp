@@ -109,13 +109,13 @@
 					</div>
 				</div>
 				
-				<!-- 챗봇 -->
-				<div class="wrap_sub_list">
+				<!-- 챗봇 -> 플러그인으로 변경 -->
+				<%-- <div class="wrap_sub_list">
 					<div class="sidebar-list">
 						<img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
 						<div class="sidebar-title">chatBot</div>
 					</div>
-				</div>
+				</div> --%>
 			</div> 
 			<!-- 관리자 페이지 -->
 			<div class="wrap_sub_list">

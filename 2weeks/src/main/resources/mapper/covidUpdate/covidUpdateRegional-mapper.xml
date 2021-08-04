@@ -15,7 +15,7 @@
 	</update>	
 	<!-- DB에 저장된 데이터 조회 -->
 	<select id="selectCovidRegionalKorList" resultMap="CovidRegionalKorDataMap">
-		SELECT * FROM  COVID_KOR_REGIONAL
+		SELECT * FROM  COVID_KOR_REGIONAL WHERE GUBUN!='검역'
 	</select>
 	<resultMap type="CovidRegionalKorData" id="CovidRegionalKorDataMap">
 		<result column="STD_DAY" property="stdDay"/>

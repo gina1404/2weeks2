@@ -44,7 +44,7 @@ $("#regionalKor").each(function(){
             var str="<div class='regionalKor-table-title' style='display:flex;'>";
             str+="<div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>지역</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>오늘 확진자</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>총 확진자</div></div>";
              //값
-            for(var i=2; i<20;i++){ //검역 빼고 마지막 줄 합계까지 출력
+            for(var i=0; i<18;i++){ //검역 빼고 마지막 줄 합계까지 출력
                 str += "<div class='regionalKor-table-content' style='display:flex;'>";
                 str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].gubun+"</div>"; //지역
                 str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].incDec+"</div>"; //오늘 확진
@@ -75,7 +75,7 @@ $("#regionalKor").each(function(){
                 .append('path').attr('d', path).attr('id', function(d) { return 'path-' + d.properties.name_eng;})
                 .attr('fill', function(d){ //확진자 수에 따라 배경 색 변경
                 	var mapColor;
-                	for(var k=2;k<20;k++){
+                	for(var k=0;k<18;k++){
                 		if(d.properties.name==data[k].gubun){
                 			console.log(d.properties.name+":"+data[k].gubun);
                 			if(data[k].incDec<50) mapColor='blue';                			
@@ -94,7 +94,7 @@ $("#regionalKor").each(function(){
 					.text(function(d) { //출력할 값 추가
 	                	 var incDec;
 	                	 var defCnt;
-	                	 for(var j=2;j<20;j++){
+	                	 for(var j=0;j<18;j++){
 	                		 if(d.properties.name==data[j].gubun){ //구분값(지역명)이 일치할 경우
 	                    		 incDec=data[j].incDec; //오늘 확진자 수
 	                    		 defCnt=data[j].defCnt; //총 확진자 수
