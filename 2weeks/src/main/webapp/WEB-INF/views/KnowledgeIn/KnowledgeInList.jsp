@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<c:set var="path" value="${pageContext.request.contextPath }"/>  
+
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="지식인상세보기"/>
@@ -33,7 +35,7 @@ outline:none;
 float:right;
 color:#ffffff;
 position: relative;
-top:-15px;
+top:-3px;
 left:-20px;
 
 }
@@ -58,7 +60,7 @@ background :#ffffff;
 float: left;
 position: relative;
 right:-1050px;
-top: -15px;
+top: -3px;
 }
 .naver{
 font-size :16px;
@@ -82,7 +84,7 @@ color:#ffffff;
 
 #no{
 position: relative;
-top:50px;
+top:-60px;
 
 
 }
@@ -91,6 +93,7 @@ top:50px;
 font-family: pretendard;
 font-size: 50px;
 color:#19ce60;
+
 }
 
 .title{
@@ -113,9 +116,25 @@ right:-20px;
     list-style: none;
     position: relative;
     right :-1000px;
+    top :-165px;
+} 
+.knowmenu2 {
+    list-style: none;
+    position: relative;
+    right :-1000px;
     top :-70px;
 } 
 .knowmenu li{
+
+float:left;
+margin-left:10px;
+font-size:13px;
+position: relative;
+top: -10px;
+
+}
+
+.knowmenu2 li{
 
 float:left;
 margin-left:10px;
@@ -152,6 +171,14 @@ font-family: pretendard;
 
 
 .userInfo{
+
+position: relative;
+top : -35px;
+right:-1150px;
+font-size: 13px;
+}
+
+.userInfo2{
 
 position: relative;
 top : -50px;
@@ -243,20 +270,51 @@ color:red;
 color: #A4A4A4;
 
 }
+#container{
+
+
+}
 </style>
 
 
 <section class="container">	
-	<div class="question"><p id="no">NO.129	</p> 
+	<div class="question">
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div>
-			<button id="Qsearch" >질문하기</button><img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
+		<a href="KnowledgeInQ.do">	<button id="Qsearch" >질문하기</button><img src="" alt=""> </a><hr width = "100%" color = "#F2F2F2"/>
+
+			<div id="container">
 			
-					<div>	<span class="QA">Q</span> <span class="title">코로나 백신 접종 예약</span> <span class="point">100</span>
+				<div>
+					<span id="no">NO.${KnowledgeIn.kin_Sq}</span> 
+					<span class="QA">Q</span> 
+					<span class="title">${KnowledgeIn.kin_Title}</span> 
+					<span class="point">100</span>
+				</div>
+				<div class="userInfo"><span class="user">비공개</span> 
+				<span class="rolldate">${KnowledgeIn.kin_Date }</span> 
+				<span class="view">조회수 ${KnowledgeIn.kin_Cnt }</span> 
+				<span class="qcount">답변 3개</span>
+				</div>
+
+			<span class="content1">${KnowledgeIn.kin_Content}<br><br></span>
+				
+
+		</div>
+		
+		<%-- 	</c:forEach> --%>
 			
-							<ul class="knowmenu"> 
-					<li style="color: orange;">코로나19</li>
+ 					
+				<button id="red1">신고</button><br>
+						<div class="qbutton">
+									<button id="update">수정</button>|
+									<a href="${path}/KnowledgeIn/deleteKin?sq=${KnowledgeIn.kin_Sq}"><button id="delete">삭제</button></a>
+									<a href="${path}/KnowledgeIn/KnowledgeInA.do?sq=${KnowledgeIn.kin_Sq}"><button id="qanswer">답변하기</button></a>
+						</div>
+						
+				<ul class="knowmenu"> 
+				<li style="color: orange;">코로나19</li>
 					<li>백신</li>
 					<li>확진</li>
 					<li>해외</li>
@@ -264,25 +322,8 @@ color: #A4A4A4;
 					<li>건강</li>
 					<li>기타</li>	
 			</ul>
-					<div class="userInfo"><span class="user">비공개</span> <span class="rolldate">2021.07.27</span> 
-					<span class="view">조회수3,879</span> <span class="qcount">답변 3개</span></div>
-
-
-			
-					</div>
-			
-			<div class="content1">지금 50대부터 코로나 백신 접종 예약 진행중인것으로 아는데요 다음주에도 접종예정인지 궁금합니다.<br><br>
-
- 				부모님 코로나 백신 접종 예약 해드리고싶은데 절차같은게 따로 나와있지 않기때문에...<br><br>
-
- 					코로나 백신 접종 예약 끝난건 아니겠죠?</div>
- 					
- 					
-				<button id="red1">신고</button><br>
-						<div class="qbutton">
-									<button id="update">수정</button>|<button id="delete">삭제</button> 
-									<a href="KnowledgeInA.do"><button id="qanswer">답변하기</button></a>
-						</div>
+						
+						
 			</div><!--질문 div -->
 			
 			
@@ -297,7 +338,7 @@ color: #A4A4A4;
 			<button id="Qcheck" >채택하기</button>
 					<div>	<span class="QA">A</span> <span class="title">코로나 백신 접종 예약</span> <span class="Adoption_completed">채택완료</span>
 			
-							<ul class="knowmenu"> 
+							<ul class="knowmenu2"> 
 				<li style="color: orange;">코로나19</li>
 					<li>백신</li>
 					<li>확진</li>
@@ -306,7 +347,7 @@ color: #A4A4A4;
 					<li>건강</li>
 					<li>기타</li>	
 			</ul>
-					<div class="userInfo"><span class="user">sihu***</span> <span class="rolldate">2021.07.27</span> 
+					<div class="userInfo2"><span class="user">sihu***</span> <span class="rolldate">2021.07.27</span> 
 					<span class="view">추천 179</span> </div>
 
 
@@ -336,6 +377,27 @@ color: #A4A4A4;
 			
 			
 </section>
+
+<script>
+$("#delete").on("click", function(e){
+    form.attr("action", "/knowledgeIn/delete");
+    form.attr("method", "post");
+    form.submit();
+});
+		
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>		
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 

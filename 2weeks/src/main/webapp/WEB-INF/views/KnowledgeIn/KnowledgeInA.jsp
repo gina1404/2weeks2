@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<c:set var="path" value="${pageContext.request.contextPath }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="지식인상세보기"/>
 </jsp:include>
@@ -308,13 +309,15 @@ right:-50px;
 
 
 <section class="container">	
-	<div class="question"><p id="no">NO.129	</p> 
+<form name="KinFrm" action="${path }/KnowledgeIn/KnowledgeInList.do"
+         method="post" enctype="multipart/form-data" >
+	<div class="question"><p id="no">NO.${KnowledgeIn.kin_Sq}	</p> 
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div>
 			<a href="KnowledgeInQ.do"><button id="Qsearch" >질문하기</button></a><img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
 			
-					<div>	<span class="QA">Q</span> <span class="title">코로나 백신 접종 예약</span> <span class="point">100</span>
+					<div>	<span class="QA">Q</span> <span class="title">${KnowledgeIn.kin_Title}</span> <span class="point">100</span>
 			
 							<ul class="knowmenu"> 
 					<li style="color: orange;">코로나19</li>
@@ -325,23 +328,19 @@ right:-50px;
 					<li>건강</li>
 					<li>기타</li>	
 			</ul>
-					<div class="userInfo"><span class="user">비공개</span> <span class="rolldate">2021.07.27</span> 
-					<span class="view">조회수3,879</span> <span class="qcount">답변 3개</span></div>
+					<div class="userInfo"><span class="user">비공개</span> <span class="rolldate">${KnowledgeIn.kin_Date}</span> 
+					<span class="view">조회수${KnowledgeIn.kin_Cnt}</span> <span class="qcount">답변 3개</span></div>
 
 
 			
 					</div>
 			
-			<div class="content1">지금 50대부터 코로나 백신 접종 예약 진행중인것으로 아는데요 다음주에도 접종예정인지 궁금합니다.<br><br>
-
- 				부모님 코로나 백신 접종 예약 해드리고싶은데 절차같은게 따로 나와있지 않기때문에...<br><br>
-
- 					코로나 백신 접종 예약 끝난건 아니겠죠?</div>
+			<div class="content1">${KnowledgeIn.kin_Content}</div>
  					
  					
 				<button id="red1">신고</button><br>
 						<div class="qbutton">
-									 <button id="qanswer">답변하기</button>
+									 <button  id="qanswer">답변하기</button>
 						</div>
 			</div><!--질문 div -->
 			
@@ -388,7 +387,7 @@ right:-50px;
 		</div>	
 		
 					<hr style="border: solid 1px #F2F2F2;">
-		<button id="Qcheck" >답변하기</button>
+		<button  type="submit"id="Qcheck" >답변등록</button>
 		</div>
 	</div>
 		
@@ -396,7 +395,7 @@ right:-50px;
 
 	
 		
-			
+</form>
 			
 			
 </section>

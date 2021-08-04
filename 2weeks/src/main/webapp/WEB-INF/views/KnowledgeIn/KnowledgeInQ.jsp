@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<c:set var="path" value="${pageContext.request.contextPath }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
+
 	<jsp:param name="title" value="지식인질문"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
@@ -292,6 +294,9 @@ right:-50px;
 
 
 <section class="container">
+<form name="KinFrm" action="${path }/KnowledgeIn/KnowledgeInQEnd.do"
+         method="post" enctype="multipart/form-data" >
+         
 	<div class="question">
 			<span class="a">Q&A</span>
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
@@ -300,9 +305,10 @@ right:-50px;
 			<button id="Qsearch" >질문하기</button><img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
 			
 					<div>	<span class="QA">Q</span> 
-					<input type="text"  maxlength='20' style="width:1000px;font-size:30px; border:1px solid #19ce60" placeholder="제목 작성란 입니다 20자 미만으로 입력해주세요.">
+<input type="text"  maxlength='20' style="width:1000px;font-size:30px; border:1px solid #19ce60" placeholder="제목 작성란 입니다 20자 미만으로 입력해주세요."
+				 value ="${knowledgeIn.kin_Title}" name="Title" required>
 			
-							<ul class="knowmenu"> 
+			<ul class="knowmenu"> 
 					<li>코로나19</li>
 					<li>백신</li>
 					<li>확진</li>
@@ -319,18 +325,28 @@ right:-50px;
 			<div class="content">
 			
 			  <textarea class="noresize" placeholder="답변이 등록되지 않은 경우에는 수정,삭제가 가능하지만 답변이 있을 시, 해당 내용은 수정,삭제가 불가능 합니다.
-
-질문 내용에 개인정보(실명,전화번호,메신저아이디)가 포함되지 않게 해주세요."></textarea>
+질문 내용에 개인정보(실명,전화번호,메신저아이디)가 포함되지 않게 해주세요."name="Content" required>${knowledgeIn.kin_Content }</textarea>
 		
-			
+		
 			</div>
  					
  					
 			 					
 <br>
 			
-		<div class="bottom">	
-		<input type="file" name="FileName" >
+		<div class="bottom">
+		<input type="file" name="FileName">
+	
+		<%-- <c:if test="${knowledgeIn.attachments.size()>0}">
+			<c:forEach var="a" items="${knowledgeIn.attachments }" varStatus="vs">
+                    <button type="button" 
+                    class="btn btn-outline-success btn-block"
+                    onclick="location.replace('${path}/KnowledgeIn/fileDownLoad.do?oriname=${a.atch_Ori }&rename=${a.atch_New }')">
+                       첨부파일 ${vs.count } -${a.atch_Ori }
+            		</button>
+        </c:forEach>
+        </c:if> --%>
+		
 		<br>
 					 					
  			<hr style="border: solid 1px #F2F2F2;">
@@ -341,8 +357,10 @@ right:-50px;
 
 		</div>	
 					 					
- 			<hr style="border: solid 1px #F2F2F2;">				
-		<button id="Qcheck" >질문등록</button>
+ 			<hr style="border: solid 1px #F2F2F2;">	
+ 			
+ 	        <!--     <input type="submit" class="btn btn-outline-success" value="질문등록" >	 -->
+		<button id="Qcheck" type="submit">질문등록</button>
 		</div>
 
 		
@@ -351,10 +369,18 @@ right:-50px;
 
 			
 			
-			
+	</form>		
 
 			
 			
 </section>
+<script>
+		$(function(){
+			$("[type=file]").on("change",e=>{
+				const fileName=$(e.target).prop("files")[0].name;
+				$(e.target).next('.custom-file-label').html(fileName);
+			});
+		}) 
+	</script>	
 	<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
