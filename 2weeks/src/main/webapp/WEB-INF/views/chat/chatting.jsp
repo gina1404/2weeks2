@@ -10,7 +10,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
-<link href="${path }/resources/css/chatting.css?after" rel="stylesheet" />
+<link href="${path }/resources/css/chat/chatting.css?after" rel="stylesheet" />
 
 <section class="container">
 	<h3>오픈채팅</h3>
@@ -48,8 +48,7 @@
 			</div>
 			<div id="entry">
 				<a id="entry_a" 
-				onclick="open('${path}/GroupChatting.do', '_blank', 'width=400, height=600, resizable=no')">입장</a>
-			</div>
+                onclick="open('${path}/GroupChatting.do?no=${l.groupNo} ', '_blank', 'width=400, height=600, resizable=no')">입장</a>			</div>
 			<hr>				
 		</c:forEach>			
 	</div>	
@@ -64,24 +63,7 @@
 	if(check){
 		alert(check);
 		console.log(check);
-	}	
-	
-	/* let sock=new SockJS("http://localhost:9090${pageContext.request.contextPath}/chatting");
-	sock.onopen=e=>{
-		console.log(e);
-	}
-	sock.onmessage=e=>{
-		console.log(e);
-	}
-	sock.onclose=e=>{
-		
-	}
-	
-	let btn=document.getElementById("sendChat");
-	btn.addEventListener("click", e=>{
-		const msg=document.getElementById("chat").value;
-		sock.send(msg);
-	}); */
+	}		
 </script>
 
 <script src="<c:url value='/resources/js/chat/chatting.js' />"></script>

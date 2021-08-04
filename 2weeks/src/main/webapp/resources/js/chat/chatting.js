@@ -30,7 +30,7 @@ $("#addBtn").click(e=>{
 		data: JSON.stringify(json),				
 		success:data=>{
 			console.log(data);
-			$("#container").html(data);
+			$(".container").html(data);
 		}
 	});	
 });	
