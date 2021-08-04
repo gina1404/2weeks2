@@ -10,12 +10,16 @@
 				<div class="wrap_sub_list"> 
 					<div class="sidebar-list">
 						<img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
-						<div class="sidebar-title">Covid-19 updates</div>
+						<a class="" href="${path }/covidUpdate/domestic.do">
+							<div class="sidebar-title">Covid-19 updates</div>
+						</a>
 					</div> 
 					<div class="sidebar-list-hide">
 		            	<div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Covid Domestic</div>
+			                <a class="" href="${path }/covidUpdate/domestic.do">
+			                	<div class="sidebar-title">Covid Domestic</div>			                
+							</a>			                
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
@@ -143,5 +147,6 @@
 		$(this).css("background", "#E1E6FF");
 		$(this).children("div.sidebar-list").css("background", "#E1E6FF");
             
-    });
+    });	
+   
     </script>

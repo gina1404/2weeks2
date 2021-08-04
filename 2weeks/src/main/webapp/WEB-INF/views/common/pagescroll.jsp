@@ -41,9 +41,9 @@
 	function fn_top() {
 	  document.body.scrollTop = 0; //Safari
 	  document.documentElement.scrollTop = 0; //Chrome, Firefox, IE and Opera
-	}
+	}	
 	
-	<!-- 챗봇 연결 플러그인 -->
+	 <!-- 챗봇 연결 플러그인 -->
 	  (function() {
 	    var w = window;
 	    if (w.ChannelIO) {
@@ -83,4 +83,5 @@
 	    "pluginKey": "cf7f84b9-913f-48bd-b7c6-898b55aeb3ef"
 	  });
 	<!-- 챗봇 연결 끝 -->
+	
 	</script>
