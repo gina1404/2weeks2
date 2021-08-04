@@ -1,9 +1,10 @@
 package com.twoweeks.spring.covid.report.model.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;

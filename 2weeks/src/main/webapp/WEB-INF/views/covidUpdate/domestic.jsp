@@ -6,11 +6,13 @@
 	<jsp:param name="title" value="updates/domestic"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6944e39f85fb8e5ca0d10ff408274b51"></script>
 
 <section id="content">
 	<h2>국내 확산 현황</h2>
 </section>
+		
+		
 		
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 

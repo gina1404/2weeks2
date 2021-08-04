@@ -2,11 +2,20 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.twoweeks.spring.user.model.vo.User" alias="user"/>
 		<typeAlias type="com.twoweeks.spring.common.StringArrayTypeHandler" alias="strArr"/>
+
+		<typeAlias type="com.twoweeks.spring.member.model.vo.Member" alias="member"/>
+		
+
 		<typeAlias type="com.twoweeks.spring.covid.report.model.vo.NewsReport" alias="newsReport"/>
 		<typeAlias type="com.twoweeks.spring.covid.report.model.vo.Center" alias="center"/>
+<<<<<<< HEAD
 		<typeAlias type="com.twoweeks.spring.chat.model.vo.ChatGroup" alias="chatGroup"/>
 		<typeAlias type="com.twoweeks.spring.chat.model.vo.ChatGroupMessage" alias="chatGroupMsg"/>
+=======
+		<typeAlias type="com.twoweeks.spring.chat.model.vo.ChatGroup" alias="chat"/>
+		<typeAlias type="com.twoweeks.spring.covid.model.vo.CovidRegionalKorData" alias="CovidRegionalKorData"/>
+
+>>>>>>> 7cd635794881925ee6adfa10299c40e9bf734bbc
 	</typeAliases>
 </configuration>

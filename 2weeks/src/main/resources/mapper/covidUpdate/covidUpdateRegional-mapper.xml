@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CovidRegionalKorData">
+
+	<!-- 지역별 현황 데이터 저장 -->
+	<update id="updateCovidRegionalKorData"> 
+	<!-- 'GUBUN'을 기준으로 가장 최신 값 1개만 유지되도록 함 -->
+		MERGE INTO COVID_KOR_REGIONAL
+		    USING DUAL
+		    ON (GUBUN=#{gubun})
+		    WHEN MATCHED THEN
+		        UPDATE SET STD_DAY=#{stdDay}, gubunEn=#{gubunEn},DEF_CNT=#{defCnt},INC_DEC=#{incDec},UPDT_DAY=SYSDATE
+		    WHEN NOT MATCHED THEN
+		        INSERT (STD_DAY, GUBUN, gubunEn, DEF_CNT, INC_DEC, UPDT_DAY) VALUES(#{stdDay},#{gubun},#{gubunEn},#{defCnt},#{incDec},SYSDATE)
+	</update>	
+	<!-- DB에 저장된 데이터 조회 -->
+	<select id="selectCovidRegionalKorList" resultMap="CovidRegionalKorDataMap">
+		SELECT * FROM  COVID_KOR_REGIONAL
+	</select>
+	<resultMap type="CovidRegionalKorData" id="CovidRegionalKorDataMap">
+		<result column="STD_DAY" property="stdDay"/>
+		<result column="GUBUN" property="gubun"/>
+		<result column="gubunEn" property="gubunEn"/>
+		<result column="DEF_CNT" property="defCnt"/>
+		<result column="INC_DEC" property="incDec"/>
+		<result column="UPDT_DAY" property="updtDay"/>
+	</resultMap>
+</mapper>
