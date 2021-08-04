@@ -11,14 +11,14 @@
 	<bean id="realDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@rclass.iptime.org:1521:xe"/>
-<<<<<<< HEAD
-
-		<property name="username" value="two"/>
-		<property name="password" value="weeks"/>
 
 
-=======
->>>>>>> 262d7881a11559e154fffbae38a4d30d01dd1ac2
+
+
+
+
+
+
 
 		<property name="username" value="two"/>
 		<property name="password" value="weeks"/>
