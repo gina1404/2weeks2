@@ -1,6 +1,7 @@
 package com.twoweeks.spring.board.freeboard.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	
 	
+
+	@Override
+	public List<FreeBoard> list(FreeBoard fb) {
+		return dao.list(session, fb);
+	}
+
 
 	@Override
 	public List<FreeBoard> listAll(int cPage, int numPerpage) {
@@ -53,6 +60,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 
 	@Override
+	public List<FreeBoard> searchBoard(Map<String,Object> param) {
+		return dao.searchBoard(session,param);
+	}
+
+
+	@Override
 	public int insertBoard(FreeBoard b) throws Exception {
 		try {
 			int result = dao.insertBoard(b, session);
@@ -73,6 +86,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		throw new Exception("등록실패");
 	}
 		return 1;
+	}
+
+
+	@Override
+	public FreeBoard read(int bno) {
+		return dao.read(session, bno);
 	}
 	
 	

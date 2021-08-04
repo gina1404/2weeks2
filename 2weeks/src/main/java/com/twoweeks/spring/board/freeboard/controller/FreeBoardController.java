@@ -2,13 +2,18 @@ package com.twoweeks.spring.board.freeboard.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +36,28 @@ public class FreeBoardController {
 	@Autowired
 	private FreeBoardService service;
 	
+	
+	
+	@GetMapping("/freeboard/searchBoard.do")
+	public ModelAndView searchBoard(ModelAndView mv, FreeBoard fb, HttpServletRequest request, HttpSession session,
+			@RequestParam(value="cPage", defaultValue="1") int cPage, @RequestParam(value="numPerpage",defaultValue="5") int numPerpage) {
+		String type= request.getParameter("searchType");
+		String keyword = request.getParameter("keyword");
+		
+		Map<String,Object> param=new HashMap<String,Object>();
+		param.put("type", type);
+		param.put("keyword", keyword);
+		param.put("user", request.getParameter("user_Id"));
+		
+		mv.addObject("list", service.searchBoard(param));
+		
+		System.out.println(service.searchBoard(param)); 
+		
+		mv.setViewName("freeBoard/searchBoardList");
+		
+		
+		return mv;
+	}
 	
 	@RequestMapping("/freeboard/boardList.do")
 	public ModelAndView boardList(@RequestParam(value="cPage", defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="5")int numPerpage,
@@ -95,7 +122,17 @@ public class FreeBoardController {
 	}
 	
 	
-	
+	@RequestMapping("/freeboard/readView")
+	public String read(FreeBoard fb, Model model,  HttpServletRequest request) {
+		log.info("read");
+		int no = Integer.parseInt(request.getParameter("no"));
+		System.out.println(no);
+		fb.setPost_Sq(Integer.parseInt(request.getParameter("no")));
+				
+		model.addAttribute("list", service.read(fb.getPost_Sq()));
+		
+		return "freeBoard/readView";
+	}
 	
 	
 	

@@ -8,21 +8,6 @@
 </jsp:include>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <style>
-/* .flex-container {
-  display: flex;
-  height: 600px;
-  flex-wrap: wrap;
-  align-content: stretch;
-  background-color: DodgerBlue;
-}
-.flex-container > div {
-  background-color: #f1f1f1;
-  width: 100px;
-  margin: 10px;
-  text-align: center;
-  line-height: 75px;
-  font-size: 30px;
-} */
  .category{
  	font-size:12px;
  }
@@ -52,6 +37,9 @@ height:13px;
 .icon{
 font-size: 8px;
 }
+a{
+text-decoration: none;
+}
 
 </style>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
@@ -59,38 +47,35 @@ font-size: 8px;
 <section id="content">
 	<div class="container">
 		<div class="form-group row justify-content-center">
-			<form action="${path }/freeboard/searchBoard.do" method="get">
-				<div class="w100" style="padding-right: 10px">
-					<select class="form-control form-control-sm" name="searchType"
-						id="searchType">
-						<option value="title">제목 + 본문</option>
-						<option value="reg_id">작성자</option>
-						<option value="reply_context">댓글내용</option>
-					</select>
-				</div>
-				<div class="w300" style="padding-right: 10px">
-					<input type="text" class="form-control form-control-sm"
-						name="keyword" id="keyword">
-				</div>
-				<div>
-					<button class="btn btn-sm btn-primary" name="btnSearch"
-						id="btnSearch" type="submit">검색</button>
+			<form  action="${path }/freeboard/searchBoard.do" method="get">
+				<div class="input-group mb-3">
+						<select name="searchType" class="form-control" id="searchType">
+							<option value="POST_TITLE" ${FreeBoard.searchType eq POST_TITLE ? 'selected' : '' }>제목</option>
+							<option value="post_Content" ${FreeBoard.searchType eq 'post_Content' ? 'selected' : '' }>본문</option>
+							<option value="user_Id" ${FreeBoard.searchType eq 'user_Id' ? 'selected' : '' }>작성자</option>
+							<option value="tc" ${fb.searchType eq 'tc' ? 'selected' : '' }>제목/내용</option>
+							<option value="tw" ${fb.searchType eq 'tw' ? 'selected' : '' }>제목/작성자</option>
+							<option value="cw" ${fb.searchType eq 'cw' ? 'selected' : '' }>내용/작성자</option>
+							<option value="tcw" ${fb.searchType eq 'tcw' ? 'selected' : '' }>전체</option>
+						</select>
+						<input type="text" class="form-control" placeholder="Search" name="keyword" value="${fb.keyword }" >
+					<div class="input-group-append">
+						<button class="btn btn-success" type="submit">Go</button>
+					</div>
 				</div>
 			</form>
 		</div>
-
-
-		<div class="row">
-			<c:forEach var="b" items="${list }">
+		<div class="row" >
+		<c:forEach var="b" items="${list }">
 				<div class="card col-md-3 m-2">
 					<div class="card-header m-3">
-						<a href="#"><img
+						<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img
 							src="${path }/resources/images/freeboardPic/default.png"
-							class="card-img-top" alt="이미지"></a>
+							class="card-img-top row" alt="이미지"></a>
 					</div>
 					<div class="card-body">
 						<p class="card-text category">${b.category } &nbsp; &nbsp; [${b.post_Dt }]</p>
-						<h4 class="card-title">${b.post_Title }</h4>
+						<h4 class="card-title"><a href="${path }/freeboard/readView?no=${b.post_Sq }"><c:out value="${b.post_Title }"/></a></h4>
 						<p class="card-text">${b.post_Content }</p>
 						<p class="card-text"><img src="${path}/resources/images/icons/profile.svg" class="profile " alt="프로필사진"> ${b.user_Id }</p>
 						<div class="row">
@@ -104,16 +89,16 @@ font-size: 8px;
 							<img alt="댓글수" src="${path }/resources/images/icons/comment.svg" class="comment">&nbsp;<p class="icon"></p>
 						</div>
 						</div>
-						<a href="" class="btn btn-primary">더보기</a>
-						<p class="card-text"></p>
 					</div>
 				</div>
-
 			</c:forEach>
+			</div>
 		</div>
 		<div id="pagebar-container" class="m-5">${pageBar }</div>
-	</div>
+
 
 </section>
-  
+<script>
+
+</script>  
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

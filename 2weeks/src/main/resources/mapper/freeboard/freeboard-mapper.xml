@@ -10,6 +10,21 @@
 		SELECT COUNT(*) FROM POST
 	</select>
 	
+	<select id="list" resultMap="boardMap">
+		SELECT * FROM POST
+	</select>
+	
+	<select id="searchBoard" resultType="freeboard">
+	SELECT * FROM POST WHERE ${type} LIKE '%'||#{keyword}||'%'
+									 
+	</select>
+	
+	<select id="read" parameterType="int" resultType="freeboard">
+	SELECT *
+	FROM POST WHERE POST_SQ = #{post_Sq}
+	</select>
+	
+	
 	<resultMap type="freeboard" id="boardMap">
 		<id column="post_Sq" property="post_Sq"/>
 		<result column="user_Id" property="user_Id"/>
@@ -22,6 +37,8 @@
 		<result column="post_Dt" property="post_Dt"/>
 		<result column="post_Cnt" property="post_Cnt"/>
 		<result column="open_Yn" property="open_Yn"/>
+		<result column="searchType" property="searchType"/>
+		<result column="keyword" property="keyword"/>
 			<collection property="attachments" ofType="postAttach">
 				<id column="atch_No" property="atch_No"/>
 				<result column="post_Sq" property="post_Sq"/>
@@ -29,4 +46,5 @@
 				<result column="atch_New" property="atch_New"/>
 			</collection>
 	</resultMap>
+	
 </mapper>

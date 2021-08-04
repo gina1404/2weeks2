@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class FreeBoard {
 	
 	private int post_Sq; //게시글 번호
@@ -25,5 +27,16 @@ public class FreeBoard {
 	private String post_Cnt; //조회수
 	private String open_Yn; //작성자명 공개 여부
 	private List<PostAttachment> attachments=new ArrayList();
+	
+	private String searchType;
+	private String keyword;
+	private String t;
+	private String w;
+	private String c;
+	private String tc;
+	private String cw;
+	private String tw;
+	private String twc;
+	
 	
 }

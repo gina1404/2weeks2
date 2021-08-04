@@ -1,6 +1,7 @@
 package com.twoweeks.spring.board.freeboard.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -28,7 +29,11 @@ public interface FreeBoardDao {
 	List<FreeBoard> listAll(SqlSession session, int cPage, int numPerpage);
 	
 	int totalBoardCount(SqlSession session);
+
+	List<FreeBoard> list(SqlSession session, FreeBoard fb);
+
+	List<FreeBoard> searchBoard(SqlSession session, Map<String,Object> param);
 		
-	
+	public FreeBoard read(SqlSession session, int bno);
 	
 }

@@ -1,7 +1,7 @@
 package com.twoweeks.spring.board.freeboard.model.dao;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -50,9 +50,24 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 
 	@Override
+	public List<FreeBoard> list(SqlSession session, FreeBoard fb) {
+		
+		return session.selectList("freeboard.list",fb);
+	}
+
+	@Override
 	public int insertAttachment(PostAttachment a, SqlSession session) {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<FreeBoard> searchBoard(SqlSession session, Map<String,Object> param) {
+		return session.selectList("freeboard.searchBoard",param);
+	}
+
+	@Override
+	public FreeBoard read(SqlSession session, int bno) {
+		return session.selectOne("freeboard.read",bno);
 	}
 
 	

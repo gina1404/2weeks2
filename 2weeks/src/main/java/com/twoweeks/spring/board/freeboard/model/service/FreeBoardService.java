@@ -1,6 +1,8 @@
 package com.twoweeks.spring.board.freeboard.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 
@@ -21,6 +23,11 @@ public interface FreeBoardService {
 	int insertBoard(FreeBoard b) throws Exception;
 	
 	int totalBoardCount();
+
+	List<FreeBoard> list(FreeBoard fb);
+
+	List<FreeBoard> searchBoard(Map<String,Object> param);
 	
+	FreeBoard read(int bno);
 	
 }
