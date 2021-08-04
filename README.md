@@ -61,7 +61,7 @@
 - 개발환경 및 툴 : Spring / Eclipse / Oracle / VsCode
 - 사용한 기술 : Servlet, JSP, HTML, CSS3, JavaScript, jQuery Ajax, WebSocket
 - API: 공공데이터, 지도 등
-- 형상관리: 소스트리(Git GUI)
+- 형상관리: github, 소스트리(Git GUI)
 - 기타 협업 툴: 프로젝트 진행 관리(슬랙), 기능 설계(구글 스프레드시트), 와이어프레임(figma), 이미지 제작(미리캔버스, 프로크리에이트 등)
 
 # 팀원별 역할
