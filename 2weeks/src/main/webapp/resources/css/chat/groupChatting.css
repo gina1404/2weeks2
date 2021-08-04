@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+#chatContainer{
+    border:1px solid;
+    width:auto;
+    height:550px;    
+    overflow: hidden;
+}
+
+#tempAlert{
+    width: 100%;
+    height: 34px;
+    background-color: #808080;
+    opacity: .6;
+    position: absolute;
+    bottom: 40px;
+    display: none;
+    margin-bottom:10px;
+}
+
+#tempAlert>p{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    opacity: 1;
+    margin-top: 10px;
+}
