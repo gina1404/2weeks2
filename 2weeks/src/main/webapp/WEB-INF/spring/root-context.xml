@@ -11,8 +11,17 @@
 	<bean id="realDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+
 		<property name="username" value="spring"/>
-		<property name="password" value="Spring"/>
+		<property name="password" value="spring"/>
+
+
+
+
+
+
+
+
 	</bean>
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="realDataSource"/>
@@ -47,5 +56,55 @@
 		<aop:pointcut expression="" id="txp"/>
 			<aop:advisor advice-ref="txAdvice" pointcut-ref="txp"/>
 	</aop:config> -->
+	
+
+	<!-- gmail설정 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+     	<property name="host" value="smtp.gmail.com" />
+	    <property name="port" value="587" />
+ 		<property name="username" value="tweeks.official.mail@gmail.com"/> <!-- 구글이메일 아이디 -->
+ 		<property name="password" value="wjsthd1234"/> <!-- 비밀번호 -->
+ 	<!-- 보안연결 TLS과 관련된 설정 -->
+     	<property name="javaMailProperties">
+   			<props>
+       			<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true	</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+    		</props>
+     	</property>
+</bean>
+	
+	
+
+	<!-- 스케쥴러 설정 추가 -->
+		<!-- 잡 (cron의 대상이 되는 클래스) -->
+	<bean id="updateDaily" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.twoweeks.spring.common.UpdateDaily"/>
+	</bean>
+		<!-- 트리거(cron 시간 설정) = 언제 -->
+	<bean id="updateDailyTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateDaily"/>
+		<property name="cronExpression">
+			<!-- 매일 낮 12시에 실행 -->
+			<value>0 0 12 * * ?</value>
+			<!-- 테스트용 : 매 1분마다 -->
+			<!-- <value>0 0/1 * * * ?</value>  -->
+		</property>
+	</bean>
+		<!-- 스케쥴러 (cron 실행) = 무엇을 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- 위에서 설정한 트리거를 등록함 -->
+				<ref bean="updateDailyTrigger"/> 
+			</list>
+		</property>
+	</bean>
+	
+
+
 	
 </beans>
