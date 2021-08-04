@@ -340,7 +340,7 @@ position: relative;
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div>
-			<button id="Qsearch" >질문하기</button>
+			<a href="KnowledgeInQ.do"><button id="Qsearch" >질문하기</button></a>
 <div id="knowQ">나의 질문 </div>  <!-- 많이 본 Q&amp;A -->
 
 	

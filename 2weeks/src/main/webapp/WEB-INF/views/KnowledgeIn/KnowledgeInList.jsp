@@ -280,7 +280,8 @@ color: #A4A4A4;
  					
 				<button id="red1">신고</button><br>
 						<div class="qbutton">
-									<button id="update">수정</button>|<button id="delete">삭제</button> <button id="qanswer">답변하기</button>
+									<button id="update">수정</button>|<button id="delete">삭제</button> 
+									<a href="KnowledgeInA.do"><button id="qanswer">답변하기</button></a>
 						</div>
 			</div><!--질문 div -->
 			

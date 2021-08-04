@@ -14,4 +14,12 @@ public class CovidUpdateController {
 		return "covidUpdate/domestic";
 	}
 
+	@RequestMapping("/covidUpdate/domesticVaccine.do")
+	public String domesticVaccine(){
+
+		
+		return "covidUpdate/domesticVaccine";
+	}
+	
+	
 }

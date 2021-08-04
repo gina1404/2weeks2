@@ -293,7 +293,7 @@ right:-50px;
 
 <section class="container">
 	<div class="question">
-			<span class="a">질문하기</span>
+			<span class="a">Q&A</span>
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div>

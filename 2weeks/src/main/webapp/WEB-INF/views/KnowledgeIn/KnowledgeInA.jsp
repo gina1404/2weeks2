@@ -312,7 +312,7 @@ right:-50px;
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div>
-			<button id="Qsearch" >질문하기</button><img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
+			<a href="KnowledgeInQ.do"><button id="Qsearch" >질문하기</button></a><img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
 			
 					<div>	<span class="QA">Q</span> <span class="title">코로나 백신 접종 예약</span> <span class="point">100</span>
 			
