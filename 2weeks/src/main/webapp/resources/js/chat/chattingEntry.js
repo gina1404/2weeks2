@@ -1,20 +1,31 @@
+$('#entryAlert').slideDown();
+setTimeout(()=>{
+    $('#entryAlert').slideUp();
+}, 1000);
+
+
 let sock=new SockJS("http://localhost:9090${path}/chattingEntry");
 
-function ChatGroupMessage(sender, chatGroupNo, chatContent){
+function ChatGroupMessage(sender, chatGroupNo, chatContent, chatTime){
     this.sender=sender;
     this.chatGroupNo=chatGroupNo;
     this.chatContent=chatContent;
+    this.chatTime=chatTime;
 }
 
 sock.onopen=e=>{
 	console.log(e);
 }
 sock.onmessage=e=>{
-	console.log(e);
+	//console.log(e);
 	
-    console.log(e.data);
+	chatContainer=document.getElementById("#chatContainer");
+	chatContainer.innerHTML=chatContainer.innerHTML+"<br>"+data;
+	//console.log("///"+chatContainer);
+	
+    //console.log(e.data);
     let data=JSON.parse(e.data);
-    console.log('메세지 : ', data['msg']);
+    //console.log('메세지 : ', data['msg']);
     //console.log('샌더 : ', data['sender']);
     
     const time = data['date'].substring(data['date'].indexOf(' ')+1, 
@@ -60,20 +71,18 @@ btn.addEventListener("click", e=>{
     //console.log(today, time);
     
     let date=today+" "+time;
-
-    //let msg=document.getElementById("chat").value;
+    
     if($.trim($('#chat').val())===''){
         $('#tempAlert').slideDown();
         setTimeout(()=>{
             $('#tempAlert').slideUp();
         }, 1000);
-    }else {
-        console.log(date);
-        let chatMsg=new ChatGroupMessage($('#sender').val(), $('#chatGroupNo').val(), $('#sendBox #chat').val(), date);
-        console.log(chatMsg);
-        console.log($('#chatGroupNo').val());
+    }else {        
+        let chatMsg=new ChatGroupMessage($('#sender').val(), 
+        	$('#chatGroupNo').val(), $('#sendBox #chat').val(), date);
+        console.log(chatMsg);       
         sock.send(JSON.stringify(chatMsg));
-        //sock.send(msg);    
+        sock.send(msg);    
     }    
 });
 

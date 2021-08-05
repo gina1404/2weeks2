@@ -15,17 +15,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link href="${path }/resources/css/chat/groupChatting.css" rel="stylesheet" />
+<link href="${path }/resources/css/chat/groupChatting.css?after=" rel="stylesheet" />
 
 </head>
 <body>
 	
 	<div id="chatContainer">
-	
+		<div id="entryAlert"><p>${loginId}님이 입장했습니다</p></div>
 	</div>
 
 	<div id="sendBox" class="input-group">
-         <input type="hidden" id="sender" value="">
+         <input type="hidden" id="sender" value="${loginId}">
          <input type="hidden" id="chatGroupNo" value="${no }">    
 		<input type="text" id="chat" class="form-control" aria-describedby="basic-addon2" 
 		placeholder="채팅을 입력하세요">
@@ -40,14 +40,6 @@
 </body>
 
 <script type="text/javascript" src="<c:url value='/resources/js/chat/chattingEntry.js?after=' />"></script>
+<%-- <script type="text/javascript" src="<c:url value='/resources/js/chat/chattingGroup.js' />"></script> --%>
 
-<!-- <script>
-	//console.log("123");
-	let chat_btn=document.getElementById("sendChat");
-	chat_btn.addEventListener("click", e=>{
-		const msg=document.getElementById("chat").value;
-		//console.log(msg);
-		
-	});
-</script> -->
 </html>

@@ -2,6 +2,9 @@ package com.twoweeks.spring.chat.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.twoweeks.spring.chat.model.service.ChatServiceImpl;
 import com.twoweeks.spring.chat.model.vo.ChatGroup;
+import com.twoweeks.spring.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,14 +27,7 @@ public class ChatController {
 	private ChatServiceImpl service;
 	
 	@RequestMapping("/chatting.do")
-	public String moveChatPage(Model model) {
-//		Member user=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		//user.setUserId("admin");
-//		//user.setUserName("관리자");
-//		
-//		log.info("==================");
-//		log.info("@ChatController, GET Chat / Username : "+user.getUserName());
-		
+	public String moveChatPage(Model model) {		
 		List<ChatGroup> list=service.selectGroupList();		
 		model.addAttribute("list", list);
 		
@@ -39,8 +36,7 @@ public class ChatController {
 	
 	@RequestMapping(value="/chat/sendChat", produces="application/json")
 	@ResponseBody
-	public String insertChat(@RequestBody ChatGroup cg, Model m) {	
-		
+	public String insertChat(@RequestBody ChatGroup cg, Model m) {		
 		cg.setMaker("admin");
 		int result=service.insertChatGroup(cg);
 		
@@ -53,8 +49,20 @@ public class ChatController {
 	}
 	
     @RequestMapping("/GroupChatting.do")        
-    public String groupChattingEntry(@RequestParam int no, Model m) {
+    public String groupChattingEntry(@RequestParam int no, HttpSession session, Model m) {        
+        //String loginId=session.getId();
+    	String chatId=(String)session.getAttribute("chatId");
+    	String chatName=(String)session.getAttribute("chatName");
+    	
+    	System.out.println(chatName);   
+        
         m.addAttribute("no", no);
+        m.addAttribute("loginId", chatId);
+        
+        JSONObject json = new JSONObject();
+		//json.put("logedList", logedList);
+		//new Gson().toJson(json, response.getWriter());
+        
         return "chat/chattingEntry";
 	}
 	
