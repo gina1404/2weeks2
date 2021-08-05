@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.twoweeks.spring.overseas.model.vo.Item;
 import com.twoweeks.spring.overseas.model.vo.OverseasGr;
 @Repository
 public class CoivdOverseasDaoImpl implements CoivdOverseasDao{
@@ -34,7 +35,14 @@ public class CoivdOverseasDaoImpl implements CoivdOverseasDao{
 		return session.update("overseas.updateGrData", gg2);
 	}
 
+	@Override
+	public int insertOverseasList(SqlSession session, List<Item> list) {
+		// TODO Auto-generated method stub
+		return session.insert("overseas.insertOverseasList",list);
+	}
 
+
+	
 	
 	
 	

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<<<<<<< HEAD
+
 <c:set var="path" value="${pageContext.request.contextPath }"/>   
 <%-- 
 <section id="content">
@@ -32,10 +32,10 @@
 		
 
 
-=======
+
 <c:set var="path" value="${pageContext.request.contextPath }"/>  
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/sidebar.css"> 
->>>>>>> ccde0fcbadbf63532246a30927e223407fb46ae2
+
 
 	<nav id="sidebar">		
 		<div class="sidebar-default"> <!-- 스크롤 내려도 목록 고정되도록 -->
@@ -48,7 +48,7 @@
 					<div class="sidebar-list-hide">
 		            	<div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Covid Domestic</div>
+			                <div class="sidebar-title"><a href="${path }/covidUpdate/domestic.do">Covid Domestic</a></div>
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
@@ -122,7 +122,7 @@
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Free</div>
+			                <div class="sidebar-title"><a href="${path }/freeboard/boardList.do">Free</a></div>
 			            </div>
 		            </div>
 				</div>
@@ -177,4 +177,9 @@
 		$(this).children("div.sidebar-list").css("background", "#E1E6FF");
             
     });
+
     </script>
+
+
+    </script>
+

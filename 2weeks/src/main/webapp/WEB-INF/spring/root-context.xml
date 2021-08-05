@@ -12,10 +12,22 @@
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@rclass.iptime.org:1521:xe"/>
 
+
+
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
 		<property name="username" value="two"/>
 		<property name="password" value="weeks"/>
 
 
+
+>>>>>>> c94800a0082de09c5671766741534b2d07a2b9e7
 
 
 	</bean>

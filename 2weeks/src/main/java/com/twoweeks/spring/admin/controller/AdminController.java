@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.twoweeks.spring.admin.model.service.AdminService;
 import com.twoweeks.spring.admin.model.vo.Notice;
 import com.twoweeks.spring.admin.model.vo.noticeAttachment;
-import com.twoweeks.spring.covid.controller.CovidUpdateController;
 
 
 import lombok.extern.slf4j.Slf4j;

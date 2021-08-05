@@ -212,6 +212,16 @@
 	<version>2.10.1</version>
 </dependency>
 		
+		<!-- 썸네일 생성 기능 -->
+<dependency>
+    <groupId>net.coobird</groupId>
+    <artifactId>thumbnailator</artifactId>
+    <version>0.4.13</version>
+</dependency>
+
+
+
+		
 		<!-- 웹소켓 모듈 적용 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
