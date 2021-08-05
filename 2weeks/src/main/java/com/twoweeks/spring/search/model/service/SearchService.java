@@ -1,9 +1,11 @@
 package com.twoweeks.spring.search.model.service;
 
-import org.springframework.web.servlet.ModelAndView;
+import java.util.List;
+
+import com.twoweeks.spring.search.model.vo.SearchExternalNaver;
 
 public interface SearchService {
 
 	
-	ModelAndView searchExternalNaver(String searchKeyword);
+	List<SearchExternalNaver> searchExternalNaver(String searchKeyword);
 }

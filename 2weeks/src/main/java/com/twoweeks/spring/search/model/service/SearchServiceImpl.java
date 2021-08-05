@@ -1,19 +1,31 @@
 package com.twoweeks.spring.search.model.service;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.twoweeks.spring.search.model.dao.SearchDao;
+import com.twoweeks.spring.search.model.vo.SearchExternalNaver;
 
 @Service
 public class SearchServiceImpl implements SearchService{
@@ -27,7 +39,7 @@ public class SearchServiceImpl implements SearchService{
 	
 	//네이버 api 검색
 	@Override
-	public ModelAndView searchExternalNaver(String searchKeyword) {
+	public List<SearchExternalNaver> searchExternalNaver(String searchKeyword){
 		//json 형식으로 된 api 데이터를 받아옴
 			String clientId = "NwVLEfLT_EOPpqU895co"; //내 client ID
 			String clientSecret = "OTOx_LnRfO"; //내 client secret
@@ -44,11 +56,37 @@ public class SearchServiceImpl implements SearchService{
 	        requestHeaders.put("X-Naver-Client-Id", clientId);
 	        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 	        
+	        System.out.println(get(apiURL,requestHeaders));        //값 받아오는지 확인
 	        //데이터 파싱
 	        String responseBody = get(apiURL,requestHeaders);
-	        System.out.println(responseBody);
-		        
-		return null;
+	        JSONParser parser=new JSONParser();
+	        JSONObject obj=null;
+	        try {
+	        	obj=(JSONObject)parser.parse(responseBody);
+	        }catch(ParseException e) {
+	        	e.printStackTrace();
+	        }	        
+	        JSONArray item=(JSONArray)obj.get("items");
+	        //파싱한 데이터를 클래스 객체를 이용해서 리스트에 담음
+	        List<SearchExternalNaver> list=new ArrayList<>();
+	        for(int i=0; i<item.size(); i++) {
+	        	SearchExternalNaver result=new SearchExternalNaver();
+	        	JSONObject tmp=(JSONObject)item.get(i);
+	        	try { //Object->Date 변환
+	        		String postdate=(String)tmp.get("postdate"); 
+		        	SimpleDateFormat formatter=new SimpleDateFormat("yyyyMMdd");
+		        	Date date=formatter.parse(postdate);
+		        	result.setPostdate(date);
+	        	}catch(Exception e) {
+	        		e.printStackTrace();
+	        	}
+	        	result.setTitle((String)tmp.get("title"));
+	        	result.setLink((String)tmp.get("link"));
+	        	result.setDescription((String)tmp.get("description"));
+	        	result.setBloggername((String)tmp.get("bloggername"));
+	        	result.setBloggerlink((String)tmp.get("bloggerlink"));
+	        }
+		return list;
 	}	
 	private static String get(String apiUrl, Map<String, String> requestHeaders){ //네이버 검색용
         HttpURLConnection con = connect(apiUrl);

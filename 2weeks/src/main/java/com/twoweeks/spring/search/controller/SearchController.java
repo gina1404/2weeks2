@@ -23,7 +23,6 @@ public class SearchController {
 		mv.addObject("searchResult-community",1);
 		mv.addObject("serchResult-knowledgeIn",2);
 		mv.addObject("searchResult-external-naver", service.searchExternalNaver(searchKeyword));
-		mv.setViewName("search/searchResult");
 		return mv;
 	}
 
