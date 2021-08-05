@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.twoweeks.spring.common.CovidCenterExcelRead;
 import com.twoweeks.spring.covid.report.model.service.CovideReportListServiceImpl;
 import com.twoweeks.spring.covid.report.model.vo.Center;
 
@@ -25,9 +26,9 @@ public class CovidCenterController {
 //		CovidCenterExcelRead excelReader=new CovidCenterExcelRead();
 //		
 //		String path=req.getServletContext().getRealPath("/resources/upload/covidCenterList.xls");
-//		List<Center> list= excelReader.xlsToCenterList(path);		
+//		List<Center> centerList= excelReader.xlsToCenterList(path);		
 //		
-//		for(Center c : list) {
+//		for(Center c : centerList) {
 //			result=service.insertCenterList(c);
 //		}
 //		if(result>0) return "covidInfo/covidCenter";
@@ -35,7 +36,7 @@ public class CovidCenterController {
 		
 		//엑셀데이터 DB에서 불러오기
 		List<Center> list=service.selectCenterList();
-		//System.out.println(list);
+		
 		m.addAttribute("list", list);
 		
 		return "covidInfo/covidCenter";

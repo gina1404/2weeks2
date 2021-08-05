@@ -3,18 +3,16 @@ package com.twoweeks.spring.chat.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.twoweeks.spring.chat.model.service.ChatServiceImpl;
 import com.twoweeks.spring.chat.model.vo.ChatGroup;
-import com.twoweeks.spring.chat.model.vo.Member;
 
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -54,10 +52,10 @@ public class ChatController {
 		return "chat/chatting";
 	}
 	
-	@RequestMapping("/GroupChatting.do")
-	public String groupChattingEntry() {
-		
-		return "chat/chattingEntry";
+    @RequestMapping("/GroupChatting.do")        
+    public String groupChattingEntry(@RequestParam int no, Model m) {
+        m.addAttribute("no", no);
+        return "chat/chattingEntry";
 	}
 	
 	

@@ -10,7 +10,7 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
-<link href="${pageContext.request.contextPath }/resources/css/covidCenter.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/resources/css/covid/covidCenter.css" rel="stylesheet" />
 
 <section class="container">	
 	<h2>선별진료소 지도</h2>	

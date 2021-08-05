@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.twoweeks.spring.overseas.model.dao.CoivdOverseasDao;
+import com.twoweeks.spring.overseas.model.vo.Item;
 import com.twoweeks.spring.overseas.model.vo.OverseasGr;
 import com.twoweeks.spring.overseas.model.vo.Response;
 
@@ -54,8 +55,8 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		
 		String ex="20210731";
 		
-		//String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=9pnmHJmbkUpNSmMy%2FGw4uRkhWrEvJq1AIuZmpisXpZ2On4uPUVtQgWKq%2FNYBzMEccRQJLCmov7%2Brh%2BAbJQ4eyg%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+realtoday+"&endCreateDt="+realtoday;
-		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=9pnmHJmbkUpNSmMy%2FGw4uRkhWrEvJq1AIuZmpisXpZ2On4uPUVtQgWKq%2FNYBzMEccRQJLCmov7%2Brh%2BAbJQ4eyg%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+ex+"&endCreateDt="+ex;
+		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=9pnmHJmbkUpNSmMy%2FGw4uRkhWrEvJq1AIuZmpisXpZ2On4uPUVtQgWKq%2FNYBzMEccRQJLCmov7%2Brh%2BAbJQ4eyg%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+realtoday+"&endCreateDt="+realtoday;
+		//String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=9pnmHJmbkUpNSmMy%2FGw4uRkhWrEvJq1AIuZmpisXpZ2On4uPUVtQgWKq%2FNYBzMEccRQJLCmov7%2Brh%2BAbJQ4eyg%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+ex+"&endCreateDt="+ex;
 		
 		RestTemplate restTemplate = new RestTemplate(); //API를 호출하기 위한 클래스
 		
@@ -122,6 +123,14 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		return dao.updateGrData(session,gg2);
 	}
 
+
+	@Override
+	public int insertOverseasList(List<Item> list) {
+		// TODO Auto-generated method stub
+		return dao.insertOverseasList(session,list);
+	}
+
+	
 
 
 	

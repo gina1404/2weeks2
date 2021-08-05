@@ -13,14 +13,14 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
-<link href="${pageContext.request.contextPath }/resources/css/covidReportList.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/resources/css/covid/covidReportList.css" rel="stylesheet" />
 
 <section class="container">
 	<h4>보도자료</h4>
 	
 	<p>총 <span>${totalContents }</span>건</p>	
 	<table id="reportTab" class="striped">
-		<tr id="reportTh">
+		<tr>
 			<th>번호</th>
 			<th>제목</th>
 			<th>담당</th>
