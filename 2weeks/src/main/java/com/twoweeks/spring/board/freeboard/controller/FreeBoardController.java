@@ -195,7 +195,7 @@ public class FreeBoardController {
 			msg= e.getMessage();
 		}
 		mv.addObject("msg",msg);
-		mv.addObject("loc","/freeBoard/boardList.do");
+		mv.addObject("loc","/freeboard/boardList.do");
 		mv.addObject("no", request.getParameter("no"));
 		mv.setViewName("common/msg");
 		return mv;
