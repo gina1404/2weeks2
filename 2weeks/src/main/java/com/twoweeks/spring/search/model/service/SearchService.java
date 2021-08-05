@@ -1,11 +1,10 @@
 package com.twoweeks.spring.search.model.service;
 
 import java.util.List;
+import java.util.Map;
 
-import com.twoweeks.spring.search.model.vo.SearchExternalNaver;
 
 public interface SearchService {
-
 	
-	List<SearchExternalNaver> searchExternalNaver(String searchKeyword);
+	List<Map<String,String>> searchExternalNaver(String searchKeyword);
 }

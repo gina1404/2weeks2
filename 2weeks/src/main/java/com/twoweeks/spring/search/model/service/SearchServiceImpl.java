@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.twoweeks.spring.search.model.dao.SearchDao;
-import com.twoweeks.spring.search.model.vo.SearchExternalNaver;
 
 @Service
 public class SearchServiceImpl implements SearchService{
@@ -39,7 +38,7 @@ public class SearchServiceImpl implements SearchService{
 	
 	//네이버 api 검색
 	@Override
-	public List<SearchExternalNaver> searchExternalNaver(String searchKeyword){
+	public List<Map<String,String>> searchExternalNaver(String searchKeyword){
 		//json 형식으로 된 api 데이터를 받아옴
 			String clientId = "NwVLEfLT_EOPpqU895co"; //내 client ID
 			String clientSecret = "OTOx_LnRfO"; //내 client secret
@@ -56,7 +55,8 @@ public class SearchServiceImpl implements SearchService{
 	        requestHeaders.put("X-Naver-Client-Id", clientId);
 	        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 	        
-	        System.out.println(get(apiURL,requestHeaders));        //값 받아오는지 확인
+//	        System.out.println(get(apiURL,requestHeaders));        //값 받아오는지 확인
+	        
 	        //데이터 파싱
 	        String responseBody = get(apiURL,requestHeaders);
 	        JSONParser parser=new JSONParser();
@@ -67,25 +67,39 @@ public class SearchServiceImpl implements SearchService{
 	        	e.printStackTrace();
 	        }	        
 	        JSONArray item=(JSONArray)obj.get("items");
-	        //파싱한 데이터를 클래스 객체를 이용해서 리스트에 담음
-	        List<SearchExternalNaver> list=new ArrayList<>();
+	        
+	        //파싱한 데이터를 리스트 맵에 담음
+	        List<Map<String,String>> list = new ArrayList<>(); //값을 담을 list 생성
+//	        List<SearchExternalNaver> list=new ArrayList<>(); //객체에 담는 것에서 map으로 바꿈
+	        
 	        for(int i=0; i<item.size(); i++) {
-	        	SearchExternalNaver result=new SearchExternalNaver();
+	        	Map<String, String> map = new HashMap<>();
+//	        	SearchExternalNaver result=new SearchExternalNaver();
 	        	JSONObject tmp=(JSONObject)item.get(i);
-	        	try { //Object->Date 변환
-	        		String postdate=(String)tmp.get("postdate"); 
-		        	SimpleDateFormat formatter=new SimpleDateFormat("yyyyMMdd");
-		        	Date date=formatter.parse(postdate);
-		        	result.setPostdate(date);
-	        	}catch(Exception e) {
-	        		e.printStackTrace();
-	        	}
-	        	result.setTitle((String)tmp.get("title"));
-	        	result.setLink((String)tmp.get("link"));
-	        	result.setDescription((String)tmp.get("description"));
-	        	result.setBloggername((String)tmp.get("bloggername"));
-	        	result.setBloggerlink((String)tmp.get("bloggerlink"));
-	        }
+	        	map.put("postdate",(String)tmp.get("postdate"));
+	        	map.put("title",(String)tmp.get("title"));
+	        	map.put("link",(String)tmp.get("link"));
+	        	map.put("description",(String)tmp.get("description"));
+	        	map.put("bloggername",(String)tmp.get("bloggername"));
+	        	map.put("bloggerlink",(String)tmp.get("bloggerlink"));
+	        	list.add(map);
+	        	
+	        	//객체에 담는 것에서 map으로 바꿈
+//	        	try { //Object->Date 변환
+//	        		String postdate=(String)tmp.get("postdate"); 
+//		        	SimpleDateFormat formatter=new SimpleDateFormat("yyyyMMdd");
+//		        	Date date=formatter.parse(postdate);
+//		        	result.setPostdate(date);
+//	        	}catch(Exception e) {
+//	        		e.printStackTrace();
+//	        	}
+//	        	result.setTitle((String)tmp.get("title"));
+//	        	result.setLink((String)tmp.get("link"));
+//	        	result.setDescription((String)tmp.get("description"));
+//	        	result.setBloggername((String)tmp.get("bloggername"));
+//	        	result.setBloggerlink((String)tmp.get("bloggerlink"));
+//	        	list.add(result);
+	        }	        
 		return list;
 	}	
 	private static String get(String apiUrl, Map<String, String> requestHeaders){ //네이버 검색용
