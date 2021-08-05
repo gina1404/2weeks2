@@ -1,17 +1,16 @@
 package com.twoweeks.spring.board.freeboard.controller;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -148,18 +147,27 @@ public class FreeBoardController {
 	
 	
 	@RequestMapping("/freeboard/update")
-	public ModelAndView update(ModelAndView mv,FreeBoard fb,@RequestParam("article_file") MultipartFile[] upload, HttpServletRequest request) {
+	public ModelAndView update(ModelAndView mv,FreeBoard fb,@RequestParam("article_file") MultipartFile[] upload, HttpServletRequest request,  MultipartFile[] file) {
 		log.info("update 수정좀하자");
 		
-		String path = request.getServletContext().getRealPath("/resources/upload"); //resources/upload 경로 설정하여 path에 저장
+		for(int i=0; i<file.length; i++) {
+            log.info("================== file start ==================");
+            log.info("파일 이름: "+file[i].getName());
+            log.info("파일 실제 이름: "+file[i].getOriginalFilename());
+            log.info("파일 크기: "+file[i].getSize());
+            log.info("content type: "+file[i].getContentType());
+            log.info("================== file   END ==================");
+
+		}
+		
+		String path = request.getServletContext().getRealPath("/resources/upload/freeboard/"); //resources/upload 경로 설정하여 path에 저장
 		File dir = new File(path); //폴더
 		String reName="";
 		if(!dir.exists()) {
 			dir.mkdirs();
 		}
-		System.out.println("이거 돌아가니");
 		
-		for(MultipartFile f : upload) {
+		for(MultipartFile f : file) {
 			//파일 있니
 			if(!f.isEmpty()) {
 				String oriFileName = f.getOriginalFilename();
@@ -170,7 +178,9 @@ public class FreeBoardController {
 				reName = front+sdf.format(System.currentTimeMillis())+"_"+rndNum+ext;
 				try {
 					f.transferTo(new File(path+reName));
-					fb.getAttachments().add(PostAttachment.builder().atch_Ori(oriFileName).atch_New(reName).build());
+					List<PostAttachment> list = fb.getAttachments();
+					list.add(PostAttachment.builder().atch_Ori(oriFileName).atch_New(reName).build());
+					//fb.getAttachments().add(PostAttachment.builder().atch_Ori(oriFileName).atch_New(reName).build());
 				}catch(IOException e) {
 					e.printStackTrace();
 				}
@@ -178,18 +188,19 @@ public class FreeBoardController {
 		  }
 		String msg ="등록성공";
 		try {
+			log.info("================== update start ==================");
 			service.update(fb);
 		}catch(Exception e) {
-			FileUtils.deleteQuietly(new File(path+reName));  //저장된 현재 파일 삭제
+			//FileUtils.deleteQuietly(new File(path+reName));  //저장된 현재 파일 삭제
 			msg= e.getMessage();
 		}
 		mv.addObject("msg",msg);
-		mv.addObject("loc","/freeboard/readView");
+		mv.addObject("loc","/freeBoard/boardList.do");
 		mv.addObject("no", request.getParameter("no"));
-		mv.setViewName("freeBoard/readView");
+		mv.setViewName("common/msg");
 		return mv;
 		}
-		
+	
 	
 	
 	@RequestMapping("/freeboard/updateBoard.do")

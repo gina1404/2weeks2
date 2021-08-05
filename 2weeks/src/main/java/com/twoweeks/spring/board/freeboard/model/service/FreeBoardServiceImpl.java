@@ -99,7 +99,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	public int update(FreeBoard fb) throws Exception {
 		try {
 			int result = dao.update(session, fb);
-			log.debug("게시글 번호 : " + fb.getPost_Sq());
+			log.info("게시글 번호 : " + fb.getPost_Sq());
 			int boardNo=fb.getPost_Sq();
 			if(result>0) {
 				List<PostAttachment> attachments = fb.getAttachments();

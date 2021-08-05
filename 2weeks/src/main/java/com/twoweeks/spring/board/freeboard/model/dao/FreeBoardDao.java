@@ -11,15 +11,6 @@ import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
 
 public interface FreeBoardDao {
 
-	/*
-	 * int create(FreeBoard freeBoard) throws Exception;
-	 * 
-	 * FreeBoard read(int post_Sq) throws Exception;
-	 * 
-	 * void update(FreeBoard freeBoard) throws Exception;
-	 * 
-	 * void delete(int post_Sq) throws Exception;
-	 */
 	
 
 	int insertBoard(FreeBoard b, SqlSession session);
@@ -36,9 +27,9 @@ public interface FreeBoardDao {
 		
 	public FreeBoard read(SqlSession session, int bno);
 	
-	int update(SqlSession session, FreeBoard fb); 
-	
 	int delete(SqlSession session, int no);
+	
+	int update(SqlSession session, FreeBoard fb); 
 
 	int updateAttachment(SqlSession session, PostAttachment a);
 	

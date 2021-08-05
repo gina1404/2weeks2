@@ -36,15 +36,19 @@
 	</selectKey>
 	</insert>
 	
-	
 	<update id="update" parameterType="freeboard">
 		UPDATE FREEBOARD SET POST_TITLE = #{title}, POST_CONTENT = #{content}, CATEGORY = #{category}
-		WHERE POST_SQ =#{no}
+		WHERE POST_SQ =#{post_Sq}
 	</update>
 	
 	<delete id="delete" parameterType="int">
 	DELETE FROM FREEBOARD WHERE BNO =#{no}
 	</delete>
+	
+	<insert id="updateAttachment">
+		INSERT INTO POST_ATCH VALUES(POST_ATCH_SEQ.NEXTVAL, #{post_Sq}, #{atch_Ori}, #{atch_New}, SYSDATE)
+	</insert>
+	
 	
 	<resultMap type="freeboard" id="boardMap">
 		<id column="post_Sq" property="post_Sq"/>

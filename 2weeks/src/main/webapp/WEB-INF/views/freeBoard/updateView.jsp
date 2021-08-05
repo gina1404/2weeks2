@@ -13,8 +13,7 @@
 <section class="content">
 <div class="container" id="">
     <div class="content" style="width: 70%">
-     <form name="boardFrm"  id="dataForm" onsubmit="return registerAction();" enctype="multipart/form-data">
-        
+     <form name="boardFrm"  id="dataForm" method="post" action="${path }/freeboard/update" enctype="multipart/form-data">
         <div class="row justify-content-md-center">
             <div class="col-sm-9">
             <div class="input-group mb-3">
@@ -45,7 +44,12 @@
             </div> 
       </div>
     <div>
-	<input type="file"  id="attach" multiple="multiple" style="border: 2px solid #ddd; outline: none;">
+	<div class="form-group" id="file-list">
+        <a href="#this" onclick="addFile()">파일추가</a>
+        <div class="file-group">
+            <input type="file" name="file"><a href='#this' name='file-delete'>삭제</a>
+        </div>
+    </div>
 	 <label for="attach"><i class="far fa-file-image"/>파일추가</label>
 	<span style="font-size: 14px; color: gray;">※첨부파일은 최대 5개까지 등록이가능합니다.</span>
 	</div>
@@ -56,9 +60,9 @@
       <div class="row justify-content-md-center">
         <input type="hidden" name="no" value="${list.post_Sq}"/>
         <input type="submit" class="m-3 btn btn-outline-secondary"   value="수   정" style="width: 20%; font-weight: bold">
-        <input type="submit" class="m-3 btn btn-outline-secondary" id="back"   value="취   소" style="width: 20%; font-weight: bold">
         </div>
      </form>
+        <input type="submit" class="m-3 btn btn-outline-secondary" id="back"   value="취   소" style="width: 20%; font-weight: bold">
   </div>
   
 
@@ -69,82 +73,27 @@
 
  
 <script>
-//해당 파일을 가져와서 배열에 담아주고 input file은 초기화 해준다.
-//multiple 특성상 중복파일은 업로드가 되지 않기에 최기화를 해야 중복파일도 업데이트가 가능띠
-	$(document).ready(function(){
-		$("#attach").on("change",fileCheck);
-	});
-	
-	$(function () {
-		$("#btn-upload").click(function(e){
-			e.preventDefault();
-			$("#attach").click();
-		});
-	});
 
-	var fileCount = 0;
-	var totalCount = 5;
-	var fileNum = 0;
-	var content_files = new Array();
-	
-	function fileCheck(e){
-		var files = e.target.files;
-		var filesArr =Array.prototype.slice.call(files);
-		
-		if(fileCount+filesArr.length> totalCount){
-			alert('파일은 최대 ' + totalCount + '개까지 업로드 할 수 있습니다.');
-			return;
-		}else{
-			fileCount = fileCount + filesArr.length;
-		}
-		
-		//각각의 파일 배열담기 및 기타
-		filesArr.forEach(function(f){
-			var reader = new FileReader();
-			
-		reader.onload = function (e) {
-			content_files.push(f);
-			$("#articlefileChange").append('<div id="file'+ fileNum + '" onclick="fileDelete(\'file' + fileNum + '\')">'+
-			'<font style="font-size:16px">' + f.name + '</font>' 
-			+'<img src ="${path }/resources/images/minus-5-xxl.png" style="width:20px; height:Auto; vertical-align:middle; cursor: pointer;"/>'+
-			'</div>'
-			);
-			fileNum++;
-		};
-		
-		reader.readAsDataURL(f);
+
+$(document).ready(function(){
+	$("a[class='file-delete']").on("click",function(e){
+		e.preventDefault();
+		deleteFile($(this));
 	});
-		console.log(content_files);
-		//초기화
-		$("#attach").val("");
+})
+
+	function addFile(){
+	let str = "<div class='file-group'><input type='file' multiple='multiple' name='file'><a href='#this' name='file-delete'>삭제</a></div>";
+	$("#file-list").append(str);
+	$("a[name='file-delete']").on("click",function(e){
+		e.preventDefault();
+		deleteFile($(this));
+	});
 		
-}
-	//파일 부분 삭제 함수
-	
-	function fileDelete(fileNum){
-		var no = fileNum.replace(/[^0-9]/g,"");
-		content_files[no].is_delete = true;
-		$('#' + fileNum).remove();
-		fileCount --;
-		console.log(content_files);
+	function deleteFile(obj){
+		obj.parent().remove();
 	}
-	
-	//폼 submit 로직
-	function registerAction(){
-		var form = $("form")[0];
-		var formData = new FormData(form);
-		for (let i = 0; i<content_files.length; i++){
-			//삭제 안한 것만 담는다.
-			if(!content_files[i].is_delete){
-				formData.append("article_file", content_files[i]);
-				location.href="${path}/freeboard/update";
-				
-			}
-		}
-		
-		//파일 업로드 multiple ajax 처리
-	
-	}	
+}
 	
 	CKEDITOR.replace("content",{
 		height : "300",
@@ -153,10 +102,7 @@
 	});
 	
 	
-	
-	$("#back").on("click",function(){
-		history.back();
-	});
+
 					
 </script>
 	
