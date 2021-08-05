@@ -90,7 +90,6 @@ public class FreeBoardController {
 	if(!dir.exists()) {
 		dir.mkdirs();
 	}
-	System.out.println("이거 돌아가니");
 	
 	for(MultipartFile f : upload) {
 		//파일 있니
@@ -135,13 +134,14 @@ public class FreeBoardController {
 	}
 	
 	
-	@PostMapping("/freeboard/delete")
+	@RequestMapping("/freeboard/delete.do")
 	public String delete(int no) {
 		log.info("delete");
 		
+		System.out.println(no);
 		service.delete(no);
 		
-		return "redirect:/freeBoard/boardList";
+		return "redirect:/freeboard/boardList.do";
 	}
 	
 	
@@ -194,13 +194,16 @@ public class FreeBoardController {
 			//FileUtils.deleteQuietly(new File(path+reName));  //저장된 현재 파일 삭제
 			msg= e.getMessage();
 		}
-		mv.addObject("msg",msg);
-		mv.addObject("loc","/freeboard/boardList.do");
-		mv.addObject("no", request.getParameter("no"));
-		mv.setViewName("common/msg");
+		//수정후에 수정한 게시물 페이지에 있어야한다. 어떻게 해야할까?
+		//readView로 보내보자
+		mv.addObject("no", request.getParameter("post_Sq"));
+		/*
+		 * mv.addObject("msg",msg); mv.addObject("loc","/freeboard/readView"); common/msg에 넣어버리면 location.replace라서 작동안됨.
+		 */
+		//redirect로 수정한 게시물을 보여준다.
+		mv.setViewName("redirect:/freeboard/readView");
 		return mv;
 		}
-	
 	
 	
 	@RequestMapping("/freeboard/updateBoard.do")

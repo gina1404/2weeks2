@@ -42,7 +42,7 @@
 	</update>
 	
 	<delete id="delete" parameterType="int">
-	DELETE FROM POST WHERE BNO =#{no}
+	DELETE FROM POST WHERE POST_SQ = #{no}
 	</delete>
 	
 	<insert id="updateAttachment">

@@ -82,7 +82,7 @@ font-size : 12px;
     <div class="inner">
       <span class="absolute">
       <button type="submit" class="update_btn">수정</button>
-	<button type="submit" class="delete_btn">삭제</button>
+	<input type="button" value="삭제" onclick="del(${list.post_Sq });">
 	<button type="submit" class="list_btn">목록</button>	
       </span>
     </div>
@@ -96,6 +96,15 @@ font-size : 12px;
 </section>
 
 <script>
+	function del(no) {
+		console.log(no);
+		let chk = confirm("정말 삭제하시겠습니까?");
+		if(chk){
+			location.href="${path}/freeboard/delete.do?no="+no;
+		}
+	}
+
+
 	function backList(){
 	window.history.back();	
 		
