@@ -20,7 +20,7 @@
 <body style="margin:0; padding:0;">
 	<header id="header">
 		<!-- 로고 -->
-		<div class="header-logo-area"><a class="header-logo" href="${path }/home.do">2weeks</a></div>
+		<div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
 				
 		<!-- 검색 -->
 		<div class="header-search-area">

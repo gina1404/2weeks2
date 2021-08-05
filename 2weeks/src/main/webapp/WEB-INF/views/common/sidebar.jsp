@@ -10,20 +10,23 @@
 				<div class="wrap_sub_list"> 
 					<div class="sidebar-list">
 						<img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
-						<a class="" href="${path }/covidUpdate/domestic.do">
+						<a class="" href="${path }/covid/domestic.do">
 							<div class="sidebar-title">Covid-19 updates</div>
 						</a>
 					</div> 
 					<div class="sidebar-list-hide">
 		            	<div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <a class="" href="${path }/covidUpdate/domestic.do">
+			                <a class="" href="${path }/covid/domestic.do">
 			                	<div class="sidebar-title">Covid Domestic</div>			                
 							</a>			                
+
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Vaccination</div>
+			                <div class="sidebar-list">
+			                	<div class="sidebar-title">Vaccination</div>
+							</div>
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
@@ -93,7 +96,7 @@
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Free</div>
+			                <div class="sidebar-title"><a href="${path }/freeboard/boardList.do">Free</a></div>
 			            </div>
 		            </div>
 				</div>
@@ -110,7 +113,7 @@
 						<a class="" href="${path }/chatting.do">
 		                	<div class="sidebar-title">chatting</div>
 		                </a>						
-					</div>
+					</div>					
 				</div>
 				
 				<!-- 챗봇 -> 플러그인으로 변경 -->
@@ -146,7 +149,6 @@
 		$(this).children("div.sidebar-list-hide").slideUp("slow");  
 		$(this).css("background", "#E1E6FF");
 		$(this).children("div.sidebar-list").css("background", "#E1E6FF");
-            
-    });	
-   
+    });
+
     </script>

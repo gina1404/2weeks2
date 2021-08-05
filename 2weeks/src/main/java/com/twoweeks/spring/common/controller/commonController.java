@@ -6,8 +6,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class commonController {
 
-	@RequestMapping("/home.do")
-	public String goHome() {
-		return "index";
-	}
 }
