@@ -22,15 +22,17 @@
 		<!-- 로고 -->
 		<div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
 				
-		<!-- 검색 -->
+		<!-- 키워드 검색 -->
 		<div class="header-search-area">
-			<input type="text" class="header-search">
-			<img class="icon-header"src="${path }/resources/images/icons/search.svg"/>
+			<form name="searchFrm" method="get" action="${path }/searchResult.do""  style="display:inline-block;"> <!-- enctype="multipart/form-data" -->
+				<input id="searchKeyword" type="text" name="searchKeyword" class="header-search" style="display:inline-block;">
+				<button id="searchKeywordSubmit" type="submit" style="display:inline-block;"><img class="icon-header" src="${path }/resources/images/icons/search.svg"/></button>
+			</form>
 		</div>
 	            
 		<!-- 기본 아이콘 -->
 		<div class="header-icon-area">
-			<div>
+			<div> <!-- 구분선 -->
 				<img class="header-divider" src="${path }/resources/images/icons/divider-virtical.svg"/>
 			</div>
 			<div class="header-icon">
@@ -57,5 +59,23 @@
 	                <div class="header-profile-photo">
 	                	<img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
 	                </div>
-	            </div>
+	            </div>	   
 	</header>     
+
+	<!-- 검색어가 입력되지 않을 경우 경고 알림 -->
+<script>
+	$(document).ready(function(){
+		$("#searchKeywordSubmit").click(function(){
+			if($("#searchKeyword").val()==""){ //검색어가 null
+				alert('검색어를 입력해 주세요.');
+				$("#searchKeyword").focus();
+				return false;
+			}else if($("#searchKeyword").val().length<2){ //검색어가 2글자 미만
+				alert('두 글자 이상 입력해 주세요.');
+				$("#searchKeyword").val("");
+				$("#searchKeyword").focus();
+				return false;
+			}
+		})
+	});	
+</script>

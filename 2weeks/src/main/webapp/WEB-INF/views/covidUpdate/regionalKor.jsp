@@ -11,7 +11,7 @@
 		<div style="display:flex;justify-content:space-around">
 			<button class="regionalKor-button" onclick="fn_selectButton1()">지도</button>
 			<button class="regionalKor-button" onclick="fn_selectButton2()">지역별 표</button>
-		</div>
+		</div>		
 		<!-- 지역별 현황 지도 영역 -->
 		<div id="regionalKor-map" style="border:1.5px solid yellow;"></div>		
 		<!-- 지역별 현황 표 영역 -->
@@ -105,6 +105,7 @@ $("#regionalKor").each(function(){
 					.attr('transform', render) //render 값으로 위치를 조절함
 					.attr('id', function(d) { return 'label-' + d.properties.name_eng;}) //id 추가
             }); //기본 지도 그리기 끝             
+            $("#regionalKor").append("업데이트 일시: "+data[0].stdDay); //업데이트 일시 추가
             
           //텍스트 위치 조절
 		    function render(d) {

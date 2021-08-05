@@ -207,20 +207,17 @@
 		
 		<!-- xmlMapper -->
 		<dependency>
-	<groupId>com.fasterxml.jackson.dataformat</groupId>
-	<artifactId>jackson-dataformat-xml</artifactId>
-	<version>2.10.1</version>
-</dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>2.10.1</version>
+		</dependency>
 		
 		<!-- 썸네일 생성 기능 -->
-<dependency>
-    <groupId>net.coobird</groupId>
-    <artifactId>thumbnailator</artifactId>
-    <version>0.4.13</version>
-</dependency>
-
-
-
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.13</version>
+		</dependency>
 		
 		<!-- 웹소켓 모듈 적용 -->
 		<dependency>
@@ -255,17 +252,12 @@
 		    <version>6.2.0.Final</version>
 		</dependency>
 		
-    
 		<dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
-
-		
-
-
-		
+        
 		<!-- 뉴스 크롤링 -->
 		<dependency>
 		    <groupId>org.jsoup</groupId>
