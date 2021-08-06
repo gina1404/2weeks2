@@ -76,22 +76,21 @@ public class FreeBoardController {
 	
 	
 	
-	@PostMapping("/freeboard/fileupload.do") 
-	public ModelAndView upload(FreeBoard b, @RequestParam("article_file") MultipartFile[] upload, ModelAndView mv,HttpServletResponse response, HttpServletRequest req) throws IOException {
-	
-		log.debug("");
-		for(int i = 0; i<upload.length; i++) {
-			log.debug("fileName : " + upload[i].getOriginalFilename());
-			log.debug("fileName : " + upload[i].getSize());
+	@PostMapping("/freeboard/writeEnd.do") 
+	public ModelAndView writeEnd(FreeBoard b, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file, ModelAndView mv,HttpServletResponse response, HttpServletRequest req) throws IOException {
+		log.info("freeboard : "+ b.toString());
+		for(int i = 0; i<file.length; i++) {
+			log.info("fileName : " + file[i].getOriginalFilename());
+			log.info("fileName : " + file[i].getSize());
 		}
 		
-	String path = req.getServletContext().getRealPath("/resources/upload"); //resources/upload 경로 설정하여 path에 저장
+	String path = req.getServletContext().getRealPath("/resources/upload/freeboard/"); //resources/upload 경로 설정하여 path에 저장
 	File dir = new File(path); //폴더
 	if(!dir.exists()) {
 		dir.mkdirs();
 	}
 	
-	for(MultipartFile f : upload) {
+	for(MultipartFile f : file) {
 		//파일 있니
 		if(!f.isEmpty()) {
 			String oriFileName = f.getOriginalFilename();
@@ -124,8 +123,7 @@ public class FreeBoardController {
 	@RequestMapping("/freeboard/readView")
 	public String read(FreeBoard fb, Model model,  HttpServletRequest request) {
 		log.info("read");
-		int no = Integer.parseInt(request.getParameter("no"));
-		System.out.println(no);
+		log.info("list" + fb.getAttachments());
 		fb.setPost_Sq(Integer.parseInt(request.getParameter("no")));
 				
 		model.addAttribute("list", service.read(fb.getPost_Sq()));
@@ -197,11 +195,11 @@ public class FreeBoardController {
 		//수정후에 수정한 게시물 페이지에 있어야한다. 어떻게 해야할까?
 		//readView로 보내보자
 		mv.addObject("no", request.getParameter("post_Sq"));
-		/*
-		 * mv.addObject("msg",msg); mv.addObject("loc","/freeboard/readView"); common/msg에 넣어버리면 location.replace라서 작동안됨.
-		 */
+		log.info("list" + fb.getAttachments());
+		 mv.addObject("msg",msg); mv.addObject("loc","/freeboard/readView"); //common/msg에 넣어버리면 location.replace라서 작동안됨.
+		 
 		//redirect로 수정한 게시물을 보여준다.
-		mv.setViewName("redirect:/freeboard/readView");
+		mv.setViewName("common/msg");
 		return mv;
 		}
 	
@@ -222,6 +220,11 @@ public class FreeBoardController {
 		return "freeBoard/updateView";
 				
 		
+	}
+	
+	@RequestMapping("/freeboard/write.do")
+	public String write() {
+		return "freeBoard/write";
 	}
 	
 }

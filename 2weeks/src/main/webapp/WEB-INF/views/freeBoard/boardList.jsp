@@ -93,6 +93,12 @@ text-decoration: none;
 				</div>
 			</c:forEach>
 			</div>
+			<div>
+			
+				<button id="btn-add" class="btn btn-outline-success" onclick="location.assign('${path}/freeboard/write.do')">
+								글쓰기
+		</button>
+			</div>
 		</div>
 		<div id="pagebar-container" class="m-5">${pageBar }</div>
 

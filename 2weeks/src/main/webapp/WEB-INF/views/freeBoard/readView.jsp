@@ -74,7 +74,18 @@ font-size : 12px;
 		<div class="row text-center" style="width: 100% ">
 			<div style="width: 100%; float: none; margin: 0 auto;">
 				<button class="btn btn btn-danger btn-round" style="width: 100px; margin-top: 300px;">추천 수</button>
-				<div></div>
+				<div>
+				${list.attachments }
+					<c:if test="${!empty list.attachments }">
+					<button type="button">버튼</button>
+						<c:forEach var="a"	items="${list.attachments }" varStatus="vs">
+							<button type="button" class="btn btn-outline-success"
+							onclick="location.replace('${path}/freeboard/fileDownload.do?=${a.atch_Ori }&rename=${a.atch_New }')">
+								첨부파일 ${vs.count } - ${a.atch_Ori }
+							</button>
+							</c:forEach>
+						</c:if>
+				</div>
 			</div>
 		</div>
 		<div class="outer">

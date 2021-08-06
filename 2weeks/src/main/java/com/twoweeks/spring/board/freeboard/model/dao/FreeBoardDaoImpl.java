@@ -25,22 +25,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		return session.selectOne("freeboard.totalBoardCount");
 	}
 
-	/*
-	 * @Override public int create(FreeBoard freeBoard) throws Exception { return
-	 * session.insert("freeboard.create", freeBoard);
-	 * 
-	 * }
-	 * 
-	 * @Override public FreeBoard read(int post_Sq) throws Exception { return
-	 * session.selectOne("freeboard.read",post_Sq); }
-	 * 
-	 * @Override public void update(FreeBoard freeBoard) throws Exception {
-	 * session.update("freeboard.update", freeBoard); }
-	 * 
-	 * @Override public void delete(int post_Sq) throws Exception {
-	 * session.delete("freeboard.delete",post_Sq); }
-	 */
-
 
 	@Override
 	public int insertBoard(FreeBoard b, SqlSession session) {
