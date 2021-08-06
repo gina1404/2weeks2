@@ -102,7 +102,7 @@
 				</div>
 								
 				<!-- 구분선 -->
-				<div class="wrap_sub_list" style="height:fit-contents;">
+				<div class="wrap_sidebar-divider" style="height:fit-contents;">
 					<img class="sidebar-divider" src="${path }/resources/images/icons/divider-horizontal.svg"/>
 				</div>
 	
@@ -143,12 +143,20 @@
     $(".wrap_sub_list").hover(function(){  
         $(this).children("div.sidebar-list-hide").slideDown("slow").siblings("div.sidebar-list-hide").slideUp("slow"); 
         $(this).css("background", "#7879F160");
-        $(this).children("div.sidebar-list").css("background", "#7879F160");
+        $(this).children("div.sidebar-list").css("background", "#7879F160");        
     },  
     function(){  
 		$(this).children("div.sidebar-list-hide").slideUp("slow");  
 		$(this).css("background", "#E1E6FF");
 		$(this).children("div.sidebar-list").css("background", "#E1E6FF");
     });
+	
+	/* list에 hover될 경우 색이 어두워짐 */
+	$(".sidebar-list-sub").hover(function(){
+		$(this).addClass("overlay");
+	},
+	function(){
+		$(this).removeClass("overlay");
+	});
 
     </script>
