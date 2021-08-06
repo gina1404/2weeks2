@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.twoweeks.spring.admin.model.dao.AdminDao;
 import com.twoweeks.spring.admin.model.vo.Notice;
 import com.twoweeks.spring.admin.model.vo.noticeAttachment;
+import com.twoweeks.spring.member.model.vo.Member;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -34,6 +35,12 @@ public class AdminServiceImpl implements AdminService{
 		}else return 0;
 		return 1;
 	}
+	@Override
+	public List<Member> selectMemberList() {
+		// TODO Auto-generated method stub
+		return dao.selectMemberList(session);
+	}
+	
 	
 	
 }

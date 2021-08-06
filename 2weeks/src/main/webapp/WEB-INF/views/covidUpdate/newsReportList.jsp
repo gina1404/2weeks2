@@ -15,12 +15,20 @@
 
 <link href="${pageContext.request.contextPath }/resources/css/covid/covidReportList.css" rel="stylesheet" />
 
+<<<<<<< Updated upstream
 <section class="container">
+=======
+<main>
+>>>>>>> Stashed changes
 	<h4>보도자료</h4>
 	
 	<p>총 <span>${totalContents }</span>건</p>	
 	<table id="reportTab" class="striped">
+<<<<<<< Updated upstream
 		<tr>
+=======
+		<tr id="reportTh">
+>>>>>>> Stashed changes
 			<th>번호</th>
 			<th>제목</th>
 			<th>담당</th>
@@ -41,7 +49,11 @@
 	<div id="reportPageBar">
 		${pageBar }
 	</div>
+<<<<<<< Updated upstream
 </section>
+=======
+</main>
+>>>>>>> Stashed changes
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
