@@ -61,9 +61,9 @@
 	</header>     
 
 	<!-- 키워드 검색  -->
-	<script>	
+	<script>			
 		/* 검색 함수 선언 */
-		function fn_searchKeyword(){
+		function fn_searchKeyword(){		
 			// 검색어가 입력되지 않을 경우 경고 알림					
 			if($("#searchKeyword").val()==""){ //검색어가 null
 				alert('검색어를 입력해 주세요.');
@@ -75,7 +75,15 @@
 				$("#searchKeyword").focus();
 				return false;
 			}else{ //검색어를 컨트롤러에 전달
-				location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();
+				var currentUrl=document.location.href; //현재 페이지 url을 받아옴 -> http://localhost:9090/ 이 부분을 잘라냄
+				currentUrl=currentUrl.substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")+1); 
+				
+				//현재 페이지 url을 매핑 주소를 비교해 분기 처리
+				if(currentUrl=='${path}/covidUpdate/report.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
+					console.log("다른 주소임");
+				}else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
+					location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();
+				}
 			}
 		}
 		

@@ -8,27 +8,27 @@
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <section class="container">	
 	<!-- 커뮤니티 검색 결과 -->
-	<section id="searchResult-community" style="width:100%; border:1px solid green;" >
+	<section id="searchResult-community" style="width:80%; border:1px solid green; display:inline-block;" >
 		<div>${searchResultCommunity}</div>		
 		<div><a>community 더 보기 -> </a></div>
 	</section>
 	
 	<!-- 지식인 검색 결과 -->
-	<section id="searchResult-knowledgeIn" style="width:100%; border:1px solid green;" >
+	<section id="searchResult-knowledgeIn" style="width:80%; border:1px solid green;" >
 			<div>${searchResultKnowledgeIn}</div>
 			<div><a>지식인 더 보기 -> </a></div>
 	</section>
 	
 	<!-- 외부 검색 결과 -->
-	<section id="serchResult-external" style="width:100%; border:1px solid green; display:inline;" >
+	<section id="serchResult-external" style="width:80%; border:1px solid green; display:inline-block;" >
 		외부 검색 결과	
 		<c:forEach var="list" items="${searchResultExternalNaver}">
-          <div style="display:inline;">${map.postdate }</div>
-				<div style="display:inline;">${list.bloggername }</div>
-				<div style="display:inline;">${list.title }</div>
+			<div>
+	          	<div style="display:inline;">${map.postdate }</div>
+				<div style="cursor: pointer; display:inline;" onclick="window.open('${list.bloggerlink }');">${list.bloggername }</div>
+				<div style="cursor: pointer; display:inline;" onclick="window.open('${list.link }');">${list.title }</div>
 				<div style="display:inline;">${list.description }</div>
-				<div style="display:inline;">${list.link }</div>
-				<div style="display:inline;">${list.bloggerlink }</div>	
+			</div>
 		</c:forEach>
 	</section>
 	
