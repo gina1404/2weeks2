@@ -28,7 +28,7 @@ public class SearchController {
 		
 		List<Map<String,String>> externalNaver = service.searchExternalNaver(searchKeyword);
 		mv.addObject("searchResultExternalNaver", externalNaver);
-		System.out.println("검색 결과 : "+service.searchExternalNaver(searchKeyword));
+//		System.out.println("검색 결과 : "+service.searchExternalNaver(searchKeyword));
 		return mv;
 	}
 
