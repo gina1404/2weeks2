@@ -20,6 +20,7 @@ public class SearchController {
 	
 	@RequestMapping(value="/searchResult.do", method=RequestMethod.GET)
 	public ModelAndView searchResut(String searchKeyword) {
+		System.err.println("검색어 : "+searchKeyword);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("search/searchResult");
 		mv.addObject("searchKeyword", searchKeyword);

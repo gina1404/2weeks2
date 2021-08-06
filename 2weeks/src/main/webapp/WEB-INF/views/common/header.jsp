@@ -23,13 +23,9 @@
 		<div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
 				
 		<!-- 키워드 검색 -->
-		<div class="header-search-area">
-			<img id="showSearchFrm" class="icon-header" src="${path }/resources/images/icons/search.svg"/>
-			
-			<form id="searchFrm" name="searchFrm" method="get" action="${path }/searchResult.do" style="display:none;"> <!-- enctype="multipart/form-data" -->
-				<input id="searchKeyword" type="text" name="searchKeyword" class="header-search" style="display:inline-block;">
-				<button id="searchKeywordSubmit" type="submit" style="display:inline-block;"><img class="icon-header" src="${path }/resources/images/icons/search.svg"/></button>
-			</form>
+		<div class="header-search-area">			
+			<input id="searchKeyword" type="text" name="searchKeyword" style="display:none;" onKeypress="javascript:if(event.keyCode==13) {fn_searchKeyword()}"> <!-- 입력창 -->
+			<img id="searchKeywordSubmit" class="header-icon" src="${path }/resources/images/icons/search.svg"/> <!-- 돋보기 버튼 -->
 		</div>
 	            
 		<!-- 기본 아이콘 -->
@@ -64,25 +60,32 @@
 	            </div>	   
 	</header>     
 
-	<!-- 검색어가 입력되지 않을 경우 경고 알림 -->
-	<script>
+	<!-- 키워드 검색  -->
+	<script>	
+		/* 검색 함수 선언 */
+		function fn_searchKeyword(){
+			// 검색어가 입력되지 않을 경우 경고 알림					
+			if($("#searchKeyword").val()==""){ //검색어가 null
+				alert('검색어를 입력해 주세요.');
+				$("#searchKeyword").focus();
+				return false;
+			}else if($("#searchKeyword").val().length<2){ //검색어가 2글자 미만
+				alert('두 글자 이상 입력해 주세요.');
+				$("#searchKeyword").val("");
+				$("#searchKeyword").focus();
+				return false;
+			}else{ //검색어를 컨트롤러에 전달
+				location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();
+			}
+		}
+		
 		$(document).ready(function(){
-			$("#showSearchFrm").click(function(){
-				$("#searchFrm").show();
-				$("#showSearchFrm").hide();
-			});
+			$("#searchKeywordSubmit").click(function(){ 
+				$("#searchKeyword").show(); //돋보기 아이콘을 클릭하면 입력창이 보이게 보이게 됨
+				$("#searchKeyword").focus();			
 			
-			$("#searchKeywordSubmit").click(function(){
-				if($("#searchKeyword").val()==""){ //검색어가 null
-					alert('검색어를 입력해 주세요.');
-					$("#searchKeyword").focus();
-					return false;
-				}else if($("#searchKeyword").val().length<2){ //검색어가 2글자 미만
-					alert('두 글자 이상 입력해 주세요.');
-					$("#searchKeyword").val("");
-					$("#searchKeyword").focus();
-					return false;
-				}
-			})
-		});	
+				//검색
+				$("#searchKeywordSubmit").click(fn_searchKeyword);						
+			});
+		});
 	</script>

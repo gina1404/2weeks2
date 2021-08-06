@@ -37,8 +37,8 @@
 <script>
 	//검색 후 입력창 글씨 지워지지 않게
 	$(document).ready(function(){
-		$("#searchKeyword").val("${searchKeyword}");
-	})
+		$("#searchKeyword").show().val("${searchKeyword}");
+	});
 </script>
 	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
