@@ -85,13 +85,13 @@ text-decoration: none;
 						<div class="col-4">
 							<img alt="조회수" src="${path }/resources/images/icons/eye-6.svg" class="eye">&nbsp;<p class="icon">${b.post_Cnt }</p>
 						</div>
-						<div class="col-4">
-							<img alt="댓글수" src="${path }/resources/images/icons/comment.svg" class="comment">&nbsp;<p class="icon"></p>
-						</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
+						<div class="col-4">
+							<img alt="댓글수" src="${path }/resources/images/icons/comment.svg" class="comment">&nbsp;<p class="icon"></p>
+						</div>
 			</div>
 			<div>
 			
