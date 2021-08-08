@@ -2,6 +2,7 @@ package com.twoweeks.spring.board.freeboard.reply.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -32,13 +33,13 @@ public class ReplayDaolmpl implements ReplyDao {
 	}
 
 	@Override
-	public List<Reply> listAll(SqlSession session, int Cpage, int numPerpage) {
-		return null;
+	public List<Reply> listAll(SqlSession session, int post_Sq, int cPage, int numPerpage) {
+		return session.selectList("reply.listAll",null, new RowBounds((cPage-1)*numPerpage, numPerpage));
 	}
 
 	@Override
-	public int countReplies(SqlSession session) {
-		return 0;
+	public int countReplies(SqlSession session, int post_Sq) {
+		return session.selectOne("reply.countReplies");
 	}
 
 	

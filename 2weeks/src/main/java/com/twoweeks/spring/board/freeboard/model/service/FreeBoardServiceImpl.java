@@ -43,22 +43,6 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		return dao.totalBoardCount(session);
 	}
 
-	
-	/*
-	 * @Override public int create(FreeBoard freeBoard) throws Exception { return
-	 * dao.create(freeBoard); }
-	 * 
-	 * @Override public FreeBoard read(int post_Sq) throws Exception { return
-	 * dao.read(post_Sq); }
-	 * 
-	 * @Override public void update(FreeBoard freeBoard) throws Exception {
-	 * dao.update(freeBoard); }
-	 * 
-	 * @Override public void delete(int post_Sq) throws Exception {
-	 * dao.delete(post_Sq); }
-	 */
-
-
 	@Override
 	public List<FreeBoard> searchBoard(Map<String,Object> param) {
 		return dao.searchBoard(session,param);

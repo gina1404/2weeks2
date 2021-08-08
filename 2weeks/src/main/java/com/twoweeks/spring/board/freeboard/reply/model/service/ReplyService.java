@@ -12,4 +12,8 @@ public interface ReplyService {
 		int create(Reply reply) throws Exception;
 		int update(Reply reply) throws Exception;
 		int delete(int reply_Sq) throws Exception;
+		
+		List<Reply> listAll(int post_Sq, int Cpage, int numPerpage);
+		
+		int countReplies(int post_Sq);
 }

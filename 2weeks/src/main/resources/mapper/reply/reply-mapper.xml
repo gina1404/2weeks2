@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reply">
 
-	<select id="list" resultMap="ReplyMap">
+	<select id="list" resultMap="replyMap">
 		SELECT * FROM POST_REPLY WHERE POST_SQ = #{post_Sq}
 		ORDER BY REPLY_SQ
 	</select>
 
 	<insert id="create">
-	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, ${user_Id}, ${post_Sq}, ${reply_Content}, null, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, NULL, SYSDATE )
+	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, #{user_Id}, #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, NULL, SYSDATE )
 	</insert>
 	
 	<update id="update">
@@ -19,8 +19,18 @@
 	<delete id="delete">
 		DELETE FROM POST_REPLY WHERE REPLY_SQ = #{reply_Sq}
 	</delete>
+	
+	<select id="listAll" resultMap="replyMap">
+		SELECT * FROM POST_REPLY WHERE POST_SQ = #{post_Sq}
+		ORDER BY REPLY_SQ
+	</select>
+	
 
-	<resultMap id="ReplayResultMap" type="reply">
+	<select id="countReplies"  resultType="_int">
+	SELECT COUNT(post_Sq) FROM POST_REPLY WHERE POST_SQ = #{post_Sq}
+	</select>
+
+	<resultMap id="replyMap" type="reply">
 		<id property="reply_Sq" column="reply_Sq"/>
 		<result property="user_Id" column="user_Id"/>
 		<result property="post_Sq" column="post_Sq"/>
@@ -33,8 +43,10 @@
 		<result property="reply_Level" column="reply_Level"/>
 		<result property="reply_Ref" column="reply_Ref"/>
 		<result property="updateDate" column="updateDate"/>
-	
+			
 	</resultMap>
+	
+	
 	
 	<resultMap type="freeboard" id="boardMap">
 		<id column="post_Sq" property="post_Sq"/>
@@ -51,4 +63,5 @@
 		<result column="searchType" property="searchType"/>
 		<result column="keyword" property="keyword"/>
 	</resultMap>
+	
 </mapper>

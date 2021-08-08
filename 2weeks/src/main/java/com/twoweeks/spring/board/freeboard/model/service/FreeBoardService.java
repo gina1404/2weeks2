@@ -34,4 +34,5 @@ public interface FreeBoardService {
 	
 	int delete(int no);
 	
+	
 }

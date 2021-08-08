@@ -73,14 +73,14 @@
 			</collection>
 	</resultMap>
 	
-	<resultMap type="postAttach" id="attachmentMap">
-  	<id column="atch_No" property="atch_No"/>
-  	<result column="post_Sq" property="post_Sq"/>
-  	<result column="atch_Ori" property="atch_Ori"/>
-  	<result column="atch_New" property="atch_New"/>
-  	<result column="upload_Date" property="upload_Date"/>
-  	<result column="downloadCount" property="downloadCount"/>
-  </resultMap>
 	
+<resultMap type="postAttach" id="attachmentMap">
+	<id column="atch_No" property="atch_No" />
+	<result column="post_Sq" property="post_Sq" />
+	<result column="atch_Ori" property="atch_Ori" />
+	<result column="atch_New" property="atch_New" />
+	<result column="upload_Date" property="upload_Date" />
+	<result column="downloadCount" property="downloadCount" />
+</resultMap>
 	
 </mapper>

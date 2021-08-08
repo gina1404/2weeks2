@@ -38,5 +38,15 @@ public class ReplyServiceImpl implements ReplyService {
 		return dao.delete(session, reply_Sq);
 	}
 
+	@Override
+	public List<Reply> listAll(int post_Sq, int Cpage, int numPerpage) {
+		return dao.listAll(session, post_Sq, Cpage, numPerpage);
+	}
+
+	@Override
+	public int countReplies(int post_Sq) {
+		return dao.countReplies(session, post_Sq);
+	}
+
 	
 }

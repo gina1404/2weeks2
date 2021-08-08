@@ -16,8 +16,8 @@ public interface ReplyDao {
 	
 	int delete(SqlSession session, int reply_Sq)  throws Exception;
 	
-	List<Reply> listAll(SqlSession session, int Cpage, int numPerpage);
+	List<Reply> listAll(SqlSession session, int post_Sq, int cPage, int numPerpage);
 	
-	int countReplies(SqlSession session); 
+	int countReplies(SqlSession session, int post_Sq); 
 	
 }
