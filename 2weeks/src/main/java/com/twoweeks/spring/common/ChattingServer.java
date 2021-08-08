@@ -3,6 +3,7 @@ package com.twoweeks.spring.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -14,31 +15,25 @@ import lombok.extern.slf4j.Slf4j;
 public class ChattingServer extends TextWebSocketHandler{
 
 	//private Map<String, WebSocketSession> clients=new HashMap(); //이걸 DB에 저장해야 함.
-	private List<WebSocketSession> sessionList=new ArrayList<WebSocketSession>();
 
+	private static Logger logger=org.slf4j.LoggerFactory.getLogger(ChattingServer.class);
+	
+	private List<WebSocketSession> sessionList=new ArrayList<WebSocketSession>();
+		
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		//onopen기능과 동일
-		log.info("#ChattingHandler, afterConnectionEstablished");
-		log.info("클라이언트 접속");
 		sessionList.add(session);
+		logger.info(" {} connected ", session.getId());
 		
-		//log.info(session.getPrincipal().getName()+"님이 입장했습니다.");
-		//System.out.println("클라이언트 접속");
+		log.info(session.getPrincipal().getName()+"님이 입장했습니다.");		
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		//onmessage기능과 동일
-		//System.out.println(message);
-			//session.open //이 없다!! 따로 websocketsession을 관리해줘야한다		
-			//session.getAttributes().put //으로 해서 데이터를 집어넣을수도있다
-		
-		log.info("#ChattingHandler, handleMessage");
-		//log.info(session.getId()+" : "+message);
-		
+		logger.info("From {}, recieved Message : {} ", session.getId(), message.getPayload());
+				
 		for(WebSocketSession s : sessionList) {
-			//s.sendMessage(new TextMessage(session.getPrincipal().getName()+" : "+message.getPayload()));
+			s.sendMessage(new TextMessage(session.getPrincipal().getName()+" : "+message.getPayload()));			
 		}
 		
 		//데이터 전송하기
@@ -47,10 +42,10 @@ public class ChattingServer extends TextWebSocketHandler{
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		//onclose 기능과 동일
-		log.info("#ChattingHandler, afterConnectionClosed");
+		log.info(session.getPrincipal().getName()+"님이 나갔습니다.");
+		
 		sessionList.remove(session);
-		//log.info(session.getPrincipal().getName()+"님이 나갔습니다.");
+		logger.info(" {} Coneection Closed ", session.getId());
 	}
 	
 	

@@ -299,6 +299,10 @@ public class MemberController {
 		if(m!=null) {			
 			if(pwEncoder.matches((String)param.get("user_Pw"), m.getUser_Pw())) {
 			session.setAttribute("member", m);
+			
+			session.setAttribute("chatId", m.getUser_Id());
+			session.setAttribute("chatName", m.getUser_Nic());
+			
 			model.addAttribute("loginMember",m);
 			msg="로그인성공";
 			}else {
@@ -309,7 +313,7 @@ public class MemberController {
 		}
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc","/");
-		
+				
 		return "common/msg";
 		
 	}
