@@ -10,4 +10,5 @@ import com.twoweeks.spring.member.model.vo.Member;
 public interface AdminService {
 	int insertNotice(Notice n);
 	List<Member> selectMemberList();
+	int selectMembercount();
 }

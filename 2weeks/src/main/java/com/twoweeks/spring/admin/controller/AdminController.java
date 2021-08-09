@@ -30,9 +30,10 @@ public class AdminController {
 	public ModelAndView adminPage(ModelAndView mv) {
 		
 		List<Member>list=service.selectMemberList();
-		
+		int memberct=service.selectMembercount();
 		//System.out.println(list);
 		
+		mv.addObject("memberct", memberct);
 		mv.addObject("list", list);
 		mv.setViewName("admin/adminMainPage");
 		return mv;

@@ -29,6 +29,12 @@ public class AdminDaoImpl implements AdminDao{
 		// TODO Auto-generated method stub
 		return session.selectList("notice.selectMemberList");
 	}
+
+	@Override
+	public int selectMembercount(SqlSession session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("notice.selectMembercount");
+	}
 	
 	
 

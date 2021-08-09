@@ -40,6 +40,11 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return dao.selectMemberList(session);
 	}
+	@Override
+	public int selectMembercount() {
+		// TODO Auto-generated method stub
+		return dao.selectMembercount(session);
+	}
 	
 	
 	

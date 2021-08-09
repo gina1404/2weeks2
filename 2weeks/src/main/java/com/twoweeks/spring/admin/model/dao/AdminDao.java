@@ -13,4 +13,5 @@ public interface AdminDao {
 	int insertNotice(Notice n,SqlSession session);
 	int insertAttachment(SqlSession session,noticeAttachment a);
 	List<Member> selectMemberList(SqlSession session);
+	int selectMembercount(SqlSession session);
 }
