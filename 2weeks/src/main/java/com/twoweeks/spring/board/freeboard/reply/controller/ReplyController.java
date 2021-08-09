@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
+import com.twoweeks.spring.board.freeboard.model.vo.PREPLY;
 import com.twoweeks.spring.board.freeboard.reply.model.service.ReplyService;
 import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 import com.twoweeks.spring.common.PageFactory;
@@ -33,6 +35,9 @@ public class ReplyController {
 	
 	@Autowired
 	private ReplyService service;
+	
+	
+
 	
 	@PostMapping("reply/insert")
 	public ResponseEntity<String> register(@RequestBody Reply reply){

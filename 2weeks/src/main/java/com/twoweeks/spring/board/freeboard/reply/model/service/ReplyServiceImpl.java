@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
+import com.twoweeks.spring.board.freeboard.model.vo.PREPLY;
 import com.twoweeks.spring.board.freeboard.reply.model.dao.ReplyDao;
 import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
@@ -28,6 +30,7 @@ public class ReplyServiceImpl implements ReplyService {
 		return dao.create(session, reply);
 	}
 
+
 	@Override
 	public int update(Reply reply) throws Exception {
 		return dao.update(session, reply);
@@ -48,5 +51,8 @@ public class ReplyServiceImpl implements ReplyService {
 		return dao.countReplies(session, post_Sq);
 	}
 
-	
+	@Override
+	public List<Reply> selectBoardComment(int no) {
+		return dao.selectBoardComment(session,no);
+	}
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.twoweeks.spring.board.freeboard.model.dao.FreeBoardDao;
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FreeBoardServiceImpl implements FreeBoardService {
 	
+	
+
+
 	@Autowired
 	private FreeBoardDao dao;
 	

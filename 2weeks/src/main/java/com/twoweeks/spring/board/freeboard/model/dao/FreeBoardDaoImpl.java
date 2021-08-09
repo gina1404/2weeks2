@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 @Repository
 public class FreeBoardDaoImpl implements FreeBoardDao {
@@ -67,5 +68,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		return session.insert("freeboard.updateAttachment", a);
 	}
 
+	
 	
 }

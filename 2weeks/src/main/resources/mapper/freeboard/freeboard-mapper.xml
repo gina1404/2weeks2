@@ -48,7 +48,6 @@
 		INSERT INTO POST_ATCH VALUES(POST_ATCH_SEQ.NEXTVAL, #{post_Sq}, #{atch_Ori}, #{atch_New}, SYSDATE, DEFAULT)
 	</insert>
 	
-	
 	<resultMap type="freeboard" id="boardMap">
 		<id column="post_Sq" property="post_Sq"/>
 		<result column="user_Id" property="user_Id"/>
@@ -63,6 +62,7 @@
 		<result column="open_Yn" property="open_Yn"/>
 		<result column="searchType" property="searchType"/>
 		<result column="keyword" property="keyword"/>
+		<result column="replyNo" property="replyNo"/>
 			<collection property="attachments" ofType="postAttach">
 				<id column="atch_No" property="atch_No"/>
 				<result column="post_Sq" property="post_Sq"/>

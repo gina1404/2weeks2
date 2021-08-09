@@ -6,10 +6,14 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
+import com.twoweeks.spring.board.freeboard.model.vo.PREPLY;
 import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 @Repository
 public class ReplayDaolmpl implements ReplyDao {
+
+	
 
 	@Override
 	public List<Reply> list(SqlSession session, int post_Sq) throws Exception {
@@ -42,6 +46,10 @@ public class ReplayDaolmpl implements ReplyDao {
 		return session.selectOne("reply.countReplies");
 	}
 
-	
+	@Override
+	public List<Reply> selectBoardComment(SqlSession session, int no) {
+		return session.selectList("reply.selectBoardComment",no);
+	}
+
 	
 }

@@ -24,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.twoweeks.spring.board.freeboard.model.service.FreeBoardService;
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.reply.model.service.ReplyService;
+import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 import com.twoweeks.spring.common.PageFactory;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FreeBoardController {
 
+	@Autowired
+	private ReplyService rService;
 	
 	@Autowired
 	private FreeBoardService service;
@@ -125,9 +129,10 @@ public class FreeBoardController {
 		log.info("read");
 		log.info("list" + fb.getAttachments());
 		fb.setPost_Sq(Integer.parseInt(request.getParameter("no")));
-				
+		int no = Integer.parseInt(request.getParameter("no"));
+		List<Reply>	reply = rService.selectBoardComment(no);
 		model.addAttribute("list", service.read(fb.getPost_Sq()));
-		
+		model.addAttribute("comments", reply);
 		return "freeBoard/readView";
 	}
 	
