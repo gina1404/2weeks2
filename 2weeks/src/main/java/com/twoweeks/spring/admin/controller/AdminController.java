@@ -79,4 +79,16 @@ public class AdminController {
 		
 		return mv;
 	}
+	@RequestMapping("/admin/deleteMember")
+	public  ModelAndView deleteMember(HttpServletRequest req,ModelAndView mv) {
+		String userId=req.getParameter("userId");
+		int result=service.deleteMember(userId);
+		
+		mv.addObject("msg", result>0?"삭제되었습니다":"삭제에 실패하였습니다");
+		mv.addObject("loc", "/admin/adminPageList");
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
+	
 }

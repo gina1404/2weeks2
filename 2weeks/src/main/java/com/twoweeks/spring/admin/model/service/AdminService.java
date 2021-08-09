@@ -11,4 +11,5 @@ public interface AdminService {
 	int insertNotice(Notice n);
 	List<Member> selectMemberList();
 	int selectMembercount();
+	int deleteMember(String userId);
 }

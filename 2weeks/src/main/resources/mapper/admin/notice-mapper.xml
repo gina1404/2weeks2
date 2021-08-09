@@ -22,4 +22,8 @@
 	<select id="selectMembercount" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER2
 	</select>
+	
+	<delete id="deleteMember">
+		DELETE FROM MEMBER2 WHERE USER_ID=#{userId}
+	</delete>
 </mapper>

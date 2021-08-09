@@ -14,4 +14,5 @@ public interface AdminDao {
 	int insertAttachment(SqlSession session,noticeAttachment a);
 	List<Member> selectMemberList(SqlSession session);
 	int selectMembercount(SqlSession session);
+	int deleteMember(SqlSession session,String userId);
 }

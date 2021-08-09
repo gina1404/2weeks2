@@ -45,6 +45,11 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return dao.selectMembercount(session);
 	}
+	@Override
+	public int deleteMember(String userId) {
+		// TODO Auto-generated method stub
+		return dao.deleteMember(session,userId);
+	}
 	
 	
 	
