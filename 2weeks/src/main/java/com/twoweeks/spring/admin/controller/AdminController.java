@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.twoweeks.spring.admin.model.service.AdminService;
 import com.twoweeks.spring.admin.model.vo.Notice;
 import com.twoweeks.spring.admin.model.vo.noticeAttachment;
-
+import com.twoweeks.spring.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,8 +27,15 @@ public class AdminController {
 	private AdminService service;
 	
 	@RequestMapping("/admin/adminPageList")
-	public String adminPage() {
-		return "admin/adminMainPage";
+	public ModelAndView adminPage(ModelAndView mv) {
+		
+		List<Member>list=service.selectMemberList();
+		
+		//System.out.println(list);
+		
+		mv.addObject("list", list);
+		mv.setViewName("admin/adminMainPage");
+		return mv;
 	}
 	@RequestMapping("/admin/admintable.do")
 	public String admintable() {
