@@ -21,17 +21,7 @@
 <body>
 	
 	<div id="chatContainer">
-		<div id="entryAlert"><p>${chatName}님이 입장했습니다</p></div>
-		<!-- <div id="myBox" style="display:none;">
-			<div id="sender"></div>
-			<div id="chatContent"></div>
-			<div id="chatTime"></div>
-		</div>
-		<div id="yourBox" style="display:none;">
-			<div id="sender"></div>
-			<div id="chatContent"></div>
-			<div id="chatTime"></div>
-		</div> -->
+		<div id="entryAlert"></div>		
 	</div>
 
 	<div id="sendBox" class="input-group">

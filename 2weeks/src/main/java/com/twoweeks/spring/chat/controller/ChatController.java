@@ -54,7 +54,8 @@ public class ChatController {
     @RequestMapping("/chatting")        
     public String groupChattingEntry(@RequestParam int no, HttpSession session, Model m) {        
     	String chatId=(String)session.getAttribute("chatId");
-    	String chatName=(String)session.getAttribute("chatName");    	   
+    	String chatName=(String)session.getAttribute("chatName");
+    	System.out.println("/////"+chatId+"   "+chatName);
         
         m.addAttribute("no", no);
         m.addAttribute("loginId", chatId);

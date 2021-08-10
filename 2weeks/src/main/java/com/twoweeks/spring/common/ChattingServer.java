@@ -24,11 +24,11 @@ public class ChattingServer extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("클라이언트 입장");
 		sessionList.add(session);				
 				
 		String sender=(String)session.getAttributes().get("chatName");
-		System.out.println(sender+"님 입장");
+		
+		log.info("{}님 입장",sender);		
 	}
 	
 	@Override
@@ -39,12 +39,12 @@ public class ChattingServer extends TextWebSocketHandler{
 		log.info("{}님이 {}메세지 전송함", sender, message.getPayload());		
 		
 		ChatGroupMessage msg=gson.fromJson(message.getPayload(), ChatGroupMessage.class); //Json을 java객체로 바꿔줌
-		
+				
 		TextMessage sendMsg= new TextMessage(gson.toJson(msg));
 		
 		for(WebSocketSession s : sessionList) {
-			s.sendMessage(sendMsg);			
-		}		
+			s.sendMessage(sendMsg);
+		}	
 	}
 
 	@Override
