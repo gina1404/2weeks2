@@ -12,6 +12,7 @@
 		<org.springframework-version>5.2.0.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.4</org.aspectj-version>
 		<org.slf4j-version>1.7.28</org.slf4j-version>
+		<lucene.version>8.8.2</lucene.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -306,7 +307,27 @@
 		    <groupId>org.json</groupId>
 		    <artifactId>json</artifactId>
 		    <version>20210307</version>
-		</dependency>								  
+		</dependency>		
+		
+		<!-- lucene (검색 엔진용) -->
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+	    	<artifactId>lucene-core</artifactId>
+	    	<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.lucene</groupId>
+		    <artifactId>lucene-analyzers-common</artifactId>
+		    <version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.lucene</groupId>
+		    <artifactId>lucene-queryparser</artifactId>
+		    <version>${lucene.version}</version>
+		</dependency>
+
+		
+								  
 
 	</dependencies>
     <build>
