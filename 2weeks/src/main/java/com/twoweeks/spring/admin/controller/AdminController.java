@@ -90,5 +90,22 @@ public class AdminController {
 		
 		return mv;
 	}
-	
+	@RequestMapping("/admin/reportList.do")
+	public ModelAndView reportList(ModelAndView mv,HttpServletRequest req) {
+		String userId=req.getParameter("userId");
+		/*
+		 * List<Report> list=service.reportList(userId);
+		 * 
+		 * mv.addObject("list", list);
+		 */
+		mv.setViewName("admin/reportTable");
+		return mv;
+	}
+	@RequestMapping("/admin/updataPoint.do")
+	public ModelAndView updataPoint(ModelAndView mv,HttpServletRequest req) {
+		String userId=req.getParameter("userId");
+		
+		mv.setViewName("admin/pointUpdate");
+		return mv;
+	}
 }

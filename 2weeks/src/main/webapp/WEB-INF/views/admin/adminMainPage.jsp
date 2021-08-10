@@ -251,7 +251,7 @@
     		const userId=clicked_id;
     			const status="width=700px,height=500px,left=500px,top=500px";
     			const title="포인트변경";
-    			const url="<%=request.getContextPath()%>/admin/updataPoint.do";
+    			const url="<%=request.getContextPath()%>/admin/updataPoint.do?userId"+userId;
     			open(url,title,status);
 
     		};
@@ -260,7 +260,7 @@
         		console.log(clicked_id);
         		const userId=clicked_id;
     			
-    			const status="width=700px,height=500px,left=500px,top=500px";
+    			const status="width=800px,height=320px,left=500px,top=500px";
     			const title="신고내역";
     			const url="<%=request.getContextPath()%>/admin/reportList.do?userId="+userId;
     			open(url,title,status);
