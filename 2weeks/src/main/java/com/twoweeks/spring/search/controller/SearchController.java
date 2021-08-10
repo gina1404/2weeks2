@@ -40,7 +40,7 @@ public class SearchController {
 	}	
 
 	
-	//커뮤니티 데이터 크롤릴용 - Daum
+	//커뮤니티 데이터 크롤링 - Daum 블로그
 	@RequestMapping("/update/communityDummy")
 	public void updateCommunityDummyData(String searchKeyword) throws Exception {
 		for(int i=0; i<=10; i++) { //페이지 반복
@@ -50,20 +50,20 @@ public class SearchController {
 	
 			//데이터 전처리
 			for(Element e : elem) {			
-				String title=e.getElementsByClass("wrap_tit mg_tit").text();//제목
-				String link=e.getElementsByClass("f_link_b").attr("href"); //게시글 링크		
-				String content; //=e.getElementsByClass("f_eb desc").text();//미리보기
-				String update; //=e.getElementsByClass("f_nb date").text(); //게시일	
+				String title=e.select("a.f_link_b").text();//제목
+				String link=e.select("a.f_link_b").attr("href"); //게시글 링크		
+				String content; //미리보기
+				String update; //게시일	
 				String writer; //작성자
 							
 				Document doc2=Jsoup.connect(link).get();
-				writer=doc2.select(".author").text();
-				update=doc2.select(".date").text();
+				writer=doc2.select("span.author").text();
+				update=doc2.select("span.date").text();
 				content=doc2.select(".tt_article_useless_p_margin").text();
 				
 				//값을 가져올 수 없는 경우
-				if(content.isBlank()) content=e.getElementsByClass("f_eb desc").text(); //미리보기로 대체
-				if(update.isBlank()) update=e.getElementsByClass("f_nb date").text();
+				if(content.isBlank()) content=e.select("p.f_eb.desc").text(); //미리보기로 대체
+				if(update.isBlank()) update=e.select("span.f_nb.date").text();
 				if(writer.isBlank()) writer="unknown";
 				
 				//writer 데이터 정제
@@ -79,50 +79,18 @@ public class SearchController {
 					SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
 					newdate=new Date(sdf.parse(update).getTime());
 				}
+				
+				//데이터 확인용
+				System.out.println(title);
+				System.out.println(content);
+				System.out.println(newdate);
+				System.out.println(writer);
+				System.out.println("===============================");
+				
 			} //데이터 전처리 종료
 		} //페이지 반복문 종료
 	} //크롤링 컨트롤러 종료
-
 	
-	//네이버 view 데이터 크롤링 - community 데이터 생성
-//	@RequestMapping("/update/communityDummy")
-//	public void updateCommunityDummyData(String searchKeyword) throws Exception {
-//		String naverViewUrl="https://search.naver.com/search.naver?sm=tab_hty.top&where=view&query="+searchKeyword;
-//		Document doc=Jsoup.connect(naverViewUrl).get();
-//		Elements elem=doc.select("div.total_area");
-//		for(Element e : elem) {
-//			String title=e.getElementsByClass("api_txt_lines total_tit").text();//제목
-//			String link=e.getElementsByClass("api_txt_lines total_tit").attr("href");
-//			
-//			String content=e.getElementsByClass("api_txt_lines dsc_txt").text();//미리보기
-//			String update=e.getElementsByClass("sub_time").text(); //게시일	
-//			Date newdate;
-//			if(update.contains("전")||update.contains("어제")) {
-//				newdate=new Date();
-//			}else {
-//				SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
-//				newdate=new Date(sdf.parse(update).getTime());
-//			}						
-//			System.out.println(title);
-//			System.out.println(content);
-//			System.out.println(newdate);
-//			System.out.println(link);
-//			
-//			//카페, 블로그 글 본문 가져오기
-//			/*
-//			 * Document doc2=Jsoup.connect(link).get(); if(link.contains("blog")) { //블로그 글
-//			 * System.out.println(doc2.select("div"));
-//			 * content=doc2.select("div.se-main-container").text(); System.out.println(1);
-//			 * }else if(link.contains("cafe")){ //카페 글
-//			 * System.out.println(doc2.select("div.article_container"));
-//			 * content=doc2.select("div.article_container").text(); System.out.println(2);
-//			 * }else { //post 글
-//			 * 
-//			 * }
-//			 */
-//			//System.out.println(content);
-//			System.out.println("=================================");
-//		}
-//	}
+	
 }
 
