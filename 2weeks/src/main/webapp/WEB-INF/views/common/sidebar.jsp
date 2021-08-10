@@ -19,14 +19,11 @@
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
 			                <a class="" href="${path }/covid/domestic.do">
 			                	<div class="sidebar-title">Covid Domestic</div>			                
-							</a>			                
-
+							</a>
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-list">
-			                	<div class="sidebar-title">Vaccination</div>
-							</div>
+			                <div class="sidebar-title">Vaccination</div>
 			            </div>
 			            <div class="sidebar-list-sub">
 			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
@@ -40,71 +37,71 @@
 			                	<div class="sidebar-title">News & Reports</div>
 		                	</a>
 			            </div>
+	            </div>
+			</div>  
+			
+			<!-- 코로나 정보 -->
+			<div class="wrap_sub_list">
+				<div class="sidebar-list">
+	                <img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
+	                <div class="sidebar-title">Covid-19 info/guide</div>
+                </div>
+				<div class="sidebar-list-hide">
+					<div class="sidebar-list-sub">
+		                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
+		                <div class="sidebar-title">Covid Info</div>
 		            </div>
-				</div>  
-				
-				<!-- 코로나 정보 -->
-				<div class="wrap_sub_list">
-					<div class="sidebar-list">
-		                <img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
-		                <div class="sidebar-title">Covid-19 info/guide</div>
-	                </div>
-					<div class="sidebar-list-hide">
-						<div class="sidebar-list-sub">
-			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Covid Info</div>
-			            </div>
-			            <div class="sidebar-list-sub">
-			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Quarantine</div>
-			            </div>
-			            <div class="sidebar-list-sub">
-			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <a class="" href="${path }/covidInfo/center.do">
-			                	<div class="sidebar-title">Covid Test</div>
-			                </a>
-			            </div>
-			            <div class="sidebar-list-sub">
-			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Vaccination</div>
-			            </div>
-			            <div class="sidebar-list-sub">
-			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Overseas Entry</div>
-			            </div>
-					</div>			
-				</div>
-				
-				<!-- 지식인 -->
-				<div class="wrap_sub_list">
-					<div class="sidebar-list">
-			            <img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
-			            <div class="sidebar-title">KnowledgeIn</div>
-					</div> 
-				</div>
-				
-				<!-- 커뮤니티 -->
-				<div class="wrap_sub_list">
-					<div class="sidebar-list">
-		                <img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
-		                <div class="sidebar-title">Community</div>
+		            <div class="sidebar-list-sub">
+		                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
+		                <div class="sidebar-title">Quarantine</div>
 		            </div>
-		            <div class="sidebar-list-hide">
-		            	<div class="sidebar-list-sub">
-			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title">Specific</div>
-			            </div>
-			            <div class="sidebar-list-sub">
-			                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-			                <div class="sidebar-title"><a href="${path }/freeboard/boardList.do">Free</a></div>
-			            </div>
+		            <div class="sidebar-list-sub">
+		                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
+		                <a class="" href="${path }/covidInfo/center.do">
+		                	<div class="sidebar-title">Covid Test</div>
+		                </a>
 		            </div>
-				</div>
-								
+		            <div class="sidebar-list-sub">
+		                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
+		                <div class="sidebar-title">Vaccination</div>
+		            </div>
+		            <div class="sidebar-list-sub">
+		                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
+		                <div class="sidebar-title">Overseas Entry</div>
+		            </div>
+				</div>			
+			</div>
+			
+			<!-- 지식인 -->
+			<div class="wrap_sub_list">
+				<div class="sidebar-list">
+		            <img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
+		            <div class="sidebar-title">KnowledgeIn</div>
+				</div> 
+			</div>
+			
+			<!-- 커뮤니티 -->
+			<div class="wrap_sub_list">
+				<div class="sidebar-list">
+	                <img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
+	                <div class="sidebar-title">Community</div>
+	            </div>
+	            <div class="sidebar-list-hide">
+	            	<div class="sidebar-list-sub">
+		                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
+		                <div class="sidebar-title">Specific</div>
+		            </div>
+		            <div class="sidebar-list-sub">
+		                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
+		                <div class="sidebar-title"><a href="${path }/freeboard/boardList.do">Free</a></div>
+		            </div>
+	            </div>
+			</div>							
+		
 				<!-- 구분선 -->
 				<div class="wrap_sidebar-divider" style="height:fit-contents;">
 					<img class="sidebar-divider" src="${path }/resources/images/icons/divider-horizontal.svg"/>
-				</div>
+			</div>
 	
 				<!-- 채팅 -->
 				<div class="wrap_sub_list">
@@ -123,18 +120,19 @@
 						<div class="sidebar-title">chatBot</div>
 					</div>
 				</div> --%>
-			</div> 
+			</div>
+			
 			<!-- 관리자 페이지 -->
 			<div class="wrap_sub_list">
-					<div class="sidebar-list">
-						<img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
-						<a href="${path }/admin/adminPageList">
-							<div class="sidebar-title">Admin</div>
-						</a>
-					</div>
+				<div class="sidebar-list">
+					<img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
+					<a href="${path }/admin/adminPageList">
+						<div class="sidebar-title">Admin</div>
+					</a>
 				</div>
-			</div>  
-			 
+			</div>	
+			
+		</div>
 	</nav>   
  
     <script>  
@@ -158,5 +156,4 @@
 	function(){
 		$(this).removeClass("overlay");
 	});
-
     </script>

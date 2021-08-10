@@ -46,13 +46,26 @@
 	            		<div class="header-profile-text">${userId} </div>
 	            		<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
 	            	</c:if>
-	            	<c:if test="${member.user_Nic ne null }">
-	            		<div class="header-profile-text">${member.user_Nic}님 </div>
-	            		<input type="button" value="로그아웃" onclick="location.href='${path}/member/logout'"/>
-	            	</c:if>	
-	                <div class="header-profile-icon">
-	                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
-	                </div>
+	            	
+	            	
+	                <div class="dropdown">
+		                <div class="header-profile-icon">
+		                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
+		                </div>
+		            	<c:if test="${member.user_Nic ne null }">
+		            		<div class="header-profile-text" id="nick">${member.user_Nic}님 </div>  
+		            	</c:if>
+		            	<div class="dropdown-content">
+		            		<a href="#">회원 정보 변경</a>
+		            		<a href="${path}/member/mypage">나의 활동 보기</a>
+		            		<a href="#">나의 포인트 0원</a>
+		            		<a href="${path}/member/logout">로그아웃</a>
+		            		
+		            	</div>
+	            	</div>
+	            	
+	            	
+	            		
 	                <!-- member profile 사진 받아올 경우 -->
 	                <div class="header-profile-photo">
 	                	<img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>

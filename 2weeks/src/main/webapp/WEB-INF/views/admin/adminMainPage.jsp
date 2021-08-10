@@ -10,8 +10,11 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>2WeekS</title>
+        
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link href="<%=request.getContextPath() %>/resources/AdminTem/css/styles.css" rel="stylesheet" />
+         	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>	
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -85,14 +88,14 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Dashboard</h1>
+                        <h1 class="mt-4">2WeekS</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">메인 페이지</li>
                         </ol>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
+                                    <div class="card-body">총회원 수<br>${memberct }명</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -101,27 +104,27 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
+                                    <div class="card-body">총 지식인 게시물 수<br>0개</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="#">지식인 바로가기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
+                                    <div class="card-body">미처리 권환요청 <br>0개</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="<%=request.getContextPath()%>/admin/admintable.do">권한요청 바로가기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
+                                    <div class="card-body">오늘의 게시글신고 수<br>0개</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="#">신고관리 바로가기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -150,10 +153,11 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
+               
                                 DataTable Example
                             </div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
+                                <table id="datatablesSimple" >
                                     <thead>
                                         <tr>
                                             <th>아이디</th>
@@ -167,6 +171,7 @@
                                             <th>가입날짜</th>
                                              <th>신고내역</th>
                                             <th>포인트 변경</th>
+                                            <th>회원 삭제</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -182,12 +187,14 @@
                                             <th>가입날짜</th>
                                              <th>신고내역</th>
                                             <th>포인트 변경</th>
+                                            <th>회원삭제</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody>
+                                    <tbody style="font-size: 18px;">
                                     <c:forEach items="${list }" var="c">
                                         <tr>
-                                            <td>${c.user_Id }</td>
+                                            <td>${c.user_Id }
+                                            <input type="hidden" name="userId" class="idCk" value="${c.user_Id }"/></td>
                                             <td>${c.user_Nm }</td>
                                             <td>${c.user_Nic }</td>
                                             <td>${c.user_Gender }</td>
@@ -203,8 +210,10 @@
                                             <td>${c.user_Email }</td>
                                             <td>${c.userPoint_Cnt }</td>
                                             <td>${c.enroll_Dt }</td>
-                                            <td><button>신고내역</button></td>
-                                            <td><button>변경</button></td>
+                                            
+                                            <td><button id="${c.user_Id }" onclick="reportlist(this.id);" type="button"  class="btn btn-outline-primary" >내역확인</button></td>
+                                            <td><button id="${c.user_Id }" type="button" onclick="fn_pointch(this.id);" class="btn btn-outline-primary">변경</button></td>
+                                            <td> <button  id="${c.user_Id }" onclick="fn_deleteMember(this.id);" class="btn btn-outline-primary" >삭제</button></td>
                                         </tr>
                                	  </c:forEach>
                                     </tbody>
@@ -234,7 +243,38 @@
         <script src="<%=request.getContextPath() %>/resources/AdminTem/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath() %>/resources/AdminTem/js/datatables-simple-demo.js"></script>
-    
+    	<script >
+
+    	
+    	function fn_pointch(clicked_id){
+    		console.log(clicked_id);
+    		const userId=clicked_id;
+    			const status="width=700px,height=600px,left=500px,top=500px";
+    			const title="포인트변경";
+    			const url="<%=request.getContextPath()%>/admin/updataPoint.do?userId="+userId;
+    			open(url,title,status);
+
+    		};
+        		function reportlist(clicked_id){
+        		
+        		console.log(clicked_id);
+        		const userId=clicked_id;
+    			
+    			const status="width=800px,height=320px,left=500px,top=500px";
+    			const title="신고내역";
+    			const url="<%=request.getContextPath()%>/admin/reportList.do?userId="+userId;
+    			open(url,title,status);
+    		}; 
+    		function fn_deleteMember(clicked_id){
+    			console.log(clicked_id);
+    			const userId=clicked_id;
+    			
+    			const result=confirm("해당 아이디의 모든 정보가 삭제됩니다,정말로 삭제하시겠습니까?");
+    			if(result){
+    				location.assign('<%=request.getContextPath() %>/admin/deleteMember?userId='+userId);			
+    				}	
+    		}
+    	</script>
     	
     	
     	

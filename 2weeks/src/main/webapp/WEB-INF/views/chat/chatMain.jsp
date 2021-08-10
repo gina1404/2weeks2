@@ -47,13 +47,11 @@
 				<div id="chatContent">${l.content }</div>
 			</div>
 			<div id="entry">
-				<a id="entry_a" 
-                onclick="open('${path}/GroupChatting.do?no=${l.groupNo} ', '_blank', 'width=400, height=600, resizable=no')">입장</a>			</div>
+				<a id="entry_a" onclick="open('${path}/chatting?no=${l.groupNo} ', '_blank', 'width=400, height=600, resizable=no')">입장</a>	
+			</div>
 			<hr>				
 		</c:forEach>			
-	</div>	
-	
-	<div id="chatContainer"></div>
+	</div>
 </section>
 
 <script>
@@ -66,7 +64,7 @@
 	}		
 </script>
 
-<script src="<c:url value='/resources/js/chat/chatting.js' />"></script>
+<script src="<c:url value='/resources/js/chat/chatMain.js' />"></script>
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

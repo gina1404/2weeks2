@@ -31,13 +31,15 @@ public class ChatController {
 		List<ChatGroup> list=service.selectGroupList();		
 		model.addAttribute("list", list);
 		
-		return "chat/chatting";
+		return "chat/chatMain";
 	}
 	
 	@RequestMapping(value="/chat/sendChat", produces="application/json")
 	@ResponseBody
-	public String insertChat(@RequestBody ChatGroup cg, Model m) {		
-		cg.setMaker("admin");
+	public String insertChat(@RequestBody ChatGroup cg, Model m, HttpSession session) {		
+		String chatId=(String)session.getAttribute("chatId");
+		cg.setMaker(chatId);
+		
 		int result=service.insertChatGroup(cg);
 		
 		String check="";
@@ -45,28 +47,21 @@ public class ChatController {
 		else check="채팅방만들기 실패";
 			
 		m.addAttribute("check", check);
-		return "chat/chatting";
+		
+		return "chat/chatMain";		
 	}
 	
-    @RequestMapping("/GroupChatting.do")        
+    @RequestMapping("/chatting")        
     public String groupChattingEntry(@RequestParam int no, HttpSession session, Model m) {        
-        //String loginId=session.getId();
     	String chatId=(String)session.getAttribute("chatId");
     	String chatName=(String)session.getAttribute("chatName");
-    	
-    	System.out.println(chatName);   
+    	System.out.println("/////"+chatId+"   "+chatName);
         
         m.addAttribute("no", no);
         m.addAttribute("loginId", chatId);
-        
-        JSONObject json = new JSONObject();
-		//json.put("logedList", logedList);
-		//new Gson().toJson(json, response.getWriter());
+        m.addAttribute("chatName", chatName);
         
         return "chat/chattingEntry";
 	}
-	
-	
-	
-	
+		
 }
