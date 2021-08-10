@@ -64,23 +64,22 @@
 }
 
 #myBox{
-	/* border:1px solid; */
+	min-height: 50px;
 	height:auto;
 	width: 230px;
-	position: absolute;
 	margin:5px;
 	padding:7px;
-	background-color:#A9BCF5;
+	background-color:#F2E0F7;
 	border-radius: 10px;
 	margin-left: 165px;
 }
 #yourBox{
+	min-height: 70px;
 	height:auto;
 	width: 230px;
-	position: absolute;
 	margin:5px;
 	padding:7px;
-	background-color:#BCF5A9;
+	background-color:#CEE3F6;
 	border-radius: 10px;
 }
 #chatTime{
