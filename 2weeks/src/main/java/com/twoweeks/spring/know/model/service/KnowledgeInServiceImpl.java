@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.twoweeks.spring.know.model.dao.KnowledgeInDao;
 import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinAttachment;
+import com.twoweeks.spring.know.model.vo.KinReply;
+import com.twoweeks.spring.know.model.vo.KinReplyAttachment;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,15 +59,94 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 	}
 
 	@Override
-	public Kin selectKinOne(int sq) {
+	public Kin selectKinOne(int sq) throws Exception {
+		dao.updatecnt(session, sq);
 		return dao.selectKinOne(session,sq);
 	}
 
 	@Override
-	public int deleteKin(int sq) throws Exception {
+	public void delete(int sq) throws Exception {
 		
-		return dao.deleteKin(session,sq);
+		dao.delete(session, sq);
 	}
+
+	@Override
+	public int insertKinReply(KinReply kr) throws Exception {
+		try {
+			int result= dao.insertKinReply(session,kr);
+			log.debug("답글번호 :"+kr.getReply_Sq());
+			int replySq=kr.getReply_Sq();
+			if(result>0) {
+				List<KinReplyAttachment> attachment=kr.getAttachments();
+				if(kr.getAttachments().size()>0) {
+					for(KinReplyAttachment a: attachment) {
+						a.setReply_Sq(replySq);
+						result=dao.insertKinReplyAttachment(session,a);
+					}
+				}else if (result >0) return 1;
+				else return 0; //첨부파일 실패
+			}else return 0;   //지식인 글 등록이 안되어있으면
+			}catch(RuntimeException e) {
+				throw new Exception("등록실패");
+			}
+			return 1;
+		}
+
+	//게시글 수정
+	/*
+	 * @Override public void update(Kin k) throws Exception {
+	 * 
+	 * dao.update(session, k);
+	 * 
+	 * }
+	 */
+
+
+	@Override
+	public int update(Kin k) throws Exception {
+		try {
+			int result = dao.update(session, k);
+			System.out.println(result);
+			
+			log.info("게시글 번호 : " +k.getKin_Sq()); // 0??????????????
+			log.info("게시글 내용 : " +k.getKin_Content());
+			log.info("카테고리 : " +k.getCategory());
+					int sq= k.getKin_Sq();
+			if(result>0) {
+				List<KinAttachment> attachments = k.getAttachments();
+					if(attachments.size()>0) {
+						for(KinAttachment ka : k.getAttachments()) {
+							ka.setKin_Sq(sq);
+							ka.setAtch_No(sq);
+							dao.updateKinAttachment(session, ka);
+						}
+					}else if (result > 0) 
+							return 1;
+					else return 0;
+			}else return 0;
+		}catch(RuntimeException e) {
+			throw new Exception("등록 실패");
+		}
+		
+		return 1;
+	}
+	
+
+	
+	@Override
+	public int selectKinReplyCount() {
+		// TODO Auto-generated method stub
+		return dao.selectKinReplyCount(session);
+	}
+
+	@Override
+	public List<Kin> list(Kin k) {
+		
+		return dao.list(session, k);
+	}
+
+
+
 	
 
 }

@@ -2,66 +2,26 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<c:set var="path" value="${pageContext.request.contextPath }"/>  
-
+<c:set var="path" value="${pageContext.request.contextPath }"/> 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="title" value="지식인상세보기"/>
+	<jsp:param name="title" value="지식인나의질의응답"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
 
 <style>
-
-.question{
-/* border: 1px solid blue; */
-position: relative;
-top:0px;
-background-color:white;
-}
-
-.answer{
-/* border: 1px solid blue; */
-position: relative;
-top: 10px;
-background-color:white;
-}
-#Qsearch{
-width:100px;
-height:40px;
-border :0px;
-background:#19ce60;
-outline:none;
-float:right;
-color:#ffffff;
-position: relative;
-top:-3px;
-left:-20px;
-
-}
-#Qcheck{
-width:100px;
-height:40px;
-border :0px;
-background:#8181F7;
-outline:none;
-float:right;
-color:#ffffff;
-position: relative;
-top:0px;
-left:-20px;
-
-}
+/* 질문바 */
 #searchBar{
 height:38px;
 width:322px;
 border : 1px solid #19ce60;
 background :#ffffff;
-float: left;
+float: right;
 position: relative;
-right:-1050px;
-top: -3px;
-}
+
+right: 150px;
+} 
 .naver{
 font-size :16px;
 width:250px;
@@ -69,6 +29,7 @@ padding:10px;
 border:0px;
 outline:none;
 float:left;
+position: absolute;
 } 
 #searchkn{
 
@@ -81,13 +42,35 @@ float:right;
 color:#ffffff;
 
 }
+#Qsearch{
 
-#no{
+width:100px;
+height:40px;
+border :0px;
+background:#19ce60;
+outline:none;
+float:right;
+color:#ffffff;
 position: relative;
-top:-60px;
+right:-300px;
 
 
 }
+/* 질문바 */
+
+
+.knowmenu li{
+
+float:left;
+margin-left:10px;
+font-size:13px;
+position: relative;
+top: -510px;
+right:-1000px;
+list-style: none;
+   
+}
+/* 질문 제목 */
 .QA{
 
 font-family: pretendard;
@@ -95,12 +78,9 @@ font-size: 50px;
 color:#19ce60;
 
 }
-
 .title{
 font-family: pretendard;
 font-size:30px;
-position: relative;
-right:-20px;
 }
 
 .point{
@@ -108,67 +88,8 @@ font-family: pretendard;
 font-size:20px;
 background-color: #BDBDBD;
 color :white;
-position: relative;
-right:-20px;
 
 }
-.knowmenu {
-    list-style: none;
-    position: relative;
-    right :-1000px;
-    top :-165px;
-} 
-.knowmenu2 {
-    list-style: none;
-    position: relative;
-    right :-1000px;
-    top :-70px;
-} 
-.knowmenu li{
-
-float:left;
-margin-left:10px;
-font-size:13px;
-position: relative;
-top: -10px;
-
-}
-
-.knowmenu2 li{
-
-float:left;
-margin-left:10px;
-font-size:13px;
-position: relative;
-top: -10px;
-
-}
-
-.rolldate{
-    color: #8c8c8c;
-     position: relative;
-right:-15px;
-}
-
-.view{
-    color: #8c8c8c;
-     position: relative;
-right:-15px;
-
-}
-.qcount{
-
-    color: #8c8c8c;
-     position: relative;
-right:-15px;
-}
-.user{
-font-family: pretendard;
-
-
-}
-
-
 
 .userInfo{
 
@@ -176,42 +97,18 @@ position: relative;
 top : -35px;
 right:-1150px;
 font-size: 13px;
-}
+color: #8c8c8c;
 
-.userInfo2{
-
-position: relative;
-top : -50px;
-right:-800px;
-font-size: 13px;
+width:250px;
 }
 
 .content1{
-position: relative;
-right: -100px;
-/* border: 1px solid red; */
-height:300px;
+display:inline-block;
 
-}
-.content2{
-position: relative;
-right: -100px;
-/* border: 1px solid red; */
-height:500px;
+/* border: 1px solid red;  */
+height:40%;
+width:80%;
 
-}
-#red{
-
- 	 color: red;
-    background-color: transparent !important;
-    outline :0;
-    border : 0;
-    position: relative;
-    right: -1400px;
-    top:-30px;
-    font-family: pretendard;
-    font-weight: bold;
-    font-size: 15px;
 }
 #red1{
 
@@ -226,18 +123,17 @@ height:500px;
     font-weight: bold;
     font-size: 15px;
 }
-#update{
+.update{
    background-color: transparent !important;
     outline :0;
     border : 0;
 
 }
-#delete {
+.delete {
    background-color: transparent !important;
     outline :0;
     border : 0;
 }
-
 #qanswer{
    background-color: transparent !important;
     outline :0;
@@ -245,10 +141,10 @@ height:500px;
 
 }
 .qbutton{
-   position: relative;
+position: relative;
    right: -1300px;
-
-}
+	width:180px;
+} 
 .Adoption_completed{
  color: red;
      position: relative;
@@ -256,11 +152,72 @@ height:500px;
       bottom : -10px;
       font-family: pretendard;
 }
+.question{
+position: relative;
+top:0px;
+background-color:white;
+
+}
+
+.answer{
+/* border: 1px solid blue;  */
+position: relative;
+top: 10px;
+background-color:white;
+}
+
+/* 채택하기버튼 */
+#Qcheck{
+width:100px;
+height:40px;
+border :0px;
+background:#8181F7;
+outline:none;
+float:right;
+color:#ffffff;
+position: relative;
+top:0px;
+left:-20px;
+
+}
+
+.knowmenu2 li{
+
+float:left;
+margin-left:10px;
+font-size:13px;
+position: relative;
+top: -80px;
+right:-1000px;
+list-style: none;
+   
+}
+
+
+.userInfo2{
+
+position: relative;
+top : -70px;
+right:-1150px;
+font-size: 13px;
+color: #8c8c8c;
+
+width:200px;
+}
+
+.content2{
+position: relative;
+/*  border: 1px solid red; */ 
+height:100%;
+width:100%;
+
+}
 .warning{
 font-family: pretendard;
 font-size:12px;
 position:relative;
 right: -100px;
+width:500px;
 }
 .warning span{
 color:red;
@@ -270,14 +227,27 @@ color:red;
 color: #A4A4A4;
 
 }
-#container{
-
-
+/* 좋아요 그림 */
+#heart1{
+width:23px;
+height:23px;
+}
+#heart2{
+width:13px;
+height:13px;
 }
 </style>
 
 
-<section class="container">	
+
+
+
+
+
+
+
+
+<section class="container">		
 	<div class="question">
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
@@ -287,19 +257,31 @@ color: #A4A4A4;
 			<div id="container">
 			
 				<div>
-					<span id="no">NO.${KnowledgeIn.kin_Sq}</span> 
+					<%-- <span id="no">NO.${KnowledgeIn.kin_Sq}</span>  --%>
 					<span class="QA">Q</span> 
 					<span class="title">${KnowledgeIn.kin_Title}</span> 
 					<span class="point">100</span>
 				</div>
-				<div class="userInfo"><span class="user">비공개</span> 
-				<span class="rolldate">${KnowledgeIn.kin_Date }</span> 
+				
+				<div class="userInfo">
+				        <c:if test="${KnowledgeIn.open_Yn eq 'Y'}" >
+            		<span class="user">${KnowledgeIn.kin_Writer}</span> 
+        					</c:if>
+        			       <c:if test="${KnowledgeIn.open_Yn eq 'N'}" >
+            				<span class="user">비공개</span> 
+        					</c:if>
+        							
+        			
+				<span class="rolldate"><fmt:formatDate value="${KnowledgeIn.kin_Date}" pattern="yyyy.MM.dd"/></span>
+			<%-- 	<span class="rolldate">${KnowledgeIn.kin_Date }</span>  --%>
 				<span class="view">조회수 ${KnowledgeIn.kin_Cnt }</span> 
-				<span class="qcount">답변 3개</span>
+				<span class="qcount">답변 ${kinReply.reply_Cnt}개</span>
 				</div>
 
 			<span class="content1">${KnowledgeIn.kin_Content}<br><br></span>
 				
+				
+
 
 		</div>
 		
@@ -308,21 +290,114 @@ color: #A4A4A4;
  					
 				<button id="red1">신고</button><br>
 						<div class="qbutton">
-									<button id="update">수정</button>|
-									<a href="${path}/KnowledgeIn/deleteKin?sq=${KnowledgeIn.kin_Sq}"><button id="delete">삭제</button></a>
+						
+							<%-- 	<a href='${path }/KnowledgeIn/update.do?sq=${KnowledgeIn.kin_Sq}'> --%><button class="update">수정</button><!-- </a> -->
+
+									<a href='${path }/delete?sq=${KnowledgeIn.kin_Sq }'><button class="delete">삭제</button></a>
+
+
+
 									<a href="${path}/KnowledgeIn/KnowledgeInA.do?sq=${KnowledgeIn.kin_Sq}"><button id="qanswer">답변하기</button></a>
 						</div>
 						
-				<ul class="knowmenu"> 
-				<li style="color: orange;">코로나19</li>
-					<li>백신</li>
-					<li>확진</li>
-					<li>해외</li>
-					<li>방역수칙</li>
-					<li>건강</li>
-					<li>기타</li>	
-			</ul>
+						<c:choose>
+						<c:when test="${KnowledgeIn.category eq '코로나19'}">
+						<ul class="knowmenu"> 
+						<li style="color: orange;">코로나19</li>
+						<li>백신</li>
+						<li>확진</li>
+						<li>해외</li>
+						<li>방역수칙</li>
+						<li>건강</li>
+						<li>기타</li>
+						</ul>
+						    </c:when>
 						
+						<c:when test="${KnowledgeIn.category eq '백신'}">
+						<ul class="knowmenu"> 
+						<li>코로나19</li>
+						<li style="color: orange;">백신</li>
+						<li>확진</li>
+						<li>해외</li>
+						<li>방역수칙</li>
+						<li>건강</li>
+						<li>기타</li>
+					
+						</ul>
+						    </c:when>
+						    
+						    
+						<c:when test="${KnowledgeIn.category eq '확진'}">
+						<ul class="knowmenu"> 
+						<li>코로나19</li>
+						<li>백신</li>
+						<li style="color: orange;">확진</li>
+						<li>해외</li>
+						<li>방역수칙</li>
+						<li>건강</li>
+						<li>기타</li>
+					
+						</ul>
+						    </c:when>
+						
+						<c:when test="${KnowledgeIn.category eq '해외'}">
+						<ul class="knowmenu"> 
+						<li>코로나19</li>
+						<li>백신</li>
+						<li>확진</li>
+						<li style="color: orange;">해외</li>
+						<li>방역수칙</li>
+						<li>건강</li>
+						<li>기타</li>
+					
+						</ul>
+						    </c:when>
+						    
+						 <c:when test="${KnowledgeIn.category eq '방역수칙'}">
+						<ul class="knowmenu"> 
+						<li>코로나19</li>
+						<li>백신</li>
+						<li>확진</li>
+						<li>해외</li>
+						<li style="color: orange;">방역수칙</li>
+						<li>건강</li>
+						<li>기타</li>
+					
+						</ul>
+						    </c:when>
+						    
+						 <c:when test="${KnowledgeIn.category eq '건강'}">
+						<ul class="knowmenu"> 
+						<li>코로나19</li>
+						<li>백신</li>
+						<li>확진</li>
+						<li>해외</li>
+						<li>방역수칙</li>
+						<li style="color: orange;">건강</li>
+						<li>기타</li>
+					
+						</ul>
+						    </c:when>   
+						
+						<c:when test="${KnowledgeIn.category eq '기타'}">
+						<ul class="knowmenu"> 
+						<li>코로나19</li>
+						<li>백신</li>
+						<li>확진</li>
+						<li>해외</li>
+						<li>방역수칙</li>
+						<li>건강</li>
+						<li style="color: orange;">기타</li>
+					
+					
+						</ul>
+						    </c:when>   
+						
+						</c:choose>
+				
+
+					
+
 						
 			</div><!--질문 div -->
 			
@@ -336,21 +411,119 @@ color: #A4A4A4;
 		
 	<img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
 			<button id="Qcheck" >채택하기</button>
-					<div>	<span class="QA">A</span> <span class="title">코로나 백신 접종 예약</span> <span class="Adoption_completed">채택완료</span>
+					<div>	<span class="QA">A</span> <span class="title">${KnowledgeIn.kin_Title}</span> <span class="Adoption_completed">채택완료</span>
 			
-							<ul class="knowmenu2"> 
-				<li style="color: orange;">코로나19</li>
-					<li>백신</li>
-					<li>확진</li>
-					<li>해외</li>
-					<li>방역수칙</li>
-					<li>건강</li>
-					<li>기타</li>	
-			</ul>
-					<div class="userInfo2"><span class="user">sihu***</span> <span class="rolldate">2021.07.27</span> 
-					<span class="view">추천 179</span> </div>
-
-
+				<c:choose>
+						<c:when test="${KnowledgeIn.category eq '코로나19'}">
+						<ul class="knowmenu2"> 
+						<li style="color: orange;">코로나19</li>
+						<li>백신</li>
+						<li>확진</li>
+						<li>해외</li>
+						<li>방역수칙</li>
+						<li>건강</li>
+						<li>기타</li>
+						</ul>
+						    </c:when>
+						
+						<c:when test="${KnowledgeIn.category eq '백신'}">
+						<ul class="knowmenu2"> 
+						<li>코로나19</li>
+						<li style="color: orange;">백신</li>
+						<li>확진</li>
+						<li>해외</li>
+						<li>방역수칙</li>
+						<li>건강</li>
+						<li>기타</li>
+					
+						</ul>
+						    </c:when>
+						    
+						    
+						<c:when test="${KnowledgeIn.category eq '확진'}">
+						<ul class="knowmenu2"> 
+						<li>코로나19</li>
+						<li>백신</li>
+						<li style="color: orange;">확진</li>
+						<li>해외</li>
+						<li>방역수칙</li>
+						<li>건강</li>
+						<li>기타</li>
+					
+						</ul>
+						    </c:when>
+						
+						<c:when test="${KnowledgeIn.category eq '해외'}">
+						<ul class="knowmenu2"> 
+						<li>코로나19</li>
+						<li>백신</li>
+						<li>확진</li>
+						<li style="color: orange;">해외</li>
+						<li>방역수칙</li>
+						<li>건강</li>
+						<li>기타</li>
+					
+						</ul>
+						    </c:when>
+						    
+						 <c:when test="${KnowledgeIn.category eq '방역수칙'}">
+						<ul class="knowmenu2"> 
+						<li>코로나19</li>
+						<li>백신</li>
+						<li>확진</li>
+						<li>해외</li>
+						<li style="color: orange;">방역수칙</li>
+						<li>건강</li>
+						<li>기타</li>
+					
+						</ul>
+						    </c:when>
+						    
+						 <c:when test="${KnowledgeIn.category eq '건강'}">
+						<ul class="knowmenu2"> 
+						<li>코로나19</li>
+						<li>백신</li>
+						<li>확진</li>
+						<li>해외</li>
+						<li>방역수칙</li>
+						<li style="color: orange;">건강</li>
+						<li>기타</li>
+					
+						</ul>
+						    </c:when>   
+						
+						<c:when test="${KnowledgeIn.category eq '기타'}">
+						<ul class="knowmenu2"> 
+						<li>코로나19</li>
+						<li>백신</li>
+						<li>확진</li>
+						<li>해외</li>
+						<li>방역수칙</li>
+						<li>건강</li>
+						<li style="color: orange;">기타</li>
+					
+					
+						</ul>
+						    </c:when>   
+						
+						</c:choose>
+				
+				
+					<div class="userInfo2">
+					<!-- <span class="user">sihu***</span>  -->
+					  <c:if test="${KnowledgeIn.open_Yn eq 'Y'}" >
+            		<span class="user">${KnowledgeIn.kin_Writer}</span> 
+        					</c:if>
+        			       <c:if test="${KnowledgeIn.open_Yn eq 'N'}" >
+            				<span class="user">비공개</span> 
+        					</c:if>
+					
+					
+					
+					<span class="rolldate"><fmt:formatDate value="${KnowledgeIn.kin_Date}" pattern="yyyy.MM.dd"/></span>
+					<span class="view"><img id="heart1" src="${pageContext.request.contextPath}/resources/image/heart1.png"> ${kinReply.reply_Like_Cnt}</span> </div>
+				<%-- 	<span class="view"><img id="heart2" src="${pageContext.request.contextPath}/resources/image/heart2.png"> ${kinReply.reply_Like_Cnt}</span> </div> --%>
+	
 			
 					</div>
 			
@@ -369,35 +542,65 @@ color: #A4A4A4;
 				
 
 			</div>
-			<button id="red">신고</button><br>
+			<button id="red1">신고</button><br>
 		</div>
 	
 		
 			
+<!-- 			</form>		 -->
 			
+
+
+		
 			
 </section>
 
 <script>
-$("#delete").on("click", function(e){
-    form.attr("action", "/knowledgeIn/delete");
-    form.attr("method", "post");
-    form.submit();
+		var selected =${KnowledgeIn.selected}
+	$(document).ready(function(){ 
+		
+		
+		$('.delete').click(function() {
+			if(selected==1){
+				alert("답변이 존재하여 수정/삭제가 불가합니다.")
+				return false;
+			}
+			
+			var result = confirm('정말 삭제하시겠습니까?'); 
+			if(result) { 
+				location.replace('${path}/KnowledgeIn/KnowledgeInMain.do'); 
+				} 
+			else { 
+				return false;
+			}
+		});
+		
+		
+		$(".update").on("click",function(){
+			location.href="${path }/KnowledgeIn/update.do?sq=${KnowledgeIn.kin_Sq}";
+		})
+		
+	
+		
+		
 });
 		
+
+	
+		
+/* 	$('.update').click(function() {
+		if(selected==1){
+			alert("답변이 존재하여 수정/삭제가 불가합니다.")
+			return false;
+		}
+ */
 
 
 
 
 </script>
 
-
-
-
-
-
-
-
-<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>		
+	
+<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
+	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-

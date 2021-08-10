@@ -2,16 +2,22 @@ package com.twoweeks.spring.know.model.dao;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinAttachment;
+import com.twoweeks.spring.know.model.vo.KinReply;
+import com.twoweeks.spring.know.model.vo.KinReplyAttachment;
 
 @Repository
 public class KnowledgeInDaoImpl implements KnowledgeInDao {
-
+	
+	
+	
 	@Override
 	public List<Kin> selectKinList(SqlSession session, int cPage, int numPerpage) {
 		return session.selectList("knowledgeIn.selectKinList",null,
@@ -25,6 +31,14 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 
 	}
 
+	@Override
+	public int selectKinReplyCount(SqlSession session) {
+		
+		return session.selectOne("kinReply.selectKinReplyCount");
+
+	}
+	
+	
 	@Override
 	public int insertKin(SqlSession session, Kin k) {
 		return session.insert("knowledgeIn.insertKin",k);
@@ -42,10 +56,44 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	}
 
 
+
 	@Override
-	public int deleteKin(SqlSession session,int sq) {
+	public void delete(SqlSession session,int sq)throws Exception {
 		
-		return session.delete("knowledgeIn.delete",sq);
+		session.delete("knowledgeIn.delete",sq);
+	}
+
+	@Override
+	public void updatecnt(SqlSession session,int sq)throws Exception{
+		session.update("knowledgeIn.updatecnt",sq);
+		
+	}
+
+	@Override
+	public int insertKinReply(SqlSession session, KinReply kr) {
+		return session.insert("kinReply.insertKinReply",kr);
+		
+	}
+
+	@Override
+	public int insertKinReplyAttachment(SqlSession session, KinReplyAttachment kra) {
+		
+		return session.insert("kinReply.insertKinReplyAttachment",kra);
+	}
+	
+	@Override
+	public int update(SqlSession session, Kin k) {
+		return session.update("knowledgeIn.update", k);
+	}
+
+	@Override
+	public int updateKinAttachment(SqlSession session, KinAttachment ka) {
+		return session.insert("knowledgeIn.updateKinAttachment",ka);
+	}
+
+	@Override
+	public List<Kin> list(SqlSession session, Kin k) {
+		return session.selectList("knowledgeIn.list",k);
 	}
 
 }

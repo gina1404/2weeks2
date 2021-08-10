@@ -6,7 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 
-	<jsp:param name="title" value="지식인질문"/>
+	<jsp:param name="title" value="지식인질문수정페이지"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
@@ -294,22 +294,21 @@ right:-50px;
 
 
 <section class="container">
-
-<form name="KinFrm" action="${path }/KnowledgeIn/KnowledgeInQEnd.do"method="post" enctype="multipart/form-data" >
-         
+<form name="KinFrm" action="${path }/KnowledgeIn/update" method="post" enctype="multipart/form-data" onsubmit="return _onSubmit();" >
+      
 	<div class="question">
-			<span class="a">Q&A</span>
+			<span class="a">수정</span>
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div>
 			<button id="Qsearch" >질문하기</button><img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
-			
+				<input type="hidden" id="no" value="${knowledgeIn.kin_Sq}">NO.${knowledgeIn.kin_Sq}  
 					<div>	<span class="QA">Q</span> 
 <input type="text"  maxlength='20' style="width:1000px;font-size:30px; border:1px solid #19ce60" placeholder="제목 작성란 입니다 20자 미만으로 입력해주세요."
 				 value ="${knowledgeIn.kin_Title}" name="kin_Title" required>
 			
 			
-			<input type="text" name="kin_Writer" class="form-control" value="${knowledgeIn.kin_Writer}" >
+			<input type="text" name="kin_Writer" class="form-control" value="${knowledgeIn.kin_Writer}"  readonly="readonly" >
 			
 			
 			<ul class="knowmenu"> 
@@ -359,8 +358,8 @@ right:-50px;
 		<br>
 					 					
  			<hr style="border: solid 1px #F2F2F2;">
-		<label>아이디 공개<input type="radio" name="open_Yn" value="Y">${knowledgeIn.open_Yn}</label>
-		<label>비공개<input type="radio" name="open_Yn" value="N">${knowledgeIn.open_Yn}</label>
+		<label>아이디 공개<input type="radio" name="open_Yn" value="Y">${KnowledgeIn.open_Yn}</label>
+		<label>비공개<input type="radio" name="open_Yn" value="N">${KnowledgeIn.open_Yn}</label>
 			<hr style="border: solid 1px #F2F2F2;">
 		<button>포인트 설정</button>
 
@@ -369,7 +368,7 @@ right:-50px;
  			<hr style="border: solid 1px #F2F2F2;">	
  			
  	        <!--     <input type="submit" class="btn btn-outline-success" value="질문등록" >	 -->
-		<button id="Qcheck" type="submit">질문등록</button>
+		<button id="Qcheck" type="submit">완료</button>
 		</div>
 
 
@@ -383,30 +382,6 @@ right:-50px;
 			
 </section>
 <script>
-
-
-$(document).ready(function(){
-	$("#attach").on("change",fileCheck);
-});
-
-$(function () {
-	$("#btn-upload").click(function(e){
-		e.preventDefault();
-		$("#attach").click();
-	});
-});
-
-
-
-
-
-
-
-
-
-
-
-
 var onoff =${KnowledgeIn.open_Yn}
 
 
@@ -419,7 +394,7 @@ var onoff =${KnowledgeIn.open_Yn}
 		}) 
 		
 		
-/* 		$("#attach").change(function(){
+/* 		$("#gdsImg").change(function(){
    if(this.files && this.files[0]) {
     var reader = new FileReader;
     reader.onload = function(data) {
@@ -431,6 +406,24 @@ var onoff =${KnowledgeIn.open_Yn}
 		
 		
 		
+		function _onSubmit(){
+
+			if(!confirm("수정하시겠습니까?")){
+			return false;
+			}
+			}
+		
+	$(function () {
+		$("#attach").on("change",fileCheck);
+	});
+
+	$(function () {
+		$("#btn-upload").click(function(e){
+			e.preventDefault();
+			$("#attach").click();
+		});
+	});
+
 		
 		
 	</script>	

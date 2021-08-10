@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 public class KinAttachment {
 	
 	private int atch_No; //첨부파일 번호

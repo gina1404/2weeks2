@@ -2,19 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="knowledgeIn">
 	<select id="selectKinList" resultMap="KnowledgeInMap">
-	SELECT * 
+ 	SELECT * 
 		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_SQ ASC 
 		
 	
 <!-- SELECT * FROM KIN --> 
 	</select>
-	
-	
-	
+	<select id ="cnt"  resultMap="KnowledgeInMap">
+		SELECT * FROM KIN ORDER BY KIN_CNT DESC
+	</select>
 	
 	<select id="selectKinCount" resultType="_int">
 		SELECT COUNT(*) FROM KIN 
 	</select> 
+	
+		<select id="selectKinReplyCount" resultType="_int">
+		SELECT COUNT(*) FROM KIN_REPLY;
+	</select> 
+	
 	
 	<resultMap type="knowledgeIn" id="KnowledgeInMap">
 		<id column="kin_Sq" property="kin_Sq"/>
@@ -44,18 +49,30 @@
 
 	</resultMap>
 	
+	
+	
 		<insert id="insertKin">
-			INSERT INTO KIN VALUES(KIN_SQ.NEXTVAL,#{kin_Writer},#{category},#{kin_Title},
-			#{kin_Content},#{kin_Image},#{open_Yn},#{selected,},#{kin_Date},#{kin_Cnt})
+			<!-- INSERT INTO KIN VALUES(KIN_SQ.NEXTVAL,#{kin_Writer},#{category},#{kin_Title},
+			#{kin_Content},#{kin_Image},#{open_Yn},#{selected,},SYSDATE,#{kin_Cnt}) -->
+			
+			INSERT INTO KIN VALUES(KIN_SEQ.NEXTVAL,#{kin_Writer},#{category},#{kin_Title},
+			#{kin_Content},NULL,#{open_Yn},default,SYSDATE,default)
+			
+			
+			
+			
 			<selectKey keyProperty="kin_Sq" resultType="_int" order="AFTER"> 
-			SELECT KIN_SQ.CURRVAL FROM DUAL 
+			SELECT KIN_SEQ.CURRVAL FROM DUAL 
 			</selectKey>
 		</insert>
 		<insert id="insertKinAttachment"> 
-		INSERT INTO KINATTACHMENT VALUES(ATCH_NO.NEXTVAL,#{kin_Sq}, #{atch_Ori}, #{atch_New}) 
+		INSERT INTO KIN_ATTACHMENT VALUES(KIN_ATTACHMENT_SEQ.NEXTVAL,#{kin_Sq}, #{atch_Ori}, #{atch_New}) 
 		</insert>
+
+	<insert id="updateKinAttachment">
+		INSERT INTO KIN_ATTACHMENT VALUES(KIN_ATTACHMENT_SEQ.NEXTVAL, #{kin_Sq}, #{atch_Ori}, #{atch_New}) 
 	
-	
+	</insert>
 	
 	<select id="selectKinOne" resultMap="KnowledgeInMap">  
 	SELECT * FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ WHERE K.KIN_SQ=#{SQ} 
@@ -65,9 +82,51 @@
 		
 		
 		
-		<delete id="deleteKin" parameterType="int">
-		DELETE FROM KIN WHERE KIN_SQ = #{SQ}
+		<delete id="delete" parameterType="int">
+		DELETE FROM KIN WHERE KIN_SQ = #{kin_Sq}
 		</delete>
+		
+		<update id="update">
+		UPDATE KIN SET KIN_TITLE = #{kin_Title}, KIN_CONTENT = #{kin_Content} ,CATEGORY = #{category} ,OPEN_YN=#{open_Yn} WHERE KIN_SQ = #{kin_Sq} 
+		</update>
+		
+		<update id="updatecnt">
+		UPDATE KIN SET KIN_CNT = KIN_CNT + 1 WHERE KIN_SQ = #{kin_Sq}
+		</update>
+		
+		
+	<!-- 좋아요 구현 -->
+<!-- 		<insert id="create">
+		INSERT INTO KIN_LIKES(KIN_SQ, USER_ID)
+		values(#{kin_Sq}, #{user_Id})
+		</insert>
+
+		<select id="read" resultType="likeVO">
+		select *
+		from KIN_LIKES
+		where KIN_SQ = #{kin_Sq} and USER_ID = #{user_Id}
+	</select>
+	
+	<delete id="delete">
+		delete from KIN_LIKES
+		where KIN_SQ = #{kin_Sq} and USER_ID = #{user_Id}
+	</delete> -->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

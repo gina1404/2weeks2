@@ -12,7 +12,8 @@
 <style>
 #rankingChart{
 	position: relative;
-	top: -15px;
+	top: -15px;.
+	
 }
 
 .ranking_section .ranking_list1{
@@ -25,7 +26,7 @@
     list-style: none;
     position:relative;
    	top:-50px;
-    
+    text-overflow: ellipsis;
 }
 
 .ranking_section .ranking_list {
@@ -34,9 +35,9 @@
     width: 50%;
     height: 308px;
     padding-right: 20px;
-     text-decoration:none;
-        list-style: none;
-       
+    text-decoration:none;
+    list-style: none;
+    text-overflow: ellipsis;
     
 }
 
@@ -49,6 +50,7 @@
     font-size: 12px;
     line-height: 1.6;
     letter-spacing: -0.5px;
+    text-overflow: ellipsis;
 }
 
 .section_headings {
@@ -82,6 +84,7 @@
     position: relative;
     margin-top: 14px;
     padding: 4px 4px 16px 18px;
+    text-overflow: ellipsis;
     border-bottom: 1px solid #f2f2f2;
     background: 0;
     font-size: 12px;
@@ -119,6 +122,7 @@
     position : relative;
     top:-12px;
     
+    
 } 
 
 
@@ -129,15 +133,17 @@
  
 /*질문 목록에서 답변*/
  .ranking_section .ranking_item .text {
+     width:300px;
     display: block;
     overflow: hidden;
     position: relative;
     margin: 0 0 4px -15px;
     color: #555;
-    text-overflow: ellipsis;
+ 	 text-overflow: ellipsis;
     white-space: nowrap;
     bottom: -5px;
     right: -14px;
+
 } 
 
 
@@ -149,6 +155,7 @@
     margin: 0 9px 0 9px;
     background-color: #e5e5e5;
     vertical-align: middle;
+    
 }   
 
  /* 답변수 색깔 */
@@ -395,8 +402,8 @@ top :-10px;
 					 <c:if test="${status.count<=3 }"> 
 					
 					<li class="ranking_item _item_1" >
-				
-					<span class="no">${k.kin_Sq}</span>
+			
+					<span class="no"><c:out value="${status.count}"></c:out></span>
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
@@ -413,8 +420,8 @@ top :-10px;
 				<c:forEach var="k" items="${list}" varStatus="status">
 				 <c:if test="${status.count>=4  }">
 					<li class="ranking_item _item_2" >
-						
-					<span class="no">${k.kin_Sq}</span>
+						<%-- 	<c:out value="${status.count}"></c:out> --%>
+					<span class="no"><c:out value="${status.count}"></c:out></span>
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
@@ -460,63 +467,43 @@ top :-10px;
 		<div class="ranking_list_area" id="rankingChart">
 				
 				<ul class="ranking_list">
+				<%-- 	<c:forEach var="k" items="${cnt }" varStatus="status">
+					 <c:if test="${status.count<=3 }"> 
 					
-                    
 					<li class="ranking_item _item_1" >
-						<span class="no">1</span>
-					<a href="" class="ranking_title" target="_blank" onclick="">코로나 백신 접종 예약</a>
-					<a href="" class="text" target="_blank" onclick="">지금 50대부터 코로나 백신 접종 예약 진행중인것으로 아는데요 다음주에도 접종예정인지 궁금합니다. 부모...</a>
-					<span class="recommend_num">조회수 4953</span>
-					<span class="reply_num">답변수 3</span>
+			
+					<span class="no"><c:out value="${status.count}"></c:out></span>
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
+					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
+		<!-- 			<span class="reply_num">답변수 8</span> -->
+			    	
+				
 					</li>
+						</c:if>
+     				</c:forEach>					 --%>
                     
-                    
-                    
-					<li class="ranking_item _item_2" >
-						<span class="no">2</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">코로나로 죽을 확률</a>
-						<a href="" class="text" target="_blank" onclick="">어제부터 인후통 오한 눈통증,  두통 팔이 저림 마른기침 이런증상이 있네요 보건소..</a>
-						<span class="recommend_num">조회수 3061</span><span class="reply_num">답변수 2</span>
-					</li>
-                    
-                    
-                    
-					<li class="ranking_item _item_3" >
-						<span class="no">3</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">코로나 증상</a>
-						<a href="" class="text" target="_blank" onclick="">고3 백신접종을 해서 맞는다고 하는데 화이자 부작용중에 알레르기 반응이 있던데 사과 알러지 있는데 이런...</a>
-						<span class="recommend_num">조회수 1575</span><span class="reply_num">답변수 10</span>
-					</li>
+	
 
                 </ul>
 				
 				<ul class="ranking_list">
-
-					<li class="ranking_item _item_4" >
-						<span class="no">4</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">코로나 검사 가까운</a>
-						<a href="" class="text" target="_blank" onclick="">코로나 검사받으려고 하는데 가까운 진료소를 알아보려면 어디서 알아볼 수 있을까요?..</a>
-						<span class="recommend_num">조회수 1413</span><span class="reply_num">답변수 28</span>
+				<%-- 	<c:forEach var="k" items="${list}" varStatus="status">
+				 <c:if test="${status.count>=4  }">
+					<li class="ranking_item _item_2" >
+							<c:out value="${status.count}"></c:out>
+					<span class="no"><c:out value="${status.count}"></c:out></span>
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
+					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
+		<!-- 			<span class="reply_num">답변수 8</span> -->
+			    	
+				
 					</li>
-                    
-                    
-				    
-					<li class="ranking_item _item_5" >
-						<span class="no">5</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">잔여백신 관련 질문입니다</a>
-						<a href="" class="text" target="_blank" onclick="">잔여백신 맞으려고 하는데요....이번달에 20대는 잔여백신을 접종할 수 있나요?</a>
-						<span class="recommend_num">조회수 1348</span><span class="reply_num">답변수 1</span>
-					</li>
-                    
-                    
-				    
-					<li class="ranking_item _item_6" >
-						<span class="no">6</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">도쿄올림픽 선수들 코로나</a>
-						<a href="" class="text" target="_blank" onclick="">도쿄올림픽 선수촌에서 코로나 발생관련..</a>
-						<span class="recommend_num">조회수 1012</span><span class="reply_num">답변수 1</span>
-					</li>
-
+				</c:if>
+     				</c:forEach>	 --%>
+     				
+			
                     
                 </ul>
         </div>

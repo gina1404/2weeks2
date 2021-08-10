@@ -1,12 +1,14 @@
 package com.twoweeks.spring.know.model.vo;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class KinReplyAttachment {
 
 		private int atch_No; //첨부파일 번호
