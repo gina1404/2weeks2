@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.twoweeks.spring.admin.model.dao.AdminDao;
 import com.twoweeks.spring.admin.model.vo.Notice;
+import com.twoweeks.spring.admin.model.vo.Point;
 import com.twoweeks.spring.admin.model.vo.noticeAttachment;
 import com.twoweeks.spring.member.model.vo.Member;
 
@@ -50,7 +51,22 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return dao.deleteMember(session,userId);
 	}
+	@Override
+	public int insertPointEnd(Point re) {
+		// TODO Auto-generated method stub
+		return dao.insertPointEnd(session,re);
+	}
+	@Override
+	public int selectMemberPoint(String name) {
+		// TODO Auto-generated method stub
+		return dao.selectMemberPoint(session,name);
+	}
 	
+	@Override
+	public int updatePointEnd(Point re) {
+		// TODO Auto-generated method stub
+		return dao.updatePointEnd(session,re);
+	}
 	
 	
 }

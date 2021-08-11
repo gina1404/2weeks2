@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.twoweeks.spring.admin.model.vo.Notice;
+import com.twoweeks.spring.admin.model.vo.Point;
 import com.twoweeks.spring.admin.model.vo.noticeAttachment;
 import com.twoweeks.spring.member.model.vo.Member;
 
@@ -41,7 +42,25 @@ public class AdminDaoImpl implements AdminDao{
 		// TODO Auto-generated method stub
 		return session.delete("notice.deleteMember", userId);
 	}
+
+	@Override
+	public int insertPointEnd(SqlSession session, Point re) {
+		// TODO Auto-generated method stub
+		return session.insert("notice.insertPointEnd", re);
+	}
+
+	@Override
+	public int selectMemberPoint(SqlSession session, String name) {
+		// TODO Auto-generated method stub
+		return session.selectOne("notice.selectMemberPoint", name);
+	}
 	
+	@Override
+	public int updatePointEnd(SqlSession session, Point re) {
+		// TODO Auto-generated method stub
+		return session.update("notice.updatePointEnd", re);
+	}
+
 	
 
 }

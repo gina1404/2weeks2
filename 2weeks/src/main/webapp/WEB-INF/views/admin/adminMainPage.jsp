@@ -249,9 +249,9 @@
     	function fn_pointch(clicked_id){
     		console.log(clicked_id);
     		const userId=clicked_id;
-    			const status="width=700px,height=500px,left=500px,top=500px";
+    			const status="width=700px,height=600px,left=500px,top=500px";
     			const title="포인트변경";
-    			const url="<%=request.getContextPath()%>/admin/updataPoint.do?userId"+userId;
+    			const url="<%=request.getContextPath()%>/admin/updataPoint.do?userId="+userId;
     			open(url,title,status);
 
     		};

@@ -6,13 +6,9 @@
 	<jsp:param name="title" value="updates/domestic"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6944e39f85fb8e5ca0d10ff408274b51"></script> -->
 <section class="container">
-	<h2>국내 확산 현황</h2>
-	
-
-	<div>지역별 확산 현황</div>
-		<section id="home-covid-chart" style="width:45%; min-height:500px; border:1px solid green;">
+	<div>test</div>
+	<section id="home-covid-chart" style="width:45%; min-height:500px; border:1px solid green;">
 			<jsp:include page="/WEB-INF/views/covidUpdate/regionalKor.jsp"></jsp:include>
 		</section>
 </section>
