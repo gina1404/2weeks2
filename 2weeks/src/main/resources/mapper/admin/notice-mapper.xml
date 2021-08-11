@@ -38,4 +38,7 @@
 	<update id="updatePointEnd">
 		UPDATE MEMBER2 SET USERPOINT_CNT=USERPOINT_CNT+#{pointAmt} WHERE USER_ID=#{userId}
 	</update> 
+	<select id="adminReporttable" resultType="com.twoweeks.spring.admin.model.vo.Report">
+		SELECT * FROM REPORT
+	</select>
 </mapper>

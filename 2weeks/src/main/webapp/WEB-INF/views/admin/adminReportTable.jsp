@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-   
+       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,104 +10,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Static Navigation - SB Admin</title>
+        <title>2WeekS admin</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="<%=request.getContextPath() %>/resources/AdminTem/css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-       <style>
-	    div#board-container{width:400px; margin:0 auto; text-align:center;}
-	    div#board-container input{margin-bottom:15px;}
-    </style>
-    	<style>
-	ul, li{
-		margin:0;
-		padding:0;
-		list-style-type:none;
-	}
-	#subject{
-		width:100%;
-	}
-	.title_input{
-		overflow: hidden;
-		padding: 15px 3px 11px;
-		border-bottom: 1px solid #e9eaeb;
-		clear: both;
-		margin: 0;
-	}
-	.title_input textarea{
-		padding: 0;
-		width: 80%;
-		border: 0;
-		font-size: 21px;
-		line-height: 24px;
-		resize: none;
-		outline: none;
-	}
-	.btn{
-		border-top: 1px solid #f5f5f5;
-		margin: 0;
-		padding: 0;
-	}
-	.btnbtn{
-		display: inline-block;
-		border: 0;
-		padding: 0;
-		text-align: right;
-		line-height: 48px;
-		background: transparent;
-		font-size: 16px;
-		color: #333;
-		cursor: pointer;
-		outline: 0;
-		vertical-align: middle;
-		margin: 0px;
-		left: 750px;
-		position: relative;
-	}
-	.btnbtn2{
-		display: inline-block;
-		border: 0;
-		padding: 0;
-		text-align: right;
-		line-height: 48px;
-		background: transparent;
-		font-size: 16px;
-		color: #333;
-		cursor: pointer;
-		outline: 0;
-		vertical-align: middle;
-		margin: 0px;
-		left: 800px;
-		position: relative;
-	}
-	.btbt{
-		display: inline-block;
-		border: 0;
-		padding: 0;
-		text-align: right;
-		line-height: 48px;
-		background: transparent;
-		font-size: 16px;
-		color: #333;
-		cursor: pointer;
-		outline: 0;
-		vertical-align: middle;
-		margin: 0px;
-	}
-	#content{
-		resize: none;
-	}	
-	.iscontainer{
-	width: 70%;
-	position: relative;
-	padding: 100px 100px 100px 100px;
-	left: 200px;
-	}	
-</style>
-     <body class="sb-nav-fixed">
+       <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="<%=request.getContextPath() %>/">2Weeks</a>
@@ -174,63 +83,76 @@
                     </div>
                 </nav>
             </div>
-        <div id="layoutSidenav_content">
-            <section id="content">
-            	<br><br><br><br>
-				<div class="iscontainer">
-			        <form name="boardFrm" action="<%=request.getContextPath() %>/admin/NoticeForm.do"
-			         method="post" enctype="multipart/form-data" >
-			            <input type="text" class="form-control" placeholder="제목" name="noticeTitle" id="noticeTitle" required>
-			            <input type="text" style="margin-top: 10px; margin-bottom: 10px;" class="form-control" placeholder="아이디 (4글자이상)" name="noticeWriter" value="Admin" readonly required>
-			            <div class="input-group mb-3" style="padding:0px;">
-			                <div class="input-group-prepend" style="padding:0px;">
-			                    <span class="input-group-text">첨부파일1</span>
-			                </div>
-			                <div class="custom-file">
-			                    <input type="file" class="custom-file-input" name="upFile" id="upFile1">
-			                    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
-			                </div>
-			            </div>
-			            <div class="input-group mb-3" style="padding:0px;">
-			                <div class="input-group-prepend" style="padding:0px;">
-			                    <span class="input-group-text">첨부파일2</span>
-			                </div>
-			                <div class="custom-file">
-			                    <input type="file" class="custom-file-input" name="upFile" id="upFile2">
-			                    <label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
-			                </div>
-			            </div>
-			            <textarea class="form-control" name="noticeContent" placeholder="내용" required style="resize: none;" cols="120" rows="15"></textarea>
-			            <br />
-			            <input type="submit" class="btnbtn" value="저장" style="margin-right: 20px;">
-			            <input type="button" onclick="fn_cancel();" class="btnbtn2" value="취소" style="margin-left: 20px; ">
-			        </form>
-			    </div>
-
-
-</section>
-                <!-- <main>
+            <div id="layoutSidenav_content">
+                <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Static Navigation</h1>
+                        <h1 class="mt-4">신고 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
+                            <li class="breadcrumb-item"><a href="<%=request.getContextPath() %>/">메인으로</a></li>
+
                         </ol>
+
                         <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                게시글 신고 요청 사항
+                            </div>
                             <div class="card-body">
-                                <p class="mb-0">
-                                    This page is an example of using static navigation. By removing the
-                                    <code>.sb-nav-fixed</code>
-                                    class from the
-                                    <code>body</code>
-                                    , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
-                                </p>
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>회원 아이디</th>
+                                            <th>카테고리</th>
+                                            <th>카테고리 번호</th>
+                                            <th>신고 목록</th>
+                                            <th>신고 상세 사유</th>
+                                            <th>처리유무</th>
+                                            <th>게시물삭제</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                     					    <th>회원 아이디</th>
+                                            <th>카테고리</th>
+                                            <th>카테고리 번호</th>
+                                            <th>신고 목록</th>
+                                            <th>신고 상세 사유</th>
+                                            <th>처리유무</th>
+                                            <th>게시물 삭제</th>                                            
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <c:forEach items="${list }" var="c">
+                                        <tr>
+                                          <td>${c.user_Id }</td>
+	                                        <c:if test="${c.post_Sq ne 0}">
+	                                            <td>일반게시물</td>
+	                                            <td>${c.post_Sq }</td>
+	                                        </c:if>
+	                                        <c:if test="${c.kin_Sq ne 0}">
+	                                            <td>지식인게시물</td>
+	                                            <td>${c.kin_Sq }</td>
+	                                        </c:if>
+	                                        <c:if test="${c.post_Reply_Sq ne 0 }">
+	                                            <td>일반게시물 댓글</td>
+	                                            <td>${c.post_Reply_Sq }</td>
+	                                        </c:if>
+	                                        <c:if test="${c.kin_Reply_Sq ne 0}">
+	                                            <td>지식인게시물 댓글</td>
+	                                            <td>${c.kin_Reply_Sq }</td>
+	                                        </c:if>
+                                            <td>${c.report_Reason }</td>
+                                            <td>${c.report_Detail_Reason }</td>
+                                            <td>${c.report_Yn }</td>
+                                            <td><button onclick="fn_deleteAll(${c.post_Sq},${c.kin_Sq},${c.post_Reply_Sq},${c.kin_Reply_Sq});" class="btn btn-outline-primary" >삭제</button></td>
+                                        </tr>
+                                     </c:forEach>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div style="height: 100vh"></div>
-                        <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
                     </div>
-                </main> -->
+                </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
@@ -247,21 +169,27 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath() %>/resources/AdminTem/js/scripts.js"></script>
-        <script>
-		$(function(){
-			$("[type=file]").on("change",e=>{
-				const fileName=$(e.target).prop("files")[0].name;
-				$(e.target).next('.custom-file-label').html(fileName);
-			});
-		});
-		const fn_cancel=()=>{
-
-	  		const result=confirm("정말로 취소하시겠습니까?");
-			if(result){
-				location.assign('<%=request.getContextPath()%>/admin/adminPageList');			
-			}	
-
-		};
-	</script>	
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="<%=request.getContextPath() %>/resources/AdminTem/js/datatables-simple-demo.js"></script>
+       <script >
+        function fn_deleteAll(a,b,c,d){
+    			
+    			const post=a;
+    			const kin=b;
+    			const postReply=c;
+    			const kinReply=d;
+    			
+    			
+    			if(post!=0){
+    				location.assign('<%=request.getContextPath() %>/admin/deletePost?seq='+post);			
+    			}else if(kin!=0){
+    				location.assign('<%=request.getContextPath() %>/admin/deleteKin?seq='+kin);	
+    			}else if(postReply!=0){
+    				location.assign('<%=request.getContextPath() %>/admin/deletePostReply?seq='+postReply);	
+    			}else if(kinReply!=0){
+    				location.assign('<%=request.getContextPath() %>/admin/deleteKinReply?seq='+kinReply);	
+    			}	
+    		}
+        </script>
     </body>
-</html>
+</html>ml>
