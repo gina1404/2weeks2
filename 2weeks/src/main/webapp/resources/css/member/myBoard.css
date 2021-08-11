@@ -53,4 +53,7 @@
 .myBoardTab tr td:nth-child(2){
 	text-align: left;
 	padding: 0 10px 0 10px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }

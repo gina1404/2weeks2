@@ -1,145 +1,20 @@
 @charset "UTF-8";
-<<<<<<< HEAD
-<style>	
-	body{
-		margin:0;
-		padding:0;
-	}
 	
-	/* a태그 기본 속성 없애기 */
-	a { text-decoration:none !important } 
-	a:hover { text-decoration:none !important }
-	a:visited {color:black;}
-	
-	/* 기본 header, nav, main(container), aside 영역 나누기  */
-	#header{
-		background-color: #F7F8FC;
-		display: flex;
-		align-items: center;
-		width: 100%;
-		position:fixed;
-		height:60px; /* header 높이 */
-		top:0;
-		left:0;
-		right:0;
-	}		
-	#sidebar {
-		left:0;
-		align-items: flex-start;
-        width:15%; /* 사이드바 너비 */
-        overflow: hidden;
-		left:0;
-		top:60px; /* header 높이에 따라 변경해야 됨 */
-		position:fixed;
-		margin:0;
-		padding:0;
-		height:100%;
-	}
-	.container {	 
-		margin-left:15%; /* 사이드바 너비만큼 띄움 */
-		margin-top:60px; /* 헤더 높이만큼 띄움 */
-		background-color: #F7F8FC;
-		min-height:800px;
-		width:80%; /* 본문 너비 */
-		padding:15px;
-	}  	
-	#aside {
-		display: flex;
-		background-color: #EEF0FE; 
-		width: 5%; /* 페이지 스크롤 영역 너비 */
-		top:60px; /*  header 높이와 동일하게 맞춰줘야 됨 */
-		right:0;
-		position:fixed;
-		min-height:400px;
-		height:100%;
-    }   
-    
-	/* header css 속성 */
-	.header-logo-area {
-		background-color: #E1E6FF;
-        width:15%; /* 사이드바 너비와 동일하게 맞춰줘야 됨 */
-        height:100%;
-		text-align:center;
-		display:flex;
-		align-items: center;
-		justify-content: center;
-		left:0;
-	}
-	.header-logo{
-		color: black;
-		font-size: 20px;
-		font-weight: bolder;
-		text-align:center;
-		align-items:center;
-		opacity: 0.7;
-	}
-	.header-search-area{
-		width: 60%;
-		height: 60px;
-		display:flex;
-		align-items: center;
-		justify-content: flex-end;
-		padding:0;
-	}
-	#searchKeyword{	
-		margin:0;
-		padding:0;
-		width:60%;
-		height:26px;
-		margin-right:-5px;
-		text-align: right;
-		border:0.5px solid gray;
-		border-radius:4px;	
-	}
-	#searchKeyword:focus{
-		outline:0.5px solid #E1E6FF;
-	}
-	.header-icon-area{
-		height: 60px;
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-		padding:0 15px;
-	}
-	}           
-	.header-divider {
-		height: 32px;
-		width: 2px;
-	}
-	.header-icon {
-		height: 24px;
-		width: 24px;
-		margin-left: 20px;	
-	}
-	.header-profile-icon{
-		height: 24px;
-		width: 24px;
-	}
-	.header-profile-photo{
-		/* profile 사진 받아올 경우 여기서 사이즈 변경 */
-		height: 30px;
-		width: 30px;
-		display:none;
-	}
-	.header-profile-text{
-		font-size: 20px;
-		margin-left: 25px;
-	}
-	
-	
-</style>
-=======
-
 body{
 	margin:0;
 	padding:0;
 }
 
+/* a태그 기본 속성 없애기 */
+a { text-decoration:none !important } 
+a:hover { text-decoration:none !important }
+a:visited {color:black;}
+
 /* 기본 header, nav, main(container), aside 영역 나누기  */
 #header{
-	align-items: center;
 	background-color: #F7F8FC;
 	display: flex;
+	align-items: center;
 	width: 100%;
 	position:fixed;
 	height:60px; /* header 높이 */
@@ -150,8 +25,9 @@ body{
 #sidebar {
 	left:0;
 	align-items: flex-start;
-	width:15%; /* 사이드바 너비 */
-	overflow: hidden;
+    width:15%; /* 사이드바 너비 */
+    min-width: 190px;
+    overflow: hidden;
 	left:0;
 	top:60px; /* header 높이에 따라 변경해야 됨 */
 	position:fixed;
@@ -176,16 +52,19 @@ body{
 	position:fixed;
 	min-height:400px;
 	height:100%;
-	z-index: -1;
-}   
-
+   }   
+   
 /* header css 속성 */
 .header-logo-area {
-	align-items: center;
 	background-color: #E1E6FF;
-	width:15%; /* 사이드바 너비와 동일하게 맞춰줘야 됨 */
-	height:100%;
+    width:15%; /* 사이드바 너비와 동일하게 맞춰줘야 됨 */
+    min-width: 190px;
+    height:100%;
 	text-align:center;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	left:0;
 }
 .header-logo{
 	color: black;
@@ -196,25 +75,33 @@ body{
 	opacity: 0.7;
 }
 .header-search-area{
-	display: flex;
-	width: 50%;
+	width: 60%;
 	height: 60px;
+	display:flex;
 	align-items: center;
-	padding:0 15px ;
+	justify-content: flex-end;
+	padding:0;
 }
-.header-search{		
-	display: flex;
+#searchKeyword{	
 	margin:0;
 	padding:0;
-	width:40%;
-	height:30px;
-	text-align: right;		
+	width:60%;
+	height:26px;
+	margin-right:-5px;
+	text-align: right;
+	border:0.5px solid gray;
+	border-radius:4px;	
+}
+#searchKeyword:focus{
+	outline:0.5px solid #E1E6FF;
 }
 .header-icon-area{
-	display: flex;
 	height: 60px;
+	display: flex;
 	align-items: center;
+	justify-content: flex-start;
 	padding:0 15px;
+}
 }           
 .header-divider {
 	height: 32px;
@@ -223,7 +110,7 @@ body{
 .header-icon {
 	height: 24px;
 	width: 24px;
-	margin-left: 20px;
+	margin-left: 20px;	
 }
 .header-profile-icon{
 	height: 24px;
@@ -237,12 +124,10 @@ body{
 }
 .header-profile-text{
 	font-size: 20px;
-	margin-left: 5px;
+	margin-left: 25px;
 }
-
-
-
-
+	
+	
 #nick {
 	font-weight: bolder;
 	font-size: 17px;
@@ -274,4 +159,4 @@ body{
 }
 .dropdown-content a:hover {background-color: #ddd;}
 .dropdown:hover .dropdown-content {display: block;}
->>>>>>> refs/heads/master
+	

@@ -96,22 +96,25 @@
 		                <div class="sidebar-title"><a href="${path }/freeboard/boardList.do">Free</a></div>
 		            </div>
 	            </div>
+			</div>
+			
+			<!-- 채팅 -->
+			<div class="wrap_sub_list">
+				<div class="sidebar-list">
+					<img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
+					<a class="" href="${path }/chatting.do">
+	                	<div class="sidebar-title">Chatting</div>
+	                </a>						
+				</div>					
 			</div>							
 		
-				<!-- 구분선 -->
-				<div class="wrap_sidebar-divider" style="height:fit-contents;">
-					<img class="sidebar-divider" src="${path }/resources/images/icons/divider-horizontal.svg"/>
+			<!-- 구분선 -->
+			<div class="wrap_sidebar-divider" style="height:fit-contents;">
+				<img class="sidebar-divider" src="${path }/resources/images/icons/divider-horizontal.svg"/>
 			</div>
 	
-				<!-- 채팅 -->
-				<div class="wrap_sub_list">
-					<div class="sidebar-list">
-						<img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
-						<a class="" href="${path }/chatting.do">
-		                	<div class="sidebar-title">chatting</div>
-		                </a>						
-					</div>					
-				</div>
+				
+				
 				
 				<!-- 챗봇 -> 플러그인으로 변경 -->
 				<%-- <div class="wrap_sub_list">
