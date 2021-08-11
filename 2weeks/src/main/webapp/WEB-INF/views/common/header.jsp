@@ -54,14 +54,14 @@
 		                </div>
 		            	<c:if test="${member.user_Nic ne null }">
 		            		<div class="header-profile-text" id="nick">${member.user_Nic}님 </div>  
+			            	<div class="dropdown-content">
+			            		<a href="#">회원 정보 변경</a>
+			            		<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>
+			            		<a href="#">나의 포인트 0원</a>
+			            		<a href="${path}/member/logout">로그아웃</a>
+			            		
+			            	</div>
 		            	</c:if>
-		            	<div class="dropdown-content">
-		            		<a href="#">회원 정보 변경</a>
-		            		<a href="${path}/member/mypage">나의 활동 보기</a>
-		            		<a href="#">나의 포인트 0원</a>
-		            		<a href="${path}/member/logout">로그아웃</a>
-		            		
-		            	</div>
 	            	</div>
 	            	
 	            	

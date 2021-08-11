@@ -46,6 +46,7 @@ body{
 	position:fixed;
 	min-height:400px;
 	height:100%;
+	z-index: -1;
 }   
 
 /* header css 속성 */
