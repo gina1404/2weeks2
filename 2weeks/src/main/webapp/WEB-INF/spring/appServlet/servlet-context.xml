@@ -72,7 +72,23 @@
 		</websocket:handshake-interceptors>
 		<websocket:sockjs/>
 	</websocket:handlers>
+	
+	
+<!-- 	웹소켓핸들러(메세지용)  -->
+
+<beans:bean id="messageHandler" class="com.twoweeks.spring.message.MessageHandler2"/>
+ 	
+ 	<websocket:handlers allowed-origins="*"> 
+		<websocket:mapping handler="messageHandler" path="/messageServer"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<websocket:sockjs websocket-enabled="true"/>
+	</websocket:handlers>
+	
 
 
+ 
+									
 	
 </beans:beans>
