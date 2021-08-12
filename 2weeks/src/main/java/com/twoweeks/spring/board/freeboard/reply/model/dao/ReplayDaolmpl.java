@@ -51,5 +51,10 @@ public class ReplayDaolmpl implements ReplyDao {
 		return session.selectList("reply.selectBoardComment",no);
 	}
 
+	@Override
+	public int rereplyInsert(SqlSession session, Reply reply) {
+		return session.insert("reply.rereplyInsert",reply);
+	}
+
 	
 }

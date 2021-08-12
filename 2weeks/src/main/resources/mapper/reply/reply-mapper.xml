@@ -8,8 +8,14 @@
 	</select>
 
 	<insert id="create">
-	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user01', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, NULL, SYSDATE )
+	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user01', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, #{reply_Dt}, DEFAULT, DEFAULT, NULL, SYSDATE )
 	</insert>
+	
+	<insert id="rereplyInsert">
+	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user02', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, #{reply_Level},
+	#{reply_Ref},DEFAULT)
+	</insert>
+	
 	
 	<update id="update">
 		UPDATE POST_REPLY SET reply_Content = #{reply_Content}, UPDATEDATE = SYSDATE
@@ -39,8 +45,6 @@
 	<select id="selectBoardComment" resultType="reply">
 	SELECT * FROM POST_REPLY WHERE POST_SQ=#{post_Sq} START WITH REPLY_LEVEL=1 CONNECT BY PRIOR REPLY_SQ=REPLY_REF	
 	</select>
-	
-	
 	
 	
 	<resultMap id="replyMap" type="reply">

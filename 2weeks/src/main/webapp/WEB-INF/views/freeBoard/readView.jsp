@@ -119,75 +119,34 @@ font-size : 12px;
 				</div>
 			</form>
 		</div>
-
-					<%-- <input type="hidden" name="commentWriter" value="${loginMember!=null?loginMember.userId:''}"> --%>
-			
-		<table id="tbl-comment">
-				<c:forEach var ="bc" items="${comments }">
-				<c:choose>
-				<c:when test="${bc.reply_Level == 1 }"> 
-   				<tr class="level1">
-   					<td>
-   						<sub class="comment-writer">${bc.user_Id }</sub>
-   						<sub class="comment-date">${bc.reply_Dt }</sub>
-   						<br>${bc.reply_Content }
-   					</td>
-   					<td>
-   						<button class="btn-reply" value="${bc.reply_Sq }">답글</button>
-   						<button class="btn-delete">삭제</button>
-   					</td>
-   				</tr>
-   				</c:when>
-   				
-   				<c:when test="${bc.reply_Level == 2 }">
-   				<tr class="level2">
-   					<td>
-   						<sub>${bc.user_Id }</sub>
-   						<sub>${bc.reply_Dt }</sub>
-   						<br>${bc.reply_Content }
-   					</td>
-   					<td>
-   					</td>
-   				</tr>
-   				</c:when>
-   				</c:choose>
-   				
-   				</c:forEach>
-   			</table>	
-	
-		<div class="modal fade" id="modifyModal" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">댓글 수정창</h4>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="reply_Sq">댓글 번호</label> <input class="form-control"
-								id="reply_Sq" name="reply_Sq" readonly>
-						</div>
-						<div class="form-group">
-							<label for="reply_Content">댓글 내용</label> <input class="form-control"
-								id="reply_Content" name="reply_Content" placeholder="댓글 내용을 입력해주세요">
-						</div>
-						<div class="form-group">
-							<label for="user_Id">댓글 작성자</label> <input
-								class="form-control" id="user_Id" name="user_Id"  readonly>
-								
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default pull-left"
-							data-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-success modalModBtn">수정</button>
-						<button type="button" class="btn btn-danger modalDelBtn">삭제</button>
-					
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
+	
+					<%-- <input type="hidden" name="commentWriter" value="${loginMember!=null?loginMember.userId:''}"> --%>
+
+
+	<div class="row">
+		<div class="col-md-8">
+		<span>${bc.user_Id }</span>
+		<span>${bc.reply_Dt }</span>
+			<div class="col-md-12">
+			<span id="reply_Content"> </span>
+			
+			<div class="row" id="dur" >
+			<div class="col-md-8"  style="margin-left:100px;">
+				
+				<br>
+			</div>
+			</div>
+			</div>
+		</div>	
+		<br />
+		<br />
+	</div>
+
+		<div class="row">
+			<div id="reply"><span>dsdadsadsa</span></div>
+		</div>
+
 
 
 
@@ -200,6 +159,29 @@ $(document).ready(function(){
 	getReplies();
 	
 var post_Sq = 4;
+
+function getReplies(){
+	console.log(${list.post_Sq})
+	$.getJSON("${path}/replies/all/"+ ${list.post_Sq}, function(data){
+		console.log(data);
+	var str="";
+	var dur="";
+	$(data).each(function(){
+	console.log(this.reply_Sq);
+	console.log(this.reply_Content);
+	dur+="아이디 : "+this.user_Id +"작성일 : "+this.updateDate;
+	str+="<div class='col-md-8'>";
+	str+="<span>"+this.reply_Content + "</span>";
+	str+="<a href  style='margin-left:15px'  onclick='fn_replyDelete('"+this.reply_Sq+");'>삭제</a>";
+	str+="<a href style='margin-left:15px'  onclick='fn_replyUpdate('"+this.reply_Sq+");'>수정</a>";
+	str+="<a href style='margin-left:15px' onclick='fn_replyReply('"+this.reply_Sq+");'>댓글</a>";
+	str+="</div>"
+	});
+	$("#reply_Content").html(str);
+	$("#dur").html(dur);
+});
+}
+
 
 
 
@@ -255,18 +237,11 @@ $(".replyAddBtn").on("click", function(){
 
 
 
-function getReplies(){
-	console.log(${list.post_Sq})
-	$.getJSON("${path}/replies/all/"+ ${list.post_Sq}, function(data){
-		console.log(data);
-	var str="";
-	$(data).each(function(){
-	console.log(this.reply_Sq);
-		});
-	
-});
-}
 
+
+/* <a href="#" onclick="fn_replyDelete('${bc.reply_Sq}')">삭제</a>
+<a href="#" onclick="fn_replyUpdate('${bc.reply_Sq}')">수정</a>
+<a href="#" onclick="fn_replyReply('${bc.reply_Sq}')">댓글</a> */
 
 
 
@@ -360,12 +335,15 @@ function del(no) {
 }
 
 $(".btn-reply").click(e=>{
-	const tr =$("<tr>");
+	const tr =$("<tr id='cancel'>");
 	const form = $(".comment-editor>form").clone();
 	console.log(form);
+	form.find("[name=comment]").removeAttr("id").addClass("btnRereply");
 	form.find("[name=comment]").attr("type","text");
+	form.find("[name=level]").addClass("level2");
 	form.find("[name=level]").val("2");
 	console.log(form.find("[name=level]").val("2"));
+	form.find("[name=commentRef]").addClass("commentRef2");
 	form.find("[name=commentRef]").val($(e.target).val());
 	form.find("button").removeAttr("class").addClass("btn btn-insert2  btn-primary");
 	form.find("button").css("width","61.88px").removeAttr("id");
@@ -379,9 +357,59 @@ $(".btn-reply").click(e=>{
 	tr.find("td").css("display","none");
 	
 	tr.insertAfter($(e.target).parents("tr")).children("td").slideDown(800);
-	
+	$(".btnRereply").val(""); //답글창 초기화
 	$(e.target).off("click");
+	$('.btn-reply').on("click");
+$("#btn-delete").on("click", function(){
+	$('#cancel').remove();
+});
+
+
+$(".btn-insert2").on("click", function(){
+	let reply_Comment = $(".btnRereply").val();
+	let post_Sq = ${list.post_Sq};
+	let level = $('.level2').val();
+	let reply_Sq = $(".commentRef2").val();
+	console.log(post_Sq);	
+	console.log(level);
+	console.log(reply_Comment);
+	console.log(reply_Sq);
+	
+	$.ajax({
+		type : "POST",
+		url:"${path}/reply/rereplyInsert.do/",
+		headers:{
+			"Content-type" : "application/json", 
+			"X-HTTP-Method-Override" : "POST"
+		},
+		dataType : "text",
+		data: JSON.stringify({
+			reply_Content : reply_Comment,
+			post_Sq : post_Sq,
+			reply_Level : level,
+			reply_Ref : reply_Sq
+		}),
+		success : function(result) {
+			console.log(result);
+			if(result == "regSuccess"){
+				alert("댓글 등록 완료");
+			}else{
+				alert("댓글 등록에 실패했습니다. 잠시 후 다시 시도해주세요.");
+			}
+				//getReplies();
+				$('#cancel').remove();
+		},error:function(request,status,error){
+	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+
+		}
+		
+	});
+});
+
+
 });	
+
+
 
 
 

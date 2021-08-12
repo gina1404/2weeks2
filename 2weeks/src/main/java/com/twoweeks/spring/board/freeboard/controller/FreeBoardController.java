@@ -128,10 +128,12 @@ public class FreeBoardController {
 	public String read(FreeBoard fb, Model model,  HttpServletRequest request) {
 		log.info("read");
 		log.info("list" + fb.getAttachments());
-		fb.setPost_Sq(Integer.parseInt(request.getParameter("no")));
-		int no = Integer.parseInt(request.getParameter("no"));
-		List<Reply>	reply = rService.selectBoardComment(no);
-		model.addAttribute("list", service.read(fb.getPost_Sq()));
+		
+		//int no = Integer.parseInt(request.getParameter("post_Sq")); 
+		 fb.setPost_Sq(Integer.parseInt(request.getParameter("no"))); 
+		 model.addAttribute("list", service.read(fb.getPost_Sq()));
+		 List<Reply> reply = rService.selectBoardComment(Integer.parseInt(request.getParameter("no")));
+		 
 		model.addAttribute("comments", reply);
 		return "freeBoard/readView";
 	}
@@ -152,6 +154,7 @@ public class FreeBoardController {
 	@RequestMapping("/freeboard/update")
 	public ModelAndView update(ModelAndView mv,FreeBoard fb,@RequestParam("article_file") MultipartFile[] upload, HttpServletRequest request,  MultipartFile[] file) {
 		log.info("update 수정좀하자");
+		
 		
 		for(int i=0; i<file.length; i++) {
             log.info("================== file start ==================");
@@ -189,22 +192,22 @@ public class FreeBoardController {
 				}
 			}
 		  }
-		String msg ="등록성공";
 		try {
 			log.info("================== update start ==================");
 			service.update(fb);
 		}catch(Exception e) {
 			//FileUtils.deleteQuietly(new File(path+reName));  //저장된 현재 파일 삭제
-			msg= e.getMessage();
+			e.printStackTrace();
 		}
 		//수정후에 수정한 게시물 페이지에 있어야한다. 어떻게 해야할까?
 		//readView로 보내보자
 		mv.addObject("no", request.getParameter("post_Sq"));
 		log.info("list" + fb.getAttachments());
-		 mv.addObject("msg",msg); mv.addObject("loc","/freeboard/readView"); //common/msg에 넣어버리면 location.replace라서 작동안됨.
+		 //mv.addObject("msg",msg); 
+		// mv.addObject("loc","/freeboard/readView"); //common/msg에 넣어버리면 location.replace라서 작동안됨.
 		 
 		//redirect로 수정한 게시물을 보여준다.
-		mv.setViewName("common/msg");
+		mv.setViewName("/freeboard/readView");
 		return mv;
 		}
 	

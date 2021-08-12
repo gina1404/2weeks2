@@ -55,4 +55,11 @@ public class ReplyServiceImpl implements ReplyService {
 	public List<Reply> selectBoardComment(int no) {
 		return dao.selectBoardComment(session,no);
 	}
+
+	@Override
+	public int rereplyInsert(Reply reply) {
+		return dao.rereplyInsert(session,reply);
+	}
+	
+	
 }

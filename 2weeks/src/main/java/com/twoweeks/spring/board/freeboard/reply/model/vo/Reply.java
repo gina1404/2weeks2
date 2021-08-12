@@ -2,6 +2,8 @@ package com.twoweeks.spring.board.freeboard.reply.model.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,7 +36,8 @@ public class Reply {
     private String secret_Yn;
 
     // 작성일 
-    private Date reply_Dt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    private String reply_Dt;
 
     // 좋아요 
     private int reply_Like_Cnt;
@@ -46,5 +49,6 @@ public class Reply {
     private int reply_Ref;
 
     // 댓글 수정일자 
-    private Date updateDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    private String updateDate;
 }

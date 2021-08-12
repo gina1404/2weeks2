@@ -20,4 +20,6 @@ public interface ReplyService {
 		int countReplies(int post_Sq);
 
 		List<Reply> selectBoardComment(int no);
+
+		int rereplyInsert(Reply reply);
 }
