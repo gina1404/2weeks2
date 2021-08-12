@@ -11,7 +11,7 @@
 		<div style="display:flex;justify-content:space-around">
 			<button class="regionalKor-button" onclick="fn_selectButton1()">지도</button>
 			<button class="regionalKor-button" onclick="fn_selectButton2()">지역별 표</button>
-		</div>
+		</div>		
 		<!-- 지역별 현황 지도 영역 -->
 		<div id="regionalKor-map" style="border:1.5px solid yellow;"></div>		
 		<!-- 지역별 현황 표 영역 -->
@@ -33,7 +33,7 @@ function fn_selectButton2(){
 }
 
 /* 지역별 현황 출력*/
-$("#regionalKor").each(function(){
+$("#regionalKor").each(function(){	
     $.ajax({ //0. 지역별 현황 DB 값 가져오기
         url:"${path}/covidUpdate/regional/kor.do",
         type:"post",
@@ -44,12 +44,11 @@ $("#regionalKor").each(function(){
             var str="<div class='regionalKor-table-title' style='display:flex;'>";
             str+="<div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>지역</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>오늘 확진자</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>총 확진자</div></div>";
              //값
-            var i;
-            for(i=2; i< 20;i++){ //검역 빼고 마지막 줄 합계까지 출력
+            for(var i=0; i<18;i++){ //검역 빼고 마지막 줄 합계까지 출력
                 str += "<div class='regionalKor-table-content' style='display:flex;'>";
-                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].gubun+"</div>";
-                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].incDec+"</div>";
-                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].defCnt+"</div>";
+                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].gubun+"</div>"; //지역
+                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].incDec+"</div>"; //오늘 확진
+                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].defCnt+"</div>"; //총 확진
                 str += "</div>"
             }//값 출력 끝
             str+="</div>";
@@ -70,10 +69,43 @@ $("#regionalKor").each(function(){
             var states = svg.append('g').attr('id', 'states');        
         
             //geoJson데이터를 파싱하여 지도그리기
-            d3.json('${path}/resources/json/korea.json', function(json) {
-                states.selectAll('path').data(json.features).enter().append('path').attr('d', path).attr('id', function(d) { return 'path-' + d.properties.name_eng;});	//지도 표시
-                 labels = states.selectAll('text').data(json.features).enter().append('text').attr('transform', render).attr('id', function(d) { return 'label-' + d.properties.name_eng;}).attr('text-anchor', 'middle').attr('dy', '.35em').text(function(d) {  return d.properties.name;}); //지역명 라벨 표시
-            }); //지도 그리기 끝   
+            d3.json('${path}/resources/json/korea.json', function(json) {				
+            	//지도 표시
+                states.selectAll('path').data(json.features).enter()
+                .append('path').attr('d', path).attr('id', function(d) { return 'path-' + d.properties.name_eng;})
+                .attr('fill', function(d){ //확진자 수에 따라 배경 색 변경
+                	var mapColor;
+                	for(var k=0;k<18;k++){
+                		if(d.properties.name==data[k].gubun){
+                			console.log(d.properties.name+":"+data[k].gubun);
+                			if(data[k].incDec<50) mapColor='blue';                			
+                			else if(data[k].incDec>=50 && data[k].incDec<100) mapColor='green';
+                			else mapColor='red';
+                		}
+                	}
+                	return mapColor;
+                });
+                
+                
+            
+                //라벨 표시
+                labels = states.selectAll('text').data(json.features).enter()
+                	.append('text')
+					.text(function(d) { //출력할 값 추가
+	                	 var incDec;
+	                	 var defCnt;
+	                	 for(var j=0;j<18;j++){
+	                		 if(d.properties.name==data[j].gubun){ //구분값(지역명)이 일치할 경우
+	                    		 incDec=data[j].incDec; //오늘 확진자 수
+	                    		 defCnt=data[j].defCnt; //총 확진자 수
+	                    	 }                		 
+	                	 }                	 
+	                	 return d.properties.name+':'+incDec+':'+defCnt;                	 
+	                 })
+					.attr('transform', render) //render 값으로 위치를 조절함
+					.attr('id', function(d) { return 'label-' + d.properties.name_eng;}) //id 추가
+            }); //기본 지도 그리기 끝             
+            $("#regionalKor").append("업데이트 일시: "+data[0].stdDay); //업데이트 일시 추가
             
           //텍스트 위치 조절
 		    function render(d) {
@@ -90,9 +122,9 @@ $("#regionalKor").each(function(){
 		                d3.event && d3.event.scale
 		                    ? d3.event.scale / height + 10
 		                    : scale / height + 10;
-		        }
+		        } //if-else문 끝
 	        return 'translate(' + arr + ')';
-		    } //function render(d) 끝
+		    } //function render(d) 끝 		    
         }, //지역별 현황function(data))출력 끝
         error:(r,m,s)=>{
             console.log(r);

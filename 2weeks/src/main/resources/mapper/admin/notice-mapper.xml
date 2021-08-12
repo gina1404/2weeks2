@@ -18,4 +18,27 @@
 	<select id="selectMemberList" resultType="com.twoweeks.spring.member.model.vo.Member">
 		SELECT * FROM MEMBER2
 	</select>
+	
+	<select id="selectMembercount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER2
+	</select>
+	
+	<delete id="deleteMember">
+		DELETE FROM MEMBER2 WHERE USER_ID=#{userId}
+	</delete>
+	
+	<insert id="insertPointEnd">
+		INSERT INTO POINT VALUES(POINT_SEQ.NEXTVAL,#{userId},#{pointAmt},#{pointGb},#{pointDiscription},SYSDATE)
+	</insert>
+	
+	<select id="selectMemberPoint" parameterType="String" resultType="_int">
+		 SELECT USERPOINT_CNT FROM MEMBER2 WHERE USER_ID=#{name}
+	</select>
+	
+	<update id="updatePointEnd">
+		UPDATE MEMBER2 SET USERPOINT_CNT=USERPOINT_CNT+#{pointAmt} WHERE USER_ID=#{userId}
+	</update> 
+	<select id="adminReporttable" resultType="com.twoweeks.spring.admin.model.vo.Report">
+		SELECT * FROM REPORT
+	</select>
 </mapper>

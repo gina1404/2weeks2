@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.twoweeks.spring.member.model.service.KakaoApi;
 import com.twoweeks.spring.member.model.service.MemberService;
@@ -504,6 +505,30 @@ public class MemberController {
 		log.info("uuid={}",uuid);		
 		return uuid;
 	}
+	
+	
+	
+	
+	
+	
+	//나의활동보기
+	
+	//@Autowired
+	//private BoardServiceImpl service;	
+	
+	@RequestMapping("/member/mypage")
+	public ModelAndView selectMyBoard(@RequestParam String loginId, ModelAndView mv) {
+		//List<> list=service.selectBoard(loginId);
+		//mv.addObject("list", list);
+		
+		mv.setViewName("member/myBoard");
+		
+		return mv;
+	}
+	
+	
+	
+	
 	
 	
 	

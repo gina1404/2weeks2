@@ -7,7 +7,9 @@ public class ChatGroupMessage {
 
     private int chatGroupNo;
     private String sender;
+    private String senderNick;
     private String chatContent;
-    private String chatTime;    
+    private String chatTime;
+    private String type;
 	
 }

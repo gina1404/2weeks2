@@ -64,6 +64,7 @@
 	<!--  웹소켓핸들러 등록-->
 	<!-- Namespaces에서 webscket 체크해서 등록해주기 -->
 	<beans:bean id="chattingHandler" class="com.twoweeks.spring.common.ChattingServer" />
+	<beans:bean id="chatAlertHandler" class="com.twoweeks.spring.common.ChatAlertServer" />
 	
 	<websocket:handlers>
 		<websocket:mapping handler="chattingHandler" path="/chatting" />
@@ -73,6 +74,32 @@
 		<websocket:sockjs/>
 	</websocket:handlers>
 
+	
+	
+<!-- 	웹소켓핸들러(메세지용)  -->
 
+<beans:bean id="messageHandler" class="com.twoweeks.spring.message.MessageHandler2"/>
+ 	
+ 	<websocket:handlers allowed-origins="*"> 
+		<websocket:mapping handler="messageHandler" path="/messageServer"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<websocket:sockjs websocket-enabled="true"/>
+	</websocket:handlers>
+	
+
+	<websocket:handlers>
+		<websocket:mapping handler="chatAlertHandler" path="/chatAlert" />
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<websocket:sockjs/>
+	</websocket:handlers>
+
+
+
+ 
+									
 	
 </beans:beans>

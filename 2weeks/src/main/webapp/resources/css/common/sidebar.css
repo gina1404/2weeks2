@@ -5,7 +5,7 @@
         overflow: hidden;
 		left:0;
 	}
-	.wrap_sub_list{
+	.wrap_sub_list, .wrap_sidebar-divider{
 		margin:0;
 		padding:0;
         background-color: #E1E6FF;
@@ -40,6 +40,9 @@
     .sidebar-divider {
         height: 4px;
         width:100%;
+	}
+	.overlay {
+		background-color: rgba(0,0,0, 0.1);
 	}
 
 	

@@ -18,6 +18,7 @@ public class CovidUpdateRegionalKorController {
 	@Autowired
 	private CovidUpdateRegionalKorService service;
 	
+	//코로나 지역별 현황 api를 DB에 저장
 	@RequestMapping("/covidUpdate/regional/kor/update.do")
 	//코로나 지역별 현황(한국) 데이터를 받아다가 DB에 저장
 	public void insertCovidRegionalKor() {
@@ -32,6 +33,7 @@ public class CovidUpdateRegionalKorController {
 		System.out.println(result>0?"지역별 현황 데이터 저장 : 성공":"지역별 현황 데이터 저장 : 실패");
 	}
 	
+	//코로나 지역별 현황 리스트를 DB에서 가져옴
 	@RequestMapping("/covidUpdate/regional/kor.do")
 	@ResponseBody
 	 public List<CovidRegionalKorData> covidRegionalKorList() throws Exception {
