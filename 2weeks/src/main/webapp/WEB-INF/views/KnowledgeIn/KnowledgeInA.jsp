@@ -105,7 +105,7 @@ width:250px;
 .content1{
 display:inline-block;
 
-border: 1px solid red; 
+/* border: 1px solid red;  */
 height:40%;
 width:80%;
 
@@ -212,7 +212,7 @@ right:180px;
 
 
 <section class="container">	
-<form name="KinFrm" action="${path }/KnowledgeIn/KnowledgeInQEnd.do"
+<form name="KinFrm" action="${path }/KnowledgeIn/KnowledgeInAEnd.do"
          method="post" enctype="multipart/form-data" >
 <div class="question">
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
@@ -223,18 +223,26 @@ right:180px;
 			<div id="container">
 			
 				<div>
-					<%-- <span id="no">NO.${KnowledgeIn.kin_Sq}</span>  --%>
+		 
 					<span class="QA">Q</span> 
+					
 					<span class="title">${KnowledgeIn.kin_Title}</span> 
 					<span class="point">100</span>
 				</div>
-				<div class="userInfo"><span class="user">비공개</span> 
+					<div class="userInfo">
+				        <c:if test="${KnowledgeIn.open_Yn eq 'Y'}" >
+            		<span class="user">${KnowledgeIn.kin_Writer}</span> 
+        					</c:if>
+        			       <c:if test="${KnowledgeIn.open_Yn eq 'N'}" >
+            				<span class="user">비공개</span> 
+        					</c:if>
+        							
+        			
 				<span class="rolldate"><fmt:formatDate value="${KnowledgeIn.kin_Date}" pattern="yyyy.MM.dd"/></span>
 			<%-- 	<span class="rolldate">${KnowledgeIn.kin_Date }</span>  --%>
 				<span class="view">조회수 ${KnowledgeIn.kin_Cnt }</span> 
-				<span class="qcount">답변 3개</span>
+				<span class="qcount">답변 <%-- ${kinReply.reply_Cnt} --%>개</span>
 				</div>
-
 			<span class="content1">${KnowledgeIn.kin_Content}<br><br></span>
 				
 
@@ -357,7 +365,9 @@ right:180px;
  			<hr style="border: solid 1px #F2F2F2;">
 <div class="answer">
 
-		
+				<input type="hidden" name="KnowledgeIn" id="no" value="${KnowledgeIn.kin_Sq}">
+			<%-- 	<input type="hidden" name="kinReply" id="no" value="${kinReply.reply_Sq}">  --%>
+			
 	<img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
 	
 					<div>	<img src=""> <span class="title2">sihu***님 답변해주세요</span>
@@ -467,18 +477,18 @@ right:180px;
 						    </c:when>   
 						
 						</c:choose>	
-
+			<input type="text" name="reply_Writer" class="form-control" value="${kinReply.reply_Writer}" >
 			<div class="content">
 		   <textarea class="noresize" placeholder="답변 작성 시 서비스 운영정책을 지켜주세요.
 광고주로부터 소정의 경제적 대가를 받고 특정 상품에 대한 추천 또는 후기글을 올리는 경우, 이러한 광고주와의
-경제적 이해관계를 소비자들이 쉽게 알 수 있도록 글 제목 또는 답변의 첫 부분 또는 끝부분 등 적절한 위치에 공개하여야 합니다."></textarea>
+경제적 이해관계를 소비자들이 쉽게 알 수 있도록 글 제목 또는 답변의 첫 부분 또는 끝부분 등 적절한 위치에 공개하여야 합니다." name="reply_Content" ></textarea>
 		
 	</div>
 
 			<br>
 				<hr style="border: solid 1px #F2F2F2;">
 		<div class="bottom">	
-		<input type="file" name="FileName" value="첨부파일">
+		<input type="file" name="file" value="첨부파일">
 		
 		</div>		
 					<hr style="border: solid 1px #F2F2F2;">

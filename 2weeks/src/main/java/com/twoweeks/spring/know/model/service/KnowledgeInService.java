@@ -8,6 +8,8 @@ import com.twoweeks.spring.know.model.vo.KinReply;
 public interface KnowledgeInService {
 	List<Kin> selectKinList(int cPage, int numPerpage); //글 목록 조회
 	
+	List<Kin> selectKinListcnt(int cPage, int numPerpage); //글 목록 조회
+	
 	List<Kin> list(Kin k);
 	
 	int selectKinCount(); 
@@ -17,6 +19,8 @@ public interface KnowledgeInService {
 	int insertKin(Kin k) throws Exception;    //글 등록
 
 	Kin selectKinOne(int sq) throws Exception; 
+	
+	List<KinReply> selectReplyOne(int sq) throws Exception; 
 	
 	public void delete(int sq)throws Exception; //게시글 삭제
 

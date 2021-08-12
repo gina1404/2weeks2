@@ -257,7 +257,8 @@ height:13px;
 			<div id="container">
 			
 				<div>
-					<%-- <span id="no">NO.${KnowledgeIn.kin_Sq}</span>  --%>
+				<input type="hidden" name="kin_Sq" value="${knowledgeIn.kin_Sq}">
+		
 					<span class="QA">Q</span> 
 					<span class="title">${KnowledgeIn.kin_Title}</span> 
 					<span class="point">100</span>
@@ -275,7 +276,7 @@ height:13px;
 				<span class="rolldate"><fmt:formatDate value="${KnowledgeIn.kin_Date}" pattern="yyyy.MM.dd"/></span>
 			<%-- 	<span class="rolldate">${KnowledgeIn.kin_Date }</span>  --%>
 				<span class="view">조회수 ${KnowledgeIn.kin_Cnt }</span> 
-				<span class="qcount">답변 ${kinReply.reply_Cnt}개</span>
+				<%-- <span class="qcount">답변 ${kr.reply_Cnt}개</span> --%>
 				</div>
 
 			<span class="content1">${KnowledgeIn.kin_Content}<br><br></span>
@@ -295,11 +296,11 @@ height:13px;
 
 									<a href='${path }/delete?sq=${KnowledgeIn.kin_Sq }'><button class="delete">삭제</button></a>
 
-
-
-									<a href="${path}/KnowledgeIn/KnowledgeInA.do?sq=${KnowledgeIn.kin_Sq}"><button id="qanswer">답변하기</button></a>
+	
+									 <%-- <span>${kr.reply_Sq}</span> --%>
+									<a href="${path}/KnowledgeIn/KnowledgeInA.do?sq=${KnowledgeIn.kin_Sq}" class="qanswer"><button id="qanswer">답변하기</button></a>
 						</div>
-						
+									
 						<c:choose>
 						<c:when test="${KnowledgeIn.category eq '코로나19'}">
 						<ul class="knowmenu"> 
@@ -389,14 +390,14 @@ height:13px;
 						<li>건강</li>
 						<li style="color: orange;">기타</li>
 					
-					
+						
 						</ul>
 						    </c:when>   
 						
 						</c:choose>
 				
-
-					
+<%-- 
+					${kr.reply_Content} --%>
 
 						
 			</div><!--질문 div -->
@@ -405,13 +406,14 @@ height:13px;
 			<!-- 답변  -->
 			
 			
-			
+	<input type="hidden" name="kr" id="no" value="${kinReply.reply_Sq}"> 
+  	<c:forEach var="kr" items="${kr}"> 
 		<div class="answer">
 
 		
 	<img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
 			<button id="Qcheck" >채택하기</button>
-					<div>	<span class="QA">A</span> <span class="title">${KnowledgeIn.kin_Title}</span> <span class="Adoption_completed">채택완료</span>
+					<div>	<span class="QA">A</span> <span class="title">${KnowledgeIn.kin_Title}</span><span>${kr.reply_Date}</span> <span class="Adoption_completed">채택완료</span>
 			
 				<c:choose>
 						<c:when test="${KnowledgeIn.category eq '코로나19'}">
@@ -444,6 +446,7 @@ height:13px;
 						<ul class="knowmenu2"> 
 						<li>코로나19</li>
 						<li>백신</li>
+	
 						<li style="color: orange;">확진</li>
 						<li>해외</li>
 						<li>방역수칙</li>
@@ -508,30 +511,28 @@ height:13px;
 						
 						</c:choose>
 				
-				
 					<div class="userInfo2">
 					<!-- <span class="user">sihu***</span>  -->
-					  <c:if test="${KnowledgeIn.open_Yn eq 'Y'}" >
-            		<span class="user">${KnowledgeIn.kin_Writer}</span> 
+					  <c:if test="${kr.open_Yn eq 'Y'}" >
         					</c:if>
-        			       <c:if test="${KnowledgeIn.open_Yn eq 'N'}" >
+        			       <c:if test="${kr.open_Yn eq 'N'}" >
             				<span class="user">비공개</span> 
         					</c:if>
 					
 					
 					
-					<span class="rolldate"><fmt:formatDate value="${KnowledgeIn.kin_Date}" pattern="yyyy.MM.dd"/></span>
-					<span class="view"><img id="heart1" src="${pageContext.request.contextPath}/resources/image/heart1.png"> ${kinReply.reply_Like_Cnt}</span> </div>
-				<%-- 	<span class="view"><img id="heart2" src="${pageContext.request.contextPath}/resources/image/heart2.png"> ${kinReply.reply_Like_Cnt}</span> </div> --%>
+					<span class="rolldate"><fmt:formatDate value="${kr.reply_Date}" pattern="yyyy.MM.dd"/></span>
+					<span class="view"><img id="heart1" src="${pageContext.request.contextPath}/resources/image/heart1.png"> ${kr.reply_Like_Cnt}</span> </div>
+			
 	
 			
 					</div>
 			
 			<div class="content2">
+				</div>
+		
+		
 
-		지금 현재 접종 진행중입니다. 예약시스템을 살펴보면 간단한 인증을통해서 주변 근처 병원을 확인하고 백신조회를 하게됩니
-
-		다. <br><br>그 후에 코로나 백신 접종 예약 진행할 수 있습니다. 의원이나 가정학의원에서도 무난히 접종이 가능합니다.</div>
  					
  			<hr style="border: solid 1px #F2F2F2;">
 			
@@ -545,7 +546,8 @@ height:13px;
 			<button id="red1">신고</button><br>
 		</div>
 	
-		
+	</c:forEach>	
+	
 			
 <!-- 			</form>		 -->
 			
@@ -582,8 +584,29 @@ height:13px;
 		
 	
 		
+/* 	
+		$(".qanswer").on("click",function(){
+			var url= "${path}/KnowledgeIn/KnowledgeInA.do?sq=${kr.reply_Sq}";
+			var reply_Sq=${kr.reply_Sq};
+			$.ajax({
+				url:url,
+				data:{sq:reply_Sq},
+				dataType:"text",
+				success : function(result){
+					console.log(result)
+				}, error:function(request,status,error){ 
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				         }
+			}) */
+				
+			
+			
+			
+		
+		
 		
 });
+	
 		
 
 	

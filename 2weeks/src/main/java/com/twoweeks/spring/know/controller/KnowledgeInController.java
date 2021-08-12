@@ -40,6 +40,7 @@ public class KnowledgeInController {
 
 			ModelAndView mv) {
 		mv.addObject("list", service.selectKinList(cPage, numPerpage));
+		mv.addObject("cnt", service.selectKinListcnt(cPage, numPerpage));
 		int totalData = service.selectKinCount();// 등록된 테이블의 총 개수를 가져다가 저장
 		mv.addObject("totalContents", totalData);
 		mv.addObject("pageBar", PageFactory.getPageBar(totalData, cPage, numPerpage, "KnowledgeInMain.do"));
@@ -51,12 +52,24 @@ public class KnowledgeInController {
 	@RequestMapping("/KnowledgeIn/KnowledgeInList.do") // 지식인 글 상세보기
 	public ModelAndView KnowledgeInList(@RequestParam(value = "sq", defaultValue = "1") int sq, ModelAndView mv)
 			throws Exception {
-		mv.addObject("KnowledgeIn", service.selectKinOne(sq));
+		
+		/* KinReply kr = service.selectReplyOne(sq); */
+		
+		mv.addObject("KnowledgeIn", service.selectKinOne(sq)); //글
+		/*
+		 * List<KinReply> kr = service.selectReplyOne(sq); mv.addObject("kr",kr);
+		 * 
+		 * 
+		 * 
+		 * log.info("kr : "+ kr); mv.addObject("kr",kr); //답글
+		 */					/* log.info("케이알"+kr); */
 		mv.setViewName("KnowledgeIn/KnowledgeInList");
 		return mv;
-
+		
+		
 	}
 
+	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(@RequestParam("sq") int sq) throws Exception {
 		service.delete(sq);
@@ -65,14 +78,7 @@ public class KnowledgeInController {
 
 	}
 
-	@RequestMapping("/KnowledgeIn/KnowledgeInA.do") // 지식인 답변
-	public ModelAndView KnowledgeInA(@RequestParam(value = "sq", defaultValue = "1") int sq, ModelAndView mv)
-			throws Exception {
-		mv.addObject("KnowledgeIn", service.selectKinOne(sq));
-		mv.setViewName("KnowledgeIn/KnowledgeInA");
-		return mv;
 
-	}
 
 	@RequestMapping("/KnowledgeIn/KnowledgeInQ.do") // 지식인 질문작성화면
 	public String KnowledgeInQ() {
@@ -136,15 +142,46 @@ public class KnowledgeInController {
 	}
 
 	
+	  @RequestMapping("/KnowledgeIn/KnowledgeInA.do") // 지식인 답변  
+	  public ModelAndView KnowledgeInA(@RequestParam(value = "sq", defaultValue = "1") int sq,
+	  HttpServletRequest request, ModelAndView mv,KinReply kr) throws Exception {
+	  
+	 mv.addObject("KnowledgeIn", service.selectKinOne(sq));
+		
+		  int resq=Integer.parseInt(request.getParameter("reply_Sq"));
+			/*
+			 * mv.addObject("kinReply",service.selectReplyOne(resq));
+			 * log.info("resq몇번"+resq);
+			 */
+			/* System.out.println(resq+"번호가 맞는지 확인"); */
+			/*
+			 * kr.setReply_Sq(Integer.parseInt(request.getParameter("reply_Sq")));
+			 * mv.addObject("kinReply", service.selectReplyOne(kr.getReply_Sq()));
+			 */
+		  
+		  
+		/*
+		 * int resq=Integer.parseInt(request.getParameter("reply_Sq"));
+		 * log.info("resq몇번"+resq);
+		 * mv.addObject("kinReply",service.selectReplyOne(resq));
+		 */
+	  
+	  mv.setViewName("KnowledgeIn/KnowledgeInA"); return mv;
+	  
+	  }
+	
+	
 	
 	@RequestMapping("/KnowledgeIn/KnowledgeInAEnd.do") // 지식인 답변등록
-	public ModelAndView insertKinReply(KinReply kr, MultipartFile[] upload, ModelAndView mv,
-			HttpServletResponse response, HttpServletRequest req) throws IOException {
-
+	public ModelAndView insertKinReply(KinReply kr, Kin k, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file,
+			ModelAndView mv, HttpServletResponse response, HttpServletRequest req) throws IOException {
+		
+		log.info("글내용"+kr.getReply_Content());
+		//log.info("답글번호:"+kr.getReply_Sq());
 		logger.debug("knowledgIn : " + kr);
 		for (int i = 0; i < upload.length; i++) {
-			logger.debug("fileName : " + upload[i].getOriginalFilename());
-			logger.debug("fileName : " + upload[i].getSize());
+			logger.debug("fileName : " + file[i].getOriginalFilename());
+			logger.debug("fileName : " + file[i].getSize());
 		}
 
 		String path = req.getServletContext().getRealPath("/resources/upload");
@@ -153,7 +190,7 @@ public class KnowledgeInController {
 			dir.mkdirs();
 		}
 
-		for (MultipartFile f : upload) {
+		for (MultipartFile f : file) {
 
 			if (!f.isEmpty()) {
 				String oriFilename = f.getOriginalFilename();
@@ -166,7 +203,7 @@ public class KnowledgeInController {
 				try {
 					f.transferTo(new File(path + reName));
 
-					kr.getAttachments()
+					kr.getAttachment()
 							.add(KinReplyAttachment.builder().atch_Ori(oriFilename).atch_New(reName).build());
 
 				} catch (IOException e) {
@@ -175,7 +212,7 @@ public class KnowledgeInController {
 
 			} // for문 종료
 		} // if문 종료
-		String msg = "등록 성공";
+		String msg = "답변 등록 성공";
 		try {
 			service.insertKinReply(kr);
 		} catch (Exception e) {
@@ -183,46 +220,14 @@ public class KnowledgeInController {
 		}
 
 		mv.addObject("msg", msg);
-		mv.addObject("loc", "/KnowledgeIn/KnowledgeInList.do");
+		
+		mv.addObject("loc", "/KnowledgeIn/KnowledgeInList.do?sq="+k.getKin_Sq());
 		mv.setViewName("common/msg");
 
 		return mv;
 	}
 
-	/*
-	 * //게시물 수정페이지로 이동 (수정뷰)
-	 * 
-	 * @RequestMapping(value="/KnowledgeIn/update",method=RequestMethod.GET)
-	 * 
-	 * 
-	 * public ModelAndView getupdate (ModelAndView mv,int sq) throws Exception{
-	 * mv.addObject("KnowledgeIn",service.selectKinOne(sq));
-	 * 
-	 * mv.setViewName("KnowledgeIn/update"); return mv;
-	 * 
-	 * 
-	 * 
-	 * }
-	 * 
-	 * 
-	 * //게시물 수정
-	 * 
-	 * @RequestMapping(value="/KnowledgeIn/update_action",method=RequestMethod.POST)
-	 * 
-	 * public String update (@ModelAttribute("k") Kin k,HttpServletRequest
-	 * request,RedirectAttributes redirect, Model model) throws Exception{
-	 * logger.info("update"); try { service.update(k);
-	 * redirect.addFlashAttribute("redirect",k.getKin_Sq());
-	 * 
-	 * 
-	 * 
-	 * redirect.addFlashAttribute("msg","수정이 완료되었습니다.");
-	 * 
-	 * }catch(Exception e) { redirect.addFlashAttribute("msg","오류가 발생되었습니다."); }
-	 * return "redirect:/KnowledgeIn/KnowledgeInMain.do"; return
-	 * "redirect:/KnowledgeIn/KnowledgeInList.do?sq="+k.getKin_Sq(); }
-	 */
-
+//게시글 수정
 	@RequestMapping("/KnowledgeIn/update")
 	public ModelAndView update(ModelAndView mv, Kin k, @RequestParam("article_file") MultipartFile[] upload,
 			HttpServletRequest request, MultipartFile[] file) {
@@ -278,7 +283,8 @@ public class KnowledgeInController {
 			msg = e.getMessage();
 		}
 		/* mv.addObject("no", request.getParameter("post_Sq")); */
-		mv.addObject("sq", request.getParameter("sq"));
+		mv.addObject("sq", request.getParameter("kin_Sq")); //파라미터에는 name 값 
+		/* log.info("sq"+k.getKin_Sq()); */
 		log.info("list" + k.getAttachments());//???
 		mv.addObject("msg", msg);
 		mv.addObject("loc", "/KnowledgeIn/KnowledgeInMain.do"); // common/msg에 넣어버리면 location.replace라서 작동안됨.

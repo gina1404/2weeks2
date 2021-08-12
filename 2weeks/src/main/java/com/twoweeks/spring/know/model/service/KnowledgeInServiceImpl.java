@@ -29,6 +29,14 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 		
 		return dao.selectKinList(session,cPage,numPerpage);
 	}
+	
+	
+	@Override
+	public List<Kin> selectKinListcnt(int cPage, int numPerpage) {
+		
+		return dao.selectKinListcnt(session,cPage,numPerpage);
+	}
+
 
 	@Override
 	public int selectKinCount() {
@@ -64,6 +72,16 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 		return dao.selectKinOne(session,sq);
 	}
 
+	
+	
+	@Override
+	public List<KinReply> selectReplyOne(int sq) throws Exception {
+		
+		return dao.selectReplyOne(session,sq);
+	}
+
+	
+	
 	@Override
 	public void delete(int sq) throws Exception {
 		
@@ -77,8 +95,8 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 			log.debug("답글번호 :"+kr.getReply_Sq());
 			int replySq=kr.getReply_Sq();
 			if(result>0) {
-				List<KinReplyAttachment> attachment=kr.getAttachments();
-				if(kr.getAttachments().size()>0) {
+				List<KinReplyAttachment> attachment=kr.getAttachment();
+				if(kr.getAttachment().size()>0) {
 					for(KinReplyAttachment a: attachment) {
 						a.setReply_Sq(replySq);
 						result=dao.insertKinReplyAttachment(session,a);
@@ -145,6 +163,7 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 		return dao.list(session, k);
 	}
 
+	
 
 
 	

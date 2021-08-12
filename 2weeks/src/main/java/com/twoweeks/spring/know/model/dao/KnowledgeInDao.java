@@ -12,6 +12,8 @@ import com.twoweeks.spring.know.model.vo.KinReplyAttachment;
 public interface KnowledgeInDao {
 	List<Kin> selectKinList(SqlSession session, int cPage, int numPerpage);
 	
+	List<Kin> selectKinListcnt(SqlSession session, int cPage, int numPerpage);
+	
 	int selectKinCount(SqlSession session); //총 건수
 	
 	int selectKinReplyCount(SqlSession session); //답글 개수
@@ -28,6 +30,8 @@ public interface KnowledgeInDao {
 	
 	Kin selectKinOne(SqlSession session, int sq); //글 상세보기
 
+	List<KinReply> selectReplyOne(SqlSession session, int sq); //답글 상세보기
+	
 	void updatecnt(SqlSession session,int sq)throws Exception;//조회수
 	
 	int update(SqlSession session, Kin k); //글 수정
@@ -36,6 +40,8 @@ public interface KnowledgeInDao {
 
 	
 	List<Kin> list(SqlSession session, Kin k);
+
+
 	
 	
 	

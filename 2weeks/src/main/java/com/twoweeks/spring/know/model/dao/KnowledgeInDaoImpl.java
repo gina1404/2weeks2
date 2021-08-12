@@ -2,8 +2,6 @@ package com.twoweeks.spring.know.model.dao;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -24,6 +22,13 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 				new RowBounds((cPage-1)*numPerpage,numPerpage));
 	}
 
+	
+
+	@Override public List<Kin> selectKinListcnt(SqlSession session, int cPage,
+	  int numPerpage) { return session.selectList("knowledgeIn.cnt",null, new
+	  RowBounds((cPage-1)*numPerpage,numPerpage)); }
+	 
+	
 	@Override
 	public int selectKinCount(SqlSession session) {
 		
@@ -34,7 +39,7 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	@Override
 	public int selectKinReplyCount(SqlSession session) {
 		
-		return session.selectOne("kinReply.selectKinReplyCount");
+		return session.selectOne("knowledgeIn.selectKinReplyCount");
 
 	}
 	
@@ -55,6 +60,10 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 		return session.selectOne("knowledgeIn.selectKinOne",sq);
 	}
 
+	@Override
+	public List<KinReply> selectReplyOne(SqlSession session, int sq) {
+		return session.selectList("knowledgeIn.selectReplyOne",sq);
+	}
 
 
 	@Override
@@ -71,14 +80,14 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 
 	@Override
 	public int insertKinReply(SqlSession session, KinReply kr) {
-		return session.insert("kinReply.insertKinReply",kr);
+		return session.insert("knowledgeIn.insertKinReply",kr);
 		
 	}
 
 	@Override
 	public int insertKinReplyAttachment(SqlSession session, KinReplyAttachment kra) {
 		
-		return session.insert("kinReply.insertKinReplyAttachment",kra);
+		return session.insert("knowledgeIn.insertKinReplyAttachment",kra);
 	}
 	
 	@Override
@@ -95,5 +104,10 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	public List<Kin> list(SqlSession session, Kin k) {
 		return session.selectList("knowledgeIn.list",k);
 	}
+
+
+
+
+
 
 }

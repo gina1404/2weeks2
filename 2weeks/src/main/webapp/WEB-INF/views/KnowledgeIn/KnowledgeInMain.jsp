@@ -27,6 +27,7 @@
     position:relative;
    	top:-50px;
     text-overflow: ellipsis;
+    background-color: white;
 }
 
 .ranking_section .ranking_list {
@@ -38,7 +39,7 @@
     text-decoration:none;
     list-style: none;
     text-overflow: ellipsis;
-    
+    background-color: white;
 }
 
 .ranking_section .ranking_item {
@@ -51,6 +52,7 @@
     line-height: 1.6;
     letter-spacing: -0.5px;
     text-overflow: ellipsis;
+     background-color: white;
 }
 
 .section_headings {
@@ -319,7 +321,7 @@ right:-1400px;
 
 .background2{
 background:#FFFFFF;
-/*  border:3px solid red; */
+/*  border:3px solid red;  */
  border-radius: 24px;
  position: relative;
  top:-100px;
@@ -328,7 +330,7 @@ background:#FFFFFF;
 
 .background3{
 background:#FFFFFF;
-border:3px solid white;
+/* border:3px solid red; */
  border-radius: 24px; 
   position: relative;
  top:-40px;
@@ -338,8 +340,14 @@ border:3px solid white;
 position: relative;
 top :-10px;
 } 
+.ranking_list_area{
+background:#FFFFFF;
+/* border: 1px solid red; */
 
-
+}
+.ranking_item _item_1{
+background:#FFFFFF;
+}
 </style>
 <section class="container">		
 
@@ -370,6 +378,7 @@ top :-10px;
 	<div class="stats_ranking_area" id="statsRankingArea">
 
 			<ul class="knowmenu"> 
+					<li>전체</li>
 					<li>코로나19</li>
 					<li>백신</li>
 					<li>확진</li>
@@ -452,8 +461,8 @@ top :-10px;
 	
 </div>
 </div>
+	</div>
 
-</div>
 
 <div class="background3">
 
@@ -467,7 +476,7 @@ top :-10px;
 		<div class="ranking_list_area" id="rankingChart">
 				
 				<ul class="ranking_list">
-				<%-- 	<c:forEach var="k" items="${cnt }" varStatus="status">
+					<c:forEach var="k" items="${cnt}" varStatus="status">
 					 <c:if test="${status.count<=3 }"> 
 					
 					<li class="ranking_item _item_1" >
@@ -481,17 +490,19 @@ top :-10px;
 				
 					</li>
 						</c:if>
-     				</c:forEach>					 --%>
+     						
+     						
+     				</c:forEach>					 
                     
 	
 
                 </ul>
 				
 				<ul class="ranking_list">
-				<%-- 	<c:forEach var="k" items="${list}" varStatus="status">
+			 	<c:forEach var="k" items="${cnt}" varStatus="status">
 				 <c:if test="${status.count>=4  }">
 					<li class="ranking_item _item_2" >
-							<c:out value="${status.count}"></c:out>
+							<%-- <c:out value="${status.count}"></c:out> --%>
 					<span class="no"><c:out value="${status.count}"></c:out></span>
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
@@ -501,7 +512,7 @@ top :-10px;
 				
 					</li>
 				</c:if>
-     				</c:forEach>	 --%>
+     				</c:forEach>	 
      				
 			
                     
@@ -511,11 +522,11 @@ top :-10px;
 	</div>
 	
 
-</div> 
+
            <div id="pagebar-container">
         	${pageBar }
         </div>
-           	
+  </div>          
 </section>
 	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>

@@ -8,8 +8,12 @@
 	
 <!-- SELECT * FROM KIN --> 
 	</select>
+	
+
+	
 	<select id ="cnt"  resultMap="KnowledgeInMap">
-		SELECT * FROM KIN ORDER BY KIN_CNT DESC
+		 	SELECT * 
+		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_CNT DESC   
 	</select>
 	
 	<select id="selectKinCount" resultType="_int">
@@ -51,6 +55,40 @@
 	
 	
 	
+	<resultMap type="kinReply" id="kinReplyMap">
+		<id column="reply_Sq" property="reply_Sq"/>
+		<result column="kin_Sq" property="kin_Sq"/>
+		<result column="reply_Writer" property="reply_Writer"/>
+		<result column="reply_Content" property="reply_Content"/>
+		<result column="reply_Image" property="reply_Image"/>
+		<result column="reply_Like_Cnt" property="reply_Like_Cnt"/>
+		<result column="reply_Date" property="reply_Date"/>
+		<result column="open_Yn" property="open_Yn"/>
+		
+		<collection property="attachment" ofType="kinReplyAttachment">
+			<id column="atch_No" property="atch_No"/>
+			<result column="reply_Sq" property="reply_Sq"/>
+			<result column="atch_Ori" property="atch_Ori"/>
+			<result column="atch_New" property="atch_New"/>
+
+		</collection>
+	</resultMap>
+	<resultMap type="attachment" id="replyattachmentMap">
+		<id column="atch_No" property="atch_No"/>
+		<result column="reply_Sq" property="reply_Sq"/>
+		<result column="atch_Ori" property="atch_Ori"/>
+		<result column="atch_New" property="atch_New"/>
+
+	</resultMap>
+
+	
+	
+	
+	
+	
+	
+	
+	
 		<insert id="insertKin">
 			<!-- INSERT INTO KIN VALUES(KIN_SQ.NEXTVAL,#{kin_Writer},#{category},#{kin_Title},
 			#{kin_Content},#{kin_Image},#{open_Yn},#{selected,},SYSDATE,#{kin_Cnt}) -->
@@ -58,13 +96,11 @@
 			INSERT INTO KIN VALUES(KIN_SEQ.NEXTVAL,#{kin_Writer},#{category},#{kin_Title},
 			#{kin_Content},NULL,#{open_Yn},default,SYSDATE,default)
 			
-			
-			
-			
 			<selectKey keyProperty="kin_Sq" resultType="_int" order="AFTER"> 
 			SELECT KIN_SEQ.CURRVAL FROM DUAL 
 			</selectKey>
 		</insert>
+		
 		<insert id="insertKinAttachment"> 
 		INSERT INTO KIN_ATTACHMENT VALUES(KIN_ATTACHMENT_SEQ.NEXTVAL,#{kin_Sq}, #{atch_Ori}, #{atch_New}) 
 		</insert>
@@ -78,10 +114,36 @@
 	SELECT * FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ WHERE K.KIN_SQ=#{SQ} 
 
 		</select>
+	
+	
+	
+	
+		<select id="selectReplyOne" resultMap="kinReplyMap">  
+	<!-- 	SELECT * FROM KIN_REPLY KR LEFT JOIN KIN_REPLY_ATTACHMENT KRA ON KR.REPLY_SQ=KRA.REPLY_SQ WHERE KIN_SQ=#{SQ} -->
+	 SELECT * FROM KIN_REPLY WHERE KIN_SQ=#{SQ}
+		</select>
+	
+	
+	
+	
+	
+	
+	
 		
+	<insert id="insertKinReply">
+			
+			INSERT INTO KIN_REPLY VALUES(KIN_REPLY_SEQ.NEXTVAL,#{reply_Writer},#{kin_Sq},#{reply_Content},NULL,
+			#{reply_Like_Cnt},SYSDATE,#{open_Yn})
+			
+			<selectKey keyProperty="reply_Sq" resultType="_int" order="AFTER"> 
+			SELECT KIN_REPLY_SEQ.CURRVAL FROM DUAL 
+			</selectKey>
+		</insert>		
 		
-		
-		
+		<insert id="insertKinReplyAttachment"> 
+		INSERT INTO KIN_REPLY_ATTACHMENT VALUES(KIN_REPLY_ATTACHMENT_SEQ.NEXTVAL,#{reply_Sq}, #{atch_Ori}, #{atch_New}) 
+		</insert>
+
 		<delete id="delete" parameterType="int">
 		DELETE FROM KIN WHERE KIN_SQ = #{kin_Sq}
 		</delete>

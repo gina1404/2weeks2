@@ -302,7 +302,7 @@ right:-50px;
 					<button id="searchkn">검색</button>
 			</div>
 			<button id="Qsearch" >질문하기</button><img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
-				<input type="hidden" id="no" value="${knowledgeIn.kin_Sq}">NO.${knowledgeIn.kin_Sq}  
+			<input type="hidden" name="kin_Sq" id="no" value="${knowledgeIn.kin_Sq}">  
 					<div>	<span class="QA">Q</span> 
 <input type="text"  maxlength='20' style="width:1000px;font-size:30px; border:1px solid #19ce60" placeholder="제목 작성란 입니다 20자 미만으로 입력해주세요."
 				 value ="${knowledgeIn.kin_Title}" name="kin_Title" required>
