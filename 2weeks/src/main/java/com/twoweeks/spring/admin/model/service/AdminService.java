@@ -18,4 +18,7 @@ public interface AdminService {
 	int selectMemberPoint(String name);
 	int updatePointEnd(Point re);
 	List<Report>adminReporttable();
+	int selectReportCount();
+	int reportUpdateYn(String pk);
+	List<Report>reportList(String userId);
 }

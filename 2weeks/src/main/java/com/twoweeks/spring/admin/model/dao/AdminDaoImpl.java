@@ -68,6 +68,24 @@ public class AdminDaoImpl implements AdminDao{
 		return session.selectList("notice.adminReporttable");
 	}
 
+	@Override
+	public int selectReportCount(SqlSession session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("notice.selectReportCount");
+	}
+
+	@Override
+	public int reportUpdateYn(SqlSession session, String pk) {
+		// TODO Auto-generated method stub
+		return session.update("notice.reportUpdateYn", pk);
+	}
+
+	@Override
+	public List<Report> reportList(SqlSession session, String userId) {
+		// TODO Auto-generated method stub
+		return session.selectList("notice.reportList", userId);
+	}
+	
 	
 	
 

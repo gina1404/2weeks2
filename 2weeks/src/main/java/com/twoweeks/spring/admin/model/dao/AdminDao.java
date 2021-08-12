@@ -21,4 +21,7 @@ public interface AdminDao {
 	int selectMemberPoint(SqlSession session,String name);
 	int updatePointEnd(SqlSession session,Point re);
 	List<Report>adminReporttable(SqlSession session);
+	int selectReportCount(SqlSession session);
+	int reportUpdateYn(SqlSession session,String pk);
+	List<Report>reportList(SqlSession session,String userId);
 }

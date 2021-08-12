@@ -23,7 +23,7 @@
             <a class="navbar-brand ps-3" href="<%=request.getContextPath() %>/">2Weeks</a>
              <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-
+			<a href="<%=request.getContextPath() %>/"><button class="btn btn-outline-primary" style="position: relative; left: 1500px;">메인으로가기</button></a>
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -122,9 +122,9 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">미처리 게시글신고 <br>0개</div>
+                                    <div class="card-body">미처리 게시글신고 <br>${reportct }개</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">신고관리 바로가기</a>
+                                        <a class="small text-white stretched-link" href="<%=request.getContextPath()%>/admin/adminReporttable.do">신고관리 바로가기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

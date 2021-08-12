@@ -33,8 +33,10 @@ public class AdminController {
 
 		List<Member> list = service.selectMemberList();
 		int memberct = service.selectMembercount();
+		int reportct=service.selectReportCount();
 		// System.out.println(list);
-
+		
+		mv.addObject("reportct", reportct);
 		mv.addObject("memberct", memberct);
 		mv.addObject("list", list);
 		mv.setViewName("admin/adminMainPage");
@@ -100,11 +102,11 @@ public class AdminController {
 	@RequestMapping("/admin/reportList.do")
 	public ModelAndView reportList(ModelAndView mv, HttpServletRequest req) {
 		String userId = req.getParameter("userId");
-		/*
-		 * List<Report> list=service.reportList(userId);
-		 * 
-		 * mv.addObject("list", list);
-		 */
+		
+		  List<Report> list=service.reportList(userId);
+		  
+		  mv.addObject("list", list);
+		 
 		mv.setViewName("admin/reportTable");
 		return mv;
 	}
@@ -162,4 +164,20 @@ public class AdminController {
 		mv.setViewName("admin/adminReportTable");
 		return mv;
 	}
+	@RequestMapping("/admin/reportUpdateYn")
+	public ModelAndView reportUpdateYn(ModelAndView mv,HttpServletRequest req) {
+		String pk=req.getParameter("pk");
+		int result=service.reportUpdateYn(pk);
+		if(result>0) {
+			mv.addObject("msg", "처리 완료되었습니다.");
+			mv.addObject("loc", "/admin/adminReporttable.do");
+			mv.setViewName("common/msg");
+		}else {
+			mv.addObject("msg", "처리 실패.");
+			mv.addObject("loc", "/admin/adminReporttable.do");
+			mv.setViewName("common/msg");
+		}
+		return mv;
+	}
+
 }

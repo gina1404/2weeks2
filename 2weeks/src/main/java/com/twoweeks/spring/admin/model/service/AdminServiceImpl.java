@@ -73,6 +73,21 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return dao.adminReporttable(session);
 	}
+	@Override
+	public int selectReportCount() {
+		// TODO Auto-generated method stub
+		return dao.selectReportCount(session);
+	}
+	@Override
+	public int reportUpdateYn(String pk) {
+		// TODO Auto-generated method stub
+		return dao.reportUpdateYn(session,pk);
+	}
+	@Override
+	public List<Report> reportList(String userId) {
+		// TODO Auto-generated method stub
+		return dao.reportList(session,userId);
+	}
 	
 	
 }

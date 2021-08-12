@@ -39,6 +39,15 @@
 		UPDATE MEMBER2 SET USERPOINT_CNT=USERPOINT_CNT+#{pointAmt} WHERE USER_ID=#{userId}
 	</update> 
 	<select id="adminReporttable" resultType="com.twoweeks.spring.admin.model.vo.Report">
-		SELECT * FROM REPORT
+		SELECT * FROM REPORT ORDER BY REPORT_YN
+	</select>
+	<select id="selectReportCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE REPORT_YN='N'
+	</select>
+	<update id="reportUpdateYn">
+		UPDATE REPORT SET REPORT_YN='Y' WHERE REPORT_DETAIL_REASON=#{pk}
+	</update>
+	<select id="reportList" resultType="com.twoweeks.spring.admin.model.vo.Report">
+		SELECT * FROM REPORT WHERE USER_ID=#{userId}
 	</select>
 </mapper>
