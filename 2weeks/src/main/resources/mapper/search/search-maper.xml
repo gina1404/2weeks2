@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="SearchMapper">
+
+	<!-- 블로그 크롤링 데이터 저장 -->
+	<insert id="insertBlogDummy">
+		INSERT INTO POST VALUES 
+		(POST_SEQ.NEXTVAL, 'DUMMY', 'COVID', 'COVID', #{postTitle}, #{postContent}, DEFAULT, 0, TO_DATE(#{postDT},'YYYY.MM.DD'), 0, 'Y', NULL)		
+	</insert>
+</mapper>
