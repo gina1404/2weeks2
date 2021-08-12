@@ -131,14 +131,17 @@ a:visited {color:black;}
 #nick {
 	font-weight: bolder;
 	font-size: 17px;
+	margin-left: 5px;
 }	
 .dropdown{
 	/* border: solid 1px; */
 	position: relative;
 	display: flex;
-	width: 165px;
-	margin-left: 25px;
+	width: 200px;
+	height: 24px;
+	margin-left: 20px;
 	cursor: pointer;
+	padding: 0;
 }
 .dropdown-content{
 	display: none;
@@ -159,4 +162,7 @@ a:visited {color:black;}
 }
 .dropdown-content a:hover {background-color: #ddd;}
 .dropdown:hover .dropdown-content {display: block;}
-	
+
+#messageIcon{
+	margin: 1px 0 0 5px;
+}

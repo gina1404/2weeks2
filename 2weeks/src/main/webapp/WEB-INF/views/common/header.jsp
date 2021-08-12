@@ -55,30 +55,32 @@
 	            		<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
 	            	</c:if>
 
-	            	<c:if test="${member.user_Nic ne null }">
+	            	<%-- <c:if test="${member.user_Nic ne null }">
 	            		<div class="header-profile-text">${member.user_Nic}</div>
 	            		<input type="hidden" value="${member.user_Nic}" id="hidden_session_id"/>
 	            		<input type="button" value="로그아웃" onclick="location.href='${path}/member/logout'"/>
 	            	</c:if>	
 	                <div class="header-profile-icon">
 	                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
-	                </div>
+	                </div> --%>
 
 	            	
 	            	
 	                <div class="dropdown">
-		                <div class="header-profile-icon">
-		                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
-		                </div>
 		            	<c:if test="${member.user_Nic ne null }">
+			                <div class="header-profile-icon">
+			                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
+			                </div>
 		            		<div class="header-profile-text" id="nick">${member.user_Nic}님 </div>  
 			            	<div class="dropdown-content">
 			            		<a href="#">회원 정보 변경</a>
 			            		<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>
 			            		<a href="#">나의 포인트 0원</a>
-			            		<a href="${path}/member/logout">로그아웃</a>
-			            		
+			            		<a href="${path}/member/logout">로그아웃</a>			            		
 			            	</div>
+			            	<div class="header-message" id="messageIcon">
+			                	<i class="far fa-envelope" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
+			                </div>
 		            	</c:if>
 	            	</div>
 	            	
@@ -90,9 +92,7 @@
 	                	<img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
 	                </div>
 
-	                <div class="header-message">
-	                	<i class="far fa-envelope" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
-	                </div>
+	                
 	                
 	            </div>
 	            

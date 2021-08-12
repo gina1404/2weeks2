@@ -27,9 +27,12 @@ public class ChatController {
 	private ChatServiceImpl service;
 	
 	@RequestMapping("/chatting.do")
-	public String moveChatPage(Model model) {		
+	public String moveChatPage(HttpSession session, Model model) {		
 		List<ChatGroup> list=service.selectGroupList();		
+		String curCnt=(String) session.getAttribute("curCnt");
+				
 		model.addAttribute("list", list);
+		model.addAttribute("curCnt", curCnt);
 		
 		return "chat/chatMain";
 	}
