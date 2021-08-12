@@ -13,24 +13,23 @@
 <section class="content">
 <div class="container" id="">
     <div class="content" style="width: 70%">
-     <form name="boardFrm"  id="dataForm" onsubmit="return registerAction();" >
-        
-        <div class="row justify-content-md-center">
+     <form name="boardFrm"  id="dataForm" action="${path}/freeboard/writeEnd.do"  method="post" enctype="multipart/form-data">
+        <div class="row justify-content-md-center"> 				
             <div class="col-sm-9">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text">제목</label>
                   </div>            
-                  <input type="text" class="form-control" name="title">              
+                  <input type="text" class="form-control" name="post_Title">              
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="input-group mb-3">
                     <select class="custom-select" id="category" name="category">
                     <option selected>분류</option>
-                    <option value="1">자유</option>
-                    <option value="2">음식</option>
-                    <option value="3">ㅇㅇㅇ</option>
+                    <option value="자유">자유</option>
+                    <option value="배달">배달</option>
+                    <option value="재택근무">재택근무</option>
                   </select>  
                 </div>
             </div>            
@@ -41,13 +40,13 @@
       <div class="row justify-content-md-center">
           <div class="col_c" style="margin-bottom: 30px">
                 <div class="input-group">                 
-                  <textarea class="form-control" id="content" name="content"></textarea>
+                  <textarea class="form-control" id="content" name="post_Content"></textarea>
                 </div>
             </div> 
       </div>
     <div>
-	<input type="file"  id="attach" multiple="multiple" style="border: 2px solid #ddd; outline: none;">
-	 <label for="attach"><i class="far fa-file-image"/>파일추가</label>
+	<input type="file" name="file"  id="attach" multiple="multiple" style="border: 2px solid #ddd; outline: none;">
+	 <label for="attach"><i class="far fa-file-image"/>파일추가 </label>
 	<span style="font-size: 14px; color: gray;">※첨부파일은 최대 5개까지 등록이가능합니다.</span>
 	</div>
 	<div class="data_file_txt" id="data_file_txt" >
@@ -130,25 +129,11 @@
 		console.log(content_files);
 	}
 	
-	//폼 submit 로직
-	function registerAction(){
-		var form = $("form")[0];
-		var formData = new FormData(form);
-		for (let i = 0; i<content_files.length; i++){
-			//삭제 안한 것만 담는다.
-			if(!content_files[i].is_delete){
-				formData.append("article_file", content_files[i]);
-			}
-		}
-		
-		//파일 업로드 multiple ajax 처리
-	
-	}	
 	
 	CKEDITOR.replace("content",{
 		height : "300",
 		width : "880",
-		filebrowserImageUploadUrl : '${pageContext.request.contextPath}/freeboard/fileupload.do ',
+		filebrowserImageUploadUrl : '${pageContext.request.contextPath}/freeboard/writeEnd.do ',
 	});
 					
 </script>

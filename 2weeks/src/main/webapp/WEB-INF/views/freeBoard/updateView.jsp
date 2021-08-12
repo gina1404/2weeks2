@@ -20,7 +20,7 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text">제목</label>
                   </div>            
-                  <input type="text" class="form-control" name="title" value="${list.post_Title }">          
+                  <input type="text" class="form-control" name="post_Title" value="${list.post_Title }">          
                 </div>
             </div>
             <div class="col-sm-3">
@@ -39,7 +39,7 @@
       <div class="row justify-content-md-center">
           <div class="col_c" style="margin-bottom: 30px">
                 <div class="input-group">                 
-                  <textarea class="form-control" id="content" name="content">${list.post_Content }</textarea>
+                  <textarea class="form-control" id="content" name="post_Content">${list.post_Content }</textarea>
                 </div>
             </div> 
       </div>
@@ -58,7 +58,7 @@
 		<div id="articlefileChange" class="bg-success">
 		</div>
       <div class="row justify-content-md-center">
-        <input type="hidden" name="no" value="${list.post_Sq}"/>
+        <input type="hidden" name="post_Sq" value="${list.post_Sq}"/>
         <input type="submit" class="m-3 btn btn-outline-secondary"   value="수   정" style="width: 20%; font-weight: bold">
         </div>
      </form>

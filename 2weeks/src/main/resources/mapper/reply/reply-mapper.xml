@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reply">
+
+	<select id="list" resultMap="replyMap">
+		SELECT * FROM POST_REPLY WHERE POST_SQ = #{post_Sq}
+		ORDER BY REPLY_SQ
+	</select>
+
+	<insert id="create">
+	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user01', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, #{reply_Dt}, DEFAULT, DEFAULT, NULL, SYSDATE )
+	</insert>
+	
+	<insert id="rereplyInsert">
+	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user02', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, #{reply_Level},
+	#{reply_Ref},DEFAULT)
+	</insert>
+	
+	
+	<update id="update">
+		UPDATE POST_REPLY SET reply_Content = #{reply_Content}, UPDATEDATE = SYSDATE
+		WHERE REPLY_SQ = #{reply_Sq}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM POST_REPLY WHERE REPLY_SQ = #{reply_Sq}
+	</delete>
+	
+	<select id="listAll" resultMap="replyMap">
+		SELECT * FROM POST_REPLY WHERE POST_SQ = #{post_Sq}
+		ORDER BY REPLY_SQ
+	</select>
+	
+
+<!-- 	<select id="selectBoardComment" resultMap="replyMap">
+		SELECT * FROM POST_REPLY WHERE POST_SQ=#{post_Sq} START WITH REPLY_LEVEL=1 CONNECT BY PRIOR REPLY_SQ=REPLY_REF	
+	</select> -->
+
+
+	<select id="countReplies"  resultType="_int">
+	SELECT COUNT(reply_Sq) FROM POST_REPLY WHERE POST_SQ = #{post_Sq}
+	</select>
+	
+	
+	<select id="selectBoardComment" resultType="reply">
+	SELECT * FROM POST_REPLY WHERE POST_SQ=#{post_Sq} START WITH REPLY_LEVEL=1 CONNECT BY PRIOR REPLY_SQ=REPLY_REF	
+	</select>
+	
+	
+	<resultMap id="replyMap" type="reply">
+		<id property="reply_Sq" column="reply_Sq"/>
+		<result property="user_Id" column="user_Id"/>
+		<result property="post_Sq" column="post_Sq"/>
+		<result property="reply_Content" column="reply_Content"/>
+		<result property="reply_image" column="reply_image"/>
+		<result property="open_Yn" column="open_Yn"/>
+		<result property="secret_Yn" column="secret_Yn"/>
+		<result property="reply_Dt" column="reply_Dt"/>
+		<result property="reply_Like_Cnt" column="reply_Like_Cnt"/>
+		<result property="reply_Level" column="reply_Level"/>
+		<result property="reply_Ref" column="reply_Ref"/>
+		<result property="updateDate" column="updateDate"/>
+	</resultMap>
+	
+	
+	
+	
+	
+</mapper>

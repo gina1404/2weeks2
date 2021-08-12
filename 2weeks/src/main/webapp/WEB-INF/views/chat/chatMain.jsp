@@ -11,6 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <link href="${path }/resources/css/chat/chatting.css?after" rel="stylesheet" />
+<c:set var="curCnt" value="${curCnt} " />
 
 <section class="container">
 	<h3>오픈채팅</h3>
@@ -43,7 +44,7 @@
 		<c:forEach var="l" items="${list }" varStatus="status">
 			<div id="group">					
 				<div id="chatTitle">${l.title }</div>
-				<div id="cntLimit">0 / ${l.cnt }명</div>
+				<div id="cntLimit">${curCnt } / ${l.cnt }명</div>
 				<div id="chatContent">${l.content }</div>
 			</div>
 			<div id="entry">

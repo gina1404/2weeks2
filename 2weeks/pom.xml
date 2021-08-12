@@ -307,7 +307,17 @@
 		    <groupId>org.json</groupId>
 		    <artifactId>json</artifactId>
 		    <version>20210307</version>
-		</dependency>		
+		</dependency>
+		
+		<!-- websocket-api  -->
+		<dependency>
+		    <groupId>javax.websocket</groupId>
+		    <artifactId>javax.websocket-api</artifactId>
+		    <version>1.1</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+										 	
 		
 		<!-- lucene (검색 엔진용) -->
 		<dependency>
@@ -328,6 +338,7 @@
 
 		
 								  
+
 
 	</dependencies>
     <build>
@@ -366,6 +377,6 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
-        </plugins>
+        </plugins>        
     </build>
 </project>

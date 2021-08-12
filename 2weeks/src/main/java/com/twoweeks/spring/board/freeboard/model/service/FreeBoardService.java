@@ -1,10 +1,10 @@
 package com.twoweeks.spring.board.freeboard.model.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
+import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 public interface FreeBoardService {
 
@@ -33,5 +33,7 @@ public interface FreeBoardService {
 	int update(FreeBoard fb) throws Exception;
 	
 	int delete(int no);
+
+	
 	
 }

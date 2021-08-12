@@ -1,9 +1,9 @@
 package com.twoweeks.spring.common;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ChattingServer extends TextWebSocketHandler{
 	
 	private List<WebSocketSession> sessionList=new ArrayList<WebSocketSession>();
-	
+		
 	Gson gson=new Gson();
 	
 	@Override
@@ -28,7 +28,15 @@ public class ChattingServer extends TextWebSocketHandler{
 				
 		String sender=(String)session.getAttributes().get("chatName");
 		
-		log.info("{}님 입장",sender);		
+		log.info("{}님 입장",sender);
+		
+//		//ChatGroupMessage msg=gson.fromJson(message.getPayload(), ChatGroupMessage.class); //Json을 java객체로 바꿔줌
+//		
+//		TextMessage sendMsg= new TextMessage(gson.toJson(msg));
+//		
+//		for(WebSocketSession s : sessionList) {
+//			s.sendMessage(sendMsg);
+//		}
 	}
 	
 	@Override

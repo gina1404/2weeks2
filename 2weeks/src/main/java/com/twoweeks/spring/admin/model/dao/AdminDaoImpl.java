@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.twoweeks.spring.admin.model.vo.Notice;
 import com.twoweeks.spring.admin.model.vo.Point;
+import com.twoweeks.spring.admin.model.vo.Report;
 import com.twoweeks.spring.admin.model.vo.noticeAttachment;
 import com.twoweeks.spring.member.model.vo.Member;
 
@@ -61,6 +62,13 @@ public class AdminDaoImpl implements AdminDao{
 		return session.update("notice.updatePointEnd", re);
 	}
 
+	@Override
+	public List<Report> adminReporttable(SqlSession session) {
+		// TODO Auto-generated method stub
+		return session.selectList("notice.adminReporttable");
+	}
+
+	
 	
 
 }

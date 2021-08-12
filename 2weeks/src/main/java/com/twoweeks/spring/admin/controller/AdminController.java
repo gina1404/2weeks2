@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.twoweeks.spring.admin.model.service.AdminService;
 import com.twoweeks.spring.admin.model.vo.Notice;
 import com.twoweeks.spring.admin.model.vo.Point;
+import com.twoweeks.spring.admin.model.vo.Report;
 import com.twoweeks.spring.admin.model.vo.noticeAttachment;
 import com.twoweeks.spring.member.model.vo.Member;
 
@@ -150,6 +151,15 @@ public class AdminController {
 		
 
 
+		return mv;
+	}
+	@RequestMapping("/admin/adminReporttable.do")
+	public ModelAndView adminReporttable(ModelAndView mv) {
+		
+		List<Report>list=service.adminReporttable();
+		System.out.println(list);
+		mv.addObject("list", list);
+		mv.setViewName("admin/adminReportTable");
 		return mv;
 	}
 }

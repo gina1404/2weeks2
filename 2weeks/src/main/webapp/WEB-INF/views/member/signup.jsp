@@ -28,7 +28,7 @@
 
 	<section id="signup" class="container">   
         <div class="signup">
-            <h3>회원가입(기능구현중)</h3><br/>
+            <h3>회원가입</h3><br/>
             <form:form modelAttribute="member" class="signup form" method="post" action="${path}/signup" enctype="multipart/form-data">
             <div class="profile">   
                 <div class="profile_view">
@@ -102,7 +102,7 @@
 					$("#submit").removeAttr("disabled");
 				}				
 				},
-			error:function(){
+			error:function(data){
 				console.log("중복확인실패");
 			}
 			});

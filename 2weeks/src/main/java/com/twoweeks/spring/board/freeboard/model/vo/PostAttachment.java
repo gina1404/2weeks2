@@ -18,5 +18,6 @@ public class PostAttachment {
 	private String atch_Ori; //원본파일 이름
 	private String atch_New; //리네임파일이름
 	private Date upload_Date;
+	private int downloadCount;
 
 }

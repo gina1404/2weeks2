@@ -20,7 +20,7 @@ body{
 #sidebar {
 	left:0;
 	align-items: flex-start;
-	width:15%; /* 사이드바 너비 */
+	width:15% ; /* 사이드바 너비 */
 	overflow: hidden;
 	left:0;
 	top:60px; /* header 높이에 따라 변경해야 됨 */

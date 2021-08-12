@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.twoweeks.spring.board.freeboard.model.dao.FreeBoardDao;
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FreeBoardServiceImpl implements FreeBoardService {
 	
+	
+
+
 	@Autowired
 	private FreeBoardDao dao;
 	
@@ -42,22 +46,6 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	public int totalBoardCount() {
 		return dao.totalBoardCount(session);
 	}
-
-	
-	/*
-	 * @Override public int create(FreeBoard freeBoard) throws Exception { return
-	 * dao.create(freeBoard); }
-	 * 
-	 * @Override public FreeBoard read(int post_Sq) throws Exception { return
-	 * dao.read(post_Sq); }
-	 * 
-	 * @Override public void update(FreeBoard freeBoard) throws Exception {
-	 * dao.update(freeBoard); }
-	 * 
-	 * @Override public void delete(int post_Sq) throws Exception {
-	 * dao.delete(post_Sq); }
-	 */
-
 
 	@Override
 	public List<FreeBoard> searchBoard(Map<String,Object> param) {
@@ -99,6 +87,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	public int update(FreeBoard fb) throws Exception {
 		try {
 			int result = dao.update(session, fb);
+			System.out.println(result);
 			log.info("게시글 번호 : " + fb.getPost_Sq());
 			int boardNo=fb.getPost_Sq();
 			if(result>0) {
