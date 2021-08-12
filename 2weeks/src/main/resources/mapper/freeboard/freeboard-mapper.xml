@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="freeboard">
+
+	<select id="listAll" resultMap="boardMap">
+		SELECT * FROM POST P LEFT JOIN POST_ATCH A ON P.POST_SQ=A.POST_SQ ORDER BY P.POST_SQ DESC
+	</select>
+	
+	<select id="totalBoardCount" resultType="_int">
+		SELECT COUNT(*) FROM POST
+	</select>
+	
+	<select id="list" resultMap="boardMap">
+		SELECT * FROM POST
+	</select>
+	
+	<select id="searchBoard" resultType="freeboard">
+	SELECT * FROM POST WHERE ${type} LIKE '%'||#{keyword}||'%'
+									 
+	</select>
+	
+	<select id="read" parameterType="int" resultType="freeboard">
+	SELECT *
+	FROM POST WHERE POST_SQ = #{post_Sq}
+	</select>
+	
+	<insert id="insertAttachment">
+		INSERT INTO POST_ATCH VALUES(POST_ATCH_SEQ.NEXTVAL, #{post_Sq}, #{atch_Ori}, #{atch_New}, SYSDATE)
+	</insert>
+	
+	<insert id="insertBoard">
+	INSERT INTO FREEBOARD VALUES(POST_SEQ.NEXTVAL, #{user_Id}, #{menu_Gb},#{category},#{post_Title},#{post_Content},
+	NULL, DEFAULT, SYSDATE, DEFAULT, #{open_Yn}, NULL, NULL, NULL)
+	<selectKey keyProperty="post_Sq" resultType="_int" order="AFTER">
+		SELECT POST_SEQ.CURRVAL FROM DUAL
+	</selectKey>
+	</insert>
+	
+	<update id="update" parameterType="freeboard">
+		UPDATE FREEBOARD SET POST_TITLE = #{title}, POST_CONTENT = #{content}, CATEGORY = #{category}
+		WHERE POST_SQ =#{post_Sq}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+	DELETE FROM FREEBOARD WHERE BNO =#{no}
+	</delete>
+	
+	<insert id="updateAttachment">
+		INSERT INTO POST_ATCH VALUES(POST_ATCH_SEQ.NEXTVAL, #{post_Sq}, #{atch_Ori}, #{atch_New}, SYSDATE)
+	</insert>
+	
+	
+	<resultMap type="freeboard" id="boardMap">
+		<id column="post_Sq" property="post_Sq"/>
+		<result column="user_Id" property="user_Id"/>
+		<result column="menu_Gb" property="menu_Gb"/>
+		<result column="category" property="category"/>
+		<result column="post_Title" property="post_Title"/>
+		<result column="post_Content" property="post_Content"/>
+		<result column="share_Yn" property="share_Yn"/>
+		<result column="post_Like_Cnt" property="post_Like_Cnt"/>
+		<result column="post_Dt" property="post_Dt"/>
+		<result column="post_Cnt" property="post_Cnt"/>
+		<result column="open_Yn" property="open_Yn"/>
+		<result column="searchType" property="searchType"/>
+		<result column="keyword" property="keyword"/>
+			<collection property="attachments" ofType="postAttach">
+				<id column="atch_No" property="atch_No"/>
+				<result column="post_Sq" property="post_Sq"/>
+				<result column="atch_Ori" property="atch_Ori"/>
+				<result column="atch_New" property="atch_New"/>
+				<result column="upload_Date" property="upload_Date"/>
+			</collection>
+	</resultMap>
+	
+</mapper>

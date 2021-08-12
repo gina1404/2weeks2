@@ -1,58 +1,54 @@
 package com.twoweeks.spring.common;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.google.gson.Gson;
+import com.twoweeks.spring.chat.model.vo.ChatGroupMessage;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ChattingServer extends TextWebSocketHandler{
-
-	//private Map<String, WebSocketSession> clients=new HashMap(); //이걸 DB에 저장해야 함.
+	
 	private List<WebSocketSession> sessionList=new ArrayList<WebSocketSession>();
-
+	
+	Gson gson=new Gson();
+	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		//onopen기능과 동일
-		log.info("#ChattingHandler, afterConnectionEstablished");
-		log.info("클라이언트 접속");
-		sessionList.add(session);
+		sessionList.add(session);				
+				
+		String sender=(String)session.getAttributes().get("chatName");
 		
-		//log.info(session.getPrincipal().getName()+"님이 입장했습니다.");
-		//System.out.println("클라이언트 접속");
+		log.info("{}님 입장",sender);		
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		//onmessage기능과 동일
-		//System.out.println(message);
-			//session.open //이 없다!! 따로 websocketsession을 관리해줘야한다		
-			//session.getAttributes().put //으로 해서 데이터를 집어넣을수도있다
+		System.out.println("====서버메세지====");		
+		String sender=(String)session.getAttributes().get("chatName");
+				
+		log.info("{}님이 {}메세지 전송함", sender, message.getPayload());		
 		
-		log.info("#ChattingHandler, handleMessage");
-		//log.info(session.getId()+" : "+message);
+		ChatGroupMessage msg=gson.fromJson(message.getPayload(), ChatGroupMessage.class); //Json을 java객체로 바꿔줌
+				
+		TextMessage sendMsg= new TextMessage(gson.toJson(msg));
 		
 		for(WebSocketSession s : sessionList) {
-			//s.sendMessage(new TextMessage(session.getPrincipal().getName()+" : "+message.getPayload()));
-		}
-		
-		//데이터 전송하기
-		session.sendMessage(message);
+			s.sendMessage(sendMsg);
+		}	
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		//onclose 기능과 동일
-		log.info("#ChattingHandler, afterConnectionClosed");
-		sessionList.remove(session);
-		//log.info(session.getPrincipal().getName()+"님이 나갔습니다.");
+		sessionList.remove(session);	
 	}
-	
-	
-	
 }

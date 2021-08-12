@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.twoweeks.spring.overseas.model.vo.Item;
 import com.twoweeks.spring.overseas.model.vo.OverseasGr;
 
 public interface CoivdOverseasDao {
@@ -13,5 +14,5 @@ public interface CoivdOverseasDao {
 	OverseasGr selectydayDef(SqlSession session);
 	List<OverseasGr>selectGrList(SqlSession session);
 	int updateGrData(SqlSession session,OverseasGr gg2);
-
+	int insertOverseasList(SqlSession session,List<Item>list);
 }

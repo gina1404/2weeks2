@@ -1,0 +1,17 @@
+게시판 페이징
+1.필요변수
+	cPage:현재 페이지 -> 1 2 3 4내가볼페이지, 보고있는 페이지
+	numPerpage : 테이블에 출력될 데이터수 / 1페이지당 출력된 데이터수
+	totalPage: 전체 페이지 수를 저장하는 변수
+	totalData: DB에 저장되어있는 전체 데이터수
+	pageBarSize : pageBar에 출력된 페이지수
+	pageNo : pageBar에 출력되는 숫자(페이지)의 시작 숫자
+	pageEnd: pageBar에 출력되는 숫자(페이지)의 끝 숫자
+
+	pageBar: pageBar를 태그 형식으로 구현한 문자열을 저장하는 String변수
+2.계산하기
+	totalPage: DB에 저장된 전체 데이터수(totalData)/페이지당 출력 데이터수(numPerpage)
+	pageNo: ((현재페이지-1)/pageBarSize)*pageBarSize+1 
+	pageEnd: pageNo+pageBarsize-1
+	가져올 데이터 시작번호: (현재페이지-1)*페이지당데이터수+1
+	가져올 데이터 끝번호 : 현제페이지*페이지당데이터수

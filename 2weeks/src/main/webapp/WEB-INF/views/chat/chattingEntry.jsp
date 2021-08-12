@@ -15,33 +15,29 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link href="${path }/resources/css/groupChatting.css" rel="stylesheet" />
+<link href="${path }/resources/css/chat/groupChatting.css" rel="stylesheet" />
 
 </head>
 <body>
 	
 	<div id="chatContainer">
-	
+		<div id="entryAlert"></div>		
 	</div>
 
 	<div id="sendBox" class="input-group">
-		<input type="text" id="chat" class="form-control" aria-describedby="basic-addon2" 
-		placeholder="채팅을 입력하세요">
+		<input type="hidden" id="sender" value="${loginId}">
+		<input type="hidden" id="senderNick" value="${chatName}">         
+		<input type="hidden" id="chatGroupNo" value="${no }">    
+		<input type="text" id="chat" class="form-control" aria-describedby="basic-addon2" placeholder="채팅을 입력하세요">
 		<span class="input-group-addon btn" id="sendChat">전송</span>
-		<!--<button id="sendChat" class="form-control">전송</button> -->
 	</div>
+	
+    <div id="tempAlert">
+        <p>내용을 입력하세요</p>    
+    </div>
 
 </body>
 
-<script type="text/javascript" src="<c:url value='/resources/js/chat/chattingEntry.js' />"></script>
+<script type="text/javascript" src="${path }/resources/js/chat/chattingEntry.js"></script>
 
-<script>
-	console.log("123");
-	let chat_btn=document.getElementById("sendChat");
-	chat_btn.addEventListener("click", e=>{
-		const msg=document.getElementById("chat").value;
-		console.log(msg);
-		
-	});
-</script>
 </html>

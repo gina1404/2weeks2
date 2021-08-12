@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+   
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +41,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<%=request.getContextPath()%>/admin/admintable.do">권한 요청</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">신고 관리</a>
+                                    <a class="nav-link" href="<%=request.getContextPath()%>/admin/adminReporttable.do">신고 관리</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
