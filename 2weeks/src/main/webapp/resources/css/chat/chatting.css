@@ -1,8 +1,23 @@
 @charset "UTF-8";
 
+#chatContainer{
+	background-color: #EFEFFB;
+	width: 95%;
+	height:730px;	
+	border-radius: 20px;
+	padding: 20px 20px 0 30px;
+}
+
 #addGroupBtn{
 	display : block;
 	float:right;
+	cursor:pointer;
+	font-size: 15px;
+    font-weight: bolder;
+    margin: 10px 20px 0 0;
+}
+#addGroupBtn:hover{
+	color: #424242;
 }
 
 #addGroup{	
