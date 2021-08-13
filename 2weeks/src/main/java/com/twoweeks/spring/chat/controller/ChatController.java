@@ -40,8 +40,6 @@ public class ChatController {
 	@RequestMapping(value="/chat/sendChat", produces="application/json")
 	@ResponseBody
 	public String insertChat(@RequestBody ChatGroup cg, Model m, HttpSession session) {		
-		String chatId=(String)session.getAttribute("chatId");
-		cg.setMaker(chatId);
 		
 		int result=service.insertChatGroup(cg);
 		
@@ -54,11 +52,19 @@ public class ChatController {
 		return "chat/chatMain";		
 	}
 	
+	@RequestMapping("/addChatRoom")
+	public String addChatRoom(HttpSession session, Model m) {	
+		String chatId=(String)session.getAttribute("chatId");
+		m.addAttribute("chatId", chatId);
+		
+		return "chat/addChatRoom";
+	}	
+	
     @RequestMapping("/chatting")        
     public String groupChattingEntry(@RequestParam int no, HttpSession session, Model m) {        
     	String chatId=(String)session.getAttribute("chatId");
     	String chatName=(String)session.getAttribute("chatName");
-    	System.out.println("/////"+chatId+"   "+chatName);
+    	//System.out.println("/////"+chatId+"   "+chatName);
         
         m.addAttribute("no", no);
         m.addAttribute("loginId", chatId);

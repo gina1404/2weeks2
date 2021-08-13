@@ -34,7 +34,10 @@ btn.addEventListener("click", e=>{
 	sendMessage(); 
 });
 
-let sock=new SockJS("http://localhost:9090/spring/chatting");
+
+//console.log(rootPath);
+let sock=new SockJS(rootPath+"/chatting");
+//console.log(sock);
 
 sock.onopen=e=>{ sendEnter(); }
 sock.onclose=e=>{ sendClose(); }

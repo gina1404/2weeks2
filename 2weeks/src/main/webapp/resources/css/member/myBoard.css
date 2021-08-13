@@ -8,7 +8,8 @@
 	width:37%;
 	min-width: 400px;
 	height:730px;
-	background-color: #F2F2F2;
+	/* background-color: rgba(242,242,242,1); */
+	/* background-color: #F9F9F9; */
 	position: absolute;
 	border-radius: 20px;
 }
@@ -22,28 +23,29 @@
 
 .boardList{
     border: solid 1px;
-    width: 92%;
+    width: 100%;
     min-width: 380px;
     height: 620px;
     margin: auto;
 }
 .myBoardTab{
-	border: 1px solid;
-	font-size: 13px;	
+	/* border: 1px solid; */
 	border-collapse: collapse;
+	font-size: 13px;	
 	width:100%;
 	table-layout: fixed;
-	text-align: center;
+	
 }
 .myBoardTab *{
-	border: 1px solid;	
+	text-align: center;
 }
 .myBoardTab tr{
 	height:30px;
 }
 
 .myBoardTab tr th:nth-child(2){
-	width:59%;
+	width:58%;
+	text-align: left;
 }
 .myBoardTab tr th:nth-child(3),
 .myBoardTab tr th:nth-child(4){
@@ -52,7 +54,6 @@
 
 .myBoardTab tr td:nth-child(2){
 	text-align: left;
-	padding: 0 10px 0 10px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
