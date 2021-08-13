@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.twoweeks.spring.admin.model.vo.Grant;
 import com.twoweeks.spring.admin.model.vo.Notice;
 import com.twoweeks.spring.admin.model.vo.Point;
 import com.twoweeks.spring.admin.model.vo.Report;
@@ -84,6 +85,13 @@ public class AdminDaoImpl implements AdminDao{
 	public List<Report> reportList(SqlSession session, String userId) {
 		// TODO Auto-generated method stub
 		return session.selectList("notice.reportList", userId);
+	}
+
+	@Override
+	public List<Grant> selectGrantTable(SqlSession session) {
+		// TODO Auto-generated method stub
+		return session.selectList("notice.selectGrantTable");
+		
 	}
 	
 	

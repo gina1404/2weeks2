@@ -50,4 +50,7 @@
 	<select id="reportList" resultType="com.twoweeks.spring.admin.model.vo.Report">
 		SELECT * FROM REPORT WHERE USER_ID=#{userId}
 	</select>
+	<select id="selectGrantTable" resultType="com.twoweeks.spring.admin.model.vo.Grant">
+		SELECT * FROM GRANTTO WHERE GRANTTO_YN='N'
+	</select>
 </mapper>

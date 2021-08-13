@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.twoweeks.spring.admin.model.dao.AdminDao;
+import com.twoweeks.spring.admin.model.vo.Grant;
 import com.twoweeks.spring.admin.model.vo.Notice;
 import com.twoweeks.spring.admin.model.vo.Point;
 import com.twoweeks.spring.admin.model.vo.Report;
@@ -87,6 +88,11 @@ public class AdminServiceImpl implements AdminService{
 	public List<Report> reportList(String userId) {
 		// TODO Auto-generated method stub
 		return dao.reportList(session,userId);
+	}
+	@Override
+	public List<Grant> selectGrantTable() {
+		// TODO Auto-generated method stub
+		return dao.selectGrantTable(session);
 	}
 	
 	

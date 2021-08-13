@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twoweeks.spring.admin.model.service.AdminService;
+import com.twoweeks.spring.admin.model.vo.Grant;
 import com.twoweeks.spring.admin.model.vo.Notice;
 import com.twoweeks.spring.admin.model.vo.Point;
 import com.twoweeks.spring.admin.model.vo.Report;
@@ -44,8 +45,12 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin/admintable.do")
-	public String admintable() {
-		return "/admin/admintable";
+	public ModelAndView admintable(ModelAndView mv) {
+		List<Grant>list=service.selectGrantTable();
+		
+		mv.addObject("list", list);
+		mv.setViewName("admin/adminGrantTable");
+		return mv;
 	}
 
 	@RequestMapping("/admon/NoticeWriter.do")
@@ -177,6 +182,13 @@ public class AdminController {
 			mv.addObject("loc", "/admin/adminReporttable.do");
 			mv.setViewName("common/msg");
 		}
+		return mv;
+	}
+	@RequestMapping("/admin/openGrantImg.do")
+	public ModelAndView openGrantImg(HttpServletRequest req,ModelAndView mv) {
+		String img=req.getParameter("img");
+		mv.addObject("img", img);
+		mv.setViewName("admin/openImg");
 		return mv;
 	}
 
