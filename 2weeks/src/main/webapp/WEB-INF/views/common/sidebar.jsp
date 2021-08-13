@@ -37,11 +37,6 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>  
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/sidebar.css"> 
 
-
-=======
-<c:set var="path" value="${pageContext.request.contextPath }"/>  
-<link rel="stylesheet" type="text/css" href="${path}/resources/css/common/sidebar.css"> 
->>>>>>> 7f5dacf74a116ce9f98faaaaaf70ed9626ff1e92
 	<nav id="sidebar">		
 		<div class="sidebar-default"> <!-- 스크롤 내려도 목록 고정되도록 -->
 			<!-- 코로나 현황 -->
