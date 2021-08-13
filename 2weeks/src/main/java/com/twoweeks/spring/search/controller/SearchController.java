@@ -42,9 +42,9 @@ public class SearchController {
 		
 	//커뮤니티 데이터 크롤링 - Daum 블로그
 	@RequestMapping("/update/blogDummy")
-	public void updateBlogDummy() {
+	public void updateBlogDummy(String searchKeyword) {
 		//크롤링한 데이터를 받아서 ListMap에 저장
-		String searchKeyword="코로나질문";
+//		String searchKeyword="백신질문";
 		List<DummyData> list=service.getBlogDummy(searchKeyword);
 		
 		int result=0; //DB 저장 결과 확인용

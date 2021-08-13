@@ -164,7 +164,7 @@ public class SearchServiceImpl implements SearchService{
     	List<DummyData> list = new ArrayList<>(); //값을 담을 list 생성
     	
     	try {
-//    		for(int i=0; i<=10; i++) { //페이지 반복
+    		for(int i=0; i<=10; i++) { //페이지 반복
     			String daumblogUrl="https://search.daum.net/search?w=blog&nil_search=btn&DA=NTB&enc=utf8&q="+searchKeyword; //+"&p="+i;
     			Document doc=Jsoup.connect(daumblogUrl).get();
     			Elements elem=doc.select("div.coll_cont ul li div.wrap_cont div.cont_inner");
@@ -195,10 +195,28 @@ public class SearchServiceImpl implements SearchService{
     				if(update.contains(":")) update=update.substring(0, update.indexOf(":")-4);
     				
     				//날짜 변환
-    				if(update.contains("전")||update.contains("어제")) update="0000.00.00";
+    				update=update.replaceAll(" ", "");
+    				if(update.contains("전")||update.contains("어제")) update="2000.00.00"; //변환이 어려울 경우 임의 날짜로 저장
+    				SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
+ 					Date newdate=new Date(sdf.parse(update).getTime());
+ 					update=sdf.format(newdate);
+//    				if(update.charAt(update.length()-1)=='.') update=update.substring(0, update.length()-1);
     				
-    				//content 길이 자르기 -> 이거 이어서 해야 됨**********************************************
-    				if(content.getBytes().length>2000) content.substring(0,600);
+    				//content 데이터 정제
+    				if(content.length()>=1000) content= content.substring(0,1000);
+    				content=content.replaceAll("'", "");
+    				content=content.replaceAll("‘","");
+    				content=content.replaceAll("’","");
+    				content=content.replaceAll(";", "");
+    				content=content.replaceAll("#", "");
+    				
+    				//title 데이터 정제
+    				if(title.length()>=30) title= content.substring(0,30);
+    				title=title.replaceAll("'", "");
+    				title=title.replaceAll("‘", "");
+    				title=title.replaceAll("’", "");
+    				title=title.replaceAll(";", "");
+    				title=title.replaceAll("#", "");    				
     				
     				//데이터 확인용
 //    				System.out.println(title);
@@ -221,7 +239,7 @@ public class SearchServiceImpl implements SearchService{
     				
     				list.add(dd);
     			} //데이터 전처리 종료
-//    		} //페이지 반복문 종료
+    		} //페이지 반복문 종료
     	}catch(Exception e){
     		e.printStackTrace();
     	}    	
