@@ -14,6 +14,8 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -25,7 +27,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class VaccineCenterApi {
 	
-	@GetMapping("/vaccineCenter")
+//	@GetMapping("vaccine/vaccineCenter")
+//	public String vaccineCenter() {
+//		return "vaccinecenter/vaccineCenter";
+//	}
+	
+	
+	@GetMapping("vaccine/vaccineCenter")
+
 	public String getCenter(Model model) throws IOException, ParseException{
 	
 		StringBuilder urlBuilder = new StringBuilder("http://api.odcloud.kr/api/15077586/v1/centers");
@@ -59,18 +68,18 @@ public class VaccineCenterApi {
             rd.close();
             conn.disconnect();
             
-            System.out.println("sb.toString()" +sb.toString());
-            // 1. 문자열 형태의 JSON을 파싱하기 위한 JSONParser 객체 생성.
+            //System.out.println("sb.toString()" +sb.toString());
+            //문자열 형태의 JSON을 파싱하기 위한 JSONParser 객체 생성.
             JSONParser parser = new JSONParser();
-            // 2. 문자열을 JSON 형태로 JSONObject 객체에 저장. 	
+            //문자열을 JSON 형태로 JSONObject 객체에 저장. 	
             JSONObject obj = (JSONObject)parser.parse(sb.toString());
             //System.out.println("obj" + obj);
-            // 3. 필요한 리스트 데이터 부분만 가져와 JSONArray로 저장.
+            //필요한 리스트 데이터 부분만 가져와 JSONArray로 저장.
             JSONArray dataArr = (JSONArray) obj.get("data");
-    	// 4. model에 담아준다.
-            System.out.println("dataArr========================================="+dataArr);
+            //System.out.println("dataArr========================================="+dataArr);
             model.addAttribute("data",dataArr);
+            return "vaccinecenter/vaccineCenter";
         
-        return "vaccinecenter/vaccineCenter";
-}
+        
+	}
 }
