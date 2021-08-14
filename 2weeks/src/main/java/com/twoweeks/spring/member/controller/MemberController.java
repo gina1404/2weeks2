@@ -293,9 +293,9 @@ public class MemberController {
 			response.addCookie(rememberCookie);
 			
 		String msg;
-		log.info("param.get(user_Pw) ={}",param.get("user_Pw"));
-		log.info("m 아이디 ={} " , m.getUser_Id());
-		log.info("m.getUser_Pw() ={}", m.getUser_Pw());
+//		log.info("param.get(user_Pw) ={}",param.get("user_Pw"));
+//		log.info("m 아이디 ={} " , m.getUser_Id());
+//		log.info("m.getUser_Pw() ={}", m.getUser_Pw());
 		
 		if(m!=null) {			
 			if(pwEncoder.matches((String)param.get("user_Pw"), m.getUser_Pw())) {
