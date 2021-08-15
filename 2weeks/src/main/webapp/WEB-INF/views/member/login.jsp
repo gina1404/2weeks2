@@ -18,9 +18,11 @@
 		</div>
 		<!--로그인 컨테이너  -->
 		<div class="col-md-6 login_box">
+			
 			<h3 class="text-center">
 				USER LOGIN
 			</h3>
+			
 			<form:form role='form' modelAttribute='login' action='${path}/member/login' method='post' >
 			<div class="row">
 				<div class="col-md-12">

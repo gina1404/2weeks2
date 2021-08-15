@@ -142,10 +142,14 @@ public class MemberController {
 	//아이디중복체크
 	@GetMapping("/member/idCheck")
 	@ResponseBody
-	public int idCheck(
+	public String idCheck(
 			@RequestParam("user_Id")String userId) {
-		
-		return memberService.idCheck(userId);
+		int result = memberService.idCheck(userId);
+		//log.info("result= {}",result);
+		String num = Integer.toString(result);
+			
+		return num;
+	
 	}
 	
 	//이메일인증
