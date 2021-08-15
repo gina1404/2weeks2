@@ -26,4 +26,6 @@ public interface AdminDao {
 	int reportUpdateYn(SqlSession session,String pk);
 	List<Report>reportList(SqlSession session,String userId);
 	List<Grant>selectGrantTable(SqlSession session);
+	int updateGrantTable(SqlSession session,String userId);
+	int updateGrantMember(SqlSession session,Member m);
 }

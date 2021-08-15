@@ -154,7 +154,7 @@
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                
-                                DataTable Example
+                                회원 테이블
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple" >

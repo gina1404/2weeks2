@@ -23,4 +23,6 @@ public interface AdminService {
 	int reportUpdateYn(String pk);
 	List<Report>reportList(String userId);
 	List<Grant>selectGrantTable();
+	int updateGrantTable(String userId);
+	int updateGrantMember(Member m);
 }

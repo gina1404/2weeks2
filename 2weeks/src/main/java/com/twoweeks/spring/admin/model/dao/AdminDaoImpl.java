@@ -93,6 +93,18 @@ public class AdminDaoImpl implements AdminDao{
 		return session.selectList("notice.selectGrantTable");
 		
 	}
+
+	@Override
+	public int updateGrantTable(SqlSession session, String userId) {
+		// TODO Auto-generated method stub
+		return session.update("notice.updateGrantTable", userId);
+	}
+
+	@Override
+	public int updateGrantMember(SqlSession session, Member m) {
+		// TODO Auto-generated method stub
+		return session.delete("notice.updateGrantMember", m);
+	}
 	
 	
 	
