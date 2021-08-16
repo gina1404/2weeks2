@@ -77,10 +77,23 @@
     display: flex;
     flex-direction: row;
 	}
+	.gritem{
+	display: inline-block;
+	}
+	.st-bat-death-countt{
+	text-align: center;
+	font-size: 18px;
+    font-weight: bold;
+    opacity: 1;
+    margin-bottom: 4px;
+    
+    flex-direction: row;
+	}
+
 </style>
 
 <section class="container">
-	<h2 style="text-align: center;">전세계 해외 정보</h2>
+	<h2 style="text-align: center;">전세계 해외 정보</h2><br><br>
 	<div class="st-mainbar">
 		<div class="st-bar1">
 			<div class="st-bar-decide">
@@ -93,20 +106,32 @@
 			</div>
 		</div>
 	</div>
-	<h2 style="text-align: center;">오늘의 확진자 수</h2>
+	<br>
 	<div>
-		<div>
-			<div>오늘의 확진자수</div>
-			<div>${realtodayDef }명</div>
+		<div class="st-mainbar">
+			<div  style="font-size: 15px; text-align: center; ">오늘의 확진자수</div><br>
+			<div class="st-bat-death-countt" style="text-align: center;">${realtodayDef }명</div>
 		</div>
 	</div>
 	<!-- 그래프 영역 -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<div class="Gr">
-  		  <div id="chart_div" style="width: 900px; height: 500px;"></div>
-		 <div id="piechart" style="width: 900px; height: 500px;"></div>
+	<div class="Gr"  >
+	<!-- 	<div style="display: block;">
+		  <select id="searchType" size="1">
+		  	<option value="chart_div" selected="selected">일별확진자</option>
+		  	<option value="chart_di" >일별 사망자</option>
+		  </select>
+  		</div> -->
+ 			<div id="search-chart_div">
+		 		 <div id="chart_div"  class="gritem" style="width: 700px;height: 500px;"></div>
+				 <div id="piechart" class="gritem" style="width: 400px; height: 500px; " ></div>
+		 	</div>
+ 			<div id="search-chart_di">
+		 		 <div id="chart_di"  class="gritem" style="width: 700px;height: 500px;"></div>
+				<div id="regions_div" class="gritem" style="width: 400px; height: 500px;"></div>
+		 	</div>
 	</div>
-
+	<br><br><br>
 
 	<table class="table table-striped table-hover">
 		<tr>
@@ -169,6 +194,33 @@ function drawChart() {
 }
 
 
+/* 파이그래프 영역 */
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChar);
+
+function drawChar() {
+
+  var data = google.visualization.arrayToDataTable([
+    ['Task', 'Hours per Day'],
+    ['${pielist[0].nationNm}',     ${pielist[0].defCount}],
+    ['${pielist[1].nationNm}',     ${pielist[1].defCount}],
+    ['${pielist[2].nationNm}',     ${pielist[2].defCount}],
+    ['${pielist[3].nationNm}',     ${pielist[3].defCount}],
+    ['${pielist[4].nationNm}',     ${pielist[4].defCount}],
+    ['${pielist[5].nationNm}',     ${pielist[5].defCount}],
+    ['${pielist[6].nationNm}',     ${pielist[6].defCount}]
+  ]);
+
+  var options = {
+    title: 'G7 국가 확진자 비율'
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('piechar'));
+
+  chart.draw(data, options);
+}
+
+
 /* 막대그래프 */
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawVisualization);
@@ -176,27 +228,106 @@ google.charts.setOnLoadCallback(drawVisualization);
 function drawVisualization() {
   // Some raw data (not necessarily accurate)
   var data = google.visualization.arrayToDataTable([
-    ['Month', '확진자','사망자'],
-    ['${Grlist[6].today}',  ${Grlist[6].today_Def}, ${Grlist[6].today_Death}],
-    ['${Grlist[5].today}',  ${Grlist[5].today_Def},${Grlist[5].today_Death}],
-    ['${Grlist[4].today}',  ${Grlist[4].today_Def},${Grlist[4].today_Death}],
-    ['${Grlist[3].today}',  ${Grlist[3].today_Def},${Grlist[3].today_Death}],
-    ['${Grlist[2].today}',  ${Grlist[2].today_Def},${Grlist[2].today_Death}],
-    ['${Grlist[1].today}',  ${Grlist[1].today_Def},${Grlist[1].today_Death}],
-    ['${Grlist[0].today}',  ${Grlist[0].today_Def},${Grlist[0].today_Death}],
+    ['Month', '확진자'],
+    ['${Grlist[6].today}',  ${Grlist[6].today_Def}],
+    ['${Grlist[5].today}',  ${Grlist[5].today_Def}],
+    ['${Grlist[4].today}',  ${Grlist[4].today_Def}],
+    ['${Grlist[3].today}',  ${Grlist[3].today_Def}],
+    ['${Grlist[2].today}',  ${Grlist[2].today_Def}],
+    ['${Grlist[1].today}',  ${Grlist[1].today_Def}],
+    ['${Grlist[0].today}',  ${Grlist[0].today_Def}],
   ]);
 
   var options = {
     title : '일별 총 확진자 통계',
     vAxis: {title: '명'},
-    hAxis: {title: '일일별 통계'},
+    hAxis: {title: '일별'},
     seriesType: 'bars',
-    series: {5: {type: 'line'}}
+    
+    series: {
+        0: { color: '#0066FF' },
+        1: { color: '#0066FF' },
+
+      }
+    
   };
 
   var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
   chart.draw(data, options);
 }
+
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawVisualizatio);
+
+function drawVisualizatio() {
+  // Some raw data (not necessarily accurate)
+  var date = google.visualization.arrayToDataTable([
+	  	['Month', '사망자'],
+	    ['${Grlist[6].today}',  ${Grlist[6].today_Death},],
+	    ['${Grlist[5].today}',  ${Grlist[5].today_Death}],
+	    ['${Grlist[4].today}', ${Grlist[4].today_Death}],
+	    ['${Grlist[3].today}', ${Grlist[3].today_Death}],
+	    ['${Grlist[2].today}', ${Grlist[2].today_Death}],
+	    ['${Grlist[1].today}', ${Grlist[1].today_Death}],
+	    ['${Grlist[0].today}',  ${Grlist[0].today_Death}],
+  ]);
+
+  var optioe = {
+    title : '일별 총 사망자 통계',
+    vAxis: {title: '명'},
+    hAxis: {title: '일별'},
+    seriesType: 'line',
+    /* series: {2: {type: 'line'}}, */
+	series: {
+            0: { color: '#CC0033' },
+            1: { color: '#CC0033' },
+
+          }
+  };
+
+  var chart = new google.visualization.ComboChart(document.getElementById('chart_di'));
+  chart.draw(date, optioe);
+}
+ 
+  
+	$("#searchType").change(e=>{
+		const aa=$("#search-chart_div");
+		const dd=$("#search-chart_di");
+		
+		aa.css("display","none");
+		dd.css("display","none"); 
+
+		
+		$("#search-"+$(e.target).val()).css("display","inline-block");
+	});
+ 
+/*    	$(function(){
+		$("#searchType").change();
+	});    */
+
+    google.charts.load('current', {
+        'packages':['geochart'],
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Popularity'],
+          ['Japan', 700],
+          ['United States', 300],
+          ['Brazil', 400],
+          ['Canada', 500],
+          ['France', 600],
+          ['RU', 700]
+        ]);
+
+        var options = {};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
 
 </script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
