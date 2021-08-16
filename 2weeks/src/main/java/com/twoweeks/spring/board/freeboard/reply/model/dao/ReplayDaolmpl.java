@@ -41,10 +41,7 @@ public class ReplayDaolmpl implements ReplyDao {
 		return session.selectOne("reply.countReplies");
 	}
 
-	@Override
-	public List<Reply> selectBoardComment(SqlSession session, int no) {
-		return session.selectList("reply.selectBoardComment",no);
-	}
+
 
 	@Override
 	public int rereplyInsert(SqlSession session, Reply reply) {

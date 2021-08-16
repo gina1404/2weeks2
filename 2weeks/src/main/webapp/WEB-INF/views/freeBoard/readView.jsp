@@ -152,6 +152,10 @@ font-size : 12px;
 
 
 
+
+
+
+
 </section>
 
 <script>
@@ -168,19 +172,19 @@ function getReplies(){
 		}
 	str+="<span> "+this.user_Id+"         "+this.updateDate + "</span>";
 	str+="<br>"
-	str+="<span><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
+	str+="<span class='replyupdate'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
 	str+="<input type='hidden' name='replyLevel' value='"+this.reply_Level+"'>"
 	str+="<a href ='javascript:void(0);' id='re-reply'style='margin-left:15px'  onclick='replyReplyInsert(event,"+ this.reply_Sq+','+this.reply_Level+");'>댓글</a>";
 	str+="<button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' style='margin-left:20px; width:35px; height:25px;'>";
 	str+="<div class='dropdown-menu'>";
 	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyDelete("+this.reply_Sq+");'>삭제 </a>";
-	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate("+this.reply_Sq+");'>수정</a>";
+	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate(event,"+this.reply_Content+','+this.reply_Sq+");'>수정</a>";
 	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>좋아요</a>";
 	str+="<a href  class='dropdown-item' style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>신고</a>";
 	str+="</div>";
 	str+="</div>";
 	str+="<hr>";
-	console.log(this.reply_Level);
+	console.log(this.reply_Content);
 	});
 	
 	$("#reply_Content").html(str);
@@ -243,8 +247,7 @@ $(".replyAddBtn").on("click", function(){
 		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
-});
-
+	});
 
 });	
 
@@ -344,10 +347,11 @@ function del(no) {
 			console.log(replySq);
 			console.log(replyContent);
 			$.ajax({
-				type:"POST",
+				type:"post",
 				url:"${path}/reply/rereplyInsert.do",
 				headers:{
 					"Content-type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
 				},
 				dataType : "text",
 				data : JSON.stringify({
@@ -365,10 +369,7 @@ function del(no) {
 					}else{
 						alert('댓글등록실패');
 					}
-				},error:function(request,status,error){
-			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
-				
 			
 			});
 			
@@ -388,13 +389,13 @@ function del(no) {
 				}
 		str+="<span>"+this.user_Id+"         "+this.updateDate + "</span>";
 		str+="<br>"
-		str+="<span><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
+		str+="<span class='replyupdate'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
 		str+="<input type='hidden' name='replyLevel' value='"+this.reply_Level+"'>"
 		str+="<a href ='javascript:void(0);' id='re-reply' style='margin-left:15px' onclick='replyReplyInsert(event,"+ this.reply_Sq+','+this.reply_Level+");'>댓글</a>";
 		str+="<button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' style='margin-left:100px; width:35px; height:25px;'>";
 		str+="<div class='dropdown-menu'>";
 		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyDelete("+this.reply_Sq+");'>삭제 </a>";
-		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate("+this.reply_Sq+");'>수정</a>";
+		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate(event,"+this.reply_Content+','+this.reply_Sq+");'>수정</a>";
 		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>좋아요</a>";
 		str+="<a href  class='dropdown-item' style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>신고</a>";
 		str+="</div>";
@@ -412,6 +413,7 @@ function del(no) {
 
 function fn_replyDelete(reply_Sq){
 	console.log(reply_Sq);
+	
 	var msg = confirm("진짜루 나 삭제할꼬야??");
 	if(msg == true){
 		$.ajax({
@@ -436,6 +438,45 @@ function fn_replyDelete(reply_Sq){
 	}
 	
 };
+
+
+function fn_replyUpdate(event,reply_Content,reply_Sq){
+	console.log('댓글 수정 : ' +reply_Sq);
+	var e = event.target;
+	var e1 = event.target;
+	var e2 = event.target;
+
+	e = e.parentNode.parentNode.parentNode.firstChild.nextSibling.nextSibling; //content
+	e1= e1.parentNode.parentNode; //버튼
+	e2 = e2.parentNode.parentNode.parentNode.firstChild.nextSibling.nextSibling.nextSibling.nextSibling; // 댓글
+	e1.remove(); // 버튼 삭제
+	e2.remove(); //댓글 삭제
+	console.log(e);
+	console.log(e1);
+	console.log(e2);
+	console.log("댓글 내용 : " + reply_Content);
+	var str="<div class='row'>";
+	 str="<form>";
+	 str+="<textarea class='col-md-7' cols='80' rows='3' autofocus maxlength='300' name='rereply_content' required>"+reply_Content+"</textarea>";
+	 str+="<"
+	 str+="<button type='button' class='btn btn-primary' id='replyModify' style='margin-bottom:90px; margin-left:35px; width:100px; height:35px;'>수정하기</button>";
+	 str+="<button type='button' id='cancleBtn2' class='btn btn-secondary' style='height:35px; width:100px;  margin-left:-100px;'>취소</button>";
+	 str+="</form>";
+	 str+="</div>";
+	$(e).html(str); //content에 덮어버림
+	
+	
+	$("#cancleBtn2").on("click",function(){
+		console.log('취소');
+		replyList();
+	});
+	
+	$("#replyModify").on("click",function(){
+		console.log('수정하기');
+		
+		
+	});
+}
 
 
 

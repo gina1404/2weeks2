@@ -18,8 +18,6 @@ public interface ReplyDao {
 	int delete(SqlSession session, int reply_Sq)  throws Exception;
 	
 	int countReplies(SqlSession session, int post_Sq);
-	
-	List<Reply> selectBoardComment(SqlSession session, int no);
 
 	int rereplyInsert(SqlSession session, Reply reply);
 	

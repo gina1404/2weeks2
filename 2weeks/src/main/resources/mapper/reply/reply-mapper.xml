@@ -2,49 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reply">
 
+	<!-- 댓글 리스트 -->
 	<select id="list" resultMap="replyMap">
-		SELECT * FROM POST_REPLY WHERE POST_SQ = #{post_Sq}
-		ORDER BY REPLY_SQ
+		
+select  a.* from post_reply a
+where post_sq = #{post_Sq}
+start with reply_ref is null
+connect by prior reply_sq = reply_ref
+order SIBLINGS by  reply_ref
 	</select>
 
+	<!-- 댓글 작성 -->
 	<insert id="create">
-	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user01', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, DEFAULT, #{reply_Ref}, SYSDATE)
+	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user01', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, DEFAULT, null, SYSDATE)
 	</insert>
 	
+	<!-- 댓댓글 추가 -->
 	<insert id="rereplyInsert">
-	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user02', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, #{reply_Level},
+	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user02', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, #{reply_Level}+1,
 	#{reply_Ref},DEFAULT)
 	</insert>
 	
-	
+	<!-- 댓글 수정 -->
 	<update id="update">
 		UPDATE POST_REPLY SET reply_Content = #{reply_Content}, UPDATEDATE = SYSDATE
 		WHERE REPLY_SQ = #{reply_Sq}
 	</update>
 	
+	
+	<!-- 댓글 삭제 -->
 	<delete id="delete">
 		DELETE FROM POST_REPLY WHERE REPLY_SQ = #{reply_Sq}
 	</delete>
-	
-	<select id="listAll" resultMap="replyMap">
-		SELECT * FROM POST_REPLY WHERE POST_SQ = #{post_Sq}
-		ORDER BY REPLY_SQ
-	</select>
-	
 
-<!-- 	<select id="selectBoardComment" resultMap="replyMap">
-		SELECT * FROM POST_REPLY WHERE POST_SQ=#{post_Sq} START WITH REPLY_LEVEL=1 CONNECT BY PRIOR REPLY_SQ=REPLY_REF	
-	</select> -->
-
-
+	<!-- 댓글 수 -->
 	<select id="countReplies"  resultType="_int">
 	SELECT COUNT(reply_Sq) FROM POST_REPLY WHERE POST_SQ = #{post_Sq}
 	</select>
 	
 	
-	<select id="selectBoardComment" resultType="reply">
-	SELECT * FROM POST_REPLY WHERE POST_SQ=#{post_Sq} START WITH REPLY_LEVEL=1 CONNECT BY PRIOR REPLY_SQ=REPLY_REF	
-	</select>
 	
 	
 	<resultMap id="replyMap" type="reply">

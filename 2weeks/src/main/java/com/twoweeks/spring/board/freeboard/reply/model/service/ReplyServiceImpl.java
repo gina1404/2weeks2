@@ -46,10 +46,7 @@ public class ReplyServiceImpl implements ReplyService {
 		return dao.countReplies(session, post_Sq);
 	}
 
-	@Override
-	public List<Reply> selectBoardComment(int no) {
-		return dao.selectBoardComment(session,no);
-	}
+
 
 	@Override
 	public int rereplyInsert(Reply reply) {

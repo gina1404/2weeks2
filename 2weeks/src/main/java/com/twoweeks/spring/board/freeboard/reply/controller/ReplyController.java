@@ -58,7 +58,7 @@ public class ReplyController {
 	}
 	
 	@PostMapping("reply/rereplyInsert.do")
-	public ResponseEntity<String> rereplyInsert(@RequestBody Reply reply, @RequestBody FreeBoard b){
+	public ResponseEntity<String> rereplyInsert(@RequestBody Reply reply){
 		log.info("reREplyInsert : " + reply);
 		ResponseEntity<String> entity = null;
 		try {
