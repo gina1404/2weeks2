@@ -289,9 +289,10 @@ $(".modalModBtn").on("click", function(){
 	window.history.back();	
 		
 	}
+	//수정하기 클릭 시 조회수 오르는 걸 방지 하기 위함.
 	$(".update_btn").on("click",function(){
 		location.href="${path}/freeboard/updateBoard.do?no=${list.post_Sq }";
-	})
+	});
 
 
 function del(no) {

@@ -37,6 +37,6 @@ public interface FreeBoardDao {
 
 	int updateReplyCnt(SqlSession session, int post_Sq);
 
-	List<FreeBoard> replyCnt(SqlSession session, Integer integer); 
+	List<FreeBoard> replyCnt(SqlSession session, int post_Sq); 
 	
 }

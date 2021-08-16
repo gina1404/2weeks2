@@ -8,7 +8,7 @@
 	</select>
 
 	<insert id="create">
-	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user01', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, #{reply_Dt}, DEFAULT, DEFAULT, NULL, SYSDATE )
+	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user01', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, DEFAULT, #{reply_Ref}, SYSDATE)
 	</insert>
 	
 	<insert id="rereplyInsert">

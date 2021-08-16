@@ -105,9 +105,10 @@ text-decoration: none;
 
 
 </section>
-<script>
+<!-- <script>
 $(document).ready(function(){
 	replyCnt();
+	
 	function replyCnt(){
 		var arr = [];
 		<c:forEach var="b" items="${list }" varStatus="status">
@@ -125,10 +126,12 @@ $(document).ready(function(){
 	 		},
 	 		dataType:"text",
 	 		success:function(data){
-	 		$(data).each(function(idx, val){
-s
+	 		 for(let i=0; i<arr.length; i++){
+	 			var obj = JSON.parse(data);
+	 			 
+	 		 }
+				console.log(obj.replyNo);
 	 			
-	 		});
 	 		
 	 		
 	 			
@@ -141,5 +144,5 @@ s
 		
 	};
 });
-</script>  
+</script>   -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

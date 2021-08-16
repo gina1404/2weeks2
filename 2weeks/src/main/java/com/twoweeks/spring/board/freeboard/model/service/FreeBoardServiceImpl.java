@@ -131,8 +131,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 
 	@Override
-	public List<FreeBoard> replyCnt(Integer integer) {
-		return dao.replyCnt(session, integer);
+	public List<FreeBoard> replyCnt(int post_Sq) {
+		return dao.replyCnt(session, post_Sq);
 	}
 	
 

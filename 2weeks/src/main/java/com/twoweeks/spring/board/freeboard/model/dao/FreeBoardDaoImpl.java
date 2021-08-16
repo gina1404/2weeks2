@@ -79,8 +79,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 
 	@Override
-	public List<FreeBoard> replyCnt(SqlSession session, Integer integer) {
-		return session.selectList("freeboard.replyCnt",integer);
+	public List<FreeBoard> replyCnt(SqlSession session, int post_Sq) {
+		return session.selectList("freeboard.replyCnt",post_Sq);
 	}
 
 	

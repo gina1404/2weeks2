@@ -36,7 +36,7 @@ public interface FreeBoardService {
 
 	int updateReplyCnt(int post_Sq);
 
-	List<FreeBoard> replyCnt(Integer integer);
+	List<FreeBoard> replyCnt(int post_Sq);
 
 	
 }

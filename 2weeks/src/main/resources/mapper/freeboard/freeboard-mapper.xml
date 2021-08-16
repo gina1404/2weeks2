@@ -21,7 +21,7 @@
 	
 	<select id="read" parameterType="int" resultType="freeboard">
 	SELECT *
-	FROM POST WHERE POST_SQ = #{post_Sq}
+	FROM POST WHERE POST_SQ = #{bno}
 	</select>
 	
 	<insert id="insertAttachment">
@@ -47,6 +47,20 @@
 	<insert id="updateAttachment">
 		INSERT INTO POST_ATCH VALUES(POST_ATCH_SEQ.NEXTVAL, #{post_Sq}, #{atch_Ori}, #{atch_New}, SYSDATE, DEFAULT)
 	</insert>
+	
+	
+	<select id="replyCnt" resultType="_int">
+	SELECT REPLYNO FROM POST WHERE POST_SQ=#{post_Sq}
+	</select>
+	
+	<!-- 조횟수 -->
+	<update id="updateView">
+	UPDATE POST SET POST_CNT = POST_CNT+1 WHERE POST_SQ =#{post_Sq}
+	</update>
+	
+	<update id="updateReplyCnt">
+	UPDATE POST SET REPLYNO = REPLYNO + 1 WHERE POST_sQ =#{post_Sq}
+	</update>
 	
 	<resultMap type="freeboard" id="boardMap">
 		<id column="post_Sq" property="post_Sq"/>

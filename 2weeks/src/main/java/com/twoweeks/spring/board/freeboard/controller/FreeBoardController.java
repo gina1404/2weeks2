@@ -78,21 +78,23 @@ public class FreeBoardController {
 		return mv;
 	}
 	
-	@PostMapping("reply/replyCnt")
-	public ModelAndView replyCnt(@RequestParam(value="arr[]") List<Integer> arr, ModelAndView mv, HttpServletRequest request) {
-		mv.setViewName( "jsonView" );
-		for(int i=0; i<arr.size(); i++) {
-			//log.info("출력해봐 :"+arr.get(i));
-			
-			List<FreeBoard> b = service.replyCnt(arr.get(i));
-					
-			mv.addObject("replyNo"+b.get(0).getReplyNo());
-			log.info("출력해봐 : ======================================================"+b.get(0));
-			
-		}
-		
-		return mv;
-	}
+	/*
+	 * @PostMapping("reply/replyCnt") public ModelAndView
+	 * replyCnt(@RequestParam(value="arr[]") List<Integer> arr, ModelAndView mv,
+	 * HttpServletRequest request) { mv.setViewName( "jsonView" ); List<FreeBoard> b
+	 * = new ArrayList(); for(int i=0; i<arr.size(); i++) {
+	 * //log.info("출력해봐 :"+arr.get(i)); //log.info("================== 배열 확인"+
+	 * arr.get(i));
+	 * 
+	 * int post_Sq = arr.get(i);
+	 * 
+	 * b = service.replyCnt(post_Sq);
+	 * 
+	 * log.info("=================="+b.get(0)); mv.addObject("replyNo",b); } return
+	 * mv;
+	 * 
+	 * }
+	 */
 	
 	
 	@PostMapping("/freeboard/writeEnd.do") 
@@ -139,8 +141,8 @@ public class FreeBoardController {
 	}
 	
 	
-	@RequestMapping("/freeboard/readView")
-	public String read(FreeBoard fb, Model model,  HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("freeboard/readView")
+	public ModelAndView read(FreeBoard fb, ModelAndView mv,  HttpServletRequest request, HttpServletResponse response) {
 		log.info("게시글 상세보기에 오신걸 환영합니다.");
 		
 		int post_Sq = Integer.parseInt(request.getParameter("no")); 
@@ -168,9 +170,9 @@ public class FreeBoardController {
 		}
 
 
-		model.addAttribute("list", service.read(post_Sq, readFlag));
-
-		return "freeBoard/readView";
+		mv.addObject("list", service.read(post_Sq, readFlag));
+		mv.setViewName("freeBoard/readView");
+		return mv;
 	}
 	
 	
@@ -247,6 +249,7 @@ public class FreeBoardController {
 		}
 	
 	
+	//조횟수 증가
 	@RequestMapping("/freeboard/updateBoard.do")
 	public String updateEnd(FreeBoard fb, Model model,  HttpServletRequest request) {
 		
