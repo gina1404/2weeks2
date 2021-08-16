@@ -151,6 +151,18 @@ public class MemberController {
 		return num;
 	
 	}
+	//닉네임중복체크
+	@GetMapping("/member/nicCheck")
+	@ResponseBody
+	public String nicCheck(
+			@RequestParam("user_Nic")String userNic) {
+		int result = memberService.nicCheck(userNic);
+		//log.info("result= {}",result);
+		String num = Integer.toString(result);
+			
+		return num;
+	
+	}
 	
 	//이메일인증
 	@GetMapping("/member/mailCheck")
@@ -243,7 +255,7 @@ public class MemberController {
 		//member.setUser_Pw(signup.getUser_Pw());
 		member.setUser_Nm(signup.getUser_Nm());
 		member.setUser_Nic(signup.getUser_Nic());
-		member.setUser_Gender(signup.getUser_Gender());
+		//member.setUser_Gender(signup.getUser_Gender());
 		member.setUser_Phone(signup.getUser_Phone());
 		member.setUser_Pf(signup.getUser_Pf());
 		member.setUser_Pfrename(signup.getUser_Pfrename());

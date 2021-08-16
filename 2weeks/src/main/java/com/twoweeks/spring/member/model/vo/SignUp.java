@@ -52,7 +52,7 @@ public class SignUp {
     //private Date user_Bday;
 
     // 회원 성별 
-	 private String user_Gender;
+	 //private String user_Gender;
 
     // 회원 전화번호 
 	 

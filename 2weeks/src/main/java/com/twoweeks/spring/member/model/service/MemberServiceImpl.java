@@ -65,6 +65,14 @@ public class MemberServiceImpl implements MemberService {
 	public String selectPw(String user_Id) {
 		return memberDao.selectPw(user_Id,session);
 	}
+
+	@Override
+	public int nicCheck(String userNic) {
+		
+		return memberDao.nicCheck(userNic,session);
+	}
+	
+	
 	
 	
 	

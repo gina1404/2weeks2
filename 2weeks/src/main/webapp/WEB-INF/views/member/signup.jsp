@@ -189,6 +189,36 @@ if(emailCheck="인증번호 확인"){
 		
 		});
 	
+	//닉네임 중복체크
+	$("#user_Nic").blur(function(){
+		let user_Nic=$('#user_Nic').val();
+		console.log(user_Nic);
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/member/nicCheck?user_Nic='+user_Nic,
+			type : 'get',
+			success: function(data) {
+				
+				console.log(data);
+				//1 = 아이디 중복
+				if(data == 1){
+					$("#nic_check").text("사용중인 닉네임입니다.");
+					$("#nic_check").css("color","red");
+					$("#submit").attr("disabled","disabled");
+			
+				}else{
+					$("#nic_check").text("사용 가능한 닉네임입니다.");
+					$("#nic_check").css("color","blue");
+					$("#submit").removeAttr("disabled");
+				}				
+				},
+			error:function(data){
+				console.log("중복확인실패");
+			}
+			});
+		
+		});
+	
 	//비밀번호 확인
 	$(function(){
 		$("#pw_success").hide();

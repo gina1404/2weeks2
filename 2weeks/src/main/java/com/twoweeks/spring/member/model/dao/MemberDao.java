@@ -25,4 +25,6 @@ public interface MemberDao {
 	public int UpdateMember(Member member, SqlSession session);
 	
 	public String selectPw(String user_Id,SqlSession session);
+	
+	public int nicCheck(String userNic,SqlSession session);
 }
