@@ -143,7 +143,6 @@
 			url:'${pageContext.request.contextPath}/member/mailCheck?email='+email,
 		    type:'get',
 		    success:function(data){
-		    	
 		    	console.log(data);
 		    	checkBox.attr("disabled",false);
 		    	box.attr("id","email_check_input_success");
