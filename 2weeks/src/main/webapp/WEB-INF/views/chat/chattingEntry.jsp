@@ -21,16 +21,15 @@
 <body>
 	
 	<div id="chatContainer">
-		<div id="entryAlert"><p>${loginId}님이 입장했습니다</p></div>
+		<div id="entryAlert"></div>		
 	</div>
 
 	<div id="sendBox" class="input-group">
-         <input type="hidden" id="sender" value="${loginId}">
-         <input type="hidden" id="chatGroupNo" value="${no }">    
-		<input type="text" id="chat" class="form-control" aria-describedby="basic-addon2" 
-		placeholder="채팅을 입력하세요">
+		<input type="hidden" id="sender" value="${loginId}">
+		<input type="hidden" id="senderNick" value="${chatName}">         
+		<input type="hidden" id="chatGroupNo" value="${no }">    
+		<input type="text" id="chat" class="form-control" aria-describedby="basic-addon2" placeholder="채팅을 입력하세요">
 		<span class="input-group-addon btn" id="sendChat">전송</span>
-		<!--<button id="sendChat" class="form-control">전송</button> -->
 	</div>
 	
     <div id="tempAlert">
@@ -39,7 +38,10 @@
 
 </body>
 
-<script type="text/javascript" src="<c:url value='/resources/js/chat/chattingEntry.js?after=' />"></script>
-<%-- <script type="text/javascript" src="<c:url value='/resources/js/chat/chattingGroup.js' />"></script> --%>
+<script>
+	const rootPath="${pageContext.request.contextPath }";
+</script>
+
+<script type="text/javascript" src="${path }/resources/js/chat/chattingEntry.js"></script>
 
 </html>

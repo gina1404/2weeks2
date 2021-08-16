@@ -42,10 +42,12 @@ public class CovidReportListController{
 //					
 //			Document doc=Jsoup.connect(reportUrl).get();	
 //			
-//			Elements elem=doc.select("table tbody tr"); 
-//			
+//			Elements elem=doc.select("table tbody tr");
+//						
 //			for(Element content : elem) {
 //				Elements tdElem=content.select("td");
+//				//System.out.println("1   "+tdElem.select("a"));
+//				//System.out.println("2   "+tdElem.get(1).text());
 //				
 //				NewsReport report=NewsReport.builder().
 //						no(Integer.parseInt(tdElem.get(0).text())).
@@ -55,10 +57,10 @@ public class CovidReportListController{
 //						attachment(tdElem.get(4).text()).build();
 //				
 //				//System.out.println(report);
-//				result=service.insertReportList(report);				
+//				//result=service.insertReportList(report);				
 //			}
 //		}
-		
+//		return mv;
 		
 		
 	}

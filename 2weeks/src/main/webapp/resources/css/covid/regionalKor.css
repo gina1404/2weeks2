@@ -13,16 +13,14 @@
 	width: 100%;
 	min-height: 500px;
 }
+
 #states path {
-	fill: #EEF0FE; 
+	/* fill: #EEF0FE;  */
 	stroke: white;
 	stroke-width: 1.px; 
 }
 
-#states path:hover {
-	fill: #E1E6FF;
-}
-
+/* 
 #states .active {
 	fill: #E1E6FF;
 }
@@ -30,13 +28,10 @@
 #states .activeDetail {
 	fill: #E1E6FF;
 }
-
-#states path {
-	cursor: pointer;
-}
+ */
 
 #states text {
 	cursor: pointer;
 	font-size: 12px;
-	fill: black; //하양
+	fill: yellow; //노랑
 }

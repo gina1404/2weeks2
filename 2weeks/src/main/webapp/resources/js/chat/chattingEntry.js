@@ -1,90 +1,119 @@
-$('#entryAlert').slideDown();
-setTimeout(()=>{
-    $('#entryAlert').slideUp();
-}, 1000);
-
-
-let sock=new SockJS("http://localhost:9090${path}/chattingEntry");
-
-function ChatGroupMessage(sender, chatGroupNo, chatContent, chatTime){
+function ChatGroupMessage(sender, senderNick, chatGroupNo, chatContent, chatTime, type){
     this.sender=sender;
+    this.senderNick=senderNick;
     this.chatGroupNo=chatGroupNo;
     this.chatContent=chatContent;
     this.chatTime=chatTime;
+    this.type=type;
 }
 
-sock.onopen=e=>{
-	console.log(e);
+//날짜 및 시간
+function getFormatDate(date){
+    let year=date.getFullYear();
+    let month=(1+date.getMonth());
+    month=month>10 ? month:'0'+month;
+    let day=date.getDate();
+    day=day>=10?day:'0'+day;
+    return year+'-'+month+'-'+day;
 }
-sock.onmessage=e=>{
-	//console.log(e);
-	
-	chatContainer=document.getElementById("#chatContainer");
-	chatContainer.innerHTML=chatContainer.innerHTML+"<br>"+data;
-	//console.log("///"+chatContainer);
-	
-    //console.log(e.data);
-    let data=JSON.parse(e.data);
-    //console.log('메세지 : ', data['msg']);
-    //console.log('샌더 : ', data['sender']);
-    
-    const time = data['date'].substring(data['date'].indexOf(' ')+1, 
-            data['date'].lastIndexOf(':'));
-    
-    //let msg;
-    msg += "<div id='msgBox'>";
-    msg += "<span>" + time + "</span><div id='msgText'>" + data['msg'] + "</div>";
-    //msg += "</div></div></div>";    
-    $("#chatContainer").append($("<h3>")).html(e.data);
+function getFormatTime(date){
+    let hour=date.getHours();
+    let minute=date.getMinutes();
+    let second=date.getSeconds();
+    return hour+":"+minute+":"+second;
 }
-sock.onclose=e=>{
-	
-}
+let today=getFormatDate(new Date());
+let time=getFormatTime(new Date());    
+const chatDate=today+" "+time;	
 
+$("#chat").keypress(function(e){
+	if(e.keyCode==13){ sendMessage(); }
+});	
 let btn=document.getElementById("sendChat");
-btn.addEventListener("click", e=>{
-	const msg=document.getElementById("chat").value;
-	console.log(msg);
-	sock.send(msg);
-	
-    if($.trim($('#chat').val())===''){
-        //alert('내용을 입력하세요');
-    }
+btn.addEventListener("click", e=>{ 
+	sendMessage(); 
+});
 
-    //날짜 및 시간
-    function getFormatDate(date){
-        let year=date.getFullYear();
-        let month=(1+date.getMonth());
-        month=month>10 ? month:'0'+month;
-        let day=date.getDate();
-        day=day>=10?day:'0'+day;
-        return year+'-'+month+'-'+day;
-    }
-    function getFormatTime(date){
-        let hour=date.getHours();
-        let minute=date.getMinutes();
-        let second=date.getSeconds();
-        return hour+":"+minute+":"+second;
-    }
-    let today=getFormatDate(new Date());
-    let time=getFormatTime(new Date());
-    //console.log(today, time);
-    
-    let date=today+" "+time;
-    
+
+//console.log(rootPath);
+let sock=new SockJS(rootPath+"/chatting");
+//console.log(sock);
+
+sock.onopen=e=>{ sendEnter(); }
+sock.onclose=e=>{ sendClose(); }
+
+function sendEnter(){
+	let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), $('#sendBox #senderNick').val(),
+        		$('#chatGroupNo').val(), $('#sendBox #chat').val(), chatDate, 'ENTER');
+               
+    sock.send(JSON.stringify(chatMsg));	
+}
+
+function sendClose(){
+	let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), $('#sendBox #senderNick').val(),
+        		$('#chatGroupNo').val(), $('#sendBox #chat').val(), chatDate, 'CLOSE');
+               
+    sock.send(JSON.stringify(chatMsg));	
+}
+
+sock.onmessage=(e)=>{	
+	let chatMsg;
+		
+	let msg=JSON.parse(e.data);
+		
+	let no=msg['chatGroupNo'];
+	let sender=msg['sender'];
+	let nickname=msg['senderNick'];
+	let content=msg['chatContent'];
+	let time=msg['chatTime'];
+	let type=msg['type'];
+	console.log(nickname);
+		
+	if($('#chatGroupNo').val()==no){ //해당 채팅방에만 메세지 출력
+		if(type=='MSG'){				
+			if($('#sendBox #sender').val()==sender){ 	/////자신
+				chatMsg="<div id='myBox'>";
+				//msg+="<div id='sender'>"+sender+"</div>";
+				chatMsg+="<div id='chatContent'>"+content+"</div>";
+				chatMsg+="<div id='chatTime'>"+time+"</div></div>";				
+			}else{ 							///////////////////상대방
+				chatMsg="<div id='yourBox'>";
+				chatMsg+="<div id='sender'>"+nickname+"</div>";
+				chatMsg+="<div id='chatContent'>"+content+"</div>";
+				chatMsg+="<div id='chatTime'>"+time+"</div></div>";				
+			}
+			$("#chatContainer").append(chatMsg);
+			$('#chatContainer').animate({
+				scrollTop: $('#chatContainer')[0].scrollHeight
+			}, 500);
+			
+		}else if(type=='ENTER'){			
+			chatMsg="<p>"+nickname+"님이 입장했습니다</p>";
+			$("#chatContainer #entryAlert").append(chatMsg);
+			$('#entryAlert').fadeIn();
+			setTimeout(()=>{
+				$('#entryAlert').fadeOut(1000);
+			}, 3000); //입장했다고 5초간 띄우기
+						
+		}else if(type=='CLOSE'){
+			chatMsg="<p>"+nickname+"님이 나갔습니다</p>";
+			$("#chatContainer #entryAlert").append(chatMsg);	
+		}
+	}	
+};
+
+function sendMessage(){
     if($.trim($('#chat').val())===''){
         $('#tempAlert').slideDown();
         setTimeout(()=>{
             $('#tempAlert').slideUp();
         }, 1000);
-    }else {        
-        let chatMsg=new ChatGroupMessage($('#sender').val(), 
-        	$('#chatGroupNo').val(), $('#sendBox #chat').val(), date);
-        console.log(chatMsg);       
+    }else {		  
+        let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), $('#sendBox #senderNick').val(),
+        		$('#chatGroupNo').val(), $('#sendBox #chat').val(), chatDate, "MSG");
+               
         sock.send(JSON.stringify(chatMsg));
-        sock.send(msg);    
-    }    
-});
-
-
-	
+                
+        $("#chat").val('').focus();    
+    }
+}

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="message">
+
+<!--메세지 리스트   -->
+<select id="messagelist" resultType="com.twoweeks.spring.message.model.vo.Message">
+	SELECT NO,ROOM,SEND_NIC,RECV_NIC,SEND_TIME,READ_TIME,CONTENT,READ_CHK 
+	FROM MESSAGE
+	WHERE NO IN (SELECT MAX(NO) FROM MESSAGE GROUP BY ROOM)
+	AND (SEND_NIC =#{nick} or RECV_NIC=#{nick})
+	ORDER BY NO DESC
+
+</select>
+<!-- 상대 프로필 가져오기 -->
+<select id ="get_profile" resultType="string">
+	SELECT USER_PFRENAME FROM MEMBER2
+	<choose>
+		<when test="send_nic == nick">
+			WHERE USER_NIC = #{recv_nic}
+		</when>
+		<otherwise>
+			WHERE USER_NIC = #{send_nic}
+		</otherwise>
+	</choose>
+</select>
+
+<!-- 안읽은 메세지 --> 
+<select id="count_unread" resultType="int">
+	SELECT COUNT(NO) FROM MESSAGE
+	WHERE RECV_NIC =#{nick} AND READ_CHK=0 AND ROOM=#{room}
+</select>
+
+<!-- 메세지 내용  -->
+<select id="room_content_list" resultType="com.twoweeks.spring.message.model.vo.Message">
+	SELECT M.NO, M.ROOM, M.SEND_NIC, M.RECV_NIC, SEND_TIME, M.READ_TIME, M.CONTENT, M.READ_CHK, MEM.USER_PFRENAME
+	FROM MESSAGE M LEFT OUTER JOIN MEMBER2 MEM
+	ON M.SEND_NIC = MEM.USER_NIC
+	<choose>
+		<when test="room !=0 ">
+			WHERE ROOM =#{room} ORDER BY NO ASC
+		</when>
+		<otherwise>
+			WHERE (RECV_NIC =#{recv_nic} AND SEND_NIC =#{nick}) OR (SEND_NIC =#{recv_nic} AND RECV_NIC =#{nick})
+		</otherwise>
+	</choose>
+</select>
+
+<!--메세지 읽음  -->
+<update id="read_chk"> 
+	UPDATE MESSAGE SET READ_CHK=1
+	<choose>
+		<when test="room!=0">
+			WHERE ROOM =#{room} AND READ_CHK=0 AND RECV_NIC =#{nick}
+		</when>
+		<otherwise>
+			WHERE SEND_NIC =#{recv_nic} AND READ_CHK=0 AND RECV_NIC=#{nick}
+		</otherwise>
+	</choose>
+</update>
+
+<!--메세지리스트에서 메세지 보내기  -->
+<insert id="sendInlist">
+	<choose>
+		<when test ="room != 0">
+			INSERT INTO MESSAGE VALUES(MESSAGE_SEQ.NEXTVAL, #{room},#{send_nic},#{recv_nic},SYSDATE,SYSDATE,#{content},0)
+		</when>
+		<otherwise>
+			INSERT INTO MESSAGE VALUES(0, #{room},#{send_nic},#{recv_nic},SYSDATE,SYSDATE,#{content},0)
+		</otherwise>
+	</choose>
+</insert>
+
+<!--room번호 최댓값  -->
+<select id="max_room" resultType="int">
+	SELECT MAX(ROOM) FROM MESSAGE
+</select>
+
+<!--메세지 이력  -->
+<select id="exist_chat" resultType="int">
+	SELECT COUNT(NO) FROM MESSAGE
+	WHERE(RECV_NIC =#{recv_nic} AND SEND_NIC=#{send_nic}) OR (SEND_NIC=#{recv_nic} AND RECV_NIC=#{send_nic})
+</select>
+
+<!--기존 메세지 내역의 room번호  -->
+<select id="select_room" resultType="string">
+SELECT * FROM(
+SELECT ROWNUM NUM, M.ROOM FROM MESSAGE M
+WHERE(RECV_NIC =#{recv_nic} AND SEND_NIC=#{send_nic}) OR (SEND_NIC=#{recv_nic} AND RECV_NIC=#{send_nic})
+)WHERE NUM = 1
+
+</select>
+
+<!--메세지알림  -->
+  <select id="countMessageView" resultType="string">
+  	SELECT COUNT(*) FROM MESSAGE WHERE RECV_NIC =#{user_Nic} AND READ_CHK = 0
+  </select>
+  
+  <select id="searchNic" resultType="com.twoweeks.spring.member.model.vo.Member">
+  	SELECT USER_NIC FROM MEMBER2 WHERE USER_NIC LIKE '%' || #{search_Nic} || '%'
+  	
+  </select>
+  
+   <select id="searchRoom" resultType="string">
+  	SELECT DISTINCT ROOM FROM MESSAGE 
+  	WHERE(RECV_NIC =#{recv_nic} AND SEND_NIC=#{send_nic}) OR (SEND_NIC=#{recv_nic} AND RECV_NIC=#{send_nic})
+  	
+  </select> 
+  
+  
+  
+  
+</mapper>

@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.twoweeks.spring.admin.model.dao.AdminDao;
+import com.twoweeks.spring.admin.model.vo.Grant;
 import com.twoweeks.spring.admin.model.vo.Notice;
+import com.twoweeks.spring.admin.model.vo.Point;
+import com.twoweeks.spring.admin.model.vo.Report;
 import com.twoweeks.spring.admin.model.vo.noticeAttachment;
 import com.twoweeks.spring.member.model.vo.Member;
 
@@ -40,7 +43,67 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return dao.selectMemberList(session);
 	}
+	@Override
+	public int selectMembercount() {
+		// TODO Auto-generated method stub
+		return dao.selectMembercount(session);
+	}
+	@Override
+	public int deleteMember(String userId) {
+		// TODO Auto-generated method stub
+		return dao.deleteMember(session,userId);
+	}
+	@Override
+	public int insertPointEnd(Point re) {
+		// TODO Auto-generated method stub
+		return dao.insertPointEnd(session,re);
+	}
+	@Override
+	public int selectMemberPoint(String name) {
+		// TODO Auto-generated method stub
+		return dao.selectMemberPoint(session,name);
+	}
 	
+	@Override
+	public int updatePointEnd(Point re) {
+		// TODO Auto-generated method stub
+		return dao.updatePointEnd(session,re);
+	}
+	@Override
+	public List<Report> adminReporttable() {
+		// TODO Auto-generated method stub
+		return dao.adminReporttable(session);
+	}
+	@Override
+	public int selectReportCount() {
+		// TODO Auto-generated method stub
+		return dao.selectReportCount(session);
+	}
+	@Override
+	public int reportUpdateYn(String pk) {
+		// TODO Auto-generated method stub
+		return dao.reportUpdateYn(session,pk);
+	}
+	@Override
+	public List<Report> reportList(String userId) {
+		// TODO Auto-generated method stub
+		return dao.reportList(session,userId);
+	}
+	@Override
+	public List<Grant> selectGrantTable() {
+		// TODO Auto-generated method stub
+		return dao.selectGrantTable(session);
+	}
+	@Override
+	public int updateGrantTable(String userId) {
+		// TODO Auto-generated method stub
+		return dao.updateGrantTable(session,userId);
+	}
+	@Override
+	public int updateGrantMember(Member m) {
+		// TODO Auto-generated method stub
+		return dao.updateGrantMember(session,m);
+	}
 	
 	
 }

@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+.boardListBack h4{
+	text-align:center;
+	font-size: 20px;
+}
+.boardListBack{
+	width:37%;
+	min-width: 400px;
+	height:730px;
+	/* background-color: rgba(242,242,242,1); */
+	/* background-color: #F9F9F9; */
+	position: absolute;
+	border-radius: 20px;
+}
+
+#scrap{
+	margin: 0 5px 0 10px;
+}
+#myBoard{
+	margin: 0 25px 0 40%;
+}
+
+.boardList{
+    border: solid 1px;
+    width: 100%;
+    min-width: 380px;
+    height: 620px;
+    margin: auto;
+}
+.myBoardTab{
+	/* border: 1px solid; */
+	border-collapse: collapse;
+	font-size: 13px;	
+	width:100%;
+	table-layout: fixed;
+	
+}
+.myBoardTab *{
+	text-align: center;
+}
+.myBoardTab tr{
+	height:30px;
+}
+
+.myBoardTab tr th:nth-child(2){
+	width:58%;
+	text-align: left;
+}
+.myBoardTab tr th:nth-child(3),
+.myBoardTab tr th:nth-child(4){
+	width:13%;
+}
+
+.myBoardTab tr td:nth-child(2){
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}

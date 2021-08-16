@@ -20,13 +20,99 @@
 	    div#board-container{width:400px; margin:0 auto; text-align:center;}
 	    div#board-container input{margin-bottom:15px;}
     </style>
+    	<style>
+	ul, li{
+		margin:0;
+		padding:0;
+		list-style-type:none;
+	}
+	#subject{
+		width:100%;
+	}
+	.title_input{
+		overflow: hidden;
+		padding: 15px 3px 11px;
+		border-bottom: 1px solid #e9eaeb;
+		clear: both;
+		margin: 0;
+	}
+	.title_input textarea{
+		padding: 0;
+		width: 80%;
+		border: 0;
+		font-size: 21px;
+		line-height: 24px;
+		resize: none;
+		outline: none;
+	}
+	.btn{
+		border-top: 1px solid #f5f5f5;
+		margin: 0;
+		padding: 0;
+	}
+	.btnbtn{
+		display: inline-block;
+		border: 0;
+		padding: 0;
+		text-align: right;
+		line-height: 48px;
+		background: transparent;
+		font-size: 16px;
+		color: #333;
+		cursor: pointer;
+		outline: 0;
+		vertical-align: middle;
+		margin: 0px;
+		left: 750px;
+		position: relative;
+	}
+	.btnbtn2{
+		display: inline-block;
+		border: 0;
+		padding: 0;
+		text-align: right;
+		line-height: 48px;
+		background: transparent;
+		font-size: 16px;
+		color: #333;
+		cursor: pointer;
+		outline: 0;
+		vertical-align: middle;
+		margin: 0px;
+		left: 800px;
+		position: relative;
+	}
+	.btbt{
+		display: inline-block;
+		border: 0;
+		padding: 0;
+		text-align: right;
+		line-height: 48px;
+		background: transparent;
+		font-size: 16px;
+		color: #333;
+		cursor: pointer;
+		outline: 0;
+		vertical-align: middle;
+		margin: 0px;
+	}
+	#content{
+		resize: none;
+	}	
+	.iscontainer{
+	width: 70%;
+	position: relative;
+	padding: 100px 100px 100px 100px;
+	left: 200px;
+	}	
+</style>
      <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="<%=request.getContextPath() %>/">2Weeks</a>
              <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-
+			<a href="<%=request.getContextPath() %>/"><button class="btn btn-outline-primary" style="position: relative; left: 1500px;">메인으로가기</button></a>
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -47,7 +133,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<%=request.getContextPath()%>/admin/admintable.do">권한 요청</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">신고 관리</a>
+                                    <a class="nav-link" href="<%=request.getContextPath()%>/admin/adminReporttable.do">신고 관리</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -91,11 +177,11 @@
         <div id="layoutSidenav_content">
             <section id="content">
             	<br><br><br><br>
-				<div id="board-container">
+				<div class="iscontainer">
 			        <form name="boardFrm" action="<%=request.getContextPath() %>/admin/NoticeForm.do"
 			         method="post" enctype="multipart/form-data" >
 			            <input type="text" class="form-control" placeholder="제목" name="noticeTitle" id="noticeTitle" required>
-			            <input type="text" class="form-control" placeholder="아이디 (4글자이상)" name="noticeWriter" value="Admin" readonly required>
+			            <input type="text" style="margin-top: 10px; margin-bottom: 10px;" class="form-control" placeholder="아이디 (4글자이상)" name="noticeWriter" value="Admin" readonly required>
 			            <div class="input-group mb-3" style="padding:0px;">
 			                <div class="input-group-prepend" style="padding:0px;">
 			                    <span class="input-group-text">첨부파일1</span>
@@ -116,8 +202,8 @@
 			            </div>
 			            <textarea class="form-control" name="noticeContent" placeholder="내용" required style="resize: none;" cols="120" rows="15"></textarea>
 			            <br />
-			            <input type="submit" class="btn btn-outline-success" value="저장" style="margin-right: 20px">
-			            <input type="button" onclick="fn_cancel();" class="btn btn-outline-success" value="취소" style="margin-left: 20px;">
+			            <input type="submit" class="btnbtn" value="저장" style="margin-right: 20px;">
+			            <input type="button" onclick="fn_cancel();" class="btnbtn2" value="취소" style="margin-left: 20px; ">
 			        </form>
 			    </div>
 
