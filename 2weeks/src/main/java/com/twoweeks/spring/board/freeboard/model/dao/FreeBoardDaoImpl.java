@@ -38,8 +38,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 
 	@Override
-	public List<FreeBoard> list(SqlSession session, FreeBoard fb) {
-		return session.selectList("freeboard.list",fb);
+	public List<FreeBoard> list(SqlSession session) {
+		return session.selectList("freeboard.list");
 	}
 
 
@@ -66,6 +66,21 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	@Override
 	public int updateAttachment(SqlSession session, PostAttachment a) {
 		return session.insert("freeboard.updateAttachment", a);
+	}
+
+	@Override
+	public int updateView(SqlSession session, int post_Sq) {
+		return session.update("freeboard.updateView",post_Sq);
+	}
+
+	@Override
+	public int updateReplyCnt(SqlSession session, int post_Sq) {
+		return session.update("freeboard.updateReplyCnt",post_Sq);
+	}
+
+	@Override
+	public List<FreeBoard> replyCnt(SqlSession session, Integer integer) {
+		return session.selectList("freeboard.replyCnt",integer);
 	}
 
 	

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <c:set var="path" value="${pageContext.request.contextPath }"/>   
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="자유게시판"/>
@@ -85,13 +86,13 @@ text-decoration: none;
 						<div class="col-4">
 							<img alt="조회수" src="${path }/resources/images/icons/eye-6.svg" class="eye">&nbsp;<p class="icon">${b.post_Cnt }</p>
 						</div>
+						<div class="col-4">
+							<img alt="댓글수" src="${path }/resources/images/icons/comment.svg" class="comment">&nbsp;<p class="icon">${b.replyNo }</p>
+						</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-						<div class="col-4">
-							<img alt="댓글수" src="${path }/resources/images/icons/comment.svg" class="comment">&nbsp;<p class="icon"></p>
-						</div>
 			</div>
 			<div>
 			
@@ -105,6 +106,40 @@ text-decoration: none;
 
 </section>
 <script>
-
+$(document).ready(function(){
+	replyCnt();
+	function replyCnt(){
+		var arr = [];
+		<c:forEach var="b" items="${list }" varStatus="status">
+			arr[${status.index}] = ${b.post_Sq};
+			
+		</c:forEach>
+		
+			console.log(arr);
+	 	$.ajax({
+	 		type:"POST",
+	 		url:"${path}/reply/replyCnt/",
+	 		
+	 		data: {
+	 			arr : arr
+	 		},
+	 		dataType:"text",
+	 		success:function(data){
+	 		$(data).each(function(idx, val){
+s
+	 			
+	 		});
+	 		
+	 		
+	 			
+	 		},error:function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+	 		
+	 		
+	 	});
+		
+	};
+});
 </script>  
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

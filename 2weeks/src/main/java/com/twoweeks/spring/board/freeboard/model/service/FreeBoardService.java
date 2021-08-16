@@ -24,16 +24,19 @@ public interface FreeBoardService {
 	
 	int totalBoardCount();
 
-	List<FreeBoard> list(FreeBoard fb);
+	List<FreeBoard> list();
 
 	List<FreeBoard> searchBoard(Map<String,Object> param);
 	
-	FreeBoard read(int bno);
+	FreeBoard read(int post_Sq, boolean readFlag);
 	
 	int update(FreeBoard fb) throws Exception;
 	
 	int delete(int no);
 
-	
+	int updateReplyCnt(int post_Sq);
+
+	List<FreeBoard> replyCnt(Integer integer);
+
 	
 }

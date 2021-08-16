@@ -3,21 +3,23 @@ package com.twoweeks.spring.board.freeboard.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,12 +27,11 @@ import com.twoweeks.spring.board.freeboard.model.service.FreeBoardService;
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
 import com.twoweeks.spring.board.freeboard.reply.model.service.ReplyService;
-import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 import com.twoweeks.spring.common.PageFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Controller
+@RestController
 @Slf4j
 public class FreeBoardController {
 
@@ -66,8 +67,7 @@ public class FreeBoardController {
 	@RequestMapping("/freeboard/boardList.do")
 	public ModelAndView boardList(@RequestParam(value="cPage", defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="5")int numPerpage,
 			ModelAndView mv) {
-		log.info("어어어어");
-		log.debug("게시판 리스트");
+		log.info("게시판 리스트" );
 		mv.addObject("list", service.listAll(cPage,numPerpage)); 
 		int totalData = service.totalBoardCount();  //등록된 테이블의 총 개수를 가져다가 저장
 		mv.addObject("totalContents", totalData);
@@ -78,6 +78,21 @@ public class FreeBoardController {
 		return mv;
 	}
 	
+	@PostMapping("reply/replyCnt")
+	public ModelAndView replyCnt(@RequestParam(value="arr[]") List<Integer> arr, ModelAndView mv, HttpServletRequest request) {
+		mv.setViewName( "jsonView" );
+		for(int i=0; i<arr.size(); i++) {
+			//log.info("출력해봐 :"+arr.get(i));
+			
+			List<FreeBoard> b = service.replyCnt(arr.get(i));
+					
+			mv.addObject("replyNo"+b.get(0).getReplyNo());
+			log.info("출력해봐 : ======================================================"+b.get(0));
+			
+		}
+		
+		return mv;
+	}
 	
 	
 	@PostMapping("/freeboard/writeEnd.do") 
@@ -125,16 +140,36 @@ public class FreeBoardController {
 	
 	
 	@RequestMapping("/freeboard/readView")
-	public String read(FreeBoard fb, Model model,  HttpServletRequest request) {
-		log.info("read");
-		log.info("list" + fb.getAttachments());
+	public String read(FreeBoard fb, Model model,  HttpServletRequest request, HttpServletResponse response) {
+		log.info("게시글 상세보기에 오신걸 환영합니다.");
 		
-		//int no = Integer.parseInt(request.getParameter("post_Sq")); 
-		 fb.setPost_Sq(Integer.parseInt(request.getParameter("no"))); 
-		 model.addAttribute("list", service.read(fb.getPost_Sq()));
-		 List<Reply> reply = rService.selectBoardComment(Integer.parseInt(request.getParameter("no")));
-		 
-		model.addAttribute("comments", reply);
+		int post_Sq = Integer.parseInt(request.getParameter("no")); 
+		boolean readFlag = false;
+		String boardReadNo="";
+		Cookie[] cookies = request.getCookies();
+		if(cookies!=null) {
+			for(Cookie c : cookies) {
+				String name=c.getName();//키값
+				String value = c.getValue(); //값
+				if(name.equals("boardReadNo")) {
+					if(value.contains("|"+post_Sq+"|")) {
+						readFlag=true;
+						break;
+					}
+					boardReadNo=value; //현재읽은 게시글 번호
+				}
+			}
+		}
+		//읽지않은 글이면 쿠키글에 추가하기 위한 로직
+		if(!readFlag) {
+			Cookie c= new Cookie("boardReadNo",boardReadNo+"|"+post_Sq+"|");
+			c.setMaxAge(-1);
+			response.addCookie(c);
+		}
+
+
+		model.addAttribute("list", service.read(post_Sq, readFlag));
+
 		return "freeBoard/readView";
 	}
 	
@@ -207,7 +242,7 @@ public class FreeBoardController {
 		// mv.addObject("loc","/freeboard/readView"); //common/msg에 넣어버리면 location.replace라서 작동안됨.
 		 
 		//redirect로 수정한 게시물을 보여준다.
-		mv.setViewName("/freeboard/readView");
+		mv.setViewName("redirect:/freeboard/readView");
 		return mv;
 		}
 	
@@ -215,13 +250,13 @@ public class FreeBoardController {
 	@RequestMapping("/freeboard/updateBoard.do")
 	public String updateEnd(FreeBoard fb, Model model,  HttpServletRequest request) {
 		
-		log.info("updateEnd");
+		log.info("수정완료를 눌러주셨군요!! " );
 		
-		int no = Integer.parseInt(request.getParameter("no"));
-		System.out.println(no+"인가요?");
-		fb.setPost_Sq(Integer.parseInt(request.getParameter("no")));
+		boolean readFlag=false;
+		
+		int post_Sq = Integer.parseInt(request.getParameter("no"));
 				
-		model.addAttribute("list", service.read(fb.getPost_Sq()));
+		model.addAttribute("list", service.read(post_Sq, readFlag));
 		
 		
 		

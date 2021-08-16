@@ -2,12 +2,11 @@ package com.twoweeks.spring.board.freeboard.reply.model.service;
 
 import java.util.List;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
-import com.twoweeks.spring.board.freeboard.model.vo.PREPLY;
 import com.twoweeks.spring.board.freeboard.reply.model.dao.ReplyDao;
 import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
@@ -41,10 +40,6 @@ public class ReplyServiceImpl implements ReplyService {
 		return dao.delete(session, reply_Sq);
 	}
 
-	@Override
-	public List<Reply> listAll(int post_Sq, int Cpage, int numPerpage) {
-		return dao.listAll(session, post_Sq, Cpage, numPerpage);
-	}
 
 	@Override
 	public int countReplies(int post_Sq) {

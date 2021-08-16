@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
-import com.twoweeks.spring.board.freeboard.model.vo.PREPLY;
 import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 @Repository
@@ -36,11 +35,7 @@ public class ReplayDaolmpl implements ReplyDao {
 		return session.delete("reply.delete",reply_Sq);
 	}
 
-	@Override
-	public List<Reply> listAll(SqlSession session, int post_Sq, int cPage, int numPerpage) {
-		return session.selectList("reply.listAll",null, new RowBounds((cPage-1)*numPerpage, numPerpage));
-	}
-
+	
 	@Override
 	public int countReplies(SqlSession session, int post_Sq) {
 		return session.selectOne("reply.countReplies");

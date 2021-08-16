@@ -1,14 +1,7 @@
 package com.twoweeks.spring.board.freeboard.reply.controller;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.twoweeks.spring.board.freeboard.model.service.FreeBoardService;
+import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.reply.model.service.ReplyService;
 import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
-import com.twoweeks.spring.common.PageFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +30,8 @@ public class ReplyController {
 	@Autowired
 	private ReplyService service;
 	
+	@Autowired
+	private FreeBoardService fService;
 	
 
 	
@@ -44,14 +39,17 @@ public class ReplyController {
 	public ResponseEntity<String> register(@RequestBody Reply reply){
 		log.info("reply : "+ reply);
 		ResponseEntity<String> entity = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		Date time = new Date();
-		String time1 = sdf.format(time);
-		reply.setReply_Dt(time1);
+	
 		try {
 			service.create(reply);
 			entity = new ResponseEntity<String>("regSuccess", HttpStatus.OK);
-			
+		int result	= fService.updateReplyCnt(reply.getPost_Sq());
+		if(result > 0) {
+			log.info("댓글수 증가 성공");
+		}else {
+			log.info("댓글 수 증가 실패");
+		}
+		
 		}catch(Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -60,12 +58,18 @@ public class ReplyController {
 	}
 	
 	@PostMapping("reply/rereplyInsert.do")
-	public ResponseEntity<String> rereplyInsert(@RequestBody Reply reply){
+	public ResponseEntity<String> rereplyInsert(@RequestBody Reply reply, @RequestBody FreeBoard b){
 		log.info("reREplyInsert : " + reply);
 		ResponseEntity<String> entity = null;
 		try {
 			service.rereplyInsert(reply);
 			entity = new ResponseEntity<String>("regSuccess", HttpStatus.OK);
+			int result	= fService.updateReplyCnt(reply.getPost_Sq());
+			if(result > 0) {
+				log.info("댓글수 증가 성공");
+			}else {
+				log.info("댓글 수 증가 실패");
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -90,11 +94,6 @@ public class ReplyController {
 	@RequestMapping(value = "replies/{reply_Sq}", method = {RequestMethod.PUT, RequestMethod.PATCH})
 	public ResponseEntity<String> update(@PathVariable("reply_Sq") int reply_Sq, @RequestBody Reply reply){
 		ResponseEntity<String> entity = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		Date time = new Date();
-		String time1 = sdf.format(time);
-		reply.setUpdateDate(time1);
-		reply.setReply_Dt(time1);
 		try {
 			reply.setReply_Sq(reply_Sq);
 			service.update(reply);
@@ -121,27 +120,27 @@ public class ReplyController {
 		return entity;
 	}
 	
-	@GetMapping("/{post_Sq}")
-	public ResponseEntity<Map<String,Object>> listPaging(@PathVariable("post_Sq") int post_Sq, HttpServletRequest request, HttpSession session,
-			@RequestParam(value="cPage", defaultValue="1") int cPage, @RequestParam(value="numPerpage",defaultValue="5") int numPerpage){
-		ResponseEntity<Map<String,Object>> entity = null;
-		
-		try {
-			List<Reply> replies = service.listAll(post_Sq, cPage, numPerpage);
-			int repliesCount = service.countReplies(post_Sq);
-			String pageBar  = PageFactory.getPageBar(repliesCount, cPage, numPerpage, "${post_Sq}");
-			
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("replies", replies);
-			map.put("repliesCount", repliesCount);
-			map.put("pageBar", pageBar);
-			
-			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-		}catch(Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
-		}
-		return entity;
-	}
+//	@GetMapping("/reply/{post_Sq}")
+//	public ResponseEntity<Map<String,Object>> listPaging(@PathVariable("post_Sq") int post_Sq, HttpServletRequest request, HttpSession session,
+//			@RequestParam(value="cPage", defaultValue="1") int cPage, @RequestParam(value="numPerpage",defaultValue="5") int numPerpage){
+//		ResponseEntity<Map<String,Object>> entity = null;
+//		
+//		try {
+//			List<Reply> replies = service.listAll(post_Sq, cPage, numPerpage);
+//			int repliesCount = service.countReplies(post_Sq);
+//			String pageBar  = PageFactory.getPageBar(repliesCount, cPage, numPerpage, "${post_Sq}");
+//			
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("replies", replies);
+//			map.put("repliesCount", repliesCount);
+//			map.put("pageBar", pageBar);
+//			
+//			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+//		}
+//		return entity;
+//	}
 	
 }

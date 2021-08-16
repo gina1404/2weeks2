@@ -21,7 +21,7 @@ public interface FreeBoardDao {
 	
 	int totalBoardCount(SqlSession session);
 
-	List<FreeBoard> list(SqlSession session, FreeBoard fb);
+	List<FreeBoard> list(SqlSession session);
 
 	List<FreeBoard> searchBoard(SqlSession session, Map<String,Object> param);
 		
@@ -33,6 +33,10 @@ public interface FreeBoardDao {
 
 	int updateAttachment(SqlSession session, PostAttachment a);
 
-	
+	int updateView(SqlSession session, int post_Sq);
+
+	int updateReplyCnt(SqlSession session, int post_Sq);
+
+	List<FreeBoard> replyCnt(SqlSession session, Integer integer); 
 	
 }

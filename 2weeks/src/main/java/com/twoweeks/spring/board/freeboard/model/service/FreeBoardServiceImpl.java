@@ -21,6 +21,9 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	
 
 
+
+
+
 	@Autowired
 	private FreeBoardDao dao;
 	
@@ -31,8 +34,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	
 
 	@Override
-	public List<FreeBoard> list(FreeBoard fb) {
-		return dao.list(session, fb);
+	public List<FreeBoard> list() {
+		return dao.list(session);
 	}
 
 
@@ -78,8 +81,15 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 
 	@Override
-	public FreeBoard read(int bno) {
-		return dao.read(session, bno);
+	public FreeBoard read(int post_Sq, boolean readFlag) {
+		FreeBoard b = dao.read(session, post_Sq);
+		if(b!=null&&!readFlag) {
+			int result = dao.updateView(session, post_Sq);
+			if(result>0) {
+				b.setPost_Cnt(b.getPost_Cnt()+1);
+			}
+		}
+		return b;
 	}
 
 
@@ -112,7 +122,19 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	public int delete(int no) {
 		return dao.delete(session, no);
 	}
+
+
+	@Override
+	public int updateReplyCnt(int post_Sq) {
+		return dao.updateReplyCnt(session, post_Sq);
+	}
+
+
+	@Override
+	public List<FreeBoard> replyCnt(Integer integer) {
+		return dao.replyCnt(session, integer);
+	}
 	
-	
+
 	
 }
