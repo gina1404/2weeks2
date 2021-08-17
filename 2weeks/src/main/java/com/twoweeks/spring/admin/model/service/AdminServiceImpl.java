@@ -104,6 +104,11 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return dao.updateGrantMember(session,m);
 	}
+	@Override
+	public int selectGrantCount() {
+		// TODO Auto-generated method stub
+		return dao.selectGrantCount(session);
+	}
 	
 	
 }

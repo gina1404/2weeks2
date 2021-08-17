@@ -59,4 +59,7 @@
 	<update id="updateGrantMember">
 		UPDATE MEMBER2 SET ACCESS_GB=#{access_Gb} WHERE USER_ID=#{user_Id}
 	</update>
+	<select id="selectGrantCount" resultType="_int">
+		SELECT COUNT(*) FROM GRANTTO WHERE GRANTTO_YN='N'
+	</select>
 </mapper>

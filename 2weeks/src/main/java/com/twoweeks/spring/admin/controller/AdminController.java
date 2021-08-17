@@ -35,8 +35,10 @@ public class AdminController {
 		List<Member> list = service.selectMemberList();
 		int memberct = service.selectMembercount();
 		int reportct=service.selectReportCount();
+		int grantct=service.selectGrantCount();
 		// System.out.println(list);
 		
+		mv.addObject("grantct", grantct);
 		mv.addObject("reportct", reportct);
 		mv.addObject("memberct", memberct);
 		mv.addObject("list", list);
