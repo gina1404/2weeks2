@@ -348,7 +348,9 @@ function drawVisualizatio() {
 
         ]);
 
-        var options = {};
+        var options = {
+        		color: '#CC0033'
+        };
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
