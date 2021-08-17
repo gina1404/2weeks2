@@ -495,7 +495,8 @@ $("#likePost").on("click",function(){
 	alreadyLikeClick = localStorage.getItem("isis2");
 	var al = localStorage.getItem("isis");
 	console.log(alreadyLikeClick);
-	 if(al == 2 && alreadyLikeClick==4){
+	//좋아요 취소
+	if(al == 2 && alreadyLikeClick==4){
 		/*  const target = document.getElementById('likePost');
 		  target.disabled = true; */
 		 $.ajax({
@@ -525,7 +526,7 @@ $("#likePost").on("click",function(){
 		});
 					
 		 return; 
-	}else if(al == 1 && isLike2==2 || (isLike == 1 && isLike2 ==2)){ 
+	}else if(al == 1 || isLike2==2 || (isLike == 1 && isLike2 ==2)){ 
 	//좋아요는 한번만 누를수 있게 하기 위해서 isLike가 false이면 ajax가 실행 	
 	$.ajax({
 		url:'${path}/freeboard/like.do',
