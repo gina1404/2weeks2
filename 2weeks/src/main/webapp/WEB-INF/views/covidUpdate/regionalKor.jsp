@@ -15,7 +15,7 @@
 		<!-- 지역별 현황 지도 영역 -->
 		<div id="regionalKor-map"></div>		
 		<!-- 지역별 현황 표 영역 -->
-		<div id="regionalKor-table" style="border:1.5px solid purple; display:none;"></div>
+		<div id="regionalKor-table"></div>
 </section>
 
 <!-- 지역별 현황 출력 -->
@@ -46,15 +46,23 @@ $("#regionalKor").each(function(){
         success:function(data){
              //1. 지역별 현황 표 출력 
              //항목
-            var str="<div class='regionalKor-table-title' style='display:flex;'>";
-            str+="<div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>지역</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>오늘 확진자</div><div class='regionalKor-table-title-txt' style='display:inline-block; border:1px solid red;'>총 확진자</div></div>";
+            var str="<div class='regionalKor-table-title'>";
+            str+="<div class='regionalKor-table-title-txt'>지역</div><div class='regionalKor-table-title-txt'>오늘 확진자</div><div class='regionalKor-table-title-txt'>총 확진자</div></div>";
              //값
             for(var i=0; i<18;i++){ //검역 빼고 마지막 줄 합계까지 출력
-                str += "<div class='regionalKor-table-content' style='display:flex;'>";
-                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].gubun+"</div>"; //지역
-                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].incDec+"</div>"; //오늘 확진
-                str += 		"<div class='regionalKor-table-txt' style='display:inline-block; border:1px solid green;'>"+data[i].defCnt+"</div>"; //총 확진
-                str += "</div>"
+                if((i%2)>0){
+                	str += "<div class='regionalKor-table-content'>";
+                    str += 		"<div class='regionalKor-table-txt'>"+data[i].gubun+"</div>"; //지역
+                    str += 		"<div class='regionalKor-table-txt'>"+data[i].incDec+"</div>"; //오늘 확진
+                    str += 		"<div class='regionalKor-table-txt'>"+data[i].defCnt+"</div>"; //총 확진
+                    str += "</div>"
+                }else{
+                	str += "<div class='regionalKor-table-content'>";
+                    str += 		"<div class='regionalKor-table-txt2'>"+data[i].gubun+"</div>"; //지역
+                    str += 		"<div class='regionalKor-table-txt2'>"+data[i].incDec+"</div>"; //오늘 확진
+                    str += 		"<div class='regionalKor-table-txt2'>"+data[i].defCnt+"</div>"; //총 확진
+                    str += "</div>"
+                }
             }//값 출력 끝
             str+="</div>";
             $("#regionalKor-table").append(str);
