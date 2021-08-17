@@ -36,12 +36,12 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	padding:0;
 	height:100%;
 }
-.container {	 
+.container {
 	margin-left:200px !important; /* 사이드바 너비만큼 띄움 */
 	margin-top:60px !important; /* 헤더 높이만큼 띄움 */
-	background-color: #F7F8FC;
+	background-color: #F7F8FC !important;
 	min-height:800px;
-	width:calc(100% - 290px) !important; /* 본문 너비 */
+	width:calc(100% - 200px) !important; /* 본문 너비 */
 	padding:15px 75px 0 15px !important;
 	margin-bottom:0;
 }  	
@@ -163,4 +163,10 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 }
 .dropdown-content a:hover {background-color: #ddd;}
 .dropdown:hover .dropdown-content {display: block;}
-<style>
+
+#messageIcon{
+	margin: 4px 0 0 5px;
+}
+</style>
+
+

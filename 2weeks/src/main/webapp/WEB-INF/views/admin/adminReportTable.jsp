@@ -21,7 +21,7 @@
             <a class="navbar-brand ps-3" href="<%=request.getContextPath() %>/">2Weeks</a>
              <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-
+			<a href="<%=request.getContextPath() %>/"><button class="btn btn-outline-primary" style="position: relative; left: 1500px;">메인으로가기</button></a>
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -88,7 +88,7 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">신고 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="<%=request.getContextPath() %>/">메인으로</a></li>
+
 
                         </ol>
 
@@ -108,6 +108,7 @@
                                             <th>신고 상세 사유</th>
                                             <th>처리유무</th>
                                             <th>게시물삭제</th>
+                                            <th>처리하기</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -118,7 +119,8 @@
                                             <th>신고 목록</th>
                                             <th>신고 상세 사유</th>
                                             <th>처리유무</th>
-                                            <th>게시물 삭제</th>                                            
+                                            <th>게시물 삭제</th>       
+                                            <th>처리하기</th>                                     
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -145,6 +147,7 @@
                                             <td>${c.report_Detail_Reason }</td>
                                             <td>${c.report_Yn }</td>
                                             <td><button onclick="fn_deleteAll(${c.post_Sq},${c.kin_Sq},${c.post_Reply_Sq},${c.kin_Reply_Sq});" class="btn btn-outline-primary" >삭제</button></td>
+                                        	<td><button id="${c.report_Detail_Reason }" class="btn btn-outline-primary" onclick="fn_updateYn(this.id);">처리확인</button></td>
                                         </tr>
                                      </c:forEach>
                                     </tbody>
@@ -172,6 +175,12 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath() %>/resources/AdminTem/js/datatables-simple-demo.js"></script>
        <script >
+       function fn_updateYn(f){
+    	   const pk=f;
+    	   location.assign('<%=request.getContextPath() %>/admin/reportUpdateYn?pk='+pk);
+    	   
+       };
+       
         function fn_deleteAll(a,b,c,d){
     			
     			const post=a;
@@ -189,7 +198,7 @@
     			}else if(kinReply!=0){
     				location.assign('<%=request.getContextPath() %>/admin/deleteKinReply?seq='+kinReply);	
     			}	
-    		}
+    		};
         </script>
     </body>
-</html>ml>
+</html>

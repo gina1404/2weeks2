@@ -34,38 +34,42 @@ btn.addEventListener("click", e=>{
 	sendMessage(); 
 });
 
-let sock=new SockJS("http://localhost:9090/spring/chatting");
+
+//console.log(rootPath);
+let sock=new SockJS(rootPath+"/chatting");
 
 sock.onopen=e=>{ sendEnter(); }
 sock.onclose=e=>{ sendClose(); }
 
 function sendEnter(){
-	let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), $('#sendBox #senderNick').val(),
-        		$('#chatGroupNo').val(), $('#sendBox #chat').val(), chatDate, 'ENTER');
-               
+	let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), 
+									$('#sendBox #senderNick').val(),
+					        		$('#chatGroupNo').val(), 
+					        		$('#sendBox #chat').val(), 
+					        		chatDate, 'ENTER');
     sock.send(JSON.stringify(chatMsg));	
 }
 
 function sendClose(){
-	let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), $('#sendBox #senderNick').val(),
-        		$('#chatGroupNo').val(), $('#sendBox #chat').val(), chatDate, 'CLOSE');
-               
-    sock.send(JSON.stringify(chatMsg));	
+	// let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), 
+	// 								$('#sendBox #senderNick').val(),
+	// 				        		$('#chatGroupNo').val(), 
+	// 				        		$('#sendBox #chat').val(), 
+	// 				        		chatDate, 'CLOSE');               
+	// sock.send(JSON.stringify(chatMsg));		
 }
 
 sock.onmessage=(e)=>{	
-	let chatMsg;
-		
+	let chatMsg;		
 	let msg=JSON.parse(e.data);
-		
+			
 	let no=msg['chatGroupNo'];
 	let sender=msg['sender'];
 	let nickname=msg['senderNick'];
 	let content=msg['chatContent'];
 	let time=msg['chatTime'];
 	let type=msg['type'];
-	console.log(nickname);
-		
+			
 	if($('#chatGroupNo').val()==no){ //해당 채팅방에만 메세지 출력
 		if(type=='MSG'){				
 			if($('#sendBox #sender').val()==sender){ 	/////자신
@@ -114,3 +118,4 @@ function sendMessage(){
         $("#chat").val('').focus();    
     }
 }
+

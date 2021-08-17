@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.twoweeks.spring.admin.model.vo.Grant;
 import com.twoweeks.spring.admin.model.vo.Notice;
 import com.twoweeks.spring.admin.model.vo.Point;
 import com.twoweeks.spring.admin.model.vo.Report;
@@ -18,4 +19,11 @@ public interface AdminService {
 	int selectMemberPoint(String name);
 	int updatePointEnd(Point re);
 	List<Report>adminReporttable();
+	int selectReportCount();
+	int reportUpdateYn(String pk);
+	List<Report>reportList(String userId);
+	List<Grant>selectGrantTable();
+	int updateGrantTable(String userId);
+	int updateGrantMember(Member m);
+	int selectGrantCount();
 }

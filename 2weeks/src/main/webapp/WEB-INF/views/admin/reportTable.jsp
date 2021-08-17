@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,46 +27,31 @@
 			   </tr>
 			 </thead>
 			 <tbody>
+			 <c:forEach items="${list }" var="c">
 			   <tr>
-			      <td>John</td>
-			      <td>Doe</td>
-			      <td>33</td>
-			      <td>john@example.com</td>
-			      <td>john@example.com</td>
-			      <td>Y</td>
+					<td>${c.user_Id }</td>
+                   <c:if test="${c.post_Sq ne 0}">
+                       <td>일반게시물</td>
+                       <td>${c.post_Sq }</td>
+                   </c:if>
+                   <c:if test="${c.kin_Sq ne 0}">
+                       <td>지식인게시물</td>
+                       <td>${c.kin_Sq }</td>
+                   </c:if>
+                   <c:if test="${c.post_Reply_Sq ne 0 }">
+                       <td>일반게시물 댓글</td>
+                       <td>${c.post_Reply_Sq }</td>
+                   </c:if>
+                   <c:if test="${c.kin_Reply_Sq ne 0}">
+                       <td>지식인게시물 댓글</td>
+                       <td>${c.kin_Reply_Sq }</td>
+                   </c:if>
+                      <td>${c.report_Reason }</td>
+                      <td>${c.report_Detail_Reason }</td>
+                      <td>${c.report_Yn }</td>
 			   </tr>
-			   <tr>
-			      <td>John</td>
-			      <td>Doe</td>
-			      <td>33</td>
-			      <td>john@example.com</td>
-			      <td>john@example.com</td>
-			      <td>Y</td>
-			   </tr>
-			   <tr>
-			      <td>John</td>
-			      <td>Doe</td>
-			      <td>33</td>
-			      <td>john@example.com</td>
-			      <td>john@example.com</td>
-			      <td>Y</td>
-			   </tr>
-			   	<tr>
-			      <td>John</td>
-			      <td>Doe</td>
-			      <td>33</td>
-			      <td>john@example.com</td>
-			      <td>john@example.com</td>
-			      <td>Y</td>
-			   </tr>
-			   <tr>
-			      <td>John</td>
-			      <td>Doe</td>
-			      <td>33</td>
-			      <td>john@example.com</td>
-			      <td>john@example.com</td>
-			      <td>Y</td>
-			   </tr>
+			 </c:forEach>
+
 			 </tbody> 
 			
 		</table>
