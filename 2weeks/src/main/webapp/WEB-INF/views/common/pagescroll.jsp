@@ -17,13 +17,20 @@
             bottom:120px;
 			position:fixed;
 			cursor: pointer;
+        	padding: 5px;
+        	background-color:#D3D8F4;
+        	border-radius:50%;
+        	justify-content: center;
+        	align-items:center;
         }
         #pagescroll-button:hover{
-        	background-color: #555;
+        	cursor:pointer;
+        	border-radius:50%;
+        	filter: brightness(95%);
         }
 	</style>
 	
-	<script>
+	<script>	
 	pagescrollButton = document.getElementById("pagescroll-button");
 
 	// 문서 높이로부터 20px 아래로 스크롤하면 버튼이 보임

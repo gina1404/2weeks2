@@ -1,9 +1,14 @@
 @charset "UTF-8";
 <style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
 body{
 	margin:0;
 	padding:0;
 }
+a {	color: #394956; text-decoration: none; outline: none }
+
+a:hover, a:active {text-decoration: none; color: #394956;}
 
 /* 기본 header, nav, main(container), aside 영역 나누기  */
 #header{
@@ -15,12 +20,14 @@ body{
 	height:60px; /* header 높이 */
 	top:0;
 	left:0;
-	right:0;
+	right:0;	
+	color: #394956;
+	font-family: 'Pretendard';
 }		
 #sidebar {
 	left:0;
 	align-items: flex-start;
-	width:15% ; /* 사이드바 너비 */
+	width:200px ; /* 사이드바 너비  15%->200px */
 	overflow: hidden;
 	left:0;
 	top:60px; /* header 높이에 따라 변경해야 됨 */
@@ -30,29 +37,31 @@ body{
 	height:100%;
 }
 .container {	 
-	margin-left:15% !important; /* 사이드바 너비만큼 띄움 */
+	margin-left:200px !important; /* 사이드바 너비만큼 띄움 */
 	margin-top:60px !important; /* 헤더 높이만큼 띄움 */
 	background-color: #F7F8FC;
 	min-height:800px;
-	width:80% !important; /* 본문 너비 */
-	padding:15px !important;
+	width:calc(100% - 290px) !important; /* 본문 너비 */
+	padding:15px 75px 0 15px !important;
+	margin-bottom:0;
 }  	
 #aside {
 	display: flex;
-	background-color: #EEF0FE; 
-	width: 5%; /* 페이지 스크롤 영역 너비 */
+	background-color: #F7F8FC; 
+	width: 60px; /* 페이지 스크롤 영역 너비 */
 	top:60px; /*  header 높이와 동일하게 맞춰줘야 됨 */
 	right:0;
 	position:fixed;
-	min-height:400px;
-	height:100%;
+	height:auto;
+	over-flow:hidden;
+	justify-content: center;
 }   
 
 /* header css 속성 */
 .header-logo-area {
 	align-items: center;
-	background-color: #E1E6FF;
-	width:15%; /* 사이드바 너비와 동일하게 맞춰줘야 됨 */
+	background-color: #D3D8F4;
+	width:200px; /* 사이드바 너비와 동일하게 맞춰줘야 됨 */
 	height:100%;
 	text-align:center;
 		display:flex;
@@ -61,24 +70,27 @@ body{
 		left:0;
 }
 .header-logo{
-		width: 60%;
-		height: 60px;
 		display:flex;
 		align-items: center;
 		justify-content: flex-end;
 		padding:0;
+		font-family: 'Pretendard';
+	font-weight:bolder;
+	font-size:25px;
+	text-decoration:none;
 }
 .header-search-area{
 	display: flex;
-	width: 50%;
+	width: 800px;
 	height: 60px;
 	align-items: center;
 	padding:0 15px ;
+	justify-content:flex-end;
 }
 #searchKeyword{	
 		margin:0;
 		padding:0;
-		width:60%;
+		width:50%;
 		height:26px;
 		margin-right:-5px;
 		text-align: right;
@@ -98,6 +110,7 @@ body{
 .header-divider {
 	height: 32px;
 	width: 2px;
+	color:#123962;
 }
 .header-icon {
 	height: 24px;

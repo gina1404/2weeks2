@@ -1,12 +1,58 @@
 @charset "UTF-8";
 
 /* 버튼 */
-.regionalKor-button{
-	border:0.5px solid darkgray;
-	width:30%;
-	padding:2%;
+.regionalKor-button-area{
+	width:80%;
+	padding:3%;
 	margin:3%;
 	text-align:center;
+  line-height: 1;
+  background: lightgrey;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  overflow: hidden;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 8px rgba(#275efe, 0.32));
+  transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+	
+}
+.regionalKor-button-1{ /* selected */
+	width:30%;
+	padding:3%;
+	margin:3%;
+	text-align:center;
+  line-height: 1;
+  color: white;
+  background: #27ae60;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  overflow: hidden;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 8px rgba(#275efe, 0.32));
+  transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.regionalKor-button-2{ /* non-selected */
+	width:30%;
+	padding:3%;
+	margin:3%;
+	text-align:center;
+  line-height: 1;
+  color: white;
+  background: red;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  overflow: hidden;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 8px rgba(#275efe, 0.32));
+  transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.regionalKor-button:hover{
+  background-color: #2ecc71;
 }
 
 #regionalKor-map {

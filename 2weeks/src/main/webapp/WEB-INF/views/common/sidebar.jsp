@@ -150,8 +150,8 @@
     },  
     function(){  
 		$(this).children("div.sidebar-list-hide").slideUp("slow");  
-		$(this).css("background", "#E1E6FF");
-		$(this).children("div.sidebar-list").css("background", "#E1E6FF");
+		$(this).css("background", "#D3D8F4");
+		$(this).children("div.sidebar-list").css("background", "#D3D8F4");
     });
 	
 

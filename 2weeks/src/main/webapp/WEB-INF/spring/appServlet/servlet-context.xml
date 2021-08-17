@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
-<!-- 스케줄러 등록 -->
+	<!-- 스케줄러 등록 -->
 	<task:annotation-driven />
 	
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -60,13 +60,6 @@
 		</beans:property>
 	</beans:bean>
 	
-
-	<!--  웹소켓핸들러 등록 (아직 안 함)  -->
-	
-	
-	
-
-
 	<!--  웹소켓핸들러 등록-->
 	<!-- Namespaces에서 webscket 체크해서 등록해주기 -->
 	<beans:bean id="chattingHandler" class="com.twoweeks.spring.common.ChattingServer" />
@@ -82,9 +75,8 @@
 
 	
 	
-<!-- 	웹소켓핸들러(메세지용)  -->
-
-<beans:bean id="messageHandler" class="com.twoweeks.spring.message.MessageHandler2"/>
+	<!-- 	웹소켓핸들러(메세지용)  -->
+	<beans:bean id="messageHandler" class="com.twoweeks.spring.message.MessageHandler2"/>
  	
  	<websocket:handlers allowed-origins="*"> 
 		<websocket:mapping handler="messageHandler" path="/messageServer"/>

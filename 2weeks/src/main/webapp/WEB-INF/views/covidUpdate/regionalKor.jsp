@@ -9,16 +9,14 @@
 <section id="regionalKor" style="width:80%; min-height:300px; margin:10%; border:1px solid blue; background-color:white;">
 		<!-- 지도/표 선택 버튼 -->
 		<div style="display:flex;justify-content:space-around">
-			<button class="regionalKor-button" onclick="fn_selectButton1()">지도</button>
-			<button class="regionalKor-button" onclick="fn_selectButton2()">지역별 표</button>
+			<button id="regionalKor-map-button" class="regionalKor-button-1" onclick="fn_selectButton1()">지도</button>
+			<button id="regionalKor-table-button" class="regionalKor-button-2" onclick="fn_selectButton2()">지역별 표</button>
 		</div>		
 		<!-- 지역별 현황 지도 영역 -->
 		<div id="regionalKor-map" style="border:1.5px solid yellow;"></div>		
 		<!-- 지역별 현황 표 영역 -->
 		<div id="regionalKor-table" style="border:1.5px solid purple; display:none;"></div>
-		
-		
-</section>
+		</section>
 
 <!-- 지역별 현황 출력 -->
 <script>
@@ -26,10 +24,16 @@
 function fn_selectButton1(){
 	$("#regionalKor-map").show();
 	$("#regionalKor-table").hide();
+
+	$("#reginalKor-map-button").removeClass("regionalKor-button-2").addClass("regionalKor-button-1");
+	$("#regionalKor-table-button").removeClass("regionalKor-button-1").addClass("regionalKor-button-2");	
 }
 function fn_selectButton2(){
 	$("#regionalKor-map").hide();
-	$("#regionalKor-table").show();
+	$("#regionalKor-table").show();	
+
+	$("#reginalKor-map-button").removeClass("regionalKor-button-1").addClass("regionalKor-button-2");	
+	$("#regionalKor-table-button").removeClass("regionalKor-button-2").addClass("regionalKor-button-1");
 }
 
 /* 지역별 현황 출력*/
