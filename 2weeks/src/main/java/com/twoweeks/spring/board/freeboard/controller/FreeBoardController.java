@@ -106,7 +106,10 @@ public class FreeBoardController {
 	
 	@PostMapping("/freeboard/writeEnd.do") 
 	public ModelAndView writeEnd(FreeBoard b, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file, ModelAndView mv,HttpServletResponse response, HttpServletRequest req) throws IOException {
+		b.setOpen_Yn(req.getParameter("anonymous"));
 		log.info("freeboard : "+ b.toString());
+
+		
 		for(int i=0; i<file.length; i++) {
             log.info("================== file start ==================");
             log.info("파일 이름: "+file[i].getName());

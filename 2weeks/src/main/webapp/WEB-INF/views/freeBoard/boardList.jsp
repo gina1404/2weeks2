@@ -78,7 +78,14 @@ text-decoration: none;
 						<p class="card-text category">${b.category } &nbsp; &nbsp; [${b.post_Dt }]</p>
 						<h4 class="card-title"><a href="${path }/freeboard/readView?no=${b.post_Sq }"><c:out value="${b.post_Title }"/></a></h4>
 						<p class="card-text">${b.post_Content }</p>
+						<c:choose>
+						<c:when test="${b.open_Yn == 'on'}">
+						<p class="card-text"><img src="${path}/resources/images/icons/profile.svg" class="profile " alt="프로필사진"> 익명</p>
+						</c:when>
+						<c:otherwise>
 						<p class="card-text"><img src="${path}/resources/images/icons/profile.svg" class="profile " alt="프로필사진"> ${b.user_Id }</p>
+						</c:otherwise>
+						</c:choose>
 						<div class="row">
 						<div class='col-4'>
 							<img alt="좋아요" src="${path }/resources/images/icons/heart.svg" class="heart">&nbsp;<p class="icon">${b.post_Like_Cnt }</p>

@@ -10,6 +10,108 @@
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <%-- <script src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script> --%>
 <script src="//cdn.ckeditor.com/4.11.4/full-all/ckeditor.js"></script>
+<style>
+.checks {
+	position: relative;
+}
+
+.checks input[type="checkbox"] { /* 실제 체크박스는 화면에서 숨김 */
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0
+}
+
+.checks input[type="checkbox"]+label {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+.checks input[type="checkbox"]+label:before { /* 가짜 체크박스 */
+	content: ' ';
+	display: inline-block;
+	width: 21px; /* 체크박스의 너비를 지정 */
+	height: 21px; /* 체크박스의 높이를 지정 */
+	line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+	margin: -2px 8px 0 0;
+	text-align: center;
+	vertical-align: middle;
+	background: #fafafa;
+	border: 1px solid #cacece;
+	border-radius: 3px;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
+		rgba(0, 0, 0, 0.05);
+}
+
+.checks input[type="checkbox"]+label:active:before, .checks input[type="checkbox"]:checked+label:active:before
+	{
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px
+		rgba(0, 0, 0, 0.1);
+}
+
+.checks input[type="checkbox"]:checked+label:before { /* 체크박스를 체크했을때 */
+	content: '\2714'; /* 체크표시 유니코드 사용 */
+	color: #99a1a7;
+	text-shadow: 1px 1px #fff;
+	background: #e9ecee;
+	border-color: #adb8c0;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
+		rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+}
+
+.checks.etrans input[type="checkbox"]+label {
+	padding-left: 30px;
+}
+
+.checks.etrans input[type="checkbox"]+label:before {
+	position: absolute;
+	left: 0;
+	top: 5px;
+	margin-top: 0;
+	opacity: .6;
+	box-shadow: none;
+	border-color: #6cc0e5;
+	-webkit-transition: all .12s, border-color .08s;
+	transition: all .12s, border-color  .08s;
+}
+
+.checks.etrans input[type="checkbox"]:checked+label:before {
+	position: absolute;
+	content: "";
+	width: 10px;
+	top: -5px;
+	left: 5px;
+	border-radius: 0;
+	opacity: 1;
+	background: transparent;
+	border-color: transparent #6cc0e5 #6cc0e5 transparent;
+	border-top-color: transparent;
+	border-left-color: transparent;
+	-ms-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.no-csstransforms .checks.etrans input[type="checkbox"]:checked+label:before
+	{
+	content: "\2714";
+	top: 0;
+	left: 5px;
+	width: 21px;
+	line-height: 21px;
+	color: #6cc0e5;
+	text-align: center;
+	border: 1px solid #6cc0e5;
+}
+</style>
 <section class="content">
 <div class="container" id="">
     <div class="content" style="width: 70%">
@@ -17,7 +119,11 @@
         <div class="row justify-content-md-center"> 				
             <div class="col-sm-9">
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
+							<div class="checks etrans">
+								<input type="checkbox" name="anonymous" id="ex_chk3" > <label
+									for="ex_chk3">익명 사용</label>
+							</div>
+							<div class="input-group-prepend">
                     <label class="input-group-text">제목</label>
                   </div>            
                   <input type="text" class="form-control" name="post_Title">              
@@ -26,8 +132,7 @@
             <div class="col-sm-3">
                 <div class="input-group mb-3">
                     <select class="custom-select" id="category" name="category">
-                    <option selected>분류</option>
-                    <option value="자유">자유</option>
+                    <option value="자유" selected>자유</option>
                     <option value="배달">배달</option>
                     <option value="재택근무">재택근무</option>
                   </select>  
