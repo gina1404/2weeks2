@@ -39,7 +39,17 @@
 			<div class="header-icon">
 				<img class="" src="${path }/resources/images/icons/language.svg"/>  
 				</div>
-	                <div class="header-profile-text">join us</div>
+					<c:if test="${userId eq null and member.user_Id eq null}">
+	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">join us</div>
+	            	</c:if>
+	            	<c:if test="${userId ne null}" >
+	            		<div class="header-profile-text">${userId} </div>
+	            		<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
+	            	</c:if>
+	            	<c:if test="${member.user_Nic ne null }">
+	            		<div class="header-profile-text">${member.user_Nic}님 </div>
+	            		<input type="button" value="로그아웃" onclick="location.href='${path}/member/logout'"/>
+	            	</c:if>	
 	                <div class="header-profile-icon">
 	                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
 	                </div>
@@ -48,4 +58,4 @@
 	                	<img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
 	                </div>
 	            </div>
-	</header>       
+	</header>     

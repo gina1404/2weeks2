@@ -348,11 +348,11 @@ right:-50px;
 <br>
 			
 		<div class="bottom">
-		 <label for="gdsImg">첨부파일</label>
+		
+		 <label for="attach">첨부파일</label>
 		<input type="file" name="file" id="attach" accept="image/gif, image/jpeg, image/png">
-	<!-- 	<label class="custom-file-label" for="upFile1">파일을 선택하세요</label> -->
 
- <div class="select_img"><img src="" />
+ <div class="select_img"><img src="" /></div>
                  
                 
 		
@@ -362,8 +362,19 @@ right:-50px;
 		<label>아이디 공개<input type="radio" name="open_Yn" value="Y">${knowledgeIn.open_Yn}</label>
 		<label>비공개<input type="radio" name="open_Yn" value="N">${knowledgeIn.open_Yn}</label>
 			<hr style="border: solid 1px #F2F2F2;">
-		<button>포인트 설정</button>
+		<span>포인트 설정 </span>
+		<label><input type="radio" name="point" value="50" ><input type="hidden" name="radio" value="50"><span class="c">50</span></label>
+		<label><input type="radio" name="point" value="100" ><input type="hidden" name="radio" value="100"><span class="c">100</span></label>
+		<label><input type="radio" name="point" value="150" ><input type="hidden" name="radio" value="150"><span class="c">150</span></label>
+		<label><input type="radio" name="point" value="200" ><input type="hidden" name="radio" value="200"><span class="c">200</span></label>
+		<label><input type="radio" name="point" value="250" ><input type="hidden" name="radio" value="250"><span class="c">250</span></label>
+		<label><input type="radio" name="point" value="300" ><input type="hidden" name="radio" value="300"><span class="c">300</span></label>
 
+<%-- <label><input type="radio"  name="point" value="1"  checked ><span class="c">직접입력</span>
+<input type="text"  id="text" name = "wr_1" placeholder="50~ 500포인트" size=10 maxlength=3 max=500 onkeyup='printValue();' onkeypress="inNumber();"/>${knowledgeIn.point}</label>
+
+ --%>
+		
 		</div>	
 					 					
  			<hr style="border: solid 1px #F2F2F2;">	
@@ -386,18 +397,67 @@ right:-50px;
 
 
 $(document).ready(function(){
+
 	$("#attach").on("change",fileCheck);
+	
+	 $("#attach").change(function(){
+		   if(this.files && this.files[0]) {
+		    var reader = new FileReader;
+		    reader.onload = function(data) {
+		     $(".select_img img").attr("src", data.target.result).width(500);        
+		    }
+		    reader.readAsDataURL(this.files[0]);
+		   }
+		  });
 });
 
-$(function () {
+/* $(function () {
 	$("#btn-upload").click(function(e){
 		e.preventDefault();
 		$("#attach").click();
 	});
 });
+ */
 
+/*  $(document).ready(function(){
+	    // 라디오버튼 클릭시 이벤트 발생
+	    $("input:radio[name=point]").click(function(){
 
+	        if($("input[name=point]:checked").val() == "1"){
+	            $("#text").attr("disabled",false);
+	            // radio 버튼의 value 값이 1이라면 활성화
+	 
+	        }else if($("input[name=point]:checked").val() != "1"){
+	              $("#text").attr("disabled",true);
+	              $("#text").val("");
+	              document.getElementById("result").innerText = 0;
+	            // radio 버튼의 value 값이 0이라면 비활성화
+	        }
+	    });
+	    
+	
+	}); */
+ 
 
+ 
+ 
+/*  
+ $(document).on("keyup", "input[name^=wr_1]", function() {
+	    var val= $(this).val();
+
+	    if(val.replace(/[0-9]/g, "").length > 0) {
+	        alert("숫자만 입력해 주십시오.");
+	        $(this).val('');
+	        document.getElementById("result").innerText = 0;
+	    }
+
+	    if(val > 500) {
+	        alert("50 ~ 500 포인트까지 입력이 가능합니다");
+	        $(this).val('');
+	        document.getElementById("result").innerText = 0;
+	    }
+	
+	}); */
 
 
 
@@ -418,18 +478,9 @@ var onoff =${KnowledgeIn.open_Yn}
 			});
 		}) 
 		
+
 		
-/* 		$("#attach").change(function(){
-   if(this.files && this.files[0]) {
-    var reader = new FileReader;
-    reader.onload = function(data) {
-     $(".select_img img").attr("src", data.target.result).width(500);        
-    }
-    reader.readAsDataURL(this.files[0]);
-   }
-  }); */
-		
-		
+
 		
 		
 		

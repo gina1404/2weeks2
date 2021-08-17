@@ -14,9 +14,13 @@ public interface KnowledgeInDao {
 	
 	List<Kin> selectKinListcnt(SqlSession session, int cPage, int numPerpage);
 	
+	List<Kin> selectKinListMyQ(SqlSession session, int cPage, int numPerpage);
+	
+	List<Kin> selectKinListMyA(SqlSession session, int cPage, int numPerpage);
+	
 	int selectKinCount(SqlSession session); //총 건수
 	
-	int selectKinReplyCount(SqlSession session); //답글 개수
+	int selectKinReplyCount(SqlSession session,int sq); //답글 개수
 	
 	int insertKin(SqlSession session,Kin k); //글 작성
 	
@@ -33,6 +37,8 @@ public interface KnowledgeInDao {
 	List<KinReply> selectReplyOne(SqlSession session, int sq); //답글 상세보기
 	
 	void updatecnt(SqlSession session,int sq)throws Exception;//조회수
+	
+	void updateReplyCount(SqlSession session, int sq)throws Exception; //답글 개수
 	
 	int update(SqlSession session, Kin k); //글 수정
 

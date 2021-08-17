@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<c:set var="path" value="${pageContext.request.contextPath }"/> 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="지식인나의질의응답"/>
@@ -11,7 +12,22 @@
 <style>
 #rankingChart{
 	position: relative;
-	top: -15px;
+	top: -15px;.
+	
+}
+
+.ranking_section .ranking_list1{
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    height: 308px;
+    padding-right: 20px;
+    text-decoration:none;
+    list-style: none;
+    position:relative;
+   	top:-50px;
+    text-overflow: ellipsis;
+    background-color: white;
 }
 
 .ranking_section .ranking_list {
@@ -20,9 +36,10 @@
     width: 50%;
     height: 308px;
     padding-right: 20px;
-     text-decoration:none;
-        list-style: none;
-    
+    text-decoration:none;
+    list-style: none;
+    text-overflow: ellipsis;
+    background-color: white;
 }
 
 .ranking_section .ranking_item {
@@ -34,6 +51,8 @@
     font-size: 12px;
     line-height: 1.6;
     letter-spacing: -0.5px;
+    text-overflow: ellipsis;
+     background-color: white;
 }
 
 .section_headings {
@@ -52,7 +71,10 @@
     border-left: 1px solid #e8e8e8;
     padding: 0 0 0 20px;
 }
-
+.ranking_section .ranking_list1+.ranking_list1 {
+    border-left: 1px solid #e8e8e8;
+    padding: 0 0 0 20px;
+}
  /* 조회수 */
 .ranking_section .ranking_item .recommend_num {
     color: #5885ce;
@@ -64,6 +86,7 @@
     position: relative;
     margin-top: 14px;
     padding: 4px 4px 16px 18px;
+    text-overflow: ellipsis;
     border-bottom: 1px solid #f2f2f2;
     background: 0;
     font-size: 12px;
@@ -101,6 +124,7 @@
     position : relative;
     top:-12px;
     
+    
 } 
 
 
@@ -111,15 +135,17 @@
  
 /*질문 목록에서 답변*/
  .ranking_section .ranking_item .text {
+     width:300px;
     display: block;
     overflow: hidden;
     position: relative;
     margin: 0 0 4px -15px;
     color: #555;
-    text-overflow: ellipsis;
+ 	 text-overflow: ellipsis;
     white-space: nowrap;
     bottom: -5px;
     right: -14px;
+
 } 
 
 
@@ -131,6 +157,7 @@
     margin: 0 9px 0 9px;
     background-color: #e5e5e5;
     vertical-align: middle;
+    
 }   
 
  /* 답변수 색깔 */
@@ -139,14 +166,7 @@
      position: relative;
     right: -180px;
       bottom : -10px;
-}    
-
-.ranking_section .ranking_item .check {
-    color: red;
-     position: relative;
-    right: -200px;
-      bottom : -10px;
-}                
+}             
 .ranking_section .ranking_item .text:before { */
  /*    content: ''; */
    display: inline-block;
@@ -178,7 +198,8 @@ top: -10px;
 #knowQ{
 
 font-weight: bold;
-
+position: relative;
+top:-70px;
 
 
 }
@@ -227,7 +248,15 @@ a:-webkit-any-link {
   	   
 }
 
-
+#expert {
+    max-width: 100%;
+    visibility: visible;
+    position:relative;
+    bottom: -100px;
+	top: -10px;
+    background-color:#6B66FF;
+    border-radius: 24px;
+}
 
 .naver::-webkit-input-placeholder {color:#a8a8a8;}
 .naver::-ms-input-placeholder {color:#a8a8a8}
@@ -281,20 +310,19 @@ top :5px;
 
 }
 
-.Myqlist{
+#Myqlist{
 
 position:relative;
-right:-1400px;
-color: #8c8c8c;
+color: black;
 font-family: Pretendard;
-top:-200px;
-
+top:-100px;
+right:-1400px;
 }
 
 .background2{
 background:#FFFFFF;
-/* border:3px solid red;
- border-radius: 24px; */
+/*  border:3px solid red;  */
+ border-radius: 24px;
  position: relative;
  top:-100px;
 }
@@ -302,7 +330,7 @@ background:#FFFFFF;
 
 .background3{
 background:#FFFFFF;
-border:3px solid white;
+/* border:3px solid red; */
  border-radius: 24px; 
   position: relative;
  top:-40px;
@@ -310,38 +338,36 @@ border:3px solid white;
 
  .paginate{
 position: relative;
-
+top :-10px;
 } 
+.ranking_list_area{
+background:#FFFFFF;
+/* border: 1px solid red; */
 
-
+}
+.ranking_item _item_1{
+background:#FFFFFF;
+}
 </style>
 <section class="container">		
 
 
 
-		<!-- 
-				<img id="expert" src="" alt=""
-						width="130px" height="130px"> -->
+		
+						
 			<div class="description"></div>
-						<button class="Myqlist">내 질문목록</button>
 				<!-- 	</div> -->
 			
-			
-
-		
-		
-
-
-
 
 
 <div class="background2">
+				<span id="Myqlist">내 질문 답변></span>
 
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div>
-			<a href="KnowledgeInQ.do"><button id="Qsearch" >질문하기</button></a>
-<div id="knowQ">나의 질문 </div>  <!-- 많이 본 Q&amp;A -->
+		<a href="KnowledgeInQ.do">	<button id="Qsearch" >질문하기</button></a>
+<!-- <div id="knowQ">답변을 기다리는 질문 </div> -->  <!-- 많이 본 Q&amp;A -->
 
 	
 
@@ -351,6 +377,7 @@ position: relative;
 	<div class="stats_ranking_area" id="statsRankingArea">
 
 			<ul class="knowmenu"> 
+					<li>전체</li>
 					<li>등록순</li>
 					<li>채택순</li>
 				
@@ -364,153 +391,138 @@ position: relative;
 
 	
 	</div>
+	
+
 	<div class="ranking_section">	
-		<h4 class="title"></h4>
+	<h4 id="knowQ">나의 질문</h4> 
 		<div class="ranking_list_area" id="rankingChart">
-				
-				<ul class="ranking_list">
-					
-                    
-					<li class="ranking_item _item_1" >
-						<span class="no">1</span>
-					<!-- 제목 -->	<a href="" class="ranking_title" target="_blank" onclick="a">코로나 백신 접종 예약</a>
-					<!-- 타이틀 -->	<a href="" class="text" target="_blank" onclick="">지금 50대부터 코로나 백신 접종 예약 진행중인것으로 아는데요 다음주에도 접종예정인지 궁금합니다. 부모...</a>
-						<span class="recommend_num">조회수 4953</span><span class="reply_num">답변수 3</span>
-					</li>
-                    
-                    
-                    
-					<li class="ranking_item _item_2" >
-						<span class="no">2</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">코로나로 죽을 확률</a>
-						<a href="" class="text" target="_blank" onclick="">어제부터 인후통 오한 눈통증,  두통 팔이 저림 마른기침 이런증상이 있네요 보건소..</a>
-						<span class="recommend_num">조회수 3061</span><span class="reply_num">답변수 2</span>
-						<span class="check">채택완료</span>
-					</li>
-                    
-                    
-                    
-					<li class="ranking_item _item_3" >
-						<span class="no">3</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">코로나 증상</a>
-						<a href="" class="text" target="_blank" onclick="">고3 백신접종을 해서 맞는다고 하는데 화이자 부작용중에 알레르기 반응이 있던데 사과 알러지 있는데 이런...</a>
-						<span class="recommend_num">조회수 1575</span><span class="reply_num">답변수 10</span>
-					</li>
-
-                </ul>
-				
-				<ul class="ranking_list">
-
-					<li class="ranking_item _item_4" >
-						<span class="no">4</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">코로나 검사 가까운</a>
-						<a href="" class="text" target="_blank" onclick="">코로나 검사받으려고 하는데 가까운 진료소를 알아보려면 어디서 알아볼 수 있을까요?..</a>
-						<span class="recommend_num">조회수 1413</span><span class="reply_num">답변수 28</span>
-					</li>
-                    
-                    
-				    
-					<li class="ranking_item _item_5" >
-						<span class="no">5</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">잔여백신 관련 질문입니다</a>
-						<a href="" class="text" target="_blank" onclick="">잔여백신 맞으려고 하는데요....이번달에 20대는 잔여백신을 접종할 수 있나요?</a>
-						<span class="recommend_num">조회수 1348</span><span class="reply_num">답변수 1</span><span class="check">채택완료</span>
-					</li>
-                    
-                    
+		
+	
 			
-
-                    
-                </ul>
+			
+				<ul class="ranking_list1">
+				
+					<c:forEach var="k" items="${MyQ }" varStatus="status">
+					 <c:if test="${status.count<=3 }"> 
+					
+					<li class="ranking_item _item_1" >
+			
+					<span class="no"><c:out value="${status.count}"></c:out></span>
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
+					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
+		<!-- 			<span class="reply_num">답변수 8</span> -->
+			    	
+				
+					</li>
+						</c:if>
+     				</c:forEach>		
+          		</ul> 
+          		
+          		    <ul class="ranking_list1">
+          		   
+				<c:forEach var="k" items="${MyQ}" varStatus="status">
+				 <c:if test="${status.count>=4  }">
+					<li class="ranking_item _item_2" >
+						<%-- 	<c:out value="${status.count}"></c:out> --%>
+					<span class="no"><c:out value="${status.count}"></c:out></span>
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
+					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
+		<!-- 			<span class="reply_num">답변수 8</span> -->
+			    	
+				
+					</li>
+				</c:if>
+     				</c:forEach>	
+     				
+          		</ul> 
+    
+          	
+              <div id="pagebar-container">
+        	${pageBar }
         </div>
+           	
+        </div>
+        
+        
+        
 		<div class="paginate" id="rankingPaging" >
 				
-			<a href="" class="on" title="선택됨" onclick="">1</a>
 			
-				<a href="" onclick="">2</a>
 			
-		</div>
+		</div> 
 	</div>
 	
 </div>
 </div>
+	</div>
 
-</div>
 
 <div class="background3">
 
-	<div id="knowM"> 나의 답변</div>  <!-- 많이 본 Q&amp;A -->
+	<div id="knowM"> 나의 답변</div>  
 
-<ul class="knowmenu"> 
-					<li>등록순</li>
-					<li>채택순</li>
-				
-					
-					
-			</ul>
-<hr width = "100%" color = "#F2F2F2">
+
 
 
 	<div class="ranking_section">	
-		<h4 class="title"></h4>
+		<h4 class=""></h4>
 		<div class="ranking_list_area" id="rankingChart">
 				
 				<ul class="ranking_list">
+					<c:forEach var="k" items="${MyA}" varStatus="status">
+					 <c:if test="${status.count<=3 }"> 
 					
-                    
 					<li class="ranking_item _item_1" >
-						<span class="no">1</span>
-					<!-- 제목 -->	<a href="" class="ranking_title" target="_blank" onclick="">코로나 백신 접종 예약</a>
-					<!-- 타이틀 -->	<a href="" class="text" target="_blank" onclick="">지금 50대부터 코로나 백신 접종 예약 진행중인것으로 아는데요 다음주에도 접종예정인지 궁금합니다. 부모...</a>
-						<span class="recommend_num">조회수 4953</span><span class="reply_num">답변수 3</span>
+			
+					<span class="no"><c:out value="${status.count}"></c:out></span>
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
+					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
+		<!-- 			<span class="reply_num">답변수 8</span> -->
+			    	
+				
 					</li>
+						</c:if>
+     						
+     						
+     				</c:forEach>					 
                     
-                    
-                    
-					<li class="ranking_item _item_2" >
-						<span class="no">2</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">코로나로 죽을 확률</a>
-						<a href="" class="text" target="_blank" onclick="">어제부터 인후통 오한 눈통증,  두통 팔이 저림 마른기침 이런증상이 있네요 보건소..</a>
-						<span class="recommend_num">조회수 3061</span><span class="reply_num">답변수 2</span><span class="check">채택완료</span>
-					</li>
-                    
-                    
-                    
-					<li class="ranking_item _item_3" >
-						<span class="no">3</span>
-						<a href="" class="ranking_title" target="_blank" onclick="">코로나 증상</a>
-						<a href="" class="text" target="_blank" onclick="">고3 백신접종을 해서 맞는다고 하는데 화이자 부작용중에 알레르기 반응이 있던데 사과 알러지 있는데 이런...</a>
-						<span class="recommend_num">조회수 1575</span><span class="reply_num">답변수 10</span>
-					</li>
+	
 
                 </ul>
 				
 				<ul class="ranking_list">
-
-                    
-                    
-				    
-		
-                    
-				    
+			 	<c:forEach var="k" items="${MyA}" varStatus="status">
+				 <c:if test="${status.count>=4  }">
+					<li class="ranking_item _item_2" >
+							<%-- <c:out value="${status.count}"></c:out> --%>
+					<span class="no"><c:out value="${status.count}"></c:out></span>
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
+					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
+					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
+		<!-- 			<span class="reply_num">답변수 8</span> -->
+			    	
 				
-
+					</li>
+				</c:if>
+     				</c:forEach>	 
+     				
+			
                     
                 </ul>
         </div>
-		<div class="paginate" id="rankingPaging" >
-				
-			<a href="#" class="on" title="선택됨" onclick="">1</a>
-			
-				<a href="#" onclick="">2</a>
-			
-		</div>
+	 
 	</div>
 	
 
-</div>
 
-
+           <div id="pagebar-container">
+        	${pageBar }
+        </div>
+        </div>
+  </div>          
 </section>
 	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>

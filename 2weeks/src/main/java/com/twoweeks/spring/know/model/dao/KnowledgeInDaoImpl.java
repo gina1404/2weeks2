@@ -29,6 +29,18 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	  RowBounds((cPage-1)*numPerpage,numPerpage)); }
 	 
 	
+
+	@Override public List<Kin> selectKinListMyQ(SqlSession session, int cPage,
+			  int numPerpage) { return session.selectList("knowledgeIn.MyQ",null, new
+			  RowBounds((cPage-1)*numPerpage,numPerpage)); }
+			 
+			
+
+	@Override public List<Kin> selectKinListMyA(SqlSession session, int cPage,
+			  int numPerpage) { return session.selectList("knowledgeIn.MyA",null, new
+			  RowBounds((cPage-1)*numPerpage,numPerpage)); }
+			 
+	
 	@Override
 	public int selectKinCount(SqlSession session) {
 		
@@ -37,7 +49,7 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	}
 
 	@Override
-	public int selectKinReplyCount(SqlSession session) {
+	public int selectKinReplyCount(SqlSession session,int sq) {
 		
 		return session.selectOne("knowledgeIn.selectKinReplyCount");
 
@@ -104,6 +116,18 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	public List<Kin> list(SqlSession session, Kin k) {
 		return session.selectList("knowledgeIn.list",k);
 	}
+
+
+	/* private static String UPDATEREPLYCOUNT = NS + ".updateReplyCount"; */
+	@Override
+	public void updateReplyCount(SqlSession session, int sq) throws Exception {
+		session.update("knowledgeIn.updateReplyCount",sq);
+		
+		
+	}
+
+
+
 
 
 

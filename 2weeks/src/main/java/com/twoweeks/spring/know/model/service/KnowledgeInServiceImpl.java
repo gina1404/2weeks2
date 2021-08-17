@@ -38,6 +38,21 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 	}
 
 
+
+	@Override
+	public List<Kin> selectKinListMyQ(int cPage, int numPerpage) {
+		
+		return dao.selectKinListMyQ(session,cPage,numPerpage);
+	}
+
+	@Override
+	public List<Kin> selectKinListMyA(int cPage, int numPerpage) {
+		
+		return dao.selectKinListMyA(session,cPage,numPerpage);
+	}
+
+	
+	
 	@Override
 	public int selectKinCount() {
 	
@@ -88,13 +103,17 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 		dao.delete(session, sq);
 	}
 
+
+	
 	@Override
-	public int insertKinReply(KinReply kr) throws Exception {
+	public int insertKinReply(KinReply kr ) throws Exception {
 		try {
 			int result= dao.insertKinReply(session,kr);
 			log.debug("답글번호 :"+kr.getReply_Sq());
 			int replySq=kr.getReply_Sq();
-			if(result>0) {
+		
+			if(result>0) {	
+				dao.updateReplyCount(session, replySq);
 				List<KinReplyAttachment> attachment=kr.getAttachment();
 				if(kr.getAttachment().size()>0) {
 					for(KinReplyAttachment a: attachment) {
@@ -107,6 +126,8 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 			}catch(RuntimeException e) {
 				throw new Exception("등록실패");
 			}
+		
+
 			return 1;
 		}
 
@@ -152,9 +173,9 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 
 	
 	@Override
-	public int selectKinReplyCount() {
+	public int selectKinReplyCount(int sq)  throws Exception{
 		// TODO Auto-generated method stub
-		return dao.selectKinReplyCount(session);
+		return dao.selectKinReplyCount(session,sq);
 	}
 
 	@Override
@@ -163,9 +184,13 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 		return dao.list(session, k);
 	}
 
+	@Override
+	public void updateReplyCount(int sq)throws Exception{
+		
+	 dao.updateReplyCount(session, sq);
+	}
+
 	
-
-
 	
 
 }

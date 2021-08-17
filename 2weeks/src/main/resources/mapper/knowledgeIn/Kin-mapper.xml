@@ -3,7 +3,7 @@
 <mapper namespace="knowledgeIn">
 	<select id="selectKinList" resultMap="KnowledgeInMap">
  	SELECT * 
-		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_SQ ASC 
+		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_SQ DESC 
 		
 	
 <!-- SELECT * FROM KIN --> 
@@ -16,13 +16,19 @@
 		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_CNT DESC   
 	</select>
 	
-	<select id="selectKinCount" resultType="_int">
-		SELECT COUNT(*) FROM KIN 
-	</select> 
 	
-		<select id="selectKinReplyCount" resultType="_int">
-		SELECT COUNT(*) FROM KIN_REPLY;
-	</select> 
+	<select id ="MyQ"  resultMap="KnowledgeInMap">
+ <!--      	SELECT * 
+		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_WRITER DESC    -->
+		   SELECT * FROM KIN 
+	</select>
+	<select id ="MyA"  resultMap="KnowledgeInMap">
+ <!--      	SELECT * 
+		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_WRITER DESC    -->
+		   SELECT * FROM KIN 
+	</select>
+	
+	
 	
 	
 	<resultMap type="knowledgeIn" id="KnowledgeInMap">
@@ -36,6 +42,8 @@
 		<result column="selected" property="selected"/>
 		<result column="kin_Date" property="kin_Date"/>
 		<result column="kin_Cnt" property="kin_Cnt"/>
+		<result property="reply_Cnt" column="reply_Cnt"/>
+		<result property="point" column="point"/>
 		
 		<collection property="attachments" ofType="attachment">
 			<id column="atch_No" property="atch_No"/>
@@ -71,7 +79,7 @@
 			<result column="atch_Ori" property="atch_Ori"/>
 			<result column="atch_New" property="atch_New"/>
 
-		</collection>
+		</collection> 
 	</resultMap>
 	<resultMap type="attachment" id="replyattachmentMap">
 		<id column="atch_No" property="atch_No"/>
@@ -83,6 +91,18 @@
 
 	
 	
+	<select id="selectKinCount" resultType="_int">
+		SELECT COUNT(*) FROM KIN 
+	</select> 
+	
+		<select id="selectKinReplyCount" resultType="_int">    
+		SELECT COUNT(*) FROM KIN_REPLY 
+
+	<!-- SELECT COUNT(*) FROM KIN_REPLY KR LEFT JOIN KIN_REPLY_ATTACHMENT KRA ON KR.REPLY_SQ=KRA.REPLY_SQ WHERE KIN_SQ=#{SQ} 
+		 -->
+
+			
+	</select> 
 	
 	
 	
@@ -94,7 +114,7 @@
 			#{kin_Content},#{kin_Image},#{open_Yn},#{selected,},SYSDATE,#{kin_Cnt}) -->
 			
 			INSERT INTO KIN VALUES(KIN_SEQ.NEXTVAL,#{kin_Writer},#{category},#{kin_Title},
-			#{kin_Content},NULL,#{open_Yn},default,SYSDATE,default)
+			#{kin_Content},NULL,#{open_Yn},default,SYSDATE,default,default,#{point})
 			
 			<selectKey keyProperty="kin_Sq" resultType="_int" order="AFTER"> 
 			SELECT KIN_SEQ.CURRVAL FROM DUAL 
@@ -119,11 +139,9 @@
 	
 	
 		<select id="selectReplyOne" resultMap="kinReplyMap">  
-	<!-- 	SELECT * FROM KIN_REPLY KR LEFT JOIN KIN_REPLY_ATTACHMENT KRA ON KR.REPLY_SQ=KRA.REPLY_SQ WHERE KIN_SQ=#{SQ} -->
-	 SELECT * FROM KIN_REPLY WHERE KIN_SQ=#{SQ}
+	SELECT * FROM KIN_REPLY KR LEFT JOIN KIN_REPLY_ATTACHMENT KRA ON KR.REPLY_SQ=KRA.REPLY_SQ WHERE KIN_SQ=#{SQ} ORDER BY REPLY_DATE 
+
 		</select>
-	
-	
 	
 	
 	
@@ -155,6 +173,12 @@
 		<update id="updatecnt">
 		UPDATE KIN SET KIN_CNT = KIN_CNT + 1 WHERE KIN_SQ = #{kin_Sq}
 		</update>
+		
+		
+		<update id="updateReplyCount" parameterType="int">
+		UPDATE KIN K SET K.REPLY_CNT =(SELECT COUNT(*)FROM KIN_REPLY WHERE KIN_SQ =#{kin_Sq}) WHERE K.KIN_SQ=#{kin_Sq}             
+		</update>
+		
 		
 		
 	<!-- 좋아요 구현 -->

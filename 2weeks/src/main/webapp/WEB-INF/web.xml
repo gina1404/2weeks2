@@ -47,9 +47,9 @@
 
 
 	<!-- 에러페이지 등록 -->
-	<error-page>
+<!-- 	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/WEB-INF/views/common/error.jsp</location>
-	</error-page>
+	</error-page> -->
 
 </web-app>

@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+//import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.twoweeks.spring.covid.vaccine.model.vo.Response;
 
 @Service
@@ -42,15 +42,15 @@ public class VaccineServiceImpl implements VaccineService {
 
     @Override
     public Response parser(String xml) {
-        ObjectMapper xmlMapper = new XmlMapper();
-        Response response = null;
-        try {
-            response= xmlMapper.readValue(xml, Response.class);
-        }catch(JsonMappingException e) {
-            e.printStackTrace();
-        }catch(JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return response;
+//        ObjectMapper xmlMapper = new XmlMapper();
+//        Response response = null;
+//        try {
+//            response= xmlMapper.readValue(xml, Response.class);
+//        }catch(JsonMappingException e) {
+//            e.printStackTrace();
+//        }catch(JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+        return null;
     }
 }

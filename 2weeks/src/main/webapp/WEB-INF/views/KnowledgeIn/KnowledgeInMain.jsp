@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="path" value="${pageContext.request.contextPath }"/> 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="지식인나의질의응답"/>
 </jsp:include>
@@ -348,11 +349,20 @@ background:#FFFFFF;
 .ranking_item _item_1{
 background:#FFFFFF;
 }
+.button{
+border :0;
+outline :0;
+background-color:transparent;
+
+}
+
+.button:hover{
+	color:orange;
+	cursor:pointer;
+	}
 </style>
 <section class="container">		
-
-
-
+<div class="row">
 		
 						<a href="">	<img id="expert" src="${pageContext.request.contextPath}/resources/image/home_panel_expert2.png" alt=""
 						width="130px" height="130px">
@@ -362,7 +372,7 @@ background:#FFFFFF;
 
 
 <div class="background2">
-				<a href="KnowledgeInMyList.do"><button id="Myqlist">내 질문목록</button></a>
+				<a href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do"><button id="Myqlist">내 질문목록</button></a>
 
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
@@ -378,14 +388,16 @@ background:#FFFFFF;
 	<div class="stats_ranking_area" id="statsRankingArea">
 
 			<ul class="knowmenu"> 
-					<li>전체</li>
-					<li>코로나19</li>
-					<li>백신</li>
-					<li>확진</li>
-					<li>해외</li>
-					<li>방역수칙</li>
-					<li>건강</li>
-					<li>기타</li>
+			
+					<li><input type="button" id="button" name="button" value="전체" class="button"/></li>
+					<li><input type="button" id="button" name="button" value="코로나19" class="button"/></li>
+					<li><input type="button" id="button" name="button" value="백신" class="button"/></li>
+					<li><input type="button" id="button" name="button" value="확진" class="button"/></li>
+					<li><input type="button" id="button" name="button" value="해외" class="button"/></li>
+					<li><input type="button" id="button" name="button" value="방역수칙" class="button"/></li>
+					<li><input type="button" id="button" name="button" value="건강" class="button"/></li>
+					<li><input type="button" id="button" name="button" value="기타" class="button"/></li>
+			
 					
 					
 			</ul>
@@ -417,6 +429,7 @@ background:#FFFFFF;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
 		<!-- 			<span class="reply_num">답변수 8</span> -->
+	<%-- 		<span class="reply_num">답변 ${k.reply_Cnt}개</span> --%>
 			    	
 				
 					</li>
@@ -434,7 +447,7 @@ background:#FFFFFF;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
-		<!-- 			<span class="reply_num">답변수 8</span> -->
+		<%-- 		<span class="reply_num">답변 ${k.reply_Cnt}개</span> --%>
 			    	
 				
 					</li>
@@ -516,18 +529,51 @@ background:#FFFFFF;
      				
 			
                     
-                </ul>
-        </div>
+                	</ul>
+       	 </div>
 	 
-	</div>
+		</div>
 	
 
 
-           <div id="pagebar-container">
-        	${pageBar }
-        </div>
-  </div>          
+           <div id="pagebar-container"class="m-5">${pageBar }</div>
+  	</div> 
+ </div>          
 </section>
+
+<script>
+var path = "${pageContext.request.contextPath }";
+$(function(){
+    
+    $("input:button[name='button']").on('click',function(){
+        var category = $(this).val();       //버튼이 클릭 되었을 시, 개별 버튼의 값이 kind 변수에 담겨집니다.
+        $.ajax({
+            
+            url : path+"/KnowledgeIn/KnowledgeInMain.do",
+            type : "post",
+            cache : false,
+            headers : {"cache-control":"no-cache","pragma":"no-cache"},
+            data : {
+                 id : $(this).val(),
+                "category":category    // 버튼의 value값에 따라 작동합니다.
+                
+            },
+            success : function(data){
+                console.log(data);
+                $('body').html(data); // 성공 시, body부분에 data라는 html 문장들을 다 적용시킵니다.
+            },
+            error : function(data){
+                alert('error');
+            }//error
+        })//ajax
+    });//button click
+    
+}); 
+
+
+
+
+</script>
 	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 	

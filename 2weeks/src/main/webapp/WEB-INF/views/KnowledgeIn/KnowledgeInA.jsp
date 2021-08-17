@@ -241,8 +241,8 @@ right:180px;
 				<span class="rolldate"><fmt:formatDate value="${KnowledgeIn.kin_Date}" pattern="yyyy.MM.dd"/></span>
 			<%-- 	<span class="rolldate">${KnowledgeIn.kin_Date }</span>  --%>
 				<span class="view">조회수 ${KnowledgeIn.kin_Cnt }</span> 
-				<span class="qcount">답변 <%-- ${kinReply.reply_Cnt} --%>개</span>
-				</div>
+				<span class="qcount">답변 ${KnowledgeIn.reply_Cnt}개</span>
+					</div>
 			<span class="content1">${KnowledgeIn.kin_Content}<br><br></span>
 				
 
@@ -365,12 +365,12 @@ right:180px;
  			<hr style="border: solid 1px #F2F2F2;">
 <div class="answer">
 
-				<input type="hidden" name="KnowledgeIn" id="no" value="${KnowledgeIn.kin_Sq}">
+				<input type="hidden" name="kin_Sq" id="no" value="${KnowledgeIn.kin_Sq}">
 			<%-- 	<input type="hidden" name="kinReply" id="no" value="${kinReply.reply_Sq}">  --%>
 			
 	<img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
 	
-					<div>	<img src=""> <span class="title2">sihu***님 답변해주세요</span>
+					<div>	<img src=""> <span class="title2">	<input type="text" name="reply_Writer" class="form-control" value="${kr.reply_Writer}" >님 답변해주세요</span>
 			<hr width = "100%" color = "#F2F2F2">
 							<!-- <ul class="knowmenu2"> 
 					<li style="color: orange;">코로나19</li>
@@ -477,7 +477,7 @@ right:180px;
 						    </c:when>   
 						
 						</c:choose>	
-			<input type="text" name="reply_Writer" class="form-control" value="${kinReply.reply_Writer}" >
+		
 			<div class="content">
 		   <textarea class="noresize" placeholder="답변 작성 시 서비스 운영정책을 지켜주세요.
 광고주로부터 소정의 경제적 대가를 받고 특정 상품에 대한 추천 또는 후기글을 올리는 경우, 이러한 광고주와의

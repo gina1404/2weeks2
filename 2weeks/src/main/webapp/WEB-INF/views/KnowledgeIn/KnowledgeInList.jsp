@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="path" value="${pageContext.request.contextPath }"/> 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="지식인나의질의응답"/>
 </jsp:include>
@@ -167,7 +168,7 @@ background-color:white;
 }
 
 /* 채택하기버튼 */
-#Qcheck{
+.Qcheck{
 width:100px;
 height:40px;
 border :0px;
@@ -207,9 +208,10 @@ width:200px;
 
 .content2{
 position: relative;
-/*  border: 1px solid red; */ 
-height:100%;
-width:100%;
+/* border: 1px solid red;  */
+height:50%;
+width:90%;
+
 
 }
 .warning{
@@ -231,6 +233,8 @@ color: #A4A4A4;
 #heart1{
 width:23px;
 height:23px;
+position: relative;
+top:5px;
 }
 #heart2{
 width:13px;
@@ -252,16 +256,19 @@ height:13px;
 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div>
+					NO.${KnowledgeIn.kin_Sq}
 		<a href="KnowledgeInQ.do">	<button id="Qsearch" >질문하기</button><img src="" alt=""> </a><hr width = "100%" color = "#F2F2F2"/>
 
 			<div id="container">
-			
+	
 				<div>
-				<input type="hidden" name="kin_Sq" value="${knowledgeIn.kin_Sq}">
+				<input type="hidden" name="kin_Sq" value="${KnowledgeIn.kin_Sq}">
+	 		<%-- <input type="hidden" name="count" value="${count}"> --%>
+	 		
 		
 					<span class="QA">Q</span> 
 					<span class="title">${KnowledgeIn.kin_Title}</span> 
-					<span class="point">100</span>
+					<span class="point">${KnowledgeIn.point}</span>
 				</div>
 				
 				<div class="userInfo">
@@ -276,10 +283,18 @@ height:13px;
 				<span class="rolldate"><fmt:formatDate value="${KnowledgeIn.kin_Date}" pattern="yyyy.MM.dd"/></span>
 			<%-- 	<span class="rolldate">${KnowledgeIn.kin_Date }</span>  --%>
 				<span class="view">조회수 ${KnowledgeIn.kin_Cnt }</span> 
-				<%-- <span class="qcount">답변 ${kr.reply_Cnt}개</span> --%>
+				<span class="qcount">답변 ${KnowledgeIn.reply_Cnt}개</span>
 				</div>
 
-			<span class="content1">${KnowledgeIn.kin_Content}<br><br></span>
+			<span class="content1">${KnowledgeIn.kin_Content}<br><br>
+			
+			
+			
+			
+			
+			
+			
+			</span>
 				
 				
 
@@ -292,7 +307,7 @@ height:13px;
 				<button id="red1">신고</button><br>
 						<div class="qbutton">
 						
-							<%-- 	<a href='${path }/KnowledgeIn/update.do?sq=${KnowledgeIn.kin_Sq}'> --%><button class="update">수정</button><!-- </a> -->
+									<button class="update">수정</button><!-- </a> -->
 
 									<a href='${path }/delete?sq=${KnowledgeIn.kin_Sq }'><button class="delete">삭제</button></a>
 
@@ -406,14 +421,23 @@ height:13px;
 			<!-- 답변  -->
 			
 			
-	<input type="hidden" name="kr" id="no" value="${kinReply.reply_Sq}"> 
   	<c:forEach var="kr" items="${kr}"> 
+<%-- 	<input type="hidden" name="kr" id="no" value="${kr.reply_Sq}">  --%>
 		<div class="answer">
 
 		
 	<img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
-			<button id="Qcheck" >채택하기</button>
-					<div>	<span class="QA">A</span> <span class="title">${KnowledgeIn.kin_Title}</span><span>${kr.reply_Date}</span> <span class="Adoption_completed">채택완료</span>
+			<button class="Qcheck" value="${kr.reply_Sq }" >채택하기</button>
+					<div>	<span class="QA">A</span> 
+					 <c:if test="${kr.open_Yn eq 'Y'}" >
+					 	<span class="title">${kr.reply_Writer}님의 답변</span> 
+        					</c:if>
+        			       <c:if test="${kr.open_Yn eq 'N'}" >
+            					<span class="title">비공개 답변</span> 
+        					</c:if>
+				
+					
+					<span class="Adoption_completed">채택완료</span>
 			
 				<c:choose>
 						<c:when test="${KnowledgeIn.category eq '코로나19'}">
@@ -514,7 +538,7 @@ height:13px;
 					<div class="userInfo2">
 					<!-- <span class="user">sihu***</span>  -->
 					  <c:if test="${kr.open_Yn eq 'Y'}" >
-        					</c:if>
+        					${kr.reply_Writer}</c:if>
         			       <c:if test="${kr.open_Yn eq 'N'}" >
             				<span class="user">비공개</span> 
         					</c:if>
@@ -529,6 +553,10 @@ height:13px;
 					</div>
 			
 			<div class="content2">
+			${kr.reply_Content}
+			
+			
+			
 				</div>
 		
 		
@@ -558,17 +586,19 @@ height:13px;
 </section>
 
 <script>
-		var selected =${KnowledgeIn.selected}
-	$(document).ready(function(){ 
+		var selected ='${KnowledgeIn.selected}'
+		var count =${KnowledgeIn.reply_Cnt }
+		var selected =${KnowledgeIn.selected }
+		$(document).ready(function(){ 
 		
 		
 		$('.delete').click(function() {
-			if(selected==1){
-				alert("답변이 존재하여 수정/삭제가 불가합니다.")
+			if(count>0){
+			alert("답변이 존재하여 삭제가 불가합니다.")
 				return false;
 			}
 			
-			var result = confirm('정말 삭제하시겠습니까?'); 
+			var result = confirm('정말 삭제하시겠습니까?\n(포인트도 같이 삭제 됩니다)'); 
 			if(result) { 
 				location.replace('${path}/KnowledgeIn/KnowledgeInMain.do'); 
 				} 
@@ -579,15 +609,33 @@ height:13px;
 		
 		
 		$(".update").on("click",function(){
+			if(count>0){
+				alert("답변이 존재하여 수정이 불가합니다.")
+					return false;
+				}
+				
 			location.href="${path }/KnowledgeIn/update.do?sq=${KnowledgeIn.kin_Sq}";
-		})
 		
-	
 		
-/* 	
-		$(".qanswer").on("click",function(){
-			var url= "${path}/KnowledgeIn/KnowledgeInA.do?sq=${kr.reply_Sq}";
-			var reply_Sq=${kr.reply_Sq};
+		});
+		
+		$(".Qcheck").on("click",function(){
+			var result = confirm("채택 하시겠습니까?");
+			if(result){
+				selected==1;
+				location.href="${path }/KnowledgeIn/KnowledgeInList.do?sq=${KnowledgeIn.kin_Sq}";
+			}
+			else{
+				return false;
+			}
+			
+		});
+		
+		
+ 	
+/* 		$(".Qcheck").on("click",function(e){
+			var url= "${path}/KnowledgeIn/KnowledgeInList.do?sq=${KnowledgeIn.kin_Sq}";
+			let reply_sq=$(e.target).val();
 			$.ajax({
 				url:url,
 				data:{sq:reply_Sq},
@@ -597,26 +645,16 @@ height:13px;
 				}, error:function(request,status,error){ 
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				         }
-			}) */
-				
-			
-			
-			
+			})
+				 */
+					
 		
 		
 		
 });
-	
-		
 
 	
-		
-/* 	$('.update').click(function() {
-		if(selected==1){
-			alert("답변이 존재하여 수정/삭제가 불가합니다.")
-			return false;
-		}
- */
+
 
 
 

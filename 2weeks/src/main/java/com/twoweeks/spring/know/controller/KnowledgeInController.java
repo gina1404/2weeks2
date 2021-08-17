@@ -38,31 +38,35 @@ public class KnowledgeInController {
 	public ModelAndView KnowledgeInMain(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 			@RequestParam(value = "numPerpage", defaultValue = "6") int numPerpage,
 
-			ModelAndView mv) {
+			ModelAndView mv,HttpServletRequest request) {
+		/* String category = request.getParameter("category"); */  
 		mv.addObject("list", service.selectKinList(cPage, numPerpage));
 		mv.addObject("cnt", service.selectKinListcnt(cPage, numPerpage));
 		int totalData = service.selectKinCount();// 등록된 테이블의 총 개수를 가져다가 저장
 		mv.addObject("totalContents", totalData);
+		/* mv.addObject("category",category); */
 		mv.addObject("pageBar", PageFactory.getPageBar(totalData, cPage, numPerpage, "KnowledgeInMain.do"));
 		mv.setViewName("KnowledgeIn/KnowledgeInMain");
-
+		
+			
+			
+			
+		 
 		return mv;
 	}
 
 	@RequestMapping("/KnowledgeIn/KnowledgeInList.do") // 지식인 글 상세보기
 	public ModelAndView KnowledgeInList(@RequestParam(value = "sq", defaultValue = "1") int sq, ModelAndView mv)
 			throws Exception {
-		
-		/* KinReply kr = service.selectReplyOne(sq); */
-		
+			
+		 service.updateReplyCount(sq);
+			log.info("답글개수"+service.selectKinReplyCount(sq));
 		mv.addObject("KnowledgeIn", service.selectKinOne(sq)); //글
-		/*
-		 * List<KinReply> kr = service.selectReplyOne(sq); mv.addObject("kr",kr);
-		 * 
-		 * 
-		 * 
-		 * log.info("kr : "+ kr); mv.addObject("kr",kr); //답글
-		 */					/* log.info("케이알"+kr); */
+		 List<KinReply> kr = service.selectReplyOne(sq);  //답변
+		 mv.addObject("kr",kr);
+		 log.info("kr : "+ kr); 
+	
+		
 		mv.setViewName("KnowledgeIn/KnowledgeInList");
 		return mv;
 		
@@ -137,34 +141,33 @@ public class KnowledgeInController {
 	}
 
 	@RequestMapping("/KnowledgeIn/KnowledgeInMyList.do") // 나의 질문,답변
-	public String KnowledgeInMyList() {
-		return "KnowledgeIn/KnowledgeInMyList";
+	public ModelAndView KnowledgeInMyList(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
+			@RequestParam(value = "numPerpage", defaultValue = "6") int numPerpage,ModelAndView mv) {
+		mv.addObject("MyQ", service.selectKinListMyQ(cPage, numPerpage));
+		mv.addObject("MyA", service.selectKinListMyA(cPage, numPerpage));
+		int totalData = service.selectKinCount();// 등록된 테이블의 총 개수를 가져다가 저장
+		mv.addObject("totalContents", totalData);
+		mv.addObject("pageBar", PageFactory.getPageBar(totalData, cPage, numPerpage, "KnowledgeInMyList.do"));
+		mv.setViewName("KnowledgeIn/KnowledgeInMyList");
+
+		return mv;
 	}
 
 	
 	  @RequestMapping("/KnowledgeIn/KnowledgeInA.do") // 지식인 답변  
 	  public ModelAndView KnowledgeInA(@RequestParam(value = "sq", defaultValue = "1") int sq,
-	  HttpServletRequest request, ModelAndView mv,KinReply kr) throws Exception {
+	  HttpServletRequest request, ModelAndView mv,KinReply kr,Kin k) throws Exception {
 	  
 	 mv.addObject("KnowledgeIn", service.selectKinOne(sq));
-		
-		  int resq=Integer.parseInt(request.getParameter("reply_Sq"));
-			/*
-			 * mv.addObject("kinReply",service.selectReplyOne(resq));
-			 * log.info("resq몇번"+resq);
-			 */
+			 log.info("번호: "+sq);
 			/* System.out.println(resq+"번호가 맞는지 확인"); */
 			/*
 			 * kr.setReply_Sq(Integer.parseInt(request.getParameter("reply_Sq")));
 			 * mv.addObject("kinReply", service.selectReplyOne(kr.getReply_Sq()));
 			 */
+		
 		  
-		  
-		/*
-		 * int resq=Integer.parseInt(request.getParameter("reply_Sq"));
-		 * log.info("resq몇번"+resq);
-		 * mv.addObject("kinReply",service.selectReplyOne(resq));
-		 */
+
 	  
 	  mv.setViewName("KnowledgeIn/KnowledgeInA"); return mv;
 	  
@@ -174,10 +177,12 @@ public class KnowledgeInController {
 	
 	@RequestMapping("/KnowledgeIn/KnowledgeInAEnd.do") // 지식인 답변등록
 	public ModelAndView insertKinReply(KinReply kr, Kin k, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file,
-			ModelAndView mv, HttpServletResponse response, HttpServletRequest req) throws IOException {
+			ModelAndView mv, HttpServletResponse response, HttpServletRequest req) throws Exception {
 		
 		log.info("글내용"+kr.getReply_Content());
-		//log.info("답글번호:"+kr.getReply_Sq());
+		log.info("아이디: "+kr.getReply_Writer());
+		log.info("질문글번호:"+kr.getKin_Sq());
+		log.info("아이디공개여부: "+kr.getOpen_Yn());
 		logger.debug("knowledgIn : " + kr);
 		for (int i = 0; i < upload.length; i++) {
 			logger.debug("fileName : " + file[i].getOriginalFilename());
@@ -215,6 +220,7 @@ public class KnowledgeInController {
 		String msg = "답변 등록 성공";
 		try {
 			service.insertKinReply(kr);
+			service.updateReplyCount(k.getReply_Cnt());
 		} catch (Exception e) {
 			msg = e.getMessage();
 		}
