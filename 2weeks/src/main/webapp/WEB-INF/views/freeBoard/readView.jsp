@@ -469,17 +469,33 @@ function fn_replyUpdate(event,reply_Sq,reply_Content){
 	});
 }
 
-
-let isLike = 1;
-let alreadyLikeClick =false;
-$("#likePost").on("click",function(){
+function getLikeCnt(){
+	$.getJSON("${path}/freeboard/getLikeCnt/"+ ${list.post_Sq}, function(data){
+		var str="";
+		$(data).each(function(){
+			$("#likePost").text("좋아요! "+data);
+			$("#top-Like").html("추천 수 "+"<b>"+data+"</b>");
+		});
+			
 	
+	
+});
+}
+
+
+
+var  alreadyLikeClick =false;
+var isLike = 1;
+var isLike2 = 2;
+$("#likePost").on("click",function(){
 	var likeIdx = ${list.post_Like_Cnt};
 	var post_sq = ${list.post_Sq};
 	
-	 alreadyLikeClick = localStorage.getItem("isis");
-	console.log(isLike);
-	 if(isLike == 2){
+	
+	alreadyLikeClick = localStorage.getItem("isis2");
+	var al = localStorage.getItem("isis");
+	console.log(alreadyLikeClick);
+	 if(al == 2 && alreadyLikeClick==4){
 		/*  const target = document.getElementById('likePost');
 		  target.disabled = true; */
 		 $.ajax({
@@ -499,14 +515,17 @@ $("#likePost").on("click",function(){
 			
 			success:function(data){
 				if(data == "<Integer>"+1+"</Integer>"){
-					alert("좋아요 취소");
-					getLikeCnt();
 					isLike = 1;
+					isLike2= 2;
+					getLikeCnt();
+					localStorage.setItem("isis", isLike);
+					localStorage.setItem("isis2", isLike2);
 				}
 			}
 		});
-		 return;
-	}else{ 
+					
+		 return; 
+	}else if(al == 1 && isLike2==2 || (isLike == 1 && isLike2 ==2)){ 
 	//좋아요는 한번만 누를수 있게 하기 위해서 isLike가 false이면 ajax가 실행 	
 	$.ajax({
 		url:'${path}/freeboard/like.do',
@@ -524,44 +543,33 @@ $("#likePost").on("click",function(){
 		}),
 		
 		success:function(result){
-			console.log(result);
 			if(result == 'regSuccess'){
-				alert("좋아요 증가!");
 				getLikeCnt();
-				
-				//
-				isLike= 2;
-				
-				/* if (typeof(Storage) !== "undefined") {
+				 isLike= 2;
+				 isLike2= 4;
+				 localStorage.setItem("isis", isLike);
+				 localStorage.setItem("isis2", isLike2);
+				/*  if (typeof(Storage) !== "undefined") {
 					  // Store
-					  localStorage.setItem("isis", isLike+1);
+					  localStorage.setItem("isis", isLike);
+					 
 					  // Retrieve
 					} else {
 					  alert('orry, your browser does not support Web Storage...');
-					} */
+					} */ 
 				
 			}else{
 				alert('좋아요 실패!');
-				isLike = 1;
+				isLike = 0;
 			}
 		}
 		
 		});
-	} //else끝나는 곳
+	}//else끝나는 곳
+	 
 });
 
-function getLikeCnt(){
-	$.getJSON("${path}/freeboard/getLikeCnt/"+ ${list.post_Sq}, function(data){
-		var str="";
-		$(data).each(function(){
-			$("#likePost").text("좋아요! "+data);
-			$("#top-Like").html("추천 수 "+"<b>"+data+"</b>");
-		});
-			
-	
-	
-});
-}
+
 
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
