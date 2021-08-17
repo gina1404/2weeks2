@@ -1,57 +1,47 @@
 @charset "UTF-8";
 
 /* 버튼 */
-.regionalKor-button-area{
+#regionalKor{
 	width:80%;
-	padding:3%;
-	margin:3%;
-	text-align:center;
-  line-height: 1;
-  background: lightgrey;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  overflow: hidden;
-  cursor: pointer;
-  filter: drop-shadow(0 2px 8px rgba(#275efe, 0.32));
-  transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-	
+	min-height:300px;
+	margin:10%;
+	border-radius:10px;
+	border:0.5px solid #e8e8e8;
+	background-color:white;
+	padding:10px;
 }
-.regionalKor-button-1{ /* selected */
-	width:30%;
-	padding:3%;
-	margin:3%;
-	text-align:center;
-  line-height: 1;
-  color: white;
-  background: #27ae60;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  overflow: hidden;
-  cursor: pointer;
-  filter: drop-shadow(0 2px 8px rgba(#275efe, 0.32));
-  transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+.regionalKor-button-area{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+	margin:10px 25px;
+	height:fit-content;
+  	background: #e8e8e8;
+  	border-radius:5px; 	
+  	
 }
-
-.regionalKor-button-2{ /* non-selected */
-	width:30%;
+.regionalKor-button{
+	display:inline-block;
 	padding:3%;
-	margin:3%;
 	text-align:center;
-  line-height: 1;
-  color: white;
-  background: red;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  overflow: hidden;
-  cursor: pointer;
-  filter: drop-shadow(0 2px 8px rgba(#275efe, 0.32));
-  transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+ 	color: darkgray;
+ 	width:50%;
+  	background: transparent;
+  	border: none;
+  	border-radius:5px;
+  	outline: none;
+  	overflow: hidden;
+  	cursor: pointer;  	
 }
 
-.regionalKor-button:hover{
+.regionalKor-button-on{	 /* selected */
+ 	color: white;
+	background: #7879F160;
+	box-shadow: 0.5px 0.5px 3px #666;
+}
+
+
+.regionalKor-button-1 :hover, .regionalKor-button-2 :hover{
   background-color: #2ecc71;
 }
 
@@ -60,24 +50,25 @@
 	min-height: 500px;
 }
 
+.regionalKor-update{
+	color: darkgray;
+	font-size:13px;
+}
+
+
 #states path {
-	/* fill: #EEF0FE;  */
 	stroke: white;
 	stroke-width: 1.px; 
 }
 
-/* 
-#states .active {
-	fill: #E1E6FF;
-}
-
-#states .activeDetail {
-	fill: #E1E6FF;
-}
- */
-
 #states text {
 	cursor: pointer;
 	font-size: 12px;
-	fill: yellow; //노랑
+	fill: black;
+	font-weight: bold;
+}
+
+#states text tspan{
+	fill: #ff8787;
+	font-wieght: normal !important;
 }
