@@ -235,13 +235,13 @@ if(emailCheck="인증번호 확인"){
 					$("#pw_fail").hide();
 					$("#pw_success").css("color","blue");
 					$("#submit").removeAttr("disabled");
-					$(".pw2_label").html("패스워드 재입력 <span style ='float:right; color:#03c75a;'>일치합니다 :)</span>");
+					$(".pw2_label").html("<span style ='float:right; color:#03c75a;'>일치합니다 :)</span>");
 				}else{
 					$("#pw_success").hide();
 					$("#pw_fail").show();
 					$("#pw_fail").css("color","red");
 					$("#submit").attr("disabled","disabled");
-					$(".pw2_label").html("패스워드 재입력 <span style ='float:right; color:red'>다시 입력해주세요 :( </span>");
+					$(".pw2_label").html("<span style ='float:right; color:red'>다시 입력해주세요 :( </span>");
 				}
 			}
 		});
