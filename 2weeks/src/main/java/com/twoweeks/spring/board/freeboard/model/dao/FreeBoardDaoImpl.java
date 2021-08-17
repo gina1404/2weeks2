@@ -93,6 +93,22 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		return session.update("freeboard.fileDownCnt",atch_No);
 	}
 
+	@Override
+	public int likeCnt(SqlSession session, int post_Sq) {
+		return session.update("freeboard.likeCnt",post_Sq);
+	}
+
+	@Override
+	public int getLikeCnt(SqlSession session, int post_Sq) {
+		return session.selectOne("freeboard.getLikeCnt",post_Sq);
+	}
+
+	@Override
+	public int likeMinus(SqlSession session, int post_Sq) {
+		return session.update("freeboard.likeMinus",post_Sq);
+	}
+
+	
 	
 	
 }

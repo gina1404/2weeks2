@@ -146,7 +146,25 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	public int fileDownCnt(int atch_No) {
 		return dao.fileDownCnt(session, atch_No);
 	}
-	
 
+	//좋아요 수 증가
+	@Override
+	public int likeCnt(int post_Sq) {
+		return dao.likeCnt(session, post_Sq);
+	}
+
+
+	@Override
+	public int getLikeCnt(int post_Sq) {
+		return dao.getLikeCnt(session, post_Sq);
+	}
+
+
+	@Override
+	public int likeMinus(int post_Sq) {
+		return dao.likeMinus(session, post_Sq);
+	}
+	
+	
 	
 }

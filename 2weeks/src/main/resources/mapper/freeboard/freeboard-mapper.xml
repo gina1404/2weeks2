@@ -70,6 +70,18 @@
 	UPDATE POST_ATCH SET DOWNLOADCOUNT = DOWNLOADCOUNT + 1 WHERE ATCH_NO = #{atch_No}
 	</update>
 	
+	<update id="likeCnt">
+		UPDATE POST SET POST_LIKE_CNT = POST_LIKE_CNT + 1 WHERE POST_SQ = #{post_Sq}
+	</update>
+	
+	<select id="getLikeCnt" resultType="_int">
+	SELECT POST_LIKE_CNT FROM POST WHERE POST_SQ = #{post_Sq}
+	</select>
+	
+	<update id="likeMinus">
+	UPDATE POST SET POST_LIKE_CNT = POST_LIKE_CNT - 1 WHERE POST_SQ = #{post_Sq}
+	</update>
+	
 	<resultMap type="freeboard" id="boardMap">
 		<id column="post_Sq" property="post_Sq"/>
 		<result column="user_Id" property="user_Id"/>

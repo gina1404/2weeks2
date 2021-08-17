@@ -43,5 +43,11 @@ public interface FreeBoardService {
 
 	int fileDownCnt(int atch_No);
 
+	int likeCnt(int post_Sq);
+
+	int getLikeCnt(int post_Sq);
+
+	int likeMinus(int post_Sq);
+
 	
 }

@@ -44,7 +44,7 @@ font-size : 12px;
 
 .inner {
   display: inline-block;
-  margin-top: 750px;
+  margin-top: 700px;
   margin-left : 125px;
 }
 
@@ -63,7 +63,7 @@ font-size : 12px;
 				<div class="divider "></div>
 				<span class="divi">조회 수 <b>${list.post_Cnt }</b></span>
 				<div class="divider "></div>
-				<span class="divi">추천 수 <b>${list.post_Like_Cnt }</b></span>
+				<span class="divi" id="top-Like">추천 수 <b>${list.post_Like_Cnt }</b></span>
 				<div class="divider "></div>
 				<span class="divi">댓글 <b></b></span>
 				<div class="divider"></div>
@@ -78,7 +78,7 @@ font-size : 12px;
 		</div>
 		<div class="outer position-relative" >
 			<div class="inner ">
-				<button class="btn btn btn-danger btn-round" id="likePost" style="width: 100px;">좋아요! ${list.post_Like_Cnt }</button>
+				<button class="btn btn btn-danger btn-round" id="likePost" style="width: 100px;">좋아요! ${list.post_Like_Cnt } </button>
 					<button type="submit" class="update_btn btn btn btn-danger btn-round  ">수정</button> 
 					<input type="button"  class=" btn btn-danger btn-round" value="삭제" onclick="del(${list.post_Sq})" style="width: 60px;">
 					<button type="submit" class="list_btn btn btn-danger btn-round">목록</button>
@@ -152,9 +152,7 @@ font-size : 12px;
 </section>
 <script>
 $(document).ready(function(){
-	
 
-	
 	
 	getReplies();
 function getReplies(){
@@ -471,31 +469,99 @@ function fn_replyUpdate(event,reply_Sq,reply_Content){
 	});
 }
 
+
+let isLike = 1;
+let alreadyLikeClick =false;
 $("#likePost").on("click",function(){
+	
 	var likeIdx = ${list.post_Like_Cnt};
 	var post_sq = ${list.post_Sq};
 	
-	console.log(likeIdx);
-	console.log(post_sq);
-	var alreadyLikeClick = false;
+	 alreadyLikeClick = localStorage.getItem("isis");
+	console.log(isLike);
+	 if(isLike == 2){
+		/*  const target = document.getElementById('likePost');
+		  target.disabled = true; */
+		 $.ajax({
+			url:'${path}/freeboard/likeMinus.do',
+			type:'POST',
+			contentType: 'application/json',
+			dataType: "text",
+			header:{
+				"Content-type" : "application/json",
+				"X-HTTP-Method-Override" : "POST" 
+			},
+			data: JSON.stringify({
+				post_Like_Cnt : likeIdx,
+				post_Sq : post_sq
+				
+			}),
+			
+			success:function(data){
+				if(data == "<Integer>"+1+"</Integer>"){
+					alert("좋아요 취소");
+					getLikeCnt();
+					isLike = 1;
+				}
+			}
+		});
+		 return;
+	}else{ 
+	//좋아요는 한번만 누를수 있게 하기 위해서 isLike가 false이면 ajax가 실행 	
 	$.ajax({
 		url:'${path}/freeboard/like.do',
-		type:'post',
+		type:'POST',
+		contentType: 'application/json',
 		dataType: "text",
-		data: {
+		header:{
+			"Content-type" : "application/json",
+			"X-HTTP-Method-Override" : "POST" 
+		},
+		data: JSON.stringify({
 			post_Like_Cnt : likeIdx,
 			post_Sq : post_sq
 			
-		},
+		}),
+		
 		success:function(result){
 			console.log(result);
+			if(result == 'regSuccess'){
+				alert("좋아요 증가!");
+				getLikeCnt();
+				
+				//
+				isLike= 2;
+				
+				/* if (typeof(Storage) !== "undefined") {
+					  // Store
+					  localStorage.setItem("isis", isLike+1);
+					  // Retrieve
+					} else {
+					  alert('orry, your browser does not support Web Storage...');
+					} */
+				
+			}else{
+				alert('좋아요 실패!');
+				isLike = 1;
+			}
 		}
-			
 		
-		
-		
-	})
+		});
+	} //else끝나는 곳
 });
+
+function getLikeCnt(){
+	$.getJSON("${path}/freeboard/getLikeCnt/"+ ${list.post_Sq}, function(data){
+		var str="";
+		$(data).each(function(){
+			$("#likePost").text("좋아요! "+data);
+			$("#top-Like").html("추천 수 "+"<b>"+data+"</b>");
+		});
+			
+	
+	
+});
+}
 
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">

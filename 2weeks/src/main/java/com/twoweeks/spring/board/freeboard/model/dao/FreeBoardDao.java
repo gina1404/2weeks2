@@ -41,6 +41,12 @@ public interface FreeBoardDao {
 
 	List<PostAttachment> getAttachment(SqlSession session, int post_Sq);
 
-	int fileDownCnt(SqlSession session, int atch_No); 
+	int fileDownCnt(SqlSession session, int atch_No);
+
+	int likeCnt(SqlSession session, int post_Sq);
+
+	int getLikeCnt(SqlSession session, int post_Sq);
+
+	int likeMinus(SqlSession session, int post_Sq); 
 	
 }

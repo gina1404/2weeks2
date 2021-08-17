@@ -17,9 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -338,13 +342,54 @@ public class FreeBoardController {
 		return mv;
 	}
 	
-	@PostMapping("/freeboard/like.do")
-	public ModelAndView like(ModelAndView mv, @RequestParam("post_Like_Cnt") int post_Like_Cnt, @RequestParam("post_Sq") int post_Sq ) {
-		log.info(""+post_Like_Cnt);
-		log.info(""+post_Sq);
+	@PostMapping("freeboard/like.do")
+	public ResponseEntity<String> like(@RequestBody FreeBoard fb) {
+		log.info("값이 잘 들어가나요? : "+ fb);
+		ResponseEntity<String> entity = null;
+		try {
+			int result = service.likeCnt(fb.getPost_Sq());
+			if(result>0) {
+				entity = new ResponseEntity<String>("regSuccess",HttpStatus.OK);
+			}else {
+				entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	
+	@GetMapping("freeboard/getLikeCnt/{post_Sq}")
+	public ResponseEntity<Integer> getLikeCnt(@PathVariable("post_Sq") int post_Sq){
+		ResponseEntity<Integer> entity = null;
+		try {
+			entity= new ResponseEntity<Integer>(service.getLikeCnt(post_Sq), HttpStatus.OK);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 		
-		
-		return mv;
+	}
+	
+	
+	@PostMapping("freeboard/likeMinus.do")
+	public int likeMinus(@RequestBody FreeBoard fb){
+		log.info("좋아요 취소");
+		int result=0;
+		ResponseEntity<Integer> entity = null;
+		try {
+			result = service.likeMinus(fb.getPost_Sq());
+			entity = new ResponseEntity<Integer>(result, HttpStatus.OK);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+		}
+		return result;
 	}
 }
 	
