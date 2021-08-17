@@ -14,5 +14,10 @@
 		<typeAlias type="com.twoweeks.spring.chat.model.vo.ChatGroupMessage" alias="chatGroupMsg"/>
 		<typeAlias type="com.twoweeks.spring.chat.model.vo.ChatLog" alias="chatLog"/>
 		<typeAlias type="com.twoweeks.spring.covid.model.vo.CovidRegionalKorData" alias="CovidRegionalKorData"/>
+		<typeAlias type="com.twoweeks.spring.common.StringArrayTypeHandler" alias="strArr" />
+		<typeAlias type="com.twoweeks.spring.know.model.vo.Kin"  alias="knowledgeIn" />
+		<typeAlias type="com.twoweeks.spring.know.model.vo.KinAttachment"  alias="attachment"/>
+		<typeAlias type="com.twoweeks.spring.know.model.vo.KinReply" alias="kinReply" />
+		<typeAlias type="com.twoweeks.spring.know.model.vo.KinReplyAttachment" alias="kinReplyAttachment" />
 	</typeAliases>
 </configuration>

@@ -191,5 +191,33 @@ public class AdminController {
 		mv.setViewName("admin/openImg");
 		return mv;
 	}
+	@RequestMapping("/admin/updateGrantEnd")
+	public ModelAndView updateGrantEnd(ModelAndView mv,HttpServletRequest req) {
+		String userId=req.getParameter("userId");
+		String kate=req.getParameter("kate");
+		
+		int result=service.updateGrantTable(userId);
+		if(result>0) {
+			Member m=new Member();
+			m.setUser_Id(userId);
+			m.setAccess_Gb(kate);
+			int re2=service.updateGrantMember(m);
+			if(re2>0) {
+				mv.addObject("msg", "권한 주기 성공");
+				mv.addObject("loc", "/admin/admintable.do");
+				mv.setViewName("common/msg");
+			}else {
+				mv.addObject("msg", "맴버테이블 권한변경실패");
+				mv.addObject("loc", "/admin/admintable.do");
+				mv.setViewName("common/msg");
+			}
+			
+		}else {
+			mv.addObject("msg", "Grant테이블 yn업데이트 실패");
+			mv.addObject("loc", "/admin/admintable.do");
+			mv.setViewName("common/msg");
+		}
+		return mv;
+	}
 
 }

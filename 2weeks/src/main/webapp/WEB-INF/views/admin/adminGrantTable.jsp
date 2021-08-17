@@ -127,7 +127,7 @@
                                             <td>${c.user_Id }</td>
                                             <td>${c.grantTo_Kategorie }</td>
                                             <td id="${c.grantTo_Filename }" onclick="fn_openImg(this.id);" style="cursor:pointer;">${c.grantTo_Filename }</td>
-                                            <td><button  class="btn btn-outline-primary" onclick="fn_updateGrYn(${c.user_Id },${c.grantTo_Kategorie });">권한주기</button></td>
+                                            <td><button id="${c.user_Id }" name="${c.grantTo_Kategorie }" onclick="fn_updateGrYn(this.id,this.name);" class="btn btn-outline-primary" >권한주기</button></td>
                                         </tr>
      								</c:forEach>
                                     </tbody>
@@ -154,6 +154,7 @@
         <script src="<%=request.getContextPath() %>/resources/AdminTem/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath() %>/resources/AdminTem/js/datatables-simple-demo.js"></script>
+    </body>
         <script>
         function fn_openImg(a){
         	const img=a;
@@ -162,6 +163,16 @@
 			const url="<%=request.getContextPath()%>/admin/openGrantImg.do?img="+img;
 			open(url,title,status);
         };
+        function fn_updateGrYn(c,d){
+			const userId=c;
+			const kate=d;
+			console.log(userId);
+			console.log(kate);
+			
+      		
+        	  location.assign('<%=request.getContextPath() %>/admin/updateGrantEnd?userId='+userId+'&kate='+kate); 		 
+      			
+      		
+        };
         </script>
-    </body>
 </html>
