@@ -10,5 +10,6 @@ public class ChatGroup {
 	private String title;
 	private int cnt;
 	private String content;
+	private int curCnt;
 	
 }
