@@ -402,6 +402,7 @@ public class MemberController {
 				helper.setSubject(title);
 				helper.setText(content,true);
 				mailSender.send(message);
+				//log.info(message.toString());
 				log.info("발송성공");
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -486,7 +487,7 @@ public class MemberController {
 	//비밀번호변경
 	@PostMapping("/member/findPw")
 	public String updatePw(
-			@ModelAttribute("member") UpdateMember updateMember, BindingResult bindingResult,
+			@Validated @ModelAttribute("member") UpdateMember updateMember, BindingResult bindingResult,
 			Model model,HttpSession session) {
 		log.info("기존={},뉴={}",updateMember.getOldPw(),updateMember.getUser_Pw());
 		
