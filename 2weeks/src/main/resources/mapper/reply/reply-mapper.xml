@@ -25,7 +25,7 @@ order SIBLINGS by  reply_ref
 	
 	<!-- 댓글 수정 -->
 	<update id="update">
-		UPDATE POST_REPLY SET reply_Content = #{reply_Content}, UPDATEDATE = SYSDATE
+		UPDATE POST_REPLY SET REPLY_CONTENT = #{reply_Content}, UPDATEDATE = SYSDATE
 		WHERE REPLY_SQ = #{reply_Sq}
 	</update>
 	

@@ -45,12 +45,12 @@
       </div>
     <div>
 	<div class="form-group" id="file-list">
-        <a href="#this" onclick="addFile()">파일추가</a>
+        <a href="#this" onclick="addFile()"><label for="attach"><i class="far fa-file-image">파일추가</i></label></a>
         <div class="file-group">
             <input type="file" name="file"><a href='#this' name='file-delete'>삭제</a>
         </div>
     </div>
-	 <label for="attach"><i class="far fa-file-image"/>파일추가</label>
+	 
 	<span style="font-size: 14px; color: gray;">※첨부파일은 최대 5개까지 등록이가능합니다.</span>
 	</div>
 	<div class="data_file_txt" id="data_file_txt" >

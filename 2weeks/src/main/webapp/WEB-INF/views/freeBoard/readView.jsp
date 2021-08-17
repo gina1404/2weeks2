@@ -6,9 +6,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
-
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <style>
+
 .container {
   padding-right: 30px;
   padding-left: 30px;
@@ -38,12 +38,14 @@ font-size : 12px;
 }
 .outer {
   text-align: center;
+  width : 1000px;
+  height: 800px;
 }
 
 .inner {
   display: inline-block;
-  margin-top: 200px;
-  margin-left: -700px;
+  margin-top: 750px;
+  margin-left : 125px;
 }
 
 </style>
@@ -74,32 +76,23 @@ font-size : 12px;
 				<span style="font-size: 16px;">${list.post_Content }</span>
 			</p>
 		</div>
-		<div class="row text-center" style="width: 100%">
-			<div style="width: 100%; float: none; margin: 0 auto;">
-				<button class="btn btn btn-danger btn-round"
-					style="width: 100px; margin-top: 300px;">추천 수</button>
-				<div>
-					${list.attachments }
-					<c:if test="${!empty list.attachments }">
-						<button type="button">버튼</button>
-						<c:forEach var="a" items="${list.attachments }" varStatus="vs">
-							<button type="button" class="btn btn-outline-success"
-								onclick="location.replace('${path}/freeboard/fileDownload.do?=${a.atch_Ori }&rename=${a.atch_New }')">
-								첨부파일 ${vs.count } - ${a.atch_Ori }</button>
+		<div class="outer position-relative" >
+			<div class="inner ">
+				<button class="btn btn btn-danger btn-round" id="likePost" style="width: 100px;">좋아요! ${list.post_Like_Cnt }</button>
+					<button type="submit" class="update_btn btn btn btn-danger btn-round  ">수정</button> 
+					<input type="button"  class=" btn btn-danger btn-round" value="삭제" onclick="del(${list.post_Sq})" style="width: 60px;">
+					<button type="submit" class="list_btn btn btn-danger btn-round">목록</button>
+			</div>
+		</div>
+			<div>
+					<c:if test="${!empty attachments}">
+						<c:forEach var="a" items="${attachments}" varStatus="vs">
+							<button type="button" class="btn btn-outline-success" style="margin-left:400px;"
+								onclick="location.replace('${path}/freeboard/fileDownload.do?oriname=${a.atch_Ori }&rename=${a.atch_New }&atch_No=${a.atch_No }')">
+								첨부파일 ${vs.count } - ${a.atch_Ori } <span>   다운로드 횟수 : ${a.downloadCount }</span></button>
 						</c:forEach>
 					</c:if>
 				</div>
-			</div>
-		</div>
-		<div class="outer" style="margin-left:670px; margin-bottom:100px;">
-			<div class="inner">
-				<span class="absolute">
-					<button type="submit" class="update_btn btn btn btn-danger btn-round">수정</button> 
-					<input type="button"  class=" btn btn-danger btn-round" value="삭제" onclick="del(${list.post_Sq})" style="width: 60px;">
-					<button type="submit" class="list_btn btn btn-danger btn-round">목록</button>
-				</span>
-			</div>
-		</div>
 		<div class="card-body comment-editor">
 			<form class="form-horizontal">
 				<div class="row">
@@ -157,9 +150,12 @@ font-size : 12px;
 
 
 </section>
-
 <script>
 $(document).ready(function(){
+	
+
+	
+	
 	getReplies();
 function getReplies(){
 	$.getJSON("${path}/replies/all/"+ ${list.post_Sq}, function(data){
@@ -172,27 +168,23 @@ function getReplies(){
 		}
 	str+="<span> "+this.user_Id+"         "+this.updateDate + "</span>";
 	str+="<br>"
-	str+="<span class='replyupdate'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
+	str+="<span class='replyupdate'  name='uuup'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
 	str+="<input type='hidden' name='replyLevel' value='"+this.reply_Level+"'>"
-	str+="<a href ='javascript:void(0);' id='re-reply'style='margin-left:15px'  onclick='replyReplyInsert(event,"+ this.reply_Sq+','+this.reply_Level+");'>댓글</a>";
+	str+="<a href ='javascript:void(0);' id='re-reply' style='margin-left:15px' onclick='replyReplyInsert(event,"+ this.reply_Sq+','+this.reply_Level+");'>댓글</a>";
 	str+="<button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' style='margin-left:20px; width:35px; height:25px;'>";
 	str+="<div class='dropdown-menu'>";
 	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyDelete("+this.reply_Sq+");'>삭제 </a>";
-	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate(event,"+this.reply_Content+','+this.reply_Sq+");'>수정</a>";
+	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate(event,"+ this.reply_Sq+ ","+'"'+this.reply_Content+'"'+");'>수정</a>";
 	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>좋아요</a>";
 	str+="<a href  class='dropdown-item' style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>신고</a>";
 	str+="</div>";
 	str+="</div>";
 	str+="<hr>";
-	console.log(this.reply_Content);
 	});
 	
 	$("#reply_Content").html(str);
 	
-	
-	
 	});
-	
 	
 }
 
@@ -256,38 +248,6 @@ $(".replyAddBtn").on("click", function(){
 
 
 
-
-$(".modalModBtn").on("click", function(){
-	//댓글 선택자
-	var reply = $(this).parent().parent();  //여기에 번호 / 작성자 / 내용을 가져올 수 있당
-	//댓글 번호
-	var reply_Sq = $("#reply_Sq").val();
-	var reply_Content = $("#reply_Content").val();
-	
-	$.ajax({
-		type:"put",
-		url : "${path}/reply/" + reply_Sq,
-		headers : {
-			"Content-type" : "application/json",
-			"X-HTTP-Method-Override" : "PUT" 
-		},
-		data : JSON.stringify(
-			{reply_Content : reply_Content}	
-		),
-		 dataType : "text",
-		 success : function(result){
-			 console.log("result : "+result);
-			 if(result == 'modSuccess'){
-				 alert("댓글 수정 완료!");
-				 $("#modifyModal").modal('hide'); //모달 닫기
-				 getReplies(); //댓글 목록 갱신
-			 }
-		 }
-	});
-});
-
-
-
 	function backList(){
 	window.history.back();	
 		
@@ -299,9 +259,6 @@ $(".modalModBtn").on("click", function(){
 
 
 function del(no) {
-	console.log('ddddd');
-	console.log(no);
-	console.log(no);
 	let chk = confirm("정말 삭제하시겠습니까?");
 	if(chk){
 		location.href="${path}/freeboard/delete.do?no="+no;
@@ -344,8 +301,6 @@ function del(no) {
 			    return;
 			  }
 			
-			console.log(replySq);
-			console.log(replyContent);
 			$.ajax({
 				type:"post",
 				url:"${path}/reply/rereplyInsert.do",
@@ -389,13 +344,13 @@ function del(no) {
 				}
 		str+="<span>"+this.user_Id+"         "+this.updateDate + "</span>";
 		str+="<br>"
-		str+="<span class='replyupdate'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
+		str+="<span class='replyupdate' name='uuup'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
 		str+="<input type='hidden' name='replyLevel' value='"+this.reply_Level+"'>"
 		str+="<a href ='javascript:void(0);' id='re-reply' style='margin-left:15px' onclick='replyReplyInsert(event,"+ this.reply_Sq+','+this.reply_Level+");'>댓글</a>";
 		str+="<button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' style='margin-left:100px; width:35px; height:25px;'>";
 		str+="<div class='dropdown-menu'>";
 		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyDelete("+this.reply_Sq+");'>삭제 </a>";
-		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate(event,"+this.reply_Content+','+this.reply_Sq+");'>수정</a>";
+		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate(event,"+ this.reply_Sq+ ","+'"'+this.reply_Content+'"'+");'>수정</a>";
 		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>좋아요</a>";
 		str+="<a href  class='dropdown-item' style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>신고</a>";
 		str+="</div>";
@@ -429,6 +384,8 @@ function fn_replyDelete(reply_Sq){
 				if(result == "delSuccess"){
 					alert('댓글 삭제 완료')	;
 					replyList();
+				}else{
+					alert('댓글 삭제 안됨');
 				}
 			}
 			
@@ -440,24 +397,22 @@ function fn_replyDelete(reply_Sq){
 };
 
 
-function fn_replyUpdate(event,reply_Content,reply_Sq){
-	console.log('댓글 수정 : ' +reply_Sq);
+
+//댓글/댓댓글 수정
+function fn_replyUpdate(event,reply_Sq,reply_Content){
 	var e = event.target;
 	var e1 = event.target;
 	var e2 = event.target;
-
+	
 	e = e.parentNode.parentNode.parentNode.firstChild.nextSibling.nextSibling; //content
 	e1= e1.parentNode.parentNode; //버튼
 	e2 = e2.parentNode.parentNode.parentNode.firstChild.nextSibling.nextSibling.nextSibling.nextSibling; // 댓글
+	
 	e1.remove(); // 버튼 삭제
 	e2.remove(); //댓글 삭제
-	console.log(e);
-	console.log(e1);
-	console.log(e2);
-	console.log("댓글 내용 : " + reply_Content);
 	var str="<div class='row'>";
 	 str="<form>";
-	 str+="<textarea class='col-md-7' cols='80' rows='3' autofocus maxlength='300' name='rereply_content' required>"+reply_Content+"</textarea>";
+	 str+="<textarea class='col-md-7' cols='80' rows='3' autofocus maxlength='300' name='rereply_content2' required>"+reply_Content+"</textarea>";
 	 str+="<"
 	 str+="<button type='button' class='btn btn-primary' id='replyModify' style='margin-bottom:90px; margin-left:35px; width:100px; height:35px;'>수정하기</button>";
 	 str+="<button type='button' id='cancleBtn2' class='btn btn-secondary' style='height:35px; width:100px;  margin-left:-100px;'>취소</button>";
@@ -466,19 +421,81 @@ function fn_replyUpdate(event,reply_Content,reply_Sq){
 	$(e).html(str); //content에 덮어버림
 	
 	
+	//수정을 취소할 때
 	$("#cancleBtn2").on("click",function(){
 		console.log('취소');
 		replyList();
 	});
 	
+	
+	//수정하기 버튼 눌렀을 때
 	$("#replyModify").on("click",function(){
-		console.log('수정하기');
+		var content = $('[name=rereply_content2]').val();
+		if (content.replace(/\s|　/gi, "").length == 0) {
+		    alert("내용을 입력해주세요.");
+		    $("[name=rereply_content2]").focus();
+		    return;
+		  }
 		
+			$.ajax({
+			url:"${path}/reply/update/"+reply_Sq,
+			type:'put',
+			contentType: 'application/json',
+			header:{
+				"Content-type" : "application/json",
+				"X-HTTP-Method-Override" : "PUT" 
+			},
 		
+				dataType:"text",
+				data : JSON.stringify({
+					reply_Content : content
+					
+				}),
+				success : (function(result){
+					if(result == 'regSuccess'){
+					alert('댓글 수정 완료');
+					replyList();
+					}else{
+						alert('댓글 수정 실패 원인이 뭘까요?? 잠시 후 다시 시도해보세요');
+					}
+					
+				
+					}),
+					error:function(request,status,error){
+				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+			
+				
+			});
+			
 	});
 }
 
-
+$("#likePost").on("click",function(){
+	var likeIdx = ${list.post_Like_Cnt};
+	var post_sq = ${list.post_Sq};
+	
+	console.log(likeIdx);
+	console.log(post_sq);
+	var alreadyLikeClick = false;
+	$.ajax({
+		url:'${path}/freeboard/like.do',
+		type:'post',
+		dataType: "text",
+		data: {
+			post_Like_Cnt : likeIdx,
+			post_Sq : post_sq
+			
+		},
+		success:function(result){
+			console.log(result);
+		}
+			
+		
+		
+		
+	})
+});
 
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">

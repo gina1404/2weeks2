@@ -52,12 +52,12 @@ text-decoration: none;
 				<div class="input-group mb-3">
 						<select name="searchType" class="form-control" id="searchType">
 							<option value="POST_TITLE" ${FreeBoard.searchType eq POST_TITLE ? 'selected' : '' }>제목</option>
-							<option value="post_Content" ${FreeBoard.searchType eq 'post_Content' ? 'selected' : '' }>본문</option>
+							<option value="post_Content" ${FreeBoard.searchType eq 'post_Content' ? 'selected' : '' }>내용</option>
 							<option value="user_Id" ${FreeBoard.searchType eq 'user_Id' ? 'selected' : '' }>작성자</option>
-							<option value="tc" ${fb.searchType eq 'tc' ? 'selected' : '' }>제목/내용</option>
-							<option value="tw" ${fb.searchType eq 'tw' ? 'selected' : '' }>제목/작성자</option>
-							<option value="cw" ${fb.searchType eq 'cw' ? 'selected' : '' }>내용/작성자</option>
-							<option value="tcw" ${fb.searchType eq 'tcw' ? 'selected' : '' }>전체</option>
+							<option value="tc" ${FreeBoard.searchType eq 'tc' ? 'selected' : '' }>제목/내용</option>
+							<option value="tw" ${FreeBoard.searchType eq 'tw' ? 'selected' : '' }>제목/작성자</option>
+							<option value="cw" ${FreeBoard.searchTypeeq eq 'cw' ? 'selected' : '' }>내용/작성자</option>
+							<option value="tcw" ${FreeBoard.searchType eq 'tcw' ? 'selected' : '' }>전체</option>
 						</select>
 						<input type="text" class="form-control" placeholder="Search" name="keyword" value="${fb.keyword }" >
 					<div class="input-group-append">

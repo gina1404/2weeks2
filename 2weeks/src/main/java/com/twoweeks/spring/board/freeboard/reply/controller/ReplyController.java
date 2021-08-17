@@ -78,6 +78,27 @@ public class ReplyController {
 	}
 	
 	
+	//@PostMapping("reply/replyUpdate.do")
+	@RequestMapping(value = "reply/update/{reply_Sq}", method = {RequestMethod.PUT, RequestMethod.PATCH})
+	public ResponseEntity<String> replyUpdate(@PathVariable("reply_Sq") int reply_Sq,  @RequestBody Reply reply){
+		reply.setReply_Sq(reply_Sq);
+		log.info("댓글 수정 컨트롤러입니다. : " + reply);
+		ResponseEntity<String> entity = null;
+		try {
+			int result = service.update(reply);
+			if(result > 0) {
+				log.info("댓글 수정 성공했뜨아");
+			}
+			entity = new ResponseEntity<String>("regSuccess", HttpStatus.OK);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	
 	
 	@GetMapping("replies/all/{post_Sq}")
 	public ResponseEntity<List<Reply>> list(@PathVariable("post_Sq") int post_Sq){
@@ -96,7 +117,8 @@ public class ReplyController {
 		ResponseEntity<String> entity = null;
 		try {
 			reply.setReply_Sq(reply_Sq);
-			service.update(reply);
+			int result = service.update(reply);
+		
 			entity = new ResponseEntity<String>("modSuccess", HttpStatus.OK);
 			
 		}catch(Exception e) {

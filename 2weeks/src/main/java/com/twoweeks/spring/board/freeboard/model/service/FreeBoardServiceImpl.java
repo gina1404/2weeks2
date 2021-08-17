@@ -57,6 +57,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 
 	@Override
+	public List<PostAttachment> getAttachment(int post_Sq) {
+		return dao.getAttachment(session,post_Sq);
+	}
+
+
+	@Override
 	public int insertBoard(FreeBoard b) throws Exception {
 		try {
 			int result = dao.insertBoard(b, session);
@@ -133,6 +139,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Override
 	public List<FreeBoard> replyCnt(int post_Sq) {
 		return dao.replyCnt(session, post_Sq);
+	}
+
+	//파일 다운로드
+	@Override
+	public int fileDownCnt(int atch_No) {
+		return dao.fileDownCnt(session, atch_No);
 	}
 	
 

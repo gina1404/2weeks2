@@ -62,6 +62,14 @@
 	UPDATE POST SET REPLYNO = REPLYNO + 1 WHERE POST_sQ =#{post_Sq}
 	</update>
 	
+	<select id="getAttachment" resultType="postAttach">
+	SELECT * FROM POST_ATCH WHERE POST_SQ =#{post_Sq}
+	</select>
+	
+	<update id="fileDownCnt">
+	UPDATE POST_ATCH SET DOWNLOADCOUNT = DOWNLOADCOUNT + 1 WHERE ATCH_NO = #{atch_No}
+	</update>
+	
 	<resultMap type="freeboard" id="boardMap">
 		<id column="post_Sq" property="post_Sq"/>
 		<result column="user_Id" property="user_Id"/>

@@ -37,6 +37,10 @@ public interface FreeBoardDao {
 
 	int updateReplyCnt(SqlSession session, int post_Sq);
 
-	List<FreeBoard> replyCnt(SqlSession session, int post_Sq); 
+	List<FreeBoard> replyCnt(SqlSession session, int post_Sq);
+
+	List<PostAttachment> getAttachment(SqlSession session, int post_Sq);
+
+	int fileDownCnt(SqlSession session, int atch_No); 
 	
 }

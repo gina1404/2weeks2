@@ -1,9 +1,12 @@
 package com.twoweeks.spring.board.freeboard.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +35,7 @@ import com.twoweeks.spring.common.PageFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
+@RestController  //restController는 값들을 다 data로 인식하여 처리한다. 그렇기 때문에 return에 주소값을 넣어주면 주소이동하지 않고 데이터를 출력해준다.
 @Slf4j
 public class FreeBoardController {
 
@@ -56,7 +60,6 @@ public class FreeBoardController {
 		
 		mv.addObject("list", service.searchBoard(param));
 		
-		System.out.println(service.searchBoard(param)); 
 		
 		mv.setViewName("freeBoard/searchBoardList");
 		
@@ -100,9 +103,14 @@ public class FreeBoardController {
 	@PostMapping("/freeboard/writeEnd.do") 
 	public ModelAndView writeEnd(FreeBoard b, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file, ModelAndView mv,HttpServletResponse response, HttpServletRequest req) throws IOException {
 		log.info("freeboard : "+ b.toString());
-		for(int i = 0; i<file.length; i++) {
-			log.info("fileName : " + file[i].getOriginalFilename());
-			log.info("fileName : " + file[i].getSize());
+		for(int i=0; i<file.length; i++) {
+            log.info("================== file start ==================");
+            log.info("파일 이름: "+file[i].getName());
+            log.info("파일 실제 이름: "+file[i].getOriginalFilename());
+            log.info("파일 크기: "+file[i].getSize());
+            log.info("content type: "+file[i].getContentType());
+            log.info("================== file   END ==================");
+
 		}
 		
 	String path = req.getServletContext().getRealPath("/resources/upload/freeboard/"); //resources/upload 경로 설정하여 path에 저장
@@ -169,8 +177,9 @@ public class FreeBoardController {
 			response.addCookie(c);
 		}
 
-
+			//어태치먼트의 리스트를 불러온다. 해당하는 post_Sq와 맞는
 		mv.addObject("list", service.read(post_Sq, readFlag));
+		mv.addObject("attachments", service.getAttachment(post_Sq));
 		mv.setViewName("freeBoard/readView");
 		return mv;
 	}
@@ -186,12 +195,66 @@ public class FreeBoardController {
 		return "redirect:/freeboard/boardList.do";
 	}
 	
+	//oriname같은 String은 그냥 쿼리스트링으로 값이 받아지는데 아래처럼 변수명을 선언하면, int형은 똑같이 int atchNo을 한다고 해서 값이 받아지지 않고 error가 발생하기 때문에~~
+	//RequestParam을 사용해서 값을 지정한다.
+	@RequestMapping("freeboard/fileDownload.do")
+	public void attachDown(String oriname, String rename, @RequestParam("atch_No") int atch_No, HttpServletRequest request, HttpServletResponse res, @RequestHeader(value="user-agent") String header) {
+		log.info(oriname);
+		log.info(rename);
+		log.info("어태치 넘버 : "+atch_No);
+		
+		
+		String path = request.getServletContext().getRealPath("/resources/upload/freeboard/");
+			File saveFile = new File(path+rename);
+			
+			BufferedInputStream bis =null;
+			BufferedOutputStream bos = null;
+			try {
+				bis = new BufferedInputStream(new FileInputStream(saveFile));
+				bos = new BufferedOutputStream(res.getOutputStream());
+				boolean isMS = header.contains("Trident")||header.contains("MSIE");
+				String encodeStr="";
+				if(isMS) {
+					encodeStr = URLEncoder.encode(oriname,"UTF-8");
+					encodeStr=encodeStr.replaceAll("\\+", "%20");
+							
+				}else {
+					encodeStr =  new String(oriname.getBytes("UTF-8"),"ISO-8859-1");
+				}
+				res.setContentType("application/octet-stream;charset=utf-8");
+				res.setHeader("Content-Disposition", "attachment;filename=\""+encodeStr+"\"");
+				
+				
+				int read=-1;
+				while((read=bis.read())!= -1) {
+					bos.write(read);
+				}
+				
+			}catch(IOException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					bis.close();
+					bos.close();
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+			int result = service.fileDownCnt(atch_No);
+			
+			if(result>0) {
+				log.info("다운로드 횟수 증가 성공");
+			}else {
+				log.info("다운로드 횟수 증가 실패");
+			}
 	
+	}
 	
 	@RequestMapping("/freeboard/update")
 	public ModelAndView update(ModelAndView mv,FreeBoard fb,@RequestParam("article_file") MultipartFile[] upload, HttpServletRequest request,  MultipartFile[] file) {
 		log.info("update 수정좀하자");
 		
+	
 		
 		for(int i=0; i<file.length; i++) {
             log.info("================== file start ==================");
@@ -251,7 +314,7 @@ public class FreeBoardController {
 	
 	//조횟수 증가
 	@RequestMapping("/freeboard/updateBoard.do")
-	public String updateEnd(FreeBoard fb, Model model,  HttpServletRequest request) {
+	public ModelAndView updateEnd(ModelAndView mv, FreeBoard fb, Model model,  HttpServletRequest request) {
 		
 		log.info("수정완료를 눌러주셨군요!! " );
 		
@@ -261,18 +324,28 @@ public class FreeBoardController {
 				
 		model.addAttribute("list", service.read(post_Sq, readFlag));
 		
+		mv.setViewName("freeBoard/updateView");
 		
-		
-		return "freeBoard/updateView";
+		return mv;
 				
 		
 	}
 	
-	@RequestMapping("/freeboard/write.do")
-	public String write() {
-		return "freeBoard/write";
+	@GetMapping("freeboard/write.do")
+	public ModelAndView write(ModelAndView mv) {
+
+		mv.setViewName("freeBoard/write");
+		return mv;
 	}
 	
+	@PostMapping("/freeboard/like.do")
+	public ModelAndView like(ModelAndView mv, @RequestParam("post_Like_Cnt") int post_Like_Cnt, @RequestParam("post_Sq") int post_Sq ) {
+		log.info(""+post_Like_Cnt);
+		log.info(""+post_Sq);
+		
+		
+		return mv;
+	}
 }
 	
 	

@@ -37,7 +37,7 @@
       
       <hr>
       
-      <div class="row justify-content-md-center">
+ <!--      <div class="row justify-content-md-center">
           <div class="col_c" style="margin-bottom: 30px">
                 <div class="input-group">                 
                   <textarea class="form-control" id="content" name="post_Content"></textarea>
@@ -45,8 +45,8 @@
             </div> 
       </div>
     <div>
-	<input type="file" name="file"  id="attach" multiple="multiple" style="border: 2px solid #ddd; outline: none;">
-	 <label for="attach"><i class="far fa-file-image"/>파일추가 </label>
+	<input type="file" name="attachments"  id="attach" multiple="multiple" style="border: 2px solid #ddd; outline: none;">
+	 <label for="attach"><i class="far fa-file-image">파일추가 </i></label>
 	<span style="font-size: 14px; color: gray;">※첨부파일은 최대 5개까지 등록이가능합니다.</span>
 	</div>
 	<div class="data_file_txt" id="data_file_txt" >
@@ -58,6 +58,36 @@
         </div>
      </form>
   </div>
+
+</div> -->
+
+      <div class="row justify-content-md-center">
+          <div class="col_c" style="margin-bottom: 30px">
+                <div class="input-group">                 
+                  <textarea class="form-control" id="content" name="post_Content"></textarea>
+                </div>
+            </div> 
+      </div>
+    <div>
+	<div class="form-group" id="file-list">
+        <a href="#this" onclick="addFile()"><label for="attach"><i class="far fa-file-image">파일추가</i></label></a>
+        <div class="file-group">
+            <input type="file" name="file"><a href='#this' name='file-delete'>삭제</a>
+        </div>
+    </div>
+	 
+	<span style="font-size: 14px; color: gray;">※첨부파일은 최대 5개까지 등록이가능합니다.</span>
+	</div>
+	<div class="data_file_txt" id="data_file_txt" >
+	</div>
+		<div id="articlefileChange" class="bg-success">
+		</div>
+      <div class="row justify-content-md-center">
+        <input type="submit" class="m-3 btn btn-outline-secondary"   value="등   록" style="width: 20%; font-weight: bold">
+        </div>
+     </form>
+        <input type="submit" class="m-3 btn btn-outline-secondary" id="back"   value="취   소" style="width: 20%; font-weight: bold">
+  </div>
   
 
 </div>
@@ -66,12 +96,23 @@
 
 
 
+
+
+
+
+
+
+
+</section>
+
+
+
  
 <script>
 
 //해당 파일을 가져와서 배열에 담아주고 input file은 초기화 해준다.
 //multiple 특성상 중복파일은 업로드가 되지 않기에 최기화를 해야 중복파일도 업데이트가 가능띠
-	$(document).ready(function(){
+/* 	$(document).ready(function(){
 		$("#attach").on("change",fileCheck);
 	});
 	
@@ -127,7 +168,30 @@
 		$('#' + fileNum).remove();
 		fileCount --;
 		console.log(content_files);
+	} */
+	
+	
+	$(document).ready(function(){
+		$("a[class='file-delete']").on("click",function(e){
+			e.preventDefault();
+			deleteFile($(this));
+		});
+	})
+
+		function addFile(){
+		let str = "<div class='file-group'><input type='file' multiple='multiple' name='file'><a href='#this' name='file-delete'>삭제</a></div>";
+		$("#file-list").append(str);
+		$("a[name='file-delete']").on("click",function(e){
+			e.preventDefault();
+			deleteFile($(this));
+		});
+			
+		function deleteFile(obj){
+			obj.parent().remove();
+		}
 	}
+	
+	
 	
 	
 	CKEDITOR.replace("content",{

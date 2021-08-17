@@ -17,7 +17,6 @@ public interface ReplyService {
 		
 		int countReplies(int post_Sq);
 
-		
-
 		int rereplyInsert(Reply reply);
+
 }

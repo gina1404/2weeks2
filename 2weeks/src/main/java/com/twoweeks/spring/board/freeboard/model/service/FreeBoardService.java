@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
+import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
 import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 public interface FreeBoardService {
@@ -37,6 +38,10 @@ public interface FreeBoardService {
 	int updateReplyCnt(int post_Sq);
 
 	List<FreeBoard> replyCnt(int post_Sq);
+
+	List<PostAttachment> getAttachment(int post_Sq);
+
+	int fileDownCnt(int atch_No);
 
 	
 }

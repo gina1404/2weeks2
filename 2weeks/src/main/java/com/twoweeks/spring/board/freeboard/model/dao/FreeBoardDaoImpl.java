@@ -83,6 +83,16 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		return session.selectList("freeboard.replyCnt",post_Sq);
 	}
 
+	@Override
+	public List<PostAttachment> getAttachment(SqlSession session, int post_Sq) {
+		return session.selectList("freeboard.getAttachment",post_Sq);
+	}
+
+	@Override
+	public int fileDownCnt(SqlSession session, int atch_No) {
+		return session.update("freeboard.fileDownCnt",atch_No);
+	}
+
 	
 	
 }
