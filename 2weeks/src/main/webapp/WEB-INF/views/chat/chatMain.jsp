@@ -10,12 +10,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
-<link href="${path }/resources/css/chat/chatting.css?after=" rel="stylesheet" />
+<link href="${path }/resources/css/chat/chatting.css" rel="stylesheet" />
 
 <section class="container">
 	<h3>오픈채팅</h3>
 	<div id="addGroupBtn">
-		<a id="addRoomBtn" onclick="open('${path}/addChatRoom ', '_blank', 'width=400, height=550, resizable=no')">채팅방 만들기</a>
+		<!-- <a id="addRoomBtn" onclick="open('${path}/addChatRoom ', '_blank', 'width=400, height=550, resizable=no')">채팅방 만들기</a> -->
+		<div id="addRoomBtn">채팅방 만들기</div>
 	</div>
 	<div id="chatContainer">
 		<c:forEach var="l" items="${list }" varStatus="status">
@@ -24,10 +25,7 @@
 					<img src="${path }/resources/images/icons/chat.png" alt="chatIcon"/>
 				</div>
 				<div id="entry" >
-					<!-- <a id="entry_a" onclick="openChat()">
-						${l.title }
-					</a> -->
-					<div id="entry_a" class="chatName">
+					<div id="entry_a" class="chatName half">
 						${l.title }
 					</div>					
 					<input type="hidden" value="${l.groupNo}">
@@ -43,13 +41,14 @@
 
 <script>
 	let rootPath="${pageContext.request.contextPath}";
-	console.log(rootPath);
 	
-	const check="${check}";	
-	if(check){
-		alert(check);
-		console.log(check);
-	}
+	$("#addRoomBtn").click(function(e){
+		let popup=window.open('${path}/addChatRoom ', '_blank', 'width=400, height=550, resizable=no');
+		
+		popup.addEventListener('beforeunload', function(){
+			$(".container #chatContainer").load(rootPath+"/chatting.do .container #chatRoomOne");
+		});
+	});
 	
 	$(".chatName").click(function(e){
 		let no=$(this).next().val();
@@ -58,7 +57,6 @@
 		let popup=window.open('${path }/chatting?no='+no, '_blank', 'width=400, height=600, resizable=no, menubar=no, toolbar=no');
 
 		popup.addEventListener('beforeunload', function(){
-			console.log("beforeunload함수 시작");
 			$.ajax({
 				url: rootPath+"/deleteChatLog",
 				type: "post",
@@ -67,12 +65,10 @@
 				data: {
 					"no" : no
 				},
-				//data: JSON.stringify({ "no": no }),
 				success: function(data){
-					console.log(data);
+					//console.log(data);
 				}
-			});
-			console.log("beforeunload함수 완료");
+			});			
 		});
 	});
 	

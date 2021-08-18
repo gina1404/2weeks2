@@ -24,7 +24,7 @@ $("#addBtn").click(e=>{
 		contentType: "application/json; charset=UTF-8",
 		data: JSON.stringify(json),				
 		success:function(data){
-			$(".container #chatContainer #groupList").load(rootPath+"/chatting.do #groupList");
+			//console.log(data);
 		}
 	});	
 	window.close();

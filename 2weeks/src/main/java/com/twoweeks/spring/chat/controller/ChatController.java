@@ -43,10 +43,11 @@ public class ChatController {
 	@RequestMapping("/deleteChatLog")
 	public String deleteChatLog(@RequestBody String no, HttpSession session){
 		String chatId=(String)session.getAttribute("chatId");
-		System.out.println("chatId=loginId : "+chatId);
-		int chatNo=Integer.parseInt(no.substring(no.indexOf(",")+4));
+		String chatName=(String)session.getAttribute("chatName");
 		
-		ChatLog cl=new ChatLog(chatNo, chatId);
+		int chatNo=Integer.parseInt(no.substring(no.indexOf(",")+4));		
+		
+		ChatLog cl=new ChatLog(chatNo, chatId, chatName);
 
 		int result=service.deleteChatLog(cl);
 
@@ -65,7 +66,7 @@ public class ChatController {
 			
 		m.addAttribute("check", check);
 		
-		return "chat/chatMain";		
+		return "chat/chatMain";
 	}
 	
 	@RequestMapping("/addChatRoom")
@@ -79,9 +80,8 @@ public class ChatController {
     @RequestMapping("/chatting")        
     public String groupChattingEntry(@RequestParam int no, HttpSession session, Model m) {        
     	String chatId=(String)session.getAttribute("chatId");
-    	String chatName=(String)session.getAttribute("chatName");
-    	//System.out.println("/////"+chatId+"   "+chatName);
-        
+    	String chatName=(String)session.getAttribute("chatName");    	
+    	
         m.addAttribute("no", no);
         m.addAttribute("loginId", chatId);
         m.addAttribute("chatName", chatName);
