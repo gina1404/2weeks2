@@ -142,10 +142,26 @@ public class MemberController {
 	//아이디중복체크
 	@GetMapping("/member/idCheck")
 	@ResponseBody
-	public int idCheck(
+	public String idCheck(
 			@RequestParam("user_Id")String userId) {
-		
-		return memberService.idCheck(userId);
+		int result = memberService.idCheck(userId);
+		//log.info("result= {}",result);
+		String num = Integer.toString(result);
+			
+		return num;
+	
+	}
+	//닉네임중복체크
+	@GetMapping("/member/nicCheck")
+	@ResponseBody
+	public String nicCheck(
+			@RequestParam("user_Nic")String userNic) {
+		int result = memberService.nicCheck(userNic);
+		//log.info("result= {}",result);
+		String num = Integer.toString(result);
+			
+		return num;
+	
 	}
 	
 	//이메일인증
@@ -239,7 +255,7 @@ public class MemberController {
 		//member.setUser_Pw(signup.getUser_Pw());
 		member.setUser_Nm(signup.getUser_Nm());
 		member.setUser_Nic(signup.getUser_Nic());
-		member.setUser_Gender(signup.getUser_Gender());
+		//member.setUser_Gender(signup.getUser_Gender());
 		member.setUser_Phone(signup.getUser_Phone());
 		member.setUser_Pf(signup.getUser_Pf());
 		member.setUser_Pfrename(signup.getUser_Pfrename());
@@ -293,9 +309,9 @@ public class MemberController {
 			response.addCookie(rememberCookie);
 			
 		String msg;
-		log.info("param.get(user_Pw) ={}",param.get("user_Pw"));
-		log.info("m 아이디 ={} " , m.getUser_Id());
-		log.info("m.getUser_Pw() ={}", m.getUser_Pw());
+//		log.info("param.get(user_Pw) ={}",param.get("user_Pw"));
+//		log.info("m 아이디 ={} " , m.getUser_Id());
+//		log.info("m.getUser_Pw() ={}", m.getUser_Pw());
 		
 		if(m!=null) {			
 			if(pwEncoder.matches((String)param.get("user_Pw"), m.getUser_Pw())) {
@@ -386,6 +402,7 @@ public class MemberController {
 				helper.setSubject(title);
 				helper.setText(content,true);
 				mailSender.send(message);
+				//log.info(message.toString());
 				log.info("발송성공");
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -470,7 +487,7 @@ public class MemberController {
 	//비밀번호변경
 	@PostMapping("/member/findPw")
 	public String updatePw(
-			@ModelAttribute("member") UpdateMember updateMember, BindingResult bindingResult,
+			@Validated @ModelAttribute("member") UpdateMember updateMember, BindingResult bindingResult,
 			Model model,HttpSession session) {
 		log.info("기존={},뉴={}",updateMember.getOldPw(),updateMember.getUser_Pw());
 		

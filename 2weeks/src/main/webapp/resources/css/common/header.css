@@ -40,8 +40,9 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	position:fixed;
 	padding:0;
 	height:100%;
-	font-family: 'Pretendard';	
+
 }
+
 .container {
 	/* margin-left:200px !important; 사이드바 너비만큼 띄움
 	margin-top:60px !important; 헤더 높이만큼 띄움
@@ -53,12 +54,13 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	width: 1440px;
 	/* padding:15px 75px 0 15px !important; */
 	margin: 60px auto auto auto;
+
 }  	
 .content{
-	border: 1px solid;
-	width: 1240px;
-	height: 100%;
-	float: right;
+    width: 1200px;
+    height: 100%;
+    float: right;
+   	margin: 0 20px 0 20px;
 }
 #aside {
 	display: flex;

@@ -1,0 +1,154 @@
+@charset "UTF-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+    /* Color */
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-grey: #E2E2E2;
+
+    /* Font size */
+    --font-large:48px;
+    --font-medium:28px;
+    --font-reqular:18px;
+    --font-small:16px;
+    --font-micro:14px;
+
+    /* Font weight */
+  	--weight-bold: 700;
+  	--weight-semi-bold: 600;
+  	--weight-regular: 400;
+  	
+  	/*font  */
+  	--p-font :'Pretendard';
+  	
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink: #d63384;
+  --bs-red: #dc3545;
+  --bs-orange: #fd7e14;
+  --bs-yellow: #ffc107;
+  --bs-green: #198754;
+  --bs-teal: #20c997;
+  --bs-cyan: #0dcaf0;
+  --bs-white: #fff;
+  --bs-gray: #6c757d;
+  --bs-gray-dark: #343a40;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
+  --bs-success: #198754;
+  --bs-info: #0dcaf0;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+}
+
+*{
+font-family :'Pretendard'	
+}
+
+.login_box {
+	border :1px solid var(--color-grey);
+	border-radius:10px;
+	background-color : var(--color-white);
+}
+
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h3{
+	margin-top:30px;
+	margin-bottom: 30px;	
+}
+p{
+	font-size:12px;
+}
+
+/* 아이디/패스워드 입력창  */
+.input_login{
+	width : 60%;
+	height: 50px;
+	margin-bottom: 30px;
+	border: 0 soild var(--color-white);
+	border-bottom: 1px solid var(--color-black);
+	font-size: var(--font-small);
+	
+}
+.input_login:focus {outline:none;}
+
+.input_login::placeholder{
+	font-family: var(--p-font);
+	font-size: var(--font-small);
+}
+
+
+/* 아이디저장 , 아이디비번찾기 */
+.remember_find {
+	display:flex;
+	justify-content: space-evenly;
+	margin-bottom: 20px;
+}
+/*체크박스  */
+
+
+
+
+/*찾기버튼  */
+.find_box{
+cursor:pointer;
+}
+
+.find_click{
+	vertical-align: middle
+}
+
+/* 로그인버튼  */
+.login_btn {
+	display:flex;
+	justify-content: space-evenly;
+	margin-bottom: 40px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+
+.tweeks_login{
+	width:183px;
+	height:45px;
+}
+.tweeks_loginBtn{
+	width:100%;
+	height:100%;
+	border-radius: 10px;
+	border : 0 solid white;
+	background-color : var(--color-black);
+	color: var(--color-white);
+	font-size: var(--font-reqular);
+	
+}
+
+/*회원가입 버튼  */
+
+.signup_btn{
+	width:183px;
+	height:45px;
+	border:2px solid var(--color-black);
+	border-radius: 10px;
+	background-color: var(--color-white);
+	font-size: var(--font-reqular);
+	margin-bottom: 20px;
+	
+}
+p{
+	color:var(--bs-gray);
+}
+

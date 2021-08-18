@@ -64,8 +64,10 @@
 					console.log("메세지전송성공");
 						//룸번호때문에 새로고침 한번 
 					 location.reload();
+					alert("메세지를 전송했습니다!");
 					 
 					 $('.write_msg').val('');
+					 
 					
 					
 					 //toastr.info('알림', '메세지를 전송하였습니다.', {timeOut: 5000});
