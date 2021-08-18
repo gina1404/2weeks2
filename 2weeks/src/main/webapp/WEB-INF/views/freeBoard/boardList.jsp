@@ -66,11 +66,24 @@ text-decoration: none;
 				</div>
 			</form>
 		</div>
-		<!-- 첨부파일이 이미지 파일이면
+		<!-- 			첨부파일이 이미지 파일이면
+		
 					 	해당게시물에 첨부파일이 없으면 썸네일 -> 기본이미지 
+					 	
 					 	첨부파일이 있는지 없는지 어떻게 확인? ima는 첨부파일이 있는 것만 저장되어있다.
-					 		<!-- 해당 게시물에 첨부파일이 있으면 첫번째 첨부파일이 썸네일 -->
-					 	-->
+					 	
+					    해당 게시물에 첨부파일이 있으면 첫번째 첨부파일이 썸네일 
+					 		
+					 	적용한 논리 :
+					 	
+					 	freeboard랑 attachment는 mapping을 시켜놨기 때문에 b.attachment로 접근 가능 join 
+					 	var ="ima"로 변수명 지정
+					 	if문을 활용하여 ima.atch_New가 없다면 어태치먼트가 없다는 뜻 그렇기 때문에 기본 디폴트 이미지를 출력
+					 	있다면 첨부파일이 이미지 파일이면 출력 아니면 기본이미지를 출력해야한다. contains로 jpg,png,jpeg를 확인하여 출력한다.	
+					 	그리고 저장된 이미지를 출력하는건 성능에 좋지 않은 것 같기에 
+					 	이미지를 저장시에는 따로 썸네일 과정을 거쳐 이미지를 축소하여 따로 저장(총 2장을 저장 => 1.업로드된 이미지    2. 업로드된 이미지를 썸네일용으로 만들어서 저장)
+					 		-->
+					 	
 		<div class="row" >
 		<c:forEach var="b" items="${list }">
 				<div class="card col-md-3 m-2">
@@ -81,11 +94,26 @@ text-decoration: none;
 							 <a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/freeboardPic/default.png"  class="card-img-top row" alt="기본이미지"> </a>
 							</c:when>
 							<c:otherwise>
-							<c:if test="${fn:contains(ima, 'png')}">
+							<c:choose>
+							<c:when test="${fn:contains(ima, 'png')}">
 								<c:if test="${vs.index == 0 }">
 						 			<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/upload/freeboard/${ima.atch_New}" class="card-img-top row" alt="첨부파일"> </a>
 						 		</c:if> 
-						 	</c:if>
+						 	</c:when>
+							<c:when test="${fn:contains(ima, 'jpg')}">
+								<c:if test="${vs.index == 0 }">
+						 			<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/upload/freeboard/${ima.atch_New}" class="card-img-top row" alt="첨부파일"> </a>
+						 		</c:if> 
+						 	</c:when>
+							<c:when test="${fn:contains(ima, 'jpeg')}">
+								<c:if test="${vs.index == 0 }">
+						 			<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/upload/freeboard/${ima.atch_New}" class="card-img-top row" alt="첨부파일"> </a>
+						 		</c:if> 
+						 	</c:when>
+						 	<c:otherwise>
+						 		<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/freeboardPic/default.png"  class="card-img-top row" alt="기본이미지"> </a>
+						 	</c:otherwise>
+						 	</c:choose>
 							</c:otherwise>					 	
 						</c:choose>
 				</c:forEach>	
