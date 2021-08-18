@@ -5,6 +5,6 @@
 	<!-- 블로그 크롤링 데이터 저장 -->
 	<insert id="insertBlogDummy">
 		INSERT INTO POST VALUES 
-		(POST_SEQ.NEXTVAL, 'DUMMY', 'DEFAULT', 'DEFAULT', '${postTitle}', '${postContent}', DEFAULT, 0, TO_DATE('${postDT}','YYYY.MM.DD'), 0, 'Y', NULL) <!-- sysdate, 0, 'Y', NULL) -->
+		(POST_SEQ.NEXTVAL, 'DUMMY', 'COVID', 'DEFAULT', '${postTitle}', '${postContent}', DEFAULT, 0, TO_DATE('${postDT}','YYYY.MM.DD'), 0, 'Y', NULL, 0) <!-- sysdate, 0, 'Y', NULL) -->
 	</insert>
 </mapper>
