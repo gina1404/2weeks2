@@ -8,6 +8,7 @@ import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinAttachment;
 import com.twoweeks.spring.know.model.vo.KinReply;
 import com.twoweeks.spring.know.model.vo.KinReplyAttachment;
+import com.twoweeks.spring.member.model.vo.Member;
 
 public interface KnowledgeInDao {
 	List<Kin> selectKinList(SqlSession session, int cPage, int numPerpage);
@@ -44,7 +45,7 @@ public interface KnowledgeInDao {
 
 	int updateKinAttachment(SqlSession session, KinAttachment ka); //첨부파일 수정
 
-	
+	 
 	List<Kin> list(SqlSession session, Kin k);
 
 

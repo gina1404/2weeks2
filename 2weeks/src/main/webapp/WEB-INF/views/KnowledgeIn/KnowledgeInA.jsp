@@ -65,7 +65,7 @@ float:left;
 margin-left:10px;
 font-size:13px;
 position: relative;
-top: -489px;
+top: -490px;
 right:-1000px;
 list-style: none;
    
@@ -218,6 +218,7 @@ right:180px;
 	<!-- 		<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div> -->
+				NO.${KnowledgeIn.kin_Sq}
 		<a href="KnowledgeInQ.do">	<button id="Qsearch" >질문하기</button><img src="" alt=""> </a><hr width = "100%" color = "#F2F2F2"/>
 
 			<div id="container">
@@ -227,7 +228,7 @@ right:180px;
 					<span class="QA">Q</span> 
 					
 					<span class="title">${KnowledgeIn.kin_Title}</span> 
-					<span class="point">100</span>
+					<span class="point">${KnowledgeIn.point}</span>
 				</div>
 					<div class="userInfo">
 				        <c:if test="${KnowledgeIn.open_Yn eq 'Y'}" >
@@ -370,7 +371,7 @@ right:180px;
 			
 	<img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
 	
-					<div>	<img src=""> <span class="title2">	<input type="text" name="reply_Writer" class="form-control" value="${kr.reply_Writer}" >님 답변해주세요</span>
+					<div>	<img src=""> <span class="title2">	<input type="hidden" name="reply_Writer" class="form-control" value="${member.user_Id}" >${member.user_Id}님 답변해주세요</span>
 			<hr width = "100%" color = "#F2F2F2">
 							<!-- <ul class="knowmenu2"> 
 					<li style="color: orange;">코로나19</li>

@@ -18,9 +18,12 @@
 	
 	
 	<select id ="MyQ"  resultMap="KnowledgeInMap">
- <!--      	SELECT * 
-		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_WRITER DESC    -->
-		   SELECT * FROM KIN 
+<!-- 	SELECT * 
+		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_SQ DESC  -->
+
+	
+ 	 SELECT * FROM KIN  
+		 
 	</select>
 	<select id ="MyA"  resultMap="KnowledgeInMap">
  <!--      	SELECT * 
