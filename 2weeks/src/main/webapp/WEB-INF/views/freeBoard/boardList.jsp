@@ -41,7 +41,11 @@ font-size: 8px;
 a{
 text-decoration: none;
 }
-
+.post_content{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 </style>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
@@ -70,14 +74,22 @@ text-decoration: none;
 		<c:forEach var="b" items="${list }">
 				<div class="card col-md-3 m-2">
 					<div class="card-header m-3">
-						<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img
-							src="${path }/resources/images/freeboardPic/default.png"
-							class="card-img-top row" alt="이미지"></a>
+					 <c:forEach var="ima" items="${attachments }"> 
+					 ${ima }
+					 <c:choose>
+					 <c:when test="${attachments ==null }">
+						<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/freeboardPic/default.png" class="card-img-top row" alt="이미지"> </a>
+					 </c:when>
+					 <c:otherwise>
+					 	<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/upload/freeboard/${ima.atch_New}" class="card-img-top row" alt="이미지"> </a>
+					 </c:otherwise>	
+					</c:choose>		
+					</c:forEach>	
 					</div>
 					<div class="card-body">
 						<p class="card-text category">${b.category } &nbsp; &nbsp; [${b.post_Dt }]</p>
-						<h4 class="card-title"><a href="${path }/freeboard/readView?no=${b.post_Sq }"><c:out value="${b.post_Title }"/></a></h4>
-						<p class="card-text">${b.post_Content }</p>
+						<h4 class="card-title"><a href="${path }/freeboard/readView?no=${b.post_Sq }"><c:out value="${b.post_Title }"/> ${attachments }</a></h4>
+						<p class="card-text post_content">${b.post_Content }</p>
 						<c:choose>
 						<c:when test="${b.open_Yn == 'on'}">
 						<p class="card-text"><img src="${path}/resources/images/icons/profile.svg" class="profile " alt="프로필사진"> 익명</p>

@@ -75,6 +75,13 @@ public class FreeBoardController {
 	public ModelAndView boardList(@RequestParam(value="cPage", defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="5")int numPerpage,
 			ModelAndView mv) {
 		log.info("게시판 리스트" );
+		List<FreeBoard> fb = service.listAll(cPage,numPerpage);
+		int post_Sq = 0;
+		for(int i=0; i<fb.size(); i++) {
+			post_Sq = fb.get(i).getPost_Sq();
+			
+		}
+		mv.addObject("attachments", service.getAttachment(post_Sq));
 		mv.addObject("list", service.listAll(cPage,numPerpage)); 
 		int totalData = service.totalBoardCount();  //등록된 테이블의 총 개수를 가져다가 저장
 		mv.addObject("totalContents", totalData);
@@ -108,7 +115,9 @@ public class FreeBoardController {
 	public ModelAndView writeEnd(FreeBoard b, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file, ModelAndView mv,HttpServletResponse response, HttpServletRequest req) throws IOException {
 		b.setOpen_Yn(req.getParameter("anonymous"));
 		log.info("freeboard : "+ b.toString());
-
+		if(b.getOpen_Yn() == null) {
+			b.setOpen_Yn("off");
+		}
 		
 		for(int i=0; i<file.length; i++) {
             log.info("================== file start ==================");
