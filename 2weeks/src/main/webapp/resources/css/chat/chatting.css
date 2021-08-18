@@ -34,8 +34,7 @@
 }
 #entry{	
 	display:inline;
-	font-weight: bolder;
-    font-size: 17px;
+	font-size: 17px;
     vertical-align: middle;
     cursor:pointer;
     margin: 10px 0 10px 20px;
@@ -58,7 +57,14 @@
 	color:black;
     width: 60%;
     display: inline;
+	font-weight: bolder;  
+	position: relative;
 }
+
+.half{
+	background: linear-gradient(to top, #D0A9F5 50%, transparent 50%);
+}
+
 #entry_a:hover{
 	text-decoration: underline;
 	color:#6E6E6E;

@@ -530,7 +530,7 @@ text-align: center;
         	${pageBar }
         </div>
         </div>
-  </div>          
+           
 </section>
 	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>

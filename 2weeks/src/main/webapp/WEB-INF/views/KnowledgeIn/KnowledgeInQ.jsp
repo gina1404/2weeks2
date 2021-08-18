@@ -35,7 +35,7 @@ position: relative;
 left:-16px;
 
 }
-#Qcheck{
+.Qcheck{
 width:100px;
 height:40px;
 border :0px;
@@ -302,16 +302,16 @@ right:-50px;
 		<!-- 	<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div> -->
-			<button id="Qsearch" >질문하기</button><img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
+			<!-- <button id="Qsearch" >질문하기</button> --><img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
 			
 					<div>	<span class="QA">Q</span> 
 <input type="text"  maxlength='20' style="width:1000px;font-size:30px; border:1px solid #19ce60" placeholder="제목 작성란 입니다 20자 미만으로 입력해주세요."
 				 value ="${knowledgeIn.kin_Title}" name="kin_Title" required>
 			
 			
-			<input type="text" name="kin_Writer" class="form-control" value="${knowledgeIn.kin_Writer}" >
+			<input type="hidden" name="kin_Writer" class="form-control" value="${member.user_Id}" readonly="readonly">
 			
-			
+			Point : ${member.userPoint_Cnt }
 			<ul class="knowmenu"> 
 					<li></li>
 					<li></li>
@@ -363,13 +363,13 @@ right:-50px;
 		<label>비공개<input type="radio" name="open_Yn" value="N">${knowledgeIn.open_Yn}</label>
 			<hr style="border: solid 1px #F2F2F2;">
 		<span>포인트 설정 </span>
-		<label><input type="radio" name="point" value="50" ><input type="hidden" name="radio" value="50"><span class="c">50</span></label>
-		<label><input type="radio" name="point" value="100" ><input type="hidden" name="radio" value="100"><span class="c">100</span></label>
-		<label><input type="radio" name="point" value="150" ><input type="hidden" name="radio" value="150"><span class="c">150</span></label>
-		<label><input type="radio" name="point" value="200" ><input type="hidden" name="radio" value="200"><span class="c">200</span></label>
-		<label><input type="radio" name="point" value="250" ><input type="hidden" name="radio" value="250"><span class="c">250</span></label>
-		<label><input type="radio" name="point" value="300" ><input type="hidden" name="radio" value="300"><span class="c">300</span></label>
-
+		<label><input type="radio" name="point" value="50" ><span class="c">50</span></label>
+		<label><input type="radio" name="point" value="100" ><span class="c">100</span></label>
+		<label><input type="radio" name="point" value="150" ><span class="c">150</span></label>
+		<label><input type="radio" name="point" value="200" ><span class="c">200</span></label>
+		<label><input type="radio" name="point" value="250" ><span class="c">250</span></label>
+		<label><input type="radio" name="point" value="300" ><span class="c">300</span></label>
+		Point : ${member.userPoint_Cnt }
 <%-- <label><input type="radio"  name="point" value="1"  checked ><span class="c">직접입력</span>
 <input type="text"  id="text" name = "wr_1" placeholder="50~ 500포인트" size=10 maxlength=3 max=500 onkeyup='printValue();' onkeypress="inNumber();"/>${knowledgeIn.point}</label>
 
@@ -380,7 +380,7 @@ right:-50px;
  			<hr style="border: solid 1px #F2F2F2;">	
  			
  	        <!--     <input type="submit" class="btn btn-outline-success" value="질문등록" >	 -->
-		<button id="Qcheck" type="submit">질문등록</button>
+		<button class="Qcheck" type="submit">질문등록</button>
 		</div>
 
 
@@ -394,7 +394,9 @@ right:-50px;
 			
 </section>
 <script>
-
+var path = "${pageContext.request.contextPath }";
+var result =${member.userPoint_Cnt};
+var result1= $("input[name=radio]:checked").val();
 
 $(document).ready(function(){
 
@@ -409,65 +411,20 @@ $(document).ready(function(){
 		    reader.readAsDataURL(this.files[0]);
 		   }
 		  });
+
+	 
 });
 
-/* $(function () {
-	$("#btn-upload").click(function(e){
-		e.preventDefault();
-		$("#attach").click();
+
+$(document).ready(function(){ 
+
+	$(".Qcheck").on("click",function(){
+	
+		result-result1 =${member.userPoint_Cnt};
+		
 	});
 });
- */
-
-/*  $(document).ready(function(){
-	    // 라디오버튼 클릭시 이벤트 발생
-	    $("input:radio[name=point]").click(function(){
-
-	        if($("input[name=point]:checked").val() == "1"){
-	            $("#text").attr("disabled",false);
-	            // radio 버튼의 value 값이 1이라면 활성화
-	 
-	        }else if($("input[name=point]:checked").val() != "1"){
-	              $("#text").attr("disabled",true);
-	              $("#text").val("");
-	              document.getElementById("result").innerText = 0;
-	            // radio 버튼의 value 값이 0이라면 비활성화
-	        }
-	    });
-	    
-	
-	}); */
- 
-
- 
- 
-/*  
- $(document).on("keyup", "input[name^=wr_1]", function() {
-	    var val= $(this).val();
-
-	    if(val.replace(/[0-9]/g, "").length > 0) {
-	        alert("숫자만 입력해 주십시오.");
-	        $(this).val('');
-	        document.getElementById("result").innerText = 0;
-	    }
-
-	    if(val > 500) {
-	        alert("50 ~ 500 포인트까지 입력이 가능합니다");
-	        $(this).val('');
-	        document.getElementById("result").innerText = 0;
-	    }
-	
-	}); */
-
-
-
-
-
-
-
-
-
-var onoff =${KnowledgeIn.open_Yn}
+/* var onoff =${KnowledgeIn.open_Yn}
 
 
 
@@ -477,7 +434,7 @@ var onoff =${KnowledgeIn.open_Yn}
 				$(e.target).next('.custom-file-label').html(fileName);
 			});
 		}) 
-		
+		 */
 
 		
 

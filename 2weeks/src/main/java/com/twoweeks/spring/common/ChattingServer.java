@@ -31,9 +31,7 @@ public class ChattingServer extends TextWebSocketHandler{
 		sessionList.add(session);				
 				
 		String sender=(String)session.getAttributes().get("chatName");
-		log.info("{}님 입장",sender);
-
-		//게터로 sessionList를 만들어 컨트롤러에서 값을 쏴줄수있게.. 전체 세션의 수를 세니 방마다의 숫자를 셀것.				
+		log.info("{}님 입장",sender);		
 	}
 	
 	@Override
@@ -52,27 +50,24 @@ public class ChattingServer extends TextWebSocketHandler{
 		TextMessage sendMsg= new TextMessage(gson.toJson(msg));
 		
 		String result=sendMsg.getPayload();
+		System.out.println(result);
 		
 		if(result.contains("ENTER")) {
 			int num=result.indexOf("chatGroupNo");
 			int no=Integer.parseInt(result.substring(num+13, result.substring(num).indexOf(",")+num));
-			cl.setChatNo(no); cl.setChatId(loginId);
-			int check=service.insertChatLog(cl);
-			System.out.println("insert : "+check);
+			int num2=result.indexOf("senderNick");
+						
+			String nick=result.substring(num2+13, result.substring(num2).indexOf(',')+num2-1);
+			System.out.println("nick "+nick);
 			
-		} else if(result.contains("CLOSE")) {
-//			System.out.println("close");
-//			int num=result.indexOf("chatGroupNo");
-//			int no=Integer.parseInt(result.substring(num+13, result.substring(num).indexOf(",")+num));
-//			cl.setChatNo(no); cl.setChatId(loginId);
-//			int check=service.deleteChatLog(cl);
-//			System.out.println("delete : "+check);
+			cl.setChatNo(no); cl.setChatId(loginId); 
+			//cl.setChatName(nick);
+			
+			int check=service.insertChatLog(cl);			
 		}
 		
-		for(WebSocketSession s : sessionList) {
-			if(result.contains("MSG")) {
-				s.sendMessage(sendMsg);				
-			}
+		for(WebSocketSession s : sessionList) {			
+			s.sendMessage(sendMsg);						
 		}	
 	}
 

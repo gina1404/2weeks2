@@ -11,5 +11,6 @@ public class ChatLog {
 
 	private int chatNo;
 	private String chatId;
-		
+	private String chatName;
+	
 }

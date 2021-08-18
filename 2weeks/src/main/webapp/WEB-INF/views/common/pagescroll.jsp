@@ -6,7 +6,9 @@
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/sidebar.css"> 
 
 	<aside id="aside">
-		<div id="pagescroll-button"  onclick="fn_top()"><img class="" src="${path }/resources/images/icons/darkmode.svg"/></div>
+		<div id="pagescroll-button"  onclick="fn_top()">
+			<img class="" src="${path }/resources/images/icons/uparrow.png"/>
+		</div>
 	</aside>
 	
 	<style>		
@@ -16,6 +18,10 @@
             height:30px;
             bottom:120px;
 			position:fixed;
+<<<<<<< HEAD
+			cursor: pointer;			
+        }        
+=======
 			cursor: pointer;
         	padding: 5px;
         	background-color:#D3D8F4;
@@ -23,14 +29,22 @@
         	justify-content: center;
         	align-items:center;
         }
+>>>>>>> 6c299bced394f2be5a5515c2c28747bdfd8f6f31
         #pagescroll-button:hover{
         	cursor:pointer;
         	border-radius:50%;
         	filter: brightness(95%);
         }
+        #pagescroll-button img{
+        	position: fixed;        	       	    
+        	height: 25px;
+        	width: 25px;
+        	z-index: 999;
+        	margin-left:5px;
+        }
 	</style>
 	
-	<script>	
+	<script>
 	pagescrollButton = document.getElementById("pagescroll-button");
 
 	// 문서 높이로부터 20px 아래로 스크롤하면 버튼이 보임

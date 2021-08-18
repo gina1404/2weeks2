@@ -300,7 +300,7 @@ color:#ffffff;
 }
 
 
-#Qsearch{
+.Qsearch{
 
 width:100px;
 height:40px;
@@ -314,7 +314,7 @@ top :10px;
 
 }
 
-#Myqlist{
+.Myqlist{
 
 position:relative;
 color: black;
@@ -322,7 +322,14 @@ font-family: Pretendard;
 top:-100px;
 right:-1400px;
 }
+#Myqlist2{
 
+position:relative;
+color: black;
+font-family: Pretendard;
+top:-100px;
+right:-1400px;
+}
 .background2{
 background:#FFFFFF;
 /*  border:3px solid red;  */
@@ -380,12 +387,13 @@ background-color:transparent;
 
 
 <div class="background2">
-				<a href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do"><button id="Myqlist">내 질문목록</button></a>
-
+				<%-- <a href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do"> --%><button class="Myqlist">내 질문목록</button><!-- </a> -->
+ 
 		<!-- 	<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div> -->
-		<a href="KnowledgeInQ.do">	<button id="Qsearch" >질문하기</button></a>
+			
+		<%-- <a href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInQ.do"> --%><%-- <c:if test="${not empty member.user_Id }">	 --%><button class="Qsearch" >질문하기</button><%-- </c:if></a> --%>
 
 
 	
@@ -575,12 +583,45 @@ $(function(){
             }//error
         })//ajax
     });//button click
+
     
 }); 
 
 
+$(document).ready(function(){ 
 
-
+		$(".Myqlist").on("click",function(){
+		
+			if(	${empty member.user_Id }){
+				alert("로그인 후 이용가능합니다.")
+					return false;
+				} 
+			
+	
+				
+			location.href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do";
+		
+			
+		});  
+		
+		$(".Qsearch").on("click",function(){
+			
+			if(	${empty member.user_Id }){
+				alert("로그인 후 이용가능합니다.")
+					return false;
+				} 
+			
+	
+				
+			location.href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInQ.do";
+		
+			
+		});  
+});
+	
+	
+	
+ 
 </script>
 	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
