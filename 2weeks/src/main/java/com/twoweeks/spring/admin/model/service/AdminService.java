@@ -25,4 +25,5 @@ public interface AdminService {
 	List<Grant>selectGrantTable();
 	int updateGrantTable(String userId);
 	int updateGrantMember(Member m);
+	int selectGrantCount();
 }

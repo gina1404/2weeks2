@@ -28,4 +28,5 @@ public interface AdminDao {
 	List<Grant>selectGrantTable(SqlSession session);
 	int updateGrantTable(SqlSession session,String userId);
 	int updateGrantMember(SqlSession session,Member m);
+	int selectGrantCount(SqlSession session);
 }

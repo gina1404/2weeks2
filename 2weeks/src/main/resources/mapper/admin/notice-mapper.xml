@@ -50,8 +50,9 @@
 	<select id="reportList" resultType="com.twoweeks.spring.admin.model.vo.Report">
 		SELECT * FROM REPORT WHERE USER_ID=#{userId}
 	</select>
-	<select id="selectGrantTable" resultType="com.twoweeks.spring.admin.model.vo.Grant">
+	 <select id="selectGrantTable" resultType="com.twoweeks.spring.admin.model.vo.Grant">
 		SELECT * FROM GRANTTO WHERE GRANTTO_YN='N'
+
 	</select>
 	<update id="updateGrantTable">
 		UPDATE GRANTTO SET GRANTTO_YN='Y' WHERE USER_ID=#{userId}
@@ -59,4 +60,10 @@
 	<update id="updateGrantMember">
 		UPDATE MEMBER2 SET ACCESS_GB=#{access_Gb} WHERE USER_ID=#{user_Id}
 	</update>
+	<select id="selectGrantCount" resultType="_int">
+		SELECT COUNT(*) FROM GRANTTO WHERE GRANTTO_YN='N'
+	</select>
+
+
+
 </mapper>

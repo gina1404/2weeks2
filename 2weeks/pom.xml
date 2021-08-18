@@ -14,6 +14,14 @@
 		<org.slf4j-version>1.7.28</org.slf4j-version>
 		<lucene.version>8.8.2</lucene.version>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>spring-libs-snapshot</id>
+			<name>Spring Snapshot Repository</name>
+			<url>https://repo.spring.io/libs-snapshot</url>
+		</repository>		
+	</repositories>
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -117,6 +125,15 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>   
+		
+		<!-- spring-test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		
 		
 		<!-- 의존성 주입 -->
 		
@@ -319,27 +336,41 @@
 		
 										 	
 		
-		<!-- lucene (검색 엔진용) -->
+		<!-- ElasticSearch (검색 엔진용) -->
 		<dependency>
-			<groupId>org.apache.lucene</groupId>
-	    	<artifactId>lucene-core</artifactId>
-	    	<version>${lucene.version}</version>
+		    <groupId>org.elasticsearch</groupId>
+		    <artifactId>elasticsearch</artifactId>
+		    <version>7.14.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-analyzers-common</artifactId>
-		    <version>${lucene.version}</version>
+		    <groupId>org.elasticsearch.client</groupId>
+		    <artifactId>elasticsearch-rest-client</artifactId>
+		    <version>7.14.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-queryparser</artifactId>
-		    <version>${lucene.version}</version>
+		    <groupId>org.elasticsearch.client</groupId>
+		    <artifactId>elasticsearch-rest-high-level-client</artifactId>
+		    <version>7.14.0</version>
 		</dependency>
-
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-elasticsearch</artifactId>
+		    <version>4.0.0.BUILD-SNAPSHOT</version>
+		</dependency>
+		<!-- Kibana -->
+		<dependency>
+	    	<groupId>io.fabric8.devops.apps</groupId>
+		    <artifactId>kibana</artifactId>
+		    <version>2.2.335</version>
+		</dependency>
+		<!-- Logstach -->
+		<dependency>
+		    <groupId>net.logstash.logback</groupId>
+		    <artifactId>logstash-logback-encoder</artifactId>
+		    <version>6.4</version>
+		</dependency>
 		
 								  
-
-
 	</dependencies>
     <build>
         <plugins>

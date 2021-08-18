@@ -4,16 +4,18 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="realDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<!-- <property name="url" value="jdbc:oracle:thin:@rclass.iptime.org:1521:xe"/> -->
-		 <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/> 
-		<property name="username" value="pro"/>
-		<property name="password" value="pro"/>
+
+	
+
+
+		<property name="url" value="jdbc:oracle:thin:@rclass.iptime.org:1521:xe"/>
+		<property name="username" value="two"/>
+		<property name="password" value="weeks"/>
 
 	</bean>
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
@@ -68,6 +70,7 @@
 				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
     		</props>
      	</property>
+     	
 </bean>
 	
 	
@@ -84,7 +87,7 @@
 			<!-- 매일 낮 12시에 실행 -->
 			<value>0 0 12 * * ?</value>
 			<!-- 테스트용 : 매 1분마다 -->
-			<!-- <value>0 0/1 * * * ?</value>  -->
+			<!-- <value>0 0/1 * * * ?</value> -->
 		</property>
 	</bean>
 		<!-- 스케쥴러 (cron 실행) = 무엇을 -->
@@ -96,8 +99,5 @@
 			</list>
 		</property>
 	</bean>
-	
-
-
 	
 </beans>

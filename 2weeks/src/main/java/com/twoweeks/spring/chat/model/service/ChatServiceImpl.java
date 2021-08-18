@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.twoweeks.spring.chat.model.dao.ChatDaoImpl;
 import com.twoweeks.spring.chat.model.vo.ChatGroup;
+import com.twoweeks.spring.chat.model.vo.ChatLog;
 
 @Service
 public class ChatServiceImpl implements chatService{
@@ -27,6 +28,20 @@ public class ChatServiceImpl implements chatService{
 		return dao.selectGroupList(session);
 	}
 
+	@Override
+	public int insertChatLog(ChatLog cl) {
+		return dao.insertChatLog(session, cl);
+	}
+
+	@Override
+	public int deleteChatLog(ChatLog cl) {
+		return dao.deleteChatLog(session, cl);
+	}
+
+	@Override
+	public int selectGroupCurCnt(int no) {
+		return dao.selectGroupCurCnt(session, no);
+	}
 	
 	
 	

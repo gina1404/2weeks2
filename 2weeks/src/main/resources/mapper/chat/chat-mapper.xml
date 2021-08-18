@@ -6,22 +6,37 @@
 		INSERT INTO CHAT_GROUP VALUES(CHAT_GROUP_SEQ.NEXTVAL, 
 			#{maker}, #{title}, #{cnt}, #{content})
 	</insert>
-
+	
 	<select id="selectGroupList" resultMap="groupMap">
 		SELECT * FROM CHAT_GROUP
 	</select>
+	
+	<insert id="insertChatLog">
+		INSERT INTO CHAT_LOG VALUES(CHAT_LOG_SEQ.NEXTVAL, #{chatNo}, #{chatId})
+	</insert>
+	
+	<delete id="deleteChatLog">
+		DELETE FROM CHAT_LOG WHERE CHAT_NO=#{chatNo} AND LOGIN_ID=#{chatId} 
+	</delete> 
+	
+	<select id="selectGroupCurCnt" resultType="int">
+		SELECT COUNT(*) FROM CHAT_LOG WHERE CHAT_NO=#{no}
+	</select>
+	
+	
+	<resultMap type="chatLog" id="logMap">
+		<id column="CHAT_NO" property="chatNo" />
+		<id column="LOGIN_ID" property="chatId" />	
+	</resultMap>
+	
+	<resultMap type="chatGroup" id="groupMap">
+		<id column="CHAT_GROUP_NO" property="groupNo"/>
+		<id column="USER_ID" property="maker"/>
+		<id column="CHAT_GROUP_TITLE" property="title"/>
+		<id column="CHAT_GROUP_CNT" property="cnt"/>
+		<id column="CHAT_GROUP_CONTENT" property="content"/> 		
+	</resultMap>
 
-   	<resultMap type="chatGroup" id="groupMap">
-        <id column="CHAT_GROUP_NO" property="groupNo"/>
- 		<id column="USER_ID" property="maker"/>
- 		<id column="CHAT_GROUP_TITLE" property="title"/>
- 		<id column="CHAT_GROUP_CNT" property="cnt"/>
- 		<id column="CHAT_GROUP_CONTENT" property="content"/> 		
- 	</resultMap>
- 
-     <resultMap type="chatGroupMsg" id="chatGroupMsgMap">
-         
-     </resultMap>
- 
+     
  
 </mapper>
