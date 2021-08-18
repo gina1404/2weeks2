@@ -66,21 +66,29 @@ text-decoration: none;
 				</div>
 			</form>
 		</div>
+		<!-- 첨부파일이 이미지 파일이면
+					 	해당게시물에 첨부파일이 없으면 썸네일 -> 기본이미지 
+					 	첨부파일이 있는지 없는지 어떻게 확인? ima는 첨부파일이 있는 것만 저장되어있다.
+					 		<!-- 해당 게시물에 첨부파일이 있으면 첫번째 첨부파일이 썸네일 -->
+					 	-->
 		<div class="row" >
 		<c:forEach var="b" items="${list }">
 				<div class="card col-md-3 m-2">
 					<div class="card-header m-3">
-					 <c:forEach var="ima" items="${attachments }"> 
-					 
-					 <c:choose>
-					 <c:when test="${attachments ==null }">
-						<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/freeboardPic/default.png" class="card-img-top row" alt="이미지"> </a>
-					 </c:when>
-					 <c:otherwise>
-					 	<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/upload/freeboard/${ima.atch_New}" class="card-img-top row" alt="이미지"> </a>
-					 </c:otherwise>	
-					</c:choose>		
-					</c:forEach>	
+					<c:forEach var="ima" items="${b.attachments }" varStatus="vs">
+						<c:choose>
+							<c:when test="${ empty ima.atch_New}">
+							 <a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/freeboardPic/default.png"  class="card-img-top row" alt="기본이미지"> </a>
+							</c:when>
+							<c:otherwise>
+							<c:if test="${fn:contains(ima, 'png')}">
+								<c:if test="${vs.index == 0 }">
+						 			<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/upload/freeboard/${ima.atch_New}" class="card-img-top row" alt="첨부파일"> </a>
+						 		</c:if> 
+						 	</c:if>
+							</c:otherwise>					 	
+						</c:choose>
+				</c:forEach>	
 					</div>
 					<div class="card-body cardContent">
 						${b.category } &nbsp; &nbsp; [${b.post_Dt }]

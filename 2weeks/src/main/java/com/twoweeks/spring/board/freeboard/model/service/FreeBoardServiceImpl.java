@@ -168,7 +168,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Override
 	public List<PostAttachment> listAttachment() {
-		return dao.listAttachment(session );
+		return dao.listAttachment(session);
 	}
 	
 	
