@@ -75,7 +75,7 @@
 			            	<div class="dropdown-content">
 			            		<a href="#">회원 정보 변경</a>
 			            		<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>
-			            		<a href="#">나의 포인트 0원</a>
+			            		<a href="#">나의 포인트 ${member.userPoint_Cnt} 원</a>
 			            		<a href="${path}/member/logout">로그아웃</a>			            		
 			            	</div>
 			            	<div class="header-message" id="messageIcon">

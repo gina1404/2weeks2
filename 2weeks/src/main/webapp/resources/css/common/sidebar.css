@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 <style>
+	
 	.sidebar-default {
         width:100%;
         overflow: hidden;
