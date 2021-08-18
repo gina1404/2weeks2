@@ -15,9 +15,10 @@
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 	<section id="vaccine_center" class="container"> 
 	<div class="container">
-
-		<div id="map" class= "map" style="width:800px;height:550px;"></div>
-
+		<div class="vaccine_box">
+			<h3 class="vaccineCenter_title">백신 접종센터</h3> 
+			<div class="center-block" id="map" class= "map" style="width:800px;height:550px;"></div>
+		</div>
 	</div>
 	</section>
 
