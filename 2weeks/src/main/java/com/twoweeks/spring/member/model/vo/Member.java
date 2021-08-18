@@ -40,6 +40,7 @@ public class Member {
 	    private String access_Gb;
 	    // 이메일 
 	    private String user_Email;
+	    //private String emailcheck;
 	    // 현재 보유 포인트 
 	    private int userPoint_Cnt;
 	    // 자가격리시작일 

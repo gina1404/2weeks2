@@ -221,5 +221,68 @@ public class AdminController {
 		}
 		return mv;
 	}
-
+	@RequestMapping("/admin/deletePost")
+	public ModelAndView deletePost(ModelAndView mv,HttpServletRequest req) {
+		int seq=Integer.parseInt(req.getParameter("seq"));
+		int result=service.deletePost(seq);
+		if(result>0) {
+			mv.addObject("msg", "게시글이 삭제되었습니다. 권한확인을 눌러주세요");
+			mv.addObject("loc", "/admin/adminReporttable.do");
+			mv.setViewName("common/msg");
+		}else {
+			mv.addObject("msg", "게시글 삭제에 실패했습니다. 다시 시도해주세요");
+			mv.addObject("loc", "/admin/adminReporttable.do");
+			mv.setViewName("common/msg");
+		}
+		
+		return mv;
+	}
+	@RequestMapping("/admin/deleteKin")
+	public ModelAndView deleteKin(ModelAndView mv,HttpServletRequest req) {
+		int seq=Integer.parseInt(req.getParameter("seq"));
+		int result=service.deleteKin(seq);
+		if(result>0) {
+			mv.addObject("msg", "게시글이 삭제되었습니다. 권한확인을 눌러주세요");
+			mv.addObject("loc", "/admin/adminReporttable.do");
+			mv.setViewName("common/msg");
+		}else {
+			mv.addObject("msg", "게시글 삭제에 실패했습니다. 다시 시도해주세요");
+			mv.addObject("loc", "/admin/adminReporttable.do");
+			mv.setViewName("common/msg");
+		}
+		
+		return mv;
+	}
+	@RequestMapping("/admin/deletePostReply")
+	public ModelAndView deletePostReply(ModelAndView mv,HttpServletRequest req) {
+		int seq=Integer.parseInt(req.getParameter("seq"));
+		int result=service.deletePostReply(seq);
+		if(result>0) {
+			mv.addObject("msg", "게시글이 삭제되었습니다. 권한확인을 눌러주세요");
+			mv.addObject("loc", "/admin/adminReporttable.do");
+			mv.setViewName("common/msg");
+		}else {
+			mv.addObject("msg", "게시글 삭제에 실패했습니다. 다시 시도해주세요");
+			mv.addObject("loc", "/admin/adminReporttable.do");
+			mv.setViewName("common/msg");
+		}
+		
+		return mv;
+	}
+	@RequestMapping("/admin/deleteKinReply")
+	public ModelAndView deleteKinReply(ModelAndView mv,HttpServletRequest req) {
+		int seq=Integer.parseInt(req.getParameter("seq"));
+		int result=service.deleteKinReply(seq);
+		if(result>0) {
+			mv.addObject("msg", "게시글이 삭제되었습니다. 권한확인을 눌러주세요");
+			mv.addObject("loc", "/admin/adminReporttable.do");
+			mv.setViewName("common/msg");
+		}else {
+			mv.addObject("msg", "게시글 삭제에 실패했습니다. 다시 시도해주세요");
+			mv.addObject("loc", "/admin/adminReporttable.do");
+			mv.setViewName("common/msg");
+		}
+		
+		return mv;
+	}
 }

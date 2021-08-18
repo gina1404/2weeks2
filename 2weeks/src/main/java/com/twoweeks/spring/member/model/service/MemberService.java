@@ -25,6 +25,8 @@ public interface MemberService {
 	
 	public String selectPw(String user_Id);
 	
+	public int nicCheck(String userNic);
+	
 	
 
 }

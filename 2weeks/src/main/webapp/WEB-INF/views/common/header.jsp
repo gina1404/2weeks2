@@ -73,9 +73,9 @@
 			                </div>
 		            		<div class="header-profile-text" id="nick">${member.user_Nic}님 </div>  
 			            	<div class="dropdown-content">
-			            		<a href="#">회원 정보 변경</a>
+			            		<a href="${path}/member/myinfo">회원 정보 변경</a>
 			            		<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>
-			            		<a href="#">나의 포인트 0원</a>
+			            		<a href="#">나의 포인트 ${member.userPoint_Cnt} 원</a>
 			            		<a href="${path}/member/logout">로그아웃</a>			            		
 			            	</div>
 			            	<div class="header-message" id="messageIcon">
@@ -105,7 +105,7 @@
 		   });
 		   
 		   function connectWs(){
-		   	msSock =new SockJS("http://localhost:9090${pageContext.request.contextPath}/messageServer");
+		   	msSock =new SockJS("http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/messageServer");
 		   	msSocket= msSock;
 		   	console.log("connectWs");
 		   	
@@ -133,6 +133,8 @@
 			   toastr.info('알림', '새로운 메세지가 도착했습니다.', {timeOut: 5000});
 
 		   }
+
+
 
 	      </script>
 	</header>     

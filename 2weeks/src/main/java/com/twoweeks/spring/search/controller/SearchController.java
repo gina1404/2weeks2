@@ -41,7 +41,7 @@ public class SearchController {
 	}		
 		
 	//커뮤니티 데이터 크롤링 - Daum 블로그
-	@RequestMapping("/update/blogDummy")
+	//@RequestMapping("/update/blogDummy")
 	public void updateBlogDummy(String searchKeyword) {
 		//크롤링한 데이터를 받아서 ListMap에 저장
 //		String searchKeyword="백신질문";

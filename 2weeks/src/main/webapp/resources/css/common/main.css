@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.gridContainer{
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-template-rows: repeat(3, minmax(100px, auto));
+	gap: 10px;
+	align-items: stretch;
+}
+.item{
+	border: 1px solid;
+}
+.item:nth-child(9) {
+	grid-column: 1/5;
+	grid-template-columns: 1fr, 1fr;
+}
+.item:nth-child(10){
+	grid-column: 5/9;
+	grid-template-columns: 1fr, 1fr;
+}
+.item:nth-child(11){
+	grid-column: 1/9;
+}

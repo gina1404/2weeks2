@@ -57,6 +57,13 @@ public class MemberDaoImpl implements MemberDao {
 	public String selectPw(String user_Id, SqlSession session) {
 		return session.selectOne("member.selectPw",user_Id);
 	}
+
+	@Override
+	public int nicCheck(String userNic, SqlSession session) {
+		return session.selectOne("member.nicCheck", userNic);
+	}
+	
+	
 	
 	
 	

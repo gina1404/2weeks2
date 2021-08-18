@@ -55,8 +55,8 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		
 		String ex="20210814";
 		
-		//String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=9pnmHJmbkUpNSmMy%2FGw4uRkhWrEvJq1AIuZmpisXpZ2On4uPUVtQgWKq%2FNYBzMEccRQJLCmov7%2Brh%2BAbJQ4eyg%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+realtoday+"&endCreateDt="+realtoday;
-		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=9pnmHJmbkUpNSmMy%2FGw4uRkhWrEvJq1AIuZmpisXpZ2On4uPUVtQgWKq%2FNYBzMEccRQJLCmov7%2Brh%2BAbJQ4eyg%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+ex+"&endCreateDt="+ex;
+		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=9pnmHJmbkUpNSmMy%2FGw4uRkhWrEvJq1AIuZmpisXpZ2On4uPUVtQgWKq%2FNYBzMEccRQJLCmov7%2Brh%2BAbJQ4eyg%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+realtoday+"&endCreateDt="+realtoday;
+		//String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=9pnmHJmbkUpNSmMy%2FGw4uRkhWrEvJq1AIuZmpisXpZ2On4uPUVtQgWKq%2FNYBzMEccRQJLCmov7%2Brh%2BAbJQ4eyg%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+ex+"&endCreateDt="+ex;
 		
 		RestTemplate restTemplate = new RestTemplate(); //API를 호출하기 위한 클래스
 		

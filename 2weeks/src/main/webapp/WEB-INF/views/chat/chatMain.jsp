@@ -6,36 +6,39 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="covid/reportList"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <link href="${path }/resources/css/chat/chatting.css" rel="stylesheet" />
 
 <section class="container">
-	<h3>오픈채팅</h3>
-	<div id="addGroupBtn">
-		<!-- <a id="addRoomBtn" onclick="open('${path}/addChatRoom ', '_blank', 'width=400, height=550, resizable=no')">채팅방 만들기</a> -->
-		<div id="addRoomBtn">채팅방 만들기</div>
-	</div>
-	<div id="chatContainer">
-		<c:forEach var="l" items="${list }" varStatus="status">
-			<div id="chatRoomOne">
-				<div id="chatIcon">
-					<img src="${path }/resources/images/icons/chat.png" alt="chatIcon"/>
+	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+	<div class="content">
+		<h3>오픈채팅</h3>
+		<div id="addGroupBtn">
+			<!-- <a id="addRoomBtn" onclick="open('${path}/addChatRoom ', '_blank', 'width=400, height=550, resizable=no')">채팅방 만들기</a> -->
+			<div id="addRoomBtn">채팅방 만들기</div>
+		</div>
+		<div id="chatContainer">
+			<c:forEach var="l" items="${list }" varStatus="status">
+				<div id="chatRoomOne">
+					<div id="chatIcon">
+						<img src="${path }/resources/images/icons/chat.png" alt="chatIcon"/>
+					</div>
+					<div id="entry" >
+						<div id="entry_a" class="chatName half">
+							${l.title }
+						</div>					
+						<input type="hidden" value="${l.groupNo}">
+											
+						<div id="cntLimit">${l.curCnt } / ${l.cnt }명</div>
+						<div id="chatContent">${l.content }</div>
+					</div>
 				</div>
-				<div id="entry" >
-					<div id="entry_a" class="chatName half">
-						${l.title }
-					</div>					
-					<input type="hidden" value="${l.groupNo}">
-										
-					<div id="cntLimit">${l.curCnt } / ${l.cnt }명</div>
-					<div id="chatContent">${l.content }</div>
-				</div>
-			</div>
-			<hr>	
-		</c:forEach>
+				<hr>	
+			</c:forEach>
+		</div>
 	</div>
 </section>
 

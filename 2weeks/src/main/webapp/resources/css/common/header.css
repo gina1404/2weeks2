@@ -1,6 +1,13 @@
 @charset "UTF-8";
-<style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+<style>
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 900;
+	font-display: swap;
+	src: local('Pretendard Black'), url('./woff2/Pretendard-Black.woff2') format('woff2'), url('./woff/Pretendard-Black.woff') format('woff');
+}
 
 body{
 	margin:0;
@@ -15,7 +22,8 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	align-items: center;
 	background-color: #F7F8FC;
 	display: flex;
-	width: 100%;
+	width: 1440px;
+	margin: auto;
 	position:fixed;
 	height:60px; /* header 높이 */
 	top:0;
@@ -25,26 +33,35 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	font-family: 'Pretendard';
 }		
 #sidebar {
-	left:0;
 	align-items: flex-start;
 	width:200px ; /* 사이드바 너비  15%->200px */
 	overflow: hidden;
-	left:0;
 	top:60px; /* header 높이에 따라 변경해야 됨 */
 	position:fixed;
-	margin:0;
 	padding:0;
 	height:100%;
+
 }
+
 .container {
-	margin-left:200px !important; /* 사이드바 너비만큼 띄움 */
-	margin-top:60px !important; /* 헤더 높이만큼 띄움 */
+	/* margin-left:200px !important; 사이드바 너비만큼 띄움
+	margin-top:60px !important; 헤더 높이만큼 띄움
+	margin-bottom:0; */
+	/* margin: 60px 0 0 200px !important; */
 	background-color: #F7F8FC !important;
 	min-height:800px;
-	width:calc(100% - 200px) !important; /* 본문 너비 */
-	padding:15px 75px 0 15px !important;
-	margin-bottom:0;
+	/* width:calc(100% - 200px) !important; 본문 너비 */
+	width: 1440px;
+	/* padding:15px 75px 0 15px !important; */
+	margin: 60px auto auto auto;
+
 }  	
+.content{
+    width: 1200px;
+    height: 100%;
+    float: right;
+   	margin: 0 20px 0 20px;
+}
 #aside {
 	display: flex;
 	background-color: #F7F8FC; 
@@ -70,11 +87,11 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 		left:0;
 }
 .header-logo{
-		display:flex;
-		align-items: center;
-		justify-content: flex-end;
-		padding:0;
-		font-family: 'Pretendard';
+	display:flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding:0;
+	font-family: 'Pretendard';
 	font-weight:bolder;
 	font-size:25px;
 	text-decoration:none;
