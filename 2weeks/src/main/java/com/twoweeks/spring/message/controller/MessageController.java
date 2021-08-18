@@ -28,6 +28,12 @@ public class MessageController {
 	@Autowired
 	private MessageService messageService;
 	
+	//테스트(삭제예정)
+	@RequestMapping("/message/Newmessagelist")
+	public String messageListtest() {
+		return "/message/Newmessagelist";
+	}
+	
 	
 	//메세지 목록
 	@RequestMapping("/message/messagelist")

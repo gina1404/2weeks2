@@ -15,22 +15,24 @@
 	}
 </style>
 
+
 <c:forEach var="tmp" items="${list }">
 	<div class="chat_list_box${tmp.room} chat_list_box">
 		<div type="button" class="chat_list" room="${tmp.room }" other-nick="${tmp.other_nick }">
 			<!-- active-chat -->
 			<div class="chat_people">
 				<div class="chat_img">
-					<a href="other_profile.do?other_nick=${tmp.other_nick}">
+					<!-- <a href="other_profile.do?other_nick=${tmp.other_nick}"> -->
+					
 					<c:choose>
-					<c:when test="${tmp.user_Pfrename ne null}">
-						<img src="${pageContext.request.contextPath}/resources/upload/member/profile${tmp.user_Pfrename}" alt="프사"/>
+					<c:when test="${tmp.profile ne null}">
+						<img src="${pageContext.request.contextPath}/resources/upload/member/profile${tmp.profile}" alt="프사"/>
 					</c:when>
-					<c:when test="${tmp.user_Pfrename eq null }">
+					<c:when test="${tmp.profile eq null }">
 						<img src="${pageContext.request.contextPath}/resources/images/member/profile.jpg" alt="프사"/>
 					</c:when>
 					</c:choose>	
-					</a>
+					<!-- </a> -->
 				</div>
 				
 				<!-- 닉네임/최신 보낸시간/최신 내용 -->
@@ -42,17 +44,15 @@
 						</span>
 					</h5>
 						<!-- 내용 / 읽음처리 -->
-					<div class="row">
-						<div class="col-md-10">
-							<p>${tmp.content }</p>
+					<p>${tmp.content }</p>
+						
+					<!-- 사용자가 안읽은 메세지 갯수가 0보다 클때만 -->
+					<c:if test="${tmp.unread>0 }">				
+						<div class="unread${tmp.room }">
+							<span class="badge bg-danger">${tmp.unread}</span>
 						</div>
-						<!-- 사용자가 안읽은 메세지 갯수가 0보다 클때만 -->
-						<c:if test="${tmp.unread>0 }">				
-							<div class="col-md-2 unread${tmp.room }">
-								<span class="badge bg-danger">${tmp.unread}</span>
-							</div>
-						</c:if>
-					</div>
+					</c:if>
+					
 				</div>
 			</div>
 		</div>
