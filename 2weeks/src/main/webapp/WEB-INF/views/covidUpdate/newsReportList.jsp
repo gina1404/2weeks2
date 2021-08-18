@@ -16,39 +16,39 @@ Compiled and minified JavaScript
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="covid/reportList"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
 <link href="${pageContext.request.contextPath }/resources/css/covid/covidReportList.css" rel="stylesheet" />
 
 
-<section class="container">
-
-	<h4>보도자료</h4>
-	
-	<p id="reportListCnt">총 <span>${totalContents }</span>건</p>	
-	<table id="reportTab" class="table table-striped">
-		<tr id="reportTh">
-			<th>번호</th>
-			<th>제목</th>
-			<th>담당</th>
-			<th>작성일시</th>
-			<th>첨부파일</th>
-		</tr>		
-		<c:forEach var="r" items="${reportList }"> 				
-			<tr>
-				<td>${r.no }</td>
-				<td>${r.title }</td>
-				<td>${r.team }</td>
-				<td>${r.date }</td>
-				<td>${r.attachment !=null?"💾":" "}
-			</tr>
-		</c:forEach>
-	</table>
-	
-	<div id="reportPageBar">
-		${pageBar }
+<section class="container">	
+	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+	<div class="content">
+		<h4>보도자료</h4>
+		
+		<p id="reportListCnt">총 <span>${totalContents }</span>건</p>	
+		<table id="reportTab" class="table table-striped">
+			<tr id="reportTh">
+				<th>번호</th>
+				<th>제목</th>
+				<th>담당</th>
+				<th>작성일시</th>
+				<th>첨부파일</th>
+			</tr>		
+			<c:forEach var="r" items="${reportList }"> 				
+				<tr>
+					<td>${r.no }</td>
+					<td>${r.title }</td>
+					<td>${r.team }</td>
+					<td>${r.date }</td>
+					<td>${r.attachment !=null?"💾":" "}
+				</tr>
+			</c:forEach>
+		</table>
+		
+		<div id="reportPageBar">
+			${pageBar }
+		</div>
 	</div>
-
 </section>
 
 

@@ -15,6 +15,7 @@ footer{
 	text-align:center;
 	align-items:center;
 	justify-content: center;
+	bottom: 0;
 }
 .footer-col{
 	display:inline-block;
