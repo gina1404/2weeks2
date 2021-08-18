@@ -20,11 +20,16 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.twoweeks.spring.search.model.dao.SearchDao;
+import com.twoweeks.spring.search.model.vo.DummyData;
 
 @Service
 public class SearchServiceImpl implements SearchService{
@@ -152,6 +157,101 @@ public class SearchServiceImpl implements SearchService{
             throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
         }
     }
+
+   //다음 블로그 크롤링
+    @Override
+	public List<DummyData> getBlogDummy(String searchKeyword) {
+    	List<DummyData> list = new ArrayList<>(); //값을 담을 list 생성
+    	
+    	try {
+    		for(int i=0; i<=10; i++) { //페이지 반복
+    			String daumblogUrl="https://search.daum.net/search?w=blog&nil_search=btn&DA=NTB&enc=utf8&q="+searchKeyword; //+"&p="+i;
+    			Document doc=Jsoup.connect(daumblogUrl).get();
+    			Elements elem=doc.select("div.coll_cont ul li div.wrap_cont div.cont_inner");
+    			
+    			
+    					
+    			//데이터 전처리
+    			for(Element e : elem) {			
+    				String title=e.select("a.f_link_b").text();//제목
+    				String link=e.select("a.f_link_b").attr("href"); //게시글 링크		
+    				String content; //미리보기
+    				String update; //게시일	
+    				String writer; //작성자
+    							
+    				Document doc2=Jsoup.connect(link).get(); //원문 가져오기
+    				writer=doc2.select("span.author").text();
+    				update=doc2.select("span.date").text();
+    				content=doc2.select(".tt_article_useless_p_margin").text();
+    				
+    				//값을 가져올 수 없는 경우
+    				if(content.isBlank()) content=e.select("p.f_eb.desc").text(); //미리보기로 대체
+    				if(update.isBlank()) update=e.select("span.f_nb.date").text();
+    				if(writer.isBlank()) writer="unknown";
+    				
+    				//writer 데이터 정제
+    				if(writer.contains("by")) writer=writer.substring(3);
+    				if(writer.contains(" ")) writer=writer.substring(0, writer.lastIndexOf(" "));
+    				if(update.contains(":")) update=update.substring(0, update.indexOf(":")-4);
+    				
+    				//날짜 변환
+    				update=update.replaceAll(" ", "");
+    				if(update.contains("전")||update.contains("어제")) update="2000.00.00"; //변환이 어려울 경우 임의 날짜로 저장
+    				SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
+ 					Date newdate=new Date(sdf.parse(update).getTime());
+ 					update=sdf.format(newdate);
+//    				if(update.charAt(update.length()-1)=='.') update=update.substring(0, update.length()-1);
+    				
+    				//content 데이터 정제
+    				if(content.length()>=1000) content= content.substring(0,1000);
+    				content=content.replaceAll("'", "");
+    				content=content.replaceAll("‘","");
+    				content=content.replaceAll("’","");
+    				content=content.replaceAll(";", "");
+    				content=content.replaceAll("#", "");
+    				
+    				//title 데이터 정제
+    				if(title.length()>=30) title= content.substring(0,30);
+    				title=title.replaceAll("'", "");
+    				title=title.replaceAll("‘", "");
+    				title=title.replaceAll("’", "");
+    				title=title.replaceAll(";", "");
+    				title=title.replaceAll("#", "");    				
+    				
+    				//데이터 확인용
+//    				System.out.println(title);
+//    				System.out.println(content);
+//    				System.out.println(newdate);
+//    				System.out.println(writer);
+//    				System.out.println("===============================");
+    				
+    				//데이터 저장
+    				DummyData dd=new DummyData();
+    					//게시글 번호는 sql default로 처리할 것
+    				dd.setUserId("dummy"); //작성자ID
+    				dd.setMenuGB("COVID"); //게시판 종류
+    				dd.setCategory("COVID"); //카테고리 글 분류
+    				dd.setPostTitle(title); //제목
+    				dd.setPostContent(content); //본문
+    					//공유 설정은 default값 사용
+    					//좋아요도 default 사용
+    				dd.setPostDT(update); //작성일 		
+    				
+    				list.add(dd);
+    			} //데이터 전처리 종료
+    		} //페이지 반복문 종료
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}    	
+		return list;
+	}
+    
+    //다음 블로그 크롤링 데이터 저장
+	@Override
+	public int insertBlogDummy(DummyData dd) {
+		return dao.insertBlogDummy(session, dd);
+	}
+    
     
     
 }

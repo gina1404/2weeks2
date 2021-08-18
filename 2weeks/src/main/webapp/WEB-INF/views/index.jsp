@@ -22,8 +22,8 @@
 	<section id="home-report&news"></section>
 	<section id="home-community"></section>
 </section>
-	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
+	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 

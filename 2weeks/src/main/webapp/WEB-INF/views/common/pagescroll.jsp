@@ -18,10 +18,22 @@
             height:30px;
             bottom:120px;
 			position:fixed;
+<<<<<<< HEAD
 			cursor: pointer;			
         }        
+=======
+			cursor: pointer;
+        	padding: 5px;
+        	background-color:#D3D8F4;
+        	border-radius:50%;
+        	justify-content: center;
+        	align-items:center;
+        }
+>>>>>>> 6c299bced394f2be5a5515c2c28747bdfd8f6f31
         #pagescroll-button:hover{
-        	background-color: #555;
+        	cursor:pointer;
+        	border-radius:50%;
+        	filter: brightness(95%);
         }
         #pagescroll-button img{
         	position: fixed;        	       	    

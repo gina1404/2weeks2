@@ -6,18 +6,16 @@
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/covid/regionalKor.css">
 <script type="text/javascript" src="${path}/resources/js/d3.js"></script>
 
-<section id="regionalKor" style="width:80%; min-height:300px; margin:10%; border:1px solid blue; background-color:white;">
+<section id="regionalKor">
 		<!-- 지도/표 선택 버튼 -->
-		<div style="display:flex;justify-content:space-around">
-			<button class="regionalKor-button" onclick="fn_selectButton1()">지도</button>
-			<button class="regionalKor-button" onclick="fn_selectButton2()">지역별 표</button>
+		<div class="regionalKor-button-area"">
+			<button id="regionalKor-map-button" class="regionalKor-button regionalKor-button-on" onclick="fn_selectButton1()">지도</button>
+			<button id="regionalKor-table-button" class="regionalKor-button" onclick="fn_selectButton2()">지역별 표</button>
 		</div>		
 		<!-- 지역별 현황 지도 영역 -->
-		<div id="regionalKor-map" style="border:1.5px solid yellow;"></div>		
+		<div id="regionalKor-map"></div>		
 		<!-- 지역별 현황 표 영역 -->
 		<div id="regionalKor-table" style="border:1.5px solid purple; display:none;"></div>
-		
-		
 </section>
 
 <!-- 지역별 현황 출력 -->
@@ -26,10 +24,17 @@
 function fn_selectButton1(){
 	$("#regionalKor-map").show();
 	$("#regionalKor-table").hide();
+	
+	$("#regionalKor-map-button").addClass("regionalKor-button-on");
+	$("#regionalKor-table-button").removeClass("regionalKor-button-on");
 }
 function fn_selectButton2(){
 	$("#regionalKor-map").hide();
 	$("#regionalKor-table").show();
+	
+	$("#regionalKor-map-button").removeClass("regionalKor-button-on");
+	$("#regionalKor-table-button").addClass("regionalKor-button-on");
+	
 }
 
 /* 지역별 현황 출력*/
@@ -78,9 +83,9 @@ $("#regionalKor").each(function(){
                 	for(var k=0;k<18;k++){
                 		if(d.properties.name==data[k].gubun){
                 			console.log(d.properties.name+":"+data[k].gubun);
-                			if(data[k].incDec<50) mapColor='blue';                			
-                			else if(data[k].incDec>=50 && data[k].incDec<100) mapColor='green';
-                			else mapColor='red';
+                			if(data[k].incDec<50) mapColor='#f2f2fa';                			
+                			else if(data[k].incDec>=50 && data[k].incDec<100) mapColor='#D3D8F4';
+                			else mapColor='#c4c4f5';
                 		}
                 	}
                 	return mapColor;
@@ -90,23 +95,45 @@ $("#regionalKor").each(function(){
             
                 //라벨 표시
                 labels = states.selectAll('text').data(json.features).enter()
-                	.append('text')
-					.text(function(d) { //출력할 값 추가
-	                	 var incDec;
-	                	 var defCnt;
-	                	 for(var j=0;j<18;j++){
-	                		 if(d.properties.name==data[j].gubun){ //구분값(지역명)이 일치할 경우
-	                    		 incDec=data[j].incDec; //오늘 확진자 수
-	                    		 defCnt=data[j].defCnt; //총 확진자 수
-	                    	 }                		 
-	                	 }                	 
-	                	 return d.properties.name+':'+incDec+':'+defCnt;                	 
-	                 })
-					.attr('transform', render) //render 값으로 위치를 조절함
-					.attr('id', function(d) { return 'label-' + d.properties.name_eng;}) //id 추가
+            	.append('text')
+				.text(function(d) { //출력할 값 추가             	 
+                	 return d.properties.name 	 
+                 })                 
+				.attr('transform', render) //render 값으로 위치를 조절함
+				.attr('id', function(d) { return 'label-' + d.properties.name_eng;}) //id 추가
+				
+				
+				.append('svg:tspan') //
+				.attr('x', 0)
+  				.attr('dy', 13)
+                .text(function(d) { //출력할 값 추가
+               	 var incDec;
+               	 var defCnt;
+               	 for(var j=0;j<18;j++){
+               		 if(d.properties.name==data[j].gubun){ //구분값(지역명)이 일치할 경우
+                   		 incDec=data[j].incDec; //오늘 확진자 수
+                   		 defCnt=data[j].defCnt; //총 확진자 수
+                   	 }                		 
+               	 } 
+               	 return "+"+incDec;
+                })
+                /* .append('svg:tspan')
+                .attr('x', 20)
+  				.attr('dy', 0)
+                .text(function(d) { //출력할 값 추가
+               	 var incDec;
+               	 var defCnt;
+               	 for(var j=0;j<18;j++){
+               		 if(d.properties.name==data[j].gubun){ //구분값(지역명)이 일치할 경우
+                   		 incDec=data[j].incDec; //오늘 확진자 수
+                   		 defCnt=data[j].defCnt; //총 확진자 수
+                   	 }                		 
+               	 } 
+               	 return defCnt;
+                }) */
+			
             }); //기본 지도 그리기 끝             
-            $("#regionalKor").append("업데이트 일시: "+data[0].stdDay); //업데이트 일시 추가
-            
+            $("#regionalKor").append("<div class='regionalKor-update'>업데이트 일시: "+data[0].stdDay+"</div>"); //업데이트 일시 추가
           //텍스트 위치 조절
 		    function render(d) {
 		        var arr = path.centroid(d);

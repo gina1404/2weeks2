@@ -12,7 +12,7 @@
 	
 
 	<div>지역별 확산 현황</div>
-		<section id="home-covid-chart" style="width:45%; min-height:500px; border:1px solid green;">
+		<section id="home-covid-chart" style="width:45%; min-height:500px;">
 			<jsp:include page="/WEB-INF/views/covidUpdate/regionalKor.jsp"></jsp:include>
 		</section>
 </section>
