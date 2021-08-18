@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.twoweeks.spring.admin.model.vo.Grant;
 import com.twoweeks.spring.admin.model.vo.Notice;
 import com.twoweeks.spring.admin.model.vo.Point;
 import com.twoweeks.spring.admin.model.vo.Report;
@@ -21,4 +22,11 @@ public interface AdminDao {
 	int selectMemberPoint(SqlSession session,String name);
 	int updatePointEnd(SqlSession session,Point re);
 	List<Report>adminReporttable(SqlSession session);
+	int selectReportCount(SqlSession session);
+	int reportUpdateYn(SqlSession session,String pk);
+	List<Report>reportList(SqlSession session,String userId);
+	List<Grant>selectGrantTable(SqlSession session);
+	int updateGrantTable(SqlSession session,String userId);
+	int updateGrantMember(SqlSession session,Member m);
+	int selectGrantCount(SqlSession session);
 }

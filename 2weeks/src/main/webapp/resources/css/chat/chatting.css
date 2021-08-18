@@ -1,97 +1,88 @@
 @charset "UTF-8";
 
-#addGroupBtn{
-	display : block;
-	float:right;
-}
-
-#addGroup{	
+#chatContainer{
+	/* background-color: #FAFAFA; */
+	width: 90%;
+	height:730px;	
+	margin: auto;
+	border-radius: 20px;
+	padding: 20px 20px 0 30px;
+	overflow-x: hidden;
 	border: 1px solid;
-    display: block;
-    height: 160px;
-    width : 300px;
-    float: right;
 }
 
-#addBox{	
+#addGroupBtn{
+	float:right;
+	cursor:pointer;
+	font-size: 15px;
+    font-weight: bolder;
+    margin: 10px 80px 10px 0;    
+}
+#addGroupBtn:hover{
+	color: #424242;
+	box-shadow: 1px 1px 3px #dadce0;	
+}
+#chatRoomOne{
+	padding: 10px;
+	/* background-color: white; */
+	border-radius: 15px;
+	display: flex;
+	border: 2px solid white; 
+}
+#chatIcon, #entry, #entry_a, #cntLimit, #chatContent{
+	/* border:1px solid; */
+}
+#entry{	
+	display:inline;
+	font-size: 17px;
+    vertical-align: middle;
+    cursor:pointer;
+    margin: 10px 0 10px 20px;
+    width: 100%;
+}
+#chatIcon{
+	display:inline;
+	width:50px;
+	height: 50px;
+	vertical-align: middle;
 	margin: auto;
 }
-
-#title{
-	width: 200px;
-}
-#limit{
-	width: 185px;
-	text-align: right;
-}
-
-#content{
+#chatIcon img{
+	width:50px;
 	height: 50px;
-	width: 200px;
-	resize:none;
-}
-#addBtn{
-	float:right;
-}
-#sendBox, #chatContainer{
-	display:inline-block;
-}
-
-#group, #cntLimit, #chatContent, #chatTitle, #entry{
-	/* border: 1px solid; */
-}
-
-#groupList{
-	height:auto;
-	width:450px;	
-	overflow-x: hidden;
-}
-
-#group{
-	display:inline-block;	
-}
-
-#chatTitle{
-	display:inline-block;
-	font-weight: bolder;
-    font-size: 17px;
-    width: 300px;
-    height: 30px;
-    margin: 0 0 0 10px;
-}
-
-#entry{
-	position: absolute;
-	display:inline-block;
-	font-weight: bolder;
-    font-size: 17px;
-    vertical-align: middle;
-    margin: 15px 0 0 5px;
-    cursor:pointer;
 }
 
 #entry_a{
 	text-decoration:none;
 	color:black;
+    width: 60%;
+    display: inline;
+	font-weight: bolder;  
+	position: relative;
 }
+
+.half{
+	background: linear-gradient(to top, #D0A9F5 50%, transparent 50%);
+}
+
 #entry_a:hover{
 	text-decoration: underline;
 	color:#6E6E6E;
 }
 
 #cntLimit{
-	display:inline-block;
+	display:inline;
 	width: 60px;
     height: 25px;
     text-align: center;
     color:#424242;
     font-size: 14px;
-    margin-left: 10px;
+    float:right;
 }
 
 #chatContent{
-	margin: 0 0 0 15px;
+	margin: 10px 0 0 15px;
 	width: 380px;
 	color:#424242;
-    font-size: 14px;
+    font-size: 14px;    
 }

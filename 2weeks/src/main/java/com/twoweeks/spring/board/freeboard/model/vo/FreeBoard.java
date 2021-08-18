@@ -27,6 +27,7 @@ public class FreeBoard {
 	private String post_Cnt; //조회수
 	private String open_Yn; //작성자명 공개 여부
 	private List<PostAttachment> attachments=new ArrayList();
+	private int replyNo; // 댓글 수 
 	
 	private String searchType;
 	private String keyword;

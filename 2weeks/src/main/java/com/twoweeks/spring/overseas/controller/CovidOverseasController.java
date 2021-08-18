@@ -84,8 +84,10 @@ public class CovidOverseasController {
 		/* 어제자 확진자/사망자 총합 가져오기 */
 		OverseasGr ydayDef = service.selectydayDef();
 		System.out.println(ydayDef);
-		int todayDef = a - ydayDef.getTotal();
-		int todayDeath = b - ydayDef.getDeath();
+		int todayDef = Math.abs(a - ydayDef.getTotal());
+
+		int todayDeath = Math.abs(b - ydayDef.getDeath());
+
 		// System.out.println(todayDef);
 		String realtodayDef = formatter.format(todayDef);
 
@@ -149,9 +151,13 @@ public class CovidOverseasController {
 				pielist.add(op1);
 			}
 		}
-		System.out.println(pielist);
-
-		System.out.println(list.get(5).getNationNm());
+		/*
+		 * System.out.println(pielist);
+		 * 
+		 * System.out.println(list.get(5).getNationNm());
+		 */
+		System.out.println(list.get(0).getNationNmEn());
+		System.out.println(list.get(0).getNatDeathCnt());
 
 		mv.addObject("list", list);
 		mv.addObject("pielist", pielist);

@@ -1,29 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="path" value="${pageContext.request.contextPath }"/> 
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/common/main.css">
+ 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-<section class="container">		
-	<section id="home-covid-domestic" style="display:inline-block;width:45%; border:1px solid green;" >
-		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 1</div>
-		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 2</div>
-		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 3</div>
-		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 4</div>
-	</section>
-	<section id="home-covid-global" style="display:inline-block;width:45%;border:1px solid green;" >
-		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 1</div>
-		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 2</div>
-		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 3</div>
-		<div style="width:20%; height:300px; display:inline-block; border:1px solid blue;">항목 4</div>
-	</section>	
-	<section id="home-report&news"></section>
-	<section id="home-community"></section>
+
+
+<section class="container">
+	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>			
+	<div class="content gridContainer">
+		<div class="item">1</div>
+		<div class="item">2</div>
+		<div class="item">3</div>
+		<div class="item">4</div>
+		<div class="item">5</div>
+		<div class="item">6</div>
+		<div class="item">7</div>
+		<div class="item">8</div>
+		<div class="item">a</div>
+		<div class="item">b</div>
+		<div class="item">가</div>
+	</div>	
 </section>
-	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
+	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 

@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="covid/reportList"/>
 </jsp:include>
@@ -18,7 +22,7 @@
 	<div id="scrap" class="boardListBack">
 		<h4>즐겨찾기</h4>
 		<div class="boardList">
-			<table class="myBoardTab">
+			<table class="myBoardTab table table-striped">
 				<tr>
 					<th>글번호</th>
 					<th>제목</th>
@@ -28,7 +32,7 @@
 				</tr>
 				<tr>
 					<td>1</td>
-					<td>2</td>
+					<td>abcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg</td>
 					<td>3</td>
 					<td>4</td>
 					<td>5</td>
@@ -40,7 +44,7 @@
 	<div id="myBoard" class="boardListBack">
 		<h4>내가 작성한 게시글</h4>
 		<div class="boardList">
-			<table class="myBoardTab">
+			<table class="myBoardTab table table-striped">
 				<tr>
 					<th>글번호</th>
 					<th>제목</th>

@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 public interface FreeBoardDao {
 
@@ -32,5 +32,7 @@ public interface FreeBoardDao {
 	int update(SqlSession session, FreeBoard fb); 
 
 	int updateAttachment(SqlSession session, PostAttachment a);
+
+	
 	
 }

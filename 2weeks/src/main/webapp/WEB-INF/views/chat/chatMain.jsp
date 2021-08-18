@@ -6,65 +6,76 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="covid/reportList"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
-<link href="${path }/resources/css/chat/chatting.css?after" rel="stylesheet" />
+<link href="${path }/resources/css/chat/chatting.css" rel="stylesheet" />
 
 <section class="container">
-	<h3>오픈채팅</h3>
-		
-	<button id="addGroupBtn">채팅방 만들기</button>
-	<div id="addGroup" style="display:none;">
-		<table id="addBox">
-			<tr>
-				<th>방 제목</th>
-				<td>
-					<input type="text" id="title" placeholder="최대 20자">
-					<input type="hidden" value="" id="maker">
-				</td>				
-			</tr>
-			<tr>
-				<th>최대 인원</th>				
-				<td><input type="number" id="limit" value="2" min="2" max="30" placeholder="최대 30명">명</td>						
-			</tr>
-			<tr>
-				<th>대화 주제</th>
-				<td><textarea id="content" placeholder="최대 50자"></textarea></td>	
-			</tr>
-			<tr>
-				<td colspan="2"><button id="addBtn">생성</button></td>
-			</tr>
-		</table>		
-	</div>	
-	
-	<div id="groupList">
-		<c:forEach var="l" items="${list }" varStatus="status">
-			<div id="group">					
-				<div id="chatTitle">${l.title }</div>
-				<div id="cntLimit">0 / ${l.cnt }명</div>
-				<div id="chatContent">${l.content }</div>
-			</div>
-			<div id="entry">
-				<a id="entry_a" onclick="open('${path}/chatting?no=${l.groupNo} ', '_blank', 'width=400, height=600, resizable=no')">입장</a>	
-			</div>
-			<hr>				
-		</c:forEach>			
+	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+	<div class="content">
+		<h3>오픈채팅</h3>
+		<div id="addGroupBtn">
+			<!-- <a id="addRoomBtn" onclick="open('${path}/addChatRoom ', '_blank', 'width=400, height=550, resizable=no')">채팅방 만들기</a> -->
+			<div id="addRoomBtn">채팅방 만들기</div>
+		</div>
+		<div id="chatContainer">
+			<c:forEach var="l" items="${list }" varStatus="status">
+				<div id="chatRoomOne">
+					<div id="chatIcon">
+						<img src="${path }/resources/images/icons/chat.png" alt="chatIcon"/>
+					</div>
+					<div id="entry" >
+						<div id="entry_a" class="chatName half">
+							${l.title }
+						</div>					
+						<input type="hidden" value="${l.groupNo}">
+											
+						<div id="cntLimit">${l.curCnt } / ${l.cnt }명</div>
+						<div id="chatContent">${l.content }</div>
+					</div>
+				</div>
+				<hr>	
+			</c:forEach>
+		</div>
 	</div>
 </section>
 
 <script>
 	let rootPath="${pageContext.request.contextPath}";
+	
+	$("#addRoomBtn").click(function(e){
+		let popup=window.open('${path}/addChatRoom ', '_blank', 'width=400, height=550, resizable=no');
 		
-	const check="${check}";	
-	if(check){
-		alert(check);
-		console.log(check);
-	}		
-</script>
+		popup.addEventListener('beforeunload', function(){
+			$(".container #chatContainer").load(rootPath+"/chatting.do .container #chatRoomOne");
+		});
+	});
+	
+	$(".chatName").click(function(e){
+		let no=$(this).next().val();
+		console.log(no);
+		
+		let popup=window.open('${path }/chatting?no='+no, '_blank', 'width=400, height=600, resizable=no, menubar=no, toolbar=no');
 
-<script src="<c:url value='/resources/js/chat/chatMain.js' />"></script>
+		popup.addEventListener('beforeunload', function(){
+			$.ajax({
+				url: rootPath+"/deleteChatLog",
+				type: "post",
+				dataType: "html",
+				contentType: "application/json; charset=UTF-8",
+				data: {
+					"no" : no
+				},
+				success: function(data){
+					//console.log(data);
+				}
+			});			
+		});
+	});
+	
+</script>
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

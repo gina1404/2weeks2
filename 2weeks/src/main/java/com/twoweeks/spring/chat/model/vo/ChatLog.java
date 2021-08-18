@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class ChatLog {
 
-	private String userId;
-	private String password;
-	private String userName;
-		
+	private int chatNo;
+	private String chatId;
+	private String chatName;
+	
 }

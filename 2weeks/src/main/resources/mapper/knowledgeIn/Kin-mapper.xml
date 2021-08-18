@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="knowledgeIn">
+	<select id="selectKinList" resultMap="KnowledgeInMap">
+ 	SELECT * 
+		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_SQ DESC 
+		
+	
+<!-- SELECT * FROM KIN --> 
+	</select>
+	
+
+	
+	<select id ="cnt"  resultMap="KnowledgeInMap">
+		 	SELECT * 
+		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_CNT DESC   
+	</select>
+	
+	
+	<select id ="MyQ"  resultMap="KnowledgeInMap">
+<!-- 	SELECT * 
+		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_SQ DESC  -->
+
+	
+ 	 SELECT * FROM KIN  
+		 
+	</select>
+	<select id ="MyA"  resultMap="KnowledgeInMap">
+ <!--      	SELECT * 
+		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_WRITER DESC    -->
+		   SELECT * FROM KIN 
+	</select>
+	
+	
+	
+	
+	<resultMap type="knowledgeIn" id="KnowledgeInMap">
+		<id column="kin_Sq" property="kin_Sq"/>
+		<result column="kin_Writer" property="kin_Writer"/>
+		<result column="category" property="category"/>
+		<result column="kin_Title" property="kin_Title"/>
+		<result column="kin_Content" property="kin_Content"/>
+		<result column="kin_Image" property="kin_Image"/>
+		<result column="open_Yn" property="open_Yn"/>
+		<result column="selected" property="selected"/>
+		<result column="kin_Date" property="kin_Date"/>
+		<result column="kin_Cnt" property="kin_Cnt"/>
+		<result property="reply_Cnt" column="reply_Cnt"/>
+		<result property="point" column="point"/>
+		
+		<collection property="attachments" ofType="attachment">
+			<id column="atch_No" property="atch_No"/>
+			<result column="kin_Sq" property="kin_Sq"/>
+			<result column="atch_Ori" property="atch_Ori"/>
+			<result column="atch_New" property="atch_New"/>
+
+		</collection>
+	</resultMap>
+	<resultMap type="attachment" id="attachmentMap">
+		<id column="atch_No" property="atch_No"/>
+		<result column="kin_Sq" property="kin_Sq"/>
+		<result column="atch_Ori" property="atch_Ori"/>
+		<result column="atch_New" property="atch_New"/>
+
+	</resultMap>
+	
+	
+	
+	<resultMap type="kinReply" id="kinReplyMap">
+		<id column="reply_Sq" property="reply_Sq"/>
+		<result column="kin_Sq" property="kin_Sq"/>
+		<result column="reply_Writer" property="reply_Writer"/>
+		<result column="reply_Content" property="reply_Content"/>
+		<result column="reply_Image" property="reply_Image"/>
+		<result column="reply_Like_Cnt" property="reply_Like_Cnt"/>
+		<result column="reply_Date" property="reply_Date"/>
+		<result column="open_Yn" property="open_Yn"/>
+		
+		<collection property="attachment" ofType="kinReplyAttachment">
+			<id column="atch_No" property="atch_No"/>
+			<result column="reply_Sq" property="reply_Sq"/>
+			<result column="atch_Ori" property="atch_Ori"/>
+			<result column="atch_New" property="atch_New"/>
+
+		</collection> 
+	</resultMap>
+	<resultMap type="attachment" id="replyattachmentMap">
+		<id column="atch_No" property="atch_No"/>
+		<result column="reply_Sq" property="reply_Sq"/>
+		<result column="atch_Ori" property="atch_Ori"/>
+		<result column="atch_New" property="atch_New"/>
+
+	</resultMap>
+
+	
+	
+	<select id="selectKinCount" resultType="_int">
+		SELECT COUNT(*) FROM KIN 
+	</select> 
+	
+		<select id="selectKinReplyCount" resultType="_int">    
+		SELECT COUNT(*) FROM KIN_REPLY 
+
+	<!-- SELECT COUNT(*) FROM KIN_REPLY KR LEFT JOIN KIN_REPLY_ATTACHMENT KRA ON KR.REPLY_SQ=KRA.REPLY_SQ WHERE KIN_SQ=#{SQ} 
+		 -->
+
+			
+	</select> 
+	
+	
+	
+	
+	
+	
+		<insert id="insertKin">
+			<!-- INSERT INTO KIN VALUES(KIN_SQ.NEXTVAL,#{kin_Writer},#{category},#{kin_Title},
+			#{kin_Content},#{kin_Image},#{open_Yn},#{selected,},SYSDATE,#{kin_Cnt}) -->
+			
+			INSERT INTO KIN VALUES(KIN_SEQ.NEXTVAL,#{kin_Writer},#{category},#{kin_Title},
+			#{kin_Content},NULL,#{open_Yn},default,SYSDATE,default,default,#{point})
+			
+			<selectKey keyProperty="kin_Sq" resultType="_int" order="AFTER"> 
+			SELECT KIN_SEQ.CURRVAL FROM DUAL 
+			</selectKey>
+		</insert>
+		
+		<insert id="insertKinAttachment"> 
+		INSERT INTO KIN_ATTACHMENT VALUES(KIN_ATTACHMENT_SEQ.NEXTVAL,#{kin_Sq}, #{atch_Ori}, #{atch_New}) 
+		</insert>
+
+	<insert id="updateKinAttachment">
+		INSERT INTO KIN_ATTACHMENT VALUES(KIN_ATTACHMENT_SEQ.NEXTVAL, #{kin_Sq}, #{atch_Ori}, #{atch_New}) 
+	
+	</insert>
+	
+	<select id="selectKinOne" resultMap="KnowledgeInMap">  
+	SELECT * FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ WHERE K.KIN_SQ=#{SQ} 
+
+		</select>
+	
+	
+	
+	
+		<select id="selectReplyOne" resultMap="kinReplyMap">  
+	SELECT * FROM KIN_REPLY KR LEFT JOIN KIN_REPLY_ATTACHMENT KRA ON KR.REPLY_SQ=KRA.REPLY_SQ WHERE KIN_SQ=#{SQ} ORDER BY REPLY_DATE 
+
+		</select>
+	
+	
+	
+	
+	
+		
+	<insert id="insertKinReply">
+			
+			INSERT INTO KIN_REPLY VALUES(KIN_REPLY_SEQ.NEXTVAL,#{reply_Writer},#{kin_Sq},#{reply_Content},NULL,
+			#{reply_Like_Cnt},SYSDATE,#{open_Yn})
+			
+			<selectKey keyProperty="reply_Sq" resultType="_int" order="AFTER"> 
+			SELECT KIN_REPLY_SEQ.CURRVAL FROM DUAL 
+			</selectKey>
+		</insert>		
+		
+		<insert id="insertKinReplyAttachment"> 
+		INSERT INTO KIN_REPLY_ATTACHMENT VALUES(KIN_REPLY_ATTACHMENT_SEQ.NEXTVAL,#{reply_Sq}, #{atch_Ori}, #{atch_New}) 
+		</insert>
+
+		<delete id="delete" parameterType="int">
+		DELETE FROM KIN WHERE KIN_SQ = #{kin_Sq}
+		</delete>
+		
+		<update id="update">
+		UPDATE KIN SET KIN_TITLE = #{kin_Title}, KIN_CONTENT = #{kin_Content} ,CATEGORY = #{category} ,OPEN_YN=#{open_Yn}, POINT=#{point} WHERE KIN_SQ = #{kin_Sq} 
+		</update>
+		
+		<update id="updatecnt">
+		UPDATE KIN SET KIN_CNT = KIN_CNT + 1 WHERE KIN_SQ = #{kin_Sq}
+		</update>
+		
+		
+		<update id="updateReplyCount" parameterType="int">
+		UPDATE KIN K SET K.REPLY_CNT =(SELECT COUNT(*)FROM KIN_REPLY WHERE KIN_SQ =#{kin_Sq}) WHERE K.KIN_SQ=#{kin_Sq}             
+		</update>
+		
+		
+		
+	<!-- 좋아요 구현 -->
+<!-- 		<insert id="create">
+		INSERT INTO KIN_LIKES(KIN_SQ, USER_ID)
+		values(#{kin_Sq}, #{user_Id})
+		</insert>
+
+		<select id="read" resultType="likeVO">
+		select *
+		from KIN_LIKES
+		where KIN_SQ = #{kin_Sq} and USER_ID = #{user_Id}
+	</select>
+	
+	<delete id="delete">
+		delete from KIN_LIKES
+		where KIN_SQ = #{kin_Sq} and USER_ID = #{user_Id}
+	</delete> -->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+</mapper> 
+ 

@@ -39,6 +39,31 @@
 		UPDATE MEMBER2 SET USERPOINT_CNT=USERPOINT_CNT+#{pointAmt} WHERE USER_ID=#{userId}
 	</update> 
 	<select id="adminReporttable" resultType="com.twoweeks.spring.admin.model.vo.Report">
-		SELECT * FROM REPORT
+		SELECT * FROM REPORT ORDER BY REPORT_YN
 	</select>
+	<select id="selectReportCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE REPORT_YN='N'
+	</select>
+	<update id="reportUpdateYn">
+		UPDATE REPORT SET REPORT_YN='Y' WHERE REPORT_DETAIL_REASON=#{pk}
+	</update>
+	<select id="reportList" resultType="com.twoweeks.spring.admin.model.vo.Report">
+		SELECT * FROM REPORT WHERE USER_ID=#{userId}
+	</select>
+	 <select id="selectGrantTable" resultType="com.twoweeks.spring.admin.model.vo.Grant">
+		SELECT * FROM GRANTTO WHERE GRANTTO_YN='N'
+
+	</select>
+	<update id="updateGrantTable">
+		UPDATE GRANTTO SET GRANTTO_YN='Y' WHERE USER_ID=#{userId}
+	</update>
+	<update id="updateGrantMember">
+		UPDATE MEMBER2 SET ACCESS_GB=#{access_Gb} WHERE USER_ID=#{user_Id}
+	</update>
+	<select id="selectGrantCount" resultType="_int">
+		SELECT COUNT(*) FROM GRANTTO WHERE GRANTTO_YN='N'
+	</select>
+
+
+
 </mapper>
