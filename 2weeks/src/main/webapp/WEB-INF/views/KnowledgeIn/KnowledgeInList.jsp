@@ -135,7 +135,7 @@ width:80%;
     outline :0;
     border : 0;
 }
-#qanswer{
+.qanswer{
    background-color: transparent !important;
     outline :0;
     border : 0;
@@ -257,7 +257,11 @@ height:13px;
 					<button id="searchkn">검색</button>
 			</div> -->
 					NO.${KnowledgeIn.kin_Sq}
-		<a href="KnowledgeInQ.do">	<button id="Qsearch" >질문하기</button><img src="" alt=""> </a><hr width = "100%" color = "#F2F2F2"/>
+		<a href="KnowledgeInQ.do">	
+			<c:if test="${not empty member.user_Id }">
+		<button id="Qsearch" >질문하기</button>
+		</c:if>
+		<img src="" alt=""> </a><hr width = "100%" color = "#F2F2F2"/>
 
 			<div id="container">
 	
@@ -279,7 +283,7 @@ height:13px;
             				<span class="user">비공개</span> 
         					</c:if>
         							
-        			
+        	
 				<span class="rolldate"><fmt:formatDate value="${KnowledgeIn.kin_Date}" pattern="yyyy.MM.dd"/></span>
 			<%-- 	<span class="rolldate">${KnowledgeIn.kin_Date }</span>  --%>
 				<span class="view">조회수 ${KnowledgeIn.kin_Cnt }</span> 
@@ -289,9 +293,9 @@ height:13px;
 			<span class="content1">${KnowledgeIn.kin_Content}<br><br>
 			
 			
+						
 			
-			
-			
+					
 			
 			
 			</span>
@@ -306,16 +310,21 @@ height:13px;
  					
 				<button id="red1">신고</button><br>
 						<div class="qbutton">
-						
+						<c:if test="${member.user_Id == KnowledgeIn.kin_Writer}">
 									<button class="update">수정</button><!-- </a> -->
-
+									
 									<a href='${path }/delete?sq=${KnowledgeIn.kin_Sq }'><button class="delete">삭제</button></a>
 
-	
-									 <%-- <span>${kr.reply_Sq}</span> --%>
-									<a href="${path}/KnowledgeIn/KnowledgeInA.do?sq=${KnowledgeIn.kin_Sq}" class="qanswer"><button id="qanswer">답변하기</button></a>
+						</c:if>			 
+						<%-- <span>${kr.reply_Sq}</span> --%>
+						<c:if test="${member.user_Id != KnowledgeIn.kin_Writer}">
+					<%-- 	<a href="${path}/KnowledgeIn/KnowledgeInA.do?sq=${KnowledgeIn.kin_Sq}"> --%><button class="qanswer">답변하기</button><!-- </a> -->
+						</c:if>	
 						</div>
-									
+						<c:if test="${empty member.user_Id} ">
+										
+										
+						</c:if>
 						<c:choose>
 						<c:when test="${KnowledgeIn.category eq '코로나19'}">
 						<ul class="knowmenu"> 
@@ -427,7 +436,9 @@ height:13px;
 
 		
 	<img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
+			<c:if test="${member.user_Id == KnowledgeIn.kin_Writer}">
 			<button class="Qcheck" value="${kr.reply_Sq }" >채택하기</button>
+			</c:if>
 					<div>	<span class="QA">A</span> 
 					 <c:if test="${kr.open_Yn eq 'Y'}" >
 					 	<span class="title">${kr.reply_Writer}님의 답변</span> 
@@ -549,6 +560,7 @@ height:13px;
 					<span class="view"><img id="heart1" src="${pageContext.request.contextPath}/resources/images/knowledgeIn/heart1.png"> ${kr.reply_Like_Cnt}</span> </div>
 			
 	
+	
 			
 					</div>
 			
@@ -584,11 +596,11 @@ height:13px;
 		
 			
 </section>
-
+ 
 <script>
-		var selected ='${KnowledgeIn.selected}'
 		var count =${KnowledgeIn.reply_Cnt }
-		var selected =${KnowledgeIn.selected }
+		var writer= ${knowledgeIn.kin_Writer}
+
 		$(document).ready(function(){ 
 		
 		
@@ -608,7 +620,8 @@ height:13px;
 		});
 		
 		
-		$(".update").on("click",function(){
+	 	$(".update").on("click",function(){
+			
 			if(count>0){
 				alert("답변이 존재하여 수정이 불가합니다.")
 					return false;
@@ -617,8 +630,19 @@ height:13px;
 			location.href="${path }/KnowledgeIn/update.do?sq=${KnowledgeIn.kin_Sq}";
 		
 		
-		});
+		});  
 		
+ 	$(".qanswer").on("click",function(){
+			
+ 		if(	${empty member.user_Id }){
+			alert("로그인 후 이용가능합니다.")
+				return false;
+			} 
+				
+			location.href="${path}/KnowledgeIn/KnowledgeInA.do?sq=${KnowledgeIn.kin_Sq}";
+		
+		
+		});  
 		/* $(".Qcheck").on("click",function(){
 			var result = confirm("채택 하시겠습니까?");
 			if(result){

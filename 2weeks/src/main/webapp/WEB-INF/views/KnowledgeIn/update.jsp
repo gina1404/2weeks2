@@ -296,7 +296,7 @@ right:-50px;
 <form name="KinFrm" action="${path }/KnowledgeIn/update" method="post" enctype="multipart/form-data" onsubmit="return _onSubmit();" >
       
 	<div class="question">
-			<span class="a">수정</span>
+			<span class="a">수정</span> 
 <!-- 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div>
@@ -304,10 +304,10 @@ right:-50px;
 			<input type="hidden" name="kin_Sq" id="no" value="${knowledgeIn.kin_Sq}">  
 					<div>	<span class="QA">Q</span> 
 <input type="text"  maxlength='20' style="width:1000px;font-size:30px; border:1px solid #19ce60" placeholder="제목 작성란 입니다 20자 미만으로 입력해주세요."
-				 value ="${knowledgeIn.kin_Title}" name="kin_Title" required>
+				 value ="${knowledgeIn.kin_Title}" name="kin_Title" required>	<span class="point">${KnowledgeIn.point}</span>
 			
 			
-			<input type="text" name="kin_Writer" class="form-control" value="${knowledgeIn.kin_Writer}"  readonly="readonly" >
+				<input type="text" name="kin_Writer" class="form-control" value="${knowledgeIn.kin_Writer}" readonly="readonly">
 			
 			
 			<ul class="knowmenu"> 
@@ -369,7 +369,7 @@ right:-50px;
 		<label><input type="radio" name="point" value="300" ><input type="hidden" name="radio" value="300"><span class="c">300</span></label>
 
 		</div>	
-					 					
+								
  			<hr style="border: solid 1px #F2F2F2;">	
  			
  	        <!--     <input type="submit" class="btn btn-outline-success" value="질문등록" >	 -->

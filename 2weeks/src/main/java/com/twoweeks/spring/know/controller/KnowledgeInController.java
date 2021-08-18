@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.twoweeks.spring.common.PageFactory;
 import com.twoweeks.spring.know.model.service.KnowledgeInService;
 import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinAttachment;
 import com.twoweeks.spring.know.model.vo.KinReply;
 import com.twoweeks.spring.know.model.vo.KinReplyAttachment;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -91,8 +94,7 @@ public class KnowledgeInController {
 
 	@RequestMapping("/KnowledgeIn/KnowledgeInQEnd.do") // 지식인 질문등록
 	public ModelAndView insertKin(Kin k, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file,
-			ModelAndView mv, HttpServletResponse response, HttpServletRequest req) throws IOException {
-
+			ModelAndView mv, HttpServletResponse response, HttpServletRequest req ) throws IOException {
 		logger.debug("knowledgIn : " + k);
 		for (int i = 0; i < upload.length; i++) {
 			logger.debug("fileName : " + file[i].getOriginalFilename());

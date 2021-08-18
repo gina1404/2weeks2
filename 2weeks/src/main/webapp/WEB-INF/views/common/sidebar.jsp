@@ -109,7 +109,7 @@
 			<div class="wrap_sub_list">
 				<div class="sidebar-list">
 		            <img class="sidebar-icon" src="${path }/resources/images/icons/language.svg"/>
-		            <div class="sidebar-title">KnowledgeIn</div>
+		            <div class="sidebar-title"><a href="${path }/KnowledgeIn/KnowledgeInMain.do">KnowledgeIn</a></div>
 				</div> 
 			</div>
 			
