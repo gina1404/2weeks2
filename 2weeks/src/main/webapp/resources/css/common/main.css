@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 .gridContainer{
-	border: 1px solid;
 	display: grid;
 	grid-template-columns: repeat(8, 1fr);
 	grid-template-rows: repeat(3, minmax(100px, auto));

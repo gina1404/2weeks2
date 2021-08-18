@@ -55,10 +55,10 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	margin: 60px auto auto auto;
 }  	
 .content{
-	border: 1px solid;
-	width: 1240px;
-	height: 100%;
-	float: right;
+    width: 1200px;
+    height: 100%;
+    float: right;
+   	margin: 0 20px 0 20px;
 }
 #aside {
 	display: flex;
