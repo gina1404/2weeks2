@@ -49,5 +49,7 @@ public interface FreeBoardService {
 
 	int likeMinus(int post_Sq);
 
+	List<PostAttachment> listAttachment();
+
 	
 }

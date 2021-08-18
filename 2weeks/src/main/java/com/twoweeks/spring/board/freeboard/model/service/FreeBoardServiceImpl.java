@@ -164,6 +164,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	public int likeMinus(int post_Sq) {
 		return dao.likeMinus(session, post_Sq);
 	}
+
+
+	@Override
+	public List<PostAttachment> listAttachment() {
+		return dao.listAttachment(session );
+	}
 	
 	
 	

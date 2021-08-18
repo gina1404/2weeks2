@@ -75,13 +75,12 @@ public class FreeBoardController {
 	public ModelAndView boardList(@RequestParam(value="cPage", defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="5")int numPerpage,
 			ModelAndView mv) {
 		log.info("게시판 리스트" );
-		List<FreeBoard> fb = service.listAll(cPage,numPerpage);
-		int post_Sq = 0;
-		for(int i=0; i<fb.size(); i++) {
-			post_Sq = fb.get(i).getPost_Sq();
-			
-		}
-		mv.addObject("attachments", service.getAttachment(post_Sq));
+		
+		List<FreeBoard> fb = service.list();
+		
+		
+		
+		mv.addObject("attachments", service.listAttachment());
 		mv.addObject("list", service.listAll(cPage,numPerpage)); 
 		int totalData = service.totalBoardCount();  //등록된 테이블의 총 개수를 가져다가 저장
 		mv.addObject("totalContents", totalData);

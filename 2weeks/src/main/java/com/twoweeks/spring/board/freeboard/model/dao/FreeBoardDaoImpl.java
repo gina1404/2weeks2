@@ -108,6 +108,11 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		return session.update("freeboard.likeMinus",post_Sq);
 	}
 
+	@Override
+	public List<PostAttachment> listAttachment(SqlSession session) {
+		return session.selectList("freeboard.listAttachment");
+	}
+
 	
 	
 	

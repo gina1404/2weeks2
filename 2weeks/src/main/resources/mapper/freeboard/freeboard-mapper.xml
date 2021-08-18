@@ -16,7 +16,6 @@
 	
 	<select id="searchBoard" resultType="freeboard">
 	SELECT * FROM POST WHERE LOWER(${type}) LIKE LOWER('%'||#{keyword}||'%')
-									 
 	</select>
 	
 	<select id="read" parameterType="int" resultType="freeboard">
@@ -81,6 +80,13 @@
 	<update id="likeMinus">
 	UPDATE POST SET POST_LIKE_CNT = POST_LIKE_CNT - 1 WHERE POST_SQ = #{post_Sq}
 	</update>
+	
+	
+	<!-- boardList페이지에 뿌려줄 sql -->
+	<select id="listAttachment" resultType="postAttach">
+	SELECT * FROM POST_ATCH
+	</select>
+	
 	
 	<resultMap type="freeboard" id="boardMap">
 		<id column="post_Sq" property="post_Sq"/>
