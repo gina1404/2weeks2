@@ -30,7 +30,7 @@
 						<label for="profile_input" class="profile_input_label">프로필 사진</label>
 						<div class="profile_imgbox">
 							
-                			<div><img id='image_section' class="preview_img" src='${path }/resources/images/member/profile.jpg' alt='my_profile'/></div>
+                			<div><img id='image_section' class="preview_img" src='${path }/resources/images/member/profile3.jpg' alt='my_profile'/></div>
                 			<div><label class="input-file-button" for="profile_input">Upload</label></div>	                		
 	                		<input id="profile_input" class="input_img" type="file" name="upFile" />
 						</div>
