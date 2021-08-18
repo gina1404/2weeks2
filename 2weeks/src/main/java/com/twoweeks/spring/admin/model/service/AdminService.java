@@ -26,4 +26,8 @@ public interface AdminService {
 	int updateGrantTable(String userId);
 	int updateGrantMember(Member m);
 	int selectGrantCount();
+	int deletePost(int seq);
+	int deleteKin(int seq);
+	int deletePostReply(int seq);
+	int deleteKinReply(int seq);
 }

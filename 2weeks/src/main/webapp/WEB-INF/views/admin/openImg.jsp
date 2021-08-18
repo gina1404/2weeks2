@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<img src="<%=request.getContextPath()%>/resources/images/icons/${img}">
+	<img width="500px" height="500px" left="400px" top="400px" src="<%=request.getContextPath()%>/resources/images/icons/${img}">
 </body>
 </html>

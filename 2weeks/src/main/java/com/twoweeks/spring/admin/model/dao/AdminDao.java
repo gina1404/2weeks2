@@ -29,4 +29,8 @@ public interface AdminDao {
 	int updateGrantTable(SqlSession session,String userId);
 	int updateGrantMember(SqlSession session,Member m);
 	int selectGrantCount(SqlSession session);
+	int deletePost(SqlSession session,int seq);
+	int deleteKin(SqlSession session,int seq);
+	int deletePostReply(SqlSession session,int seq);
+	int deleteKinReply(SqlSession session,int seq);
 }
