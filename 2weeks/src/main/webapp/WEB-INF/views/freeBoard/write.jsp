@@ -115,7 +115,7 @@
 <section class="content">
 <div class="container" id="">
     <div class="content" style="width: 70%">
-     <form name="boardFrm"  id="dataForm" action="${path}/freeboard/writeEnd.do"  method="post" enctype="multipart/form-data">
+     <form name="boardFrm"  id="dataForm" action="${path}/freeboard/writeEnd.do"   method="post" enctype="multipart/form-data">
         <div class="row justify-content-md-center"> 				
             <div class="col-sm-9">
             <div class="input-group mb-3">
@@ -141,35 +141,11 @@
       </div>
       
       <hr>
-      
- <!--      <div class="row justify-content-md-center">
-          <div class="col_c" style="margin-bottom: 30px">
-                <div class="input-group">                 
-                  <textarea class="form-control" id="content" name="post_Content"></textarea>
-                </div>
-            </div> 
-      </div>
-    <div>
-	<input type="file" name="attachments"  id="attach" multiple="multiple" style="border: 2px solid #ddd; outline: none;">
-	 <label for="attach"><i class="far fa-file-image">파일추가 </i></label>
-	<span style="font-size: 14px; color: gray;">※첨부파일은 최대 5개까지 등록이가능합니다.</span>
-	</div>
-	<div class="data_file_txt" id="data_file_txt" >
-	</div>
-		<div id="articlefileChange" class="bg-success">
-		</div>
-      <div class="row justify-content-md-center">
-        <input type="submit" class="m-3 btn btn-outline-secondary"   value="등  록" style="width: 20%; font-weight: bold">
-        </div>
-     </form>
-  </div>
-
-</div> -->
 
       <div class="row justify-content-md-center">
           <div class="col_c" style="margin-bottom: 30px">
                 <div class="input-group">                 
-                  <textarea class="form-control" id="content" name="post_Content"></textarea>
+                  <textarea class="form-control" id="post_Content" name="post_Content"></textarea>
                 </div>
             </div> 
       </div>
@@ -188,7 +164,7 @@
 		<div id="articlefileChange" class="bg-success">
 		</div>
       <div class="row justify-content-md-center">
-        <input type="submit" class="m-3 btn btn-outline-secondary"   value="등   록" style="width: 20%; font-weight: bold">
+        <input type="submit" class="m-3 btn btn-outline-secondary" onclick="editorContent();"  value="등   록" style="width: 20%; font-weight: bold">
         </div>
      </form>
         <input type="submit" class="m-3 btn btn-outline-secondary" id="back"   value="취   소" style="width: 20%; font-weight: bold">
@@ -295,11 +271,17 @@
 			obj.parent().remove();
 		}
 	}
-	
-	
-	
-	
-	CKEDITOR.replace("content",{
+	/* 
+	function editorContent(){
+	var editorContent = CKEDITOR.instances.post_Content.getData();
+	var convertContent = editorContent.replace(/(<([^>]+)>)/ig,"");
+	$("#post_Content").val(convertContent);
+	var cc = $("#post_Content").val();
+	console.log(cc);
+	alert('dsadsa');
+	}
+	 */
+	CKEDITOR.replace("post_Content",{
 		height : "300",
 		width : "880",
 		filebrowserImageUploadUrl : '${pageContext.request.contextPath}/freeboard/writeEnd.do ',

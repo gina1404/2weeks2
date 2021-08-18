@@ -41,11 +41,7 @@ font-size: 8px;
 a{
 text-decoration: none;
 }
-.post_content{
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+
 </style>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
@@ -75,7 +71,7 @@ text-decoration: none;
 				<div class="card col-md-3 m-2">
 					<div class="card-header m-3">
 					 <c:forEach var="ima" items="${attachments }"> 
-					 ${ima }
+					 
 					 <c:choose>
 					 <c:when test="${attachments ==null }">
 						<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/freeboardPic/default.png" class="card-img-top row" alt="이미지"> </a>
@@ -86,10 +82,17 @@ text-decoration: none;
 					</c:choose>		
 					</c:forEach>	
 					</div>
-					<div class="card-body">
-						<p class="card-text category">${b.category } &nbsp; &nbsp; [${b.post_Dt }]</p>
-						<h4 class="card-title"><a href="${path }/freeboard/readView?no=${b.post_Sq }"><c:out value="${b.post_Title }"/> ${attachments }</a></h4>
-						<p class="card-text post_content">${b.post_Content }</p>
+					<div class="card-body cardContent">
+						${b.category } &nbsp; &nbsp; [${b.post_Dt }]
+						<h4 class="card-title"><a href="${path }/freeboard/readView?no=${b.post_Sq }"><c:out value="${b.post_Title }"/> </a></h4>
+						<c:choose>
+						<c:when test="${fn:length(b.post_Content) gt 26 }">
+							 ${fn:substring(b.post_Content, 0, 25)} 
+						</c:when>
+							<c:otherwise>
+							${b.post_Content }
+							</c:otherwise>
+						</c:choose>
 						<c:choose>
 						<c:when test="${b.open_Yn == 'on'}">
 						<p class="card-text"><img src="${path}/resources/images/icons/profile.svg" class="profile " alt="프로필사진"> 익명</p>

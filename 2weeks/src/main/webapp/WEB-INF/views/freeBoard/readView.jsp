@@ -72,9 +72,9 @@ font-size : 12px;
 		</div>
 		<div class="col-md-12 "
 			style="border: solid black 1px; margin-top: 50px; margin-right: 500px;">
-			<p>
+			
 				<span style="font-size: 16px;">${list.post_Content }</span>
-			</p>
+			
 		</div>
 		<div class="outer position-relative" >
 			<div class="inner ">
