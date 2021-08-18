@@ -5,16 +5,19 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="updates/domestic"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6944e39f85fb8e5ca0d10ff408274b51"></script> -->
 <section class="container">
-	<h2>국내 확산 현황</h2>
+	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+	<div class="container">	
+		<h2>국내 확산 현황</h2>
+		
 	
-
-	<div>지역별 확산 현황</div>
-		<section id="home-covid-chart" style="width:45%; min-height:500px;">
-			<jsp:include page="/WEB-INF/views/covidUpdate/regionalKor.jsp"></jsp:include>
-		</section>
+		<div style="text-align: center;">
+			<section id="home-covid-chart" style="width:45%; display:inline-block;">
+				<jsp:include page="/WEB-INF/views/covidUpdate/regionalKor.jsp"></jsp:include>
+			</section>
+		</div>
+	</div>
 </section>
 		
 		

@@ -65,7 +65,7 @@
 		            </div>
 		            <div class="sidebar-list-sub">
 		                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>
-		                <div class="sidebar-title">Vaccination</div>
+		                <div class="sidebar-title" onclick="location.href='${path}/vaccine/vaccineCenter'" style="cursor:pointer;">Vaccination</div>
 		            </div>
 		            <div class="sidebar-list-sub">
 		                <img class="sidebar-icon" src="${path }/resources/images/icons/darkmode.svg"/>

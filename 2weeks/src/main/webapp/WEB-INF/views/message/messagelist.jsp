@@ -7,73 +7,54 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <script src="${path }/resources/js/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<link href="${pageContext.request.contextPath }/resources/css/message/messagelist.css" rel="stylesheet" />
 <script src="https://kit.fontawesome.com/d4b4124527.js" crossorigin="anonymous"></script>
-<!-- <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> -->
 
-
-<style>
-.col-md-6{
- height:700px;
-}
-.incoming_msg{
-
-
-text-align: left;
-background-color:#63CC63;
-border-radius :10px;
-}
-.outgoing_msg{
-text-align: right ;
-
-background-color:#dcdcdc;
-border-radius:10px;
-}
-
-
-</style>
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="title" value="2weeks"/>
-</jsp:include>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
-<div id ="msg-container" class="container" style="border:1px solid black;">
+<div class="container">
+<h3 class=" text-center">Message</h3>
+<div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people"> <!-- 메세지리스트 -->
+          <div class="headind_srch"> <!--  메세지리스트 헤드라인,검색 -->
+            <div class="recent_heading">
+              <h4>Recent</h4>
+            </div>
+            <div class="srch_bar"> <!-- 검색바  -->
+              <div class="stylish-input-group">
+                <input type="text" class="search-bar"  placeholder="Search" >
+                <span class="input-group-addon">
+                <button type="button" onclick="openSearch()"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                </span> </div>
+            </div> <!-- 검색바 끝 -->
+          </div> <!--  메세지리스트 헤드라인,검색 끝-->
+          <div class="inbox_chat"> <!-- 쪽지 list  -->
 
-			<div class="row">
-				<div class="col-md-1"></div>
-				<div class="col-md-4" style="border:1px solid black;">
-					
-						<h4>메세지</h4> <input type="text" class="search-bar" placeholder="닉네임">
-						<button onclick="openSearch()">🔍</button>
-						
-					<div class="row">
-						<div class="col-md-12 inbox_chat">
-							<!-- //메세지리스트 -->					
-						</div>	
-					</div>
-			
-				</div>
-				<div class="col-md-6" style="border:1px solid black;">
-					<div class="msg_history row" name="contentList">
-						메세지내용
-						<!-- <div class="col-md-6">
-						</div>
-						<div class="col-md-6">
-						</div> -->
-					</div>
-					<div class="row">
-						<div class="col-md-12 send_message">
-											
-						</div>
-					</div>								
-				</div>
-				<div class="col-md-1"></div>
-			 </div>
+
+          </div> <!-- 쪽지 list 끝 -->
+        </div> <!-- 메세지리스트 끝-->
+        <div class="mesgs"> <!-- 오른쪽 컨테이너 -->
+          <div class="msg_history"> <!-- 메세지내역 -->
+          <div class="mesgs_main"><h3 class="text-center">내 메시지</h3></br>
+          		
+          		<i class="far fa-paper-plane fa-5x"></i>
+          		<p class="main_message text-center">닉네임 검색 후 다른 회원에게 메세지를 보내보세요.</p> </div>
+
+
+          </div> <!-- 메세지내역 끝 -->
+          <div class="send_message">
+
+          </div>    
+        </div><!-- 오른쪽 컨테이너 끝 -->
+      </div>
 </div>
+</div>
+
 <script>
-
-
 
 //메세지 리스트 
 	const FirstMessageList = function(){
@@ -101,13 +82,9 @@ border-radius:10px;
 				
 				let send_msg="";
 				send_msg += "<div class='type_msg'>";
-				send_msg += " <div class='input_msg_write row'>";
-				send_msg += "  <div class='col-md-10'>";
+				send_msg += " <div class='input_msg_write'>";
 				send_msg += "    <input type='text' class='write_msg form-control' placeholder='메세지를 입력하세요' />";
-				send_msg += "  </div>";
-				send_msg += "  <div class='col-md-2' >"; 
 				send_msg += "     <button class='msg_send_btn' type='button'><i class='far fa-paper-plane' aria-hidden='true'></i></button>";
-				send_msg += "   </div>";
 				send_msg += " </div>";
 				send_msg += "</div>";
 				
@@ -154,13 +131,9 @@ border-radius:10px;
 					
 					let send_msg="";
 					send_msg += "<div class='type_msg'>";
-					send_msg += " <div class='input_msg_write row'>";
-					send_msg += "  <div>";
+					send_msg += " <div class='input_msg_write'>";
 					send_msg += "    <input type='text' class='write_msg form-control' placeholder='메세지를 입력하세요' />";
-					send_msg += "  </div>";
-					send_msg += "  <div>";
-					send_msg += "     <button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
-					send_msg += "   </div>";
+					send_msg += "     <button class='msg_send_btn' type='button'><i class='far fa-paper-plane' aria-hidden='true'></i></button>";
 					send_msg += " </div>";
 					send_msg += "</div>";
 					
@@ -268,12 +241,15 @@ border-radius:10px;
 	//
 	function openSearch() {
 		let user_Nic = $('.search-bar').val();
+		if(user_Nic==''){
+			alert("닉네임을 입력해주세요!");
+		}else{
 		console.log(user_Nic);
         var url = "${path}/message/searchNic?user_Nic="+user_Nic;
         var name = "닉네임 검색";
         var option = "width = 500, height = 500, top = 100, left = 200, location = no"
         window.open(url, name, option);
-		
+		}
 	}	
 /* 	function getInfiniteChat(room){
 		setInterval(function(){
@@ -323,7 +299,7 @@ border-radius:10px;
 	</script>
 
 
-<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
-	
+
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

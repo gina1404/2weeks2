@@ -1,12 +1,12 @@
 @charset "UTF-8";
-
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 /* 버튼 */
 #regionalKor{
 	width:80%;
 	min-height:300px;
 	margin:10%;
 	border-radius:10px;
-	border:0.5px solid #e8e8e8;
+	border:0.5px solid #f0f0f0;
 	background-color:white;
 	padding:10px;
 }
@@ -16,9 +16,8 @@
     align-items: center;
 	margin:10px 25px;
 	height:fit-content;
-  	background: #e8e8e8;
-  	border-radius:5px; 	
-  	
+  	background: #f0f0f0;
+  	border-radius:5px;   	
 }
 .regionalKor-button{
 	display:inline-block;
@@ -31,7 +30,11 @@
   	border-radius:5px;
   	outline: none;
   	overflow: hidden;
-  	cursor: pointer;  	
+  	cursor: pointer;
+	font-family: 'Pretendard';
+	font-weight: bold;
+	font-size: 15px;  	
+  	
 }
 
 .regionalKor-button-on{	 /* selected */
@@ -53,8 +56,8 @@
 .regionalKor-update{
 	color: darkgray;
 	font-size:13px;
+	margin:10px 50px;
 }
-
 
 #states path {
 	stroke: white;
@@ -64,11 +67,58 @@
 #states text {
 	cursor: pointer;
 	font-size: 12px;
-	fill: black;
+	fill: #123962;
 	font-weight: bold;
 }
 
 #states text tspan{
-	fill: #ff8787;
 	font-wieght: normal !important;
+	fill: #ff6363;
+}
+
+
+/* 지역별 현황 지도 */
+#regionalKor-table{
+	display:none;
+    align-items: center;
+	margin:10px 25px;
+	height:fit-content;
+}
+.regionalKor-table-title{
+	display:flex;
+    justify-content: space-around;
+    align-items: center;
+	height:fit-content;
+}
+
+.regionalKor-table-title-txt{
+	display:inline-block;
+	width:100px;
+	text-align:center;  	
+	font-family: 'Pretendard';
+	font-wieght: bolder;
+  	color: darkgray;
+}
+.regionalKor-table-content{
+	display:flex;
+    justify-content: space-around;
+    align-items: center;
+	height:fit-content;
+}
+.regionalKor-table-txt{
+	display:inline-block;
+	border-radius:5px;
+	width:100px;
+	text-align:center; 	
+	font-family: 'Pretendard';
+	background-color: #f0f0f0;
+	padding:2%;
+}
+.regionalKor-table-txt2{
+	display:inline-block;
+	border-radius:5px;
+	width:100px;
+	text-align:center; 	
+	font-family: 'Pretendard';
+	padding:2%;
 }

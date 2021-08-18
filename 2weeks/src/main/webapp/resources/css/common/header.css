@@ -1,6 +1,6 @@
 @charset "UTF-8";
-<style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+<style>
 
 html{
 	width: 100%;
@@ -41,15 +41,22 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	position:fixed;
 	padding:0;
 	height:100%;
-	font-family: 'Pretendard';	
+
 }
+
 .container {
 	background-color: #F7F8FC !important;
 	height: auto;
 	min-height : 100%; 
 	width: 1440px;
+<<<<<<< HEAD
 	margin: 60px auto 0 auto;
 	padding-left: 0;
+=======
+	/* padding:15px 75px 0 15px !important; */
+	margin: 60px auto auto auto;
+
+>>>>>>> 0492eb1173f330f932d3f2673b6404c9b5aac37a
 }  	
 .content{
     width: 1200px;

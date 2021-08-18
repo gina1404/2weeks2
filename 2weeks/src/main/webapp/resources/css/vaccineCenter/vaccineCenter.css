@@ -1,0 +1,23 @@
+@charset "UTF-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+*{
+	font-family: 'Pretendard';
+}
+.vaccineCenter_title{
+	margin-bottom: 30px;
+}
+.vaccine_box{
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.info_div
+{	
+	width:220px;
+	height:55px;
+	font-size: 12px;
+	font-family :'Pretendard'
+}
+
