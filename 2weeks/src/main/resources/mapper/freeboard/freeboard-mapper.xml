@@ -15,7 +15,7 @@
 	</select>
 	
 	<select id="searchBoard" resultType="freeboard">
-	SELECT * FROM POST WHERE ${type} LIKE '%'||#{keyword}||'%'
+	SELECT * FROM POST WHERE LOWER(${type}) LIKE LOWER('%'||#{keyword}||'%')
 									 
 	</select>
 	
