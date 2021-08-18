@@ -6,7 +6,9 @@
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/sidebar.css"> 
 
 	<aside id="aside">
-		<div id="pagescroll-button"  onclick="fn_top()"><img class="" src="${path }/resources/images/icons/darkmode.svg"/></div>
+		<div id="pagescroll-button"  onclick="fn_top()">
+			<img class="" src="${path }/resources/images/icons/uparrow.png"/>
+		</div>
 	</aside>
 	
 	<style>		
@@ -16,10 +18,17 @@
             height:30px;
             bottom:120px;
 			position:fixed;
-			cursor: pointer;
-        }
+			cursor: pointer;			
+        }        
         #pagescroll-button:hover{
         	background-color: #555;
+        }
+        #pagescroll-button img{
+        	position: fixed;        	       	    
+        	height: 25px;
+        	width: 25px;
+        	z-index: 999;
+        	margin-left:5px;
         }
 	</style>
 	
