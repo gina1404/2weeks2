@@ -48,7 +48,7 @@ text-decoration: none;
 <section id="content">
 	<div class="container">
 		<div class="form-group row justify-content-center">
-			<form  action="${path }/freeboard/searchBoard.do" method="get">
+			<form  action="${path }/freeboard/searchBoard.do"  method="get">
 				<div class="input-group mb-3">
 						<select name="searchType" class="form-control" id="searchType">
 							<option value="POST_TITLE" ${FreeBoard.searchType eq POST_TITLE ? 'selected' : '' }>제목</option>
@@ -59,9 +59,9 @@ text-decoration: none;
 							<option value="cw" ${FreeBoard.searchTypeeq eq 'cw' ? 'selected' : '' }>내용/작성자</option>
 							<option value="tcw" ${FreeBoard.searchType eq 'tcw' ? 'selected' : '' }>전체</option> --%>
 						</select>
-						<input type="text" class="form-control" placeholder="Search" name="keyword" value="${fb.keyword }" >
+						<input type="text" class="form-control serachInput" placeholder="Search" name="keyword" value="${fb.keyword }" >
 					<div class="input-group-append">
-						<button class="btn btn-success" type="submit">Go</button>
+						<button class="btn btn-success" type="submit" onclick="return searchInput();">Go</button>
 					</div>
 				</div>
 			</form>
@@ -103,8 +103,8 @@ text-decoration: none;
 			</div>
 			<div>
 			
-				<button id="btn-add" class="btn btn-outline-success" onclick="location.assign('${path}/freeboard/write.do')">
-								글쓰기
+		<button id="btn-add" class="btn btn-outline-success" onclick="location.assign('${path}/freeboard/write.do')">
+				글쓰기
 		</button>
 			</div>
 		</div>
@@ -112,44 +112,16 @@ text-decoration: none;
 
 
 </section>
-<!-- <script>
-$(document).ready(function(){
-	replyCnt();
-	
-	function replyCnt(){
-		var arr = [];
-		<c:forEach var="b" items="${list }" varStatus="status">
-			arr[${status.index}] = ${b.post_Sq};
-			
-		</c:forEach>
-		
-			console.log(arr);
-	 	$.ajax({
-	 		type:"POST",
-	 		url:"${path}/reply/replyCnt/",
-	 		
-	 		data: {
-	 			arr : arr
-	 		},
-	 		dataType:"text",
-	 		success:function(data){
-	 		 for(let i=0; i<arr.length; i++){
-	 			var obj = JSON.parse(data);
-	 			 
-	 		 }
-				console.log(obj.replyNo);
-	 			
-	 		
-	 		
-	 			
-	 		},error:function(request,status,error){
-		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-	 		
-	 		
-	 	});
-		
-	};
-});
-</script>   -->
+<script>
+
+	function searchInput(){
+		var text = $('.serachInput').val();
+		if (text.replace(/\s|　/gi, "").length == 0) {
+		    alert("검색칸에 입력해주세요.");
+		    $(".serachInput").focus();
+		    return false;
+		  }
+	}
+
+</script> 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

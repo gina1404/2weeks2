@@ -78,7 +78,15 @@ font-size : 12px;
 		</div>
 		<div class="outer position-relative" >
 			<div class="inner ">
+			<c:choose>
+			<c:when test="${sessionScope.loginMember != null }">
 				<button class="btn btn btn-danger btn-round" id="likePost" style="width: 100px;">좋아요! ${list.post_Like_Cnt } </button>
+			</c:when>
+			<c:otherwise>
+				<button class="btn btn btn-danger btn-round" id="likePost2" style="width: 100px;">좋아요! ${list.post_Like_Cnt } </button>
+			
+			</c:otherwise>
+			</c:choose>
 					<button type="submit" class="update_btn btn btn btn-danger btn-round  ">수정</button> 
 					<input type="button"  class=" btn btn-danger btn-round" value="삭제" onclick="del(${list.post_Sq})" style="width: 60px;">
 					<button type="submit" class="list_btn btn btn-danger btn-round">목록</button>
@@ -139,13 +147,6 @@ font-size : 12px;
 		<div class="row" >
 			<div id="reply" ><span></span></div>
 		</div>
-
-	
-
-
-
-
-
 
 
 
@@ -570,7 +571,10 @@ $("#likePost").on("click",function(){
 	 
 });
 
-
+$("#likePost2").on("click",function(){
+	alert('로그인 후 눌러주세요');
+	return;
+});
 
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
