@@ -37,38 +37,34 @@ btn.addEventListener("click", e=>{
 
 //console.log(rootPath);
 let sock=new SockJS(rootPath+"/chatting");
-//console.log(sock);
 
 sock.onopen=e=>{ sendEnter(); }
 sock.onclose=e=>{ sendClose(); }
 
 function sendEnter(){
-	let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), $('#sendBox #senderNick').val(),
-        		$('#chatGroupNo').val(), $('#sendBox #chat').val(), chatDate, 'ENTER');
-               
+	let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), 
+									$('#sendBox #chatNick').val(),
+					        		$('#chatGroupNo').val(), 
+					        		$('#sendBox #chat').val(), 
+					        		chatDate, 'ENTER');
     sock.send(JSON.stringify(chatMsg));	
 }
 
-function sendClose(){
-	let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), $('#sendBox #senderNick').val(),
-        		$('#chatGroupNo').val(), $('#sendBox #chat').val(), chatDate, 'CLOSE');
-               
-    sock.send(JSON.stringify(chatMsg));	
-}
+function sendClose(){ }
 
 sock.onmessage=(e)=>{	
-	let chatMsg;
-		
+	let chatMsg;		
 	let msg=JSON.parse(e.data);
-		
+	console.log(msg);
 	let no=msg['chatGroupNo'];
 	let sender=msg['sender'];
-	let nickname=msg['senderNick'];
+	//console.log(sender);
+	let nickname1=msg['senderNick'];
+	//console.log(nickname1);
 	let content=msg['chatContent'];
 	let time=msg['chatTime'];
 	let type=msg['type'];
-	console.log(nickname);
-		
+			
 	if($('#chatGroupNo').val()==no){ //해당 채팅방에만 메세지 출력
 		if(type=='MSG'){				
 			if($('#sendBox #sender').val()==sender){ 	/////자신
@@ -78,7 +74,7 @@ sock.onmessage=(e)=>{
 				chatMsg+="<div id='chatTime'>"+time+"</div></div>";				
 			}else{ 							///////////////////상대방
 				chatMsg="<div id='yourBox'>";
-				chatMsg+="<div id='sender'>"+nickname+"</div>";
+				chatMsg+="<div id='sender'>"+nickname1+"</div>";
 				chatMsg+="<div id='chatContent'>"+content+"</div>";
 				chatMsg+="<div id='chatTime'>"+time+"</div></div>";				
 			}
@@ -87,20 +83,24 @@ sock.onmessage=(e)=>{
 				scrollTop: $('#chatContainer')[0].scrollHeight
 			}, 500);
 			
-		}else if(type=='ENTER'){			
-			chatMsg="<p>"+nickname+"님이 입장했습니다</p>";
-			$("#chatContainer #entryAlert").append(chatMsg);
+		}else if(type=='ENTER'){		
+			//console.log(nickname1);	
+			chatMsg="<p>"+nickname1+"님이 입장했습니다</p>";
+			console.log(chatMsg);
+			$("#chatContainer #entryAlert").html(chatMsg);
 			$('#entryAlert').fadeIn();
 			setTimeout(()=>{
 				$('#entryAlert').fadeOut(1000);
 			}, 3000); //입장했다고 5초간 띄우기
 						
 		}else if(type=='CLOSE'){
-			chatMsg="<p>"+nickname+"님이 나갔습니다</p>";
-			$("#chatContainer #entryAlert").append(chatMsg);	
+			chatMsg="<p>"+nickname1+"님이 나갔습니다</p>";
+			$("#chatContainer #entryAlert").html(chatMsg);	
 		}
 	}	
 };
+
+console.log($("#chatNick").val());
 
 function sendMessage(){
     if($.trim($('#chat').val())===''){
@@ -109,7 +109,7 @@ function sendMessage(){
             $('#tempAlert').slideUp();
         }, 1000);
     }else {		  
-        let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), $('#sendBox #senderNick').val(),
+        let chatMsg=new ChatGroupMessage($('#sendBox #sender').val(), $('#sendBox #chatNick').val(),
         		$('#chatGroupNo').val(), $('#sendBox #chat').val(), chatDate, "MSG");
                
         sock.send(JSON.stringify(chatMsg));
@@ -117,3 +117,4 @@ function sendMessage(){
         $("#chat").val('').focus();    
     }
 }
+

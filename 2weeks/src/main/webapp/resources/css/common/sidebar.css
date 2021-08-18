@@ -4,11 +4,13 @@
         width:100%;
         overflow: hidden;
 		left:0;
+		color: #394956;
+		
 	}
 	.wrap_sub_list, .wrap_sidebar-divider{
 		margin:0;
 		padding:0;
-        background-color: #E1E6FF;
+        background-color: #D3D8F4;
 	}
 	.sidebar-list{
         align-items: center;
@@ -42,7 +44,7 @@
         width:100%;
 	}
 	.overlay {
-		background-color: rgba(0,0,0, 0.1);
+		background-color: rgba(0,0,0, 0.05);
 	}
 
 	

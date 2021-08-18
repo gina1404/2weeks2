@@ -26,7 +26,7 @@
 
 	<div id="sendBox" class="input-group">
 		<input type="hidden" id="sender" value="${loginId}">
-		<input type="hidden" id="senderNick" value="${chatName}">         
+		<input type="hidden" id="chatNick" value="${chatName}">         
 		<input type="hidden" id="chatGroupNo" value="${no }">    
 		<input type="text" id="chat" class="form-control" aria-describedby="basic-addon2" placeholder="채팅을 입력하세요">
 		<span class="input-group-addon btn" id="sendChat">전송</span>
