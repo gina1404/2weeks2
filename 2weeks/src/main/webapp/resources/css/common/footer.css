@@ -1,20 +1,17 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 
-@font-face {
-	font-family: 'Pretendard';
-	font-weight: 900;
-	font-display: swap;
-	src: local('Pretendard Black'), url('./woff2/Pretendard-Black.woff2') format('woff2'), url('./woff/Pretendard-Black.woff') format('woff');
-}
-
 footer{	
 	font-size: 12px;
-	width:1440px;
-	background-color: #F2F2F2;
+	/* width:1440px; */
+	width: 100%;
+	/* background-color: #F2F2F2; */
+	border-top: 2px solid #F2F2F2;
 	margin: auto;
 	text-align:center;
 	align-items:center;
 	justify-content: center;
+	bottom: 0;
+	font-family: 'Pretendard';
 }
 .footer-col{
 	display:inline-block;

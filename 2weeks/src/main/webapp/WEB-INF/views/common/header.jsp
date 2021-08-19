@@ -50,8 +50,17 @@
 	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">join us</div>
 	            	</c:if>
 	            	<c:if test="${userId ne null}" >
-	            		<div class="header-profile-text">${userId} </div>
-	            		<input type="hidden" value="${userId}" id="hidden_session_kakao"/>
+	            		<div class="header-profile-text">${user_Nic} 님</div>
+	            		<%-- <input type="hidden" value="${user_Nic}" id="hidden_session_kakao"/> --%>
+					         <div class="dropdown-content">
+			            		<a href="${path}/member/myinfo">회원 정보 변경</a>
+			            		<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>
+			            		<a href="#">나의 포인트 ${member.userPoint_Cnt} 원</a>
+			            		<a href="${path}/member/kakaologout">로그아웃</a>			            		
+			            	</div>
+			            	<div class="header-message" id="messageIcon">
+			                	<i class="far fa-envelope fa-lg" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
+			                </div>
 	            		<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
 	            	</c:if>
 
@@ -79,7 +88,8 @@
 			            		<a href="${path}/member/logout">로그아웃</a>			            		
 			            	</div>
 			            	<div class="header-message" id="messageIcon">
-			                	<i class="far fa-envelope" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
+			                	<i class="far fa-envelope fa-lg" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
+			                	<span class="recMs"></span>
 			                </div>
 		            	</c:if>
 	            	</div>
@@ -115,8 +125,45 @@
 		   
 		   msSock.onmessage = function(evt){
 				var data = evt.data;
+				console.log(data);
+				if(data == "new message"){
+					messageToast();
+				}
+				
+				var splitdata = evt.data.split(":");
+				console.log(+splitdata[1]);
+				if(splitdata[0].indexOf("recMs") > -1){
+					var num1= +splitdata[1];
+					console.log("num1 = "+num1);
+					if(num1 == 0){
+						$("<span></span>").replaceAll(".recMs");
+						
+					}else{
+						console.log(num1);
+						$(".recMs").append(num1);
+						$(".recMs").css({
+								"position": "absolute",
+							    "top": "-10",
+							    "right": "0",
+							    "left":"15",
+							    "z-index": "3",
+							    "height": "18px",
+							    "width": "18px",
+							    "font-size":"15px",
+							    /* "font-weight":"bold", */
+							    "line-height": "20px",
+							    "text-align": "center",
+							    "background-color": "red",
+							    "border-radius": "15px",
+							    "display": "inline-block",
+						});
+
+					}
+				}
+				
 				console.log("recvMsg" +data);
-				messageToast();
+				
+				//messageToast();
 				
 				
 				//$.toast('새로운 메세지가 도착했습니다');
