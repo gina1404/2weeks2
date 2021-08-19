@@ -14,4 +14,8 @@ public interface CovidNewsDao {
 
 	List<CovidNews> getNewsList(SqlSession session);
 
+	List<CovidNews> list(SqlSession session, int cPage, int numPerpage);
+
+	int totalNewsCount(SqlSession session);
+
 }

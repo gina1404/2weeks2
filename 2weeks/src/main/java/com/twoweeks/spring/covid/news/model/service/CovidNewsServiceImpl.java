@@ -32,6 +32,18 @@ public class CovidNewsServiceImpl implements CovidNewsService {
 		return dao.getNewsList(session);
 	}
 
+	@Override
+	public List<CovidNews> list(int cPage, int numPerpage) {
+		// TODO Auto-generated method stub
+		return dao.list(session, cPage, numPerpage);
+	}
+
+	//pageBar를 생성하기 위한 총 뉴스 데이터 갯수를 불러온다.
+	@Override
+	public int totalNewsCount() {
+		return dao.totalNewsCount(session);
+	}
+
 	
 	
 }

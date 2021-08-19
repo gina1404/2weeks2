@@ -11,5 +11,9 @@ public interface CovidNewsService {
 	int covidNewsData(Map<String, String> param);
 
 	List<CovidNews> getNewsList();
+
+	List<CovidNews> list(int cPage, int numPerpage);
+
+	int totalNewsCount();
 	
 }

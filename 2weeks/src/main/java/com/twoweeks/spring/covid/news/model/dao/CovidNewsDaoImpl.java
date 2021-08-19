@@ -3,6 +3,7 @@ package com.twoweeks.spring.covid.news.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +22,18 @@ public class CovidNewsDaoImpl implements CovidNewsDao {
 	@Override
 	public List<CovidNews> getNewsList(SqlSession session) {
 		return session.selectList("covidnews.getNewsList");
+	}
+
+	@Override
+	public List<CovidNews> list(SqlSession session, int cPage, int numPerpage) {
+	
+		return session.selectList("covidnews.list", null, new RowBounds((cPage-1)*numPerpage, numPerpage));
+	}
+
+	@Override
+	public int totalNewsCount(SqlSession session) {
+	
+		return session.selectOne("covidnews.totalNewsCount");
 	}
 
 	

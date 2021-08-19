@@ -8,9 +8,16 @@
 	
 	
 	<select id="getNewsList" resultType="covidnews">
-	SELECT TITLE, CONTENT, PRESS, URL, NEWSDATE FROM NEWS
+	SELECT TITLE, CONTENT, PRESS, URL, NEWSDATE FROM NEWS ORDER BY NO DESC
 	</select>
 	
+	<select id="list" resultType="covidnews">
+	SELECT  TITLE, CONTENT, PRESS, URL, NEWSDATE FROM NEWS ORDER BY NO DESC
+	</select>
+	
+	<select id="totalNewsCount" resultType="_int">
+	SELECT COUNT(*) FROM NEWS
+	</select>
 	
 	<resultMap type="covidnews" id="covidnewsMap">
 	<id column="no" property="no"/>

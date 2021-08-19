@@ -1,6 +1,5 @@
 package com.twoweeks.spring.covid.news.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,10 +9,16 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.twoweeks.spring.common.PageFactory;
 import com.twoweeks.spring.covid.news.model.service.CovidNewsService;
 import com.twoweeks.spring.covid.news.model.vo.CovidNews;
 
@@ -30,8 +35,9 @@ public class CovidNewsController {
 	
 	
 	
-	
-	public ModelAndView newsList(ModelAndView mv) throws Exception {
+	@Scheduled(cron = "0 0 12 * * *")
+	public ModelAndView newsList() throws Exception {
+		ModelAndView mv = new ModelAndView();
 		int result=0;
 		CovidNews cn =  null;
 		Document document = Jsoup.connect(CONNECT_URL).get();
@@ -71,16 +77,34 @@ public class CovidNewsController {
 		}
 		
 		 
-			 	
-			mv.addObject("loc","/");
+			log.info("========================================5초마다 이거 실행하니??=========================================");
+			//mv.addObject("newsList",service.getNewsList());
 			mv.setViewName("news/covidNews");
 			return mv;
 	}
 	
-	@RequestMapping("covid/news")
-	public String moveCovidNews() {
-		return ("news/covidNews");
+	@RequestMapping("covid/news.do")
+	public ModelAndView moveCovidNews(ModelAndView mv, @RequestParam(value="cPage", defaultValue="1") int cPage, @RequestParam(value="numPerpage",defaultValue="6")int numPerpage) {
+		 mv.addObject("list",service.list(cPage, numPerpage));
+		 int totalData = service.totalNewsCount();
+		 mv.addObject("totalContents",totalData);
+		 mv.addObject("pageBar",PageFactory.getPageBar(totalData, cPage, numPerpage, "news.do"));
+		 mv.setViewName("news/covidNews");
+		return mv;
 		
 	}
 	
+	@GetMapping("news/getNewsList")
+	public ResponseEntity<List<CovidNews>> getNewsList() {
+		log.info("new 리스트 가져오기!!");
+		ResponseEntity<List<CovidNews>> entity = null;
+		try {
+			entity = new ResponseEntity<List<CovidNews>>(service.getNewsList(), HttpStatus.OK);
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<List<CovidNews>>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+		 
+	}
 }
