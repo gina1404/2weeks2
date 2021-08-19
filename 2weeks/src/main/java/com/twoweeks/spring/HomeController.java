@@ -39,7 +39,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		model.addAttribute("reportList", reportService.reportList(1, 10));
+		model.addAttribute("reportList", reportService.reportList(1, 14));
 		
 		return "index";
 	}
