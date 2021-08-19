@@ -8,7 +8,7 @@
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6944e39f85fb8e5ca0d10ff408274b51"></script> -->
 <section class="container" style="display:flex;">
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="content" style="display:nline-block; padding-left:220px;">	
+	<div class="content" style="display:inline-block; padding-left:220px;">	
 		<h2>국내 확산 현황</h2>
 		
 	
