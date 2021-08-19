@@ -20,22 +20,20 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 /* 기본 header, nav, main(container), aside 영역 나누기  */
 #header{
 	align-items: center;
-	/* background-color: #F7F8FC; */
 	display: flex;
 	width: 1440px;
-	margin: auto;
-	position:fixed;
+	margin: 10px auto auto auto;
 	height:60px; /* header 높이 */
 	top:0;
 	left:0;
 	right:0;	
 	color: #394956;
 	font-family: 'Pretendard';
+	
 }		
 #sidebar {
 	align-items: flex-start;
 	width:200px ; /* 사이드바 너비  15%->200px */
-	/* overflow: hidden; */
 	top:60px; /* header 높이에 따라 변경해야 됨 */
 	position:fixed;
 	padding:0;
@@ -45,14 +43,11 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 }
 
 .container {
-	/* background-color: #F7F8FC !important; */
 	height: auto;
 	min-height : 100%; 
 	width: 1440px;
-	/* margin: 60px auto 0 auto; */
 	padding-left: 0;
-	/* padding:15px 75px 0 15px !important; */
-	margin: 60px auto auto auto;
+	margin: auto;
 }  	
 .content{
     width: 1200px;
@@ -84,6 +79,8 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	align-items: center;
 	justify-content: center;
 	left:0;
+    border-radius: 15px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
 }
 .header-logo{
 	display:flex;
