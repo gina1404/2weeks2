@@ -109,6 +109,26 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return dao.selectGrantCount(session);
 	}
+	@Override
+	public int deletePost(int seq) {
+		// TODO Auto-generated method stub
+		return dao.deletePost(session,seq);
+	}
+	@Override
+	public int deleteKin(int seq) {
+		// TODO Auto-generated method stub
+		return dao.deleteKin(session,seq);
+	}
+	@Override
+	public int deletePostReply(int seq) {
+		// TODO Auto-generated method stub
+		return dao.deletePostReply(session,seq);
+	}
+	@Override
+	public int deleteKinReply(int seq) {
+		// TODO Auto-generated method stub
+		return dao.deleteKinReply(session,seq);
+	}
 	
 	
 }
