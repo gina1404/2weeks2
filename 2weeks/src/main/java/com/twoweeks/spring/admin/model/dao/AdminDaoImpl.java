@@ -135,6 +135,12 @@ public class AdminDaoImpl implements AdminDao{
 		// TODO Auto-generated method stub
 		return session.delete("notice.deleteKinReply", seq);
 	}
+
+	@Override
+	public int deleteGrant(SqlSession session, String userId) {
+		// TODO Auto-generated method stub
+		return session.delete("notice.deleteGrant", userId);
+	}
 	
 	
 	
