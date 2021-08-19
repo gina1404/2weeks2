@@ -8,7 +8,7 @@
 
 	<jsp:param name="title" value="지식인질문"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 
 <style>
 
@@ -293,7 +293,7 @@ right: -60px;
 
 
 <section class="container" style="display:flex; padding-bottom: 200px;"> 	
-
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <form name="KinFrm" action="${path }/KnowledgeIn/KnowledgeInQEnd.do"method="post" enctype="multipart/form-data" >
          
 	<div class="question"  style="display:inline-block;padding-left: 200px;">
@@ -307,7 +307,7 @@ right: -60px;
 <input type="text"  maxlength='20' style="width:1000px;font-size:30px; border:1px solid #19ce60" placeholder="제목 작성란 입니다 20자 미만으로 입력해주세요."
 				 value ="${knowledgeIn.kin_Title}" name="kin_Title" required>
 			
-			
+			<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly">
 			<input type="hidden" name="kin_Writer" class="form-control" value="${member.user_Id}" readonly="readonly">
 			Point : ${member.userPoint_Cnt } 
 			<ul class="knowmenu"> 

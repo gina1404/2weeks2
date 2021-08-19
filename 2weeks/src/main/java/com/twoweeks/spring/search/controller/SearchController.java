@@ -1,28 +1,37 @@
 package com.twoweeks.spring.search.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.search.model.service.SearchService;
 import com.twoweeks.spring.search.model.vo.DummyData;
+
+import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
+import kr.co.shineware.nlp.komoran.core.Komoran;
+import kr.co.shineware.nlp.komoran.model.KomoranResult;
 
 @Controller
 public class SearchController {
 	
-	@Autowired
+	@Autowired	
 	private SearchService service;
+	
+
+	//형태소 분석
+	public static List<String> analyzeKeyword(String searchKeyword) {
+		Komoran komoran = new Komoran(DEFAULT_MODEL.FULL);
+		KomoranResult analyzedKeyword = komoran.analyze(searchKeyword);
+		//System.out.println(analyzedKeyword.getTokenList());
+		List<String> nounList = analyzedKeyword.getNouns();
+		return nounList;
+	}
 	
 	//전체 검색 결과
 	@RequestMapping(value="/searchResult.do", method=RequestMethod.GET)
@@ -34,7 +43,15 @@ public class SearchController {
 		mv.addObject("searchResultCommunity","TEST");
 		mv.addObject("searchResultKnowledgeIn","TEST2");
 		
-		List<Map<String,String>> externalNaver = service.searchExternalNaver(searchKeyword);
+		List<String> nounList = analyzeKeyword(searchKeyword); //형태소 분석 후 명사만 추출
+//		System.out.println(nounList);
+		
+		//post검색
+		List<FreeBoard> searchResultCommunity = service.searchResultCommunity(nounList);
+		
+		if (searchResultCommunity!=null) mv.addObject("searchResultCommunity", searchResultCommunity);
+		
+		List<Map<String,String>> externalNaver = service.searchExternalNaver(searchKeyword);		
 		mv.addObject("searchResultExternalNaver", externalNaver);
 //		System.out.println("검색 결과 : "+service.searchExternalNaver(searchKeyword));
 		return mv;

@@ -180,6 +180,8 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 .dropdown-content a:hover {background-color: #ddd;}
 .dropdown:hover .dropdown-content {display: block;}
 
+
+
 #messageIcon{
 	margin: 4px 0 0 5px;
 }
@@ -188,6 +190,10 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 .header-message{
 	position: relative;
 }
+
+
+
+
 /* .recMs{
 	position: absolute;
     top: -10;

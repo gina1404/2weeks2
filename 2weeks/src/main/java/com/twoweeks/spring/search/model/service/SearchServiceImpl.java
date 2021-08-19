@@ -28,8 +28,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.search.model.dao.SearchDao;
 import com.twoweeks.spring.search.model.vo.DummyData;
+import com.twoweeks.spring.search.model.vo.SearchNoun;
 
 @Service
 public class SearchServiceImpl implements SearchService{
@@ -40,6 +42,29 @@ public class SearchServiceImpl implements SearchService{
 	@Autowired
 	private SearchDao dao;
 
+	//community 내부 검색
+	@Override
+	public List<FreeBoard> searchResultCommunity(List<String> nounList) {
+		String searchNoun="";
+		for(int i=0; i<nounList.size();i++) {
+			if(i==0) {
+				searchNoun=searchNoun+"POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+			}else {
+				if(i%2==1) {
+					searchNoun=searchNoun+"AND POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				}else {
+					searchNoun=searchNoun+"OR POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				}
+			}			
+		}
+		SearchNoun sn=new SearchNoun();
+		sn.setSearchNoun(searchNoun);
+		System.out.println(searchNoun);
+		
+		return dao.searchResultCommunity(session, sn);
+	}
+	
+	
 	
 	//네이버 api 검색
 	@Override
@@ -107,6 +132,7 @@ public class SearchServiceImpl implements SearchService{
 	        }	        
 		return list;
 	}	
+
 	private static String get(String apiUrl, Map<String, String> requestHeaders){ //네이버 검색용
         HttpURLConnection con = connect(apiUrl);
         try {

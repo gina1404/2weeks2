@@ -31,7 +31,7 @@ public class VaccineController {
         mv.addObject("second",items.get(0).getSecondCnt()); //당일 통계(2차 접종)
         
         System.out.println(items.toString());
-        mv.setViewName("domestic/map");
+        mv.setViewName("covidUpdate/domesticVaccine");
         
         return mv;
     }

@@ -96,7 +96,7 @@ public class KnowledgeInController {
 
 	@RequestMapping("/KnowledgeIn/KnowledgeInQEnd.do") // 지식인 질문등록
 	public ModelAndView insertKin(Kin k,Member m, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file,
-			ModelAndView mv, HttpServletResponse response, HttpServletRequest req ) throws Exception {
+			ModelAndView mv, HttpServletResponse response, HttpServletRequest req,HttpSession session) throws Exception {
 		
 		
 		logger.debug("knowledgIn : " + k);
@@ -138,14 +138,16 @@ public class KnowledgeInController {
 		String msg = "등록 성공";
 		try {
 			service.insertKin(k);
-			
+			 service.updatePoint(m); 
 		} catch (Exception e) {
 			msg = e.getMessage();
 		}
-		/*
-		 * service.updatePoint(m); m.setUser_Id(m.getUser_Id());
-		 * m.setUserPoint_Cnt(m.getUserPoint_Cnt());
-		 */
+	
+		
+		 m.setUser_Id(m.getUser_Id());
+		 m.setUserPoint_Cnt(m.getUserPoint_Cnt());
+		 session.setAttribute("m", m);
+		
 		mv.addObject("msg", msg);
 		mv.addObject("loc", "/KnowledgeIn/KnowledgeInMain.do");
 		

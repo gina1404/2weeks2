@@ -8,7 +8,7 @@
 
 <section id="regionalKor">
 		<!-- 지도/표 선택 버튼 -->
-		<div class="regionalKor-button-area"">
+		<div class="regionalKor-button-area">
 			<button id="regionalKor-map-button" class="regionalKor-button regionalKor-button-on" onclick="fn_selectButton1()">지도</button>
 			<button id="regionalKor-table-button" class="regionalKor-button" onclick="fn_selectButton2()">지역별 표</button>
 		</div>		
@@ -70,11 +70,11 @@ $("#regionalKor").each(function(){
             
             //2. 지역별 현황 지도 출력
             var width = 100; //지도의 넓이 %
-            var height = 500; //지도의 높이 px
-            var scale = 4800; //확대시킬 값
+            var height = 530; //지도의 높이 px
+            var scale = 4600; //확대시킬 값
             var labels; //라벨
             //geo 세팅 : 축척 - 서울 중심 좌표를 기준으로 조금씩 움직이며 맞췃음
-            var projection = d3.geo.mercator().scale(scale).center([127-1.3, 37.6-1.15]).translate([width/2,height/2]);
+            var projection = d3.geo.mercator().scale(scale).center([127-1.5, 37.6-1.7]).translate([width/2,height/2]);
             var path = d3.geo.path().projection(projection);
         
             //지도 츨력

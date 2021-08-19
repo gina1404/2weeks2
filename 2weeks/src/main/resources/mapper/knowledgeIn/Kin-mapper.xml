@@ -176,10 +176,10 @@
 		
 		
 			
-	<!-- 	<update id="updatePoint" parameterType="Member">
-		UPDATE MEMBER2 M SET M.USERPOINT_CNT= (SELECT USERPOINT_CNT FROM MEMBER2 WHERE USER_ID = #{user_Id}) - (SELECT POINT FROM KIN  WHERE KIN_SQ =#{kin_Sq})WHERE M.USER_ID=#{user_Id}
-		</update>  -->
-	
+		<update id="updatePoint" parameterType="Member">
+		UPDATE MEMBER2 M SET M.USERPOINT_CNT= (SELECT USERPOINT_CNT FROM MEMBER2 WHERE USER_ID = #{user_Id}) - (SELECT POINT FROM KIN  WHERE KIN_SQ =#{kin_Sq})WHERE USER_ID=#{user_Id}
+		</update>
+
 		
 		<update id="updateReplyCount" parameterType="int">
 		UPDATE KIN K SET K.REPLY_CNT =(SELECT COUNT(*)FROM KIN_REPLY WHERE KIN_SQ =#{kin_Sq}) WHERE K.KIN_SQ=#{kin_Sq}             
