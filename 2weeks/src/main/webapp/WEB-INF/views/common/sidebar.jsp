@@ -140,12 +140,12 @@
 	/* hover로 사이드바 열고 닫기 */
     /* hover일 때 색상 변경 */
     $(".wrap_sub_list").hover(function(){  
-        $(this).children("div.sidebar-list-hide").slideDown("slow").siblings("div.sidebar-list-hide").slideUp("slow"); 
+        $(this).children("div.sidebar-list-hide").slideDown(1100).siblings("div.sidebar-list-hide").slideUp(1000); 
         $(this).css("background", "#7879F160");
         $(this).children("div.sidebar-list").css("background", "#7879F160");        
     },  
     function(){  
-		$(this).children("div.sidebar-list-hide").slideUp("slow");  
+		$(this).children("div.sidebar-list-hide").slideUp(1000);  
 		$(this).css("background", "#D3D8F4");
 		$(this).children("div.sidebar-list").css("background", "#D3D8F4");
     });

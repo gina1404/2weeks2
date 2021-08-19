@@ -180,16 +180,20 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 .dropdown-content a:hover {background-color: #ddd;}
 .dropdown:hover .dropdown-content {display: block;}
 
+
+
 #messageIcon{
 	margin: 4px 0 0 5px;
 }
-<<<<<<< HEAD
-=======
 
 /*메세지 알림 추가  */
 .header-message{
 	position: relative;
 }
+
+
+
+
 /* .recMs{
 	position: absolute;
     top: -10;
@@ -208,6 +212,3 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 } */
 
 </style>
-
-
->>>>>>> b3b83b8c609229c069ec99217fac81c2d14dc3af
