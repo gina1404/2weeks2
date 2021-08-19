@@ -184,6 +184,28 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 #messageIcon{
 	margin: 4px 0 0 5px;
 }
+
+/*메세지 알림 추가  */
+.header-message{
+	position: relative;
+}
+/* .recMs{
+	position: absolute;
+    top: -10;
+    right: 0;
+    left:15;
+    z-index: 3;
+    height: 18px;
+    width: 18px;
+    font-size:15px;
+    font-weight:bold;
+    line-height: 20px;
+    text-align: center;
+    background-color: red;
+    border-radius: 15px;
+    display: inline-block;
+} */
+
 </style>
 
 
