@@ -17,6 +17,12 @@ a {	color: #394956; text-decoration: none; outline: none }
 
 a:hover, a:active {text-decoration: none; color: #394956;}
 
+/* 테두리 박스 규격 */
+.defaultBoxshadow{
+    border-radius: 14px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
+    overflow:hidden;
+}
 /* 기본 header, nav, main(container), aside 영역 나누기  */
 #header{
 	align-items: center;
@@ -28,15 +34,17 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	height:60px; /* header 높이 */
 	top:0;
 	left:0;
-	right:0;	
+	right:0;
+	padding-top:30px;	
 	color: #394956;
 	font-family: 'Pretendard';
+	background-color:white;
 }		
 #sidebar {
 	align-items: flex-start;
 	width:200px ; /* 사이드바 너비  15%->200px */
 	/* overflow: hidden; */
-	top:60px; /* header 높이에 따라 변경해야 됨 */
+	top:75px; /* header 높이에 따라 변경해야 됨 */
 	position:fixed;
 	padding:0;
 	height:100%;
@@ -45,14 +53,11 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 }
 
 .container {
-	/* background-color: #F7F8FC !important; */
 	height: auto;
 	min-height : 100%; 
 	width: 1440px;
-	/* margin: 60px auto 0 auto; */
 	padding-left: 0;
-	/* padding:15px 75px 0 15px !important; */
-	margin: 60px auto auto auto;
+	margin: 75px auto auto auto;
 }  	
 .content{
     width: 1200px;
@@ -60,6 +65,8 @@ a:hover, a:active {text-decoration: none; color: #394956;}
     height:auto;
     float: right;
    	margin: 20px;
+   	padding-left:20px;
+   	padding-right:20px;
 }
 #aside {
 	display: flex;
@@ -78,12 +85,15 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	align-items: center;
 	background-color: #D3D8F4;
 	width:200px; /* 사이드바 너비와 동일하게 맞춰줘야 됨 */
-	height:100%;
+	height:60px;
 	text-align:center;
 	display:flex;
 	align-items: center;
 	justify-content: center;
 	left:0;
+	border-radius:14px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
+    overflow: hidden;
 }
 .header-logo{
 	display:flex;
@@ -97,7 +107,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 }
 .header-search-area{
 	display: flex;
-	width: 800px;
+	width: 700px;
 	height: 60px;
 	align-items: center;
 	padding:0 15px ;
@@ -106,11 +116,12 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 #searchKeyword{	
 	margin:0;
 	padding:0;
-	width:50%;
-	height:26px;
+	width:90%;
+	height:30px;
+	font-size:15px;
 	margin-right:-5px;
 	text-align: right;
-	border:0.5px solid gray;
+	border:0;
 	border-radius:4px;	
 }
 #searchKeyword:focus{
@@ -118,10 +129,10 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 }
 .header-icon-area{
 	height: 60px;
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-		padding:0 15px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding:0 15px;
 }           
 .header-divider {
 	height: 32px;
@@ -210,5 +221,4 @@ a:hover, a:active {text-decoration: none; color: #394956;}
     border-radius: 15px;
     display: inline-block;
 } */
-
 </style>

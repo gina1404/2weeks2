@@ -77,15 +77,7 @@
 			<div class="wrap_sub_list">
 				<div class="sidebar-list">
 	                <img class="sidebar-icon" src="${path }/resources/images/icons/commu.png"/>
-	                <div class="sidebar-title">Community</div>
-	            </div>
-	            <div class="sidebar-list-hide">
-	            	<div class="sidebar-list-sub">
-		                <div class="sidebar-title">Specific</div>
-		            </div>
-		            <div class="sidebar-list-sub">
-		                <div class="sidebar-title"><a href="${path }/freeboard/boardList.do">Free</a></div>
-		            </div>
+	                <div class="sidebar-title"><a href="${path }/freeboard/boardList.do">Community</a></div>
 	            </div>
 			</div>
 			

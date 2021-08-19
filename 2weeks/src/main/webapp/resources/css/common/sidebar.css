@@ -5,26 +5,24 @@
 	width:100%;
 	overflow: hidden;
 	left:0;
-	color: #394956;		
-	border-radius: 15px;
-    box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
+	color: #394956;
+    border-radius: 14px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
 	margin-top: 20px;
 	background-color: #D3D8F4;
-	/* padding-left: 5px; */
 }
 .wrap_sub_list, .wrap_sidebar-divider{
 	margin:0;
-	padding:0;
 	/* background-color: #D3D8F4; */
 	cursor:point;
 }
 .sidebar-list{
 	align-items: center;
 	display: flex;
-	height: 40px;
+	height: 45px;
 	cursor:point;
 	width:100%;
-	padding-left:15px;
+	padding-left:17px;
 }
 .sidebar-list-hide{
 	display:none;

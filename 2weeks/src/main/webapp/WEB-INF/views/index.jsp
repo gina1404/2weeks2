@@ -29,7 +29,11 @@
 		<div class="item 1st">7</div>
 		<div class="item 1st">8</div>
 		<div id="home-map-area" class="item 2nd">
-			<div id="mapMove">지역별 확산 지도</div>
+			<div id="mapMove">
+				<a class="" href="${path }/covid/domestic.do">
+				지역별 확산 현황 지도
+				</a>
+			</div>
 			<div id="regionalKor-map-small"></div>
 		</div>
 		<div class="item 2nd">

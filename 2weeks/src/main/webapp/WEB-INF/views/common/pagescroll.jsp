@@ -44,6 +44,7 @@
 	<script>
 	pagescrollButton = document.getElementById("pagescroll-button");
 
+
 	// 문서 높이로부터 20px 아래로 스크롤하면 버튼이 보임
 	window.onscroll = function() {fn_scroll()};
 
@@ -62,7 +63,7 @@
 	}	
 	
 	 <!-- 챗봇 연결 플러그인 -->
-	  /* (function() {
+	  (function() {
 	    var w = window;
 	    if (w.ChannelIO) {
 	      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
@@ -99,7 +100,7 @@
 	  })();
 	  ChannelIO('boot', {
 	    "pluginKey": "cf7f84b9-913f-48bd-b7c6-898b55aeb3ef"
-	  });  */
+	  });
 	<!-- 챗봇 연결 끝 -->
 	
 	</script>
