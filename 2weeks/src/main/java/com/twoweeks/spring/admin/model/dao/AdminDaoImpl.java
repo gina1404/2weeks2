@@ -111,6 +111,30 @@ public class AdminDaoImpl implements AdminDao{
 		// TODO Auto-generated method stub
 		return session.selectOne("notice.selectGrantCount");
 	}
+
+	@Override
+	public int deletePost(SqlSession session, int seq) {
+		// TODO Auto-generated method stub
+		return session.delete("notice.deletePost", seq);
+	}
+
+	@Override
+	public int deleteKin(SqlSession session, int seq) {
+		// TODO Auto-generated method stub
+		return session.delete("notice.deleteKin",seq);
+	}
+
+	@Override
+	public int deletePostReply(SqlSession session, int seq) {
+		// TODO Auto-generated method stub
+		return session.delete("notice.deletePostReply", seq);
+	}
+
+	@Override
+	public int deleteKinReply(SqlSession session, int seq) {
+		// TODO Auto-generated method stub
+		return session.delete("notice.deleteKinReply", seq);
+	}
 	
 	
 	

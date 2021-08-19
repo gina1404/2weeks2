@@ -7,10 +7,10 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
-<section class="container">	
+<section class="container" style="display:flex; padding-bottom:200px;">	
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="content">
-		<!-- 커뮤니티 검색 결과 -->
+	<div class="content" style="display:inline-block; padding-left:220px; ">
+		<%-- <!-- 커뮤니티 검색 결과 -->
 		<section id="searchResult-community" style="width:80%; border:1px solid green; display:inline-block;" >
 			<div>${searchResultCommunity}</div>		
 			<div><a>community 더 보기 -> </a></div>
@@ -20,7 +20,7 @@
 		<section id="searchResult-knowledgeIn" style="width:80%; border:1px solid green;" >
 				<div>${searchResultKnowledgeIn}</div>
 				<div><a>지식인 더 보기 -> </a></div>
-		</section>
+		</section> --%>
 		
 		<!-- 외부 검색 결과 -->
 		<section id="searchResult-external" class="searchResult-area">
@@ -38,7 +38,6 @@
 			</c:forEach>
 			<div class="searchResult-detail"><div onclick="window.open('https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${searchKeyword}')">외부 검색 결과 더 보기 <span>→</span></div></div>
 		</section>
-	<br><br><br><br><br><br>
 	</div>
 </section>
 
