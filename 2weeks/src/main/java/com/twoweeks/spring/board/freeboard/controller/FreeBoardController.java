@@ -235,6 +235,24 @@ public class FreeBoardController {
 		return "freeBoard/write";
 	}
 	
+
+	
+	
+	
+	
+	
+	//나의활동보기
+	@RequestMapping("/member/mypage")
+	public ModelAndView selectMyBoard(@RequestParam String loginId, ModelAndView mv) {
+		List<FreeBoard> list=service.selectMyBoard(loginId);
+		mv.addObject("list", list);
+		
+		mv.setViewName("member/myBoard");
+		
+		return mv;
+	}
+	
+	
 }
 	
 	

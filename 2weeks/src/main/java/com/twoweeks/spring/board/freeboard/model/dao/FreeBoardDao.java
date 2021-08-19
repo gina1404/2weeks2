@@ -33,6 +33,6 @@ public interface FreeBoardDao {
 
 	int updateAttachment(SqlSession session, PostAttachment a);
 
-	
+	List<FreeBoard> selectMyBoard(SqlSession session, String userId);
 	
 }

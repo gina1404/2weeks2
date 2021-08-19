@@ -112,7 +112,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	public int delete(int no) {
 		return dao.delete(session, no);
 	}
-	
+
+
+	@Override
+	public List<FreeBoard> selectMyBoard(String userId) {		
+		return dao.selectMyBoard(session, userId);
+	}
 	
 	
 }

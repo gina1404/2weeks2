@@ -1,7 +1,9 @@
 @charset "UTF-8";
-
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 h2{
     text-align: center;
+    font-family: 'Pretendard';
+    font-size: 30px;
 }
 #map{
     margin: auto;

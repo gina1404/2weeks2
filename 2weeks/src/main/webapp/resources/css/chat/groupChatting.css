@@ -1,4 +1,9 @@
 @charset "UTF-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+#chatContainer, #sendBox{
+	font-family: 'Pretendard';
+}
 
 #chatContainer{
     border:1px solid;
@@ -72,6 +77,8 @@
 	background-color:#F2E0F7;
 	border-radius: 10px;
 	margin-left: 165px;
+	display: flex;
+	flex-direction: column;
 }
 #yourBox{
 	min-height: 70px;
@@ -81,6 +88,8 @@
 	padding:7px;
 	background-color:#CEE3F6;
 	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
 }
 #chatTime{
 	width: 120px;
@@ -90,6 +99,7 @@
     position: relative;
     color:#808080;
     text-align: right;
+    margin-left: 95px;
 }
 #sender{
 	width: 200px;

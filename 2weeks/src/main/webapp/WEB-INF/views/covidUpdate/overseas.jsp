@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <c:set var="path" value="${pageContext.request.contextPath }"/>    
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2Weeks"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 <style>
 
 	.st-mainbar{
@@ -92,9 +92,11 @@
 
 </style>
 
-<section class="container">
+<section class="container" style="display: flex; padding-bottom: 30px; position: relative; right: 150px;" >
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+<div class="content gridContainer" style="margin-left: 300px; " >
 	<h2 style="text-align: center;">전세계 해외 정보</h2><br><br>
-	<div class="st-mainbar">
+	<div class="st-mainbar" style="border: 1px gray solid;">
 		<div class="st-bar1">
 			<div class="st-bar-decide">
 				<div class="st-bar-decide-title">확진자</div>
@@ -108,7 +110,7 @@
 	</div>
 	<br>
 	<div>
-		<div class="st-mainbar">
+		<div class="st-mainbar" style="border: 1px gray solid;">
 			<div  style="font-size: 15px; text-align: center; ">오늘의 확진자수</div><br>
 			<div class="st-bat-death-countt" style="text-align: center;">${realtodayDef }명</div>
 		</div>
@@ -123,12 +125,12 @@
 		  </select>
   		</div> -->
  			<div id="search-chart_div">
-		 		 <div id="chart_div"  class="gritem" style="width: 700px;height: 500px;"></div>
-				 <div id="piechart" class="gritem" style="width: 400px; height: 500px; " ></div>
+		 		 <div id="chart_div"  class="gritem" style="width: 390px;height: 500px;"></div>
+				 <div id="piechart" class="gritem" style="width: 390px; height: 500px; " ></div>
 		 	</div>
  			<div id="search-chart_di">
-		 		 <div id="chart_di"  class="gritem" style="width: 700px;height: 500px;"></div>
-				<div id="regions_div" class="gritem" style="width: 400px; height: 500px;"></div>
+		 		 <div id="chart_di"  class="gritem" style="width: 390px;height: 500px;"></div>
+				<div id="regions_div" class="gritem" style="width: 390px; height: 500px;"></div>
 		 	</div>
 	</div>
 	<br><br><br>
@@ -152,7 +154,7 @@
 	</table>
 	
 	
-	
+	</div>
 
 </section>
 
@@ -358,7 +360,7 @@ function drawVisualizatio() {
       }
 
 </script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 		
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
