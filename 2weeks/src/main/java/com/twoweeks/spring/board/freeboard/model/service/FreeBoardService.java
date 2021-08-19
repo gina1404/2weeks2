@@ -9,15 +9,7 @@ import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 public interface FreeBoardService {
 
-	/*
-	 * int create(FreeBoard freeBoard) throws Exception;
-	 * 
-	 * FreeBoard read(int post_Sq) throws Exception;
-	 * 
-	 * void update(FreeBoard freeBoard) throws Exception;
-	 * 
-	 * void delete(int post_Sq) throws Exception;
-	 */
+
 	
 	List<FreeBoard> listAll(int cPage, int numPerpage);
 
