@@ -21,7 +21,7 @@ public interface KnowledgeInDao {
 	
 	int selectKinCount(SqlSession session); //총 건수
 	
-	int selectKinReplyCount(SqlSession session,int sq); //답글 개수
+	int selectKinReplyCount(SqlSession session,int sq); //총 답글 개수
 	
 	int insertKin(SqlSession session,Kin k); //글 작성
 	
@@ -41,11 +41,12 @@ public interface KnowledgeInDao {
 	
 	void updateReplyCount(SqlSession session, int sq)throws Exception; //답글 개수
 	
+	int  updatePoint(SqlSession session, Member m)throws Exception; //글 등록시 멤버포인트
+	
 	int update(SqlSession session, Kin k); //글 수정
 
 	int updateKinAttachment(SqlSession session, KinAttachment ka); //첨부파일 수정
 
-	 
 	List<Kin> list(SqlSession session, Kin k);
 
 

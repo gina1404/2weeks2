@@ -203,7 +203,7 @@ top: -10px;
 
 font-weight: bold;
 position: relative;
-top:-50px;
+top:-60px;
 
 
 }
@@ -256,8 +256,7 @@ a:-webkit-any-link {
     max-width: 100%;
     visibility: visible;
     position:relative;
-    bottom: -100px;
-	top: -10px;
+	top: 10px;
     background-color:#6B66FF;
     border-radius: 24px;
 }
@@ -299,7 +298,7 @@ color:#ffffff;
 }
 
 
-#Qsearch{
+.Qsearch{
 
 width:100px;
 height:40px;
@@ -319,7 +318,7 @@ position:relative;
 color: black;
 font-family: Pretendard;
 top:-100px;
-right:-1400px;
+right:-1000px;
 }
 
 .background2{
@@ -356,9 +355,12 @@ text-align: center;
 
 }
 </style>
-<section class="container">		
+<section class="container" style="display:flex; padding-bottom: 200px;"> 	
+<div class="content" style="display:inline-block;padding-left: 220px;">	
 
-
+		<a href="">	<img id="expert" src="${pageContext.request.contextPath}/resources/images/knowledgeIn/home_panel_expert2.png" alt=""
+						width="130px" height="130px">
+			<div class="description">전문의 상담이<br>필요할 땐,<br>지식iN 엑스퍼트</div></a>
 
 		
 						
@@ -368,12 +370,14 @@ text-align: center;
 
 
 <div class="background2">
-				<span id="Myqlist">내 질문 답변></span>
+
+
+				<span id="Myqlist">내 질문 답변</span>
 
 			<!-- <div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div> -->
-		<a href="KnowledgeInQ.do">	<button id="Qsearch" >질문하기</button></a>
+		<button class="Qsearch" >질문하기</button>
 <!-- <div id="knowQ">답변을 기다리는 질문 </div> -->  <!-- 많이 본 Q&amp;A -->
 
 	
@@ -530,9 +534,23 @@ text-align: center;
         	${pageBar }
         </div>
         </div>
-           
+      </div>     
 </section>
+	<script>
+	$(".Qsearch").on("click",function(){
+		
+		if(	${empty member.user_Id }){
+			alert("로그인 후 이용가능합니다.")
+				return false;
+			} 
+		
+
+			
+		location.href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInQ.do";
 	
+		
+	});  
+</script>
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

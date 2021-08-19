@@ -10,6 +10,7 @@ import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinAttachment;
 import com.twoweeks.spring.know.model.vo.KinReply;
 import com.twoweeks.spring.know.model.vo.KinReplyAttachment;
+import com.twoweeks.spring.member.model.vo.Member;
 
 @Repository
 public class KnowledgeInDaoImpl implements KnowledgeInDao {
@@ -127,9 +128,13 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	}
 
 
+	@Override
+	public int updatePoint(SqlSession session, Member m) throws Exception {
+		return session.update("knowledgeIn.updatePoint",m);
+			
+	}
 
-
-
+	
 
 
 

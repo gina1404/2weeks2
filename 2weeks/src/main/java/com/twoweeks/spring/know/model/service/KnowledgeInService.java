@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinReply;
+import com.twoweeks.spring.member.model.vo.Member;
 
 public interface KnowledgeInService {
 	List<Kin> selectKinList(int cPage, int numPerpage); //글 목록 조회
@@ -32,7 +33,12 @@ public interface KnowledgeInService {
 	
 	int update(Kin k) throws Exception; //글 수정
 	
-	void updateReplyCount(int sq)throws Exception;
+	void updateReplyCount(int sq)throws Exception; //답글 개수 
+	
+	int updatePoint(Member m)throws Exception; //포인트
+
+
+
 
 
 
