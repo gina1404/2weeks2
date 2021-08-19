@@ -17,6 +17,12 @@ public class CovidNewsDaoImpl implements CovidNewsDao {
 		return session.insert("covidnews.covidNewsData",param);
 	}
 
+	//뉴스 데이터 가져오기
+	@Override
+	public List<CovidNews> getNewsList(SqlSession session) {
+		return session.selectList("covidnews.getNewsList");
+	}
+
 	
 	
 }

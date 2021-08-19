@@ -9,5 +9,7 @@ public interface CovidNewsService {
 
 	
 	int covidNewsData(Map<String, String> param);
+
+	List<CovidNews> getNewsList();
 	
 }

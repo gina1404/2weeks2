@@ -25,6 +25,13 @@ public class CovidNewsServiceImpl implements CovidNewsService {
 		return dao.covidNewsData(param, session);
 	}
 
+	//뉴스 데이터 가져오기
+	@Override
+	public List<CovidNews> getNewsList() {
+		
+		return dao.getNewsList(session);
+	}
+
 	
 	
 }

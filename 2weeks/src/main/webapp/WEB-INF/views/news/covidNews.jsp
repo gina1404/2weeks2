@@ -20,6 +20,7 @@
         <h5 class="section-title h1">뉴스</h5>
         <div class="row">
             <!-- Team member -->
+            <c:forEach var ="n" items="${newsList }">
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
                     <div class="mainflip">
@@ -27,9 +28,8 @@
                             <div class="card">
                                 <div class="card-body text-center">
                                     <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_06.jpg" alt="card image"></p>
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <h4 class="card-title">${n.title }</h4>
+                                    <p class="card-text">${n.content }</p>
                                 </div>
                             </div>
                         </div>
@@ -66,9 +66,25 @@
                     </div>
                 </div>
             </div>
+            </c:forEach>
             <!-- ./Team member -->
 
         </div>
     </div>
 </section>
-<!-- Team -->
+
+<script>
+$(document).ready(function(){
+	
+	function getNewsList(){
+		$.getJSON("${path}/news/getNewsList/", function(data){
+			var str="";
+			$(data).each(function(){
+				console.log(content);
+			});
+		});
+	}
+})
+
+
+</script>

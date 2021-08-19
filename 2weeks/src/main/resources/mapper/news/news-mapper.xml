@@ -6,6 +6,12 @@
 	INSERT INTO NEWS VALUES(NEWS_SEQ.NEXTVAL, #{title}, #{content}, NULL,DEFAULT, #{url}, #{newsDate})
 	</insert>
 	
+	
+	<select id="getNewsList" resultType="covidnews">
+	SELECT TITLE, CONTENT, PRESS, URL, NEWSDATE FROM NEWS
+	</select>
+	
+	
 	<resultMap type="covidnews" id="covidnewsMap">
 	<id column="no" property="no"/>
 	<result column="title" property="title"/>

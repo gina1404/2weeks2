@@ -12,4 +12,6 @@ public interface CovidNewsDao {
 	//뉴스크롤링 데이터 db에 저장
 	int covidNewsData(Map<String, String> param, SqlSession session);
 
+	List<CovidNews> getNewsList(SqlSession session);
+
 }
