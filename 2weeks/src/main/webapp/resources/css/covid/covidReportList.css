@@ -12,6 +12,8 @@
 #reportLogo{
 	margin-left: 30px;
 	font-weight: bolder;
+	font-size: 30px;
+    margin-bottom: 25px;
 }
 #reportListCnt span{
 	color: red;

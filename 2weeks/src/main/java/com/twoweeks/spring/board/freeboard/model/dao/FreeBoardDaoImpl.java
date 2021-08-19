@@ -68,6 +68,11 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		return session.insert("freeboard.updateAttachment", a);
 	}
 
+	@Override
+	public List<FreeBoard> selectBoard(SqlSession session, String userId) {
+		return session.selectList("freeboard.selectBoard", userId);
+	}
+
 	
 	
 }
