@@ -49,7 +49,9 @@ public class SearchController {
 		//post검색
 		List<FreeBoard> searchResultCommunity = service.searchResultCommunity(nounList);
 		
-		List<Map<String,String>> externalNaver = service.searchExternalNaver(searchKeyword);
+		if (searchResultCommunity!=null) mv.addObject("searchResultCommunity", searchResultCommunity);
+		
+		List<Map<String,String>> externalNaver = service.searchExternalNaver(searchKeyword);		
 		mv.addObject("searchResultExternalNaver", externalNaver);
 //		System.out.println("검색 결과 : "+service.searchExternalNaver(searchKeyword));
 		return mv;
