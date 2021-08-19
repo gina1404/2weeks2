@@ -1,11 +1,12 @@
 @charset "UTF-8";
-
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 .gridContainer{
 	display: grid;
 	grid-template-columns: repeat(8, 1fr);
 	grid-auto-rows: 150px 450px 500px;	
 	gap: 15px;
 	align-items: stretch;
+	font-family: 'Pretendard';
 }
 .item{	
     overflow: hidden;
@@ -45,6 +46,11 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	cursor: pointer;
+}
+#reportTab tr td:hover{
+	color: #6E6E6E;
+	font-weight: bolder;
 }
 
 .report>div{
@@ -52,4 +58,8 @@
 	font-size: 20px;
     text-align: center;
     margin: 25px 15px 15px 15px;
+}
+#reportMove:hover{
+	color: #6E6E6E;
+	font-weight: bolder;
 }

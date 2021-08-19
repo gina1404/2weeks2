@@ -29,12 +29,17 @@
 		<div class="item 2nd">a</div>
 		<div class="item 2nd">
 			<div class="report">
-				<div>보도자료</div>
+				<div>
+					<a id="reportMove" href="${path }/covidUpdate/report.do">
+						보도자료
+					</a>	
+				</div>
 				<table id="reportTab" class="table table-striped">
 					<c:forEach var="r" items="${reportList }">
-						<tr><td style="text-overflow: ellipsis;">
-						${r.title }
-						</td></tr>
+						<tr>
+							<td class="reportTitle" style="text-overflow: ellipsis;"> ${r.title } </td>
+							<input type="hidden" value="${r.url }">
+						</tr>
 					</c:forEach>
 				</table>
 			</div>
@@ -45,8 +50,34 @@
 		<div class="item 3rd">가</div>
 	</div>	
 </section>
-<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
-	
+
+<script>
+	let move;
+	$(".reportTitle").click(e=>{
+		let aTag=$(e.target).next().val();		
+		let url=aTag.split("','");
+		for(let i=0; i<url.length; i++){
+			if(url[2]!=""){				
+				move="http://ncov.mohw.go.kr/tcmBoardView.do?brdId="+url[1]+
+						"&brdGubun="+url[2]+
+						"&dataGubun=&ncvContSeq="+url[3]+
+						"&contSeq="+url[3]+
+						"&board_id="+url[4].substring(0, 3)+"&gubun=BDJ";						
+			}else {				
+				move="http://ncov.mohw.go.kr/tcmBoardView.do?brdId=&brdGubun=&dataGubun=&ncvContSeq="+
+						url[3]+"&contSeq="+url[3]+"&board_id=140&gubun=BDJ";
+			}			
+		}
+		window.open(move);	
+	});	
+
+</script>
+
+
+
+
+
+<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 

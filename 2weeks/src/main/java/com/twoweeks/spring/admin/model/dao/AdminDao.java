@@ -33,4 +33,5 @@ public interface AdminDao {
 	int deleteKin(SqlSession session,int seq);
 	int deletePostReply(SqlSession session,int seq);
 	int deleteKinReply(SqlSession session,int seq);
+	int deleteGrant(SqlSession session,String userId);
 }

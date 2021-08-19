@@ -170,7 +170,8 @@ background-color:white;
 	height:500px; 
     resize:none;/* 크기고정 */ 
 	position: relative;
-	right:-50px;
+	float: left;
+	left:-120px;
 }
 
 .knowmenu2 li{

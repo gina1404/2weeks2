@@ -104,6 +104,7 @@
                                             <th>신청 카테고리</th>
                                             <th>증명 이미지(클릭시 확인가능)</th>
                                             <th>권한 승인</th>                                            
+                                            <th>승인 취소</th>                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -111,7 +112,8 @@
                                             <th>회원아이디</th>
                                             <th>신청 카테고리</th>
                                             <th>증명 이미지</th>
-                                            <th>권한 승인</th>   
+                                            <th>권한 승인</th> 
+                                             <th>승인 취소</th>          
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -121,6 +123,7 @@
                                             <td>${c.grantTo_Kategorie }</td>
                                             <td id="${c.grantTo_Filename }" onclick="fn_openImg(this.id);" style="cursor:pointer;">${c.grantTo_Filename }</td>
                                             <td><button id="${c.user_Id }" name="${c.grantTo_Kategorie }" onclick="fn_updateGrYn(this.id,this.name);" class="btn btn-outline-primary" >권한주기</button></td>
+                                        	<td><button class="btn btn-outline-primary" onclick="fn_grantcansel(this.id);" id="${c.user_Id }">취소</button></td>
                                         </tr>
      								</c:forEach>
                                     </tbody>
@@ -167,5 +170,9 @@
       			
       		
         };
+        function fn_grantcansel(id){
+        	const userId=id;
+        	 location.assign('<%=request.getContextPath() %>/admin/deleteGrant?userId='+userId); 	
+        }
         </script>
 </html>
