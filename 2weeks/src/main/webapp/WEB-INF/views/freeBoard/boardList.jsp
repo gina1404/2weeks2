@@ -7,42 +7,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="자유게시판"/>
 </jsp:include>
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/freeboard/boardList.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<style>
- .category{
- 	font-size:12px;
- }
-.container {
-  padding-right: 30px;
-  padding-left: 30px;
-  margin-right: auto;
-  margin-left: 20%;
-  margin-top:5%;
-}
-.profile{
-	width:24px;
-	height:24px;
-}
-.heart {
-width:13px;
-height:13px;
-}
-.eye{
-width:13px;
-height:13px;
-}
-.comment{
-width:13px;
-height:13px;
-}
-.icon{
-font-size: 8px;
-}
-a{
-text-decoration: none;
-}
 
-</style>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
 <section id="content">
@@ -86,7 +53,7 @@ text-decoration: none;
 					 	
 		<div class="row" >
 		<c:forEach var="b" items="${list }">
-				<div class="card col-md-3 m-2">
+				<div class="card col-md-3 m-4" style="padding-left:-100px;">
 					<div class="card-header m-3">
 					<c:forEach var="ima" items="${b.attachments }" varStatus="vs">
 						<c:choose>
@@ -159,7 +126,7 @@ text-decoration: none;
 		</button>
 			</div>
 		</div>
-		<div id="pagebar-container" class="m-5">${pageBar }</div>
+		<div id="pagebar-container" class="m-8">${pageBar }</div>
 
 
 </section>
