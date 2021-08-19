@@ -6,7 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>  
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/sidebar.css"> 
 
-	<nav id="sidebar">		
+	<nav id="sidebar" class="side_bar">		
 		<div class="sidebar-default"> <!-- 스크롤 내려도 목록 고정되도록 -->
 			<!-- 코로나 현황 -->
 				<div class="wrap_sub_list"> 
