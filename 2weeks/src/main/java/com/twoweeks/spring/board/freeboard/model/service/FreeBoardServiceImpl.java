@@ -115,8 +115,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 
 	@Override
-	public List<FreeBoard> selectBoard(String userId) {		
-		return dao.selectBoard(session, userId);
+	public List<FreeBoard> selectMyBoard(String userId) {		
+		return dao.selectMyBoard(session, userId);
 	}
 	
 	

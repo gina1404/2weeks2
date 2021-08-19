@@ -69,8 +69,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 
 	@Override
-	public List<FreeBoard> selectBoard(SqlSession session, String userId) {
-		return session.selectList("freeboard.selectBoard", userId);
+	public List<FreeBoard> selectMyBoard(SqlSession session, String userId) {
+		return session.selectList("freeboard.selectMyBoard", userId);
 	}
 
 	

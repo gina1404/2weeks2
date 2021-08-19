@@ -34,7 +34,7 @@ public interface FreeBoardService {
 	
 	int delete(int no);
 	
-	List<FreeBoard> selectBoard(String userId);
+	List<FreeBoard> selectMyBoard(String userId);
 
 	
 	
