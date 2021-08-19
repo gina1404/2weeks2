@@ -13,9 +13,25 @@
 <script src="https://kit.fontawesome.com/d4b4124527.js" crossorigin="anonymous"></script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
-<div class="container">
+<style>
+.side_bar{
+	left:40px;
+
+}
+.content2{
+
+	width:1100px;
+	margin-left:auto;
+
+}
+</style> 
+
+
+<section class="container">
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+<div class="content">
+<div class="content2">
 <h3 class=" text-center">Message</h3>
 <div class="messaging">
       <div class="inbox_msg">
@@ -51,8 +67,10 @@
           </div>    
         </div><!-- 오른쪽 컨테이너 끝 -->
       </div>
+      </div>
 </div>
 </div>
+</section>
 
 <script>
 
