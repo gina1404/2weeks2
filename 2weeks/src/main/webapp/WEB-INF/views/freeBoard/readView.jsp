@@ -78,15 +78,15 @@ font-size : 12px;
 		</div>
 		<div class="outer position-relative" >
 			<div class="inner ">
-			<c:choose>
-			<c:when test="${sessionScope.loginMember != null }">
 				<button class="btn btn btn-danger btn-round" id="likePost" style="width: 100px;">좋아요! ${list.post_Like_Cnt } </button>
+		<%-- 	<c:choose>
+			<c:when test="${sessionScope.loginMember != null }">
 			</c:when>
 			<c:otherwise>
 				<button class="btn btn btn-danger btn-round" id="likePost2" style="width: 100px;">좋아요! ${list.post_Like_Cnt } </button>
 			
 			</c:otherwise>
-			</c:choose>
+			</c:choose> --%>
 					<button type="submit" class="update_btn btn btn btn-danger btn-round  ">수정</button> 
 					<input type="button"  class=" btn btn-danger btn-round" value="삭제" onclick="del(${list.post_Sq})" style="width: 60px;">
 					<button type="submit" class="list_btn btn btn-danger btn-round">목록</button>
@@ -151,6 +151,9 @@ font-size : 12px;
 
 
 </section>
+
+
+
 <script>
 $(document).ready(function(){
 
@@ -477,58 +480,25 @@ function getLikeCnt(){
 			$("#likePost").text("좋아요! "+data);
 			$("#top-Like").html("추천 수 "+"<b>"+data+"</b>");
 		});
-			
-	
-	
-});
+	});
 }
 
 
 
-var  alreadyLikeClick =false;
+
 var isLike = 1;
-var isLike2 = 2;
+var check = "false";
 $("#likePost").on("click",function(){
 	var likeIdx = ${list.post_Like_Cnt};
 	var post_sq = ${list.post_Sq};
-	
-	
-	alreadyLikeClick = localStorage.getItem("isis2");
-	var al = localStorage.getItem("isis");
-	console.log(alreadyLikeClick);
+	check =  localStorage.getItem("isis");
 	//좋아요 취소
-	if(al == 2 && alreadyLikeClick==4){
-		/*  const target = document.getElementById('likePost');
-		  target.disabled = true; */
-		 $.ajax({
-			url:'${path}/freeboard/likeMinus.do',
-			type:'POST',
-			contentType: 'application/json',
-			dataType: "text",
-			header:{
-				"Content-type" : "application/json",
-				"X-HTTP-Method-Override" : "POST" 
-			},
-			data: JSON.stringify({
-				post_Like_Cnt : likeIdx,
-				post_Sq : post_sq
-				
-			}),
-			
-			success:function(data){
-				if(data == "<Integer>"+1+"</Integer>"){
-					isLike = 1;
-					isLike2= 2;
-					getLikeCnt();
-					localStorage.setItem("isis", isLike);
-					localStorage.setItem("isis2", isLike2);
-				}
-			}
-		});
-					
-		 return; 
-	}else if(al == 1 || isLike2==2 || (isLike == 1 && isLike2 ==2)){ 
-	//좋아요는 한번만 누를수 있게 하기 위해서 isLike가 false이면 ajax가 실행 	
+	if(check ==2){
+		  return;
+	}else{
+		
+	
+	
 	$.ajax({
 		url:'${path}/freeboard/like.do',
 		type:'POST',
@@ -548,35 +518,28 @@ $("#likePost").on("click",function(){
 			if(result == 'regSuccess'){
 				getLikeCnt();
 				 isLike= 2;
-				 isLike2= 4;
 				 localStorage.setItem("isis", isLike);
-				 localStorage.setItem("isis2", isLike2);
-				/*  if (typeof(Storage) !== "undefined") {
-					  // Store
-					  localStorage.setItem("isis", isLike);
-					 
-					  // Retrieve
-					} else {
-					  alert('orry, your browser does not support Web Storage...');
-					} */ 
-				
+				 
 			}else{
 				alert('좋아요 실패!');
 				isLike = 0;
+				}
 			}
-		}
-		
 		});
-	}//else끝나는 곳
-	 
-});
-
-$("#likePost2").on("click",function(){
+	}  
+	
+	});	
+/* 	 $("#likePost2").on("click",function(){
 	alert('로그인 후 눌러주세요');
 	return;
-});
-
+});  */
+	
+	
 </script>
+
+
+
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 	
