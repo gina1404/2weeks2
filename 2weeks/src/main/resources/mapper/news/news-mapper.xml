@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="covidnews">
+  
+	<insert id="covidNewsData">
+	INSERT INTO NEWS VALUES(NEWS_SEQ.NEXTVAL, #{title}, #{content}, NULL,DEFAULT, #{url}, #{newsDate})
+	</insert>
+	
+	<resultMap type="covidnews" id="covidnewsMap">
+	<id column="no" property="no"/>
+	<result column="title" property="title"/>
+	<result column="content" property="content"/>
+	<result column="photo" property="photo"/>
+	<result column="press" property="press"/>
+	<result column="url" property="url"/>
+	<result column="newsDate" property="newsDate"/>
+	</resultMap>
+</mapper>
