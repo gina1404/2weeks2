@@ -75,7 +75,7 @@
 
 	            	
 	            	
-	                <div class="dropdown">
+					<div class="dropdown">
 		            	<c:if test="${member.user_Nic ne null }">
 			                <div class="header-profile-icon">
 			                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
@@ -143,9 +143,9 @@
 						$(".recMs").append(num1);
 						$(".recMs").css({
 								"position": "absolute",
-							    "top": "-10",
-							    "right": "0",
-							    "left":"15",
+							    "top": "-10px",
+							    /* "right": "15px", */
+							     "left":"10px", 
 							    "z-index": "3",
 							    "height": "18px",
 							    "width": "18px",
@@ -156,6 +156,7 @@
 							    "background-color": "red",
 							    "border-radius": "15px",
 							    "display": "inline-block",
+							    "color":"white",
 						});
 
 					}
@@ -177,7 +178,7 @@
 			}
 		   
 		   function messageToast(){
-			   toastr.info('알림', '새로운 메세지가 도착했습니다.', {timeOut: 5000});
+			   toastr.info('알림', '새로운 메세지가 도착했습니다.', {timeOut: 7000});
 
 		   }
 
@@ -206,7 +207,7 @@
 				currentUrl=currentUrl.substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")+1); 
 				
 				//현재 페이지 url을 매핑 주소를 비교해 분기 처리
-				if(currentUrl=='${path}/covidUpdate/report.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
+				if(currentUrl=='${path}/test/test.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
 					console.log("다른 주소임");
 				}else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
 					location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();

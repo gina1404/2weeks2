@@ -30,4 +30,5 @@ public interface AdminService {
 	int deleteKin(int seq);
 	int deletePostReply(int seq);
 	int deleteKinReply(int seq);
+	int deleteGrant(String userId);
 }

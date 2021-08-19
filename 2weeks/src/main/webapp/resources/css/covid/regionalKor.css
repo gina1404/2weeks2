@@ -52,6 +52,10 @@
 	width: 100%;
 	min-height: 500px;
 }
+#regionalKor-map-small {
+	width: 100%;
+	min-height: 500px;
+}
 
 .regionalKor-update{
 	color: darkgray;

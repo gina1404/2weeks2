@@ -8,7 +8,7 @@
 
 	<jsp:param name="title" value="지식인질문수정페이지"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 
 <style>
 
@@ -294,6 +294,7 @@ right: 50px;
 </style>
 
 <section class="container" style="display:flex; padding-bottom: 200px;"> 	
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <form name="KinFrm" action="${path }/KnowledgeIn/update" method="post" enctype="multipart/form-data" onsubmit="return _onSubmit();" >
       
 	<div class="question"  style="display:inline-block;padding-left: 200px;">

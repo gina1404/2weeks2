@@ -11,9 +11,15 @@
 <script src="${path }/resources/js/jquery-3.6.0.min.js"></script>
 <link href="${pageContext.request.contextPath }/resources/css/member/myinfo.css" rel="stylesheet" />
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+<style>
+.side_bar{
+	left:40px;
+}
+</style>
 
-<div class="container">
+<section class="container">
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+<div class="content">
 	<div class="row">
 		<div class="col-md-3">
 		</div>
@@ -71,7 +77,8 @@
 		<div class="col-md-3">
 		</div>
 	</div>
-</div>
+	</div>
+</section>
 
 
 
