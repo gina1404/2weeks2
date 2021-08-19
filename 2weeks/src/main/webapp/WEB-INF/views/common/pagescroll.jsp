@@ -14,17 +14,20 @@
 	<style>		
         #pagescroll-button{
         	display:none;
-            width:30px;
-            height:30px;
+            width:55px;
+            height:55px;
             bottom:120px;
+            right:35px;
 			position:fixed;
 			cursor: pointer;
         	padding: 5px;
         	background-color:#D3D8F4;
+        	/* background: linear-gradient( 130deg, #7879F1, #D3D8F4 ); */
         	border-radius:50%;
         	justify-content: center;
         	align-items:center;
-			cursor: pointer;	
+			cursor: pointer;
+    		box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;	
         }
 
         #pagescroll-button:hover{
@@ -37,7 +40,8 @@
         	height: 25px;
         	width: 25px;
         	z-index: 999;
-        	margin-left: 3px;
+        	margin-left: 10px;
+        	margin-top: 7px;
         }
 	</style>
 	

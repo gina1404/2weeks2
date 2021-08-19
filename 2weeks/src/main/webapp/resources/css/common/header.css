@@ -35,10 +35,10 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	top:0;
 	left:0;
 	right:0;
-	padding-top:30px;	
+	padding-top:25px;
+	margin-bottom:10px;
 	color: #394956;
 	font-family: 'Pretendard';
-	background-color:white;
 }		
 #sidebar {
 	align-items: flex-start;

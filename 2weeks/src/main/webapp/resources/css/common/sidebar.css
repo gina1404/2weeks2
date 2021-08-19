@@ -10,6 +10,7 @@
     box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
 	margin-top: 20px;
 	background-color: #D3D8F4;
+	/* background: linear-gradient( 130deg, #7879F1, #D3D8F4, #D3D8F4 ); */
 }
 .wrap_sub_list, .wrap_sidebar-divider{
 	margin:0;
@@ -50,6 +51,6 @@
 	width:100%;
 }
 .overlay {
-	background-color: rgba(0,0,0, 0.05);
+	background-color: rgba(0,0,0, 0.03);
 }
 

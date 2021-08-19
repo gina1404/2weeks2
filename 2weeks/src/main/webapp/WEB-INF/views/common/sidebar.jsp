@@ -114,8 +114,8 @@
     /* hover일 때 색상 변경 */
     $(".wrap_sub_list").hover(function(){  
         $(this).children("div.sidebar-list-hide").slideDown(1100).siblings("div.sidebar-list-hide").slideUp(1000); 
-        $(this).css("background", "#7879F160");
-        $(this).children("div.sidebar-list").css("background", "#7879F160");        
+        $(this).css("background", "#8c8dfa60");
+        $(this).children("div.sidebar-list").css("background", "#8c8dfa60");        
     },  
     function(){  
 		$(this).children("div.sidebar-list-hide").slideUp(1000);  
