@@ -114,6 +114,11 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 
 	
+
+	public List<FreeBoard> selectMyBoard(SqlSession session, String userId) {
+		return session.selectList("freeboard.selectMyBoard", userId);
+	}
+
 	
 	
 }

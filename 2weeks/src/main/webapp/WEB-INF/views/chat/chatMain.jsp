@@ -7,15 +7,14 @@
 	<jsp:param name="title" value="covid/reportList"/>
 </jsp:include>
 
-
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <link href="${path }/resources/css/chat/chatting.css" rel="stylesheet" />
 
-<section class="container">
+<section class="container" style="display:flex; padding-bottom: 20px;">
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="content">
-		<h3>오픈채팅</h3>
+	<div class="content" style="display: inline-block; padding-left: 220px;">
+		<h3 id="chatLogo">오픈채팅</h3>
 		<div id="addGroupBtn">
 			<!-- <a id="addRoomBtn" onclick="open('${path}/addChatRoom ', '_blank', 'width=400, height=550, resizable=no')">채팅방 만들기</a> -->
 			<div id="addRoomBtn">채팅방 만들기</div>

@@ -20,7 +20,13 @@
 			<id>spring-libs-snapshot</id>
 			<name>Spring Snapshot Repository</name>
 			<url>https://repo.spring.io/libs-snapshot</url>
-		</repository>		
+		</repository>
+		
+		<!-- 형태소 분석기 구축용 -->
+		<repository>
+	      <id>jitpack.io</id>
+	      <url>https://jitpack.io</url>
+	  </repository>	
 	</repositories>
 	<dependencies>
 		<!-- Spring -->
@@ -334,9 +340,17 @@
 		    <scope>provided</scope>
 		</dependency>
 		
-		
-		
-								  
+		<!-- 형태소 분석기 -->
+		<dependency>
+		    <groupId>com.github.shin285</groupId>
+		    <artifactId>KOMORAN</artifactId>
+			<version>3.3.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-resources-plugin</artifactId>
+		    <version>3.2.0</version>
+		</dependency>	  
 	</dependencies>
     <build>
         <plugins>

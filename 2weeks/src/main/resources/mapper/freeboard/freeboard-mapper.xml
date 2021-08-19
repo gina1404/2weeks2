@@ -6,6 +6,10 @@
 		SELECT * FROM POST P LEFT JOIN POST_ATCH A ON P.POST_SQ=A.POST_SQ ORDER BY P.POST_SQ DESC
 	</select>
 	
+	<select id="selectMyBoard" resultMap="boardMap">
+		SELECT * FROM POST WHERE USER_ID=#{userId}		
+	</select>
+	
 	<select id="totalBoardCount" resultType="_int">
 		SELECT COUNT(*) FROM POST
 	</select>

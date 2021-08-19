@@ -8,12 +8,11 @@
 
 	<jsp:param name="title" value="지식인질문"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 
 <style>
 
 .question{
-/* border: 1px solid blue; */
 background-color: white;
 }
 
@@ -45,7 +44,7 @@ float:right;
 color:#ffffff;
 position: relative;
 top:-130px;
-left:-170px;
+left:-150px;
 
 }
 #searchBar{
@@ -122,7 +121,7 @@ right:-40px;
 .knowmenu2 {
     list-style: none;
     position: relative;
-    right :-1200px;
+    float:right;
    top:-10px;
 } 
 .knowmenu li{
@@ -180,9 +179,8 @@ font-size: 13px;
 }
 
 .content{
-position: relative;
-right: -50px;
-/* border: 1px solid red; */
+float:left;
+/* border: 1px solid red;  */
 
 
 }
@@ -245,15 +243,16 @@ color: #A4A4A4;
 }
 
 .noresize {
-	width:1300px; 
-	height:500px; 
+	width:1100px; 
+	height:600px; 
     resize:none;/* 크기고정 */ 
 	position: relative;
 
 }
 .bottom{
 position: relative;
-right:-50px;
+bottom: 200px;
+right: -60px;
 
 }
 ::placeholder {
@@ -293,11 +292,11 @@ right:-50px;
 </style>
 
 
-<section class="container">
-
+<section class="container" style="display:flex; padding-bottom: 200px;"> 	
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <form name="KinFrm" action="${path }/KnowledgeIn/KnowledgeInQEnd.do"method="post" enctype="multipart/form-data" >
          
-	<div class="question">
+	<div class="question"  style="display:inline-block;padding-left: 200px;">
 			<span class="a">Q&A</span>
 		<!-- 	<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
@@ -308,10 +307,9 @@ right:-50px;
 <input type="text"  maxlength='20' style="width:1000px;font-size:30px; border:1px solid #19ce60" placeholder="제목 작성란 입니다 20자 미만으로 입력해주세요."
 				 value ="${knowledgeIn.kin_Title}" name="kin_Title" required>
 			
-			
+			<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly">
 			<input type="hidden" name="kin_Writer" class="form-control" value="${member.user_Id}" readonly="readonly">
-			
-			Point : ${member.userPoint_Cnt }
+			Point : ${member.userPoint_Cnt } 
 			<ul class="knowmenu"> 
 					<li></li>
 					<li></li>
@@ -324,8 +322,8 @@ right:-50px;
 
  			<select class="knowmenu2" id="category" name="category" >
              	
-	                <option value="코로나19"      ${knowledgeIn.category eq '코로나19'? 'selected' :''}>코로나19</option>
-	                <option value="백신"     		${knowledgeIn.category eq '백신'? 'selected' :''}>백신</option> 
+	                <option value="코로나19"     ${knowledgeIn.category eq '코로나19'? 'selected' :''}>코로나19</option>
+	                <option value="백신"     	${knowledgeIn.category eq '백신'? 'selected' :''}>백신</option> 
 	                <option value="확진"         ${knowledgeIn.category eq '확진'? 'selected' :''}>확진</option>
 	                <option value="해외"         ${knowledgeIn.category eq '해외'? 'selected' :''}>해외</option>
 	                <option value="방역수칙"      ${knowledgeIn.category eq '방역수칙'? 'selected' :''}>방역수칙</option>
@@ -347,41 +345,40 @@ right:-50px;
 			 					
 <br>
 			
-		<div class="bottom">
-		
-		 <label for="attach">첨부파일</label>
-		<input type="file" name="file" id="attach" accept="image/gif, image/jpeg, image/png">
+		</div>
+		<div class="bottom"style="display:inline-block;padding-left: 200px;">
+	
 
  <div class="select_img"><img src="" /></div>
                  
-                
+          	
+		 <label for="attach"></label>
+		<input type="file" name="file" id="attach" accept="image/gif, image/jpeg, image/png">      
 		
 		<br>
 					 					
  			<hr style="border: solid 1px #F2F2F2;">
 		<label>아이디 공개<input type="radio" name="open_Yn" value="Y">${knowledgeIn.open_Yn}</label>
 		<label>비공개<input type="radio" name="open_Yn" value="N">${knowledgeIn.open_Yn}</label>
+				
 			<hr style="border: solid 1px #F2F2F2;">
+	<!-- 		<span>(선택하지 않을 시 0포인트)</span>
+			<hr style="border: solid 1px #F2F2F2;"> -->
 		<span>포인트 설정 </span>
+		
 		<label><input type="radio" name="point" value="50" ><span class="c">50</span></label>
 		<label><input type="radio" name="point" value="100" ><span class="c">100</span></label>
 		<label><input type="radio" name="point" value="150" ><span class="c">150</span></label>
 		<label><input type="radio" name="point" value="200" ><span class="c">200</span></label>
 		<label><input type="radio" name="point" value="250" ><span class="c">250</span></label>
 		<label><input type="radio" name="point" value="300" ><span class="c">300</span></label>
-		Point : ${member.userPoint_Cnt }
-<%-- <label><input type="radio"  name="point" value="1"  checked ><span class="c">직접입력</span>
-<input type="text"  id="text" name = "wr_1" placeholder="50~ 500포인트" size=10 maxlength=3 max=500 onkeyup='printValue();' onkeypress="inNumber();"/>${knowledgeIn.point}</label>
-
- --%>
+	
 		
 		</div>	
 					 					
- 			<hr style="border: solid 1px #F2F2F2;">	
+ 		
  			
- 	        <!--     <input type="submit" class="btn btn-outline-success" value="질문등록" >	 -->
 		<button class="Qcheck" type="submit">질문등록</button>
-		</div>
 
 
 			

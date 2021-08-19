@@ -353,6 +353,7 @@ public class FreeBoardController {
 		return mv;
 	}
 	
+
 	@PostMapping("freeboard/like.do")
 	public ResponseEntity<String> like(@RequestBody FreeBoard fb) {
 		log.info("값이 잘 들어가나요? : "+ fb);
@@ -402,6 +403,22 @@ public class FreeBoardController {
 		}
 		return result;
 	}
+
+
+
+	//나의활동보기
+	@RequestMapping("/member/mypage")
+	public ModelAndView selectMyBoard(@RequestParam String loginId, ModelAndView mv) {
+		List<FreeBoard> list=service.selectMyBoard(loginId);
+		mv.addObject("list", list);
+		
+		mv.setViewName("member/myBoard");
+		
+		return mv;
+	}
+	
+	
+
 }
 	
 	

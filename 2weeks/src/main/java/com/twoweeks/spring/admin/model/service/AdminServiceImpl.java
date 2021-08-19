@@ -129,6 +129,11 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return dao.deleteKinReply(session,seq);
 	}
+	@Override
+	public int deleteGrant(String userId) {
+		// TODO Auto-generated method stub
+		return dao.deleteGrant(session,userId);
+	}
 	
 	
 }

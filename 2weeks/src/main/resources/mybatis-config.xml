@@ -21,5 +21,6 @@
 		<typeAlias type="com.twoweeks.spring.know.model.vo.KinAttachment"  alias="attachment"/>
 		<typeAlias type="com.twoweeks.spring.know.model.vo.KinReply" alias="kinReply" />
 		<typeAlias type="com.twoweeks.spring.know.model.vo.KinReplyAttachment" alias="kinReplyAttachment" />
+		<typeAlias type="com.twoweeks.spring.search.model.vo.SearchNoun" alias="searchNoun"/>
 	</typeAliases>
 </configuration>

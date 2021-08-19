@@ -26,6 +26,8 @@ public interface FreeBoardService {
 	int update(FreeBoard fb) throws Exception;
 	
 	int delete(int no);
+	
+	List<FreeBoard> selectMyBoard(String userId);
 
 	int updateReplyCnt(int post_Sq);
 

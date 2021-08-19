@@ -1,23 +1,77 @@
 @charset "UTF-8";
-
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 .gridContainer{
 	display: grid;
 	grid-template-columns: repeat(8, 1fr);
-	grid-template-rows: repeat(3, minmax(100px, auto));
-	gap: 10px;
+	grid-auto-rows: 150px 580px 500px;	
+	gap: 15px;
 	align-items: stretch;
+	font-family: 'Pretendard';
 }
-.item{
-	border: 1px solid;
+.item{	
+    overflow: hidden;
+    position: relative;
+    border-radius: 14px;
+    background-color: var(--colorBg10);
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
 }
+
+.1st{
+	height: 50px;
+}
+
 .item:nth-child(9) {
-	grid-column: 1/5;
+	grid-column: 1/4;
 	grid-template-columns: 1fr, 1fr;
 }
 .item:nth-child(10){
-	grid-column: 5/9;
+	grid-column: 4/9;
 	grid-template-columns: 1fr, 1fr;
 }
 .item:nth-child(11){
 	grid-column: 1/9;
+}
+#home-map-area{
+	text-align:center;
+}
+#mapMove{
+	color: #6E6E6E;
+	font-weight: bolder;
+	font-size: 20px;
+    text-align: center;
+	font-weight: bolder;
+	font-size: 20px;
+    text-align: center;
+    margin: 25px 15px 15px 15px;
+}
+.report{
+	width: 375px;;
+	height: 100%;
+}
+#reportTab{
+	font-size: 13px;
+	width: 320px;
+    margin: auto;     
+    table-layout:fixed;
+}
+#reportTab tr td{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+}
+#reportTab tr td:hover{
+	color: #6E6E6E;
+	font-weight: bolder;
+}
+
+.report>div{
+	font-weight: bolder;
+	font-size: 20px;
+    text-align: center;
+    margin: 25px 15px 15px 15px;
+}
+#reportMove:hover, #mapMove:hover{
+	color: #6E6E6E;
+	font-weight: bolder;
 }

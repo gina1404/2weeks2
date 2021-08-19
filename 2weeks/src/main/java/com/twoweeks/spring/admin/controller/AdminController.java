@@ -285,4 +285,19 @@ public class AdminController {
 		
 		return mv;
 	}
+	@RequestMapping("/admin/deleteGrant")
+	public ModelAndView deleteGrant(ModelAndView mv,HttpServletRequest req) {
+		String userId=req.getParameter("userId");
+		int result=service.deleteGrant(userId);
+		if(result>0) {
+			mv.addObject("msg", "권한요청이 취소되었습니다");
+			mv.addObject("loc", "/admin/admintable.do");
+			mv.setViewName("common/msg");
+		}else {
+			mv.addObject("msg", "삭제에 실패했습니다. 다시 시도해주세요");
+			mv.addObject("loc", "/admin/admintable.do");
+			mv.setViewName("common/msg");
+		}
+		return mv;
+	}
 }

@@ -11,7 +11,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="지식인나의질의응답"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 
 <style>
 #rankingChart{
@@ -30,7 +30,7 @@
     list-style: none;
     position:relative;
     text-overflow: ellipsis;
-    background-color: white;
+ /*    background-color: white */;
     top:-5px;
 }
 
@@ -43,7 +43,7 @@
     text-decoration:none;
     list-style: none;
     text-overflow: ellipsis;
-    background-color: white;
+    /* background-color: white; */
 }
 
 .ranking_section .ranking_item {
@@ -320,7 +320,7 @@ position:relative;
 color: black;
 font-family: Pretendard;
 top:-100px;
-right:-1400px;
+right:-1000px;
 }
 #Myqlist2{
 
@@ -375,11 +375,13 @@ background-color:transparent;
 	
 	
 	}
+
 </style>
-<section class="container">		
-<div class="row">
+<section class="container" style="display:flex; padding-bottom: 200px;"> 
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>	
+<div class="content" style="display:inline-block;padding-left: 220px;">
 		
-						<a href="">	<img id="expert" src="${pageContext.request.contextPath}/resources/images/knowledgeIn/home_panel_expert2.png" alt=""
+						<a href="${pageContext.request.contextPath}/chatting.do">	<img id="expert" src="${pageContext.request.contextPath}/resources/images/knowledgeIn/home_panel_expert2.png" alt=""
 						width="130px" height="130px">
 			<div class="description">전문의 상담이<br>필요할 땐,<br>지식iN 엑스퍼트</div></a>
 				<!-- 	</div> -->
@@ -548,14 +550,16 @@ background-color:transparent;
                 	</ul>
        	 </div>
 	 
+           <div id="pagebar-container"class="m-5">${pageBar }</div>
 		</div>
 	
 
 
-           <div id="pagebar-container"class="m-5">${pageBar }</div>
   	</div> 
  </div>          
 </section>
+<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>	
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 <script>
 var path = "${pageContext.request.contextPath }";
@@ -624,6 +628,3 @@ $(document).ready(function(){
  
 </script>
 	
-<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
-	
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -10,55 +10,59 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="covid/reportList"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <link href="${path }/resources/css/member/myBoard.css" rel="stylesheet" />
 
-<section class="container">
-	<h3>나의 활동보기</h3>
-	
-	<div id="scrap" class="boardListBack">
-		<h4>즐겨찾기</h4>
-		<div class="boardList">
-			<table class="myBoardTab table table-striped">
-				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>글쓴이</th>
-					<th>날짜</th>
-					<th>조회수</th>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>abcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-				</tr>
-			</table>
+<section class="container" style="display: flex; padding-bottom: 30px;">
+	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+	<div class="content" style="margin-left: 220px;">
+		<h3 id="boardLogo">나의 활동보기</h3>
+		
+		<div id="scrap" class="boardListBack">
+			<h4>즐겨찾기</h4>
+			<div class="boardList">
+				<table class="myBoardTab table table-striped">
+					<tr>
+						<th>글번호</th>
+						<th>제목</th>
+						<th>글쓴이</th>
+						<th>날짜</th>
+						<th>조회수</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>abcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+					</tr>
+				</table>
+			</div>
 		</div>
-	</div>
-	
-	<div id="myBoard" class="boardListBack">
-		<h4>내가 작성한 게시글</h4>
-		<div class="boardList">
-			<table class="myBoardTab table table-striped">
-				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>글쓴이</th>
-					<th>날짜</th>
-					<th>조회수</th>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</table>
+		
+		<div id="myBoard" class="boardListBack">
+			<h4>내가 작성한 게시글</h4>
+			<div class="boardList">
+				<table class="myBoardTab table table-striped">
+					<tr>
+						<th>글번호</th>
+						<th>제목</th>
+						<th>글쓴이</th>
+						<th>날짜</th>
+						<th>조회수</th>
+					</tr>
+					<tr>
+						<td>${post_Sq }</td>
+						<td>[${category }] ${post_Title }</td>
+						<td>${user_Id }</td>
+						<td>${post_Dt }</td>
+						<td>${post_Cnt }</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 	

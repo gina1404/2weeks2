@@ -171,6 +171,10 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		return dao.listAttachment(session);
 	}
 	
+
+	public List<FreeBoard> selectMyBoard(String userId) {		
+		return dao.selectMyBoard(session, userId);
+	}
 	
 	
 }

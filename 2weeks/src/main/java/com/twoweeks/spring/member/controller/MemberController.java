@@ -123,6 +123,7 @@ public class MemberController {
 		}
 			//세션등록	
 			session.setAttribute("userId", userInfo.get("email"));
+			session.setAttribute("user_Nic", userInfo.get("nickname"));
 			session.setAttribute("access_Token", access_Token);
 			
 			
@@ -523,31 +524,4 @@ public class MemberController {
 		return uuid;
 	}
 	
-	
-	
-	
-	
-	
-	//나의활동보기
-	
-	//@Autowired
-	//private BoardServiceImpl service;	
-	
-	@RequestMapping("/member/mypage")
-	public ModelAndView selectMyBoard(@RequestParam String loginId, ModelAndView mv) {
-		//List<> list=service.selectBoard(loginId);
-		//mv.addObject("list", list);
-		
-		mv.setViewName("member/myBoard");
-		
-		return mv;
-	}
-	
-	
-	
-	
-	
-	
-	
-
 }

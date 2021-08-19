@@ -28,7 +28,9 @@
 	<header id="header">
 		<!-- 로고 -->
 		<div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
-				
+		
+		<div class="content">
+		<div id="header-main-area" style="display: flex; width:1143px; height:60px; justify-content:flex-end;">
 		<!-- 키워드 검색 -->
 		<div class="header-search-area">			
 			<input id="searchKeyword" type="text" name="searchKeyword" style="display:none;" onKeypress="javascript:if(event.keyCode==13) {fn_searchKeyword()}"> <!-- 입력창 -->
@@ -50,8 +52,17 @@
 	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">join us</div>
 	            	</c:if>
 	            	<c:if test="${userId ne null}" >
-	            		<div class="header-profile-text">${userId} </div>
-	            		<input type="hidden" value="${userId}" id="hidden_session_kakao"/>
+	            		<div class="header-profile-text">${user_Nic} 님</div>
+	            		<%-- <input type="hidden" value="${user_Nic}" id="hidden_session_kakao"/> --%>
+					         <div class="dropdown-content">
+			            		<a href="${path}/member/myinfo">회원 정보 변경</a>
+			            		<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>
+			            		<a href="#">나의 포인트 ${member.userPoint_Cnt} 원</a>
+			            		<a href="${path}/member/kakaologout">로그아웃</a>			            		
+			            	</div>
+			            	<div class="header-message" id="messageIcon">
+			                	<i class="far fa-envelope fa-lg" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
+			                </div>
 	            		<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
 	            	</c:if>
 
@@ -66,7 +77,7 @@
 
 	            	
 	            	
-	                <div class="dropdown">
+					<div class="dropdown">
 		            	<c:if test="${member.user_Nic ne null }">
 			                <div class="header-profile-icon">
 			                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
@@ -79,7 +90,8 @@
 			            		<a href="${path}/member/logout">로그아웃</a>			            		
 			            	</div>
 			            	<div class="header-message" id="messageIcon">
-			                	<i class="far fa-envelope" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
+			                	<i class="far fa-envelope fa-lg" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
+			                	<span class="recMs"></span>
 			                </div>
 		            	</c:if>
 	            	</div>
@@ -95,7 +107,8 @@
 	                
 	                
 	            </div>
-	            
+	       </div>   
+	       </div> 
 	      <script>
 	      //메세지 알림 웹소켓
 	  	var msSocket=null;
@@ -115,8 +128,46 @@
 		   
 		   msSock.onmessage = function(evt){
 				var data = evt.data;
+				console.log(data);
+				if(data == "new message"){
+					messageToast();
+				}
+				
+				var splitdata = evt.data.split(":");
+				console.log(+splitdata[1]);
+				if(splitdata[0].indexOf("recMs") > -1){
+					var num1= +splitdata[1];
+					console.log("num1 = "+num1);
+					if(num1 == 0){
+						$("<span></span>").replaceAll(".recMs");
+						
+					}else{
+						console.log(num1);
+						$(".recMs").append(num1);
+						$(".recMs").css({
+								"position": "absolute",
+							    "top": "-10px",
+							    /* "right": "15px", */
+							     "left":"10px", 
+							    "z-index": "3",
+							    "height": "18px",
+							    "width": "18px",
+							    "font-size":"15px",
+							    /* "font-weight":"bold", */
+							    "line-height": "20px",
+							    "text-align": "center",
+							    "background-color": "red",
+							    "border-radius": "15px",
+							    "display": "inline-block",
+							    "color":"white",
+						});
+
+					}
+				}
+				
 				console.log("recvMsg" +data);
-				messageToast();
+				
+				//messageToast();
 				
 				
 				//$.toast('새로운 메세지가 도착했습니다');
@@ -130,7 +181,7 @@
 			}
 		   
 		   function messageToast(){
-			   toastr.info('알림', '새로운 메세지가 도착했습니다.', {timeOut: 5000});
+			   toastr.info('알림', '새로운 메세지가 도착했습니다.', {timeOut: 7000});
 
 		   }
 
@@ -159,7 +210,7 @@
 				currentUrl=currentUrl.substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")+1); 
 				
 				//현재 페이지 url을 매핑 주소를 비교해 분기 처리
-				if(currentUrl=='${path}/covidUpdate/report.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
+				if(currentUrl=='${path}/test/test.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
 					console.log("다른 주소임");
 				}else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
 					location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();
@@ -171,7 +222,7 @@
 			$("#searchKeywordSubmit").click(function(){ 
 				$("#searchKeyword").show(); //돋보기 아이콘을 클릭하면 입력창이 보이게 보이게 됨
 				$("#searchKeyword").focus();			
-			
+				$("#header-main-area").addClass("defaultBoxshadow");
 				//검색
 				$("#searchKeywordSubmit").click(fn_searchKeyword);						
 			});

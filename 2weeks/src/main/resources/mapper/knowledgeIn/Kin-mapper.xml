@@ -18,12 +18,9 @@
 	
 	
 	<select id ="MyQ"  resultMap="KnowledgeInMap">
-<!-- 	SELECT * 
-		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_SQ DESC  -->
-
-	
- 	 SELECT * FROM KIN  
-		 
+ <!--      	SELECT * 
+		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_WRITER DESC    -->
+		   SELECT * FROM KIN 
 	</select>
 	<select id ="MyA"  resultMap="KnowledgeInMap">
  <!--      	SELECT * 
@@ -170,7 +167,7 @@
 		</delete>
 		
 		<update id="update">
-		UPDATE KIN SET KIN_TITLE = #{kin_Title}, KIN_CONTENT = #{kin_Content} ,CATEGORY = #{category} ,OPEN_YN=#{open_Yn}, POINT=#{point} WHERE KIN_SQ = #{kin_Sq} 
+		UPDATE KIN SET KIN_TITLE = #{kin_Title}, KIN_CONTENT = #{kin_Content} ,CATEGORY = #{category} ,OPEN_YN=#{open_Yn} WHERE KIN_SQ = #{kin_Sq} 
 		</update>
 		
 		<update id="updatecnt">
@@ -178,28 +175,23 @@
 		</update>
 		
 		
+			
+		<update id="updatePoint" parameterType="Member">
+		UPDATE MEMBER2 M SET M.USERPOINT_CNT= (SELECT USERPOINT_CNT FROM MEMBER2 WHERE USER_ID = #{user_Id}) - (SELECT POINT FROM KIN  WHERE KIN_SQ =#{kin_Sq})WHERE USER_ID=#{user_Id}
+		</update>
+
+		
 		<update id="updateReplyCount" parameterType="int">
 		UPDATE KIN K SET K.REPLY_CNT =(SELECT COUNT(*)FROM KIN_REPLY WHERE KIN_SQ =#{kin_Sq}) WHERE K.KIN_SQ=#{kin_Sq}             
 		</update>
 		
 		
 		
-	<!-- 좋아요 구현 -->
-<!-- 		<insert id="create">
-		INSERT INTO KIN_LIKES(KIN_SQ, USER_ID)
-		values(#{kin_Sq}, #{user_Id})
-		</insert>
 
-		<select id="read" resultType="likeVO">
-		select *
-		from KIN_LIKES
-		where KIN_SQ = #{kin_Sq} and USER_ID = #{user_Id}
-	</select>
-	
-	<delete id="delete">
-		delete from KIN_LIKES
-		where KIN_SQ = #{kin_Sq} and USER_ID = #{user_Id}
-	</delete> -->
+		
+		
+		
+
 		
 		
 		

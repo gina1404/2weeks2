@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="지식인상세보기"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 
 
 <style>
@@ -65,8 +65,8 @@ float:left;
 margin-left:10px;
 font-size:13px;
 position: relative;
-top: -490px;
-right:-1000px;
+top: -480px;
+right:-700px;
 list-style: none;
    
 }
@@ -91,11 +91,12 @@ color :white;
 
 }
 
+
 .userInfo{
 
 position: relative;
 top : -35px;
-right:-1150px;
+right:-900px;
 font-size: 13px;
 color: #8c8c8c;
 
@@ -117,7 +118,7 @@ width:80%;
     outline :0;
     border : 0;
     position: relative;
-    right: -1400px;
+  	float:right;
     top:-30px;
     font-family: pretendard;
     font-weight: bold;
@@ -160,17 +161,18 @@ background-color:white;
 }
 
 .answer{
-
+/* border:1px solid  red; */
 position: relative;
-top: 10px;
+top: -20px;
 background-color:white;
 }
 .noresize {
-	width:1300px; 
-	height:500px; 
+	width:1200px; 
+	height:380px; 
     resize:none;/* 크기고정 */ 
 	position: relative;
-	right:-50px;
+	float: left;
+	
 }
 
 .knowmenu2 li{
@@ -180,7 +182,7 @@ margin-left:10px;
 font-size:13px;
 position: relative;
 top: -35px;
-right:-1000px;
+right:-700px;
 list-style: none;
    
 }
@@ -211,7 +213,9 @@ right:180px;
 </style>
 
 
-<section class="container">	
+<section class="container" style="display:flex; padding-bottom: 200px;"> 
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>	
+<div class="content" style="display:inline-block;padding-left: 220px;">
 <form name="KinFrm" action="${path }/KnowledgeIn/KnowledgeInAEnd.do"
          method="post" enctype="multipart/form-data" >
 <div class="question">
@@ -479,7 +483,7 @@ right:180px;
 						
 						</c:choose>	
 		
-			<div class="content">
+			<div class="content2">
 		   <textarea class="noresize" placeholder="답변 작성 시 서비스 운영정책을 지켜주세요.
 광고주로부터 소정의 경제적 대가를 받고 특정 상품에 대한 추천 또는 후기글을 올리는 경우, 이러한 광고주와의
 경제적 이해관계를 소비자들이 쉽게 알 수 있도록 글 제목 또는 답변의 첫 부분 또는 끝부분 등 적절한 위치에 공개하여야 합니다." name="reply_Content" ></textarea>
@@ -508,7 +512,7 @@ right:180px;
 	
 	</form>		
 <!-- </form> -->
-			
+	</div>		
 			
 </section>
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>		
