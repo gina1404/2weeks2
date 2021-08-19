@@ -1,6 +1,5 @@
 @charset "UTF-8";
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
-<style>
 
 html{
 	width: 100%;
@@ -21,7 +20,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 /* 기본 header, nav, main(container), aside 영역 나누기  */
 #header{
 	align-items: center;
-	background-color: #F7F8FC;
+	/* background-color: #F7F8FC; */
 	display: flex;
 	width: 1440px;
 	margin: auto;
@@ -36,27 +35,24 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 #sidebar {
 	align-items: flex-start;
 	width:200px ; /* 사이드바 너비  15%->200px */
-	overflow: hidden;
+	/* overflow: hidden; */
 	top:60px; /* header 높이에 따라 변경해야 됨 */
 	position:fixed;
 	padding:0;
 	height:100%;
-
+	font-family: 'Pretendard';
+	font-size: 15px;
 }
 
 .container {
-	background-color: #F7F8FC !important;
+	/* background-color: #F7F8FC !important; */
 	height: auto;
 	min-height : 100%; 
 	width: 1440px;
-<<<<<<< HEAD
-	margin: 60px auto 0 auto;
+	/* margin: 60px auto 0 auto; */
 	padding-left: 0;
-=======
 	/* padding:15px 75px 0 15px !important; */
 	margin: 60px auto auto auto;
-
->>>>>>> 0492eb1173f330f932d3f2673b6404c9b5aac37a
 }  	
 .content{
     width: 1200px;
@@ -187,6 +183,3 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 #messageIcon{
 	margin: 4px 0 0 5px;
 }
-</style>
-
-

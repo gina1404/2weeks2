@@ -1,25 +1,42 @@
 @charset "UTF-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 
-/* #reportListCnt{
-	font-size: 13px;
-	margin-left: 10px;
+.container{
+	font-family: 'Pretendard';	
+}
+#reportListCnt{
+	font-size: 14px;
+	margin-left: 30px;
+}
+
+#reportLogo{
+	margin-left: 30px;
+	font-weight: bolder;
 }
 #reportListCnt span{
 	color: red;
 }
 #reportTab{
-	font-size:13px;
+	font-size:14px;
+	width:95%;
+	margin: auto;
 }
 #reportTab th{
 	font-weight:bolder;
 	text-align: center;
+	margin: 20px;
 }
 #reportTab td{
 	text-align: center;
 }
 #reportTab td:nth-child(2){
 	text-align: left;
+	cursor: pointer;
+}
+#reportTab td:nth-child(2):hover{
+	color: #6E6E6E;
+	font-weight: bolder;
 }
 #reportPageBar{
 	text-align: center;
-} */
+}

@@ -37,7 +37,7 @@
         	height: 25px;
         	width: 25px;
         	z-index: 999;
-        	margin-left:5px;
+        	margin-left: 3px;
         }
 	</style>
 	
