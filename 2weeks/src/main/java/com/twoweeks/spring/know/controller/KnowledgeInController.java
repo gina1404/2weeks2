@@ -26,6 +26,7 @@ import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinAttachment;
 import com.twoweeks.spring.know.model.vo.KinReply;
 import com.twoweeks.spring.know.model.vo.KinReplyAttachment;
+import com.twoweeks.spring.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -59,10 +60,11 @@ public class KnowledgeInController {
 	}
 
 	@RequestMapping("/KnowledgeIn/KnowledgeInList.do") // 지식인 글 상세보기
-	public ModelAndView KnowledgeInList(@RequestParam(value = "sq", defaultValue = "1") int sq, ModelAndView mv)
+	public ModelAndView KnowledgeInList(@RequestParam(value = "sq", defaultValue = "1") int sq,ModelAndView mv)
 			throws Exception {
 			
 		 service.updateReplyCount(sq);
+			/* service.updatePoint(m); */
 			log.info("답글개수"+service.selectKinReplyCount(sq));
 		mv.addObject("KnowledgeIn", service.selectKinOne(sq)); //글
 		 List<KinReply> kr = service.selectReplyOne(sq);  //답변
@@ -93,8 +95,10 @@ public class KnowledgeInController {
 	}
 
 	@RequestMapping("/KnowledgeIn/KnowledgeInQEnd.do") // 지식인 질문등록
-	public ModelAndView insertKin(Kin k, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file,
-			ModelAndView mv, HttpServletResponse response, HttpServletRequest req ) throws IOException {
+	public ModelAndView insertKin(Kin k,Member m, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file,
+			ModelAndView mv, HttpServletResponse response, HttpServletRequest req ) throws Exception {
+		
+		
 		logger.debug("knowledgIn : " + k);
 		for (int i = 0; i < upload.length; i++) {
 			logger.debug("fileName : " + file[i].getOriginalFilename());
@@ -128,18 +132,26 @@ public class KnowledgeInController {
 
 			} // for문 종료
 		} // if문 종료
+		
+		
+		
 		String msg = "등록 성공";
 		try {
 			service.insertKin(k);
+			
 		} catch (Exception e) {
 			msg = e.getMessage();
 		}
-
+		/*
+		 * service.updatePoint(m); m.setUser_Id(m.getUser_Id());
+		 * m.setUserPoint_Cnt(m.getUserPoint_Cnt());
+		 */
 		mv.addObject("msg", msg);
 		mv.addObject("loc", "/KnowledgeIn/KnowledgeInMain.do");
+		
 		mv.setViewName("common/msg");
-
 		return mv;
+		
 	}
 
 	@RequestMapping("/KnowledgeIn/KnowledgeInMyList.do") // 나의 질문,답변
@@ -166,11 +178,7 @@ public class KnowledgeInController {
 			/*
 			 * kr.setReply_Sq(Integer.parseInt(request.getParameter("reply_Sq")));
 			 * mv.addObject("kinReply", service.selectReplyOne(kr.getReply_Sq()));
-			 */
-		
-		  
-
-	  
+			 */	  
 	  mv.setViewName("KnowledgeIn/KnowledgeInA"); return mv;
 	  
 	  }
@@ -316,7 +324,6 @@ public class KnowledgeInController {
 		k.setKin_Sq(Integer.parseInt(request.getParameter("sq")));
 		model.addAttribute("knowledgeIn", service.selectKinOne(k.getKin_Sq()));
 	
-	/*		model.addAttribute("list", service.read(fb.getPost_Sq()));*/
 		return "/KnowledgeIn/update";
 	
 		

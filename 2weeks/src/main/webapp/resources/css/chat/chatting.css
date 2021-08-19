@@ -1,7 +1,14 @@
 @charset "UTF-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 
+.container{
+	font-family: 'Pretendard';
+}
+#chatLogo{
+    margin-left: 30px;
+    font-size: 30px;
+}
 #chatContainer{
-	/* background-color: #FAFAFA; */
 	width: 90%;
 	height:730px;	
 	margin: auto;
@@ -24,14 +31,11 @@
 }
 #chatRoomOne{
 	padding: 10px;
-	/* background-color: white; */
 	border-radius: 15px;
 	display: flex;
 	border: 2px solid white; 
 }
-#chatIcon, #entry, #entry_a, #cntLimit, #chatContent{
-	/* border:1px solid; */
-}
+
 #entry{	
 	display:inline;
 	font-size: 17px;

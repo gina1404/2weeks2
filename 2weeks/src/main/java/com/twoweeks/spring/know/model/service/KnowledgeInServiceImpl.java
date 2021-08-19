@@ -11,6 +11,8 @@ import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinAttachment;
 import com.twoweeks.spring.know.model.vo.KinReply;
 import com.twoweeks.spring.know.model.vo.KinReplyAttachment;
+import com.twoweeks.spring.member.model.dao.MemberDao;
+import com.twoweeks.spring.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +24,6 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 	private KnowledgeInDao dao;
 	@Autowired
 	private SqlSession session;
-	
 	
 	@Override
 	public List<Kin> selectKinList(int cPage, int numPerpage) {
@@ -164,7 +165,7 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 					else return 0;
 			}else return 0;
 		}catch(RuntimeException e) {
-			throw new Exception("등록 실패");
+			throw new Exception("수정 실패");
 		}
 		
 		return 1;
@@ -189,6 +190,20 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 		
 	 dao.updateReplyCount(session, sq);
 	}
+
+
+	@Override
+	public int updatePoint(Member m) throws Exception {
+		return dao.updatePoint(session, m);
+		
+		
+		
+		
+		
+	}
+
+
+
 
 	
 	

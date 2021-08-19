@@ -3,7 +3,7 @@
 <mapper namespace="newsReport">
 
 	<insert id="insertReport">
-		INSERT INTO NEWS_REPORT VALUES(#{no}, #{title}, #{team}, #{attachment}, #{date})
+		INSERT INTO NEWS_REPORT VALUES(#{no}, #{title}, #{team}, #{attachment}, #{date}, #{url})
 	</insert>
 
 	<select id="selectReportList" resultMap="newsReportMap">

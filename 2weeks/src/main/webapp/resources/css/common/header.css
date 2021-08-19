@@ -1,17 +1,17 @@
 @charset "UTF-8";
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
-<style>
 
-@font-face {
-	font-family: 'Pretendard';
-	font-weight: 900;
-	font-display: swap;
-	src: local('Pretendard Black'), url('./woff2/Pretendard-Black.woff2') format('woff2'), url('./woff/Pretendard-Black.woff') format('woff');
+html{
+	width: 100%;
+	min-height: 100%;
+	height: auto;
 }
 
-body{
+html body{
 	margin:0;
 	padding:0;
+	height: auto;
+	min-height: 100%;
 }
 a {	color: #394956; text-decoration: none; outline: none }
 
@@ -20,7 +20,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 /* 기본 header, nav, main(container), aside 영역 나누기  */
 #header{
 	align-items: center;
-	background-color: #F7F8FC;
+	/* background-color: #F7F8FC; */
 	display: flex;
 	width: 1440px;
 	margin: auto;
@@ -35,32 +35,31 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 #sidebar {
 	align-items: flex-start;
 	width:200px ; /* 사이드바 너비  15%->200px */
-	overflow: hidden;
+	/* overflow: hidden; */
 	top:60px; /* header 높이에 따라 변경해야 됨 */
 	position:fixed;
 	padding:0;
 	height:100%;
-
+	font-family: 'Pretendard';
+	font-size: 15px;
 }
 
 .container {
-	/* margin-left:200px !important; 사이드바 너비만큼 띄움
-	margin-top:60px !important; 헤더 높이만큼 띄움
-	margin-bottom:0; */
-	/* margin: 60px 0 0 200px !important; */
-	background-color: #F7F8FC !important;
-	min-height:800px;
-	/* width:calc(100% - 200px) !important; 본문 너비 */
+	/* background-color: #F7F8FC !important; */
+	height: auto;
+	min-height : 100%; 
 	width: 1440px;
+	/* margin: 60px auto 0 auto; */
+	padding-left: 0;
 	/* padding:15px 75px 0 15px !important; */
 	margin: 60px auto auto auto;
-
 }  	
 .content{
     width: 1200px;
-    height: 100%;
+    min-height: 95%;
+    height:auto;
     float: right;
-   	margin: 0 20px 0 20px;
+   	margin: 20px;
 }
 #aside {
 	display: flex;
@@ -81,10 +80,10 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	width:200px; /* 사이드바 너비와 동일하게 맞춰줘야 됨 */
 	height:100%;
 	text-align:center;
-		display:flex;
-		align-items: center;
-		justify-content: center;
-		left:0;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	left:0;
 }
 .header-logo{
 	display:flex;
@@ -105,18 +104,18 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	justify-content:flex-end;
 }
 #searchKeyword{	
-		margin:0;
-		padding:0;
-		width:50%;
-		height:26px;
-		margin-right:-5px;
-		text-align: right;
-		border:0.5px solid gray;
-		border-radius:4px;	
-	}
-	#searchKeyword:focus{
-		outline:0.5px solid #E1E6FF;
-	}
+	margin:0;
+	padding:0;
+	width:50%;
+	height:26px;
+	margin-right:-5px;
+	text-align: right;
+	border:0.5px solid gray;
+	border-radius:4px;	
+}
+#searchKeyword:focus{
+	outline:0.5px solid #E1E6FF;
+}
 .header-icon-area{
 	height: 60px;
 		display: flex;
@@ -184,6 +183,26 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 #messageIcon{
 	margin: 4px 0 0 5px;
 }
+
+/*메세지 알림 추가  */
+.header-message{
+	position: relative;
+}
+/* .recMs{
+	position: absolute;
+    top: -10;
+    right: 0;
+    left:15;
+    z-index: 3;
+    height: 18px;
+    width: 18px;
+    font-size:15px;
+    font-weight:bold;
+    line-height: 20px;
+    text-align: center;
+    background-color: red;
+    border-radius: 15px;
+    display: inline-block;
+} */
+
 </style>
-
-

@@ -123,6 +123,7 @@ public class MemberController {
 		}
 			//세션등록	
 			session.setAttribute("userId", userInfo.get("email"));
+			session.setAttribute("user_Nic", userInfo.get("nickname"));
 			session.setAttribute("access_Token", access_Token);
 			
 			

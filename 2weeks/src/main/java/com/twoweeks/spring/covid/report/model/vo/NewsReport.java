@@ -2,6 +2,8 @@ package com.twoweeks.spring.covid.report.model.vo;
 
 import java.util.Date;
 
+import org.jsoup.select.Elements;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +20,6 @@ public class NewsReport {
 	private String team;
 	private String attachment;
 	private String date;
+	private String url;
 
 }

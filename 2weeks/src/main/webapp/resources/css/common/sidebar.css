@@ -1,53 +1,54 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
-<style>
-	
-	.sidebar-default {
-        width:100%;
-        overflow: hidden;
-		left:0;
-		color: #394956;
-		
-	}
-	.wrap_sub_list, .wrap_sidebar-divider{
-		margin:0;
-		padding:0;
-        background-color: #D3D8F4;
-	}
-	.sidebar-list{
-        align-items: center;
-        display: flex;
-        height: 40px;
-        cursor:point;
-        width:100%;
-        padding-left:5px;
-	}
-	.sidebar-list-hide{
-		display:none;
-        width:100%;
-	}
 
-	.sidebar-list-sub{
-        align-items: center;
-        display: flex;
-        height: 40px;
-        width:100%;
-        padding-left:20px;
-	}
-	.sidebar-icon {
-        height: 24px;
-        width: 24px;
-	}
-	.sidebar-title {
-        padding-left: 10px;
-	}
-    .sidebar-divider {
-        height: 4px;
-        width:100%;
-	}
-	.overlay {
-		background-color: rgba(0,0,0, 0.05);
-	}
+.sidebar-default {
+	width:100%;
+	overflow: hidden;
+	left:0;
+	color: #394956;		
+	border-radius: 15px;
+    box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
+	margin-top: 20px;
+	background-color: #7879F160;
+	padding-left: 5px;
+}
+.wrap_sub_list, .wrap_sidebar-divider{
+	margin:0;
+	padding:0;
+	/* background-color: #D3D8F4; */
+}
+.sidebar-list{
+	align-items: center;
+	display: flex;
+	height: 40px;
+	cursor:point;
+	width:100%;
+	padding-left:5px;
+}
+.sidebar-list-hide{
+	display:none;
+	width:100%;
+}
 
-	
-</style>
+.sidebar-list-sub{
+	align-items: center;
+	display: flex;
+	height: 40px;
+	width:100%;
+	padding-left:20px;
+}
+.sidebar-icon {
+	height: 24px;
+	width: 24px;
+}
+.sidebar-title {
+	padding-left: 10px;
+}
+.sidebar-divider {
+	height: 4px;
+	width:100%;
+}
+.overlay {
+	background-color: rgba(0,0,0, 0.05);
+}
+

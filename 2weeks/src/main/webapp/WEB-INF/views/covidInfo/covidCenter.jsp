@@ -8,14 +8,15 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="covid/reportList"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-
 
 <link href="${pageContext.request.contextPath }/resources/css/covid/covidCenter.css" rel="stylesheet" />
 
 <section class="container">	
-	<h2>선별진료소 지도</h2>	
-	<div id="map" style="width:800px;height:550px;"></div>	
+	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+	<div class="content">
+		<h2>선별진료소 지도</h2>	
+		<div id="map" style="width:800px;height:550px;"></div>
+	</div>	
 </section>
 
 <script>
