@@ -13,7 +13,7 @@
 	<div class="content" style="display:inline-block; padding-left:220px; ">
 		<!-- 커뮤니티 검색 결과 -->
 		<section id="searchResult-community" class="searchResult-area" >
-			<div class="searchResult-name">외부 검색 결과</div>
+			<div class="searchResult-name">2weeks 검색 결과</div>
 			<c:forEach var="list" varStatus="i" items="${searchResultCommunity}" end="8">
 				<div class="searchResult-list">					
 					<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/two.svg"/></div>

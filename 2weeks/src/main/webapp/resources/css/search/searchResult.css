@@ -2,7 +2,7 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 
 .searchResult-area{
-	width:100%;
+	width:90%;
 	min-height:300px;
 	border-radius:10px;
 	border:0.5px solid #f0f0f0;

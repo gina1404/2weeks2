@@ -207,7 +207,7 @@
 				currentUrl=currentUrl.substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")+1); 
 				
 				//현재 페이지 url을 매핑 주소를 비교해 분기 처리
-				if(currentUrl=='${path}/covidUpdate/report.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
+				if(currentUrl=='${path}/test/test.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
 					console.log("다른 주소임");
 				}else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
 					location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();
