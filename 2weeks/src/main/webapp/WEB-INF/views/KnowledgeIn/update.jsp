@@ -13,8 +13,9 @@
 <style>
 
 .question{
-/* border: 1px solid blue; */
+
 background-color: white;
+height:1000px;
 }
 
 .answer{
@@ -35,7 +36,7 @@ position: relative;
 left:-16px;
 
 }
-#Qcheck{
+.Qcheck{
 width:100px;
 height:40px;
 border :0px;
@@ -45,7 +46,7 @@ float:right;
 color:#ffffff;
 position: relative;
 top:-130px;
-left:-170px;
+left: 500px;
 
 }
 #searchBar{
@@ -122,7 +123,7 @@ right:-40px;
 .knowmenu2 {
     list-style: none;
     position: relative;
-    right :-1200px;
+    float:right;
    top:-10px;
 } 
 .knowmenu li{
@@ -180,8 +181,7 @@ font-size: 13px;
 }
 
 .content{
-position: relative;
-right: -50px;
+float:left;
 /* border: 1px solid red; */
 
 
@@ -245,15 +245,16 @@ color: #A4A4A4;
 }
 
 .noresize {
-	width:1300px; 
-	height:500px; 
+	width:1100px; 
+	height:600px; 
     resize:none;/* 크기고정 */ 
 	position: relative;
 
 }
 .bottom{
 position: relative;
-right:-50px;
+top : -300px;
+right: 50px;
 
 }
 ::placeholder {
@@ -279,6 +280,7 @@ right:-50px;
 .a{
 	font-size:30px;
 	position: relative;
+
 	font-family: pretendard;
 	font-weight: bold;
 }
@@ -291,11 +293,10 @@ right:-50px;
 	input:focus {outline:1px solid #19ce60;}
 </style>
 
-
-<section class="container">
+<section class="container" style="display:flex; padding-bottom: 200px;"> 	
 <form name="KinFrm" action="${path }/KnowledgeIn/update" method="post" enctype="multipart/form-data" onsubmit="return _onSubmit();" >
       
-	<div class="question">
+	<div class="question"  style="display:inline-block;padding-left: 200px;">
 			<span class="a">수정</span> 
 <!-- 			<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
@@ -345,7 +346,7 @@ right:-50px;
 			 					
 <br>
 			
-		<div class="bottom">
+			<div class="bottom"style="display:inline-block;padding-left: 200px;">
 		 <label for="gdsImg">첨부파일</label>
 		<input type="file" name="file" id="attach" accept="image/gif, image/jpeg, image/png">
 	<!-- 	<label class="custom-file-label" for="upFile1">파일을 선택하세요</label> -->
@@ -373,7 +374,7 @@ right:-50px;
  			<hr style="border: solid 1px #F2F2F2;">	
  			
  	        <!--     <input type="submit" class="btn btn-outline-success" value="질문등록" >	 -->
-		<button id="Qcheck" type="submit">완료</button>
+		<button class="Qcheck" type="submit">수정 완료</button>
 		</div>
 
 
