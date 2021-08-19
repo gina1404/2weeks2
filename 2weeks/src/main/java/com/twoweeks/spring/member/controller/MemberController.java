@@ -524,31 +524,4 @@ public class MemberController {
 		return uuid;
 	}
 	
-	
-	
-	
-	
-	
-	//나의활동보기
-	
-	//@Autowired
-	//private BoardServiceImpl service;	
-	
-	@RequestMapping("/member/mypage")
-	public ModelAndView selectMyBoard(@RequestParam String loginId, ModelAndView mv) {
-		//List<> list=service.selectBoard(loginId);
-		//mv.addObject("list", list);
-		
-		mv.setViewName("member/myBoard");
-		
-		return mv;
-	}
-	
-	
-	
-	
-	
-	
-	
-
 }
