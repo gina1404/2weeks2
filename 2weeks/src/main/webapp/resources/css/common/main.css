@@ -45,6 +45,11 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	cursor: pointer;
+}
+#reportTab tr td:hover{
+	color: #6E6E6E;
+	font-weight: bolder;
 }
 
 .report>div{
@@ -52,4 +57,8 @@
 	font-size: 20px;
     text-align: center;
     margin: 25px 15px 15px 15px;
+}
+#reportMove:hover{
+	color: #6E6E6E;
+	font-weight: bolder;
 }

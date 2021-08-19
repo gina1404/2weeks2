@@ -45,23 +45,24 @@
 </section>
 
 <script>
+	let move;
 	$(".reportTitle").click(e=>{
-		let url=$(e.target).next().val();
-		
-		console.log(url.substring(url.indexOf(",''")));
-		
-		//fn_tcm_boardView('/tcmBoardView.do','3','31','5739','312', 'ALL');
-		//fn_tcm_boardView('/tcmBoardView.do','','','366664','', 'ALL');
-		//http://ncov.mohw.go.kr/tcmBoardView.do?brdId=3&brdGubun=31&dataGubun=&ncvContSeq=5830&contSeq=5830&board_id=312&gubun=BDJ
-		//http://ncov.mohw.go.kr/tcmBoardView.do?brdId=&brdGubun=&dataGubun=&ncvContSeq=366865&contSeq=366865&board_id=140&gubun=BDJ
-		//window.open("http://naver.com");
-		
-	});
-	
-	
-	
-	
-	
+		let aTag=$(e.target).next().val();		
+		let url=aTag.split("','");
+		for(let i=0; i<url.length; i++){
+			if(url[2]!=""){				
+				move="http://ncov.mohw.go.kr/tcmBoardView.do?brdId="+url[1]+
+						"&brdGubun="+url[2]+
+						"&dataGubun=&ncvContSeq="+url[3]+
+						"&contSeq="+url[3]+
+						"&board_id="+url[4].substring(0, 3)+"&gubun=BDJ";						
+			}else {				
+				move="http://ncov.mohw.go.kr/tcmBoardView.do?brdId=&brdGubun=&dataGubun=&ncvContSeq="+
+						url[3]+"&contSeq="+url[3]+"&board_id=140&gubun=BDJ";
+			}			
+		}
+		window.open(move);	
+	});	
 </script>
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
