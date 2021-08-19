@@ -38,26 +38,26 @@
                             <div class="card">
                                 <div class="card-body text-center mt-4">
                                     <h2 class="card-title">YTN 뉴스</h2>
-                                    <p class="card-text"><a class="go-to-ytn" href="${n.url }"><c:out value="${n.content }"/></a></p>
+                                    <p class="card-text"><a class="go-to-ytn" target="_blank" href="${n.url }"><c:out value="${n.content }"/></a></p>
                                  <ul class="list-inline">
                                         <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="페이스북" href="#">
-                                                <i class="fa fa-facebook"></i>
+                                            <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-github"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="트위터" href="#">
+                                            <a class="social-icon text-xs-center" target="_blank" href="#">
                                                 <i class="fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="스카이프" href="#">
-                                                <i class="fa fa-skype"></i>
+                                            <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-instagram"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="구글" href="#">
-                                                <i class="fa fa-google"></i>
+                                            <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-facebook"></i>
                                             </a>
                                         </li>
                                     </ul>
