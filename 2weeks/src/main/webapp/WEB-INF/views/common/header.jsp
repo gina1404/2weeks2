@@ -75,7 +75,7 @@
 
 	            	
 	            	
-	                <div class="dropdown">
+					<div class="dropdown">
 		            	<c:if test="${member.user_Nic ne null }">
 			                <div class="header-profile-icon">
 			                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
@@ -143,9 +143,9 @@
 						$(".recMs").append(num1);
 						$(".recMs").css({
 								"position": "absolute",
-							    "top": "-10",
-							    "right": "0",
-							    "left":"15",
+							    "top": "-10px",
+							    /* "right": "15px", */
+							     "left":"10px", 
 							    "z-index": "3",
 							    "height": "18px",
 							    "width": "18px",
@@ -156,6 +156,7 @@
 							    "background-color": "red",
 							    "border-radius": "15px",
 							    "display": "inline-block",
+							    "color":"white",
 						});
 
 					}
@@ -177,7 +178,7 @@
 			}
 		   
 		   function messageToast(){
-			   toastr.info('알림', '새로운 메세지가 도착했습니다.', {timeOut: 5000});
+			   toastr.info('알림', '새로운 메세지가 도착했습니다.', {timeOut: 7000});
 
 		   }
 
