@@ -47,7 +47,7 @@
 				<img class="" src="${path }/resources/images/icons/language.svg"/>  
 				</div>
 					<c:if test="${userId eq null and member.user_Id eq null}">
-	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">join us</div>
+	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">LOGIN</div>
 	            	</c:if>
 	            	<c:if test="${userId ne null}" >
 	            		<div class="header-profile-text">${user_Nic} 님</div>
