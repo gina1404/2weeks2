@@ -75,5 +75,7 @@ public class SignUp {
 
     // 가입일 
 	 private Date enroll_Dt;
+	 
+	 private int userPoint_Cnt;
 
 }
