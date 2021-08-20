@@ -38,7 +38,7 @@
         <div class="inbox_people"> <!-- 메세지리스트 -->
           <div class="headind_srch"> <!--  메세지리스트 헤드라인,검색 -->
             <div class="recent_heading">
-              <h4>Recent</h4>
+              <h4><img width="20px" height="20px" src="${path }/resources/images/message/message2.png"/>  쪽지함</h4>
             </div>
             <div class="srch_bar"> <!-- 검색바  -->
               <div class="stylish-input-group">

@@ -35,7 +35,7 @@
 				</div>
 				<c:if test ="${not i.last}"><hr></c:if>									
 			</c:forEach>
-			<div class="searchResult-detail"><div onclick="">커뮤니티 검색 결과 더 보기 <span>→</span></div></div>
+			<div class="searchResult-detail"><div onclick="pageContext.forward('searchResultDetail.jsp')">커뮤니티 검색 결과 더 보기 <span>→</span></div></div>
 		
 		</section>
 		<br><br><br>

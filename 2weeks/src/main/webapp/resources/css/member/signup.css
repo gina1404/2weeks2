@@ -108,8 +108,17 @@ input:focus {outline:none;}
 	flex-wrap: wrap;
 	align-content:center;
 	margin-bottom: 25px;
+	position: relative;
 	
 }
+.eye{
+	position: absolute;
+	left:430px;
+	top:27px;
+	cursor: pointer;
+	font-size: 20px;
+}
+
 
 /*패스워드 확인  */
 .pw2_input_box {
