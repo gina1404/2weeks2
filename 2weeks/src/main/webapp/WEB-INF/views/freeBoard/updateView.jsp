@@ -8,10 +8,11 @@
 	<jsp:param name="title" value=""/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
- <%-- <script src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>  --%>
 <script src="//cdn.ckeditor.com/4.11.4/full-all/ckeditor.js"></script>
-<section class="content">
-<div class="container" id="">
+
+
+<section class="container">container
+<div class="content" id="">
     <div class="content" style="width: 70%">
      <form name="boardFrm"  id="dataForm" method="post" action="${path }/freeboard/update" enctype="multipart/form-data">
         <div class="row justify-content-md-center">
@@ -60,9 +61,10 @@
       <div class="row justify-content-md-center">
         <input type="hidden" name="post_Sq" value="${list.post_Sq}"/>
         <input type="submit" class="m-3 btn btn-outline-secondary"   value="수   정" style="width: 20%; font-weight: bold">
+         <input type="button" class="m-3 btn btn-outline-secondary" id="back-cancel"   value="취   소" style="width: 20%; font-weight: bold">
         </div>
      </form>
-        <input type="submit" class="m-3 btn btn-outline-secondary" id="back"   value="취   소" style="width: 20%; font-weight: bold">
+       
   </div>
   
 
@@ -101,7 +103,9 @@ $(document).ready(function(){
 		filebrowserImageUploadUrl : '${pageContext.request.contextPath}/freeboard/update',
 	});
 	
-	
+	$("#back-cancel").on("click", function(){
+		history.back();
+	});
 
 					
 </script>

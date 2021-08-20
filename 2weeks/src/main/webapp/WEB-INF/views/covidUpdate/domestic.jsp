@@ -14,6 +14,10 @@
 	
 		<div style="text-align: center;">
 			<section id="domestic-covid-chart" style="width:45%; display:inline-block;">
+			
+			
+			
+			
 				<jsp:include page="/WEB-INF/views/covidUpdate/regionalKor.jsp"></jsp:include>
 			</section>
 		</div>

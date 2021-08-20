@@ -7,50 +7,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
+<link rel="stylesheet" type="text/css" href="${path }/resources/css/freeboard/readView.css">
 
-<style>
-
-.container {
-  padding-right: 30px;
-  padding-left: 30px;
-  margin-right: auto;
-  margin-left: 20%;
-  margin-top:5%;
-}
-h4 > span{
-    display: block;
-    margin-bottom: 4px;
-    color: #ff5722;
-    font-weight: bold;
-    font-size: 12px;
-}
-a{
-text-decoration:none;
-color: #000;
-}
-.wrapper > .row{
-margin-top:5%;
-}
-.divi{
-font-size : 12px;
-}
-.col-sm-12{
-  float: left;
-}
-.outer {
-  text-align: center;
-  width : 1000px;
-  height: 800px;
-}
-
-.inner {
-  display: inline-block;
-  margin-top: 700px;
-  margin-left : 125px;
-}
-content
-</style>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <section class="container">
 	<div class="content">
 		<div class="wrapper">
@@ -361,7 +319,7 @@ function del(no) {
 function fn_replyDelete(reply_Sq){
 	console.log(reply_Sq);
 	
-	var msg = confirm("진짜루 나 삭제할꼬야??");
+	var msg = confirm("댓글을 삭제하시겠습니까?");
 	if(msg == true){
 		$.ajax({
 			type:"delete",
