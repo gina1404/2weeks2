@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+ .category{
+ 	font-size:12px;
+ }
+.container {
+  padding-right: 30px;
+  padding-left: 30px;
+  margin-right: auto;
+  margin-left: 20%;
+  margin-top:5%;
+}
+.profile{
+	width:24px;
+	height:24px;
+}
+.heart {
+width:13px;
+height:13px;
+}
+.eye{
+width:13px;
+height:13px;
+}
+.comment{
+width:13px;
+height:13px;
+}
+.icon{
+font-size: 8px;
+}
+a{
+text-decoration: none;
+}
+#searhType{
+    margin-left: 700px;	
+}

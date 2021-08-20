@@ -19,7 +19,11 @@
 	<div class="content">
 		<div class="vaccine_box ">
 			<h3 class="vaccineCenter_title">백신 접종센터</h3> 
+<<<<<<< HEAD
+			<div class="vaccineMap center-block" id="map" class= "map" style="width:800px;height:550px;"></div>
+=======
 			<div class="center-block   defaultBoxshadow" id="map" class= "map" style="width:800px;height:550px;"></div>
+>>>>>>> 77d8e4ea2d076ba7301a235e8daeb6e194018e55
 		</div>
 	</div>
 	</section>

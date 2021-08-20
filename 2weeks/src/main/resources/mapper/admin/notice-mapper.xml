@@ -63,6 +63,7 @@
 	<select id="selectGrantCount" resultType="_int">
 		SELECT COUNT(*) FROM GRANTTO WHERE GRANTTO_YN='N'
 	</select>
+	
 	<delete id="deletePost">
 		DELETE FROM POST WHERE POST_SQ=#{seq}
 	</delete>
@@ -74,9 +75,17 @@
 	</delete>
 	<delete id="deleteKinReply">
 		DELETE FROM KIN_REPLY WHERE REPLY_SQ=#{seq}
+
 	</delete>
+
+
+
+
+
+
 	<delete id="deleteGrant">
 		DELETE FROM GRANTTO WHERE USER_ID=#{userId}
 	</delete>
+
 
 </mapper>

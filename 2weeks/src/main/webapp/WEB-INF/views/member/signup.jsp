@@ -62,7 +62,7 @@
 				<div class="col-md-12 password1">
 					<div class="pw_input_box">
 						<label for="pw1" class="pw_label input_label">패스워드</label>
-						<form:input path='user_Pw' id ='pw1' type='password' name='user_Pw' />
+						<form:input path='user_Pw' id ='pw1' class="password1" type='password' name='user_Pw' /><span class="eye">👀</span>
 						<div class="signup_guide">6자 이상 숫자,영문,특수문자(필수)를 사용하세요.</div>
 						<form:errors path='user_Pw' class='errors_message'/>
 					</div>
@@ -73,7 +73,7 @@
 				<div class="col-md-12">
 					<div class="pw2_input_box">
 						<label for="pw2" class="pw2_label input_label">패스워드 재입력</label>						
-						<form:input path='user_Pw2' id ='pw2' type='password' name='user_Pw' />						
+						<form:input path='user_Pw2' id ='pw2' class="password2" type='password' name='user_Pw' />						
 					</div>
 				</div>
 			</div>
@@ -325,6 +325,20 @@ if(emailCheck="인증번호 확인"){
 	// 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행
 	$("#profile_input").change(function(){
 		readURL(this);
+	});
+	
+	//패스워드 숫자형식
+	$(document).ready(function(){
+		$('.eye').on('click',function(){
+			$('.password1').toggleClass('active');
+			if($('.password1').hasClass('active')){
+				$(this).text('😎').prev('.password1').attr('type',"text");
+				$('.password2').attr('type',"text");
+			}else{
+				$(this).text('👀').prev('.password1').attr('type','password');
+				$('.password2').attr('type',"password");
+			}
+		});
 	});
 	
 </script>
