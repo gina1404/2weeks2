@@ -21,7 +21,38 @@
 	<div class="content" style="margin-left: 220px;">
 		<h3 id="boardLogo">나의 활동보기</h3>
 		
-		<div id="scrap" class="boardListBack">
+		<div id="myBoard" class="boardListBack">
+			<h4>내가 작성한 게시글</h4>
+			<div class="boardList">
+				<table class="myBoardTab table table-striped">
+					<tr>
+						<th>글번호</th>
+						<th>제목</th>
+						<th>글쓴이</th>
+						<th>날짜</th>
+						<th>조회수</th>
+					</tr>
+					<c:forEach var="r" items="${list }">
+						<tr>
+							<td>${r.post_Sq }</td>
+							<td>
+								<a href="${path }/freeboard/readView?no=${r.post_Sq}">
+									[${r.category }] ${r.post_Title }
+								</a>
+							</td>
+							<td>${r.user_Id }</td>
+							<td>${r.post_Dt }</td>
+							<td>${r.post_Cnt }</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<div id="reportPageBar">
+					${pageBar }
+				</div>
+			</div>
+		</div>
+		
+		<!-- <div id="scrap" class="boardListBack">
 			<h4>즐겨찾기</h4>
 			<div class="boardList">
 				<table class="myBoardTab table table-striped">
@@ -41,34 +72,15 @@
 					</tr>
 				</table>
 			</div>
-		</div>
+		</div> -->
 		
-		<div id="myBoard" class="boardListBack">
-			<h4>내가 작성한 게시글</h4>
-			<div class="boardList">
-				<table class="myBoardTab table table-striped">
-					<tr>
-						<th>글번호</th>
-						<th>제목</th>
-						<th>글쓴이</th>
-						<th>날짜</th>
-						<th>조회수</th>
-					</tr>
-					<tr>
-						<td>${post_Sq }</td>
-						<td>[${category }] ${post_Title }</td>
-						<td>${user_Id }</td>
-						<td>${post_Dt }</td>
-						<td>${post_Cnt }</td>
-					</tr>
-				</table>
-			</div>
-		</div>
 	</div>
 	
-
-
 </section>
+
+<script>
+	location.assign('member/mypage?cPage=1&loginId='+DUMMY);
+</script>
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

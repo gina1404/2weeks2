@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="freeboard">
-
+	
 	<select id="listAll" resultMap="boardMap">
 		SELECT * FROM POST P LEFT JOIN POST_ATCH A ON P.POST_SQ=A.POST_SQ ORDER BY P.POST_SQ DESC
 	</select>
 	
-	<select id="selectMyBoard" resultMap="boardMap">
-		SELECT * FROM POST WHERE USER_ID=#{userId}		
+	<select id="selectMyBoard" parameterType="map" resultMap="boardMap">
+		SELECT * FROM POST WHERE USER_ID=#{loginId}		
+	</select>
+	
+	<select id="myBoardCount" resultType="_int">
+		SELECT COUNT(*) FROM POST WHERE USER_ID=#{loginId}	
 	</select>
 	
 	<select id="totalBoardCount" resultType="_int">

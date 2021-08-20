@@ -36,7 +36,9 @@ import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
 import com.twoweeks.spring.board.freeboard.reply.model.service.ReplyService;
 import com.twoweeks.spring.common.PageFactory;
+import com.twoweeks.spring.common.Pagination;
 
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController  //restController는 값들을 다 data로 인식하여 처리한다. 그렇기 때문에 return에 주소값을 넣어주면 주소이동하지 않고 데이터를 출력해준다.
@@ -408,10 +410,15 @@ public class FreeBoardController {
 
 	//나의활동보기
 	@RequestMapping("/member/mypage")
-	public ModelAndView selectMyBoard(@RequestParam String loginId, ModelAndView mv) {
-		List<FreeBoard> list=service.selectMyBoard(loginId);
-		mv.addObject("list", list);
+	public ModelAndView selectMyBoard(@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="15") int numPerpage,			
+			@RequestParam String loginId, ModelAndView mv) {
 		
+		mv.addObject("list", service.selectMyBoard(loginId, cPage, numPerpage));
+		System.out.println("이게 cPage야 : "+cPage);
+		int totalData=service.myBoardCount(loginId);
+		
+		mv.addObject("pageBar", Pagination.getPageBar(totalData, cPage, numPerpage, "mypage", loginId));
 		mv.setViewName("member/myBoard");
 		
 		return mv;

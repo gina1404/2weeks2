@@ -30,7 +30,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	display: flex;
 	width: 1440px;
 	margin: auto;
-	position:fixed;
+	/* position:fixed; */
 	height:60px; /* header 높이 */
 	top:0;
 	left:0;
@@ -57,7 +57,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	min-height : 100%; 
 	width: 1440px;
 	padding-left: 0;
-	margin: 75px auto auto auto;
+	margin: auto;
 }  	
 .content{
     width: 1200px;

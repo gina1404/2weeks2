@@ -129,12 +129,17 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		return dao.delete(session, no);
 	}
 
-
+	
 	@Override
 	public int updateReplyCnt(int post_Sq) {
 		return dao.updateReplyCnt(session, post_Sq);
 	}
 
+
+	@Override
+	public int myBoardCount(String loginId) {
+		return dao.myBoardCount(session, loginId);
+	}
 
 	@Override
 	public List<FreeBoard> replyCnt(int post_Sq) {
@@ -169,11 +174,11 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Override
 	public List<PostAttachment> listAttachment() {
 		return dao.listAttachment(session);
-	}
-	
+	}	
 
-	public List<FreeBoard> selectMyBoard(String userId) {		
-		return dao.selectMyBoard(session, userId);
+	@Override
+	public List<FreeBoard> selectMyBoard(String loginId, int cPage, int numPerpage) {		
+		return dao.selectMyBoard(session, loginId, cPage, numPerpage);
 	}
 	
 	
