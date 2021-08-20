@@ -5,6 +5,7 @@
 	<groupId>com.twoweeks</groupId>
 	<artifactId>spring</artifactId>
 	<name>2weeks</name>
+	
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
