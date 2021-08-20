@@ -2,7 +2,9 @@ package com.twoweeks.spring.covid.domestic.model.Service;
 
 import java.net.URI;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -29,10 +31,14 @@ public class CovidDomesticServiceImpl implements CovidDomesticService {
 	public ResponseEntity<String> getApi() {
 		Date today = new Date();
 		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+		
+		Calendar c = new GregorianCalendar();
+		c.add(Calendar.DATE, -1);
+		
 		System.out.println(date.format(today));
 		String realtoday = date.format(today);
-		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=sklG4ffg0dLw22C3ideuBi5dyS%2FqK5%2F6YymY5LMR9PiSQhzt3w8aqVAwqS70rOvlGVGl7MctP%2BWC1OMzPgjmUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt=20210721&endCreateDt="+realtoday;
-		
+		String yesterday = date.format(c.getTime());
+		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=sklG4ffg0dLw22C3ideuBi5dyS%2FqK5%2F6YymY5LMR9PiSQhzt3w8aqVAwqS70rOvlGVGl7MctP%2BWC1OMzPgjmUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+yesterday+"&endCreateDt="+realtoday;
 		RestTemplate restTemplate = new RestTemplate(); //API를 호출하기 위한 클래스
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -41,10 +47,11 @@ public class CovidDomesticServiceImpl implements CovidDomesticService {
 		
 		ResponseEntity<String> response = restTemplate.exchange(URI.create(url), HttpMethod.GET, entity, String.class);
 		
+		log.info("==============================================================="+response);
+		
 		return response;
 	}
 
-	//OPxjpH9NsZcbai7EGVg5KSFrYJd4Cw6RM
 		@Override
 		public String getGoodBye() {
 			String url = "https://api.corona-19.kr/korea/?serviceKey=OPxjpH9NsZcbai7EGVg5KSFrYJd4Cw6RM"; //국내 카운터
@@ -75,6 +82,7 @@ public class CovidDomesticServiceImpl implements CovidDomesticService {
 	@Override
 	public Response parser(String xml) {
 		ObjectMapper xmlMapper = new XmlMapper();
+		//xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		Response response = null;
 		try {
 			response= xmlMapper.readValue(xml, Response.class);

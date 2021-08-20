@@ -16,18 +16,20 @@
 <section class="container">
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 	<h2 style="text-align: center;">국내 코로나 확진 현황</h2>
+	 <c:forEach var="b" items="${items }">
 	<div class="st-mainbar">
 		<div class="st-bar1">
 			<div class="st-bar-decide">
 				<div class="st-bar-decide-title">확진자</div>
-				<div class="st-bar-decide-count"><fmt:formatNumber value="${decide }" type="number"/>명</div>
+				<div class="st-bar-decide-count"><fmt:formatNumber value="${b.decideCnt }" type="number"/>명</div>
 			</div>
 			<div class="st-bar-death">
 				<div class="st-bar-death-title">사망자</div>
-				<div class="st-bat-death-count"><fmt:formatNumber value="${death }" type="number"/> 명</div>
+				<div class="st-bat-death-count"><fmt:formatNumber value="${b.deathCnt }" type="number"/> 명</div>
 			</div>
 		</div>
 	</div>
+	</c:forEach>
 	<h2 style="text-align: center;">오늘의 확진자 수</h2>
 	<div>
 	<h5 style="text-align: right; font-size:12px;">등록일 : ${day } </h5>
@@ -51,15 +53,15 @@
 			<th>사망자</th>
 			<th>사망률</th>
 		</tr>
-		<%-- <c:forEach items="${list }" var="c"> --%>
+		
 			<tr>
 				<td></td>
 				<td></td>			
 				<td></td>	
 				<td><fmt:formatNumber value="" pattern=".00"></fmt:formatNumber>%</td>
-				<%-- <td id="pc">${c.natDeathRate }</td> --%>
+				<%--  <td id="pc">${c.natDeathRate }</td>  --%>
 			</tr>			
-		<%-- </c:forEach> --%>
+		
 	</table>
 	
 	

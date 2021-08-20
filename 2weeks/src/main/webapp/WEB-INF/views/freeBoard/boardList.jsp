@@ -73,7 +73,7 @@
 							<c:forEach var="ima" items="${b.attachments }" varStatus="vs">
 								<c:choose>
 									<c:when test="${empty ima.atch_New} ">
-										<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/freeboardPic/default.png"  class="card-img-top row" alt="기본이미지" style="width:10px;"> </a>
+										<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/icons/safety-suit.svg"  class="card-img-top row" alt="기본이미지" style="width:10px;"> </a>
 									</c:when>
 									<c:otherwise>
 										<c:choose>
@@ -93,7 +93,7 @@
 						 						</c:if> 
 						 					</c:when>
 						 					<c:otherwise>
-						 						<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/freeboardPic/default.png"  class="card-img-top row" alt="기본이미지"> </a>
+						 						<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/icons/safety-suit.svg"  class="card-img-top row" alt="기본이미지"> </a>
 						 					</c:otherwise>
 										</c:choose>
 									</c:otherwise>

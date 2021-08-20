@@ -14,14 +14,15 @@
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 	<div class="content" style="display:inline-block; padding-left:220px;">	
 		<h2>국내 확산 현황</h2>
-
-
+		<h5>업데이트 날짜 : ${day }</h5>
+		
 		<div class="Domestic" style="display:block;">
+		 <c:forEach var="b" items="${items }">
 			<div class="topwrap">
 				<div class="middlewrap">
 					<div class="bottomwrap">
 						<div class="bottomwrap-child">확진자</div>
-						<div class="bottomwrap-child2"> 232,859</div>
+						<div class="bottomwrap-child2"> <fmt:formatNumber value="${b.decideCnt }" type="number"/>명</div>
 						<div class="bottomwrap-child3"> 
 							<div class=""></div>
 							<div size="12" class="">
@@ -30,7 +31,7 @@
 					</div>
 					<div class="bottomwrap">
 						<div class="bottomwrap-child">총 사망자</div>
-						<div class="bottomwrap-child-died">2,197</div>
+						<div class="bottomwrap-child-died"><fmt:formatNumber value="${b.deathCnt }" type="number"/>명</div>
 						<div color="grey" class="">
 							<div class=""></div>
 							<div size="12" class="">
@@ -39,8 +40,8 @@
 					</div>
 					
 					<div class="bottomwrap">
-						<div class="bottomwrap-child">완치자</div>
-						<div class="bottomwrap-child-recovery">1234</div>
+						<div class="bottomwrap-child">격리해제 수</div>
+						<div class="bottomwrap-child-recovery"><fmt:formatNumber value="${b. clearCnt}" type="number"/>명</div>
 						<div color="green" class="">
 								<div class=""></div>
 								<div size="12" class="">
@@ -50,7 +51,7 @@
 					
 					<div class="bottomwrap">
 						<div class="bottomwrap-child">검사자</div>
-						<div class="bottomwrap-child-test">12,567,009</div>
+						<div class="bottomwrap-child-test"><fmt:formatNumber value="${b.accExamCnt }" type="number"/>명</div>
 						<div color="blue" class="">
 							
 							<div class=""></div>
@@ -60,19 +61,10 @@
 			</div>
 		</div>
 	</div>
+	</c:forEach>
 </div>
-
-
-
-
-
-
 		<div style="text-align: center;">
 			<section id="domestic-covid-chart" style="width:45%; display:inline-block;">
-			
-			
-			
-			
 				<jsp:include page="/WEB-INF/views/covidUpdate/regionalKor.jsp"></jsp:include>
 			</section>
 		</div>
