@@ -9,6 +9,7 @@
 </jsp:include>
 <link rel="stylesheet" type="text/css" href="${path }/resources/css/freeboard/readView.css">
 
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <section class="container">
 	<div class="content">
 		<div class="wrapper">

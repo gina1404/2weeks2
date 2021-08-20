@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+
+*{
+font-family :'Pretendard'	
+}
+
 .category{
  	font-size:12px;
  }
