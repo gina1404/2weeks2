@@ -37,7 +37,7 @@ public class Pagination {
 		if(loginId==null) {
 			pageBar+="location.assign('" +url+ "?cPage='+cPage);}";
 		} else if(loginId!=null) {			
-			pageBar+="location.assign('"+url+"?cPage="+"'+cPage+'"+"&loginId='"+loginId+");}";
+			pageBar+="location.assign('"+url+"?cPage='+cPage+'&loginId="+loginId+"');}";
 			//pageBar+="location.assign('"+url+"?loginId='"+loginId+"'&cPage='"+"cPage"+"');}";
 			//location.assign('mypage?cPage='+cpage+'login
 		}

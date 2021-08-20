@@ -78,5 +78,9 @@
 	
 </section>
 
+<script>
+	location.assign('member/mypage?cPage=1&loginId='+DUMMY);
+</script>
+
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

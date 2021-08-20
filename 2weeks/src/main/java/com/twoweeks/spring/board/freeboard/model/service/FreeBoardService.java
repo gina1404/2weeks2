@@ -29,9 +29,9 @@ public interface FreeBoardService {
 	
 	List<FreeBoard> selectMyBoard(String loginId, int cPage, int numPerpage);
 
-<<<<<<< HEAD
+
 	int myBoardCount(String loginId);
-=======
+
 	int updateReplyCnt(int post_Sq);
 
 	List<FreeBoard> replyCnt(int post_Sq);
@@ -48,6 +48,6 @@ public interface FreeBoardService {
 
 	List<PostAttachment> listAttachment();
 
->>>>>>> ce0f9cdb2e95233f81aeeeb4519466d5d7931631
+
 	
 }

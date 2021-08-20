@@ -69,14 +69,15 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 			
 	@Override
-<<<<<<< HEAD
 	public List<FreeBoard> selectMyBoard(SqlSession session, String loginId, int cPage, int numPerpage) {
 		System.out.println("loginId + "+ loginId);
 		System.out.println(cPage+" "+numPerpage);
 		Map m= new HashMap();
 		m.put("loginId", loginId);
 		return session.selectList("freeboard.selectMyBoard", m, new RowBounds((cPage-1)*numPerpage, numPerpage));
-=======
+	}
+
+	@Override
 	public int updateView(SqlSession session, int post_Sq) {
 		return session.update("freeboard.updateView",post_Sq);
 	}
@@ -119,13 +120,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	@Override
 	public List<PostAttachment> listAttachment(SqlSession session) {
 		return session.selectList("freeboard.listAttachment");
-	}
-
-	
-
-	public List<FreeBoard> selectMyBoard(SqlSession session, String userId) {
-		return session.selectList("freeboard.selectMyBoard", userId);
->>>>>>> ce0f9cdb2e95233f81aeeeb4519466d5d7931631
 	}
 
 	@Override
