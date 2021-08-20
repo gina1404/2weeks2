@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 <c:set var="path" value="${pageContext.request.contextPath }"/>    
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2Weeks"/>
@@ -125,12 +125,12 @@
 		  </select>
   		</div> -->
  			<div id="search-chart_div">
-		 		 <div id="chart_div"  class="gritem" style="width: 390px;height: 500px;"></div>
-				 <div id="piechart" class="gritem" style="width: 390px; height: 500px; " ></div>
+		 		 <div id="chart_div"  class="gritem" style="width: 380px;height: 500px;"></div>
+				 <div id="piechart" class="gritem" style="width: 380px; height: 500px; " ></div>
 		 	</div>
  			<div id="search-chart_di">
-		 		 <div id="chart_di"  class="gritem" style="width: 390px;height: 500px;"></div>
-				<div id="regions_div" class="gritem" style="width: 390px; height: 500px;"></div>
+		 		 <div id="chart_di"  class="gritem" style="width: 380px;height: 500px;"></div>
+				<div id="regions_div" class="gritem" style="width: 380px; height: 500px;"></div>
 		 	</div>
 	</div>
 	<br><br><br>
@@ -359,7 +359,9 @@ function drawVisualizatio() {
         chart.draw(data, options);
       }
 
+      
 </script>
+
 
 		
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>	

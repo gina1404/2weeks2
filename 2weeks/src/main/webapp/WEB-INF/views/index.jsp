@@ -35,7 +35,7 @@
 			<br><br><span style=" font-size: 17px; padding-left: 25px; margin-top: 20px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[6].defCount }" var="com2"/>${com2 }명</span>
 		</div>
 		<div class="item 1st">
-			<img  style="padding-left: 5px; padding-right: 10px; padding-top: 10px; padding-bottom: 5px;" width="50px" height="50px" left="50px" top="50px" src="<%=request.getContextPath()%>/resources/images/icons/Kingdom.jpg">
+			<img  style="padding-left: 5px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;" width="50px" height="50px" left="50px" top="50px" src="<%=request.getContextPath()%>/resources/images/icons/Kingdom.jpg">
 			<h4 style="text-align: center; display: inline-block;"> ${pielist[0].nationNm }</h4> 
 			<br><br><span style=" font-size: 17px; padding-left: 18px; margin-top: 20px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[0].defCount }" var="com3"/>${com3 }명</span>
 		</div>

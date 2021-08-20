@@ -48,7 +48,7 @@ public class CovidOverseasServiceImpl implements CovidOverseasService{
 		 */
 		Calendar c1 = new GregorianCalendar();
 
-		c1.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
+		c1.add(Calendar.DATE, -3); // 오늘날짜로부터 -1
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); // 날짜 포맷 
 		String realtoday = sdf.format(c1.getTime()); // String으로 저장
