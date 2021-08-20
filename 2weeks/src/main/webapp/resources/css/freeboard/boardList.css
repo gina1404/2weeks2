@@ -33,13 +33,7 @@ section {
 
 
 
-.image-flip:hover .frontside,
-.image-flip.hover .frontside {
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-    -o-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-}
+
 
 .mainflip {
     -webkit-transition: 1s;
@@ -74,10 +68,11 @@ section {
 }
 
 .frontside .card .card-body img {
-    width: 60px;
-    height: 60px;
+    width: 160px;
+    height: 120px;
     border-radius: 50%;
-    margin-left : 80px;
+    margin-left: 55px;
+    margin-bottom: 30px;
 }
 
 .card-img .card-img-bottom .card-img-top{
@@ -86,7 +81,11 @@ section {
 	
 }
 #pagebar-container{
-	padding-left:278px;
-	padding-top:150px;
+	padding-left:100px;
+	padding-top:50px;
+	
+}
+.card-img-top row{
+	width: 80px;
 	
 }
