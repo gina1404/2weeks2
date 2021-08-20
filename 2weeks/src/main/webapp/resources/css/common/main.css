@@ -75,3 +75,57 @@
 	color: #6E6E6E;
 	font-weight: bolder;
 }
+
+
+/***해외현황***/
+.state, .flag, .flagLogo, .num{
+	/* border: solid 1px; */
+}
+
+.state{
+	width: 90px;
+    height: 25px;
+    display: flex;
+    margin: 30px auto auto auto;
+}
+.flag{
+	width: 40px;
+    height: 25px;
+    display: inline-block;
+}
+.flag img{
+	height: 12px;
+    display: block;
+    text-align: center;
+    float: right;
+    margin: 7px auto auto auto;
+}
+
+.flagLogo{
+	width: 50px;
+    height: 25px;
+    margin-left: 5px; 
+	display: inline-block;
+}
+.flagLogo h4{
+	margin-top: 3px;
+    font-weight: bolder;	
+}
+.num{
+	width: 130px;
+    height: 80px;
+    font-size: 17px;
+    margin: auto;
+    text-align: center;
+    line-height: 90px;
+    font-weight: bolder;
+}
+
+
+
+
+
+
+
+
+
