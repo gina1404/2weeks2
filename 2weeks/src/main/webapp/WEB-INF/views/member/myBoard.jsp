@@ -35,20 +35,20 @@
 					<c:forEach var="r" items="${list }">
 						<tr>
 							<td>${r.post_Sq }</td>
-							<td>[${r.category }] ${r.post_Title }</td>
+							<td>
+								<a href="${path }/freeboard/readView?no=${r.post_Sq}">
+									[${r.category }] ${r.post_Title }
+								</a>
+							</td>
 							<td>${r.user_Id }</td>
 							<td>${r.post_Dt }</td>
 							<td>${r.post_Cnt }</td>
 						</tr>
 					</c:forEach>
-					<tr>
-						<td colspan="5">
-							<div id="reportPageBar">
-								${pageBar }
-							</div>
-						</td>
-					</tr>
 				</table>
+				<div id="reportPageBar">
+					${pageBar }
+				</div>
 			</div>
 		</div>
 		
