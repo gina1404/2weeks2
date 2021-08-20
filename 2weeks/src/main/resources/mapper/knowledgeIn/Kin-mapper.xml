@@ -17,17 +17,17 @@
 	</select>
 	
 	
-	<select id ="MyQ"  resultMap="KnowledgeInMap">
- <!--      	SELECT * 
-		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_WRITER DESC    -->
-		   SELECT * FROM KIN 
+	<select id ="MyQ"  resultMap="KnowledgeInMap" parameterType="String">
+       SELECT KIN_SQ,KIN_WRITER,CATEGORY,KIN_TITLE,KIN_CONTENT,KIN_IMAGE,OPEN_YN,SELECTED,KIN_DATE,KIN_CNT,REPLY_CNT,POINT
+		FROM KIN K LEFT JOIN MEMBER2 M ON K.KIN_WRITER=M.USER_ID WHERE K.KIN_WRITER=${user_Id};
+	<!-- 	SELECT * FROM KIN     -->
 	</select>
 	<select id ="MyA"  resultMap="KnowledgeInMap">
  <!--      	SELECT * 
 		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_WRITER DESC    -->
 		   SELECT * FROM KIN 
 	</select>
-	
+
 	
 	
 	
@@ -44,7 +44,7 @@
 		<result column="kin_Cnt" property="kin_Cnt"/>
 		<result property="reply_Cnt" column="reply_Cnt"/>
 		<result property="point" column="point"/>
-		
+		<collection property="member" resultMap="Member"/>
 		<collection property="attachments" ofType="attachment">
 			<id column="atch_No" property="atch_No"/>
 			<result column="kin_Sq" property="kin_Sq"/>
@@ -89,6 +89,36 @@
 
 	</resultMap>
 
+	<resultMap type="com.twoweeks.spring.member.model.vo.Member" id="Member">
+	<result column="user_Id" property="user_Id"/>
+<!-- 	<result column="user_Nm" property="user_Nm"/>
+	<result column="user_Pw" property="user_Pw"/>
+	<result column="user_Pw2" property="user_Pw2"/>
+	<result column="user_Nic" property="user_Nic"/>
+	<result column="sns_Type" property="sns_Type"/>
+	<result column="sns_Id" property="sns_Id"/>
+	<result column="sns_Connected_Dt" property="sns_Connected_Dt"/>
+	<result column="user_Bday" property="user_Bday"/>
+	<result column="user_Gender" property="user_Gender"/>
+	<result column="user_Phone" property="user_Phone"/>
+	<result column="user_Pf" property="user_Pf"/>
+	<result column="user_Pfrename" property="user_Pfrename"/>
+	<result column="access_Gb" property="access_Gb"/>
+	<result column="user_Email" property="user_Email"/>
+	<result column="userPoint_Cnt" property="userPoint_Cnt"/>
+	<result column="quarantine_Dt" property="quarantine_Dt"/>
+	<result column="user_Addr" property="user_Addr"/>
+	<result column="enroll_Dt" property="enroll_Dt"/> -->
+	
+	</resultMap>
+
+
+	
+	
+	
+	
+	
+	
 	
 	
 	<select id="selectKinCount" resultType="_int">

@@ -1,5 +1,6 @@
 package com.twoweeks.spring.board.freeboard.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
-import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 @Repository
 public class FreeBoardDaoImpl implements FreeBoardDao {
@@ -38,8 +38,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 
 	@Override
-	public List<FreeBoard> list(SqlSession session, FreeBoard fb) {
-		return session.selectList("freeboard.list",fb);
+	public List<FreeBoard> list(SqlSession session) {
+		return session.selectList("freeboard.list");
 	}
 
 
@@ -67,12 +67,64 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	public int updateAttachment(SqlSession session, PostAttachment a) {
 		return session.insert("freeboard.updateAttachment", a);
 	}
-
+			
 	@Override
-	public List<FreeBoard> selectMyBoard(SqlSession session, String userId) {
-		return session.selectList("freeboard.selectMyBoard", userId);
+	public List<FreeBoard> selectMyBoard(SqlSession session, String loginId, int cPage, int numPerpage) {
+		System.out.println("loginId + "+ loginId);
+		System.out.println(cPage+" "+numPerpage);
+		Map m= new HashMap();
+		m.put("loginId", loginId);
+		return session.selectList("freeboard.selectMyBoard", m, new RowBounds((cPage-1)*numPerpage, numPerpage));
 	}
 
-	
+	@Override
+	public int updateView(SqlSession session, int post_Sq) {
+		return session.update("freeboard.updateView",post_Sq);
+	}
+
+	@Override
+	public int updateReplyCnt(SqlSession session, int post_Sq) {
+		return session.update("freeboard.updateReplyCnt",post_Sq);
+	}
+
+	@Override
+	public List<FreeBoard> replyCnt(SqlSession session, int post_Sq) {
+		return session.selectList("freeboard.replyCnt",post_Sq);
+	}
+
+	@Override
+	public List<PostAttachment> getAttachment(SqlSession session, int post_Sq) {
+		return session.selectList("freeboard.getAttachment",post_Sq);
+	}
+
+	@Override
+	public int fileDownCnt(SqlSession session, int atch_No) {
+		return session.update("freeboard.fileDownCnt",atch_No);
+	}
+
+	@Override
+	public int likeCnt(SqlSession session, int post_Sq) {
+		return session.update("freeboard.likeCnt",post_Sq);
+	}
+
+	@Override
+	public int getLikeCnt(SqlSession session, int post_Sq) {
+		return session.selectOne("freeboard.getLikeCnt",post_Sq);
+	}
+
+	@Override
+	public int likeMinus(SqlSession session, int post_Sq) {
+		return session.update("freeboard.likeMinus",post_Sq);
+	}
+
+	@Override
+	public List<PostAttachment> listAttachment(SqlSession session) {
+		return session.selectList("freeboard.listAttachment");
+	}
+
+	@Override
+	public int myBoardCount(SqlSession session, String loginId) {
+		return session.selectOne("freeboard.myBoardCount", loginId);
+	}
 	
 }

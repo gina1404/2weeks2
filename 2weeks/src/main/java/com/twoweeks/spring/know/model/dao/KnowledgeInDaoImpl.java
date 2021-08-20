@@ -32,7 +32,7 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	
 
 	@Override public List<Kin> selectKinListMyQ(SqlSession session, int cPage,
-			  int numPerpage) { return session.selectList("knowledgeIn.MyQ",null, new
+			  int numPerpage,String user_Id) { return session.selectList("knowledgeIn.MyQ",null, new
 			  RowBounds((cPage-1)*numPerpage,numPerpage)); }
 			 
 			
@@ -133,6 +133,9 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 		return session.update("knowledgeIn.updatePoint",m);
 			
 	}
+
+
+
 
 	
 

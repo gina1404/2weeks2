@@ -55,12 +55,9 @@ function sendClose(){ }
 sock.onmessage=(e)=>{	
 	let chatMsg;		
 	let msg=JSON.parse(e.data);
-	console.log(msg);
 	let no=msg['chatGroupNo'];
 	let sender=msg['sender'];
-	//console.log(sender);
 	let nickname1=msg['senderNick'];
-	//console.log(nickname1);
 	let content=msg['chatContent'];
 	let time=msg['chatTime'];
 	let type=msg['type'];
@@ -69,10 +66,9 @@ sock.onmessage=(e)=>{
 		if(type=='MSG'){				
 			if($('#sendBox #sender').val()==sender){ 	/////자신
 				chatMsg="<div id='myBox'>";
-				//msg+="<div id='sender'>"+sender+"님</div>";
 				chatMsg+="<div id='chatContent'>"+content+"</div>";
 				chatMsg+="<div id='chatTime'>"+time+"</div></div>";				
-			}else{ 							///////////////////상대방
+			}else{ 										/////상대방
 				chatMsg="<div id='yourBox'>";
 				chatMsg+="<div id='sender'>"+nickname1+"님</div>";
 				chatMsg+="<div id='chatContent'>"+content+"</div>";
@@ -84,7 +80,6 @@ sock.onmessage=(e)=>{
 			}, 500);
 			
 		}else if(type=='ENTER'){		
-			//console.log(nickname1);	
 			chatMsg="<p>"+nickname1+"님이 입장했습니다</p>";
 			console.log(chatMsg);
 			$("#chatContainer #entryAlert").html(chatMsg);

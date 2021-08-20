@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+.container{
+	font-family: 'Pretendard';
+}
+
 #boardLogo{
 	margin-left: 10px;	
 }
@@ -9,12 +15,12 @@
 	font-size: 20px;
 }
 .boardListBack{
-	width:30%;
-	min-width: 400px;
+	/* width:30%; */
+	/* min-width: 400px; */
 	height:730px;
 	/* background-color: rgba(242,242,242,1); */
 	/* background-color: #F9F9F9; */
-	position: absolute;
+	/* position: absolute; */
 	border-radius: 20px;
 }
 
@@ -22,12 +28,12 @@
 	margin: 0 5px 0 10px;
 }
 #myBoard{
-	margin: 0 25px 0 33%;
+	margin: 0 25px 0 30px;
 }
 
 .boardList{
     width: 100%;
-    min-width: 380px;
+    /* min-width: 380px; */
     height: 760px;
     margin: auto;
 }
@@ -39,7 +45,7 @@
 	table-layout: fixed;
 	
 }
-.myBoardTab *{
+.myBoardTab *, #reportPageBar{
 	text-align: center;
 }
 .myBoardTab tr{
@@ -50,6 +56,7 @@
 	width:54%;
 	text-align: left;
 }
+
 .myBoardTab tr th:nth-child(3),
 .myBoardTab tr th:nth-child(4){
 	width:13%;
@@ -60,4 +67,9 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	cursor: pointer;
+}
+.myBoardTab tr td a:hover{
+	color: #6E6E6E;
+	font-weight: bolder;
 }

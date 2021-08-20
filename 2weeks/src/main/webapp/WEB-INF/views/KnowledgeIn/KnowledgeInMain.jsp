@@ -320,7 +320,7 @@ position:relative;
 color: black;
 font-family: Pretendard;
 top:-100px;
-right:-1000px;
+right:-850px;
 }
 #Myqlist2{
 
@@ -389,7 +389,7 @@ background-color:transparent;
 
 
 <div class="background2">
-				<%-- <a href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do"> --%><button class="Myqlist">내 질문목록</button><!-- </a> -->
+			<button class="Myqlist">내 질문목록</button><!-- </a> -->
  
 		<!-- 	<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
@@ -550,7 +550,7 @@ background-color:transparent;
                 	</ul>
        	 </div>
 	 
-           <div id="pagebar-container"class="m-5">${pageBar }</div>
+ <%--           <div id="pagebar-container"class="m-5">${pageBar }</div> --%>
 		</div>
 	
 

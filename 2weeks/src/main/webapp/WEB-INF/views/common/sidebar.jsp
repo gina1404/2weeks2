@@ -23,7 +23,7 @@
 						</a>
 					</div>
 					<div class="sidebar-list-sub">
-						<div class="sidebar-title">Vaccination</div>
+						<div class="sidebar-title"><a href="${path }/covidUpdate/domesticVaccine.do">Vaccination</a></div>
 					</div>
 					<div class="sidebar-list-sub">
 						<a href="${path }/covid/overseas.do">

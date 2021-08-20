@@ -53,7 +53,7 @@ outline:none;
 float:right;
 color:#ffffff;
 position: relative;
-right: 18px;
+
 
 
 }
@@ -181,7 +181,7 @@ float:right;
 color:#ffffff;
 position: relative;
 top:0px;
-left:-20px;
+right:-5px;
 
 }
 

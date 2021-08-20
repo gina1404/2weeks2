@@ -20,7 +20,7 @@
 					<div class="searchResult-blogName" onclick="">${list.category }</div>
 			       	<div class="searchResult-vertical-divider"></div>
 			       	<div class="searchResult-date">${list.post_Dt }</div>
-					<div class="searchResult-title" onclick="">${list.post_Title }</div>
+					<div class="searchResult-title" onclick="location.href='${path}/freeboard/readView?no=${list.post_Sq}'">${list.post_Title }</div>
 					<div class="searchResult-content">
 						<!-- 미리보기 글자수 제한 -->
 						<c:choose>
@@ -35,7 +35,7 @@
 				</div>
 				<c:if test ="${not i.last}"><hr></c:if>									
 			</c:forEach>
-			<div class="searchResult-detail"><div onclick="">커뮤니티 검색 결과 더 보기 <span>→</span></div></div>
+			<div class="searchResult-detail"><div onclick="pageContext.forward('searchResultDetail.jsp')">커뮤니티 검색 결과 더 보기 <span>→</span></div></div>
 		
 		</section>
 		<br><br><br>
