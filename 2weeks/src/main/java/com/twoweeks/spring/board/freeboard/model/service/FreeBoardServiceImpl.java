@@ -21,6 +21,9 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	
 
 
+
+
+
 	@Autowired
 	private FreeBoardDao dao;
 	
@@ -31,8 +34,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	
 
 	@Override
-	public List<FreeBoard> list(FreeBoard fb) {
-		return dao.list(session, fb);
+	public List<FreeBoard> list() {
+		return dao.list(session);
 	}
 
 
@@ -50,6 +53,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Override
 	public List<FreeBoard> searchBoard(Map<String,Object> param) {
 		return dao.searchBoard(session,param);
+	}
+
+
+	@Override
+	public List<PostAttachment> getAttachment(int post_Sq) {
+		return dao.getAttachment(session,post_Sq);
 	}
 
 
@@ -78,8 +87,15 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 
 	@Override
-	public FreeBoard read(int bno) {
-		return dao.read(session, bno);
+	public FreeBoard read(int post_Sq, boolean readFlag) {
+		FreeBoard b = dao.read(session, post_Sq);
+		if(b!=null&&!readFlag) {
+			int result = dao.updateView(session, post_Sq);
+			if(result>0) {
+				b.setPost_Cnt(b.getPost_Cnt()+1);
+			}
+		}
+		return b;
 	}
 
 
@@ -115,14 +131,59 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 
 	@Override
+<<<<<<< HEAD
 	public List<FreeBoard> selectMyBoard(String loginId, int cPage, int numPerpage) {		
 		return dao.selectMyBoard(session, loginId, cPage, numPerpage);
+=======
+	public int updateReplyCnt(int post_Sq) {
+		return dao.updateReplyCnt(session, post_Sq);
+>>>>>>> ce0f9cdb2e95233f81aeeeb4519466d5d7931631
 	}
 
 
 	@Override
+<<<<<<< HEAD
 	public int myBoardCount(String loginId) {
 		return dao.myBoardCount(session, loginId);
+=======
+	public List<FreeBoard> replyCnt(int post_Sq) {
+		return dao.replyCnt(session, post_Sq);
+	}
+
+	//파일 다운로드
+	@Override
+	public int fileDownCnt(int atch_No) {
+		return dao.fileDownCnt(session, atch_No);
+	}
+
+	//좋아요 수 증가
+	@Override
+	public int likeCnt(int post_Sq) {
+		return dao.likeCnt(session, post_Sq);
+	}
+
+
+	@Override
+	public int getLikeCnt(int post_Sq) {
+		return dao.getLikeCnt(session, post_Sq);
+	}
+
+
+	@Override
+	public int likeMinus(int post_Sq) {
+		return dao.likeMinus(session, post_Sq);
+	}
+
+
+	@Override
+	public List<PostAttachment> listAttachment() {
+		return dao.listAttachment(session);
+	}
+	
+
+	public List<FreeBoard> selectMyBoard(String userId) {		
+		return dao.selectMyBoard(session, userId);
+>>>>>>> ce0f9cdb2e95233f81aeeeb4519466d5d7931631
 	}
 	
 	

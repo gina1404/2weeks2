@@ -22,7 +22,7 @@ public class FreeBoard {
 	private String post_Title; //게시글 제목
 	private String post_Content; //게시글 본문
 	private String share_Yn; //공유 설정
-	private String post_Like_Cnt; //좋아요
+	private int post_Like_Cnt; //좋아요
 	private Date post_Dt; //작성일
 	private String post_Cnt; //조회수
 	private String open_Yn; //작성자명 공개 여부

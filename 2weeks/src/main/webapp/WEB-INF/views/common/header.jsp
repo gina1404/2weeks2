@@ -28,7 +28,9 @@
 	<header id="header">
 		<!-- 로고 -->
 		<div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
-				
+		
+		<div class="content">
+		<div id="header-main-area" style="display: flex; width:1143px; height:60px; justify-content:flex-end;">
 		<!-- 키워드 검색 -->
 		<div class="header-search-area">			
 			<input id="searchKeyword" type="text" name="searchKeyword" style="display:none;" onKeypress="javascript:if(event.keyCode==13) {fn_searchKeyword()}"> <!-- 입력창 -->
@@ -47,7 +49,7 @@
 				<img class="" src="${path }/resources/images/icons/language.svg"/>  
 				</div>
 					<c:if test="${userId eq null and member.user_Id eq null}">
-	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">join us</div>
+	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">LOGIN</div>
 	            	</c:if>
 	            	<c:if test="${userId ne null}" >
 	            		<div class="header-profile-text">${user_Nic} 님</div>
@@ -105,7 +107,8 @@
 	                
 	                
 	            </div>
-	            
+	       </div>   
+	       </div> 
 	      <script>
 	      //메세지 알림 웹소켓
 	  	var msSocket=null;
@@ -219,7 +222,7 @@
 			$("#searchKeywordSubmit").click(function(){ 
 				$("#searchKeyword").show(); //돋보기 아이콘을 클릭하면 입력창이 보이게 보이게 됨
 				$("#searchKeyword").focus();			
-			
+				$("#header-main-area").addClass("defaultBoxshadow");
 				//검색
 				$("#searchKeywordSubmit").click(fn_searchKeyword);						
 			});

@@ -21,7 +21,7 @@ public interface FreeBoardDao {
 	
 	int totalBoardCount(SqlSession session);
 
-	List<FreeBoard> list(SqlSession session, FreeBoard fb);
+	List<FreeBoard> list(SqlSession session);
 
 	List<FreeBoard> searchBoard(SqlSession session, Map<String,Object> param);
 		
@@ -33,8 +33,32 @@ public interface FreeBoardDao {
 
 	int updateAttachment(SqlSession session, PostAttachment a);
 
+<<<<<<< HEAD
 	List<FreeBoard> selectMyBoard(SqlSession session, String loginId, int cPage, int numPerpage);
 	
 	int myBoardCount(SqlSession session, String loginId);
+=======
+
+	int updateView(SqlSession session, int post_Sq);
+
+	int updateReplyCnt(SqlSession session, int post_Sq);
+
+	List<FreeBoard> replyCnt(SqlSession session, int post_Sq);
+
+	List<PostAttachment> getAttachment(SqlSession session, int post_Sq);
+
+	int fileDownCnt(SqlSession session, int atch_No);
+
+	int likeCnt(SqlSession session, int post_Sq);
+
+	int getLikeCnt(SqlSession session, int post_Sq);
+
+	int likeMinus(SqlSession session, int post_Sq);
+
+	List<PostAttachment> listAttachment(SqlSession session); 
+
+	List<FreeBoard> selectMyBoard(SqlSession session, String userId);
+
+>>>>>>> ce0f9cdb2e95233f81aeeeb4519466d5d7931631
 	
 }

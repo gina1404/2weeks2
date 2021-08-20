@@ -15,7 +15,7 @@
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 	<div class="content">
 		<h2>선별진료소 지도</h2>	
-		<div id="map" style="width:800px;height:550px;"></div>
+		<div id="map" style="width:800px;height:550px;" class="defaultBoxshadow"></div>
 	</div>	
 </section>
 

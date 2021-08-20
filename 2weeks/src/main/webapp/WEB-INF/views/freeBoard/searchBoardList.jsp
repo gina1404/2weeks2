@@ -44,6 +44,27 @@ font-size: 8px;
 
 <section class="container">		
 	<div class="container">
+		<div class="form-group row justify-content-center">
+			<form action="${path }/freeboard/searchBoard.do" method="get">
+				<div class="input-group mb-3">
+						<select name="searchType" class="form-control" id="searchType">
+							<option value="POST_TITLE" ${FreeBoard.searchType eq POST_TITLE ? 'selected' : '' }>제목</option>
+							<option value="post_Content" ${FreeBoard.searchType eq 'post_Content' ? 'selected' : '' }>내용</option>
+							<option value="user_Id" ${FreeBoard.searchType eq 'user_Id' ? 'selected' : '' }>작성자</option>
+							<%-- <option value="tc" ${FreeBoard.searchType eq 'tc' ? 'selected' : '' }>제목/내용</option>
+							<option value="tw" ${FreeBoard.searchType eq 'tw' ? 'selected' : '' }>제목/작성자</option>
+							<option value="cw" ${FreeBoard.searchTypeeq eq 'cw' ? 'selected' : '' }>내용/작성자</option>
+							<option value="tcw" ${FreeBoard.searchType eq 'tcw' ? 'selected' : '' }>전체</option> --%>
+						</select>
+						<input type="text" class="form-control searchInput" placeholder="Search" name="keyword" value="${fb.keyword }" >
+					<div class="input-group-append">
+						<button class="btn btn-success" type="submit" onclick="return searchInput();">Go</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		
 		<div class="row">
 			<c:forEach var="b" items="${list }">
 				<div class="card col-md-3 m-2">
@@ -76,7 +97,16 @@ font-size: 8px;
 		<div id="pagebar-container" class="m-5">${pageBar }</div>
 	</div>
 </section>
-	
+	<script>
+	function searchInput(){
+		var text = $('.searchInput').val();
+		if (text.replace(/\s|　/gi, "").length == 0) {
+		    alert("검색칸에 입력해주세요.");
+		    $(".searchInput").focus();
+		    return false;
+		  }
+	}
+	</script>
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
