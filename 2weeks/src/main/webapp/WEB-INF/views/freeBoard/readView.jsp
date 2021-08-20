@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 <style>
 
 .container {
@@ -47,10 +48,11 @@ font-size : 12px;
   margin-top: 700px;
   margin-left : 125px;
 }
-
+content
 </style>
-<section class="content">
-	<div class="container">
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+<section class="container">
+	<div class="content">
 		<div class="wrapper">
 			<div class="row ">
 				<h4>
@@ -58,20 +60,15 @@ font-size : 12px;
 						href="${path }/freeboard/readView?no=${list.post_Sq }">${list.post_Title}</a>
 				</h4>
 			</div>
-			<div class="row" style="border: solid blue 10px; margin-top: 5px;">
+			<div class="row" style=" margin-top: 5px;">
 				<img src="">
-				<div class="divider "></div>
 				<span class="divi">조회 수 <b>${list.post_Cnt }</b></span>
-				<div class="divider "></div>
 				<span class="divi" id="top-Like">추천 수 <b>${list.post_Like_Cnt }</b></span>
-				<div class="divider "></div>
-				<span class="divi">댓글 <b></b></span>
-				<div class="divider"></div>
-				<span class="divi"><fmt:formatDate value="${list.post_Dt }" pattern="yyyy-MM-dd hh:mm:ss"/></span>
-			</div>
+				<span class="divi">댓글 <b>${list.replyNo }</b></span>
+				<span class="divi"> 등록일 : <b><fmt:formatDate value="${list.post_Dt }" pattern="yyyy-MM-dd hh:mm:ss"/></b></span>
 		</div>
 		<div class="col-md-12 "
-			style="border: solid black 1px; margin-top: 50px; margin-right: 500px;">
+			style=" margin-top: 50px; margin-right: 500px;">
 			
 				<span style="font-size: 16px;">${list.post_Content }</span>
 			
@@ -126,15 +123,13 @@ font-size : 12px;
 
 
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-8" style="margin-left:-500px;">
 		<span>${bc.user_Id }</span>
 		<span>${bc.reply_Dt }</span>
 			<div class="col-md-12" style='margin-left:500px;'>
 			<span id="reply_Content"> </span>
-			
 			<div class="row" id="dur" >
 			<div class="col-md-8"  style="margin-left:100px;">
-				
 				<br>
 			</div>
 			</div>
@@ -149,7 +144,7 @@ font-size : 12px;
 		</div>
 
 
-
+</div>
 </section>
 
 
@@ -163,14 +158,12 @@ function getReplies(){
 	$.getJSON("${path}/replies/all/"+ ${list.post_Sq}, function(data){
 	var str="";
 	$(data).each(function(i){
-		if(this.reply_Level >= 2)	{
-		str+="<div class='col-md-8 respace' style='margin-left:"+(10*(this.reply_Level+1.5))+"px;' data-value='"+(i+1)+"' >";
-		}else{
-		str+="<div class='col-md-8 respace' data-value='"+(i+1)+"' >";
+		if(this.reply_Level >= 1)	{
+		str+="<div class='col-md-8 respace' style='margin-left:"+(25*(this.reply_Level+1.5))+"px;' data-value='"+(i+1)+"' >";
 		}
-	str+="<span> "+this.user_Id+"         "+this.updateDate + "</span>";
+	str+="<span><img class='replyIcon' style='width:25px; margin:5px; 10px;' src='${path}/resources/images/icons/hazmat.svg'/> "+this.user_Id+"         "+this.updateDate + "</span>";
 	str+="<br>"
-	str+="<span class='replyupdate'  name='uuup'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
+	str+="<span class='replyupdate'  name='uuup'><img class='replyIcon' style='width:25px; margin:5px; 10px;' src='${path}/resources/images/icons/replyy.png'/>"+this.reply_Content + "</span>";
 	str+="<input type='hidden' name='replyLevel' value='"+this.reply_Level+"'>"
 	str+="<a href ='javascript:void(0);' id='re-reply' style='margin-left:15px' onclick='replyReplyInsert(event,"+ this.reply_Sq+','+this.reply_Level+");'>댓글</a>";
 	str+="<button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' style='margin-left:20px; width:35px; height:25px;'>";
@@ -183,7 +176,6 @@ function getReplies(){
 	str+="</div>";
 	str+="<hr>";
 	});
-	
 	$("#reply_Content").html(str);
 	
 	});
@@ -339,14 +331,12 @@ function del(no) {
 	$.getJSON("${path}/replies/all/"+ ${list.post_Sq}, function(data){
 		var str="";
 		$(data).each(function(i){
-			if(this.reply_Level >= 2)	{
-				str+="<div class='col-md-8 respace' style='margin-left:"+(10*(this.reply_Level+1.5))+"px;' data-value='"+(i+1)+"' >";
-				}else{
-				str+="<div class='col-md-8 respace' data-value='"+(i+1)+"' >";
+			if(this.reply_Level >= 1)	{
+				str+="<div class='col-md-8 respace' style='margin-left:"+(25*(this.reply_Level+1.5))+"px;' data-value='"+(i+1)+"' >";
 				}
-		str+="<span>"+this.user_Id+"         "+this.updateDate + "</span>";
+		str+="<span><img class='replyIcon' style='width:25px; margin:5px; 10px;' src='${path}/resources/images/icons/hazmat.svg'/>"+this.user_Id+"         "+this.updateDate + "</span>";
 		str+="<br>"
-		str+="<span class='replyupdate' name='uuup'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
+		str+="<span class='replyupdate' name='uuup'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/replyy.png'/>"+this.reply_Content + "</span>";
 		str+="<input type='hidden' name='replyLevel' value='"+this.reply_Level+"'>"
 		str+="<a href ='javascript:void(0);' id='re-reply' style='margin-left:15px' onclick='replyReplyInsert(event,"+ this.reply_Sq+','+this.reply_Level+");'>댓글</a>";
 		str+="<button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' style='margin-left:100px; width:35px; height:25px;'>";
@@ -540,7 +530,10 @@ $("#likePost").on("click",function(){
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 	
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+
+	
