@@ -84,7 +84,7 @@
 						<div class="searchResult-blogName" onclick="">${list.category }</div>
 				       	<div class="searchResult-vertical-divider"></div>
 				       	<div class="searchResult-date">${list.post_Dt }</div>
-						<div class="searchResult-title" onclick="">${list.post_Title }</div>
+						<div class="searchResult-title" onclick="location.href='${path}/freeboard/readView?no=${list.post_Sq}'">${list.post_Title }</div>
 						<div class="searchResult-content">
 							<!-- 미리보기 글자수 제한 -->
 							<c:choose>
