@@ -41,9 +41,6 @@ public class SearchController {
 		System.err.println("검색어 : "+searchKeyword);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("search/searchResult");
-		mv.addObject("searchKeyword", searchKeyword);
-		mv.addObject("searchResultCommunity","TEST");
-		mv.addObject("searchResultKnowledgeIn","TEST2");
 		
 		List<String> nounList = analyzeKeyword(searchKeyword); //형태소 분석 후 명사만 추출
 //		System.out.println(nounList);

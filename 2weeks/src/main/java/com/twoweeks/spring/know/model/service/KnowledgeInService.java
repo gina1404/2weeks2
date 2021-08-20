@@ -11,7 +11,7 @@ public interface KnowledgeInService {
 	
 	List<Kin> selectKinListcnt(int cPage, int numPerpage); //글 목록 조회수별로 조회
 
-	List<Kin> selectKinListMyQ(int cPage, int numPerpage); //글 목록 나의 질문
+	List<Kin> selectKinListMyQ(int cPage, int numPerpage, String user_Id); //글 목록 나의 질문
 	
 	List<Kin> selectKinListMyA(int cPage, int numPerpage); //글 목록 나의 답변
 	

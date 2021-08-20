@@ -34,6 +34,11 @@ public interface FreeBoardDao {
 	int updateAttachment(SqlSession session, PostAttachment a);
 
 
+	List<FreeBoard> selectMyBoard(SqlSession session, String loginId, int cPage, int numPerpage);
+	
+	int myBoardCount(SqlSession session, String loginId);
+
+
 	int updateView(SqlSession session, int post_Sq);
 
 	int updateReplyCnt(SqlSession session, int post_Sq);
@@ -51,8 +56,5 @@ public interface FreeBoardDao {
 	int likeMinus(SqlSession session, int post_Sq);
 
 	List<PostAttachment> listAttachment(SqlSession session); 
-
-	List<FreeBoard> selectMyBoard(SqlSession session, String userId);
-
 	
 }

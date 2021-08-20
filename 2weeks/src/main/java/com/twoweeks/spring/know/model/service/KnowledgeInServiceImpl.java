@@ -41,9 +41,9 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 
 
 	@Override
-	public List<Kin> selectKinListMyQ(int cPage, int numPerpage) {
+	public List<Kin> selectKinListMyQ(int cPage, int numPerpage,String user_Id) {
 		
-		return dao.selectKinListMyQ(session,cPage,numPerpage);
+		return dao.selectKinListMyQ(session,cPage,numPerpage,user_Id);
 	}
 
 	@Override

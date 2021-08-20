@@ -15,7 +15,7 @@ public interface KnowledgeInDao {
 	
 	List<Kin> selectKinListcnt(SqlSession session, int cPage, int numPerpage);
 	
-	List<Kin> selectKinListMyQ(SqlSession session, int cPage, int numPerpage);
+	List<Kin> selectKinListMyQ(SqlSession session, int cPage, int numPerpage, String user_Id);
 	
 	List<Kin> selectKinListMyA(SqlSession session, int cPage, int numPerpage);
 	

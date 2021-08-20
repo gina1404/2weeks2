@@ -1,8 +1,8 @@
 package com.twoweeks.spring.common;
 
 public class Pagination {
-	
-	public static String getPageBar(int totalData, int cPage, int numPerpage, String url) {
+	//public static String getPageBar(int totalData, int cPage, int numPerpage, String url) {
+	public static String getPageBar(int totalData, int cPage, int numPerpage, String url, String loginId) {
 		String pageBar="<div class='pagination'>";
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarsize=5;
@@ -28,9 +28,20 @@ public class Pagination {
 		}else {
 			pageBar+="<a href='javascript:fn_paging("+(pageNo)+")'>&raquo;</a>";
 		}
+		
 		pageBar+="<script>";
+		pageBar+="console.log(cPage);";
 		pageBar+="function fn_paging(cPage){";
-		pageBar+="location.assign('"+url+"?cPage='+cPage);}";
+		//pageBar+="location.assign('"+url+"?cPage='+cPage);}";
+		
+		if(loginId==null) {
+			pageBar+="location.assign('" +url+ "?cPage='+cPage);}";
+		} else if(loginId!=null) {			
+			pageBar+="location.assign('"+url+"?cPage='+cPage+'&loginId="+loginId+"');}";
+			//pageBar+="location.assign('"+url+"?loginId='"+loginId+"'&cPage='"+"cPage"+"');}";
+			//location.assign('mypage?cPage='+cpage+'login
+		}
+		
 		pageBar+="</script>";
 		pageBar+="<style>";
 		pageBar+=".pagination { display: inline-block; font-size: 15px;}";

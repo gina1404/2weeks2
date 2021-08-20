@@ -39,8 +39,6 @@ public class ChattingServer extends TextWebSocketHandler{
 		String loginName=(String)session.getAttributes().get("chatName");			
 		String loginId=(String)session.getAttributes().get("chatId");
 		
-		
-		//알람띄울 샌더 다시 추출하기
 		log.info("{}님이 {}메세지 전송함", loginName, message.getPayload());		
 		
 		Gson gson=new Gson();
@@ -58,10 +56,8 @@ public class ChattingServer extends TextWebSocketHandler{
 			int num2=result.indexOf("senderNick");
 						
 			String nick=result.substring(num2+13, result.substring(num2).indexOf(',')+num2-1);
-			System.out.println("nick "+nick);
 			
 			cl.setChatNo(no); cl.setChatId(loginId); 
-			//cl.setChatName(nick);
 			
 			int check=service.insertChatLog(cl);			
 		}

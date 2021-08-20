@@ -12,11 +12,17 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +32,7 @@ import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinAttachment;
 import com.twoweeks.spring.know.model.vo.KinReply;
 import com.twoweeks.spring.know.model.vo.KinReplyAttachment;
+import com.twoweeks.spring.member.model.vo.Login;
 import com.twoweeks.spring.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -155,11 +162,12 @@ public class KnowledgeInController {
 		return mv;
 		
 	}
-
 	@RequestMapping("/KnowledgeIn/KnowledgeInMyList.do") // 나의 질문,답변
 	public ModelAndView KnowledgeInMyList(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
-			@RequestParam(value = "numPerpage", defaultValue = "6") int numPerpage,ModelAndView mv) {
-		mv.addObject("MyQ", service.selectKinListMyQ(cPage, numPerpage));
+			@RequestParam(value = "numPerpage", defaultValue = "6") int numPerpage,HttpServletRequest request,ModelAndView mv,Member m,
+			@RequestParam("user_Id")String user_Id) 
+		{
+		mv.addObject("MyQ", service.selectKinListMyQ(cPage, numPerpage,user_Id));
 		mv.addObject("MyA", service.selectKinListMyA(cPage, numPerpage));
 		int totalData = service.selectKinCount();// 등록된 테이블의 총 개수를 가져다가 저장
 		mv.addObject("totalContents", totalData);

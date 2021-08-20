@@ -27,24 +27,56 @@
 		<div class="item 1st">3</div>
 		<div class="item 1st">4</div>
 		<div class="item 1st">
-			<img  style="padding-left: 5px; padding-right: 5px;" width="50px" height="50px" left="50px" top="50px" src="<%=request.getContextPath()%>/resources/images/icons/arar.svg">
-			<h4 style="text-align: center; display: inline-block;"> ${pielist[5].nationNm }</h4> 
-			<br><br><span style=" font-size: 17px; padding-left: 18px; margin-top: 20px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[5].defCount }" var="com1"/>${com1 }명</span>
+			<div class="state">
+				<div class="flag">
+					<img alt="미국국기" src="<%=request.getContextPath()%>/resources/images/icons/arar.svg">
+				</div>
+				<div class="flagLogo">
+					 <h4>${pielist[5].nationNm }</h4>
+				</div>
+			</div>
+			<div class="num">
+				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[5].defCount }" var="com1"/>${com1 }명
+			</div>
 		</div>
 		<div class="item 1st">
-			<img  style="padding-left: 5px; padding-top:10px; padding-right: 5px; padding-bottom: 10px;" width="50px" height="50px" left="50px" top="50px" src="<%=request.getContextPath()%>/resources/images/icons/Japan.png">
-			<h4 style="text-align: center; display: inline-block;"> ${pielist[6].nationNm }</h4> 
-			<br><br><span style=" font-size: 17px; padding-left: 25px; margin-top: 20px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[6].defCount }" var="com2"/>${com2 }명</span>
+			<div class="state">
+				<div class="flag">
+					<img alt="일본국기" src="<%=request.getContextPath()%>/resources/images/icons/Japan.png">
+				</div>
+				<div class="flagLogo">
+					 <h4>${pielist[6].nationNm }</h4>
+				</div>
+			</div>
+			<div class="num">
+				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[6].defCount }" var="com2"/>${com2 }명
+			</div>
 		</div>
 		<div class="item 1st">
-			<img  style="padding-left: 5px; padding-right: 10px; padding-top: 10px; padding-bottom: 5px;" width="50px" height="50px" left="50px" top="50px" src="<%=request.getContextPath()%>/resources/images/icons/Kingdom.jpg">
-			<h4 style="text-align: center; display: inline-block;"> ${pielist[0].nationNm }</h4> 
-			<br><br><span style=" font-size: 17px; padding-left: 18px; margin-top: 20px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[0].defCount }" var="com3"/>${com3 }명</span>
+			<div class="state">
+				<div class="flag">
+					<img alt="영국국기" src="<%=request.getContextPath()%>/resources/images/icons/Kingdom.jpg">
+				</div>
+				<div class="flagLogo">
+					 <h4>${pielist[0].nationNm }</h4>
+				</div>
+			</div>
+			<div class="num">
+				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[0].defCount }" var="com3"/>${com3 }명
+			</div>
 		</div>
 		<div class="item 1st">
-			<img  style="padding-left: 5px; padding-right: 5px; padding-top: 10px; padding-bottom: 10px;" width="50px" height="50px" left="50px" top="50px" src="<%=request.getContextPath()%>/resources/images/icons/frfr.png">
-			<h4 style="text-align: center; display: inline-block;"> ${pielist[1].nationNm }</h4> 
-			<br><br><span style=" font-size: 17px; padding-left: 18px; margin-top: 20px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[1].defCount }" var="com4"/>${com4 }명</span>
+			<div class="state" style="margin-right: 28px;">
+				<div class="flag">
+					<img alt="프랑스국기" src="<%=request.getContextPath()%>/resources/images/icons/frfr.png">
+				</div>
+				<div class="flagLogo">
+					 <h4>${pielist[1].nationNm }</h4>
+				</div>
+			</div>
+			<div class="num">
+				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[1].defCount }" var="com4"/>${com4 }명
+			</div>
 		</div>
 
 		<div id="home-map-area" class="item 2nd">
@@ -84,7 +116,7 @@
 						<div class="searchResult-blogName" onclick="">${list.category }</div>
 				       	<div class="searchResult-vertical-divider"></div>
 				       	<div class="searchResult-date">${list.post_Dt }</div>
-						<div class="searchResult-title" onclick="">${list.post_Title }</div>
+						<div class="searchResult-title" onclick="location.href='${path}/freeboard/readView?no=${list.post_Sq}'">${list.post_Title }</div>
 						<div class="searchResult-content">
 							<!-- 미리보기 글자수 제한 -->
 							<c:choose>
