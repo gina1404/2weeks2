@@ -1,5 +1,6 @@
 package com.twoweeks.spring.search.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
@@ -35,7 +37,7 @@ public class SearchController {
 	
 	//전체 검색 결과
 	@RequestMapping(value="/searchResult.do", method=RequestMethod.GET)
-	public ModelAndView searchResut(String searchKeyword) {
+	public ModelAndView searchResult(String searchKeyword) {
 		System.err.println("검색어 : "+searchKeyword);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("search/searchResult");
@@ -70,6 +72,25 @@ public class SearchController {
 			result+=service.insertBlogDummy(list.get(i));
 		}
 		System.out.println(result>0?"커뮤니티 크롤링 데이터 저장 : 성공":"커뮤니티 크롤링황 데이터 저장 : 실패");
+	}
+	
+	//메인 페이지용 검색
+	@RequestMapping(value="/search4Home.do", method=RequestMethod.GET)
+	@ResponseBody
+	public Object search4home() {
+		String searchKeyword="코로나 백신 자가격리 마스크";
+		System.err.println("검색어 : "+searchKeyword);
+		ModelAndView mv=new ModelAndView();
+		
+		List<String> nounList = analyzeKeyword(searchKeyword); //형태소 분석 후 명사만 추출
+//		System.out.println(nounList);
+		
+		//post검색
+		List<FreeBoard> searchResultCommunity = service.searchResultCommunity(nounList);
+		
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("searchResultCommunity", searchResultCommunity);
+		return m;
 	}
 	
 }

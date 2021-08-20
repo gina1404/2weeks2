@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>  
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/covid/regionalKor.css">
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/search/searchResult.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -56,7 +58,32 @@
 				<div>뉴스</div>
 			</div>			
 		</div>
-		<div class="item 3rd">가</div>
+		<div class="item 3rd">
+			<div id="home-community-list">
+				 <div class="searchResult-name">2weeks 검색 결과</div>
+				<c:forEach var="list" varStatus="i" items="${searchResultCommunity}" end="8">
+					<div class="searchResult-list" >					
+						<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/two.svg"/></div>
+						<div class="searchResult-blogName" onclick="">${list.category }</div>
+				       	<div class="searchResult-vertical-divider"></div>
+				       	<div class="searchResult-date">${list.post_Dt }</div>
+						<div class="searchResult-title" onclick="">${list.post_Title }</div>
+						<div class="searchResult-content">
+							<!-- 미리보기 글자수 제한 -->
+							<c:choose>
+								<c:when test="${fn:length(list.post_Content) gt 200 }">
+									<c:out value="${fn:substring(list.post_Content,0,200)}"/>...
+								</c:when>
+								<c:otherwise>
+									<c:out value="${list.post_Content}"/>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+					<c:if test ="${not i.last}"><hr></c:if>									
+				</c:forEach>
+			</div>
+		</div>
 	</div>	
 </section>
 
@@ -174,8 +201,6 @@ $("#home-map-area").each(function(){
     }); //ajax 끝
 }); //함수 끝
 </script>
-
-
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
