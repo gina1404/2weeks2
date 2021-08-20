@@ -112,7 +112,10 @@
 							</c:otherwise>
 						</c:choose>
 						<ul class="list-inline">
+							<li><b><fmt:formatDate value="${b.post_Dt }" pattern="yyyy-MM-dd"/></b></li>
 						
+						</ul>
+						<ul class="list-inline">
 						<li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"></a> <i class="fa fa-heart"><c:out value="${b.post_Like_Cnt }"/></i>
 						<li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"></a> <i class="fa  fa-commenting-o"><c:out value="${b.replyNo }"/></i>
 						<li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"></a> <i class="fa fa-eye"><c:out value="${b.post_Cnt }"/></i>
