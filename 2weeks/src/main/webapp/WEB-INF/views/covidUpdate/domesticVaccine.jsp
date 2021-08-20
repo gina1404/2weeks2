@@ -22,50 +22,36 @@ float:left;
 </style>
 <section class="container">		
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-		<!-- <div class="main" style="width:1500px; height:500px; border:1px solid green"> -->
-		<div class="main" style="width:750px; height:400px; border:1px solid green">
-		<span style="font-family: pretendard">Korea 1st inoculation</span>
+
+
+	<table class="table">
+		<tr>
+			<th>지역</th>
+			<th>날짜</th>
+			<th>전날 1차 접종</th>
+			<th>전날 2차 접종</th>
+			<th>금일 1차 접종</th>
+			<th>금일 2차 접종</th>
+			<th>총 1차 접종</th>
+			<th>총 2차 접종</th>
+		</tr>
+		<c:forEach items="${items}" var="c">
+			<tr>	
+
+				<td>${c.baseDate }</td>	
+				<td>${c.sido }</td>		
+				<td>${c.accumulatedFirstCnt}</td>	
+				<td>${c.accumulatedSecondCnt}</td>
+				<td>${c.firstCnt}</td>
+				<td>${c.totalFirstCnt}</td>
+				<td>${c.totalsecondCnt}</td>		
+				
+			</tr>			
+		</c:forEach>
+	</table>
 	
-			<div style="width:750px; height:200px; border:1px solid red">
-			
-				<span style="font-family: pretendard">All</span>
-				
-				</div>
-				
-			<div style="width:750px; height:200px; border:1px solid yellow">
-			
-				<span style="font-family: pretendard">Today</span>
-				
-				</div>
-		</div>
-		
-		
-		
-	<div class="main1" style="width:750px; height:400px; border:1px solid green">
 	
-			<span style="font-family: pretendard">Inoculation Completed</span>
-			
-			<div style="width:750px; height:200px; border:1px solid red">
-			
-				<span style="font-family: pretendard">All</span>
-				
-				</div>
-				
-			<div style="width:750px; height:200px; border:1px solid yellow">
-			
-				<span style="font-family: pretendard">Today</span>
-				
-				</div>
 	
-			</div>	
-<br>
-
-<div>
-
-<span style="font-family: pretendard">Statistics on vaccination status by province and province</span>	
-
-</div>
-
 	
 	
 		

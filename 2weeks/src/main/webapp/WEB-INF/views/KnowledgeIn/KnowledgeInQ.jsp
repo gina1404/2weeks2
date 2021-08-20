@@ -309,7 +309,7 @@ right: -60px;
 			
 			<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly">
 			<input type="hidden" name="kin_Writer" class="form-control" value="${member.user_Id}" readonly="readonly">
-			Point : ${member.userPoint_Cnt } 
+			<%-- Point : ${member.userPoint_Cnt }  --%>
 			<ul class="knowmenu"> 
 					<li></li>
 					<li></li>
