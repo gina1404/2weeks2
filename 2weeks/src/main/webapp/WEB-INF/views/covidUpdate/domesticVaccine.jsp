@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+
 <style>
 
 
@@ -21,7 +21,7 @@ float:left;
 }
 </style>
 <section class="container">		
-
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 		<!-- <div class="main" style="width:1500px; height:500px; border:1px solid green"> -->
 		<div class="main" style="width:750px; height:400px; border:1px solid green">
 		<span style="font-family: pretendard">Korea 1st inoculation</span>

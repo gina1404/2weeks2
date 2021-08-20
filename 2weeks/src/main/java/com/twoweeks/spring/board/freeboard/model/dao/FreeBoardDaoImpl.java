@@ -38,8 +38,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 
 	@Override
-	public List<FreeBoard> list(SqlSession session, FreeBoard fb) {
-		return session.selectList("freeboard.list",fb);
+	public List<FreeBoard> list(SqlSession session) {
+		return session.selectList("freeboard.list");
 	}
 
 
@@ -66,6 +66,57 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	@Override
 	public int updateAttachment(SqlSession session, PostAttachment a) {
 		return session.insert("freeboard.updateAttachment", a);
+	}
+
+	@Override
+	public int updateView(SqlSession session, int post_Sq) {
+		return session.update("freeboard.updateView",post_Sq);
+	}
+
+	@Override
+	public int updateReplyCnt(SqlSession session, int post_Sq) {
+		return session.update("freeboard.updateReplyCnt",post_Sq);
+	}
+
+	@Override
+	public List<FreeBoard> replyCnt(SqlSession session, int post_Sq) {
+		return session.selectList("freeboard.replyCnt",post_Sq);
+	}
+
+	@Override
+	public List<PostAttachment> getAttachment(SqlSession session, int post_Sq) {
+		return session.selectList("freeboard.getAttachment",post_Sq);
+	}
+
+	@Override
+	public int fileDownCnt(SqlSession session, int atch_No) {
+		return session.update("freeboard.fileDownCnt",atch_No);
+	}
+
+	@Override
+	public int likeCnt(SqlSession session, int post_Sq) {
+		return session.update("freeboard.likeCnt",post_Sq);
+	}
+
+	@Override
+	public int getLikeCnt(SqlSession session, int post_Sq) {
+		return session.selectOne("freeboard.getLikeCnt",post_Sq);
+	}
+
+	@Override
+	public int likeMinus(SqlSession session, int post_Sq) {
+		return session.update("freeboard.likeMinus",post_Sq);
+	}
+
+	@Override
+	public List<PostAttachment> listAttachment(SqlSession session) {
+		return session.selectList("freeboard.listAttachment");
+	}
+
+	
+
+	public List<FreeBoard> selectMyBoard(SqlSession session, String userId) {
+		return session.selectList("freeboard.selectMyBoard", userId);
 	}
 
 	

@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="지식인나의질의응답"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+<%-- <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/> --%>
 
 
 <style>
@@ -66,8 +66,8 @@ float:left;
 margin-left:10px;
 font-size:13px;
 position: relative;
-top: -510px;
-right:-1000px;
+top: -280px;
+right:-700px;
 list-style: none;
    
 }
@@ -96,7 +96,7 @@ color :white;
 
 position: relative;
 top : -35px;
-right:-1150px;
+right:-900px;
 font-size: 13px;
 color: #8c8c8c;
 
@@ -118,7 +118,7 @@ width:80%;
     outline :0;
     border : 0;
     position: relative;
-    right: -1400px;
+    float:right;
     top:-30px;
     font-family: pretendard;
     font-weight: bold;
@@ -143,8 +143,10 @@ width:80%;
 }
 .qbutton{
 position: relative;
-   right: -1300px;
+float:right;
+
 	width:180px;
+	
 } 
 .Adoption_completed{
  color: red;
@@ -157,14 +159,15 @@ position: relative;
 position: relative;
 top:0px;
 background-color:white;
-
+/*  border: 1px solid green;  */
+ height:400px;
 }
 
 .answer{
-/* border: 1px solid blue;  */
+/*  border: 1px solid blue;   */
 position: relative;
-top: 10px;
-background-color:white;
+height:500px;
+
 }
 
 /* 채택하기버튼 */
@@ -189,7 +192,7 @@ margin-left:10px;
 font-size:13px;
 position: relative;
 top: -80px;
-right:-1000px;
+right:-700px;
 list-style: none;
    
 }
@@ -198,13 +201,14 @@ list-style: none;
 .userInfo2{
 
 position: relative;
-top : -70px;
-right:-1150px;
+top : -80px;
+right:-900px;
 font-size: 13px;
 color: #8c8c8c;
 
 width:200px;
 }
+
 
 .content2{
 position: relative;
@@ -240,6 +244,9 @@ top:5px;
 width:13px;
 height:13px;
 }
+.content{
+/* border: 1px solid red; */
+}
 </style>
 
 
@@ -251,13 +258,15 @@ height:13px;
 
 
 
-<section class="container">		
+<section class="container" style="display:flex; padding-bottom: 200px;"> 
+<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>	
+<div class="content" style="display:inline-block;padding-left: 220px;">	
 	<div class="question">
 			<!-- <div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
 			</div> -->
 					NO.${KnowledgeIn.kin_Sq}
-		<a href="KnowledgeInQ.do">	
+		<a href="${path}/KnowledgeIn/KnowledgeInQ.do">	
 			<c:if test="${not empty member.user_Id }">
 		<button id="Qsearch" >질문하기</button>
 		</c:if>
@@ -431,6 +440,7 @@ height:13px;
 			
 			
   	<c:forEach var="kr" items="${kr}"> 
+  	
 <%-- 	<input type="hidden" name="kr" id="no" value="${kr.reply_Sq}">  --%>
 		<div class="answer">
 
@@ -585,10 +595,12 @@ height:13px;
 			</div>
 			<button id="red1">신고</button><br>
 		</div>
-	
+		
 	</c:forEach>	
 	
-			
+
+	</div>
+		
 <!-- 			</form>		 -->
 			
 
@@ -596,7 +608,7 @@ height:13px;
 		
 			
 </section>
- 
+
 <script>
 		var count =${KnowledgeIn.reply_Cnt }
 		var writer= ${knowledgeIn.kin_Writer}
@@ -684,7 +696,5 @@ height:13px;
 
 </script>
 
-	
+ <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
-	
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

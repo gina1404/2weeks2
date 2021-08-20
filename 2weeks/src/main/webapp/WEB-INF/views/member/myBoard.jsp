@@ -55,10 +55,11 @@
 						<th>조회수</th>
 					</tr>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${post_Sq }</td>
+						<td>[${category }] ${post_Title }</td>
+						<td>${user_Id }</td>
+						<td>${post_Dt }</td>
+						<td>${post_Cnt }</td>
 					</tr>
 				</table>
 			</div>

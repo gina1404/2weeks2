@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="SearchMapper">
+
+	<!-- 블로그 크롤링 데이터 저장 -->
+	<insert id="insertBlogDummy">
+		INSERT INTO POST VALUES 
+		(POST_SEQ.NEXTVAL, 'DUMMY', 'COVID', 'DEFAULT', '${postTitle}', '${postContent}', DEFAULT, 0, TO_DATE('${postDT}','YYYY.MM.DD'), 0, 'Y', NULL, 0) <!-- sysdate, 0, 'Y', NULL) -->
+	</insert>
+	
+	
+	<!-- community 내부 검색 결과 -->
+	<select id="searchResultCommunity" resultMap="boardMap" parameterType="searchNoun">
+		SELECT *
+		FROM(
+			SELECT * FROM POST WHERE (${searchNoun})
+		)
+		WHERE ROWNUM <![CDATA[ < ]]>= 20
+	</select>
+	
+	<resultMap type="freeboard" id="boardMap">
+		<id column="post_Sq" property="post_Sq"/>
+		<result column="user_Id" property="user_Id"/>
+		<result column="menu_Gb" property="menu_Gb"/>
+		<result column="category" property="category"/>
+		<result column="post_Title" property="post_Title"/>
+		<result column="post_Content" property="post_Content"/>
+		<result column="share_Yn" property="share_Yn"/>
+		<result column="post_Like_Cnt" property="post_Like_Cnt"/>
+		<result column="post_Dt" property="post_Dt"/>
+		<result column="post_Cnt" property="post_Cnt"/>
+		<result column="open_Yn" property="open_Yn"/>
+		<result column="searchType" property="searchType"/>
+		<result column="keyword" property="keyword"/>
+		<result column="replyNo" property="replyNo"/>
+	</resultMap>
+</mapper>

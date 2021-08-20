@@ -5,19 +5,26 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>      
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="title" value=""/>
+	<jsp:param name="title" value="게시글 작성"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-<%-- <script src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script> --%>
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/freeboard/write.css">
 <script src="//cdn.ckeditor.com/4.11.4/full-all/ckeditor.js"></script>
-<section class="content">
-<div class="container" id="">
-    <div class="content" style="width: 70%">
-     <form name="boardFrm"  id="dataForm" action="${path}/freeboard/writeEnd.do"  method="post" enctype="multipart/form-data">
+<style>
+
+</style>
+<section class="content" id="containerWrapper">
+<div class="container" >
+    <div class="row container" id="writeContainer" style="width: 100%">
+     <form name="boardFrm"  id="dataForm" action="${path}/freeboard/writeEnd.do"   method="post" enctype="multipart/form-data">
         <div class="row justify-content-md-center"> 				
             <div class="col-sm-9">
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
+							<div class="checks etrans">
+								<input type="checkbox" name="anonymous" id="ex_chk3" > <label id="anonWrap"
+									for="ex_chk3">익명 사용</label>
+							</div>
+							<div class="input-group-prepend">
                     <label class="input-group-text">제목</label>
                   </div>            
                   <input type="text" class="form-control" name="post_Title">              
@@ -26,8 +33,7 @@
             <div class="col-sm-3">
                 <div class="input-group mb-3">
                     <select class="custom-select" id="category" name="category">
-                    <option selected>분류</option>
-                    <option value="자유">자유</option>
+                    <option value="자유" selected>자유</option>
                     <option value="배달">배달</option>
                     <option value="재택근무">재택근무</option>
                   </select>  
@@ -36,17 +42,22 @@
       </div>
       
       <hr>
-      
+
       <div class="row justify-content-md-center">
           <div class="col_c" style="margin-bottom: 30px">
                 <div class="input-group">                 
-                  <textarea class="form-control" id="content" name="post_Content"></textarea>
+                  <textarea class="form-control" id="post_Content" name="post_Content"></textarea>
                 </div>
             </div> 
       </div>
     <div>
-	<input type="file" name="file"  id="attach" multiple="multiple" style="border: 2px solid #ddd; outline: none;">
-	 <label for="attach"><i class="far fa-file-image"/>파일추가 </label>
+	<div class="form-group" id="file-list">
+        <a href="#this" onclick="addFile()"><label for="attach"><i class="far fa-file-image">파일추가</i></label></a>
+        <div class="file-group">
+            <input type="file" name="file"><a href='#this' name='file-delete'>삭제</a>
+        </div>
+    </div>
+	 
 	<span style="font-size: 14px; color: gray;">※첨부파일은 최대 5개까지 등록이가능합니다.</span>
 	</div>
 	<div class="data_file_txt" id="data_file_txt" >
@@ -54,7 +65,8 @@
 		<div id="articlefileChange" class="bg-success">
 		</div>
       <div class="row justify-content-md-center">
-        <input type="submit" class="m-3 btn btn-outline-secondary"   value="등  록" style="width: 20%; font-weight: bold">
+        <input type="submit" class="m-3 btn btn-outline-secondary" onclick="editorContent();"  value="등   록" style="width: 20%; font-weight: bold">
+        <input type="submit" class="m-3 btn btn-outline-secondary" id="back"   value="취   소" style="width: 20%; font-weight: bold">
         </div>
      </form>
   </div>
@@ -63,15 +75,12 @@
 </div>
 </section>
 
-
-
-
  
 <script>
 
 //해당 파일을 가져와서 배열에 담아주고 input file은 초기화 해준다.
 //multiple 특성상 중복파일은 업로드가 되지 않기에 최기화를 해야 중복파일도 업데이트가 가능띠
-	$(document).ready(function(){
+/* 	$(document).ready(function(){
 		$("#attach").on("change",fileCheck);
 	});
 	
@@ -127,10 +136,39 @@
 		$('#' + fileNum).remove();
 		fileCount --;
 		console.log(content_files);
+	} */
+	
+	
+	$(document).ready(function(){
+		$("a[class='file-delete']").on("click",function(e){
+			e.preventDefault();
+			deleteFile($(this));
+		});
+	})
+
+		function addFile(){
+		let str = "<div class='file-group'><input type='file' multiple='multiple' name='file'><a href='#this' name='file-delete'>삭제</a></div>";
+		$("#file-list").append(str);
+		$("a[name='file-delete']").on("click",function(e){
+			e.preventDefault();
+			deleteFile($(this));
+		});
+			
+		function deleteFile(obj){
+			obj.parent().remove();
+		}
 	}
-	
-	
-	CKEDITOR.replace("content",{
+	/* 
+	function editorContent(){
+	var editorContent = CKEDITOR.instances.post_Content.getData();
+	var convertContent = editorContent.replace(/(<([^>]+)>)/ig,"");
+	$("#post_Content").val(convertContent);
+	var cc = $("#post_Content").val();
+	console.log(cc);
+	alert('dsadsa');
+	}
+	 */
+	CKEDITOR.replace("post_Content",{
 		height : "300",
 		width : "880",
 		filebrowserImageUploadUrl : '${pageContext.request.contextPath}/freeboard/writeEnd.do ',

@@ -16,7 +16,7 @@
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 	<div class="content">
 		<h4 id="reportLogo">보도자료</h4>
-		
+		<div class=" defaultBoxshadow" style="padding-top:20px;"> <!-- <- 진영 추가 (열기) -->
 		<p id="reportListCnt">총 <span>${totalContents }</span>건</p>	
 		<table id="reportTab" class="table table-striped">
 			<tr id="reportTh">
@@ -42,6 +42,7 @@
 			${pageBar }
 		</div>
 	</div>
+	</div> <!-- <- 진영 추가 (닫기) -->
 </section>
 
 <script>

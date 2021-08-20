@@ -6,14 +6,14 @@
 	<jsp:param name="title" value="updates/domestic"/>
 </jsp:include>
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6944e39f85fb8e5ca0d10ff408274b51"></script> -->
-<section class="container">
+<section class="container" style="display:flex;">
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="content">	
+	<div class="content" style="display:inline-block; padding-left:220px;">	
 		<h2>국내 확산 현황</h2>
 		
 	
 		<div style="text-align: center;">
-			<section id="home-covid-chart" style="width:45%; display:inline-block;">
+			<section id="domestic-covid-chart" style="width:45%; display:inline-block;">
 				<jsp:include page="/WEB-INF/views/covidUpdate/regionalKor.jsp"></jsp:include>
 			</section>
 		</div>
@@ -21,6 +21,7 @@
 </section>
 		
 		
-<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>	
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
+
 

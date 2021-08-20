@@ -28,7 +28,9 @@
 	<header id="header">
 		<!-- 로고 -->
 		<div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
-				
+		
+		<div class="content">
+		<div id="header-main-area" style="display: flex; width:1143px; height:60px; justify-content:flex-end;">
 		<!-- 키워드 검색 -->
 		<div class="header-search-area">			
 			<input id="searchKeyword" type="text" name="searchKeyword" style="display:none;" onKeypress="javascript:if(event.keyCode==13) {fn_searchKeyword()}"> <!-- 입력창 -->
@@ -105,7 +107,8 @@
 	                
 	                
 	            </div>
-	            
+	       </div>   
+	       </div> 
 	      <script>
 	      //메세지 알림 웹소켓
 	  	var msSocket=null;
@@ -207,7 +210,7 @@
 				currentUrl=currentUrl.substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")+1); 
 				
 				//현재 페이지 url을 매핑 주소를 비교해 분기 처리
-				if(currentUrl=='${path}/covidUpdate/report.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
+				if(currentUrl=='${path}/test/test.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
 					console.log("다른 주소임");
 				}else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
 					location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();
@@ -219,7 +222,7 @@
 			$("#searchKeywordSubmit").click(function(){ 
 				$("#searchKeyword").show(); //돋보기 아이콘을 클릭하면 입력창이 보이게 보이게 됨
 				$("#searchKeyword").focus();			
-			
+				$("#header-main-area").addClass("defaultBoxshadow");
 				//검색
 				$("#searchKeywordSubmit").click(fn_searchKeyword);						
 			});

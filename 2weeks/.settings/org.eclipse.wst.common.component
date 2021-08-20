@@ -20,6 +20,7 @@
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
                                 
+<<<<<<< HEAD
         
         
         <property name="context-root" value="spring"/>
@@ -27,6 +28,15 @@
         
         
         <property name="java-output-path" value="/2weeks/target/classes"/>
+=======
+        
+        
+        <property name="java-output-path" value="/2weeks/target/classes"/>
+                                
+        
+        
+        <property name="context-root" value="spring"/>
+>>>>>>> 77d8e4ea2d076ba7301a235e8daeb6e194018e55
                             
     
     

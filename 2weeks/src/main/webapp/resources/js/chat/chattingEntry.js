@@ -69,12 +69,12 @@ sock.onmessage=(e)=>{
 		if(type=='MSG'){				
 			if($('#sendBox #sender').val()==sender){ 	/////자신
 				chatMsg="<div id='myBox'>";
-				//msg+="<div id='sender'>"+sender+"</div>";
+				//msg+="<div id='sender'>"+sender+"님</div>";
 				chatMsg+="<div id='chatContent'>"+content+"</div>";
 				chatMsg+="<div id='chatTime'>"+time+"</div></div>";				
 			}else{ 							///////////////////상대방
 				chatMsg="<div id='yourBox'>";
-				chatMsg+="<div id='sender'>"+nickname1+"</div>";
+				chatMsg+="<div id='sender'>"+nickname1+"님</div>";
 				chatMsg+="<div id='chatContent'>"+content+"</div>";
 				chatMsg+="<div id='chatTime'>"+time+"</div></div>";				
 			}
