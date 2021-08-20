@@ -26,7 +26,7 @@ public class CovidReportListController{
 		int totalData=service.selectReportCount();		
 		mv.addObject("totalContents", totalData);
 				
-		mv.addObject("pageBar", Pagination.getPageBar(totalData, cPage, numPerpage, "report.do"));
+		mv.addObject("pageBar", Pagination.getPageBar(totalData, cPage, numPerpage, "report.do", null));
 		
 		mv.setViewName("covidUpdate/newsReportList");
 		return mv;

@@ -34,8 +34,8 @@ public interface FreeBoardService {
 	
 	int delete(int no);
 	
-	List<FreeBoard> selectMyBoard(String userId);
+	List<FreeBoard> selectMyBoard(String loginId, int cPage, int numPerpage);
 
-	
+	int myBoardCount(String loginId);
 	
 }

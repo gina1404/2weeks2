@@ -115,8 +115,14 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 
 	@Override
-	public List<FreeBoard> selectMyBoard(String userId) {		
-		return dao.selectMyBoard(session, userId);
+	public List<FreeBoard> selectMyBoard(String loginId, int cPage, int numPerpage) {		
+		return dao.selectMyBoard(session, loginId, cPage, numPerpage);
+	}
+
+
+	@Override
+	public int myBoardCount(String loginId) {
+		return dao.myBoardCount(session, loginId);
 	}
 	
 	

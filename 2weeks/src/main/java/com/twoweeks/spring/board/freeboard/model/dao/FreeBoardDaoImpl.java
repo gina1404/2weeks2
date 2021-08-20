@@ -1,5 +1,6 @@
 package com.twoweeks.spring.board.freeboard.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
-import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 @Repository
 public class FreeBoardDaoImpl implements FreeBoardDao {
@@ -67,12 +67,19 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	public int updateAttachment(SqlSession session, PostAttachment a) {
 		return session.insert("freeboard.updateAttachment", a);
 	}
-
+			
 	@Override
-	public List<FreeBoard> selectMyBoard(SqlSession session, String userId) {
-		return session.selectList("freeboard.selectMyBoard", userId);
+	public List<FreeBoard> selectMyBoard(SqlSession session, String loginId, int cPage, int numPerpage) {
+		System.out.println("loginId + "+ loginId);
+		System.out.println(cPage+" "+numPerpage);
+		Map m= new HashMap();
+		m.put("loginId", loginId);
+		return session.selectList("freeboard.selectMyBoard", m, new RowBounds((cPage-1)*numPerpage, numPerpage));
 	}
 
-	
+	@Override
+	public int myBoardCount(SqlSession session, String loginId) {
+		return session.selectOne("freeboard.myBoardCount", loginId);
+	}
 	
 }
