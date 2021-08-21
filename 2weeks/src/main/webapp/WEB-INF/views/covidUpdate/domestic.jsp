@@ -7,7 +7,8 @@
 </jsp:include>
 <
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6944e39f85fb8e5ca0d10ff408274b51"></script> -->
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
+		
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/domestic/domestic.css">
 
 <section class="container" style="display:flex;">
@@ -60,10 +61,16 @@
 					</div>
 				</div>
 			</div>
+				
 		</div>
 	</div>
 	</c:forEach>
-</div>
+	
+			<div>
+				<canvas id="myChart" ></canvas>
+			</div>
+
+		</div>
 		<div style="text-align: center;">
 			<section id="domestic-covid-chart" style="width:45%; display:inline-block;">
 				<jsp:include page="/WEB-INF/views/covidUpdate/regionalKor.jsp"></jsp:include>
@@ -71,8 +78,124 @@
 		</div>
 	</div>
 </section>
+
+<script>
+	
+	var decideCnt =[];
+	
+	var accExamCnt = [];
+	
+	var clearCnt = [];
+	
+	var deathCnt = [];
+	
+	var stateDt = [];
+	
+	var todayDecideCnt = [];
+	
+	var todayDeathCnt = 0;
+
+	$.ajax({
+		type:'GET',
+		url : "${pageContext.request.contextPath}/covid/getToday",
+		dataType:"text",
+		success:function(data){
+			todayDeathCnt=data;
+			
+		}
 		
+			
+	});
+	
+	$.ajax({
+		type:'GET',
+		url : "${pageContext.request.contextPath}/covid/getNumber",
+		dataType:"json",
+		success:function(data){
+			$.each(data, function(idx, obj){
+				stateDt.unshift(obj.stateDt);
+				decideCnt.unshift(obj.decideCnt);
+				accExamCnt.unshift(obj.accExamCnt);
+				deathCnt.unshift(obj.deathCnt);
+				clearCnt.unshift(obj.clearCnt);
+				console.log(obj.clearCnt);
+			});
+			createChart();
+		}
 		
+	});
+
+	
+	
+	
+	
+	
+var myChart = document.getElementById("myChart").getContext("2d");
+
+	function createChart() {
+		Chart.defaults.font.size = 18;
+		var chart = new Chart(myChart, {
+			type : "bar",
+			data : {
+				labels : stateDt,
+				datasets : [ {
+					label : "총 확진자 수",
+					minBarLength: 250,
+					data : decideCnt,
+					backgroundColor : "#f1c40f",
+
+				}, 
+				{
+					label : "총 격리해제 수",
+					minBarLength: 250,
+					data : clearCnt,
+					backgroundColor : "#2ecc71"
+				}, 
+				{
+					label : "총 누적 검사 수",
+					data : accExamCnt,
+					backgroudColor : "#2ecc71"
+				}, 
+				{
+					label : "총 사망자 수",
+					minBarLength: 250,
+					data : deathCnt,
+					backgroundColor : "#e74c3c",
+				}, 
+				]
+			},
+			  options: {
+				    scales: {
+				      yAxes: [{
+				    	  beginAtZero: true,
+				    	  gridLines:{
+				        	color: "rgba(0, 0, 0, 0)",
+				        }
+				    	 
+				      }],
+				      yAxes: [{
+				            gridLines: {
+				                color: "rgba(0, 0, 0, 0)",
+				            }   
+				        }]
+				    },
+				    plugins: {
+			            legend: {
+			                labels: {
+			                    // This more specific font property overrides the global property
+			                    font: {
+			                    	family : "Pretendard"
+			                    }
+				  }
+			            }
+				    }
+			  }
+
+		});
+	}
+
+</script>	
+	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 

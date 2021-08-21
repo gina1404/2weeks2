@@ -51,7 +51,7 @@ public class CovidDomesticServiceImpl implements CovidDomesticService {
 		System.out.println(date.format(today));
 		String realtoday = date.format(today);
 		String yesterday = date.format(c.getTime());
-		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=sklG4ffg0dLw22C3ideuBi5dyS%2FqK5%2F6YymY5LMR9PiSQhzt3w8aqVAwqS70rOvlGVGl7MctP%2BWC1OMzPgjmUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+realtoday+"&endCreateDt="+realtoday;
+		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=sklG4ffg0dLw22C3ideuBi5dyS%2FqK5%2F6YymY5LMR9PiSQhzt3w8aqVAwqS70rOvlGVGl7MctP%2BWC1OMzPgjmUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+yesterday+"&endCreateDt="+realtoday;
 		RestTemplate restTemplate = new RestTemplate(); //API를 호출하기 위한 클래스
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -134,7 +134,17 @@ public class CovidDomesticServiceImpl implements CovidDomesticService {
 		return  dao.kCovidDataInsert(session, param2);
 	}
 
-	
+	@Override
+	public List<Item> getNumber() {
+		return dao.getNumber(session);
+	}
 
+	@Override
+	public List<Integer> getToday() {
+		return dao.getToday(session);
+	}
+
+	
+	
 	
 }

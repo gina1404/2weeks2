@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 
+import com.twoweeks.spring.covid.domestic.model.vo.Item;
 import com.twoweeks.spring.covid.domestic.model.vo.Response;
 
 
@@ -15,4 +16,6 @@ public interface CovidDomesticService {
 	String getGoodBye();
 	ResponseEntity<String> kCovidDataSave();
 	int kCovidDataInsert(Map<String, Integer> param2);
+	List<Item> getNumber();
+	List<Integer> getToday();
 }

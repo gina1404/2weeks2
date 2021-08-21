@@ -24,4 +24,5 @@ public class Item {
 	private int stateDt; //기준일
 	private String stateTime; //기준시간
 	private String updateDt; //수정일시분초
+
 }
