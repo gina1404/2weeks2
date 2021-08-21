@@ -167,7 +167,7 @@ public class KnowledgeInController {
 			@RequestParam(value = "numPerpage", defaultValue = "6") int numPerpage,HttpServletRequest request,ModelAndView mv,Member m,
 			@RequestParam("user_Id")String user_Id) 
 		{
-		mv.addObject("MyQ", service.selectKinListMyQ(cPage, numPerpage,user_Id));
+		mv.addObject("MyQ", service.selectKinList(cPage, numPerpage));
 		mv.addObject("MyA", service.selectKinListMyA(cPage, numPerpage));
 		int totalData = service.selectKinCount();// 등록된 테이블의 총 개수를 가져다가 저장
 		mv.addObject("totalContents", totalData);
