@@ -17,11 +17,12 @@
 		<h5>업데이트 날짜 : ${day }</h5>
 		
 		<div class="Domestic" style="display:block;">
-		 <c:forEach var="b" items="${items }">
+		 <c:forEach var="b" items="${items }" varStatus="vs" >
 			<div class="topwrap">
+			
 				<div class="middlewrap">
 					<div class="bottomwrap">
-						<div class="bottomwrap-child">확진자</div>
+						<div class="bottomwrap-child">확진자 ${vs.end }</div>
 						<div class="bottomwrap-child2"> <fmt:formatNumber value="${b.decideCnt }" type="number"/>명</div>
 						<div class="bottomwrap-child3"> 
 							<div class=""></div>

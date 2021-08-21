@@ -42,8 +42,7 @@ public class CovidDomesitcController {
 		
 	System.out.println(json.toString());
 	
-	mv.addObject("first",items); //확진자 수
-	//mv.addObject("death",items.get(0).getSecondCnt()); //사망자 수
+	mv.addObject("death",items.get(0).getDecideCnt()); //사망자 수
 	mv.addObject("json");
 	mv.addObject("items",items);
 	//뒤에 소수점 .xxx가 붙어서 맨뒤에서 부터 4글자를 삭제해줌
