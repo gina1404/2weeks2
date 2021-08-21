@@ -113,11 +113,11 @@ public class CovidDomesticServiceImpl implements CovidDomesticService {
 		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
 		
 		Calendar c = new GregorianCalendar();
-		c.add(Calendar.DATE, -10);
+		c.add(Calendar.DATE, -1);
 		String realtoday = date.format(today);
 		String yesterday = date.format(c.getTime());
 		
-		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=sklG4ffg0dLw22C3ideuBi5dyS%2FqK5%2F6YymY5LMR9PiSQhzt3w8aqVAwqS70rOvlGVGl7MctP%2BWC1OMzPgjmUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+yesterday+"&endCreateDt="+realtoday;
+		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=sklG4ffg0dLw22C3ideuBi5dyS%2FqK5%2F6YymY5LMR9PiSQhzt3w8aqVAwqS70rOvlGVGl7MctP%2BWC1OMzPgjmUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+realtoday+"&endCreateDt="+realtoday;
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
