@@ -55,6 +55,8 @@ public interface FreeBoardDao {
 
 	int likeMinus(SqlSession session, int post_Sq);
 
-	List<PostAttachment> listAttachment(SqlSession session); 
+	List<PostAttachment> listAttachment(SqlSession session);
+
+	
 	
 }

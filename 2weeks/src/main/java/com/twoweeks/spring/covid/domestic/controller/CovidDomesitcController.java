@@ -1,9 +1,12 @@
 package com.twoweeks.spring.covid.domestic.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,5 +59,27 @@ public class CovidDomesitcController {
 	
 	mv.setViewName("covidUpdate/domestic");
 	return mv;
+	}
+	
+	@Scheduled(cron = "0 0 12 * * *")
+	public void kCovidDataSave() {
+		
+		ResponseEntity<String> responseEntity = service.kCovidDataSave();
+		Response response = service.parser(responseEntity.getBody());
+		List<Item> items = response.getBody().getItems();
+		Map<String, Integer> param2 = new HashMap<String, Integer>();
+		log.info("dsadsadwsa : "+items.get(0).getStateDt());
+		
+		for(int i =0; i<items.size(); i++) {
+			
+		param2.put("accExamCnt", items.get(i).getAccExamCnt());
+		param2.put("clearCnt", items.get(i).getClearCnt());
+		param2.put("stateDt", items.get(i).getStateDt());
+		param2.put("deathCnt", items.get(i).getDeathCnt());
+		param2.put("decideCnt", items.get(i).getDecideCnt());
+		
+		service.kCovidDataInsert(param2);
+		}
+		
 	}
 }

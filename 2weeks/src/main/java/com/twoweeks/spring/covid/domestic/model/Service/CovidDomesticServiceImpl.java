@@ -5,7 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,6 +24,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.google.gson.Gson;
+import com.twoweeks.spring.board.freeboard.model.dao.FreeBoardDao;
+import com.twoweeks.spring.covid.domestic.model.dao.CovidDomesticDao;
+import com.twoweeks.spring.covid.domestic.model.vo.Item;
 import com.twoweeks.spring.covid.domestic.model.vo.Response;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +34,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CovidDomesticServiceImpl implements CovidDomesticService {
 
+	@Autowired
+	private CovidDomesticDao dao;
+	
+	@Autowired
+	private SqlSession session;
+	
 	@Override
 	public ResponseEntity<String> getApi() {
 		Date today = new Date();
@@ -94,5 +107,34 @@ public class CovidDomesticServiceImpl implements CovidDomesticService {
 		return response;
 	}
 
+	@Override
+	public ResponseEntity<String> kCovidDataSave() {
+		Date today = new Date();
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+		
+		Calendar c = new GregorianCalendar();
+		c.add(Calendar.DATE, -10);
+		String realtoday = date.format(today);
+		String yesterday = date.format(c.getTime());
+		
+		String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=sklG4ffg0dLw22C3ideuBi5dyS%2FqK5%2F6YymY5LMR9PiSQhzt3w8aqVAwqS70rOvlGVGl7MctP%2BWC1OMzPgjmUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+yesterday+"&endCreateDt="+realtoday;
+		
+		RestTemplate restTemplate = new RestTemplate();
+		
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.APPLICATION_XML);
+		HttpEntity<HttpHeaders> entity = new HttpEntity<>(header);
+		ResponseEntity<String> response = restTemplate.exchange(URI.create(url), HttpMethod.GET, entity, String.class);
+		
+		return response;
+	}
 
+	@Override
+	public int kCovidDataInsert(Map<String, Integer> param2) {
+		return  dao.kCovidDataInsert(session, param2);
+	}
+
+	
+
+	
 }

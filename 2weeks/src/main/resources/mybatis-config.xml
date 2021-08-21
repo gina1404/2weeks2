@@ -6,6 +6,7 @@
 		<typeAlias type="com.twoweeks.spring.common.StringArrayTypeHandler" alias="strArr"/>
 		<typeAlias type="com.twoweeks.spring.board.freeboard.model.vo.FreeBoard" alias="freeboard"/>
 		<typeAlias type="com.twoweeks.spring.covid.news.model.vo.CovidNews" alias="covidnews"/>
+		<typeAlias type="com.twoweeks.spring.covid.domestic.model.vo.Item" alias="item"/>
 		<typeAlias type="com.twoweeks.spring.board.freeboard.model.vo.PostAttachment" alias="postAttach"/>
 		<typeAlias type="com.twoweeks.spring.board.freeboard.reply.model.vo.Reply" alias="reply"/>
 		<typeAlias type="com.twoweeks.spring.member.model.vo.Member" alias="member"/>
