@@ -26,4 +26,5 @@ public class KinReply {
 	private Date reply_Date; // 답글 작성일 
 	private String open_Yn; //아이디 공개여부 
 	private List<KinReplyAttachment> attachment=new ArrayList();
+	private int selected;  //채택여부
 }

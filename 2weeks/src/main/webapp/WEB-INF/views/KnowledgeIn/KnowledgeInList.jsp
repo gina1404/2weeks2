@@ -481,7 +481,7 @@ function fn_selection(a,b,c){
 					<div><button class="Qcheck"  id ="${kr.reply_Writer}" name ="${KnowledgeIn.point}" value="${KnowledgeIn.kin_Sq}" onclick="fn_selection(this.id,this.name,this.value);" >채택하기</button></div>
 				</c:when>
 				<c:when test ="${KnowledgeIn.selected==1}">
-					<div class="selected">채택 완료</div>
+					<div class="selected"></div>
 				</c:when>
 			</c:choose>
 				
@@ -491,7 +491,7 @@ function fn_selection(a,b,c){
 			<c:if test="${member.user_Id != KnowledgeIn.kin_Writer}">
 			<c:choose>
 				<c:when test ="${KnowledgeIn.selected==1}">
-					<div class="selected">채택 완료</div>
+					<div class="selected"></div>
 				</c:when>
 			</c:choose>
 				

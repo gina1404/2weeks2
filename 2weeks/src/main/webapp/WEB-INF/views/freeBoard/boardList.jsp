@@ -15,9 +15,9 @@
 
 
 
-<section id="content" class="pb-5">
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="container">
+<section id="container" class="pb-5" style="display:flex; padding-bottom: 20px; margin-left: 240px;">
+	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+	<div class="content" style="display: inline-block; padding-left: 270px;">
 		
 	
 		<!-- 			첨부파일이 이미지 파일이면
