@@ -137,25 +137,25 @@ var myChart = document.getElementById("myChart").getContext("2d");
 			data : {
 				labels : stateDt,
 				datasets : [ {
-					label : "총 확진자 수",
+					label : "누적 확진자 수",
 					minBarLength: 250,
 					data : decideCnt,
 					backgroundColor : "#f1c40f",
 
 				}, 
 				{
-					label : "총 격리해제 수",
+					label : "누적 격리해제 수",
 					minBarLength: 250,
 					data : clearCnt,
 					backgroundColor : "#2ecc71"
 				}, 
 				{
-					label : "총 누적 검사 수",
+					label : " 누적 검사 수",
 					data : accExamCnt,
 					backgroudColor : "#2ecc71"
 				}, 
 				{
-					label : "총 사망자 수",
+					label : "누적 사망자 수",
 					minBarLength: 250,
 					data : deathCnt,
 					backgroundColor : "#e74c3c",
