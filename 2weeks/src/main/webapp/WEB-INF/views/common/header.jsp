@@ -226,8 +226,7 @@
 						|| currentUrl=='${path}/KnowledgeIn/update.do'
 				){					
 						location.href='${path }/searchResult/knowledgeInAll.do?searchKeyword='+$('input[name=searchKeyword]').val();
-				}				
-				else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
+				}else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
 					location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();
 				}
 			}
