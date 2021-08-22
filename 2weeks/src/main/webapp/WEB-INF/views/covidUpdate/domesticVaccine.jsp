@@ -6,7 +6,12 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
-
+<style>
+	header .content{
+		padding-left:250px !important;
+		margin-top:0;
+	}
+</style>
 <style>
 .table4_1{
 	width:65%;
