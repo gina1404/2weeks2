@@ -43,7 +43,7 @@
 					
 					<div class="bottomwrap">
 						<div class="bottomwrap-child">격리해제 수</div>
-						<div class="bottomwrap-child-recovery"><fmt:formatNumber value="${b. clearCnt}" type="number"/>명</div>
+						<div class="bottomwrap-child-recovery"><fmt:formatNumber value="${b.clearCnt}" type="number"/>명</div>
 						<div color="green" class="">
 								<div class=""></div>
 								<div size="12" class="">

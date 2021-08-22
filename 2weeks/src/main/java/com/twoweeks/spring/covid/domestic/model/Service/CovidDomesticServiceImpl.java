@@ -140,8 +140,13 @@ public class CovidDomesticServiceImpl implements CovidDomesticService {
 	}
 
 	@Override
-	public List<Integer> getToday() {
+	public int getToday() {
 		return dao.getToday(session);
+	}
+
+	@Override
+	public int getTodayDecide() {
+		return dao.getTodayDecide(session);
 	}
 
 	

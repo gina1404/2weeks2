@@ -23,8 +23,13 @@ public class CovidDomesticDaoImpl implements CovidDomesticDao{
 	}
 
 	@Override
-	public List<Integer> getToday(SqlSession session) {
-		return session.selectList("item.getToday");
+	public int getToday(SqlSession session) {
+		return session.selectOne("item.getToday");
+	}
+
+	@Override
+	public int getTodayDecide(SqlSession session) {
+		return session.selectOne("item.getTodayDecide");
 	}
 
 

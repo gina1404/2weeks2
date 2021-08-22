@@ -12,6 +12,7 @@ public interface CovidDomesticDao {
 
 	int kCovidDataInsert(SqlSession session, Map<String, Integer> param2);
 	List<Item> getNumber(SqlSession session);
-	List<Integer> getToday(SqlSession session);
+	int getToday(SqlSession session);
+	int getTodayDecide(SqlSession session);
 
 }

@@ -1,9 +1,8 @@
 package com.twoweeks.spring.covid.controller;
 
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +56,7 @@ public class CovidUpdateController {
 	public @ResponseBody String getToday(Locale locale) {
 		Gson gson = new Gson();
 		
-		List<Integer> today = service.getToday();
+		int today = service.getToday();
 		
 		System.out.println(today);
 		

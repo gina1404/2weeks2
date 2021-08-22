@@ -17,5 +17,6 @@ public interface CovidDomesticService {
 	ResponseEntity<String> kCovidDataSave();
 	int kCovidDataInsert(Map<String, Integer> param2);
 	List<Item> getNumber();
-	List<Integer> getToday();
+	int getToday();
+	int getTodayDecide();
 }

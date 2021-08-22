@@ -22,10 +22,20 @@
 <section class="container" style="display: flex; padding-bottom: 30px;">
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>			
 	<div class="content gridContainer" style="margin-left: 220px;">
-		<div class="item 1st">1</div>
-		<div class="item 1st">2</div>
-		<div class="item 1st">3</div>
-		<div class="item 1st">4</div>
+		<div class="item 1st">
+			<div class="">
+				<p>금일 확진자</p>
+					<div>
+						<fmt:formatNumber type="number" value="${todayDecide }" />
+					</div>
+			
+			</div>
+		</div>
+		
+		
+		<div class="item 1st"><fmt:formatNumber type="number" value="${decideCnt }" /></div>
+		<div class="item 1st"><fmt:formatNumber type="number" value="${deathCnt }" /></div>
+		<div class="item 1st"><fmt:formatNumber type="number" value="${clearCnt }" /></div>
 		<div class="item 1st">
 			<div class="state">
 				<div class="flag">
@@ -133,7 +143,7 @@
 				</c:forEach>
 			</div>
 		</div>
-	</div>	
+	</div>
 </section>
 
 <!-- 보도자료 -->
