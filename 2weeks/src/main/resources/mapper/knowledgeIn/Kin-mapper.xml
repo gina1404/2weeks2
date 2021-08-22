@@ -201,7 +201,7 @@
 	<insert id="insertKinReply">
 			
 			INSERT INTO KIN_REPLY VALUES(KIN_REPLY_SEQ.NEXTVAL,#{reply_Writer},#{kin_Sq},#{reply_Content},NULL,
-			#{reply_Like_Cnt},SYSDATE,#{open_Yn})
+			#{reply_Like_Cnt},SYSDATE,#{open_Yn},default)
 			
 			<selectKey keyProperty="reply_Sq" resultType="_int" order="AFTER"> 
 			SELECT KIN_REPLY_SEQ.CURRVAL FROM DUAL 
