@@ -10,9 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/freeboard/write.css">
 <script src="//cdn.ckeditor.com/4.11.4/full-all/ckeditor.js"></script>
-<style>
 
-</style>
 <section class="content" id="containerWrapper">
 <div class="container" >
     <div class="row container" id="writeContainer" style="width: 100%">
@@ -34,8 +32,9 @@
                 <div class="input-group mb-3">
                     <select class="custom-select" id="category" name="category">
                     <option value="자유" selected>자유</option>
-                    <option value="배달">배달</option>
                     <option value="재택근무">재택근무</option>
+                    <option value="밀키트">밀키트</option>
+                    <option value="취미생활">취미생활</option>
                   </select>  
                 </div>
             </div>            
@@ -78,9 +77,6 @@
 
  
 <script>
-
-	
-	
 	$(document).ready(function(){
 		$("a[class='file-delete']").on("click",function(e){
 			e.preventDefault();
@@ -107,7 +103,6 @@
 		filebrowserImageUploadUrl : '${pageContext.request.contextPath}/freeboard/writeEnd.do ',
 	});
 					
-
 	 
 	 $("#back-cancle").on("click",function(){
 		 history.back();
@@ -115,47 +110,3 @@
 	 
 	 </script>
 	
-
-
-
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
-.cke_editor_editor .cke_contents{ 
-     min-height:550px; 
-     min-width: 900px;
-     } 
-.content{
-	display: block;
-	margin-top: 100px;
-	margin-left: 135px;
-}
-#articlefileChange{
-	border : solid black 1px;
-}
-
-#attach{
-   width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-	
-}
-#attach + label{
-  display: inline-block;
-  padding: 10px 20px;
-  color: #999;
-  vertical-align: middle;
-  background-color: #fdfdfd;
-  cursor: pointer;
-  border: 2px solid #ebebeb;
-  border-radius: 5px;
-  font-family: 'Open Sans', sans-serif; 
-}
-#attach:focus + label,
-#attach + label:hover{
-	cursor:pointer;
-}
-</style>

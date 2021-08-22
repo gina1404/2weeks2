@@ -76,24 +76,3 @@
     </div>
 </section>
 
-<script>
-/* $(document).ready(function(){
-	getNewsList();
-	function getNewsList(){
-		$.getJSON("${path}/news/getNewsList/", function(data){
-			var str="";
-			var content ="";
-			var date ="";
-	$.each(data, function(key, val) {
-				console.log(val.title);
-					str=val.title;
-					content=val.content;
-					date=val.newsDate;
-				});
-	$("#news-title").html(str);
-	$("#news-content").html(content);
-	$("#news-date").html(date);
-			});
-		}
-	}) */
-</script>

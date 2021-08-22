@@ -15,7 +15,7 @@
 		<div class="wrapper">
 			<div class="row ">
 				<h4>
-					<span title="category">${list.category }</span> <a class=""
+					<span title="category" style="font-size:18px;">${list.category }</span><a class=""
 						href="${path }/freeboard/readView?no=${list.post_Sq }">${list.post_Title}</a>
 				</h4>
 			</div>
@@ -24,7 +24,7 @@
 				<span class="divi">조회 수 <b>${list.post_Cnt }</b></span>
 				<span class="divi" id="top-Like">추천 수 <b>${list.post_Like_Cnt }</b></span>
 				<span class="divi">댓글 <b>${list.replyNo }</b></span>
-				<span class="divi"> 등록일 : <b><fmt:formatDate value="${list.post_Dt }" pattern="yyyy-MM-dd hh:mm:ss"/></b></span>
+				<span class="divi"> 등록일 : <b><fmt:formatDate value="${list.post_Dt }" pattern="yyyy-MM-dd"/></b></span>
 		</div>
 		<div class="col-md-12 "
 			style=" margin-top: 50px; margin-right: 500px;">
@@ -115,7 +115,7 @@
 <script>
 $(document).ready(function(){
 
-	
+	getLikeCnt();
 	getReplies();
 	
 
@@ -154,6 +154,7 @@ function getReplies(){
 	});
 	
 }
+
 
 
 
@@ -455,33 +456,25 @@ function fn_replyUpdate(event,reply_Sq,reply_Content,user_Id){
 	}
 }
 
+
 function getLikeCnt(){
 	$.getJSON("${path}/freeboard/getLikeCnt/"+ ${list.post_Sq}, function(data){
 		var str="";
-		$(data).each(function(){
 			$("#likePost").text("좋아요! "+data);
 			$("#top-Like").html("추천 수 "+"<b>"+data+"</b>");
-		});
 	});
 }
 
 
 
 
-var isLike = 1;
-var check = "false";
 $("#likePost").on("click",function(){
 	var likeIdx = ${list.post_Like_Cnt};
 	var post_sq = ${list.post_Sq};
-	check =  localStorage.getItem("isis");
-	//좋아요 취소
-	if(check ==2){
-		  return;
-	}else{
-		
+	var user_Id = '${member.user_Id}';
+	console.log(post_sq);
 	
-	
-	$.ajax({
+	$.ajax({	
 		url:'${path}/freeboard/like.do',
 		type:'POST',
 		contentType: 'application/json',
@@ -491,26 +484,22 @@ $("#likePost").on("click",function(){
 			"X-HTTP-Method-Override" : "POST" 
 		},
 		data: JSON.stringify({
-			post_Like_Cnt : likeIdx,
-			post_Sq : post_sq
+			post_Sq : post_sq,
+			user_Id : user_Id
 			
 		}),
 		
 		success:function(result){
-			if(result == 'regSuccess'){
-				getLikeCnt();
-				 isLike= 2;
-				 localStorage.setItem("isis", isLike);
-				 
-			}else{
-				alert('좋아요 실패!');
-				isLike = 0;
-				}
+		console.log(result);
+			getLikeCnt();
+				
 			}
 		});
-	}  
+	});  
 	
-	});	
+getLikeCnt();
+
+
 
 $("#backList").on("click",function(){
 	history.back();
