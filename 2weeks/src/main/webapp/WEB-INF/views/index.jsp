@@ -112,7 +112,7 @@
 
 		<div id="home-map-area" class="item 2nd a">
 			<div id="mapMove">
-				<a class="move" href="${path }/covid/domestic.do">
+				<a class="move z" href="${path }/covid/domestic.do">
 					지역별 확산 현황 지도
 				</a>
 			</div>
@@ -121,7 +121,7 @@
 		<div class="item 2nd a">
 			<div class="report" >
 				<div id="reportreport">
-					<a class="move" href="${path }/covidUpdate/report.do">
+					<a class="move z" href="${path }/covidUpdate/report.do">
 						보도자료
 					</a>
 				</div>
@@ -135,21 +135,17 @@
 		</div>
 			<div class="news">
 				<div id="newsMove">
-<<<<<<< HEAD
-					<a class="move" href="${pageContext.request.contextPath }/covid/news.do">
-=======
-					<a id="reportMove" href="${pageContext.request.contextPath }/covid/news.do"  target=_blank>
->>>>>>> 66824696b4355b9db010551bad69b74a3de854e6
+					<a class="move z" href="${pageContext.request.contextPath }/covid/news.do"  target=_blank>
 						뉴스
 					</a>					 
 				</div>
 				<c:forEach var ="news" items="${CovidNews }">
-				<div class="frontside">
+				<div class="frontside ">
                      <div class="card">
                          <div class="card-body text-center">
                              <p><img class=" img-fluid" src="${path }/resources/images/icons/hazmat.svg" alt="card image" style="width:60px;"></p>
-                             <h4 class="card-title" id="news-title"><a href="<c:out value="${news.url }"/>"  target=_blank ><c:out value="${news.title }"/></a></h4>
-                             <p class="card-text" id="news-content"><a href="<c:out value="${news.url }"/>"  target=_blank ><c:out value="${news.content }"/></a></p>
+                             <h4 class="card-title" id="news-title"><a class="y" href="<c:out value="${news.url }"/>"  target=_blank ><c:out value="${news.title }"/></a></h4>
+                             <p class="card-text" id="news-content"><a class="y" href="<c:out value="${news.url }"/>"  target=_blank ><c:out value="${news.content }"/></a></p>
                              <p class="card-text" id="news-date"><c:out value="${news.newsDate }"/></p>
                          </div>
                      </div>
@@ -308,7 +304,16 @@ $("#home-map-area").each(function(){
 		for ( var i = 0; i < a.length; i++ ) {
         	a[i].classList.toggle("item");
 			a[i].classList.toggle("dark1");
-      	}		
+      	}
+		const z=document.querySelectorAll(".z");
+		for( var i=0; i<z.length; i++){
+			z[i].classList.toggle("darkLogo");
+			z[i].classList.toggle("move");
+		}
+		const y=document.querySelectorAll(".y");
+		for( var i=0; i<y.length; i++){
+			y[i].classList.toggle("darkNews");
+		}
 	});
 
 </script>

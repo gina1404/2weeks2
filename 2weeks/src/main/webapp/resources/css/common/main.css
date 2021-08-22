@@ -109,6 +109,13 @@
 	color: #6E6E6E;
 	font-weight: bolder;
 }
+.darkLogo{
+	color: white;
+}
+.darkLogo:hover{
+	color: #6E6E6E;
+	font-weight: bolder;
+}
 
 
 /***해외현황***/
@@ -207,4 +214,8 @@
 }
 .frontside{
 	 margin-top : 10px;
+	 width: 340px;
+}
+.darkNews{
+	 color: white;
 }
