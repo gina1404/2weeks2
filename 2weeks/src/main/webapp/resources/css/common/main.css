@@ -121,7 +121,20 @@
     font-weight: bolder;
 }
 
+.today{
+	padding-top : 25px;
+	font-size: 18px;
+	font-weight: bolder;
+	text-align: center;
+	line-height: 40px;
+}
 
+.todayCnt{
+	text-align: center;
+	font-weight: bolder;
+	font-size: 17px;
+	padding-top : 15px;
+}
 
 
 

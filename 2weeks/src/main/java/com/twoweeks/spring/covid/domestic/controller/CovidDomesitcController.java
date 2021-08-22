@@ -42,22 +42,20 @@ public class CovidDomesitcController {
 
 	
 		String json =  service.getGoodBye();
-		
-	System.out.println(json.toString());
+		System.out.println(items.toString());
 	
-	mv.addObject("death",items.get(0).getDecideCnt()); //사망자 수
-	mv.addObject("json");
-	
-	
-	mv.addObject("items",items);
+	mv.addObject("decide",items.get(0).getDecideCnt()); 
+	mv.addObject("death",items.get(0).getDeathCnt());
+	mv.addObject("accExamCnt",items.get(0).getAccExamCnt());
+	mv.addObject("clearCnt",items.get(0).getClearCnt());
 	//뒤에 소수점 .xxx가 붙어서 맨뒤에서 부터 4글자를 삭제해줌
 	String cd = items.get(0).getCreateDt();
-	cd = cd.substring(0, cd.length()-4);
+	cd = cd.substring(0, cd.length()-3);
 	
 
 	log.info(cd);
 	mv.addObject("day",cd); //기준일
-	System.out.println(items.toString());
+	
 	
 	mv.setViewName("covidUpdate/domestic");
 	return mv;

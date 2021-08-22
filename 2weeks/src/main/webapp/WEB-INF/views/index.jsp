@@ -22,20 +22,41 @@
 <section class="container" style="display: flex; padding-bottom: 30px;">
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>			
 	<div class="content gridContainer" style="margin-left: 220px;">
-		<div class="item 1st">
-			<div class="">
+		<div class="kCovid item">
+			<div class="today">
 				<p>금일 확진자</p>
-					<div>
-						<fmt:formatNumber type="number" value="${todayDecide }" />
-					</div>
-			
 			</div>
-		</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${todayDecide }" />명
+					</div>
+			</div>
+		
+		<div class="kCovid item">
+			<div class="today">
+				<p>금일 확진자</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${decideCnt }" />명
+					</div>
+			</div>
+				<div class="kCovid item">
+			<div class="today">
+				<p>총 사망자</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${deathCnt }" />명
+					</div>
+			</div>
+					<div class="kCovid item">
+			<div class="today">
+				<p>격리해제 수</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${clearCnt }" />명
+					</div>
+			</div>
 		
 		
-		<div class="item 1st"><fmt:formatNumber type="number" value="${decideCnt }" /></div>
-		<div class="item 1st"><fmt:formatNumber type="number" value="${deathCnt }" /></div>
-		<div class="item 1st"><fmt:formatNumber type="number" value="${clearCnt }" /></div>
 		<div class="item 1st">
 			<div class="state">
 				<div class="flag">

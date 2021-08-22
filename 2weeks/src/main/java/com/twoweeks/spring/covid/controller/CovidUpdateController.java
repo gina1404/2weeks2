@@ -31,10 +31,18 @@ public class CovidUpdateController {
 		ResponseEntity<String> responseEntity = service.getApi();
 		Response response = service.parser(responseEntity.getBody());
 		List<Item> items = response.getBody().getItems();
-		mv.addObject("items",items);
+		//mv.addObject("items",items);
+		
+		mv.addObject("decide",items.get(0).getDecideCnt()); 
+		mv.addObject("death",items.get(0).getDeathCnt());
+		mv.addObject("accExamCnt",items.get(0).getAccExamCnt());
+		mv.addObject("clearCnt",items.get(0).getClearCnt());
+		
+		
+		
 		
 		String cd = items.get(0).getCreateDt();
-		cd = cd.substring(0, cd.length()-4);
+		cd = cd.substring(0, cd.length()-3);
 		
 		mv.addObject("day",cd);
 		

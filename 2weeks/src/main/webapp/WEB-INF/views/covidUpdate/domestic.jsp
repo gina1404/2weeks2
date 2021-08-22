@@ -18,13 +18,12 @@
 		<h5>업데이트 날짜 : ${day }</h5>
 		
 		<div class="Domestic" style="display:block;">
-		 <c:forEach var="b" items="${items }" varStatus="vs" >
 			<div class="topwrap">
 			
 				<div class="middlewrap">
 					<div class="bottomwrap">
-						<div class="bottomwrap-child">확진자 ${vs.end }</div>
-						<div class="bottomwrap-child2"> <fmt:formatNumber value="${b.decideCnt }" type="number"/>명</div>
+						<div class="bottomwrap-child">확진자</div>
+						<div class="bottomwrap-child2"> <fmt:formatNumber value="${decide}" type="number"/>명</div>
 						<div class="bottomwrap-child3"> 
 							<div class=""></div>
 							<div size="12" class="">
@@ -33,7 +32,7 @@
 					</div>
 					<div class="bottomwrap">
 						<div class="bottomwrap-child">총 사망자</div>
-						<div class="bottomwrap-child-died"><fmt:formatNumber value="${b.deathCnt }" type="number"/>명</div>
+						<div class="bottomwrap-child-died"><fmt:formatNumber value="${death }" type="number"/>명</div>
 						<div color="grey" class="">
 							<div class=""></div>
 							<div size="12" class="">
@@ -43,7 +42,7 @@
 					
 					<div class="bottomwrap">
 						<div class="bottomwrap-child">격리해제 수</div>
-						<div class="bottomwrap-child-recovery"><fmt:formatNumber value="${b.clearCnt}" type="number"/>명</div>
+						<div class="bottomwrap-child-recovery"><fmt:formatNumber value="${clearCnt}" type="number"/>명</div>
 						<div color="green" class="">
 								<div class=""></div>
 								<div size="12" class="">
@@ -52,8 +51,8 @@
 					</div>
 					
 					<div class="bottomwrap">
-						<div class="bottomwrap-child">검사자</div>
-						<div class="bottomwrap-child-test"><fmt:formatNumber value="${b.accExamCnt }" type="number"/>명</div>
+						<div class="bottomwrap-child">검사자 </div>
+						<div class="bottomwrap-child-test"><fmt:formatNumber value="${accExamCnt}" type="number"/>명</div>
 						<div color="blue" class="">
 							
 							<div class=""></div>
@@ -64,7 +63,6 @@
 				
 		</div>
 	</div>
-	</c:forEach>
 	
 			<div>
 				<canvas id="myChart" ></canvas>
