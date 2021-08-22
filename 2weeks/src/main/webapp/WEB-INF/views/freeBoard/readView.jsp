@@ -15,7 +15,7 @@
 		<div class="wrapper">
 			<div class="row ">
 				<h4>
-					<span title="category">${list.category }</span> <a class=""
+					<span title="category" style="font-size:18px;">${list.category }</span><a class=""
 						href="${path }/freeboard/readView?no=${list.post_Sq }">${list.post_Title}</a>
 				</h4>
 			</div>
@@ -24,7 +24,7 @@
 				<span class="divi">조회 수 <b>${list.post_Cnt }</b></span>
 				<span class="divi" id="top-Like">추천 수 <b>${list.post_Like_Cnt }</b></span>
 				<span class="divi">댓글 <b>${list.replyNo }</b></span>
-				<span class="divi"> 등록일 : <b><fmt:formatDate value="${list.post_Dt }" pattern="yyyy-MM-dd hh:mm:ss"/></b></span>
+				<span class="divi"> 등록일 : <b><fmt:formatDate value="${list.post_Dt }" pattern="yyyy-MM-dd"/></b></span>
 		</div>
 		<div class="col-md-12 "
 			style=" margin-top: 50px; margin-right: 500px;">
