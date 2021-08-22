@@ -20,7 +20,7 @@
 
 <section class="container" style="display:flex; padding-bottom:200px;">	
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="content " style="display:inline-block; padding-left:220px;">
+	<div class="content" style="display:inline-block; padding-left:220px;">
 		<h2>코로나 검사 받는 방법</h2>
 		<div class="defaultBoxshadow" style="padding:30px;">
 			<br>
