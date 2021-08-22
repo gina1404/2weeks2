@@ -133,21 +133,27 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	}
 
 
-
-
-	
 	  @Override public int updatePoint(SqlSession session,Member m1) {
 	  
 	  return session.update("knowledgeIn.updatePoint",m1);
-	  
-	  
-	  
+
+	  }
+	 
+
+	  @Override public int selection(SqlSession session,Member m1) {
+		  
+	  return session.update("knowledgeIn.selection",m1);
+
 	  }
 	 
 
 
+	@Override public int updateSq(SqlSession session,int sq) {
+		  
+	  return session.update("knowledgeIn.updateSq",sq);
 
-
+	  }
+	 
 
 
 

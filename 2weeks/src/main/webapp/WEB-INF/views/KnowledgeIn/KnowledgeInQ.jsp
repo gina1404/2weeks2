@@ -295,7 +295,8 @@ right: -60px;
 <section class="container" style="display:flex; padding-bottom: 200px;"> 	
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <form name="KinFrm" action="${path }/KnowledgeIn/KnowledgeInQEnd.do"method="post" enctype="multipart/form-data" >
-         
+
+       
 	<div class="question"  style="display:inline-block;padding-left: 200px;">
 			<span class="a">Q&A</span>
 		<!-- 	<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
@@ -309,6 +310,8 @@ right: -60px;
 			
 			<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly"> 
 			<input type="hidden" name="kin_Writer" class="form-control" value="${member.user_Id}" readonly="readonly"> 
+		
+	
 		<%-- <input type="hidden" name="point2" class="form-control" value="${member.userPoint_Cnt}" readonly="readonly">  --%> 
 		Point : ${member.userPoint_Cnt }  
 			<ul class="knowmenu"> 
@@ -367,6 +370,7 @@ right: -60px;
 			<hr style="border: solid 1px #F2F2F2;"> -->
 		<span>포인트 설정 </span>
 		
+		<label><input type="radio" name="point" value="0" ><span class="c">0</span></label>
 		<label><input type="radio" name="point" value="50" ><span class="c">50</span></label>
 		<label><input type="radio" name="point" value="100" ><span class="c">100</span></label>
 		<label><input type="radio" name="point" value="150" ><span class="c">150</span></label>

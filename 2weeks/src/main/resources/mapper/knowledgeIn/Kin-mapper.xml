@@ -230,7 +230,7 @@
 		UPDATE MEMBER2 SET USERPOINT_CNT= USERPOINT_CNT - #{userPoint_Cnt} WHERE USER_ID=#{user_Id}
 		</update>
 
-		<update id="updatePoint2" >
+		<update id="selection" >
 		UPDATE MEMBER2 SET USERPOINT_CNT= USERPOINT_CNT + #{userPoint_Cnt} WHERE USER_ID=#{user_Id}
 		</update>
 		
@@ -242,7 +242,12 @@
 		
 		
 		
-
+		<update id ="updateSq">
+		UPDATE KIN SET SELECTED = 1 WHERE KIN_SQ=#{sq}
+		
+		</update>
+		
+		
 		
 		
 		

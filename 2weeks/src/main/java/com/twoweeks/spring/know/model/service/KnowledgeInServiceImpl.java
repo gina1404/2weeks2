@@ -207,7 +207,17 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 
 
 
+	@Override
+	public int selection(Member m1) throws Exception {
+		return dao.selection(session,m1);
 
+		
+	}
+	@Override
+	public int updateSq(int sq) throws Exception {
+	
+		return dao.updateSq(session,sq);
+}
 	
 	
 
