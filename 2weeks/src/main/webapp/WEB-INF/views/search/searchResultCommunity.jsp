@@ -12,7 +12,7 @@
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 	<div class="content">
 		<!-- 커뮤니티 검색 결과 -->
-		<section id="searchResult-community-detail" class="searchResult-area defaultBoxshadow" >
+		<section id="searchResult-community-detail" class="searchResult-area defaultBoxshadow" style="margin-left:20px;">
 			<div class="searchResult-name">2weeks 커뮤니티 검색 결과</div>
 			<c:choose>
 				<c:when test="${!empty searchResultCom }">
@@ -37,7 +37,7 @@
 						</div>
 						<c:if test ="${not i.last}"><hr></c:if>									
 					</c:forEach>					
-					<div class="pagebar" style="text-align: center;">${pageBar }</div>
+					<div class="pagebar" style="text-align: center; margin: 20px 0px; font-size: 15px;">${pageBar }</div>
 				</c:when>
 				
 				<c:otherwise>

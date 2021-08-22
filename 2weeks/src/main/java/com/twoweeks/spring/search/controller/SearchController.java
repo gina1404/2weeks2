@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mchange.v2.sql.filter.SynchronizedFilterDataSource;
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.common.Pagination;
 import com.twoweeks.spring.search.model.service.SearchService;
@@ -66,12 +67,16 @@ public class SearchController {
 	@RequestMapping(value="/searchResult/community.do", method=RequestMethod.GET)
 	public ModelAndView searchResultCommunity(@RequestParam(value="cPage", defaultValue="1") int cPage,
 			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, ModelAndView mv, String searchKeyword) throws IOException {
-		System.out.println(cPage);
-		if(searchKeyword.contains("?")) searchKeyword=searchKeyword.substring(0, searchKeyword.indexOf("?"));
+		if(searchKeyword.contains("?")) {
+			System.out.println(searchKeyword);
+			cPage=Integer.parseInt(searchKeyword.substring(searchKeyword.lastIndexOf("=")+1));
+			System.out.println(cPage);
+			searchKeyword=searchKeyword.substring(0, searchKeyword.indexOf("?"));
+		}
 		//mv.addObject("searchKeyword",searchKeyword);
 		
 		List<String> nounList = analyzeKeyword(searchKeyword); //형태소 분석 후 명사만 추출
-		System.out.println("검색어"+searchKeyword);
+		//System.out.println("검색어"+searchKeyword);
 		
 		System.out.println(cPage);
 		
