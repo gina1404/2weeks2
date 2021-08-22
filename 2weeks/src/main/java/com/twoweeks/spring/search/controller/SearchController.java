@@ -1,5 +1,6 @@
 package com.twoweeks.spring.search.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
+import com.twoweeks.spring.common.Pagination;
 import com.twoweeks.spring.search.model.service.SearchService;
 import com.twoweeks.spring.search.model.vo.DummyData;
 
@@ -41,21 +44,53 @@ public class SearchController {
 		System.err.println("검색어 : "+searchKeyword);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("search/searchResult");
-		
+		mv.addObject("searchKeyword",searchKeyword);
 		List<String> nounList = analyzeKeyword(searchKeyword); //형태소 분석 후 명사만 추출
 //		System.out.println(nounList);
 		
-		//post검색
-		List<FreeBoard> searchResultCommunity = service.searchResultCommunity(nounList);
-		
-		if (searchResultCommunity!=null) mv.addObject("searchResultCommunity", searchResultCommunity);
+		if(!nounList.isEmpty()) {
+			//post검색
+			List<FreeBoard> searchResultCommunity = service.searchResultCommunity(nounList); 			
+			if (searchResultCommunity!=null) mv.addObject("searchResultCommunity", searchResultCommunity);
+		}
+		int totalData=service.selectResultComCount(nounList);
+		mv.addObject("searchResultCommunityCount", totalData);
 		
 		List<Map<String,String>> externalNaver = service.searchExternalNaver(searchKeyword);		
 		mv.addObject("searchResultExternalNaver", externalNaver);
 //		System.out.println("검색 결과 : "+service.searchExternalNaver(searchKeyword));
 		return mv;
 	}		
+	
+	//커뮤니티 상세 검색 결과
+	@RequestMapping(value="/searchResult/community.do", method=RequestMethod.GET)
+	public ModelAndView searchResultCommunity(@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, ModelAndView mv, String searchKeyword) throws IOException {
+		System.out.println(cPage);
+		if(searchKeyword.contains("?")) searchKeyword=searchKeyword.substring(0, searchKeyword.indexOf("?"));
+		//mv.addObject("searchKeyword",searchKeyword);
 		
+		List<String> nounList = analyzeKeyword(searchKeyword); //형태소 분석 후 명사만 추출
+		System.out.println("검색어"+searchKeyword);
+		
+		System.out.println(cPage);
+		
+		if(!nounList.isEmpty()) {
+			//post검색
+			List<FreeBoard> searchResultCom = service.searchResultCom(cPage, numPerpage, nounList);
+			int totalData=service.selectResultComCount(nounList);
+			System.out.println(totalData);
+			if (searchResultCom!=null) {
+				mv.addObject("totalContents",totalData);
+				mv.addObject("searchResultCom", searchResultCom);
+				mv.addObject("pageBar", Pagination.getPageBar(totalData, cPage, numPerpage, "community.do?searchKeyword="+searchKeyword, null));
+			}
+		}
+
+		mv.setViewName("search/searchResultCommunity");
+		return mv;
+	}
+	
 	//커뮤니티 데이터 크롤링 - Daum 블로그
 	//@RequestMapping("/update/blogDummy")
 	public void updateBlogDummy(String searchKeyword) {

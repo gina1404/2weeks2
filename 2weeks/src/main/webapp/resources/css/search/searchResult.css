@@ -90,11 +90,13 @@
   	padding:15px;
   	text-align:center;
   	display:center;
+	cursor: pointer;
 }
 .searchResult-detail div{
 	display:inline-block;
 	font-family:'Pretendard';
-  	font-size:17px;
+  	font-size:17px;	
+    cursor: pointer;
 }
 .searchResult-detail span{
 	font-family:'Pretendard';
@@ -103,3 +105,4 @@
   	color: darkgray;
   	margin-left:5px;
 }
+

@@ -18,6 +18,20 @@
 		WHERE ROWNUM <![CDATA[ < ]]>= 20
 	</select>
 	
+	<!-- community 전체 검색 결과 -->
+	<select id="searchResultCom" resultMap="boardMap" parameterType="searchNoun">
+		SELECT *
+		FROM(
+			SELECT * FROM POST WHERE (${searchNoun})
+		)
+	</select>
+	<select id="searchResultComCount" resultType="_int" parameterType="searchNoun">
+		SELECT COUNT(*)
+		FROM(
+			SELECT * FROM POST WHERE (${searchNoun})
+		)
+	</select>
+	
 	<resultMap type="freeboard" id="boardMap">
 		<id column="post_Sq" property="post_Sq"/>
 		<result column="user_Id" property="user_Id"/>

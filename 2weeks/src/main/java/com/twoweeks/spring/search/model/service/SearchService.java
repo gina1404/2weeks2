@@ -1,5 +1,6 @@
 package com.twoweeks.spring.search.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +11,11 @@ import com.twoweeks.spring.search.model.vo.DummyData;
 public interface SearchService {
 	
 	//community 내부 검색
-	List<FreeBoard>searchResultCommunity(List<String> nounList);
+	List<FreeBoard> searchResultCommunity(List<String> nounList);
 	
+	//community 전체 검색
+	List<FreeBoard> searchResultCom(int cPage, int numPerpage, List<String> nounList)  throws IOException;
+	int selectResultComCount(List<String> nounList);
 	
 	//네이버 검색 결과 api
 	List<Map<String,String>> searchExternalNaver(String searchKeyword);

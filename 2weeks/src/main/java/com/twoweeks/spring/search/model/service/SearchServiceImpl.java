@@ -59,13 +59,53 @@ public class SearchServiceImpl implements SearchService{
 		}
 		SearchNoun sn=new SearchNoun();
 		sn.setSearchNoun(searchNoun);
-		System.out.println(searchNoun);
+		//System.out.println(searchNoun);
 		
 		return dao.searchResultCommunity(session, sn);
 	}
 	
 	
-	
+	//community 전체 검색
+	@Override
+	public List<FreeBoard> searchResultCom(int cPage, int numPerpage, List<String> nounList) throws IOException {
+		String searchNoun="";
+		for(int i=0; i<nounList.size();i++) {
+			if(i==0) {
+				searchNoun=searchNoun+"POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+			}else {
+				if(i%2==1) {
+					searchNoun=searchNoun+"AND POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				}else {
+					searchNoun=searchNoun+"OR POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				}
+			}			
+		}
+		SearchNoun sn=new SearchNoun();
+		sn.setSearchNoun(searchNoun);
+		//System.out.println(searchNoun);
+		
+		return dao.selectResultCom(session, cPage, numPerpage, sn);
+	}
+	@Override
+	public int selectResultComCount(List<String> nounList) {
+		String searchNoun="";
+		for(int i=0; i<nounList.size();i++) {
+			if(i==0) {
+				searchNoun=searchNoun+"POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+			}else {
+				if(i%2==1) {
+					searchNoun=searchNoun+"AND POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				}else {
+					searchNoun=searchNoun+"OR POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				}
+			}			
+		}
+		SearchNoun sn=new SearchNoun();
+		sn.setSearchNoun(searchNoun);
+		return dao.selectResultComCount(session, sn);
+	}
+
+
 	//네이버 api 검색
 	@Override
 	public List<Map<String,String>> searchExternalNaver(String searchKeyword){

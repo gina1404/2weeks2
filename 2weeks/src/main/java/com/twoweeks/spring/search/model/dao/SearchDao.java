@@ -13,6 +13,9 @@ public interface SearchDao {
 	//community 내부 검색 결과
 	List<FreeBoard> searchResultCommunity(SqlSessionTemplate session, SearchNoun sn);
 	
+	//community 전체 검색
+	List<FreeBoard> selectResultCom(SqlSessionTemplate session, int cPage, int numPerpage, SearchNoun sn);
+	int selectResultComCount(SqlSessionTemplate session, SearchNoun sn);
 	//블로그 크롤링 정보를 DB에 저장
 	int insertBlogDummy (SqlSessionTemplate session, DummyData dd);
 }
