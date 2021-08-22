@@ -295,7 +295,8 @@ right: -60px;
 <section class="container" style="display:flex; padding-bottom: 200px;"> 	
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <form name="KinFrm" action="${path }/KnowledgeIn/KnowledgeInQEnd.do"method="post" enctype="multipart/form-data" >
-         
+
+       
 	<div class="question"  style="display:inline-block;padding-left: 200px;">
 			<span class="a">Q&A</span>
 		<!-- 	<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
@@ -307,9 +308,12 @@ right: -60px;
 <input type="text"  maxlength='20' style="width:1000px;font-size:30px; border:1px solid #19ce60" placeholder="제목 작성란 입니다 20자 미만으로 입력해주세요."
 				 value ="${knowledgeIn.kin_Title}" name="kin_Title" required>
 			
-			<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly">
-			<input type="hidden" name="kin_Writer" class="form-control" value="${member.user_Id}" readonly="readonly">
-			<%-- Point : ${member.userPoint_Cnt }  --%>
+			<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly"> 
+			<input type="hidden" name="kin_Writer" class="form-control" value="${member.user_Id}" readonly="readonly"> 
+		
+	
+		<%-- <input type="hidden" name="point2" class="form-control" value="${member.userPoint_Cnt}" readonly="readonly">  --%> 
+		Point : ${member.userPoint_Cnt }  
 			<ul class="knowmenu"> 
 					<li></li>
 					<li></li>
@@ -365,13 +369,61 @@ right: -60px;
 	<!-- 		<span>(선택하지 않을 시 0포인트)</span>
 			<hr style="border: solid 1px #F2F2F2;"> -->
 		<span>포인트 설정 </span>
+				<c:choose>
+				<c:when test ="${member.userPoint_Cnt<50}">
+				<label><input type="radio" name="point" value="0" ><span class="c">0</span></label>
+				  (보유한 포인트가 없습니다)
+				</c:when>
+				
+				<c:when test ="${member.userPoint_Cnt<100}">
+					<label><input type="radio" name="point" value="0" ><span class="c">0</span></label>
+					<label><input type="radio" name="point" value="50" ><span class="c">50</span></label>
+				</c:when>
+					<c:when test ="${member.userPoint_Cnt<150}">
+					<label><input type="radio" name="point" value="0" ><span class="c">0</span></label>
+					<label><input type="radio" name="point" value="50" ><span class="c">50</span></label>
+					<label><input type="radio" name="point" value="100" ><span class="c">100</span></label>
+				</c:when>
+				
+					
+					<c:when test ="${member.userPoint_Cnt<200}">
+					<label><input type="radio" name="point" value="0" ><span class="c">0</span></label>
+					<label><input type="radio" name="point" value="50" ><span class="c">50</span></label>
+					<label><input type="radio" name="point" value="100" ><span class="c">100</span></label>
+					<label><input type="radio" name="point" value="150" ><span class="c">150</span></label>
 		
-		<label><input type="radio" name="point" value="50" ><span class="c">50</span></label>
-		<label><input type="radio" name="point" value="100" ><span class="c">100</span></label>
-		<label><input type="radio" name="point" value="150" ><span class="c">150</span></label>
-		<label><input type="radio" name="point" value="200" ><span class="c">200</span></label>
-		<label><input type="radio" name="point" value="250" ><span class="c">250</span></label>
-		<label><input type="radio" name="point" value="300" ><span class="c">300</span></label>
+				</c:when>
+					<c:when test ="${member.userPoint_Cnt<250}">
+					<label><input type="radio" name="point" value="0" ><span class="c">0</span></label>
+					<label><input type="radio" name="point" value="50" ><span class="c">50</span></label>
+					<label><input type="radio" name="point" value="100" ><span class="c">100</span></label>
+					<label><input type="radio" name="point" value="150" ><span class="c">150</span></label>
+					<label><input type="radio" name="point" value="200" ><span class="c">200</span></label>
+			
+				</c:when>
+		
+					<c:when test ="${member.userPoint_Cnt<300}">
+					<label><input type="radio" name="point" value="0" ><span class="c">0</span></label>
+					<label><input type="radio" name="point" value="50" ><span class="c">50</span></label>
+					<label><input type="radio" name="point" value="100" ><span class="c">100</span></label>
+					<label><input type="radio" name="point" value="150" ><span class="c">150</span></label>
+					<label><input type="radio" name="point" value="200" ><span class="c">200</span></label>
+					<label><input type="radio" name="point" value="250" ><span class="c">250</span></label>
+			
+				</c:when>
+				<c:otherwise>
+					<label><input type="radio" name="point" value="0" ><span class="c">0</span></label>
+					<label><input type="radio" name="point" value="50" ><span class="c">50</span></label>
+					<label><input type="radio" name="point" value="100" ><span class="c">100</span></label>
+					<label><input type="radio" name="point" value="150" ><span class="c">150</span></label>
+					<label><input type="radio" name="point" value="200" ><span class="c">200</span></label>
+					<label><input type="radio" name="point" value="250" ><span class="c">250</span></label>
+					<label><input type="radio" name="point" value="300" ><span class="c">300</span></label>
+				</c:otherwise>
+
+
+			</c:choose>
+		
 	
 		
 		</div>	

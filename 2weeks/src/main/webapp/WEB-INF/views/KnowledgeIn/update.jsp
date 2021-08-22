@@ -362,17 +362,17 @@ right: 50px;
 		<label>아이디 공개<input type="radio" name="open_Yn" value="Y">${KnowledgeIn.open_Yn}</label>
 		<label>비공개<input type="radio" name="open_Yn" value="N">${KnowledgeIn.open_Yn}</label>
 			<hr style="border: solid 1px #F2F2F2;">
-		<span>포인트 설정 </span>
+		<!-- <span>포인트 설정 </span>
 		<label><input type="radio" name="point" value="50" ><input type="hidden" name="radio" value="50"><span class="c">50</span></label>
 		<label><input type="radio" name="point" value="100" ><input type="hidden" name="radio" value="100"><span class="c">100</span></label>
 		<label><input type="radio" name="point" value="150" ><input type="hidden" name="radio" value="150"><span class="c">150</span></label>
 		<label><input type="radio" name="point" value="200" ><input type="hidden" name="radio" value="200"><span class="c">200</span></label>
 		<label><input type="radio" name="point" value="250" ><input type="hidden" name="radio" value="250"><span class="c">250</span></label>
-		<label><input type="radio" name="point" value="300" ><input type="hidden" name="radio" value="300"><span class="c">300</span></label>
+		<label><input type="radio" name="point" value="300" ><input type="hidden" name="radio" value="300"><span class="c">300</span></label> -->
 
 		</div>	
 								
- 			<hr style="border: solid 1px #F2F2F2;">	
+ 			
  			
  	        <!--     <input type="submit" class="btn btn-outline-success" value="질문등록" >	 -->
 		<button class="Qcheck" type="submit">수정 완료</button>

@@ -1,5 +1,8 @@
 @charset "UTF-8";
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+a {	color: #394956; text-decoration: none; outline: none }
+
+a:hover, a:active {text-decoration: none; color: #394956;}
 
 .sidebar-default {
 	width:100%;

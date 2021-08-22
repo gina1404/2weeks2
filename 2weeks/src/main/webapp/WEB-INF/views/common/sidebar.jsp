@@ -7,7 +7,9 @@
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/sidebar.css"> 
 
 	<nav id="sidebar" class="side_bar">		
+			<div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
 		<div class="sidebar-default"> <!-- 스크롤 내려도 목록 고정되도록 -->
+		
 			<!-- 코로나 현황 -->
 			<div class="wrap_sub_list"> 
 				<div class="sidebar-list">

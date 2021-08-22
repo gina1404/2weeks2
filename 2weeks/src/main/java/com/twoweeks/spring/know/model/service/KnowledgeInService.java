@@ -2,6 +2,8 @@ package com.twoweeks.spring.know.model.service;
 
 import java.util.List;
 
+
+
 import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinReply;
 import com.twoweeks.spring.member.model.vo.Member;
@@ -11,9 +13,9 @@ public interface KnowledgeInService {
 	
 	List<Kin> selectKinListcnt(int cPage, int numPerpage); //글 목록 조회수별로 조회
 
-	List<Kin> selectKinListMyQ(int cPage, int numPerpage, String user_Id); //글 목록 나의 질문
+	List<Kin> selectKinListMyQ(int cPage, int numPerpage,String userId); //글 목록 나의 질문
 	
-	List<Kin> selectKinListMyA(int cPage, int numPerpage); //글 목록 나의 답변
+	List<Kin> selectKinListMyA(int cPage, int numPerpage,String userId); //글 목록 나의 답변
 	
 	List<Kin> list(Kin k);
 	
@@ -35,7 +37,28 @@ public interface KnowledgeInService {
 	
 	void updateReplyCount(int sq)throws Exception; //답글 개수 
 	
-	int updatePoint(Member m)throws Exception; //포인트
+	int updatePoint(Member m1) throws Exception; //글 등록시 포인트 설정 
+	
+	int selection(Member m1) throws Exception; //채택 하면 답변자에게 포인트가 넘어감 
+
+	int updateSq(int sq) throws Exception; //selected =1 
+
+	
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+	
 
 
 

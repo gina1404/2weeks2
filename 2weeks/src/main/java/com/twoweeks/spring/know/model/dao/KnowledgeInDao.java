@@ -1,6 +1,7 @@
 package com.twoweeks.spring.know.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -15,9 +16,9 @@ public interface KnowledgeInDao {
 	
 	List<Kin> selectKinListcnt(SqlSession session, int cPage, int numPerpage);
 	
-	List<Kin> selectKinListMyQ(SqlSession session, int cPage, int numPerpage, String user_Id);
+	List<Kin> selectKinListMyQ(SqlSession session, int cPage, int numPerpage,String user_Id);
 	
-	List<Kin> selectKinListMyA(SqlSession session, int cPage, int numPerpage);
+	List<Kin> selectKinListMyA(SqlSession session, int cPage, int numPerpage,String user_Id);
 	
 	int selectKinCount(SqlSession session); //총 건수
 	
@@ -41,13 +42,34 @@ public interface KnowledgeInDao {
 	
 	void updateReplyCount(SqlSession session, int sq)throws Exception; //답글 개수
 	
-	int  updatePoint(SqlSession session, Member m)throws Exception; //글 등록시 멤버포인트
-	
 	int update(SqlSession session, Kin k); //글 수정
 
 	int updateKinAttachment(SqlSession session, KinAttachment ka); //첨부파일 수정
 
 	List<Kin> list(SqlSession session, Kin k);
+
+	int updatePoint(SqlSession session, Member m1); //포인트설정하고 글등록
+	
+	int selection(SqlSession session, Member m1); //채택하면 포인트 주어지게
+
+	int updateSq(SqlSession session, int sq); 
+
+
+
+
+
+
+
+	
+
+	
+
+
+
+
+
+
+
 
 
 	

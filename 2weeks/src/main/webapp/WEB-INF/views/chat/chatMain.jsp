@@ -3,6 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
+<style>
+	header .content{
+		padding-left:250px !important;
+		margin-top:0;
+	}
+</style>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="covid/reportList"/>
 </jsp:include>

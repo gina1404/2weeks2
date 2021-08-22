@@ -379,6 +379,7 @@ background-color:transparent;
 </style>
 <section class="container" style="display:flex; padding-bottom: 200px;"> 
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>	
+
 <div class="content" style="display:inline-block;padding-left: 220px;">
 		
 						<a href="${pageContext.request.contextPath}/chatting.do">	<img id="expert" src="${pageContext.request.contextPath}/resources/images/knowledgeIn/home_panel_expert2.png" alt=""
@@ -465,6 +466,7 @@ background-color:transparent;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
+					
 		<%-- 		<span class="reply_num">답변 ${k.reply_Cnt}개</span> --%>
 			    	
 				
@@ -595,15 +597,15 @@ $(function(){
 $(document).ready(function(){ 
 
 		$(".Myqlist").on("click",function(){
-		
+			
 			if(	${empty member.user_Id }){
 				alert("로그인 후 이용가능합니다.")
 					return false;
 				} 
 			
 	
-				
-			location.href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do";
+		    location.href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do?user_Id=${member.user_Id}";
+			/* location.href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do"; */
 		
 			
 		});  

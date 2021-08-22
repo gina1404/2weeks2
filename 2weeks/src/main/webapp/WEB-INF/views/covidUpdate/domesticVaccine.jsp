@@ -6,7 +6,12 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
-
+<style>
+	header .content{
+		padding-left:250px !important;
+		margin-top:0;
+	}
+</style>
 <style>
 .table4_1{
 	width:65%;
@@ -88,7 +93,7 @@ top: -500px;
 			</tr>	
 		</c:forEach>
 </table>
-<div class="datetime">${datetime}기준</div>
+<div class="datetime">업데이트 일시: ${datetime}</div>
 	
 	
 	
@@ -97,7 +102,7 @@ top: -500px;
 		
 	
 </section>
-	
+	 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

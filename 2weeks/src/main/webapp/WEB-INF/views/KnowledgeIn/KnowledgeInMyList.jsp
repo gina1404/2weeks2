@@ -363,7 +363,7 @@ text-align: center;
 						width="130px" height="130px">
 			<div class="description">전문의 상담이<br>필요할 땐,<br>지식iN 엑스퍼트</div></a>
 
-		
+			<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly">
 						
 			<div class="description"></div>
 				<!-- 	</div> -->
@@ -416,7 +416,7 @@ text-align: center;
 				
 					<c:forEach var="k" items="${MyQ }" varStatus="status">
 					 <c:if test="${status.count<=3 }"> 
-					
+				<%-- 	<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly"> --%>
 					<li class="ranking_item _item_1" >
 			
 					<span class="no"><c:out value="${status.count}"></c:out></span>
