@@ -452,6 +452,7 @@ height:13px;
 					<div>	<span class="QA">A</span> 
 					 <c:if test="${kr.open_Yn eq 'Y'}" >
 					 	<span class="title">${kr.reply_Writer}님의 답변</span> 
+					 	<input type="hidden" name="kin_Sq" value="${KnowledgeIn.kin_Sq}">
         					</c:if>
         			       <c:if test="${kr.open_Yn eq 'N'}" >
             					<span class="title">비공개 답변</span> 

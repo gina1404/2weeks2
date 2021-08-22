@@ -307,9 +307,10 @@ right: -60px;
 <input type="text"  maxlength='20' style="width:1000px;font-size:30px; border:1px solid #19ce60" placeholder="제목 작성란 입니다 20자 미만으로 입력해주세요."
 				 value ="${knowledgeIn.kin_Title}" name="kin_Title" required>
 			
-			<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly">
-			<input type="hidden" name="kin_Writer" class="form-control" value="${member.user_Id}" readonly="readonly">
-			<%-- Point : ${member.userPoint_Cnt }  --%>
+			<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly"> 
+			<input type="hidden" name="kin_Writer" class="form-control" value="${member.user_Id}" readonly="readonly"> 
+		<%-- <input type="hidden" name="point2" class="form-control" value="${member.userPoint_Cnt}" readonly="readonly">  --%> 
+		Point : ${member.userPoint_Cnt }  
 			<ul class="knowmenu"> 
 					<li></li>
 					<li></li>

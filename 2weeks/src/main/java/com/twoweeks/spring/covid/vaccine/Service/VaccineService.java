@@ -1,6 +1,6 @@
 package com.twoweeks.spring.covid.vaccine.Service;
 
-import java.util.List;
+
 
 import org.springframework.http.ResponseEntity;
 
