@@ -9,28 +9,55 @@
 	</insert>
 	
 	
-	<!-- community 내부 검색 결과 -->
+	<!-- community 내부 검색 -->
 	<select id="searchResultCommunity" resultMap="boardMap" parameterType="searchNoun">
 		SELECT *
 		FROM(
 			SELECT * FROM POST WHERE (${searchNoun})
 		)
-		WHERE ROWNUM <![CDATA[ < ]]>= 20
+		WHERE ROWNUM <![CDATA[ < ]]>= 10
 	</select>
 	
-	<!-- community 전체 검색 결과 -->
+	<!-- community 상세 검색 -->
 	<select id="searchResultCom" resultMap="boardMap" parameterType="searchNoun">
 		SELECT *
 		FROM(
 			SELECT * FROM POST WHERE (${searchNoun})
 		)
 	</select>
+	
+	<!-- community 상세 검색 수 -->
 	<select id="searchResultComCount" resultType="_int" parameterType="searchNoun">
 		SELECT COUNT(*)
 		FROM(
 			SELECT * FROM POST WHERE (${searchNoun})
 		)
+	</select>	
+	
+	<!-- 지식인 내부 검색 -->
+	<select id="searchResultKnowledgeIn" resultMap="KnowledgeInMap" parameterType="searchNoun">
+		SELECT *
+		FROM(
+			SELECT * FROM KIN WHERE (${searchNoun})
+		)
+		WHERE ROWNUM <![CDATA[ < ]]>= 10
 	</select>
+	
+	<!-- 지식인 상세 검색 -->
+	<select id="searchResultKin" resultMap="KnowledgeInMap" parameterType="searchNoun">
+		SELECT *
+		FROM(
+			SELECT * FROM KIN WHERE (${searchNoun})
+		)
+	</select>
+	
+	<!-- 지식인 상세 검색 수 -->
+	<select id="searchResultKinCount" resultType="_int" parameterType="searchNoun">
+		SELECT COUNT(*)
+		FROM(
+			SELECT * FROM KIN WHERE (${searchNoun})
+		)
+	</select>	
 	
 	<resultMap type="freeboard" id="boardMap">
 		<id column="post_Sq" property="post_Sq"/>
@@ -47,5 +74,20 @@
 		<result column="searchType" property="searchType"/>
 		<result column="keyword" property="keyword"/>
 		<result column="replyNo" property="replyNo"/>
+	</resultMap>
+	
+	<resultMap type="knowledgeIn" id="KnowledgeInMap">
+		<id column="kin_Sq" property="kin_Sq"/>
+		<result column="kin_Writer" property="kin_Writer"/>
+		<result column="category" property="category"/>
+		<result column="kin_Title" property="kin_Title"/>
+		<result column="kin_Content" property="kin_Content"/>
+		<result column="kin_Image" property="kin_Image"/>
+		<result column="open_Yn" property="open_Yn"/>
+		<result column="selected" property="selected"/>
+		<result column="kin_Date" property="kin_Date"/>
+		<result column="kin_Cnt" property="kin_Cnt"/>
+		<result property="reply_Cnt" column="reply_Cnt"/>
+		<result property="point" column="point"/>
 	</resultMap>
 </mapper>

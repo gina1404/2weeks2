@@ -17,42 +17,6 @@
 <section class="container" style="display:flex; padding-bottom:200px;">	
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 	<div class="content" style="display:inline-block; padding-left:220px; ">
-		<!-- 커뮤니티 검색 결과 -->
-		<section id="searchResult-community" class="searchResult-area" >
-			<div class="searchResult-name">2weeks 커뮤니티 검색 결과</div>
-			<c:choose>
-				<c:when test="${!empty searchResultCommunity }">
-					<c:forEach var="list" varStatus="i" items="${searchResultCommunity}" end="8">
-						<div class="searchResult-list">					
-							<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/two.svg"/></div>
-							<div class="searchResult-blogName" onclick="">${list.category }</div>
-					       	<div class="searchResult-vertical-divider"></div>
-					       	<div class="searchResult-date">${list.post_Dt }</div>
-							<div class="searchResult-title" onclick="location.href='${path}/freeboard/readView?no=${list.post_Sq}'">${list.post_Title }</div>
-							<div class="searchResult-content">
-								<!-- 미리보기 글자수 제한 -->
-								<c:choose>
-									<c:when test="${fn:length(list.post_Content) gt 200 }">
-										<c:out value="${fn:substring(list.post_Content,0,200)}"/>...
-									</c:when>
-									<c:otherwise>
-										<c:out value="${list.post_Content}"/>
-									</c:otherwise>
-								</c:choose>
-							</div>
-						</div>
-						<c:if test ="${not i.last}"><hr></c:if>									
-					</c:forEach>
-					<div class="searchResult-detail"><div onclick="location.href='${path}/searchResult/community.do?searchKeyword=${searchKeyword }'">커뮤니티 검색 결과 더 보기 (총 ${searchResultCommunityCount }개)<span>→</span></div></div>
-				</c:when>
-				
-				<c:otherwise>
-					<div class="searchResult-list"> 커뮤니티 검색 결과가 없습니다 </div>
-				</c:otherwise>
-			</c:choose>
-		</section>
-		<br><br><br>
-		
 		<!-- 지식인 검색 결과 -->
 		<section id="searchResult-knowledgeIn" class="searchResult-area" >
 			<div class="searchResult-name">2weeks 지식인 검색 결과</div>

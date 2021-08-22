@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
+import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.search.model.dao.SearchDao;
 import com.twoweeks.spring.search.model.vo.DummyData;
 import com.twoweeks.spring.search.model.vo.SearchNoun;
@@ -64,19 +65,60 @@ public class SearchServiceImpl implements SearchService{
 		return dao.searchResultCommunity(session, sn);
 	}
 	
-	
-	//community 전체 검색
+	//community 상세 검색
+		@Override
+		public List<FreeBoard> searchResultCom(int cPage, int numPerpage, List<String> nounList) throws IOException {
+			String searchNoun="";
+			for(int i=0; i<nounList.size();i++) {
+				if(i==0) {
+					searchNoun=searchNoun+"POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				}else {
+					if(i%2==1) {
+						searchNoun=searchNoun+"AND POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+					}else {
+						searchNoun=searchNoun+"OR POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+					}
+				}			
+			}
+			SearchNoun sn=new SearchNoun();
+			sn.setSearchNoun(searchNoun);
+			//System.out.println(searchNoun);
+			
+			return dao.selectResultCom(session, cPage, numPerpage, sn);
+		}
+		
+		//community 상세 검색 개수
+		@Override
+		public int selectResultComCount(List<String> nounList) {
+			String searchNoun="";
+			for(int i=0; i<nounList.size();i++) {
+				if(i==0) {
+					searchNoun=searchNoun+"POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				}else {
+					if(i%2==1) {
+						searchNoun=searchNoun+"AND POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+					}else {
+						searchNoun=searchNoun+"OR POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+					}
+				}			
+			}
+			SearchNoun sn=new SearchNoun();
+			sn.setSearchNoun(searchNoun);
+			return dao.selectResultComCount(session, sn);
+		}
+
+	//지식인 내부 검색
 	@Override
-	public List<FreeBoard> searchResultCom(int cPage, int numPerpage, List<String> nounList) throws IOException {
+	public List<Kin> searchResultKnowledgeIn(List<String> nounList) {
 		String searchNoun="";
 		for(int i=0; i<nounList.size();i++) {
 			if(i==0) {
-				searchNoun=searchNoun+"POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				searchNoun=searchNoun+"KIN_CONTENT LIKE'%"+nounList.get(i)+"%'";
 			}else {
 				if(i%2==1) {
-					searchNoun=searchNoun+"AND POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+					searchNoun=searchNoun+"AND KIN_CONTENT LIKE'%"+nounList.get(i)+"%'";
 				}else {
-					searchNoun=searchNoun+"OR POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+					searchNoun=searchNoun+"OR KIN_CONTENT LIKE'%"+nounList.get(i)+"%'";
 				}
 			}			
 		}
@@ -84,27 +126,51 @@ public class SearchServiceImpl implements SearchService{
 		sn.setSearchNoun(searchNoun);
 		//System.out.println(searchNoun);
 		
-		return dao.selectResultCom(session, cPage, numPerpage, sn);
+		return dao.searchResultkNowledgeIn(session, sn);
 	}
+	
+	//지식인 상세 검색
 	@Override
-	public int selectResultComCount(List<String> nounList) {
+	public List<Kin> searchResultKin(int cPage, int numPerpage, List<String> nounList) throws IOException {
 		String searchNoun="";
 		for(int i=0; i<nounList.size();i++) {
 			if(i==0) {
-				searchNoun=searchNoun+"POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				searchNoun=searchNoun+"KIN_CONTENT LIKE'%"+nounList.get(i)+"%'";
 			}else {
 				if(i%2==1) {
-					searchNoun=searchNoun+"AND POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+					searchNoun=searchNoun+"AND KIN_CONTENT LIKE'%"+nounList.get(i)+"%'";
 				}else {
-					searchNoun=searchNoun+"OR POST_CONTENT LIKE'%"+nounList.get(i)+"%'";
+					searchNoun=searchNoun+"OR KIN_CONTENT LIKE'%"+nounList.get(i)+"%'";
 				}
 			}			
 		}
 		SearchNoun sn=new SearchNoun();
 		sn.setSearchNoun(searchNoun);
-		return dao.selectResultComCount(session, sn);
+		//System.out.println(searchNoun);
+		
+		return dao.selectResultKin(session, cPage, numPerpage, sn);
 	}
 
+	@Override
+	public int selectResultKinCount(List<String> nounList) {
+		String searchNoun="";
+		for(int i=0; i<nounList.size();i++) {
+			if(i==0) {
+				searchNoun=searchNoun+"KIN_CONTENT LIKE'%"+nounList.get(i)+"%'";
+			}else {
+				if(i%2==1) {
+					searchNoun=searchNoun+"AND KIN_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				}else {
+					searchNoun=searchNoun+"OR KIN_CONTENT LIKE'%"+nounList.get(i)+"%'";
+				}
+			}			
+		}
+		SearchNoun sn=new SearchNoun();
+		sn.setSearchNoun(searchNoun);
+		return dao.selectResultKinCount(session, sn);
+	}
+
+	
 
 	//네이버 api 검색
 	@Override

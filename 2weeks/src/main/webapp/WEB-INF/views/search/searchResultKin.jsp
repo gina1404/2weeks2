@@ -17,26 +17,26 @@
 <section class="container">	
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 	<div class="content">
-		<!-- 커뮤니티 검색 결과 -->
-		<section id="searchResult-community-detail" class="searchResult-area defaultBoxshadow">
+		<!-- 지식인 검색 결과 -->
+		<section id="searchResult-kin-detail" class="searchResult-area defaultBoxshadow">
 			<div class="searchResult-name">2weeks 커뮤니티 검색 결과</div>
 			<c:choose>
-				<c:when test="${!empty searchResultCom }">
-					<c:forEach var="list" varStatus="i" items="${searchResultCom}" end="8">
+				<c:when test="${!empty searchResultKin }">
+					<c:forEach var="list" varStatus="i" items="${searchResultKin}" end="8">
 						<div class="searchResult-list">					
 							<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/two.svg"/></div>
 							<div class="searchResult-blogName" onclick="">${list.category }</div>
 					       	<div class="searchResult-vertical-divider"></div>
-					       	<div class="searchResult-date">${list.post_Dt }</div>
-							<div class="searchResult-title" onclick="location.href='${path}/freeboard/readView?no=${list.post_Sq}'">${list.post_Title }</div>
+					       	<div class="searchResult-date">${list.kin_Date }</div>
+							<div class="searchResult-title" onclick="location.href='${path}/freeboard/readView?no=${list.kin_Sq}'">${list.kin_Title }</div>
 							<div class="searchResult-content">
 								<!-- 미리보기 글자수 제한 -->
 								<c:choose>
-									<c:when test="${fn:length(list.post_Content) gt 200 }">
-										<c:out value="${fn:substring(list.post_Content,0,200)}"/>...
+									<c:when test="${fn:length(list.kin_Content) gt 200 }">
+										<c:out value="${fn:substring(list.kin_Content,0,200)}"/>...
 									</c:when>
 									<c:otherwise>
-										<c:out value="${list.post_Content}"/>
+										<c:out value="${list.kin_Content}"/>
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -47,7 +47,7 @@
 				</c:when>
 				
 				<c:otherwise>
-					<div class="searchResult-list"> 커뮤니티 검색 결과가 없습니다 </div>
+					<div class="searchResult-list"> 지식인 검색 결과가 없습니다 </div>
 				</c:otherwise>
 			</c:choose>
 		</section>
