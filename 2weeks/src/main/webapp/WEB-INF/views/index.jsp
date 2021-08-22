@@ -22,10 +22,41 @@
 <section class="container" style="display: flex; padding-bottom: 30px;">
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>			
 	<div class="content gridContainer" style="margin-left: 220px;">
-		<div class="item 1st">1</div>
-		<div class="item 1st">2</div>
-		<div class="item 1st">3</div>
-		<div class="item 1st">4</div>
+		<div class="kCovid item">
+			<div class="today">
+				<p>금일 확진자</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${todayDecide }" />명
+					</div>
+			</div>
+		
+		<div class="kCovid item">
+			<div class="today">
+				<p>금일 확진자</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${decideCnt }" />명
+					</div>
+			</div>
+				<div class="kCovid item">
+			<div class="today">
+				<p>총 사망자</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${deathCnt }" />명
+					</div>
+			</div>
+					<div class="kCovid item">
+			<div class="today">
+				<p>격리해제 수</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${clearCnt }" />명
+					</div>
+			</div>
+		
+		
 		<div class="item 1st">
 			<div class="state">
 				<div class="flag">
@@ -88,11 +119,11 @@
 			<div id="regionalKor-map-small"></div>
 		</div>
 		<div class="item 2nd">
-			<div class="report">
+			<div class="report" >
 				<div>
 					<a id="reportMove" href="${path }/covidUpdate/report.do">
 						보도자료
-					</a>	
+					</a>
 				</div>
 				<table id="reportTab" class="table table-striped">
 					<c:forEach var="r" items="${reportList }">
@@ -102,11 +133,26 @@
 						</tr>
 					</c:forEach>
 				</table>
-			</div>
-			<div class="report">
-				<div>뉴스</div>
-			</div>			
 		</div>
+			<div class="news">
+				<div id="newsMove">
+					<a id="reportMove" href="${pageContext.request.contextPath }/covid/news.do">
+						뉴스
+					</a>					 
+				</div>
+				<div class="frontside">
+                     <div class="card">
+                         <div class="card-body text-center">
+                             <p><img class=" img-fluid" src="${path }/resources/images/icons/hazmat.svg" alt="card image" style="width:60px;"></p>
+                             <h4 class="card-title" id="news-title"><c:out value="dasdasdasdas"/></h4>
+                             <p class="card-text" id="news-content"><c:out value="dsadasdas"/></p>
+                             <p class="card-text" id="news-date"><c:out value="dsadasdsadasdasdsadas"/></p>
+                         </div>
+                     </div>
+                 </div>
+			</div>		
+		</div>				
+		
 		<div class="item 3rd">
 			<div id="home-community-list">
 				 <div class="searchResult-name">2weeks 검색 결과</div>
@@ -133,7 +179,7 @@
 				</c:forEach>
 			</div>
 		</div>
-	</div>	
+	</div>
 </section>
 
 <!-- 보도자료 -->

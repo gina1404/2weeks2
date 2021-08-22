@@ -2,50 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<style>
- .category{
- 	font-size:12px;
- }
-.container {
-  padding-right: 30px;
-  padding-left: 30px;
-  margin-right: auto;
-  margin-left: 20%;
-  margin-top:5%;
-}
-.profile{
-	width:24px;
-	height:24px;
-}
-.heart {
-width:13px;
-height:13px;
-}
-.eye{
-width:13px;
-height:13px;
-}
-.comment{
-width:13px;
-height:13px;
-}
-.icon{
-font-size: 8px;
-}
+<link re="stylesheet" type="text/css" href="${path }/resouces/css/freeboard/searchBoardList.css">
 
-</style>
 
+<section id="content" class="pb-5">
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-
-<section class="container">		
 	<div class="container">
-		<div class="form-group row justify-content-center">
-			<form action="${path }/freeboard/searchBoard.do" method="get">
+   <h1 class="section-title">자유 게시판</h1>
+    <div class="form-group row justify-center-center">
+			<form  action="${path }/freeboard/searchBoard.do"  method="get">
 				<div class="input-group mb-3">
 						<select name="searchType" class="form-control" id="searchType">
 							<option value="POST_TITLE" ${FreeBoard.searchType eq POST_TITLE ? 'selected' : '' }>제목</option>
@@ -56,46 +27,83 @@ font-size: 8px;
 							<option value="cw" ${FreeBoard.searchTypeeq eq 'cw' ? 'selected' : '' }>내용/작성자</option>
 							<option value="tcw" ${FreeBoard.searchType eq 'tcw' ? 'selected' : '' }>전체</option> --%>
 						</select>
-						<input type="text" class="form-control searchInput" placeholder="Search" name="keyword" value="${fb.keyword }" >
+						<input type="text" class="form-control serachInput" placeholder="Search" name="keyword" value="${fb.keyword }" >
 					<div class="input-group-append">
 						<button class="btn btn-success" type="submit" onclick="return searchInput();">Go</button>
 					</div>
 				</div>
 			</form>
 		</div>
-		
-		
-		<div class="row">
-			<c:forEach var="b" items="${list }">
-				<div class="card col-md-3 m-2">
-					<div class="card-header m-3">
-						<a href="#"><img
-							src="${path }/resources/images/freeboardPic/default.png"
-							class="card-img-top" alt="이미지"></a>
-					</div>
-					<div class="card-body">
-						<p class="card-text category">${b.category } &nbsp; &nbsp; [${b.post_Dt }]</p>
-						<h4 class="card-title"><a href="${path }/freeboard/readView?no=${b.post_Sq }&user_id=${b.user_Id}"><c:out value="${b.post_Title }"/></a></h4>
-						<p class="card-text">${b.post_Content }</p>
-						<p class="card-text"><img src="${path}/resources/images/icons/profile.svg" class="profile " alt="프로필사진"> ${b.user_Id }</p>
-						<div class="row">
-						<div class='col-4'>
-							<img alt="좋아요" src="${path }/resources/images/icons/heart.svg" class="heart">&nbsp;<p class="icon">${b.post_Like_Cnt }</p>
-						</div>
-						<div class="col-4">
-							<img alt="조회수" src="${path }/resources/images/icons/eye-6.svg" class="eye">&nbsp;<p class="icon">${b.post_Cnt }</p>
-						</div>
-						<div class="col-4">
-							<img alt="댓글수" src="${path }/resources/images/icons/comment.svg" class="comment">&nbsp;<p class="icon"></p>
-						</div>
+     <div class="row" style="margin-left: 76px;">
+            <!-- Team member -->
+      <c:forEach var="b" items="${list }">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+			<div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+				<div class="mainflip">
+					<div class="frontside">
+						<div class="card">
+							<div class="card-body text-center">
+							<c:forEach var="ima" items="${b.attachments }" varStatus="vs">
+								<c:choose>
+									<c:when test="${empty ima.atch_New} ">
+										<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/freeboardPic/default.png"  class="card-img-top row" alt="기본이미지"> </a>
+									</c:when>
+									<c:otherwise>
+										<c:choose>
+											<c:when test="${fn:contains(ima, 'png')}">
+												<c:if test="${vs.index == 0 }">
+						 							<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/upload/freeboard/${ima.atch_New}" class="card-img-top row" alt="첨부파일"> </a>
+						 						</c:if> 
+											</c:when>
+											<c:when test="${fn:contains(ima, 'jpg')}">
+												<c:if test="${vs.index == 0 }">
+						 							<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/upload/freeboard/${ima.atch_New}" class="card-img-top row" alt="첨부파일"> </a>
+						 						</c:if> 
+						 					</c:when>
+											<c:when test="${fn:contains(ima, 'jpeg')}">
+												<c:if test="${vs.index == 0 }">
+						 							<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/upload/freeboard/${ima.atch_New}" class="card-img-top row" alt="첨부파일"> </a>
+						 						</c:if> 
+						 					</c:when>
+						 					<c:otherwise>
+						 						<a href="${path }/freeboard/readView?no=${b.post_Sq }"><img src="${path }/resources/images/freeboardPic/default.png"  class="card-img-top row" alt="기본이미지"> </a>
+						 					</c:otherwise>
+										</c:choose>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+									<h4 class="card-title">
+										<a href="${path }/freeboard/readView?no=${b.post_Sq }">
+										<c:out value="${b.post_Title }" /> </a>
+									</h4>
+						<c:choose>
+							<c:when test="${fn:length(b.post_Content) gt 26 }">
+							 ${fn:substring(b.post_Content, 0, 25)} 
+							</c:when>
+							<c:otherwise>
+							${b.post_Content }
+							</c:otherwise>
+						</c:choose>
+						<ul class="list-inline">
+						
+						<li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"></a> <i class="fa fa-heart"><c:out value="${b.post_Like_Cnt }"/></i>
+						<li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"></a> <i class="fa  fa-commenting-o"><c:out value="${b.replyNo }"/></i>
+						<li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"></a> <i class="fa fa-eye"><c:out value="${b.post_Cnt }"/></i>
+						
+						
+						</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-
-			</c:forEach>
-		</div>
-		<div id="pagebar-container" class="m-5">${pageBar }</div>
-	</div>
+			</div>
+            <!-- ./Team member -->
+         </c:forEach>
+       </div>
+    </div>
+    
+   
 </section>
 	<script>
 	function searchInput(){

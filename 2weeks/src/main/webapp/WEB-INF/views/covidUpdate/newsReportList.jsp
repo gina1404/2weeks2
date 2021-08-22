@@ -15,7 +15,10 @@
 <section class="container">	
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 	<div class="content">
-		<h4 id="reportLogo">보도자료</h4>
+		<div class="row">
+		<h4 id="reportLogo" class="col-md-2" >보도자료</h4>
+		<h4 id="reportLogo"  class="col-md-4" ><a href="${pageContext.request.contextPath }/covid/news.do">뉴스</a></h4>
+		</div>
 		<div class=" defaultBoxshadow" style="padding-top:20px;"> <!-- <- 진영 추가 (열기) -->
 		<p id="reportListCnt">총 <span>${totalContents }</span>건</p>	
 		<table id="reportTab" class="table table-striped">

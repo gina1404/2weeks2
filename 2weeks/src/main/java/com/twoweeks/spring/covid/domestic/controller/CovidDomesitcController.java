@@ -1,13 +1,13 @@
 package com.twoweeks.spring.covid.domestic.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,40 +33,53 @@ public class CovidDomesitcController {
 	}
 	
 	
-	@RequestMapping("/domestic/cases/")
+	@RequestMapping("domestic/cases")
 	public ModelAndView cases(ModelAndView mv) {
 		
-	log.info("case 실행중입니다 ");
-	
-	Date day = new Date();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-	
-	
-	ResponseEntity<String> responseEntity = service.getApi();
-	Response response = service.parser(responseEntity.getBody());
-	System.out.println(responseEntity.getBody());
-	
-	
-	String json= service.getGoodBye();
-	
-	
-	
-	log.info("json : " + json);
-	System.out.println(json.toString());
-	List<Item> items = response.getBody().getItems();
-	mv.addObject("decide",items.get(0).getDecideCnt()); //확진자 수
-	mv.addObject("death",items.get(0).getDeathCnt()); //사망자 수
-	mv.addObject("json",json);
-	//뒤에 소수점 .xxx가 붙어서 맨뒤에서 부터 4글자를 삭제해줌
-	String cd = items.get(0).getCreateDt();
-	cd = cd.substring(0, cd.length()-4);
-	
+		ResponseEntity<String> responseEntity = service.getApi();
+		Response response = service.parser(responseEntity.getBody());
+		List<Item> items = response.getBody().getItems();
 
 	
-	mv.addObject("day",cd); //기준일
-	System.out.println(items.toString());
+		String json =  service.getGoodBye();
+		System.out.println(items.toString());
 	
-	mv.setViewName("domestic/domesticList");
+	mv.addObject("decide",items.get(0).getDecideCnt()); 
+	mv.addObject("death",items.get(0).getDeathCnt());
+	mv.addObject("accExamCnt",items.get(0).getAccExamCnt());
+	mv.addObject("clearCnt",items.get(0).getClearCnt());
+	//뒤에 소수점 .xxx가 붙어서 맨뒤에서 부터 4글자를 삭제해줌
+	String cd = items.get(0).getCreateDt();
+	cd = cd.substring(0, cd.length()-3);
+	
+
+	log.info(cd);
+	mv.addObject("day",cd); //기준일
+	
+	
+	mv.setViewName("covidUpdate/domestic");
 	return mv;
+	}
+	
+	@Scheduled(cron = "0 0 12 * * *")
+	public void kCovidDataSave() {
+		
+		ResponseEntity<String> responseEntity = service.kCovidDataSave();
+		Response response = service.parser(responseEntity.getBody());
+		List<Item> items = response.getBody().getItems();
+		Map<String, Integer> param2 = new HashMap<String, Integer>();
+		log.info("dsadsadwsa : "+items.get(0).getStateDt());
+		
+		for(int i =0; i<items.size(); i++) {
+			
+		param2.put("accExamCnt", items.get(i).getAccExamCnt());
+		param2.put("clearCnt", items.get(i).getClearCnt());
+		param2.put("stateDt", items.get(i).getStateDt());
+		param2.put("deathCnt", items.get(i).getDeathCnt());
+		param2.put("decideCnt", items.get(i).getDecideCnt());
+		
+		service.kCovidDataInsert(param2);
+		}
+		
 	}
 }

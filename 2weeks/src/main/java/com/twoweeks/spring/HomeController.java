@@ -1,6 +1,7 @@
 package com.twoweeks.spring;
 
 import java.text.DateFormat;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,16 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
+import com.twoweeks.spring.covid.domestic.model.Service.CovidDomesticService;
 import com.twoweeks.spring.covid.report.model.service.CovideReportListServiceImpl;
+import com.twoweeks.spring.overseas.model.sevice.CovidOverseasService;
+import com.twoweeks.spring.overseas.model.vo.Item;
+import com.twoweeks.spring.overseas.model.vo.OverseasPie;
+import com.twoweeks.spring.overseas.model.vo.Response;
 import com.twoweeks.spring.search.model.service.SearchService;
 
 import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
 import kr.co.shineware.nlp.komoran.core.Komoran;
 import kr.co.shineware.nlp.komoran.model.KomoranResult;
-import com.twoweeks.spring.overseas.model.sevice.CovidOverseasService;
-import com.twoweeks.spring.overseas.model.vo.Item;
-import com.twoweeks.spring.overseas.model.vo.OverseasPie;
-import com.twoweeks.spring.overseas.model.vo.Response;
 
 /**
  * Handles requests for the application home page.
@@ -40,6 +42,8 @@ public class HomeController {
 	private CovideReportListServiceImpl reportService;
 	@Autowired
 	private CovidOverseasService service;
+	@Autowired
+	private CovidDomesticService dService;
 	
 	@Autowired	
 	private SearchService searchService;
@@ -101,6 +105,9 @@ public class HomeController {
 				pielist.add(op1);
 			}
 		}
+		
+		
+		
 		/* System.out.println(pielist); */
 		model.addAttribute("pielist",pielist);
 		
@@ -116,6 +123,21 @@ public class HomeController {
 		model.addAttribute("searchResultCommunity", searchResultCommunity);
 		//커뮤니티 검색 결과 출력 끝
 		
+		
+		
+		//금일 확진자, 총 사망자, 총 확진자, 총 검사수, 
+		int today = dService.getTodayDecide();
+		ResponseEntity<String> res = dService.getApi();
+		com.twoweeks.spring.covid.domestic.model.vo.Response r = dService.parser(res.getBody());
+		List<com.twoweeks.spring.covid.domestic.model.vo.Item> items = r.getBody().getItems();
+		System.out.println(items.get(0).getDeathCnt());
+		model.addAttribute("decideCnt",items.get(0).getDecideCnt());
+		model.addAttribute("deathCnt",items.get(0).getDeathCnt());
+		model.addAttribute("clearCnt",items.get(0).getClearCnt());
+		
+		model.addAttribute("todayDecide", today);
+		/////////////////////////////////////////////////////////////////
+		
 		return "index";
 	}
 	
@@ -127,5 +149,8 @@ public class HomeController {
 			List<String> nounList = analyzedKeyword.getNouns();
 			return nounList;
 		}
+		
+		
+	
 	
 }

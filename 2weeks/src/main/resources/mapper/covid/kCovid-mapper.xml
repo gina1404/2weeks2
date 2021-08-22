@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="item">
+
+<insert id="kCovidDataInsert">
+	INSERT INTO ITEM (NO,ACCEXAMCNT, CLEARCNT, STATEDT, DEATHCNT, DECIDECNT) 
+	 VALUES(ITEM_SEQ.NEXTVAL, #{accExamCnt}, #{clearCnt},#{stateDt}, #{deathCnt}, #{decideCnt})
+	
+</insert>
+
+
+<select id="getToday" resultType="_int">
+SELECT MIN(DECODE(ROWNUM,1,DEATHCNT)) - MIN(DECODE(ROWNUM,2,DEATHCNT)) FROM ITEM 
+ORDER BY STATEDT DESC
+</select>
+
+<select id="getNumber" resultType="item">
+SELECT NO, ACCEXAMCNT,CLEARCNT,DEATHCNT,DECIDECNT,STATEDT FROM ITEM
+WHERE NO > 1 
+ORDER BY STATEDT DESC
+</select>
+
+<select id="getTodayDecide" resultType="_int">
+SELECT MIN(DECODE(ROWNUM,1,DECIDECNT)) - MIN(DECODE(ROWNUM,2,DECIDECNT))  FROM ITEM 
+ORDER BY STATEDT DESC
+
+</select>
+	
+	<resultMap type="item" id="itemMap">
+	<id column="no" property="no"/>
+	<result column="accDefRate" property="accDefRate"/>
+	<result column="accExamCnt" property="accExamCnt"/>
+	<result column="accExamCompCnt" property="accExamCompCnt"/>
+	<result column="careCnt" property="careCnt"/>
+	<result column="clearCnt" property="clearCnt"/>
+	<result column="createDt" property="createDt"/>
+	<result column="deathCnt" property="deathCnt"/>
+	<result column="decideCnt" property="decideCnt"/>
+	<result column="examCnt" property="examCnt"/>
+	<result column="resutlNegCnt" property="resutlNegCnt"/>
+	<result column="seq" property="seq"/>
+	<result column="stateDt" property="stateDt"/>
+	<result column="stateTime" property="stateTime"/>
+	<result column="updateDt" property="updateDt"/>
+	</resultMap>
+	
+</mapper>
