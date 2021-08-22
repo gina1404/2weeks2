@@ -64,8 +64,9 @@
 	</div>
 		<div id="articlefileChange" class="bg-success">
 		</div>
+		<input type="hidden" value="${member.user_Id }" name="user_Id">
       <div class="row justify-content-md-center">
-        <input type="submit" class="m-3 btn btn-outline-secondary" onclick="editorContent();"  value="등   록" style="width: 20%; font-weight: bold">
+        <input type="submit" class="m-3 btn btn-outline-secondary"  value="등   록" style="width: 20%; font-weight: bold">
         <input type="button" class="m-3 btn btn-outline-secondary" id="back-cancle"   value="취   소" style="width: 20%; font-weight: bold">
         </div>
      </form>

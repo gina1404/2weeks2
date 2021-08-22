@@ -7,15 +7,37 @@ html{
 	height: auto;
 }
 
-html body{
+body{
 	margin:0;
 	padding:0;
 	height: auto;
-	min-height: 100%;
+	min-height: 100%;	
+	color: #333;
 }
 a {	color: #394956; text-decoration: none; outline: none }
 
 a:hover, a:active {text-decoration: none; color: #394956;}
+
+
+/*****다크모드*****/
+
+#darkBtn{
+	cursor: pointer;
+}
+
+body.dark{
+	width: 100%;
+	min-height: 100%;
+	height: auto;
+	background-color: black;
+	color: #FFFFFF;
+}
+.loginColor{
+	color: #FFFFFF;
+}
+
+/***************/
+
 
 /* 테두리 박스 규격 */
 .defaultBoxshadow{
@@ -144,7 +166,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 .header-divider {
 	height: 32px;
 	width: 2px;
-	color:#123962;
+	:#123962;
 }
 .header-icon {
 	height: 24px;
@@ -182,7 +204,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 .dropdown-content{
 	display: none;
 	position: absolute;
-	background-color: #f1f1f1;
+	background-: #f1f1f1;
 	min-width: 130px;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	z-index: 1;	

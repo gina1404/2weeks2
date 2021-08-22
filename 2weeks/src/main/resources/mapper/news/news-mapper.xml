@@ -19,6 +19,13 @@
 	SELECT COUNT(*) FROM NEWS
 	</select>
 	
+	<select id="postThree" resultType="covidnews">
+	<![CDATA[SELECT DISTINCT TITLE, CONTENT, URL, NEWSDATE FROM(SELECT TITLE, CONTENT, URL, NEWSDATE FROM NEWS ORDER BY NO DESC)
+	WHERE ROWNUM <= 2 ]]>
+	
+
+	</select>
+	
 	<resultMap type="covidnews" id="covidnewsMap">
 	<id column="no" property="no"/>
 	<result column="title" property="title"/>

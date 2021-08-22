@@ -15,9 +15,9 @@
 
 
 
-<section id="content" class="pb-5">
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="container">
+<section id="container" class="pb-5" style="display:flex; padding-bottom: 20px; margin-left: 240px;">
+	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+	<div class="content" style="display: inline-block; padding-left: 270px;">
 		
 	
 		<!-- 			첨부파일이 이미지 파일이면
@@ -120,16 +120,21 @@
 						<li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"></a> <i class="fa  fa-commenting-o"><c:out value="${b.replyNo }"/></i>
 						<li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"></a> <i class="fa fa-eye"><c:out value="${b.post_Cnt }"/></i>
 						
-						
 						</ul>
 								</div>
 							</div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
             <!-- ./Team member -->
          </c:forEach>
+         <c:if test='${not empty member.user_Id }'>
+         <button id="btn-add" class="btn btn-outline-success" onclick="location.assign('${path}/freeboard/write.do')">
+								글쓰기
+		</button>
+		</c:if>
        </div>
        <div id="pagebar-container">${pageBar }</div>
     </div>
