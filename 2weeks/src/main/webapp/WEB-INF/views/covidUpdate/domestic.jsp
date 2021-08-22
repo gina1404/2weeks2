@@ -2,13 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<style>
+	header .content{
+		padding-left:250px !important;
+		margin-top:0;
+	}
+</style>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="updates/domestic"/>
 </jsp:include>
-<
+
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6944e39f85fb8e5ca0d10ff408274b51"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
-		
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/domestic/domestic.css">
 
 <section class="container" style="display:flex;">
