@@ -57,7 +57,7 @@ public class CovidNewsController {
 		Elements newsDate = null;
 
 
-		for(int i=1; i<10; i++) {
+		for(int i=1; i<15; i++) {
 			cn = new CovidNews();
 			content = document.select("#zone1 > div.newslist_wrap > div:nth-child(1) > ul > li:nth-child("+i+") > a > div > div > span.desc");
 			title = document.select("#zone1 > div.newslist_wrap > div:nth-child(1) > ul > li:nth-child("+i+") > a > div > span");

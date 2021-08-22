@@ -36,6 +36,12 @@ public class CovidNewsDaoImpl implements CovidNewsDao {
 		return session.selectOne("covidnews.totalNewsCount");
 	}
 
+	@Override
+	public List<CovidNews> postThree(SqlSession session) {
+	
+		return session.selectList("covidnews.postThree");
+	}
+
 	
 	
 }

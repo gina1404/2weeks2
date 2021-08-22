@@ -136,20 +136,22 @@
 		</div>
 			<div class="news">
 				<div id="newsMove">
-					<a id="reportMove" href="${pageContext.request.contextPath }/covid/news.do">
+					<a id="reportMove" href="${pageContext.request.contextPath }/covid/news.do"  target=_blank>
 						뉴스
 					</a>					 
 				</div>
+				<c:forEach var ="news" items="${CovidNews }">
 				<div class="frontside">
                      <div class="card">
                          <div class="card-body text-center">
                              <p><img class=" img-fluid" src="${path }/resources/images/icons/hazmat.svg" alt="card image" style="width:60px;"></p>
-                             <h4 class="card-title" id="news-title"><c:out value="dasdasdasdas"/></h4>
-                             <p class="card-text" id="news-content"><c:out value="dsadasdas"/></p>
-                             <p class="card-text" id="news-date"><c:out value="dsadasdsadasdasdsadas"/></p>
+                             <h4 class="card-title" id="news-title"><a href="<c:out value="${news.url }"/>"  target=_blank ><c:out value="${news.title }"/></a></h4>
+                             <p class="card-text" id="news-content"><a href="<c:out value="${news.url }"/>"  target=_blank ><c:out value="${news.content }"/></a></p>
+                             <p class="card-text" id="news-date"><c:out value="${news.newsDate }"/></p>
                          </div>
                      </div>
                  </div>
+                 </c:forEach>
 			</div>		
 		</div>				
 		

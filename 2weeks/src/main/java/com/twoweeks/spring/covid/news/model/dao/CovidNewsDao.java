@@ -18,4 +18,6 @@ public interface CovidNewsDao {
 
 	int totalNewsCount(SqlSession session);
 
+	List<CovidNews> postThree(SqlSession session);
+
 }

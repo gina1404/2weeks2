@@ -173,8 +173,9 @@
     color: #007b5e!important;
 }
 .frontside .card {
-    min-height: 100px;
+    min-height: 80px;
 }
 .frontside{
 	 border : 1px solid black;
+	 margin-top : 10px;
 }

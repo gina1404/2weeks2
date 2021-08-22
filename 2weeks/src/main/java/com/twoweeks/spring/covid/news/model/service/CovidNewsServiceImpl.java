@@ -44,6 +44,11 @@ public class CovidNewsServiceImpl implements CovidNewsService {
 		return dao.totalNewsCount(session);
 	}
 
+	@Override
+	public List<CovidNews> postThree() {
+		return dao.postThree(session);
+	}
+
 	
 	
 }
