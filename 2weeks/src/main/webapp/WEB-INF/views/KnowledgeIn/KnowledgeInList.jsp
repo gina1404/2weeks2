@@ -357,10 +357,12 @@ function fn_selection(a,b,c){
 					<%-- 	<a href="${path}/KnowledgeIn/KnowledgeInA.do?sq=${KnowledgeIn.kin_Sq}"> --%><button class="qanswer">답변하기</button><!-- </a> -->
 						</c:if>	
 						</div>
-						<c:if test="${empty member.user_Id} ">
-										
-										
+						<c:if test="${empty member.user_Id} ">			
 						</c:if>
+						
+						
+						
+						
 						<c:choose>
 						<c:when test="${KnowledgeIn.category eq '코로나19'}">
 						<ul class="knowmenu"> 
@@ -478,6 +480,16 @@ function fn_selection(a,b,c){
 				<c:when test ="${KnowledgeIn.selected==0}">
 					<div><button class="Qcheck"  id ="${kr.reply_Writer}" name ="${KnowledgeIn.point}" value="${KnowledgeIn.kin_Sq}" onclick="fn_selection(this.id,this.name,this.value);" >채택하기</button></div>
 				</c:when>
+				<c:when test ="${KnowledgeIn.selected==1}">
+					<div class="selected">채택 완료</div>
+				</c:when>
+			</c:choose>
+				
+			</c:if>
+			
+			
+			<c:if test="${member.user_Id != KnowledgeIn.kin_Writer}">
+			<c:choose>
 				<c:when test ="${KnowledgeIn.selected==1}">
 					<div class="selected">채택 완료</div>
 				</c:when>
