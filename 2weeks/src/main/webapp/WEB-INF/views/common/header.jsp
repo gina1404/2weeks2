@@ -27,9 +27,9 @@
 <body style="margin:0; padding:0;">
 	<header id="header">
 		<!-- 로고 -->
-		<div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
-		
-		<div class="content">
+		<%-- <div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
+		 --%>
+		<div class="content"  style="align-items: center; padding-left:120px;">
 		<div id="header-main-area" style="display: flex; width:1143px; height:60px; justify-content:flex-end;">
 		<!-- 키워드 검색 -->
 		<div class="header-search-area">			
@@ -49,7 +49,7 @@
 				<img class="" src="${path }/resources/images/icons/language.svg"/>  
 				</div>
 					<c:if test="${userId eq null and member.user_Id eq null}">
-	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">LOGIN</div>
+	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">LOGIN HERE!</div>
 	            	</c:if>
 	            	<c:if test="${userId ne null}" >
 	            		<div class="header-profile-text">${user_Nic} 님</div>
@@ -75,7 +75,6 @@
 	                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
 	                </div> --%>
 
-	            	
 	            	
 					<div class="dropdown">
 		            	<c:if test="${member.user_Nic ne null }">
@@ -222,7 +221,7 @@
 			$("#searchKeywordSubmit").click(function(){ 
 				$("#searchKeyword").show(); //돋보기 아이콘을 클릭하면 입력창이 보이게 보이게 됨
 				$("#searchKeyword").focus();			
-				$("#header-main-area").addClass("defaultBoxshadow");
+				$("#header-main-area").addClass("defaultBoxshadow2");
 				//검색
 				$("#searchKeywordSubmit").click(fn_searchKeyword);						
 			});

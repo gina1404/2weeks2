@@ -23,11 +23,16 @@ a:hover, a:active {text-decoration: none; color: #394956;}
     box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
     overflow:hidden;
 }
+.defaultBoxshadow2{
+    border-radius: 14px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
+}
 /* 기본 header, nav, main(container), aside 영역 나누기  */
 #header{
 	align-items: center;
 	/* background-color: #F7F8FC; */
 	display: flex;
+	justify-content: center;
 	width: 1440px;
 	margin: auto;
 	/* position:fixed; */
@@ -44,9 +49,10 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	align-items: flex-start;
 	width:200px ; /* 사이드바 너비  15%->200px */
 	/* overflow: hidden; */
-	top:75px; /* header 높이에 따라 변경해야 됨 */
+	top:0; /* 75px; */ /* header 높이에 따라 변경해야 됨 */
 	position:fixed;
 	padding:0;
+	padding-top:10px;
 	height:100%;
 	font-family: 'Pretendard';
 	font-size: 15px;
@@ -129,6 +135,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 }
 .header-icon-area{
 	height: 60px;
+	width:310px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
