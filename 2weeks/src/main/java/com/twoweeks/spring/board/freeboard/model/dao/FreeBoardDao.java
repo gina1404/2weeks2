@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.model.vo.Post_Likes;
 import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 public interface FreeBoardDao {
@@ -49,13 +50,15 @@ public interface FreeBoardDao {
 
 	int fileDownCnt(SqlSession session, int atch_No);
 
-	int likeCnt(SqlSession session, int post_Sq);
+	int likeCnt(SqlSession session, Post_Likes pl);
 
 	int getLikeCnt(SqlSession session, int post_Sq);
 
-	int likeMinus(SqlSession session, int post_Sq);
+	int likeMinus(SqlSession session, Post_Likes pl);
 
 	List<PostAttachment> listAttachment(SqlSession session);
+
+	int likeCheck(SqlSession session, Post_Likes pl);
 
 	
 	

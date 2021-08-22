@@ -34,11 +34,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.twoweeks.spring.board.freeboard.model.service.FreeBoardService;
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.model.vo.Post_Likes;
 import com.twoweeks.spring.board.freeboard.reply.model.service.ReplyService;
 import com.twoweeks.spring.common.PageFactory;
 import com.twoweeks.spring.common.Pagination;
 
-import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController  //restController는 값들을 다 data로 인식하여 처리한다. 그렇기 때문에 return에 주소값을 넣어주면 주소이동하지 않고 데이터를 출력해준다.
@@ -51,6 +51,7 @@ public class FreeBoardController {
 	@Autowired
 	private FreeBoardService service;
 	
+
 	
 	
 	@GetMapping("/freeboard/searchBoard.do")
@@ -356,23 +357,26 @@ public class FreeBoardController {
 		return mv;
 	}
 	
-
+	
 	@PostMapping("freeboard/like.do")
-	public ResponseEntity<String> like(@RequestBody FreeBoard fb) {
-		log.info("값이 잘 들어가나요? : "+ fb);
-		ResponseEntity<String> entity = null;
-		try {
-			int result = service.likeCnt(fb.getPost_Sq());
-			if(result>0) {
-				entity = new ResponseEntity<String>("regSuccess",HttpStatus.OK);
-			}else {
-				entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<Integer> like(@RequestBody Post_Likes pl) {
+		log.info("값이 잘 들어가나요? : "+ pl);
+
+		ResponseEntity<Integer> entity = null; 
+		try { 
+			int result = service.likeCnt(pl);
+		
+				 if(result>0) { 
+					 entity = new ResponseEntity<Integer>(HttpStatus.OK);
+				 }else {
+					 entity = new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST); 
+					 }
+				 }catch(Exception e) {
+					 e.printStackTrace(); 
+					 entity = new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+				 }
 		return entity;
+		
 	}
 	
 	
@@ -391,21 +395,15 @@ public class FreeBoardController {
 	}
 	
 	
-	@PostMapping("freeboard/likeMinus.do")
-	public int likeMinus(@RequestBody FreeBoard fb){
-		log.info("좋아요 취소");
-		int result=0;
-		ResponseEntity<Integer> entity = null;
-		try {
-			result = service.likeMinus(fb.getPost_Sq());
-			entity = new ResponseEntity<Integer>(result, HttpStatus.OK);
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
-		}
-		return result;
-	}
+	/*
+	 * @PostMapping("freeboard/likeMinus.do") public int likeMinus(@RequestBody
+	 * FreeBoard fb){ log.info("좋아요 취소"); int result=0; ResponseEntity<Integer>
+	 * entity = null; try { result = service.likeMinus(fb.getPost_Sq()); entity =
+	 * new ResponseEntity<Integer>(result, HttpStatus.OK);
+	 * 
+	 * }catch(Exception e) { e.printStackTrace(); entity = new
+	 * ResponseEntity<Integer>(HttpStatus.BAD_REQUEST); } return result; }
+	 */
 
 
 

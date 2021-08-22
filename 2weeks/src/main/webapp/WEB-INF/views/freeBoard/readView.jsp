@@ -115,7 +115,7 @@
 <script>
 $(document).ready(function(){
 
-	
+	getLikeCnt();
 	getReplies();
 	
 
@@ -154,6 +154,7 @@ function getReplies(){
 	});
 	
 }
+
 
 
 
@@ -455,33 +456,25 @@ function fn_replyUpdate(event,reply_Sq,reply_Content,user_Id){
 	}
 }
 
+
 function getLikeCnt(){
 	$.getJSON("${path}/freeboard/getLikeCnt/"+ ${list.post_Sq}, function(data){
 		var str="";
-		$(data).each(function(){
 			$("#likePost").text("좋아요! "+data);
 			$("#top-Like").html("추천 수 "+"<b>"+data+"</b>");
-		});
 	});
 }
 
 
 
 
-var isLike = 1;
-var check = "false";
 $("#likePost").on("click",function(){
 	var likeIdx = ${list.post_Like_Cnt};
 	var post_sq = ${list.post_Sq};
-	check =  localStorage.getItem("isis");
-	//좋아요 취소
-	if(check ==2){
-		  return;
-	}else{
-		
+	var user_Id = '${member.user_Id}';
+	console.log(post_sq);
 	
-	
-	$.ajax({
+	$.ajax({	
 		url:'${path}/freeboard/like.do',
 		type:'POST',
 		contentType: 'application/json',
@@ -491,26 +484,22 @@ $("#likePost").on("click",function(){
 			"X-HTTP-Method-Override" : "POST" 
 		},
 		data: JSON.stringify({
-			post_Like_Cnt : likeIdx,
-			post_Sq : post_sq
+			post_Sq : post_sq,
+			user_Id : user_Id
 			
 		}),
 		
 		success:function(result){
-			if(result == 'regSuccess'){
-				getLikeCnt();
-				 isLike= 2;
-				 localStorage.setItem("isis", isLike);
-				 
-			}else{
-				alert('좋아요 실패!');
-				isLike = 0;
-				}
+		console.log(result);
+			getLikeCnt();
+				
 			}
 		});
-	}  
+	});  
 	
-	});	
+getLikeCnt();
+
+
 
 $("#backList").on("click",function(){
 	history.back();
