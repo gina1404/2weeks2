@@ -22,7 +22,7 @@
 <section class="container" style="display: flex; padding-bottom: 30px;">
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>			
 	<div class="content gridContainer" style="margin-left: 220px;">
-		<div class="kCovid item">
+		<div class="kCovid item a">
 			<div class="today">
 				<p>금일 확진자</p>
 			</div>
@@ -31,7 +31,7 @@
 					</div>
 			</div>
 		
-		<div class="kCovid item">
+		<div class="kCovid item a">
 			<div class="today">
 				<p>금일 확진자</p>
 			</div>
@@ -39,7 +39,7 @@
 						<fmt:formatNumber type="number" value="${decideCnt }" />명
 					</div>
 			</div>
-				<div class="kCovid item">
+				<div class="kCovid item a">
 			<div class="today">
 				<p>총 사망자</p>
 			</div>
@@ -47,7 +47,7 @@
 						<fmt:formatNumber type="number" value="${deathCnt }" />명
 					</div>
 			</div>
-					<div class="kCovid item">
+					<div class="kCovid item a">
 			<div class="today">
 				<p>격리해제 수</p>
 			</div>
@@ -57,7 +57,7 @@
 			</div>
 		
 		
-		<div class="item 1st">
+		<div class="item 1st a">
 			<div class="state">
 				<div class="flag">
 					<img alt="미국국기" src="<%=request.getContextPath()%>/resources/images/icons/arar.svg">
@@ -70,7 +70,7 @@
 				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[5].defCount }" var="com1"/>${com1 }명
 			</div>
 		</div>
-		<div class="item 1st">
+		<div class="item 1st a">
 			<div class="state">
 				<div class="flag">
 					<img alt="일본국기" src="<%=request.getContextPath()%>/resources/images/icons/Japan.png">
@@ -83,7 +83,7 @@
 				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[6].defCount }" var="com2"/>${com2 }명
 			</div>
 		</div>
-		<div class="item 1st">
+		<div class="item 1st a">
 			<div class="state">
 				<div class="flag">
 					<img alt="영국국기" src="<%=request.getContextPath()%>/resources/images/icons/Kingdom.jpg">
@@ -96,7 +96,7 @@
 				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[0].defCount }" var="com3"/>${com3 }명
 			</div>
 		</div>
-		<div class="item 1st">
+		<div class="item 1st a">
 			<div class="state" style="margin-right: 28px;">
 				<div class="flag">
 					<img alt="프랑스국기" src="<%=request.getContextPath()%>/resources/images/icons/frfr.png">
@@ -110,33 +110,32 @@
 			</div>
 		</div>
 
-		<div id="home-map-area" class="item 2nd">
+		<div id="home-map-area" class="item 2nd a">
 			<div id="mapMove">
-				<a class="" href="${path }/covid/domestic.do">
-				지역별 확산 현황 지도
+				<a class="move" href="${path }/covid/domestic.do">
+					지역별 확산 현황 지도
 				</a>
 			</div>
 			<div id="regionalKor-map-small"></div>
 		</div>
-		<div class="item 2nd">
+		<div class="item 2nd a">
 			<div class="report" >
-				<div>
-					<a id="reportMove" href="${path }/covidUpdate/report.do">
+				<div id="reportreport">
+					<a class="move" href="${path }/covidUpdate/report.do">
 						보도자료
 					</a>
 				</div>
-				<table id="reportTab" class="table table-striped">
+				<div id="reportTab">
 					<c:forEach var="r" items="${reportList }">
-						<tr>
-							<td class="reportTitle" style="text-overflow: ellipsis;"> ${r.title } </td>
-							<input type="hidden" value="${r.url }">
-						</tr>
+						<div id="reportTitle" style="text-overflow: ellipsis;"> ${r.title } </div>
+						<input type="hidden" value="${r.url }">
+						<hr id="reportHr">
 					</c:forEach>
-				</table>
+				</div>
 		</div>
 			<div class="news">
 				<div id="newsMove">
-					<a id="reportMove" href="${pageContext.request.contextPath }/covid/news.do">
+					<a class="move" href="${pageContext.request.contextPath }/covid/news.do">
 						뉴스
 					</a>					 
 				</div>
@@ -153,7 +152,7 @@
 			</div>		
 		</div>				
 		
-		<div class="item 3rd">
+		<div class="item 3rd a">
 			<div id="home-community-list">
 				 <div class="searchResult-name">2weeks 검색 결과</div>
 				<c:forEach var="list" varStatus="i" items="${searchResultCommunity}" end="8">
@@ -295,6 +294,16 @@ $("#home-map-area").each(function(){
         }
     }); //ajax 끝
 }); //함수 끝
+
+	/* 다크모드 */
+	document.getElementById("darkBtn").addEventListener("click", () => {	
+		const a = document.querySelectorAll(".a");
+		for ( var i = 0; i < a.length; i++ ) {
+        	a[i].classList.toggle("item");
+			a[i].classList.toggle("dark1");
+      	}		
+	});
+
 </script>
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>	

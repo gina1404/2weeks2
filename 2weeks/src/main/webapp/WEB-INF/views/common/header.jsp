@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <c:set var="path" value="${pageContext.request.contextPath }"/>      
 <!DOCTYPE html>
-<html>
+<html class="">
 <head>
 <meta charset="UTF-8">
 <title>2weeks</title>
@@ -43,13 +43,13 @@
 				<img class="header-divider" src="${path }/resources/images/icons/divider-virtical.svg"/>
 			</div>
 			<div class="header-icon">
-				<img class="" src="${path }/resources/images/icons/darkmode.svg" />
+				<img id="darkBtn" src="${path }/resources/images/icons/darkmode.svg" />
 			</div>
 			<div class="header-icon">
 				<img class="" src="${path }/resources/images/icons/language.svg"/>  
 			</div>
 			<c:if test="${userId eq null and member.user_Id eq null}">
-				<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer; margin: 20px;">LOGIN HERE!</div>
+				<div class="header-profile-text x" id="loginBtn" onclick="location.href='${path}/member/login'" style="cursor:pointer; margin: 20px;">LOGIN HERE!</div>
 			</c:if>
 			<c:if test="${userId ne null}" >
 				<div class="header-profile-text">${user_Nic} 님</div>
@@ -225,6 +225,15 @@
 				//검색
 				$("#searchKeywordSubmit").click(fn_searchKeyword);						
 			});
+		});
+		
+		/* 다크모드 */
+		document.getElementById("darkBtn").addEventListener("click", () => {
+    		document.body.classList.toggle("dark");
+    		const x = document.querySelectorAll(".x");
+    		for ( var i = 0; i < x.length; i++ ) {
+    			x[i].classList.toggle("loginColor");
+    		}
 		});
 	</script>
 
