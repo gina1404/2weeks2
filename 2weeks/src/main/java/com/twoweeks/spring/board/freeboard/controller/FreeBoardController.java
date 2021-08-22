@@ -115,6 +115,7 @@ public class FreeBoardController {
 	@PostMapping("/freeboard/writeEnd.do") 
 	public ModelAndView writeEnd(FreeBoard b, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file, ModelAndView mv,HttpServletResponse response, HttpServletRequest req) throws IOException {
 		b.setOpen_Yn(req.getParameter("anonymous"));
+		b.setUser_Id(req.getParameter("user_Id"));
 		log.info("freeboard : "+ b.toString());
 		if(b.getOpen_Yn() == null) {
 			b.setOpen_Yn("off");

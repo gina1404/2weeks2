@@ -40,7 +40,7 @@
 	</insert>
 	
 	<insert id="insertBoard">
-	INSERT INTO POST VALUES(POST_SEQ.NEXTVAL, 'user02', DEFAULT, #{category}, #{post_Title}, #{post_Content}, DEFAULT, DEFAULT, SYSDATE, DEFAULT, #{open_Yn},NULL, 0)
+	INSERT INTO POST VALUES(POST_SEQ.NEXTVAL, #{user_Id}, DEFAULT, #{category}, #{post_Title}, #{post_Content}, DEFAULT, DEFAULT, SYSDATE, DEFAULT, #{open_Yn},NULL, 0)
 						   
 	<selectKey keyProperty="post_Sq" resultType="_int" order="AFTER">
 		SELECT POST_SEQ.CURRVAL FROM DUAL
