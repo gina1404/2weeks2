@@ -150,7 +150,7 @@ public class SearchServiceImpl implements SearchService{
 		
 		return dao.selectResultKin(session, cPage, numPerpage, sn);
 	}
-
+	//지식인 상세 검새 수
 	@Override
 	public int selectResultKinCount(List<String> nounList) {
 		String searchNoun="";
@@ -290,7 +290,57 @@ public class SearchServiceImpl implements SearchService{
         }
     }
 
-   //다음 블로그 크롤링
+    //네이버 지식인 검색 api
+   @Override
+	public List<Map<String, String>> searchExternalKin(String searchKeyword) {
+	 //json 형식으로 된 api 데이터를 받아옴
+		String clientId = "mmLwm5edqkF97j1Ah3dq"; //내 client ID
+		String clientSecret = "JFR0Gotd1n"; //내 client secret
+			
+       try {
+       	searchKeyword = URLEncoder.encode(searchKeyword, "UTF-8");	        	
+       } catch (UnsupportedEncodingException e) {
+           throw new RuntimeException("검색어 인코딩 실패",e);
+       }
+       
+       String apiURL="https://openapi.naver.com/v1/search/kin.json?query=" + searchKeyword; // json 결과
+       
+       Map<String, String> requestHeaders = new HashMap<>();
+       requestHeaders.put("X-Naver-Client-Id", clientId);
+       requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+       
+//       System.out.println(get(apiURL,requestHeaders));        //값 받아오는지 확인
+       
+       //데이터 파싱
+       String responseBody = get(apiURL,requestHeaders);
+       JSONParser parser=new JSONParser();
+       JSONObject obj=null;
+       try {
+       	obj=(JSONObject)parser.parse(responseBody);
+       }catch(ParseException e) {
+       	e.printStackTrace();
+       }	        
+       JSONArray item=(JSONArray)obj.get("items");
+       
+       //파싱한 데이터를 리스트 맵에 담음
+       List<Map<String,String>> list = new ArrayList<>(); //값을 담을 list 생성
+//       List<SearchExternalNaver> list=new ArrayList<>(); //객체에 담는 것에서 map으로 바꿈
+       
+       for(int i=0; i<item.size(); i++) {
+       	Map<String, String> map = new HashMap<>();
+//       	SearchExternalNaver result=new SearchExternalNaver();
+       	JSONObject tmp=(JSONObject)item.get(i);
+       	map.put("title",(String)tmp.get("title"));
+       	map.put("link",(String)tmp.get("link"));
+       	map.put("description",(String)tmp.get("description"));
+       	map.put("total",(String)tmp.get("total"));
+       	list.add(map);
+       	
+       }	        
+	return list;
+	}
+
+	//다음 블로그 크롤링
     @Override
 	public List<DummyData> getBlogDummy(String searchKeyword) {
     	List<DummyData> list = new ArrayList<>(); //값을 담을 list 생성

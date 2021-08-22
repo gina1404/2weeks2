@@ -27,6 +27,9 @@ public interface SearchService {
 	//네이버 검색 결과 api
 	List<Map<String,String>> searchExternalNaver(String searchKeyword);
 	
+	//네이버 지식인 검색 api
+	List<Map<String,String>> searchExternalKin(String searchKeyword);
+	
 	//다음 블로그 크롤링 데이터를 ListMap에 저장
 	List<DummyData> getBlogDummy(String searchKeyword);	
 	

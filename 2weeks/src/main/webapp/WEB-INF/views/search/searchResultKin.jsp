@@ -14,9 +14,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
-<section class="container">	
+<section class="container"  style="display:flex; padding-bottom:200px;">	
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="content">
+	<div class="content" style="display:inline-block; padding-left:220px; margin-top:0;">
 		<!-- 지식인 검색 결과 -->
 		<section id="searchResult-kin-detail" class="searchResult-area defaultBoxshadow">
 			<div class="searchResult-name">2weeks 커뮤니티 검색 결과</div>

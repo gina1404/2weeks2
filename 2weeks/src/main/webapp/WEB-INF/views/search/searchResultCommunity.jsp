@@ -14,15 +14,15 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
-<section class="container">	
+<section class="container" style="display:flex; padding-bottom:200px;">	
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="content">
+	<div class="content" style="display:inline-block; padding-left:220px; margin-top:0;">
 		<!-- 커뮤니티 검색 결과 -->
 		<section id="searchResult-community-detail" class="searchResult-area defaultBoxshadow">
 			<div class="searchResult-name">2weeks 커뮤니티 검색 결과</div>
 			<c:choose>
 				<c:when test="${!empty searchResultCom }">
-					<c:forEach var="list" varStatus="i" items="${searchResultCom}" end="8">
+					<c:forEach var="list" varStatus="i" items="${searchResultCom}" end="8" >
 						<div class="searchResult-list">					
 							<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/two.svg"/></div>
 							<div class="searchResult-blogName" onclick="">${list.category }</div>

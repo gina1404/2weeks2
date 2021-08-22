@@ -16,13 +16,13 @@
 </jsp:include>
 <section class="container" style="display:flex; padding-bottom:200px;">	
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="content" style="display:inline-block; padding-left:220px; ">
+	<div class="content" style="display:inline-block; padding-left:220px;">
 		<!-- 지식인 검색 결과 -->
 		<section id="searchResult-knowledgeIn" class="searchResult-area" >
 			<div class="searchResult-name">2weeks 지식인 검색 결과</div>
 			<c:choose>
 				<c:when test="${!empty searchResultKnowledgeIn }">
-					<c:forEach var="list" varStatus="i" items="${searchResultKnowledgeIn}" end="8">
+					<c:forEach var="list" varStatus="i" items="${searchResultKnowledgeIn}" end="5">
 						<div class="searchResult-list">					
 							<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/two.svg"/></div>
 							<div class="searchResult-blogName" onclick="">${list.category }</div>
@@ -54,20 +54,18 @@
 		<br><br><br>
 		
 		<!-- 외부 검색 결과 -->
-		<section id="searchResult-external" class="searchResult-area">
+		<section id="searchResult-external-kin" class="searchResult-area">
 			<div class="searchResult-name">외부 검색 결과</div>
-			<c:forEach var="list" varStatus="i" items="${searchResultExternalNaver}">
+			<c:forEach var="list" varStatus="i" items="${searchResultExternalKin}" end="5">
 				<div class="searchResult-list">					
 					<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/naver.png"/></div>
-					<div class="searchResult-blogName" onclick="window.open('${list.bloggerlink }');">${list.bloggername }</div>
-		          	<div class="searchResult-vertical-divider"></div>
-		          	<div class="searchResult-date">${list.postdate }</div>
+					<div class="searchResult-blogName" >지식인 검색 결과</div>
 					<div class="searchResult-title" onclick="window.open('${list.link }');">${list.title }</div>
 					<div class="searchResult-content">${list.description }</div>
 				</div>
 			<c:if test ="${not i.last}"><hr></c:if>					
 			</c:forEach>
-			<div class="searchResult-detail"><div onclick="window.open('https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${searchKeyword}')">외부 검색 결과 더 보기 <span>→</span></div></div>
+			<div class="searchResult-detail"><div onclick="window.open('https://search.naver.com/search.naver?where=kin&sm=tab_jum&query=${searchKeyword}')">외부 검색 결과 더 보기 <span>→</span></div></div>
 		</section>
 	</div>
 </section>

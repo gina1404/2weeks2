@@ -22,7 +22,7 @@
 			<div class="searchResult-name">2weeks 커뮤니티 검색 결과</div>
 			<c:choose>
 				<c:when test="${!empty searchResultCommunity }">
-					<c:forEach var="list" varStatus="i" items="${searchResultCommunity}" end="8">
+					<c:forEach var="list" varStatus="i" items="${searchResultCommunity}" end="5">
 						<div class="searchResult-list">					
 							<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/two.svg"/></div>
 							<div class="searchResult-blogName" onclick="">${list.category }</div>
@@ -58,7 +58,7 @@
 			<div class="searchResult-name">2weeks 지식인 검색 결과</div>
 			<c:choose>
 				<c:when test="${!empty searchResultKnowledgeIn }">
-					<c:forEach var="list" varStatus="i" items="${searchResultKnowledgeIn}" end="8">
+					<c:forEach var="list" varStatus="i" items="${searchResultKnowledgeIn}" end="5">
 						<div class="searchResult-list">					
 							<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/two.svg"/></div>
 							<div class="searchResult-blogName" onclick="">${list.category }</div>
@@ -92,7 +92,7 @@
 		<!-- 외부 검색 결과 -->
 		<section id="searchResult-external" class="searchResult-area">
 			<div class="searchResult-name">외부 검색 결과</div>
-			<c:forEach var="list" varStatus="i" items="${searchResultExternalNaver}">
+			<c:forEach var="list" varStatus="i" items="${searchResultExternalNaver}" end="5">
 				<div class="searchResult-list">					
 					<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/naver.png"/></div>
 					<div class="searchResult-blogName" onclick="window.open('${list.bloggerlink }');">${list.bloggername }</div>
