@@ -45,8 +45,10 @@
     margin: 25px 15px 15px 15px;
 }
 .report{
-	width: 375px;;
+	width: 330px;
 	height: 100%;
+	display: inline-block;
+	
 }
 #reportTab{
 	font-size: 13px;
@@ -137,8 +139,40 @@
 }
 
 
+ .news{
+	width: 330px;
+	margin-left: 30px;
+	
+}
+#newsMove{
+	color: #6E6E6E;
+	font-weight: bolder;
+	font-size: 20px;
+    text-align: center;
+	font-weight: bolder;
+	font-size: 20px;
+    text-align: center;
+    margin: 25px 15px 15px 15px;
+}
 
+.image-flip:hover .frontside,
+.image-flip.hover .frontside {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
 
-
-
-
+.frontside .card .card-body img {
+    border-radius: 50%;
+    border : 1px solid black;
+}
+.frontside .card .card-title{
+    color: #007b5e!important;
+}
+.frontside .card {
+    min-height: 100px;
+}
+.frontside{
+	 border : 1px solid black;
+}
