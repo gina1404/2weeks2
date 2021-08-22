@@ -134,23 +134,22 @@
 					</c:forEach>
 				</table>
 		</div>
-				<div class="news">
-					<div id="newsMove">
-						<a id="reportMove" href="${pageContext.request.contextPath }/covid/news.do">
-							뉴스
-						</a>
-						 
-					</div>
-					<div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="${path }/resources/images/icons/hazmat.svg" alt="card image" style="width:60px;"></p>
-                                    <h4 class="card-title" id="news-title"><c:out value="dasdasdasdas"/></h4>
-                                    <p class="card-text" id="news-content"><c:out value="dsadasdas"/></p>
-                                    <p class="card-text" id="news-date"><c:out value="dsadasdsadasdasdsadas"/></p>
-                                </div>
-                            </div>
-                        </div>
+			<div class="news">
+				<div id="newsMove">
+					<a id="reportMove" href="${pageContext.request.contextPath }/covid/news.do">
+						뉴스
+					</a>					 
+				</div>
+				<div class="frontside">
+                     <div class="card">
+                         <div class="card-body text-center">
+                             <p><img class=" img-fluid" src="${path }/resources/images/icons/hazmat.svg" alt="card image" style="width:60px;"></p>
+                             <h4 class="card-title" id="news-title"><c:out value="dasdasdasdas"/></h4>
+                             <p class="card-text" id="news-content"><c:out value="dsadasdas"/></p>
+                             <p class="card-text" id="news-date"><c:out value="dsadasdsadasdasdsadas"/></p>
+                         </div>
+                     </div>
+                 </div>
 			</div>		
 		</div>				
 		

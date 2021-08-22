@@ -45,7 +45,7 @@
     margin: 25px 15px 15px 15px;
 }
 .report{
-	width: 330px;
+	width: 355px;
 	height: 100%;
 	display: inline-block;
 	
@@ -139,10 +139,12 @@
 }
 
 
- .news{
-	width: 330px;
-	margin-left: 30px;
-	
+.news{
+	width: 355px;
+	/* margin-left: 30px; */
+	height: 100%;
+	float: right;
+	border: 1px solid;
 }
 #newsMove{
 	color: #6E6E6E;
