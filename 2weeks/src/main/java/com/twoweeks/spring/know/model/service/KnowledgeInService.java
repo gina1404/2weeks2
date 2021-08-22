@@ -1,7 +1,7 @@
 package com.twoweeks.spring.know.model.service;
 
 import java.util.List;
-import java.util.Map;
+
 
 
 import com.twoweeks.spring.know.model.vo.Kin;
@@ -37,7 +37,11 @@ public interface KnowledgeInService {
 	
 	void updateReplyCount(int sq)throws Exception; //답글 개수 
 	
-	int updatePoint(Member m1) throws Exception;
+	int updatePoint(Member m1) throws Exception; //글 등록시 포인트 설정 
+	
+	int selection(Member m1) throws Exception; //채택 하면 답변자에게 포인트가 넘어감 
+
+	int updateSq(int sq) throws Exception; //selected =1 
 
 	
 

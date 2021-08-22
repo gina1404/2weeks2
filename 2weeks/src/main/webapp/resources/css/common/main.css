@@ -176,7 +176,6 @@
 	/* margin-left: 30px; */
 	height: 100%;
 	float: right;
-	border: 1px solid;
 }
 #newsMove{
 	color: #6E6E6E;
@@ -199,14 +198,13 @@
 
 .frontside .card .card-body img {
     border-radius: 50%;
-    border : 1px solid black;
 }
 .frontside .card .card-title{
     color: #007b5e!important;
 }
 .frontside .card {
-    min-height: 100px;
+    min-height: 80px;
 }
 .frontside{
-	 border : 1px solid black;
+	 margin-top : 10px;
 }

@@ -2,15 +2,10 @@ package com.twoweeks.spring.know.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,6 +137,7 @@ public class KnowledgeInController {
 		String msg = "등록 성공";
 		try {
 			int result=service.insertKin(k);
+			
 			if(result>0){
 				Member m1=new Member();
 				m1.setUser_Id(user_Id);
@@ -337,6 +333,67 @@ public class KnowledgeInController {
 	
 		
 	}
+	
+	
+	/* 여기 주석처리 */
+	
+	@RequestMapping("/KnowledgeIn/KnowledgeInListEnd.do") //채택
+	public ModelAndView selection(Kin k,Member m,ModelAndView mv, HttpServletResponse response, HttpServletRequest request,HttpSession session)throws Exception {
+	
+		String user_Id=request.getParameter("Writer");
+		int point=Integer.parseInt(request.getParameter("point"));
+		int sq=Integer.parseInt(request.getParameter("sq"));
+		
+		
+		String msg = "채택이 완료되었습니다.";
+		try {
+			
+			
+			
+				Member m1=new Member();
+				m1.setUser_Id(user_Id);
+				m1.setUserPoint_Cnt(point);
+				int result=service.selection(m1);
+				
+				if(result>0) {
+					int result2 =service.updateSq(sq);
+					if(result2>0) {
+						mv.addObject("msg", msg);
+						mv.addObject("loc", "/KnowledgeIn/KnowledgeInList.do?sq="+sq);
+						mv.setViewName("common/msg");
+					}else {
+						mv.addObject("msg","채택 실패");
+						mv.addObject("loc", "/KnowledgeIn/KnowledgeInList.do?sq="+sq);
+						mv.setViewName("common/msg");
+					}
+				}
+		
+		} catch (Exception e) {
+			msg = e.getMessage();
+		}
+	
+		return mv;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

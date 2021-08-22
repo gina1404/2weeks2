@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.covid.domestic.model.Service.CovidDomesticService;
+import com.twoweeks.spring.covid.news.model.service.CovidNewsService;
+import com.twoweeks.spring.covid.news.model.vo.CovidNews;
 import com.twoweeks.spring.covid.report.model.service.CovideReportListServiceImpl;
 import com.twoweeks.spring.overseas.model.sevice.CovidOverseasService;
 import com.twoweeks.spring.overseas.model.vo.Item;
@@ -44,6 +46,8 @@ public class HomeController {
 	private CovidOverseasService service;
 	@Autowired
 	private CovidDomesticService dService;
+	@Autowired
+	private CovidNewsService nService;
 	
 	@Autowired	
 	private SearchService searchService;
@@ -137,6 +141,17 @@ public class HomeController {
 		
 		model.addAttribute("todayDecide", today);
 		/////////////////////////////////////////////////////////////////
+		
+
+		
+		
+		
+		//최신 뉴스글 3개 출력하기
+		List<CovidNews> cn = nService.postThree();
+		model.addAttribute("CovidNews", cn);
+		////////////////////////////////////////////////////
+		
+		
 		
 		return "index";
 	}

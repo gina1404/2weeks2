@@ -48,7 +48,11 @@ public interface KnowledgeInDao {
 
 	List<Kin> list(SqlSession session, Kin k);
 
-	int updatePoint(SqlSession session, Member m1);
+	int updatePoint(SqlSession session, Member m1); //포인트설정하고 글등록
+	
+	int selection(SqlSession session, Member m1); //채택하면 포인트 주어지게
+
+	int updateSq(SqlSession session, int sq); 
 
 
 
