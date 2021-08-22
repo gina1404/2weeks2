@@ -23,5 +23,7 @@ public class Kin {
 	private int reply_Cnt; //답글 수 
 	private int point; //포인트 
 	private List<KinAttachment> attachments=new ArrayList();
-	/* private Member member; */
+	private Member member;
+	private KinReply kinreply;
 }
+

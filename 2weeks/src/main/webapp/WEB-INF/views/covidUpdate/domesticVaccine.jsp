@@ -93,7 +93,7 @@ top: -500px;
 			</tr>	
 		</c:forEach>
 </table>
-<div class="datetime">${datetime}기준</div>
+<div class="datetime">업데이트 일시: ${datetime}</div>
 	
 	
 	
@@ -102,7 +102,7 @@ top: -500px;
 		
 	
 </section>
-	
+	 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

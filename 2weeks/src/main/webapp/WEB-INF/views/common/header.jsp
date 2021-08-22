@@ -47,24 +47,24 @@
 			</div>
 			<div class="header-icon">
 				<img class="" src="${path }/resources/images/icons/language.svg"/>  
+			</div>
+			<c:if test="${userId eq null and member.user_Id eq null}">
+				<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer; margin: 20px;">LOGIN HERE!</div>
+			</c:if>
+			<c:if test="${userId ne null}" >
+				<div class="header-profile-text">${user_Nic} 님</div>
+				<%-- <input type="hidden" value="${user_Nic}" id="hidden_session_kakao"/> --%>
+				<div class="dropdown-content">
+			 		<a href="${path}/member/myinfo">회원 정보 변경</a>
+					<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>
+					<a href="#">나의 포인트 ${member.userPoint_Cnt} 원</a>
+					<a href="${path}/member/kakaologout">로그아웃</a>			            		
 				</div>
-					<c:if test="${userId eq null and member.user_Id eq null}">
-	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer; ">LOGIN HERE!</div>
-	            	</c:if>
-	            	<c:if test="${userId ne null}" >
-	            		<div class="header-profile-text">${user_Nic} 님</div>
-	            		<%-- <input type="hidden" value="${user_Nic}" id="hidden_session_kakao"/> --%>
-					         <div class="dropdown-content">
-			            		<a href="${path}/member/myinfo">회원 정보 변경</a>
-			            		<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>
-			            		<a href="#">나의 포인트 ${member.userPoint_Cnt} 원</a>
-			            		<a href="${path}/member/kakaologout">로그아웃</a>			            		
-			            	</div>
-			            	<div class="header-message" id="messageIcon">
-			                	<i class="far fa-envelope fa-lg" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
-			                </div>
-	            		<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
-	            	</c:if>
+				<div class="header-message" id="messageIcon">
+			   		<i class="far fa-envelope fa-lg" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
+			    </div>
+				<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
+			</c:if>
 
 	            	<%-- <c:if test="${member.user_Nic ne null }">
 	            		<div class="header-profile-text">${member.user_Nic}</div>
