@@ -19,7 +19,7 @@
 	<div class="content" style="display:inline-block; padding-left:220px; margin-top:0;">
 		<!-- 지식인 검색 결과 -->
 		<section id="searchResult-kin-detail" class="searchResult-area defaultBoxshadow">
-			<div class="searchResult-name">2weeks 커뮤니티 검색 결과</div>
+			<div class="searchResult-name">2weeks 지식인 검색 결과</div>
 			<c:choose>
 				<c:when test="${!empty searchResultKin }">
 					<c:forEach var="list" varStatus="i" items="${searchResultKin}" end="8">

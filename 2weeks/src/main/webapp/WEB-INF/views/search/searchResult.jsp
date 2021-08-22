@@ -16,7 +16,7 @@
 </jsp:include>
 <section class="container" style="display:flex; padding-bottom:200px;">	
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-	<div class="content" style="display:inline-block; padding-left:220px; ">
+	<div class="content" style="display:inline-block; padding-left:220px;">
 		<!-- 커뮤니티 검색 결과 -->
 		<section id="searchResult-community" class="searchResult-area" >
 			<div class="searchResult-name">2weeks 커뮤니티 검색 결과</div>
