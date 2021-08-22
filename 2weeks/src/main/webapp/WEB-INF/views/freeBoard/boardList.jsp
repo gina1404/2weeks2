@@ -99,6 +99,7 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
+									<h6 style="color:red;">[<c:out value="${b.category }"/>]</h6>
 									<h4 class="card-title">
 										<a href="${path }/freeboard/readView?no=${b.post_Sq }">
 										<c:out value="${b.post_Title }" /> </a>
