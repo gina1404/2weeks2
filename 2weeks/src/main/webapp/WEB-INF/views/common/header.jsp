@@ -49,7 +49,7 @@
 				<img class="" src="${path }/resources/images/icons/language.svg"/>  
 				</div>
 					<c:if test="${userId eq null and member.user_Id eq null}">
-	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">LOGIN HERE!</div>
+	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer; ">LOGIN HERE!</div>
 	            	</c:if>
 	            	<c:if test="${userId ne null}" >
 	            		<div class="header-profile-text">${user_Nic} 님</div>
@@ -76,8 +76,8 @@
 	                </div> --%>
 
 	            	
-					<div class="dropdown">
-		            	<c:if test="${member.user_Nic ne null }">
+		           	<c:if test="${member.user_Nic ne null }">
+						<div class="dropdown">
 			                <div class="header-profile-icon">
 			                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
 			                </div>
@@ -92,8 +92,8 @@
 			                	<i class="far fa-envelope fa-lg" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
 			                	<span class="recMs"></span>
 			                </div>
-		            	</c:if>
-	            	</div>
+	            		</div>
+		            </c:if>
 	            	
 	            	
 	            		

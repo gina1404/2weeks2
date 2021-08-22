@@ -163,7 +163,8 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 }
 .header-profile-text{
 	font-size: 20px;
-	margin-left: 5px;
+	margin-left: 5px;	
+	padding-left: 15px;
 }
 
 #nick {
