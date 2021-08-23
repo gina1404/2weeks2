@@ -52,7 +52,7 @@
 				<div class="header-profile-text x" id="loginBtn" onclick="location.href='${path}/member/login'" style="cursor:pointer; margin: 20px;">LOGIN HERE!</div>
 			</c:if>
 			<c:if test="${userId ne null}" >
-				<div class="header-profile-text">${user_Nic} 님</div>
+				<div class="header-profile-text x">${user_Nic} 님</div>
 				<%-- <input type="hidden" value="${user_Nic}" id="hidden_session_kakao"/> --%>
 				<div class="dropdown-content">
 			 		<a href="${path}/member/myinfo">회원 정보 변경</a>
@@ -81,7 +81,7 @@
 			                <div class="header-profile-icon">
 			                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
 			                </div>
-		            		<div class="header-profile-text" id="nick">${member.user_Nic}님 </div>  
+		            		<div class="header-profile-text x" id="nick">${member.user_Nic}님 </div>  
 			            	<div class="dropdown-content">
 			            		<a href="${path}/member/myinfo">회원 정보 변경</a>
 			            		<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>

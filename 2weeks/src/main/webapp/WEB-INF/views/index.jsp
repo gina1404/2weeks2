@@ -187,8 +187,8 @@
 <!-- 보도자료 -->
 <script>
 	let move;
-	$(".reportTitle").click(e=>{
-		let aTag=$(e.target).next().val();		
+	$("#reportTitle").click(e=>{
+		let aTag=$(e.target).next().val();
 		let url=aTag.split("','");
 		for(let i=0; i<url.length; i++){
 			if(url[2]!=""){				
