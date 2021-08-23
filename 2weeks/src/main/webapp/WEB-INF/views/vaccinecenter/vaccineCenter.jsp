@@ -16,6 +16,15 @@
 	<section id="vaccine_center" class="container" style="display:flex; padding-bottom:200px;"> 
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
+<!-- <<<<<<< HEAD
+	<div class="content">
+		<div class="vaccine_box ">
+			<h3 class="vaccineCenter_title">백신 접종센터</h3> 
+
+			<div class="vaccineMap center-block defaultBoxshadow" id="map" class= "map" style="width:800px;height:550px;"></div>
+
+			
+======= -->
 	<div class="content" style="display:inline-block; padding-left:220px;">
 	<div style="justify-content:center; text-align:center;font-weight:bold; font-size:30px;">
 		<h2>백신 접종 주의 사항</h2>
@@ -73,6 +82,7 @@
 			
 			<br><br><br>
 			<div style="color:darkgray; cursor:pointer">자료 출처: nip.kdca.go.kr</div>
+>>>>>>> 3cc3a2e5ec424b90e433c26eea1c488e861ad6df
 		</div>
 	</div>
 	</section>

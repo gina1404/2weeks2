@@ -206,28 +206,14 @@
 				$("#searchKeyword").focus();
 				return false;
 			}else{ //검색어를 컨트롤러에 전달
-				var currentUrl=document.location.href; //현재 페이지 url을 받아옴 -> http://localhost:9090/ 이 부분을 잘라냄
-				currentUrl=currentUrl.substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")+1); 
+				var currentUrl=document.location.href; //현재 페이지 url을 받아옴
 				
 				//현재 페이지 url을 매핑 주소를 비교해 분기 처리
-				if( //커뮤니티에서 검색할 경우
-						currentUrl=='${path}/freeboard/boardList.do'
-						|| currentUrl=='${path}/freeboard/searchBoard.do'
-						|| currentUrl=='${path}/freeboard/boardList.do'
-						|| currentUrl=='${path}/freeboard/readView'){ 
-						location.href='${path}/searchResult/community.do?searchKeyword='+$('input[name=searchKeyword]').val();
-					}else if( //지식인에서 검색할 경우
-							currentUrl=='${path}/KnowledgeIn/KnowledgeInMain.do'
-							|| currentUrl=='${path}/KnowledgeIn/KnowledgeInList.do'
-							|| currentUrl=='${path}/KnowledgeIn/KnowledgeInQ.do'
-							|| currentUrl=='${path}/KnowledgeIn/KnowledgeInMyList.do'
-							|| currentUrl=='${path}/KnowledgeIn/KnowledgeInA.do'
-							|| currentUrl=='${path}/KnowledgeIn/KnowledgeInAEnd.do'
-							|| currentUrl=='${path}/KnowledgeIn/update'
-							|| currentUrl=='${path}/KnowledgeIn/update.do'
-					){					
-							location.href='${path }/searchResult/knowledgeInAll.do?searchKeyword='+$('input[name=searchKeyword]').val();
-					}else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
+				if(currentUrl.includes("freeboard")){  //커뮤니티에서 검색할 경우
+					location.href='${path }/searchResult/community.do?searchKeyword='+$('input[name=searchKeyword]').val();
+				}else if(currentUrl.includes("KnowledgeIn")){//지식인에서 검색할 경우
+					location.href='${path }/searchResult/knowledgeInAll.do?searchKeyword='+$('input[name=searchKeyword]').val();
+				}else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
 					location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();
 				}
 			}

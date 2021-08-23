@@ -479,7 +479,7 @@ public class MemberController {
 		}
 	
 	//비밀번호 변경 페이지
-	@GetMapping("/member/updatePw")
+	@GetMapping("/member/findPw")
 	public String updatePw(Model model) {
 		model.addAttribute("member",new Member());
 		return "/member/updatePw";
