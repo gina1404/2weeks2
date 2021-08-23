@@ -26,20 +26,20 @@
 			<!-- <a id="addRoomBtn" onclick="open('${path}/addChatRoom ', '_blank', 'width=400, height=550, resizable=no')">채팅방 만들기</a> -->
 			<div id="addRoomBtn">채팅방 만들기</div>
 		</div>
-		<div id="chatContainer">
+		<div class="chatContainer c">
 			<c:forEach var="l" items="${list }" varStatus="status">
 				<div id="chatRoomOne">
 					<div id="chatIcon">
 						<img src="${path }/resources/images/icons/chat.png" alt="chatIcon"/>
 					</div>
 					<div id="entry" >
-						<div id="entry_a" class="chatName half">
+						<div class="entry_a chatName half">
 							${l.title }
 						</div>					
 						<input type="hidden" value="${l.groupNo}">
 											
 						<div id="cntLimit">${l.curCnt } / ${l.cnt }명</div>
-						<div id="chatContent">${l.content }</div>
+						<div id="chatContent" class="chatCon">${l.content }</div>
 					</div>
 				</div>
 				<hr>	
@@ -49,6 +49,26 @@
 </section>
 
 <script>
+
+	document.getElementById("darkBtn").addEventListener("click", () => {	
+		const c = document.querySelectorAll(".c");
+		for ( var i = 0; i < c.length; i++ ) {
+    		c[i].classList.toggle("chatContainer");
+			c[i].classList.toggle("cc");
+  		}
+		const entry=document.querySelectorAll(".chatName");
+		for( var i=0; i<entry.length; i++){
+			entry[i].classList.toggle("entry_a");
+			entry[i].classList.toggle("ct");
+		}
+		const chat=document.querySelectorAll(".chatCon");
+		for(var i=0; i<chat.length; i++){
+			chat[i].classList.toggle("chatCon");
+			chat[i].classList.toggle("cCon");
+		}
+		
+	});
+
 	let rootPath="${pageContext.request.contextPath}";
 	
 	$("#addRoomBtn").click(function(e){

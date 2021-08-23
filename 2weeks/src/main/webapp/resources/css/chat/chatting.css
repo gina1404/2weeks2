@@ -8,7 +8,7 @@
     margin-left: 30px;
     font-size: 30px;
 }
-#chatContainer{
+.chatContainer{
 	width: 90%;
 	height:730px;	
 	margin: auto;
@@ -16,6 +16,18 @@
 	padding: 20px 20px 0 30px;
 	overflow-x: hidden;
 	border: 1px solid;
+}
+
+.cc{
+	width: 90%;
+	height:730px;	
+	margin: auto;
+	border-radius: 20px;
+	padding: 20px 20px 0 30px;
+	overflow-x: hidden;
+	border: 1px solid;
+	color: white;
+	background-color: #394956;
 }
 
 #addGroupBtn{
@@ -56,7 +68,7 @@
 	height: 50px;
 }
 
-#entry_a{
+.entry_a{
 	text-decoration:none;
 	color:black;
     width: 60%;
@@ -64,14 +76,22 @@
 	font-weight: bolder;  
 	position: relative;
 }
+.ct{
+	text-decoration:none;
+	color: white;
+    width: 60%;
+    display: inline;
+	font-weight: bolder;  
+	position: relative;
+}
+
+.entry_a:hover{
+	text-decoration: underline;
+	color:#6E6E6E;
+}
 
 .half{
 	background: linear-gradient(to top, #D0A9F5 50%, transparent 50%);
-}
-
-#entry_a:hover{
-	text-decoration: underline;
-	color:#6E6E6E;
 }
 
 #cntLimit{
@@ -84,9 +104,16 @@
     float:right;
 }
 
-#chatContent{
+.chatCon{
 	margin: 10px 0 0 15px;
 	width: 380px;
 	color:#424242;
     font-size: 14px;    
+}
+
+.cCon{
+	margin: 10px 0 0 15px;
+	width: 380px;
+	color: #BDBDBD;
+    font-size: 14px; 
 }
