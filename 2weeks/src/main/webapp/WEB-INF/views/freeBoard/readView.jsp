@@ -3,93 +3,46 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="2weeks"/>
 </jsp:include>
+<link rel="stylesheet" type="text/css" href="${path }/resources/css/freeboard/readView.css">
+
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-<style>
-
-.container {
-  padding-right: 30px;
-  padding-left: 30px;
-  margin-right: auto;
-  margin-left: 20%;
-  margin-top:5%;
-}
-h4 > span{
-    display: block;
-    margin-bottom: 4px;
-    color: #ff5722;
-    font-weight: bold;
-    font-size: 12px;
-}
-a{
-text-decoration:none;
-color: #000;
-}
-.wrapper > .row{
-margin-top:5%;
-}
-.divi{
-font-size : 12px;
-}
-.col-sm-12{
-  float: left;
-}
-.outer {
-  text-align: center;
-  width : 1000px;
-  height: 800px;
-}
-
-.inner {
-  display: inline-block;
-  margin-top: 700px;
-  margin-left : 125px;
-}
-
-</style>
-<section class="content">
-	<div class="container">
+<section class="container">
+	<div class="content">
 		<div class="wrapper">
 			<div class="row ">
 				<h4>
-					<span title="category">${list.category }</span> <a class=""
+					<span title="category" style="font-size:18px;">${list.category }</span><a class=""
 						href="${path }/freeboard/readView?no=${list.post_Sq }">${list.post_Title}</a>
 				</h4>
 			</div>
-			<div class="row" style="border: solid blue 10px; margin-top: 5px;">
+			<div class="row" style=" margin-top: 5px;">
 				<img src="">
-				<div class="divider "></div>
 				<span class="divi">조회 수 <b>${list.post_Cnt }</b></span>
-				<div class="divider "></div>
 				<span class="divi" id="top-Like">추천 수 <b>${list.post_Like_Cnt }</b></span>
-				<div class="divider "></div>
-				<span class="divi">댓글 <b></b></span>
-				<div class="divider"></div>
-				<span class="divi"><fmt:formatDate value="${list.post_Dt }" pattern="yyyy-MM-dd hh:mm:ss"/></span>
-			</div>
+				<span class="divi">댓글 <b>${list.replyNo }</b></span>
+				<span class="divi"> 등록일 : <b><fmt:formatDate value="${list.post_Dt }" pattern="yyyy-MM-dd"/></b></span>
 		</div>
 		<div class="col-md-12 "
-			style="border: solid black 1px; margin-top: 50px; margin-right: 500px;">
+			style=" margin-top: 50px; margin-right: 500px;">
 			
 				<span style="font-size: 16px;">${list.post_Content }</span>
 			
 		</div>
 		<div class="outer position-relative" >
 			<div class="inner ">
-				<button class="btn btn btn-danger btn-round" id="likePost" style="width: 100px;">좋아요! ${list.post_Like_Cnt } </button>
-		<%-- 	<c:choose>
-			<c:when test="${sessionScope.loginMember != null }">
-			</c:when>
-			<c:otherwise>
-				<button class="btn btn btn-danger btn-round" id="likePost2" style="width: 100px;">좋아요! ${list.post_Like_Cnt } </button>
-			
-			</c:otherwise>
-			</c:choose> --%>
+			<c:if test='${not empty member.user_Id }'>
+				<button class="btn btn btn-danger btn-round" id="likePost" style="width: 100px;">좋아요! ${list.post_Like_Cnt }</button>
+					<c:if test="${member.user_Id eq list.user_Id}">
 					<button type="submit" class="update_btn btn btn btn-danger btn-round  ">수정</button> 
 					<input type="button"  class=" btn btn-danger btn-round" value="삭제" onclick="del(${list.post_Sq})" style="width: 60px;">
-					<button type="submit" class="list_btn btn btn-danger btn-round">목록</button>
+					</c:if>
+			</c:if>
+					<button type="submit" id="backList" class="list_btn btn btn-danger btn-round">목록</button>
+			
 			</div>
 		</div>
 			<div>
@@ -105,7 +58,14 @@ font-size : 12px;
 			<form class="form-horizontal">
 				<div class="row">
 					<div class="form-group col-md-10">
+					<c:choose>
+					<c:when test="${not empty member.user_Id }">
 						<textarea class="form-control input-md" id="newReplyText"  name="comment" cols="40" rows="3" autofocus maxlength="50" required></textarea>
+					</c:when>
+					<c:otherwise>
+					<textarea class="form-control input-md" id="newReplyText"  name="comment" cols="40" rows="3" autofocus maxlength="50" readonly>로그인 후 이용가능합니다.</textarea>	
+					</c:otherwise>
+					</c:choose>
 					</div>
 					<div class="form-group">
 						<input type="hidden" name="level" value="1">
@@ -114,7 +74,7 @@ font-size : 12px;
 					</div>
 					<div class="form-group col-md-2" name="deleteBtn">
 						<button type="button" class="btn  btn-secondary btn-md btn-block replyAddBtn" id="btn-insert" style="height:70px; width:120px; font-size:20px;">
-							등록 
+							등록  
 						</button>
 					</div>
 				</div>
@@ -126,15 +86,13 @@ font-size : 12px;
 
 
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-8" style="margin-left:-500px;">
 		<span>${bc.user_Id }</span>
 		<span>${bc.reply_Dt }</span>
 			<div class="col-md-12" style='margin-left:500px;'>
 			<span id="reply_Content"> </span>
-			
 			<div class="row" id="dur" >
 			<div class="col-md-8"  style="margin-left:100px;">
-				
 				<br>
 			</div>
 			</div>
@@ -149,7 +107,7 @@ font-size : 12px;
 		</div>
 
 
-
+</div>
 </section>
 
 
@@ -157,33 +115,40 @@ font-size : 12px;
 <script>
 $(document).ready(function(){
 
-	
+	getLikeCnt();
 	getReplies();
+	
+
+var m = "";	
 function getReplies(){
 	$.getJSON("${path}/replies/all/"+ ${list.post_Sq}, function(data){
 	var str="";
+	
+	if(${empty member.user_Id}){
+		member =null;
+	}
+
 	$(data).each(function(i){
-		if(this.reply_Level >= 2)	{
-		str+="<div class='col-md-8 respace' style='margin-left:"+(10*(this.reply_Level+1.5))+"px;' data-value='"+(i+1)+"' >";
-		}else{
-		str+="<div class='col-md-8 respace' data-value='"+(i+1)+"' >";
+		if(this.reply_Level >= 1)	{
+		str+="<div class='col-md-8 respace' style='margin-left:"+(25*(this.reply_Level+1.5))+"px;' data-value='"+(i+1)+"' >";
 		}
-	str+="<span> "+this.user_Id+"         "+this.updateDate + "</span>";
+	str+="<span><img class='replyIcon' style='width:25px; margin:5px; 10px;' src='${path}/resources/images/icons/hazmat.svg'/> "+this.user_Id+"         "+this.updateDate + "</span>";
 	str+="<br>"
-	str+="<span class='replyupdate'  name='uuup'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
+	str+="<span class='replyupdate'  name='uuup'><img class='replyIcon' style='width:25px; margin:5px; 10px;' src='${path}/resources/images/icons/replyy.png'/>"+this.reply_Content + "</span>";
 	str+="<input type='hidden' name='replyLevel' value='"+this.reply_Level+"'>"
+	if(member != null){
 	str+="<a href ='javascript:void(0);' id='re-reply' style='margin-left:15px' onclick='replyReplyInsert(event,"+ this.reply_Sq+','+this.reply_Level+");'>댓글</a>";
 	str+="<button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' style='margin-left:20px; width:35px; height:25px;'>";
+	}
 	str+="<div class='dropdown-menu'>";
-	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyDelete("+this.reply_Sq+");'>삭제 </a>";
-	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate(event,"+ this.reply_Sq+ ","+'"'+this.reply_Content+'"'+");'>수정</a>";
+	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyDelete("+this.reply_Sq+","+'"'+this.user_Id+'"'+");'>삭제 </a>";
+	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate(event,"+ this.reply_Sq+ ","+'"'+this.reply_Content+'"'+','+'"'+this.user_Id+'"'+");'>수정</a>";
 	str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>좋아요</a>";
 	str+="<a href  class='dropdown-item' style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>신고</a>";
 	str+="</div>";
 	str+="</div>";
 	str+="<hr>";
 	});
-	
 	$("#reply_Content").html(str);
 	
 	});
@@ -193,15 +158,21 @@ function getReplies(){
 
 
 
+
 //댓글 등록
 $(".replyAddBtn").on("click", function(){
 		//화면으로부터 입력 받은 변수값 처리
+		let u = '${member.user_Id}';
+		
+	if(	${empty member.user_Id }){
+		alert("로그인 후 이용가능합니다.")
+			return false;
+		} 
+	
 		var replyLevel = $('[name=level]').val();
 		console.log(replyLevel);
 		let reply_text = $("#newReplyText");  //댓글 내용
-		let reply_writer=$("#newReplyWriter"); //댓글 작성자
 		let reply_textVal = reply_text.val();
-		let reply_writerVal = reply_writer.val();
 		
 		if (reply_textVal.replace(/\s|　/gi, "").length == 0) {
 		    alert("내용을 입력해주세요.");
@@ -210,7 +181,6 @@ $(".replyAddBtn").on("click", function(){
 		  }
 		
 		console.log(reply_textVal);
-		console.log(reply_writerVal);
 		$.ajax({
 			type: "POST",
 			url:"${path}/reply/insert/",
@@ -223,7 +193,7 @@ $(".replyAddBtn").on("click", function(){
 			data: JSON.stringify({
 				post_Sq : ${list.post_Sq},
 				reply_Content : reply_textVal, 
-				user_Id : reply_writerVal,
+				user_Id :  u,
 				reply_Level : replyLevel
 			}),
 			
@@ -235,7 +205,6 @@ $(".replyAddBtn").on("click", function(){
 				}
 				getReplies(); // 댓글 목록 출력 함수 호출
 				reply_text.val("") // 댓글 내용 초기화
-				reply_writer.val("") //댓글 작성자 초기화
 			},
 			error:function(request,status,error){
 		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -261,6 +230,7 @@ $(".replyAddBtn").on("click", function(){
 
 
 function del(no) {
+	
 	let chk = confirm("정말 삭제하시겠습니까?");
 	if(chk){
 		location.href="${path}/freeboard/delete.do?no="+no;
@@ -271,10 +241,10 @@ function del(no) {
 	var cnt = 0;
 	
 	function replyReplyInsert(event,reply_Sq,reply_Level){
-		console.log(event.target);
+
+		let us = '${member.user_Id }';		
 		let elem = event.target;
-		console.log(reply_Level); 
-		console.log(reply_Sq);
+		 
 		var str="";
 		if(!elem.classList.contains('respace') && cnt < 1){
 		str+="<div class='row rerere'>";
@@ -315,7 +285,8 @@ function del(no) {
 					reply_Content : replyContent,
 					post_Sq : ${list.post_Sq},
 					reply_Level : reply_Level,
-					reply_Ref : replySq
+					reply_Ref : replySq,
+					user_Id : us
 				}),
 				success : function(result){
 					if(result == 'regSuccess'){
@@ -333,28 +304,33 @@ function del(no) {
 		});
 		
 	};
-
-	
+	var member = "";
 	function replyList(){
 	$.getJSON("${path}/replies/all/"+ ${list.post_Sq}, function(data){
+		
+		if(${empty member.user_Id}){
+			member =null;
+		}
+	
 		var str="";
 		$(data).each(function(i){
-			if(this.reply_Level >= 2)	{
-				str+="<div class='col-md-8 respace' style='margin-left:"+(10*(this.reply_Level+1.5))+"px;' data-value='"+(i+1)+"' >";
-				}else{
-				str+="<div class='col-md-8 respace' data-value='"+(i+1)+"' >";
+			if(this.reply_Level >= 1)	{
+				str+="<div class='col-md-8 respace' style='margin-left:"+(25*(this.reply_Level+1.5))+"px;' data-value='"+(i+1)+"' >";
 				}
-		str+="<span>"+this.user_Id+"         "+this.updateDate + "</span>";
+		str+="<span><img class='replyIcon' style='width:25px; margin:5px; 10px;' src='${path}/resources/images/icons/hazmat.svg'/>"+this.user_Id+"         "+this.updateDate + "</span>";
 		str+="<br>"
-		str+="<span class='replyupdate' name='uuup'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/reply.png'/>"+this.reply_Content + "</span>";
+		str+="<span class='replyupdate' name='uuup'><img class='replyIcon' style='width:15px; margin:5px; 10px;' src='${path}/resources/images/icons/replyy.png'/>"+this.reply_Content + "</span>";
 		str+="<input type='hidden' name='replyLevel' value='"+this.reply_Level+"'>"
+		if(member != null){
 		str+="<a href ='javascript:void(0);' id='re-reply' style='margin-left:15px' onclick='replyReplyInsert(event,"+ this.reply_Sq+','+this.reply_Level+");'>댓글</a>";
 		str+="<button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' style='margin-left:100px; width:35px; height:25px;'>";
+		}
 		str+="<div class='dropdown-menu'>";
-		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyDelete("+this.reply_Sq+");'>삭제 </a>";
-		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate(event,"+ this.reply_Sq+ ","+'"'+this.reply_Content+'"'+");'>수정</a>";
+		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyDelete("+this.reply_Sq+","+'"'+this.user_Id+'"'+");'>삭제 </a>";
+		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyUpdate(event,"+ this.reply_Sq+ ","+'"'+this.reply_Content+'"'+','+'"'+this.user_Id+'"'+");'>수정</a>";
 		str+="<a href class='dropdown-item'  style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>좋아요</a>";
 		str+="<a href  class='dropdown-item' style='margin-left:15px' onclick='fn_replyReply("+this.reply_Sq+");'>신고</a>";
+		
 		str+="</div>";
 		str+="</div>"
 		str+="<hr>"
@@ -368,10 +344,13 @@ function del(no) {
 };
 
 
-function fn_replyDelete(reply_Sq){
+function fn_replyDelete(reply_Sq,user_Id){
 	console.log(reply_Sq);
-	
-	var msg = confirm("진짜루 나 삭제할꼬야??");
+	console.log(user_Id);
+	if(user_Id != '${member.user_Id }')	{
+		return;
+	}else{
+	var msg = confirm("댓글을 삭제하시겠습니까?");
 	if(msg == true){
 		$.ajax({
 			type:"delete",
@@ -395,16 +374,21 @@ function fn_replyDelete(reply_Sq){
 	}else{
 		return false;
 	}
-	
+	}
 };
 
 
 
 //댓글/댓댓글 수정
-function fn_replyUpdate(event,reply_Sq,reply_Content){
+function fn_replyUpdate(event,reply_Sq,reply_Content,user_Id){
 	var e = event.target;
 	var e1 = event.target;
 	var e2 = event.target;
+	
+	if(user_Id != '${member.user_Id}'){
+		console.log(user_Id)
+		return;
+	}else{
 	
 	e = e.parentNode.parentNode.parentNode.firstChild.nextSibling.nextSibling; //content
 	e1= e1.parentNode.parentNode; //버튼
@@ -466,40 +450,31 @@ function fn_replyUpdate(event,reply_Sq,reply_Content){
 					error:function(request,status,error){
 				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 					}
-			
 				
 			});
-			
-	});
+		});
+	}
 }
+
 
 function getLikeCnt(){
 	$.getJSON("${path}/freeboard/getLikeCnt/"+ ${list.post_Sq}, function(data){
 		var str="";
-		$(data).each(function(){
 			$("#likePost").text("좋아요! "+data);
 			$("#top-Like").html("추천 수 "+"<b>"+data+"</b>");
-		});
 	});
 }
 
 
 
 
-var isLike = 1;
-var check = "false";
 $("#likePost").on("click",function(){
 	var likeIdx = ${list.post_Like_Cnt};
 	var post_sq = ${list.post_Sq};
-	check =  localStorage.getItem("isis");
-	//좋아요 취소
-	if(check ==2){
-		  return;
-	}else{
-		
+	var user_Id = '${member.user_Id}';
+	console.log(post_sq);
 	
-	
-	$.ajax({
+	$.ajax({	
 		url:'${path}/freeboard/like.do',
 		type:'POST',
 		contentType: 'application/json',
@@ -509,38 +484,37 @@ $("#likePost").on("click",function(){
 			"X-HTTP-Method-Override" : "POST" 
 		},
 		data: JSON.stringify({
-			post_Like_Cnt : likeIdx,
-			post_Sq : post_sq
+			post_Sq : post_sq,
+			user_Id : user_Id
 			
 		}),
 		
 		success:function(result){
-			if(result == 'regSuccess'){
-				getLikeCnt();
-				 isLike= 2;
-				 localStorage.setItem("isis", isLike);
-				 
-			}else{
-				alert('좋아요 실패!');
-				isLike = 0;
-				}
+		console.log(result);
+			getLikeCnt();
+				
 			}
 		});
-	}  
+	});  
 	
-	});	
-/* 	 $("#likePost2").on("click",function(){
-	alert('로그인 후 눌러주세요');
-	return;
-});  */
+getLikeCnt();
+
+
+
+$("#backList").on("click",function(){
+	history.back();
 	
+});
 	
 </script>
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>
 	
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+
+	

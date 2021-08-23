@@ -34,8 +34,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.twoweeks.spring.board.freeboard.model.service.FreeBoardService;
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.model.vo.Post_Likes;
 import com.twoweeks.spring.board.freeboard.reply.model.service.ReplyService;
 import com.twoweeks.spring.common.PageFactory;
+import com.twoweeks.spring.common.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,11 +51,12 @@ public class FreeBoardController {
 	@Autowired
 	private FreeBoardService service;
 	
+
 	
 	
 	@GetMapping("/freeboard/searchBoard.do")
 	public ModelAndView searchBoard(ModelAndView mv, FreeBoard fb, HttpServletRequest request, HttpSession session,
-			@RequestParam(value="cPage", defaultValue="1") int cPage, @RequestParam(value="numPerpage",defaultValue="5") int numPerpage) {
+			@RequestParam(value="cPage", defaultValue="1") int cPage, @RequestParam(value="numPerpage",defaultValue="6") int numPerpage) {
 		String type= request.getParameter("searchType");
 		String keyword = request.getParameter("keyword");
 		
@@ -72,7 +75,7 @@ public class FreeBoardController {
 	}
 	
 	@RequestMapping("/freeboard/boardList.do")
-	public ModelAndView boardList(@RequestParam(value="cPage", defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="6")int numPerpage,
+	public ModelAndView boardList(@RequestParam(value="cPage", defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="15")int numPerpage,
 			ModelAndView mv) {
 		log.info("게시판 리스트" );
 		
@@ -113,6 +116,7 @@ public class FreeBoardController {
 	@PostMapping("/freeboard/writeEnd.do") 
 	public ModelAndView writeEnd(FreeBoard b, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file, ModelAndView mv,HttpServletResponse response, HttpServletRequest req) throws IOException {
 		b.setOpen_Yn(req.getParameter("anonymous"));
+		b.setUser_Id(req.getParameter("user_Id"));
 		log.info("freeboard : "+ b.toString());
 		if(b.getOpen_Yn() == null) {
 			b.setOpen_Yn("off");
@@ -353,23 +357,26 @@ public class FreeBoardController {
 		return mv;
 	}
 	
-
+	
 	@PostMapping("freeboard/like.do")
-	public ResponseEntity<String> like(@RequestBody FreeBoard fb) {
-		log.info("값이 잘 들어가나요? : "+ fb);
-		ResponseEntity<String> entity = null;
-		try {
-			int result = service.likeCnt(fb.getPost_Sq());
-			if(result>0) {
-				entity = new ResponseEntity<String>("regSuccess",HttpStatus.OK);
-			}else {
-				entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<Integer> like(@RequestBody Post_Likes pl) {
+		log.info("값이 잘 들어가나요? : "+ pl);
+
+		ResponseEntity<Integer> entity = null; 
+		try { 
+			int result = service.likeCnt(pl);
+		
+				 if(result>0) { 
+					 entity = new ResponseEntity<Integer>(HttpStatus.OK);
+				 }else {
+					 entity = new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST); 
+					 }
+				 }catch(Exception e) {
+					 e.printStackTrace(); 
+					 entity = new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+				 }
 		return entity;
+		
 	}
 	
 	
@@ -388,30 +395,29 @@ public class FreeBoardController {
 	}
 	
 	
-	@PostMapping("freeboard/likeMinus.do")
-	public int likeMinus(@RequestBody FreeBoard fb){
-		log.info("좋아요 취소");
-		int result=0;
-		ResponseEntity<Integer> entity = null;
-		try {
-			result = service.likeMinus(fb.getPost_Sq());
-			entity = new ResponseEntity<Integer>(result, HttpStatus.OK);
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
-		}
-		return result;
-	}
+	/*
+	 * @PostMapping("freeboard/likeMinus.do") public int likeMinus(@RequestBody
+	 * FreeBoard fb){ log.info("좋아요 취소"); int result=0; ResponseEntity<Integer>
+	 * entity = null; try { result = service.likeMinus(fb.getPost_Sq()); entity =
+	 * new ResponseEntity<Integer>(result, HttpStatus.OK);
+	 * 
+	 * }catch(Exception e) { e.printStackTrace(); entity = new
+	 * ResponseEntity<Integer>(HttpStatus.BAD_REQUEST); } return result; }
+	 */
 
 
 
 	//나의활동보기
 	@RequestMapping("/member/mypage")
-	public ModelAndView selectMyBoard(@RequestParam String loginId, ModelAndView mv) {
-		List<FreeBoard> list=service.selectMyBoard(loginId);
-		mv.addObject("list", list);
+	public ModelAndView selectMyBoard(@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="15") int numPerpage,			
+			@RequestParam String loginId, ModelAndView mv) {
 		
+		mv.addObject("list", service.selectMyBoard(loginId, cPage, numPerpage));
+		System.out.println("이게 cPage야 : "+cPage);
+		int totalData=service.myBoardCount(loginId);
+		
+		mv.addObject("pageBar", Pagination.getPageBar(totalData, cPage, numPerpage, "mypage", loginId));
 		mv.setViewName("member/myBoard");
 		
 		return mv;

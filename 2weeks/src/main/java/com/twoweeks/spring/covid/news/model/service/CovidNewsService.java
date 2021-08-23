@@ -16,4 +16,6 @@ public interface CovidNewsService {
 
 	int totalNewsCount();
 	
+	List<CovidNews> postThree();
+	
 }

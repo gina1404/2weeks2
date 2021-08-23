@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.twoweeks.spring.board.freeboard.model.dao.FreeBoardDao;
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.model.vo.Post_Likes;
 import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 import lombok.extern.slf4j.Slf4j;
@@ -129,12 +130,17 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		return dao.delete(session, no);
 	}
 
-
+	
 	@Override
 	public int updateReplyCnt(int post_Sq) {
 		return dao.updateReplyCnt(session, post_Sq);
 	}
 
+
+	@Override
+	public int myBoardCount(String loginId) {
+		return dao.myBoardCount(session, loginId);
+	}
 
 	@Override
 	public List<FreeBoard> replyCnt(int post_Sq) {
@@ -149,8 +155,19 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	//좋아요 수 증가
 	@Override
-	public int likeCnt(int post_Sq) {
-		return dao.likeCnt(session, post_Sq);
+	public int likeCnt(Post_Likes pl) {
+		
+		int result = dao.likeCheck(session, pl);
+		int r=0;
+		if(result == 0) {
+			r = dao.likeCnt(session, pl);
+		}else {
+			r= dao.likeMinus(session, pl);
+			System.out.println(r);
+		}
+		
+		
+		return r;
 	}
 
 
@@ -161,19 +178,19 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 
 	@Override
-	public int likeMinus(int post_Sq) {
-		return dao.likeMinus(session, post_Sq);
+	public int likeMinus(Post_Likes pl) {
+		return dao.likeMinus(session, pl);
 	}
 
 
 	@Override
 	public List<PostAttachment> listAttachment() {
 		return dao.listAttachment(session);
-	}
-	
+	}	
 
-	public List<FreeBoard> selectMyBoard(String userId) {		
-		return dao.selectMyBoard(session, userId);
+	@Override
+	public List<FreeBoard> selectMyBoard(String loginId, int cPage, int numPerpage) {		
+		return dao.selectMyBoard(session, loginId, cPage, numPerpage);
 	}
 	
 	

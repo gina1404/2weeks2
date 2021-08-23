@@ -13,9 +13,10 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-	<section id="vaccine_center" class="container"> 
+	<section id="vaccine_center" class="container" style="display:flex; padding-bottom:200px;"> 
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 
+<!-- <<<<<<< HEAD
 	<div class="content">
 		<div class="vaccine_box ">
 			<h3 class="vaccineCenter_title">백신 접종센터</h3> 
@@ -23,6 +24,65 @@
 			<div class="vaccineMap center-block defaultBoxshadow" id="map" class= "map" style="width:800px;height:550px;"></div>
 
 			
+======= -->
+	<div class="content" style="display:inline-block; padding-left:220px;">
+	<div style="justify-content:center; text-align:center;font-weight:bold; font-size:30px;">
+		<h2>백신 접종 주의 사항</h2>
+	</div>
+	<br>
+		<div class="defaultBoxshadow" style="padding:30px;">
+			<h3 style="font-weight:bold;">코로나 <span style="color:orange;">예방접종 전</span> 주의사항</h3>
+			<br>
+			<h4><span style="color:green;">건강상태가 좋을 때</span> 코로나19 백신을 접종받는 것이 중요합니다</h4>
+			<h4>접종 전 반드시 <span style="color:green;">의사의 예진</span>을 받아야 합니다.</h4>
+			<h4>다음과 같은 경우는 <span style="color:green;">코로나19 예방접종을 받아서는 안됩니다.</span></h4>
+			<br><br>
+			<div style="justify-content:center; text-align:left; border:0.5px solid lightgray; width:fit-content;">
+				<ul style="font-size:20px;">
+					<li>코로나19 백신 구성 성분에 대한 아나필락시스*와 같은 심각한 알레르기 반응이 나타난 경우</li>
+					<li>1차 코로나19 예방접종 후 아나필락시스와 같은 심각한 알레르기 반응이 나타난 경우, 첫 번째 백신과 동일 플랫폼의 백신으로 접종 금기</li>
+					<li style="font-weight:bold;">1차 바이러스 벡터 코로나19 백신 접종 후 혈소판감소성 혈전증이 발생한 경우, 바이러스 벡터 코로나19 백신 접종 금기</li>
+					<li style="font-weight:bold;">모세혈관 누출 증후군의 병력이 있는 경우, 아스트라제네카, 얀센 코로나19 백신 접종 금기</li>
+				</ul>
+			</div>
+			<br><br>
+			<h4>아나필락시스: 호흡곤란, 얼굴의 부기, 눈 또는 입술/입안의 부종, 몸 전체의 발진, 빠른 심장 박동, 현기증, 쇼크 등의 증상을 동반한 심각한 알레르기 반응</h4>
+			<h4>약(장 세척제 등), 화장품, 음식, 다른 종류의 백신 접종 등에 대한 알레르기 병력이 있는 경우 예진표에 자세히 기록해 주세요!</h4>
+			<h4>임신부와 18세 미만 소아청소년의 경우 백신 접종 후 안전성 및 유효성에 대한 임상연구 결과가 나오기 전까지 접종이 권고되지 않습니다.</h4>
+			<br><br>
+			<h4 style="color:blue; font-weight:bold">다음과 같은 경우는 예방접종을 연기합니다.</h4>
+			<br>
+			<div style="justify-content:center; text-align:left; border:0.5px solid lightgray; width:fit-content;">
+				<ul style="font-size:20px;">
+					<li>코로나19 감염이 의심되는 경우 선별진료소 등을 통해 신속히 진단검사를 받으셔야 하며, 결과가 나올 때까지 예방접종을 연기합니다.</li>
+					<li>1차 코로나19 예방접종 후 아나필락시스와 같은 심각한 알레르기 반응이 나타난 경우, 첫 번째 백신과 동일 플랫폼의 백신으로 접종 금기</li>
+					<li>격리 중인 코로나19 환자 및 접촉자는 격리해제 될 때까지 예방접종을 연기합니다.</li>		
+				</ul>
+			</div>
+			<br><br>
+			<h3 style="font-weight:bold;">코로나 <span style="color:orange;">예방접종 후</span> 주의사항</h3>
+			<br>
+			<ul style="font-size:20px;">
+					<li>예방접종 후 <span style="color:green;">15~30분간</span> 접종기관에 머물러 이상반응 발생 여부를 관찰합니다.</li>
+					<li>예방접종 후 <span style="color:green;">3시간 이상</span> 주의 깊게 관찰합니다.</li>
+					<li>예방접종 후 <span style="color:green;">4주간은</span> 특별한 관심을 가지고 관찰하며 평소와 다른 신체 증상이 나타나면 바로 의사의 진료를 받도록 합니다.</li>
+					<li>예방접종 후 <span style="color:green;">2일 정도는</span> 고강도 운동 및 활동, 음주를 삼가주세요.</li>
+					<li>접종부위는 청결히 유지합니다.</li>
+					<li>어르신은, 예방접종 후 혼자 있지 말고 다른 사람과 함께 있어 증상 발생 시 도움을 받을 수 있도록 합니다.</li>	
+				</ul>
+			<br><br><br>
+			<div class="vaccine_box ">
+				<h3 class="vaccineCenter_title" style="font-weight:bold;">내 근처 백신 접종센터</h3> 
+				<div class="vaccineMap center-block defaultBoxshadow" id="map" class= "map" style="width:800px;height:550px;"></div>
+			</div>
+			<br><br><br>
+			<div style="justify-content:center; text-align:center;">
+				<div style="background-color:darkblue; font-weight:bold; font-size:30px; color:white; width:60%; display:inline-block;" onclick="window.open('https://ncvr2.kdca.go.kr/')"><span style="color:yellow;">코로나 19</span> 백신 사전예약 바로가기</div>
+			</div>
+			
+			<br><br><br>
+			<div style="color:darkgray; cursor:pointer">자료 출처: nip.kdca.go.kr</div>
+>>>>>>> 3cc3a2e5ec424b90e433c26eea1c488e861ad6df
 		</div>
 	</div>
 	</section>

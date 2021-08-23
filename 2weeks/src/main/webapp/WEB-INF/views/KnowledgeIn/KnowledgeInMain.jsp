@@ -320,7 +320,7 @@ position:relative;
 color: black;
 font-family: Pretendard;
 top:-100px;
-right:-1000px;
+right:-850px;
 }
 #Myqlist2{
 
@@ -375,10 +375,17 @@ background-color:transparent;
 	
 	
 	}
-
+.selected{
+color:red;
+font-family: pretendard;
+position: relative;
+right:-100px;
+top:-10px;
+}
 </style>
 <section class="container" style="display:flex; padding-bottom: 200px;"> 
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>	
+
 <div class="content" style="display:inline-block;padding-left: 220px;">
 		
 						<a href="${pageContext.request.contextPath}/chatting.do">	<img id="expert" src="${pageContext.request.contextPath}/resources/images/knowledgeIn/home_panel_expert2.png" alt=""
@@ -389,7 +396,7 @@ background-color:transparent;
 
 
 <div class="background2">
-				<%-- <a href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do"> --%><button class="Myqlist">내 질문목록</button><!-- </a> -->
+			<button class="Myqlist">내 질문목록</button><!-- </a> -->
  
 		<!-- 	<div id="searchBar"><input class="naver" type="text" placeholder="검색어 입력">
 					<button id="searchkn">검색</button>
@@ -446,6 +453,21 @@ background-color:transparent;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
+					<c:choose>
+					<c:when test ="${k.selected==1}">
+					<div class="selected">채택완료</div>
+					</c:when>
+					
+					<c:when test ="${k.selected==0}">
+					<div class="selected"></div>
+					</c:when>
+					</c:choose>
+					
+					
+					
+					
+					
+					
 		<!-- 			<span class="reply_num">답변수 8</span> -->
 	<%-- 		<span class="reply_num">답변 ${k.reply_Cnt}개</span> --%>
 			    	
@@ -465,6 +487,15 @@ background-color:transparent;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="ranking_title" target="_blank" onclick="">${k.kin_Title}</a>	
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
+					<c:choose>
+					<c:when test ="${k.selected==1}">
+					<div class="selected">채택완료</div>
+					</c:when>
+					
+					<c:when test ="${k.selected==0}">
+					<div class="selected"></div>
+					</c:when>
+					</c:choose>
 		<%-- 		<span class="reply_num">답변 ${k.reply_Cnt}개</span> --%>
 			    	
 				
@@ -517,7 +548,15 @@ background-color:transparent;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
 		<!-- 			<span class="reply_num">답변수 8</span> -->
-			    	
+			    	<c:choose>
+					<c:when test ="${k.selected==1}">
+					<div class="selected">채택완료</div>
+					</c:when>
+					
+					<c:when test ="${k.selected==0}">
+					<div class="selected"></div>
+					</c:when>
+					</c:choose>
 				
 					</li>
 						</c:if>
@@ -539,7 +578,15 @@ background-color:transparent;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
 		<!-- 			<span class="reply_num">답변수 8</span> -->
-			    	
+			    	<c:choose>
+					<c:when test ="${k.selected==1}">
+					<div class="selected">채택완료</div>
+					</c:when>
+					
+					<c:when test ="${k.selected==0}">
+					<div class="selected"></div>
+					</c:when>
+					</c:choose>
 				
 					</li>
 				</c:if>
@@ -550,7 +597,7 @@ background-color:transparent;
                 	</ul>
        	 </div>
 	 
-           <div id="pagebar-container"class="m-5">${pageBar }</div>
+ <%--           <div id="pagebar-container"class="m-5">${pageBar }</div> --%>
 		</div>
 	
 
@@ -595,15 +642,15 @@ $(function(){
 $(document).ready(function(){ 
 
 		$(".Myqlist").on("click",function(){
-		
+			
 			if(	${empty member.user_Id }){
 				alert("로그인 후 이용가능합니다.")
 					return false;
 				} 
 			
 	
-				
-			location.href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do";
+		    location.href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do?user_Id=${member.user_Id}";
+			/* location.href="${pageContext.request.contextPath}/KnowledgeIn/KnowledgeInMyList.do"; */
 		
 			
 		});  

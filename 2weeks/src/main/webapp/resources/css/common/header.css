@@ -7,15 +7,37 @@ html{
 	height: auto;
 }
 
-html body{
+body{
 	margin:0;
 	padding:0;
 	height: auto;
-	min-height: 100%;
+	min-height: 100%;	
+	color: #333;
 }
 a {	color: #394956; text-decoration: none; outline: none }
 
 a:hover, a:active {text-decoration: none; color: #394956;}
+
+
+/*****다크모드*****/
+
+#darkBtn{
+	cursor: pointer;
+}
+
+body.dark{
+	width: 100%;
+	min-height: 100%;
+	height: auto;
+	background-color: black;
+	color: #FFFFFF;
+}
+.loginColor{
+	color: #FFFFFF;
+}
+
+/***************/
+
 
 /* 테두리 박스 규격 */
 .defaultBoxshadow{
@@ -23,14 +45,19 @@ a:hover, a:active {text-decoration: none; color: #394956;}
     box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
     overflow:hidden;
 }
+.defaultBoxshadow2{
+    border-radius: 14px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
+}
 /* 기본 header, nav, main(container), aside 영역 나누기  */
 #header{
 	align-items: center;
 	/* background-color: #F7F8FC; */
 	display: flex;
+	justify-content: center;
 	width: 1440px;
 	margin: auto;
-	position:fixed;
+	/* position:fixed; */
 	height:60px; /* header 높이 */
 	top:0;
 	left:0;
@@ -44,9 +71,10 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	align-items: flex-start;
 	width:200px ; /* 사이드바 너비  15%->200px */
 	/* overflow: hidden; */
-	top:75px; /* header 높이에 따라 변경해야 됨 */
+	top:0; /* 75px; */ /* header 높이에 따라 변경해야 됨 */
 	position:fixed;
 	padding:0;
+	padding-top:10px;
 	height:100%;
 	font-family: 'Pretendard';
 	font-size: 15px;
@@ -57,7 +85,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 	min-height : 100%; 
 	width: 1440px;
 	padding-left: 0;
-	margin: 75px auto auto auto;
+	margin: auto;
 }  	
 .content{
     width: 1200px;
@@ -129,6 +157,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 }
 .header-icon-area{
 	height: 60px;
+	width:310px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
@@ -137,7 +166,7 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 .header-divider {
 	height: 32px;
 	width: 2px;
-	color:#123962;
+	:#123962;
 }
 .header-icon {
 	height: 24px;
@@ -156,7 +185,8 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 }
 .header-profile-text{
 	font-size: 20px;
-	margin-left: 5px;
+	margin-left: 5px;	
+	padding-left: 15px;
 }
 
 #nick {
@@ -174,11 +204,12 @@ a:hover, a:active {text-decoration: none; color: #394956;}
 .dropdown-content{
 	display: none;
 	position: absolute;
-	background-color: #f1f1f1;
+	background-: #f1f1f1;
 	min-width: 130px;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	z-index: 1;	
-    margin-top: 23px;	
+    margin-top: 23px;
+    margin-left: 35px;	
 }
 .dropdown-content a{
 	color: black;

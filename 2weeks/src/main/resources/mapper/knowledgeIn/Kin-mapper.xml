@@ -17,17 +17,20 @@
 	</select>
 	
 	
-	<select id ="MyQ"  resultMap="KnowledgeInMap">
- <!--      	SELECT * 
-		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_WRITER DESC    -->
-		   SELECT * FROM KIN 
+	<select id ="MyQ"  resultMap="KnowledgeInMemberMap">
+		SELECT *
+		FROM KIN K LEFT JOIN MEMBER2 M ON K.KIN_WRITER=M.USER_ID WHERE K.KIN_WRITER=#{user_Id} 
+
+		
+	 <!-- SELECT * FROM KIN  -->
 	</select>
-	<select id ="MyA"  resultMap="KnowledgeInMap">
- <!--      	SELECT * 
-		FROM KIN K LEFT JOIN KIN_ATTACHMENT KA ON K.KIN_SQ=KA.KIN_SQ ORDER BY K.KIN_WRITER DESC    -->
-		   SELECT * FROM KIN 
-	</select>
+	<select id ="MyA"  resultMap="KnowledgeInMemberMap2">
+	 	
+		   SELECT * FROM KIN K LEFT JOIN KIN_REPLY KR ON K.KIN_SQ=KR.KIN_SQ WHERE KR.REPLY_WRITER=#{user_Id}
 	
+				
+	</select>
+
 	
 	
 	
@@ -44,7 +47,6 @@
 		<result column="kin_Cnt" property="kin_Cnt"/>
 		<result property="reply_Cnt" column="reply_Cnt"/>
 		<result property="point" column="point"/>
-		
 		<collection property="attachments" ofType="attachment">
 			<id column="atch_No" property="atch_No"/>
 			<result column="kin_Sq" property="kin_Sq"/>
@@ -53,6 +55,7 @@
 
 		</collection>
 	</resultMap>
+	
 	<resultMap type="attachment" id="attachmentMap">
 		<id column="atch_No" property="atch_No"/>
 		<result column="kin_Sq" property="kin_Sq"/>
@@ -89,6 +92,53 @@
 
 	</resultMap>
 
+	<resultMap type="com.twoweeks.spring.member.model.vo.Member" id="Member">
+	<id column="user_Id" property="user_Id"/>
+
+	</resultMap> 
+
+
+<resultMap type="knowledgeIn" id="KnowledgeInMemberMap">
+		<id column="kin_Sq" property="kin_Sq"/>
+		<result column="kin_Writer" property="kin_Writer"/>
+		<result column="category" property="category"/>
+		<result column="kin_Title" property="kin_Title"/>
+		<result column="kin_Content" property="kin_Content"/>
+		<result column="kin_Image" property="kin_Image"/>
+		<result column="open_Yn" property="open_Yn"/>
+		<result column="selected" property="selected"/>
+		<result column="kin_Date" property="kin_Date"/>
+		<result column="kin_Cnt" property="kin_Cnt"/>
+		<result property="reply_Cnt" column="reply_Cnt"/>
+		<result property="point" column="point"/>
+		<collection property="member" ofType="Member">
+		<id column="user_Id" property="user_Id"/>
+		</collection>
+	</resultMap>
+
+	
+	<resultMap type="knowledgeIn" id="KnowledgeInMemberMap2">
+		<id column="kin_Sq" property="kin_Sq"/>
+		<result column="kin_Writer" property="kin_Writer"/>
+		<result column="category" property="category"/>
+		<result column="kin_Title" property="kin_Title"/>
+		<result column="kin_Content" property="kin_Content"/>
+		<result column="kin_Image" property="kin_Image"/>
+		<result column="open_Yn" property="open_Yn"/>
+		<result column="selected" property="selected"/>
+		<result column="kin_Date" property="kin_Date"/>
+		<result column="kin_Cnt" property="kin_Cnt"/>
+		<result property="reply_Cnt" column="reply_Cnt"/>
+		<result property="point" column="point"/>
+		<collection property="kinreply" ofType="kinReply">
+		<id column="kin_Sq" property="kin_Sq"/>
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	
 	
 	
 	<select id="selectKinCount" resultType="_int">
@@ -151,7 +201,7 @@
 	<insert id="insertKinReply">
 			
 			INSERT INTO KIN_REPLY VALUES(KIN_REPLY_SEQ.NEXTVAL,#{reply_Writer},#{kin_Sq},#{reply_Content},NULL,
-			#{reply_Like_Cnt},SYSDATE,#{open_Yn})
+			#{reply_Like_Cnt},SYSDATE,#{open_Yn},default)
 			
 			<selectKey keyProperty="reply_Sq" resultType="_int" order="AFTER"> 
 			SELECT KIN_REPLY_SEQ.CURRVAL FROM DUAL 
@@ -176,10 +226,15 @@
 		
 		
 			
-		<update id="updatePoint" parameterType="Member">
-		UPDATE MEMBER2 M SET M.USERPOINT_CNT= (SELECT USERPOINT_CNT FROM MEMBER2 WHERE USER_ID = #{user_Id}) - (SELECT POINT FROM KIN  WHERE KIN_SQ =#{kin_Sq})WHERE USER_ID=#{user_Id}
+		<update id="updatePoint" >
+		UPDATE MEMBER2 SET USERPOINT_CNT= USERPOINT_CNT - #{userPoint_Cnt} WHERE USER_ID=#{user_Id}
 		</update>
 
+		<update id="selection" >
+		UPDATE MEMBER2 SET USERPOINT_CNT= USERPOINT_CNT + #{userPoint_Cnt} WHERE USER_ID=#{user_Id}
+		</update>
+		
+			
 		
 		<update id="updateReplyCount" parameterType="int">
 		UPDATE KIN K SET K.REPLY_CNT =(SELECT COUNT(*)FROM KIN_REPLY WHERE KIN_SQ =#{kin_Sq}) WHERE K.KIN_SQ=#{kin_Sq}             
@@ -187,7 +242,12 @@
 		
 		
 		
-
+		<update id ="updateSq">
+		UPDATE KIN SET SELECTED = 1 WHERE KIN_SQ=#{sq}
+		
+		</update>
+		
+		
 		
 		
 		

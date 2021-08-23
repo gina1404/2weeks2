@@ -1,10 +1,15 @@
 package com.twoweeks.spring.covid.domestic.model.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Item {
 
+	private int no;
 	private double accDefRate; //누적 확진률
 	private int accExamCnt; //누적 검사 수
 	private int accExamCompCnt; // 누적 검사 완료 수
@@ -19,4 +24,5 @@ public class Item {
 	private int stateDt; //기준일
 	private String stateTime; //기준시간
 	private String updateDt; //수정일시분초
+
 }

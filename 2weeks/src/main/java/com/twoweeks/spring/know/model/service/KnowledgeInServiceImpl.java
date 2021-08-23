@@ -41,15 +41,15 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 
 
 	@Override
-	public List<Kin> selectKinListMyQ(int cPage, int numPerpage) {
+	public List<Kin> selectKinListMyQ(int cPage, int numPerpage,String user_Id) {
 		
-		return dao.selectKinListMyQ(session,cPage,numPerpage);
+		return dao.selectKinListMyQ(session,cPage,numPerpage,user_Id);
 	}
 
 	@Override
-	public List<Kin> selectKinListMyA(int cPage, int numPerpage) {
+	public List<Kin> selectKinListMyA(int cPage, int numPerpage,String user_Id) {
 		
-		return dao.selectKinListMyA(session,cPage,numPerpage);
+		return dao.selectKinListMyA(session,cPage,numPerpage,user_Id);
 	}
 
 	
@@ -192,9 +192,12 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 	}
 
 
+
+
+
 	@Override
-	public int updatePoint(Member m) throws Exception {
-		return dao.updatePoint(session, m);
+	public int updatePoint(Member m1) throws Exception {
+		return dao.updatePoint(session,m1);
 		
 		
 		
@@ -204,7 +207,17 @@ public class KnowledgeInServiceImpl implements KnowledgeInService {
 
 
 
+	@Override
+	public int selection(Member m1) throws Exception {
+		return dao.selection(session,m1);
 
+		
+	}
+	@Override
+	public int updateSq(int sq) throws Exception {
+	
+		return dao.updateSq(session,sq);
+}
 	
 	
 

@@ -1,14 +1,11 @@
 package com.twoweeks.spring.know.controller;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.twoweeks.spring.common.PageFactory;
 import com.twoweeks.spring.know.model.service.KnowledgeInService;
 import com.twoweeks.spring.know.model.vo.Kin;
@@ -64,7 +60,7 @@ public class KnowledgeInController {
 			throws Exception {
 			
 		 service.updateReplyCount(sq);
-			/* service.updatePoint(m); */
+		
 			log.info("답글개수"+service.selectKinReplyCount(sq));
 		mv.addObject("KnowledgeIn", service.selectKinOne(sq)); //글
 		 List<KinReply> kr = service.selectReplyOne(sq);  //답변
@@ -95,17 +91,20 @@ public class KnowledgeInController {
 	}
 
 	@RequestMapping("/KnowledgeIn/KnowledgeInQEnd.do") // 지식인 질문등록
-	public ModelAndView insertKin(Kin k,Member m, @RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file,
-			ModelAndView mv, HttpServletResponse response, HttpServletRequest req,HttpSession session) throws Exception {
-		
-		
+	public ModelAndView insertKin(Kin k,Member m,@RequestParam("article_file") MultipartFile[] upload, MultipartFile[] file,
+			ModelAndView mv, HttpServletResponse response, HttpServletRequest request,HttpSession session)throws Exception {
+	
+		int point=Integer.parseInt(request.getParameter("point"));
+		String user_Id=request.getParameter("kin_Writer");
+
+	
 		logger.debug("knowledgIn : " + k);
 		for (int i = 0; i < upload.length; i++) {
 			logger.debug("fileName : " + file[i].getOriginalFilename());
 			logger.debug("fileName : " + file[i].getSize());
 		}
 
-		String path = req.getServletContext().getRealPath("/resources/upload/knowledgeIn");
+		String path = request.getServletContext().getRealPath("/resources/upload/knowledgeIn");
 		File dir = new File(path); // 폴더
 		if (!dir.exists()) {
 			dir.mkdirs();
@@ -137,17 +136,19 @@ public class KnowledgeInController {
 		
 		String msg = "등록 성공";
 		try {
-			service.insertKin(k);
-			 service.updatePoint(m); 
+			int result=service.insertKin(k);
+			
+			if(result>0){
+				Member m1=new Member();
+				m1.setUser_Id(user_Id);
+				m1.setUserPoint_Cnt(point);
+				service.updatePoint(m1); 
+			}
 		} catch (Exception e) {
 			msg = e.getMessage();
 		}
 	
-		
-		 m.setUser_Id(m.getUser_Id());
-		 m.setUserPoint_Cnt(m.getUserPoint_Cnt());
-		 session.setAttribute("m", m);
-		
+	
 		mv.addObject("msg", msg);
 		mv.addObject("loc", "/KnowledgeIn/KnowledgeInMain.do");
 		
@@ -155,12 +156,14 @@ public class KnowledgeInController {
 		return mv;
 		
 	}
-
 	@RequestMapping("/KnowledgeIn/KnowledgeInMyList.do") // 나의 질문,답변
 	public ModelAndView KnowledgeInMyList(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
-			@RequestParam(value = "numPerpage", defaultValue = "6") int numPerpage,ModelAndView mv) {
-		mv.addObject("MyQ", service.selectKinListMyQ(cPage, numPerpage));
-		mv.addObject("MyA", service.selectKinListMyA(cPage, numPerpage));
+			@RequestParam(value = "numPerpage", defaultValue = "6") int numPerpage,HttpServletRequest request,ModelAndView mv,String user_Id) 
+		{
+		user_Id=request.getParameter("user_Id");
+		log.info("아이디"+user_Id);
+		mv.addObject("MyQ", service.selectKinListMyQ(cPage, numPerpage,user_Id));
+		mv.addObject("MyA", service.selectKinListMyA(cPage, numPerpage,user_Id));
 		int totalData = service.selectKinCount();// 등록된 테이블의 총 개수를 가져다가 저장
 		mv.addObject("totalContents", totalData);
 		mv.addObject("pageBar", PageFactory.getPageBar(totalData, cPage, numPerpage, "KnowledgeInMyList.do"));
@@ -297,12 +300,12 @@ public class KnowledgeInController {
 			service.update(k);
 			
 		} catch (Exception e) {
-			// FileUtils.deleteQuietly(new File(path+reName)); //저장된 현재 파일 삭제
+			
 			msg = e.getMessage();
 		}
-		/* mv.addObject("no", request.getParameter("post_Sq")); */
+	
 		mv.addObject("sq", request.getParameter("kin_Sq")); //파라미터에는 name 값 
-		/* log.info("sq"+k.getKin_Sq()); */
+	
 		log.info("list" + k.getAttachments());//???
 		mv.addObject("msg", msg);
 		mv.addObject("loc", "/KnowledgeIn/KnowledgeInMain.do"); // common/msg에 넣어버리면 location.replace라서 작동안됨.
@@ -330,6 +333,67 @@ public class KnowledgeInController {
 	
 		
 	}
+	
+	
+	/* 여기 주석처리 */
+	
+	@RequestMapping("/KnowledgeIn/KnowledgeInListEnd.do") //채택
+	public ModelAndView selection(Kin k,Member m,ModelAndView mv, HttpServletResponse response, HttpServletRequest request,HttpSession session)throws Exception {
+	
+		String user_Id=request.getParameter("Writer");
+		int point=Integer.parseInt(request.getParameter("point"));
+		int sq=Integer.parseInt(request.getParameter("sq"));
+		
+		
+		String msg = "채택이 완료되었습니다.";
+		try {
+			
+			
+			
+				Member m1=new Member();
+				m1.setUser_Id(user_Id);
+				m1.setUserPoint_Cnt(point);
+				int result=service.selection(m1);
+				
+				if(result>0) {
+					int result2 =service.updateSq(sq);
+					if(result2>0) {
+						mv.addObject("msg", msg);
+						mv.addObject("loc", "/KnowledgeIn/KnowledgeInList.do?sq="+sq);
+						mv.setViewName("common/msg");
+					}else {
+						mv.addObject("msg","채택 실패");
+						mv.addObject("loc", "/KnowledgeIn/KnowledgeInList.do?sq="+sq);
+						mv.setViewName("common/msg");
+					}
+				}
+		
+		} catch (Exception e) {
+			msg = e.getMessage();
+		}
+	
+		return mv;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

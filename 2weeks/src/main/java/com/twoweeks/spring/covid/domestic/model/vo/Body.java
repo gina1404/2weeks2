@@ -2,6 +2,7 @@ package com.twoweeks.spring.covid.domestic.model.vo;
 
 import java.util.List;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

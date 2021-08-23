@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twoweeks.spring.covid.vaccine.Service.VaccineService;
+import com.twoweeks.spring.covid.vaccine.model.vo.Body;
 import com.twoweeks.spring.covid.vaccine.model.vo.Item;
 import com.twoweeks.spring.covid.vaccine.model.vo.Response;
 
@@ -18,19 +19,16 @@ public class VaccineController {
     private VaccineService vaccineService;
     
     @GetMapping("/covidUpdate/domesticVaccine.do")
-    public ModelAndView domesticTrend(ModelAndView mv) {
+    public ModelAndView domesticVaccine(ModelAndView mv) {
         ResponseEntity<String> responseEntity = vaccineService.getApi();
         Response response = vaccineService.parser(responseEntity.getBody());
         
         List<Item> items = response.getBody().getItems();
-        System.out.println(responseEntity.getBody());
-        System.out.println(responseEntity);
-        mv.addObject("total",items.get(0).getTotalFirstCnt());  //전체 누적 통계(1차 접종)
-        mv.addObject("first",items.get(0).getFirstCnt()); //당일 통계(1차 접종)
-        mv.addObject("total2",items.get(0).getTotalSecondCnt()); //전체 누적 통계(2차 접종)
-        mv.addObject("second",items.get(0).getSecondCnt()); //당일 통계(2차 접종)
-        
-        System.out.println(items.toString());
+        String datetime = response.getBody().getDataTime();
+    	mv.addObject("items",items);
+    	mv.addObject("datetime",datetime);
+        System.out.println(items);
+        System.out.println(datetime);
         mv.setViewName("covidUpdate/domesticVaccine");
         
         return mv;

@@ -1,11 +1,13 @@
 package com.twoweeks.spring.know.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.know.model.vo.KinAttachment;
 import com.twoweeks.spring.know.model.vo.KinReply;
@@ -32,15 +34,18 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	
 
 	@Override public List<Kin> selectKinListMyQ(SqlSession session, int cPage,
-			  int numPerpage) { return session.selectList("knowledgeIn.MyQ",null, new
-			  RowBounds((cPage-1)*numPerpage,numPerpage)); }
+			  int numPerpage,String user_Id) { 
+		return session.selectList("knowledgeIn.MyQ",user_Id, new
+			  RowBounds((cPage-1)*numPerpage,numPerpage)); 
+		}
 			 
 			
 
 	@Override public List<Kin> selectKinListMyA(SqlSession session, int cPage,
-			  int numPerpage) { return session.selectList("knowledgeIn.MyA",null, new
-			  RowBounds((cPage-1)*numPerpage,numPerpage)); }
-			 
+			  int numPerpage,String user_Id) { 
+		return session.selectList("knowledgeIn.MyA",user_Id, new
+			  RowBounds((cPage-1)*numPerpage,numPerpage)); 
+		}
 	
 	@Override
 	public int selectKinCount(SqlSession session) {
@@ -128,11 +133,45 @@ public class KnowledgeInDaoImpl implements KnowledgeInDao {
 	}
 
 
-	@Override
-	public int updatePoint(SqlSession session, Member m) throws Exception {
-		return session.update("knowledgeIn.updatePoint",m);
-			
-	}
+	  @Override public int updatePoint(SqlSession session,Member m1) {
+	  
+	  return session.update("knowledgeIn.updatePoint",m1);
+
+	  }
+	 
+
+	  @Override public int selection(SqlSession session,Member m1) {
+		  
+	  return session.update("knowledgeIn.selection",m1);
+
+	  }
+	 
+
+
+	@Override public int updateSq(SqlSession session,int sq) {
+		  
+	  return session.update("knowledgeIn.updateSq",sq);
+
+	  }
+	 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
 
 	
 

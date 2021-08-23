@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <c:set var="path" value="${pageContext.request.contextPath }"/>      
 <!DOCTYPE html>
-<html>
+<html class="">
 <head>
 <meta charset="UTF-8">
 <title>2weeks</title>
@@ -27,9 +27,9 @@
 <body style="margin:0; padding:0;">
 	<header id="header">
 		<!-- 로고 -->
-		<div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
-		
-		<div class="content">
+		<%-- <div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
+		 --%>
+		<div class="content"  style="align-items: center; padding-left:120px;">
 		<div id="header-main-area" style="display: flex; width:1143px; height:60px; justify-content:flex-end;">
 		<!-- 키워드 검색 -->
 		<div class="header-search-area">			
@@ -43,28 +43,28 @@
 				<img class="header-divider" src="${path }/resources/images/icons/divider-virtical.svg"/>
 			</div>
 			<div class="header-icon">
-				<img class="" src="${path }/resources/images/icons/darkmode.svg" />
+				<img id="darkBtn" src="${path }/resources/images/icons/darkmode.svg" />
 			</div>
 			<div class="header-icon">
 				<img class="" src="${path }/resources/images/icons/language.svg"/>  
+			</div>
+			<c:if test="${userId eq null and member.user_Id eq null}">
+				<div class="header-profile-text x" id="loginBtn" onclick="location.href='${path}/member/login'" style="cursor:pointer; margin: 20px;">LOGIN HERE!</div>
+			</c:if>
+			<c:if test="${userId ne null}" >
+				<div class="header-profile-text">${user_Nic} 님</div>
+				<%-- <input type="hidden" value="${user_Nic}" id="hidden_session_kakao"/> --%>
+				<div class="dropdown-content">
+			 		<a href="${path}/member/myinfo">회원 정보 변경</a>
+					<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>
+					<a href="#">나의 포인트 ${member.userPoint_Cnt} 원</a>
+					<a href="${path}/member/kakaologout">로그아웃</a>			            		
 				</div>
-					<c:if test="${userId eq null and member.user_Id eq null}">
-	                	<div class="header-profile-text" onclick="location.href='${path}/member/login'" style="cursor:pointer;">LOGIN</div>
-	            	</c:if>
-	            	<c:if test="${userId ne null}" >
-	            		<div class="header-profile-text">${user_Nic} 님</div>
-	            		<%-- <input type="hidden" value="${user_Nic}" id="hidden_session_kakao"/> --%>
-					         <div class="dropdown-content">
-			            		<a href="${path}/member/myinfo">회원 정보 변경</a>
-			            		<a href="${path}/member/mypage?loginId=${chatId }">나의 활동 보기</a>
-			            		<a href="#">나의 포인트 ${member.userPoint_Cnt} 원</a>
-			            		<a href="${path}/member/kakaologout">로그아웃</a>			            		
-			            	</div>
-			            	<div class="header-message" id="messageIcon">
-			                	<i class="far fa-envelope fa-lg" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
-			                </div>
-	            		<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
-	            	</c:if>
+				<div class="header-message" id="messageIcon">
+			   		<i class="far fa-envelope fa-lg" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
+			    </div>
+				<input type="button" value="로그아웃" onclick="location.href='${path}/member/kakaologout'"/>
+			</c:if>
 
 	            	<%-- <c:if test="${member.user_Nic ne null }">
 	            		<div class="header-profile-text">${member.user_Nic}</div>
@@ -76,9 +76,8 @@
 	                </div> --%>
 
 	            	
-	            	
-					<div class="dropdown">
-		            	<c:if test="${member.user_Nic ne null }">
+		           	<c:if test="${member.user_Nic ne null }">
+						<div class="dropdown">
 			                <div class="header-profile-icon">
 			                    <img class="" src="${path }/resources/images/icons/profile.svg" style="margin: 0;"/>
 			                </div>
@@ -93,8 +92,8 @@
 			                	<i class="far fa-envelope fa-lg" onclick="location.href='${path}/message/messagelist'" style="cursor:pointer;"></i>
 			                	<span class="recMs"></span>
 			                </div>
-		            	</c:if>
-	            	</div>
+	            		</div>
+		            </c:if>
 	            	
 	            	
 	            		
@@ -206,12 +205,13 @@
 				$("#searchKeyword").focus();
 				return false;
 			}else{ //검색어를 컨트롤러에 전달
-				var currentUrl=document.location.href; //현재 페이지 url을 받아옴 -> http://localhost:9090/ 이 부분을 잘라냄
-				currentUrl=currentUrl.substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")+1); 
+				var currentUrl=document.location.href; //현재 페이지 url을 받아옴
 				
 				//현재 페이지 url을 매핑 주소를 비교해 분기 처리
-				if(currentUrl=='${path}/test/test.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
-					console.log("다른 주소임");
+				if(currentUrl.includes("freeboard")){  //커뮤니티에서 검색할 경우
+					location.href='${path }/searchResult/community.do?searchKeyword='+$('input[name=searchKeyword]').val();
+				}else if(currentUrl.includes("KnowledgeIn")){//지식인에서 검색할 경우
+					location.href='${path }/searchResult/knowledgeInAll.do?searchKeyword='+$('input[name=searchKeyword]').val();
 				}else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
 					location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();
 				}
@@ -222,10 +222,19 @@
 			$("#searchKeywordSubmit").click(function(){ 
 				$("#searchKeyword").show(); //돋보기 아이콘을 클릭하면 입력창이 보이게 보이게 됨
 				$("#searchKeyword").focus();			
-				$("#header-main-area").addClass("defaultBoxshadow");
+				$("#header-main-area").addClass("defaultBoxshadow2");
 				//검색
 				$("#searchKeywordSubmit").click(fn_searchKeyword);						
 			});
+		});
+		
+		/* 다크모드 */
+		document.getElementById("darkBtn").addEventListener("click", () => {
+    		document.body.classList.toggle("dark");
+    		const x = document.querySelectorAll(".x");
+    		for ( var i = 0; i < x.length; i++ ) {
+    			x[i].classList.toggle("loginColor");
+    		}
 		});
 	</script>
 

@@ -7,7 +7,9 @@
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/sidebar.css"> 
 
 	<nav id="sidebar" class="side_bar">		
+			<div class="header-logo-area"><a class="header-logo" href="${path }/">2weeks</a></div>
 		<div class="sidebar-default"> <!-- 스크롤 내려도 목록 고정되도록 -->
+		
 			<!-- 코로나 현황 -->
 			<div class="wrap_sub_list"> 
 				<div class="sidebar-list">
@@ -23,7 +25,7 @@
 						</a>
 					</div>
 					<div class="sidebar-list-sub">
-						<div class="sidebar-title">Vaccination</div>
+						<div class="sidebar-title"><a href="${path }/covidUpdate/domesticVaccine.do">Vaccination</a></div>
 					</div>
 					<div class="sidebar-list-sub">
 						<a href="${path }/covid/overseas.do">
@@ -42,15 +44,17 @@
 			<div class="wrap_sub_list">
 				<div class="sidebar-list">
 	                <img class="sidebar-icon" src="${path }/resources/images/icons/info.png"/>
-	                <div class="sidebar-title">Covid-19 info/guide</div>
+	                	<a class="" href="${path }/covidInfo/center.do">
+		                	<div class="sidebar-title">Covid-19 info/guide</div>
+		                </a>
                 </div>
 				<div class="sidebar-list-hide">
-					<div class="sidebar-list-sub">
+					<!-- <div class="sidebar-list-sub">
 		                <div class="sidebar-title">Covid Info</div>
 		            </div>
 		            <div class="sidebar-list-sub">
 		                <div class="sidebar-title">Quarantine</div>
-		            </div>
+		            </div> -->
 		            <div class="sidebar-list-sub">
 		                <a class="" href="${path }/covidInfo/center.do">
 		                	<div class="sidebar-title">Covid Test</div>
@@ -59,9 +63,9 @@
 		            <div class="sidebar-list-sub">
 		                <div class="sidebar-title" onclick="location.href='${path}/vaccine/vaccineCenter'" style="cursor:pointer;">Vaccination</div>
 		            </div>
-		            <div class="sidebar-list-sub">
+		            <!-- <div class="sidebar-list-sub">
 		                <div class="sidebar-title">Overseas Entry</div>
-		            </div>
+		            </div> -->
 				</div>			
 			</div>
 			

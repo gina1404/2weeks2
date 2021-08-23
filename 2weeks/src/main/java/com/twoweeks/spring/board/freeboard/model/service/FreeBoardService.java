@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.model.vo.Post_Likes;
 import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
 
 public interface FreeBoardService {
@@ -27,7 +28,10 @@ public interface FreeBoardService {
 	
 	int delete(int no);
 	
-	List<FreeBoard> selectMyBoard(String userId);
+	List<FreeBoard> selectMyBoard(String loginId, int cPage, int numPerpage);
+
+
+	int myBoardCount(String loginId);
 
 	int updateReplyCnt(int post_Sq);
 
@@ -37,13 +41,14 @@ public interface FreeBoardService {
 
 	int fileDownCnt(int atch_No);
 
-	int likeCnt(int post_Sq);
+	int likeCnt(Post_Likes pl);
 
 	int getLikeCnt(int post_Sq);
 
-	int likeMinus(int post_Sq);
+	int likeMinus(Post_Likes pl);
 
 	List<PostAttachment> listAttachment();
+
 
 	
 }

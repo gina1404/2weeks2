@@ -11,18 +11,8 @@
 
 <script src="${path }/resources/js/jquery-3.6.0.min.js"></script>
 <link href="${pageContext.request.contextPath }/resources/css/member/signup.css" rel="stylesheet" />
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
- <style>
-/* .container{
-display:flex;
- */
-/* .side_bar{
-	left:40px;
-} */
 
-
-</style> 
-
+<jsp:include page="/WEB-INF/views/common/header2.jsp"/>
 
 <section class="container">
 

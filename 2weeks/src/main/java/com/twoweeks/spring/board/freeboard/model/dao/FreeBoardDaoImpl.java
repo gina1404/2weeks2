@@ -1,5 +1,6 @@
 package com.twoweeks.spring.board.freeboard.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
-import com.twoweeks.spring.board.freeboard.reply.model.vo.Reply;
+import com.twoweeks.spring.board.freeboard.model.vo.Post_Likes;
 
 @Repository
 public class FreeBoardDaoImpl implements FreeBoardDao {
@@ -67,6 +68,15 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	public int updateAttachment(SqlSession session, PostAttachment a) {
 		return session.insert("freeboard.updateAttachment", a);
 	}
+			
+	@Override
+	public List<FreeBoard> selectMyBoard(SqlSession session, String loginId, int cPage, int numPerpage) {
+		System.out.println("loginId + "+ loginId);
+		System.out.println(cPage+" "+numPerpage);
+		Map m= new HashMap();
+		m.put("loginId", loginId);
+		return session.selectList("freeboard.selectMyBoard", m, new RowBounds((cPage-1)*numPerpage, numPerpage));
+	}
 
 	@Override
 	public int updateView(SqlSession session, int post_Sq) {
@@ -94,31 +104,46 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 
 	@Override
-	public int likeCnt(SqlSession session, int post_Sq) {
-		return session.update("freeboard.likeCnt",post_Sq);
+	public int likeCnt(SqlSession session, Post_Likes pl) {
+		return session.insert("postlike.likeCnt",pl);
 	}
 
 	@Override
 	public int getLikeCnt(SqlSession session, int post_Sq) {
-		return session.selectOne("freeboard.getLikeCnt",post_Sq);
+		return session.selectOne("postlike.getLikeCnt",post_Sq);
 	}
 
 	@Override
-	public int likeMinus(SqlSession session, int post_Sq) {
-		return session.update("freeboard.likeMinus",post_Sq);
+	public int likeMinus(SqlSession session, Post_Likes pl) {
+		return session.delete("postlike.likeMinus",pl);
 	}
 
+	@Override
+	public int likeCheck(SqlSession session, Post_Likes pl) {
+		int result = 0;
+		
+		try {
+			result = (Integer) session.selectOne("postlike.likeCheck",pl);
+		}catch(Exception e) {
+			System.out.println("likeCheck : "+ e);
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
 	@Override
 	public List<PostAttachment> listAttachment(SqlSession session) {
 		return session.selectList("freeboard.listAttachment");
 	}
 
-	
-
-	public List<FreeBoard> selectMyBoard(SqlSession session, String userId) {
-		return session.selectList("freeboard.selectMyBoard", userId);
+	@Override
+	public int myBoardCount(SqlSession session, String loginId) {
+		return session.selectOne("freeboard.myBoardCount", loginId);
 	}
 
-	
 	
 }

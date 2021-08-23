@@ -1,37 +1,99 @@
 @charset "UTF-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
- .category{
- 	font-size:12px;
- }
-.container {
-  padding-right: 30px;
-  padding-left: 30px;
-  margin-right: auto;
-  margin-left: 20%;
-  margin-top:5%;
+
+*{
+font-family :'Pretendard'	
 }
-.profile{
-	width:24px;
-	height:24px;
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #108d6f;
+    border-color: #108d6f;
+    box-shadow: none;
+    outline: none;
 }
-.heart {
-width:13px;
-height:13px;
+
+.btn-primary {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
 }
-.eye{
-width:13px;
-height:13px;
+
+section {
+    padding: 65px 0;
 }
-.comment{
-width:13px;
-height:13px;
+
+.section-title {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 50px;
+    text-transform: uppercase;
 }
-.icon{
-font-size: 8px;
+
+.container .card {
+    border: none;
+    background: #ffffff;
 }
-a{
-text-decoration: none;
+
+.form-group{
+	margin-left: 650px;
 }
-#searhType{
-    margin-left: 700px;	
+
+
+
+
+.mainflip {
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.frontside {
+    position: relative;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+
+.frontside .card{
+    min-height: 312px;
+}
+
+
+
+.frontside .card .card-title{
+    color: #007b5e!important;
+}
+
+.frontside .card .card-body img {
+    width: 160px;
+    height: 120px;
+    border-radius: 50%;
+    margin-left: 27px;
+    margin-bottom: 30px;
+}
+
+.card-img .card-img-bottom .card-img-top{
+    flex-shrink: 0;
+    width: 50%;
+	
+}
+#pagebar-container{
+	padding-left:100px;
+	padding-top:50px;
+	
+}
+.card-img-top row{
+	width: 80px;
+	
 }

@@ -45,5 +45,14 @@ CKEDITOR.editorConfig = function( config ) {
 config.shiftEnterMode = CKEDITOR.ENTER_P;	//엔터키 입력시 p 태그로 변경
 config.startupFocus = true;					//시작시 포커스 설정
 
+ config.filebrowserBrowseUrl = "../ckfinder/ckfinder.html";
+    config.filebrowserFlashBrowseUrl = "../ckfinder/ckfinder.html?type=Flash";
+    config.filebrowserUploadUrl = "../ckfinder/core/connector/java/connctor.java?command=QuickUpload&type=Files";
+    config.filebrowserImageUploadUrl = "../ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Images";
+    config.filebrowserFlashUploadUrl = "../ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash";
+config.filebrowserUploadMethod = 'form';
+
+
+
 	 
 };

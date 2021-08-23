@@ -10,9 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/freeboard/write.css">
 <script src="//cdn.ckeditor.com/4.11.4/full-all/ckeditor.js"></script>
-<style>
 
-</style>
 <section class="content" id="containerWrapper">
 <div class="container" >
     <div class="row container" id="writeContainer" style="width: 100%">
@@ -34,8 +32,9 @@
                 <div class="input-group mb-3">
                     <select class="custom-select" id="category" name="category">
                     <option value="자유" selected>자유</option>
-                    <option value="배달">배달</option>
                     <option value="재택근무">재택근무</option>
+                    <option value="밀키트">밀키트</option>
+                    <option value="취미생활">취미생활</option>
                   </select>  
                 </div>
             </div>            
@@ -64,9 +63,10 @@
 	</div>
 		<div id="articlefileChange" class="bg-success">
 		</div>
+		<input type="hidden" value="${member.user_Id }" name="user_Id">
       <div class="row justify-content-md-center">
-        <input type="submit" class="m-3 btn btn-outline-secondary" onclick="editorContent();"  value="등   록" style="width: 20%; font-weight: bold">
-        <input type="submit" class="m-3 btn btn-outline-secondary" id="back"   value="취   소" style="width: 20%; font-weight: bold">
+        <input type="submit" class="m-3 btn btn-outline-secondary"  value="등   록" style="width: 20%; font-weight: bold">
+        <input type="button" class="m-3 btn btn-outline-secondary" id="back-cancle"   value="취   소" style="width: 20%; font-weight: bold">
         </div>
      </form>
   </div>
@@ -77,68 +77,6 @@
 
  
 <script>
-
-//해당 파일을 가져와서 배열에 담아주고 input file은 초기화 해준다.
-//multiple 특성상 중복파일은 업로드가 되지 않기에 최기화를 해야 중복파일도 업데이트가 가능띠
-/* 	$(document).ready(function(){
-		$("#attach").on("change",fileCheck);
-	});
-	
-	$(function () {
-		$("#btn-upload").click(function(e){
-			e.preventDefault();
-			$("#attach").click();
-		});
-	});
-
-	var fileCount = 0;
-	var totalCount = 5;
-	var fileNum = 0;
-	var content_files = new Array();
-	
-	function fileCheck(e){
-		var files = e.target.files;
-		var filesArr =Array.prototype.slice.call(files);
-		
-		if(fileCount+filesArr.length> totalCount){
-			alert('파일은 최대 ' + totalCount + '개까지 업로드 할 수 있습니다.');
-			return;
-		}else{
-			fileCount = fileCount + filesArr.length;
-		}
-		
-		//각각의 파일 배열담기 및 기타
-		filesArr.forEach(function(f){
-			var reader = new FileReader();
-			
-		reader.onload = function (e) {
-			content_files.push(f);
-			$("#articlefileChange").append('<div id="file'+ fileNum + '" onclick="fileDelete(\'file' + fileNum + '\')">'+
-			'<font style="font-size:16px">' + f.name + '</font>' 
-			+'<img src ="${path }/resources/images/minus-5-xxl.png" style="width:20px; height:Auto; vertical-align:middle; cursor: pointer;"/>'+
-			'</div>'
-			);
-			fileNum++;
-		};
-		
-		reader.readAsDataURL(f);
-	});
-		console.log(content_files);
-		//초기화
-		$("#attach").val("");
-		
-}
-	//파일 부분 삭제 함수
-	
-	function fileDelete(fileNum){
-		var no = fileNum.replace(/[^0-9]/g,"");
-		content_files[no].is_delete = true;
-		$('#' + fileNum).remove();
-		fileCount --;
-		console.log(content_files);
-	} */
-	
-	
 	$(document).ready(function(){
 		$("a[class='file-delete']").on("click",function(e){
 			e.preventDefault();
@@ -158,67 +96,17 @@
 			obj.parent().remove();
 		}
 	}
-	/* 
-	function editorContent(){
-	var editorContent = CKEDITOR.instances.post_Content.getData();
-	var convertContent = editorContent.replace(/(<([^>]+)>)/ig,"");
-	$("#post_Content").val(convertContent);
-	var cc = $("#post_Content").val();
-	console.log(cc);
-	alert('dsadsa');
-	}
-	 */
+	
 	CKEDITOR.replace("post_Content",{
 		height : "300",
 		width : "880",
 		filebrowserImageUploadUrl : '${pageContext.request.contextPath}/freeboard/writeEnd.do ',
 	});
 					
-</script>
+	 
+	 $("#back-cancle").on("click",function(){
+		 history.back();
+	 });
+	 
+	 </script>
 	
-
-
-
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
-.cke_editor_editor .cke_contents{ 
-     min-height:550px; 
-     min-width: 900px;
-     } 
-.content{
-	display: block;
-	margin-top: 100px;
-	margin-left: 135px;
-}
-#articlefileChange{
-	border : solid black 1px;
-}
-
-#attach{
-   width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-	
-}
-#attach + label{
-  display: inline-block;
-  padding: 10px 20px;
-  color: #999;
-  vertical-align: middle;
-  background-color: #fdfdfd;
-  cursor: pointer;
-  border: 2px solid #ebebeb;
-  border-radius: 5px;
-  font-family: 'Open Sans', sans-serif; 
-}
-#attach:focus + label,
-#attach + label:hover{
-	cursor:pointer;
-}
-</style>
-</body>
-</html>

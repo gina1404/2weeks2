@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>  
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/covid/regionalKor.css">
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/search/searchResult.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -20,61 +22,166 @@
 <section class="container" style="display: flex; padding-bottom: 30px;">
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>			
 	<div class="content gridContainer" style="margin-left: 220px;">
-		<div class="item 1st">1</div>
-		<div class="item 1st">2</div>
-		<div class="item 1st">3</div>
-		<div class="item 1st">4</div>
-		<div class="item 1st">
-			<img  style="padding-left: 5px; padding-right: 5px;" width="50px" height="50px" left="50px" top="50px" src="<%=request.getContextPath()%>/resources/images/icons/arar.svg">
-			<h4 style="text-align: center; display: inline-block;"> ${pielist[5].nationNm }</h4> 
-			<br><br><span style=" font-size: 17px; padding-left: 18px; margin-top: 20px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[5].defCount }" var="com1"/>${com1 }명</span>
+		<div class="kCovid item a">
+			<div class="today">
+				<p>금일 확진자</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${todayDecide }" />명
+					</div>
+			</div>
+		
+		<div class="kCovid item a">
+			<div class="today">
+				<p>금일 확진자</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${decideCnt }" />명
+					</div>
+			</div>
+				<div class="kCovid item a">
+			<div class="today">
+				<p>총 사망자</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${deathCnt }" />명
+					</div>
+			</div>
+					<div class="kCovid item a">
+			<div class="today">
+				<p>격리해제 수</p>
+			</div>
+					<div class="todayCnt">
+						<fmt:formatNumber type="number" value="${clearCnt }" />명
+					</div>
+			</div>
+		
+		
+		<div class="item 1st a">
+			<div class="state">
+				<div class="flag">
+					<img alt="미국국기" src="<%=request.getContextPath()%>/resources/images/icons/arar.svg">
+				</div>
+				<div class="flagLogo">
+					 <h4>${pielist[5].nationNm }</h4>
+				</div>
+			</div>
+			<div class="num">
+				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[5].defCount }" var="com1"/>${com1 }명
+			</div>
 		</div>
-		<div class="item 1st">
-			<img  style="padding-left: 5px; padding-top:10px; padding-right: 5px; padding-bottom: 10px;" width="50px" height="50px" left="50px" top="50px" src="<%=request.getContextPath()%>/resources/images/icons/Japan.png">
-			<h4 style="text-align: center; display: inline-block;"> ${pielist[6].nationNm }</h4> 
-			<br><br><span style=" font-size: 17px; padding-left: 25px; margin-top: 20px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[6].defCount }" var="com2"/>${com2 }명</span>
+		<div class="item 1st a">
+			<div class="state">
+				<div class="flag">
+					<img alt="일본국기" src="<%=request.getContextPath()%>/resources/images/icons/Japan.png">
+				</div>
+				<div class="flagLogo">
+					 <h4>${pielist[6].nationNm }</h4>
+				</div>
+			</div>
+			<div class="num">
+				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[6].defCount }" var="com2"/>${com2 }명
+			</div>
 		</div>
-		<div class="item 1st">
-			<img  style="padding-left: 5px; padding-right: 10px; padding-top: 10px; padding-bottom: 5px;" width="50px" height="50px" left="50px" top="50px" src="<%=request.getContextPath()%>/resources/images/icons/Kingdom.jpg">
-			<h4 style="text-align: center; display: inline-block;"> ${pielist[0].nationNm }</h4> 
-			<br><br><span style=" font-size: 17px; padding-left: 18px; margin-top: 20px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[0].defCount }" var="com3"/>${com3 }명</span>
+		<div class="item 1st a">
+			<div class="state">
+				<div class="flag">
+					<img alt="영국국기" src="<%=request.getContextPath()%>/resources/images/icons/Kingdom.jpg">
+				</div>
+				<div class="flagLogo">
+					 <h4>${pielist[0].nationNm }</h4>
+				</div>
+			</div>
+			<div class="num">
+				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[0].defCount }" var="com3"/>${com3 }명
+			</div>
 		</div>
-		<div class="item 1st">
-			<img  style="padding-left: 5px; padding-right: 5px; padding-top: 10px; padding-bottom: 10px;" width="50px" height="50px" left="50px" top="50px" src="<%=request.getContextPath()%>/resources/images/icons/frfr.png">
-			<h4 style="text-align: center; display: inline-block;"> ${pielist[1].nationNm }</h4> 
-			<br><br><span style=" font-size: 17px; padding-left: 18px; margin-top: 20px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[1].defCount }" var="com4"/>${com4 }명</span>
+		<div class="item 1st a">
+			<div class="state" style="margin-right: 28px;">
+				<div class="flag">
+					<img alt="프랑스국기" src="<%=request.getContextPath()%>/resources/images/icons/frfr.png">
+				</div>
+				<div class="flagLogo">
+					 <h4>${pielist[1].nationNm }</h4>
+				</div>
+			</div>
+			<div class="num">
+				<fmt:formatNumber type="number" maxFractionDigits="3" value="${pielist[1].defCount }" var="com4"/>${com4 }명
+			</div>
 		</div>
 
-		<div id="home-map-area" class="item 2nd">
+		<div id="home-map-area" class="item 2nd a">
 			<div id="mapMove">
-				<a class="" href="${path }/covid/domestic.do">
-				지역별 확산 현황 지도
+				<a class="move z" href="${path }/covid/domestic.do">
+					지역별 확산 현황 지도
 				</a>
 			</div>
 			<div id="regionalKor-map-small"></div>
 		</div>
-		<div class="item 2nd">
-			<div class="report">
-				<div>
-					<a id="reportMove" href="${path }/covidUpdate/report.do">
+		<div class="item 2nd a">
+			<div class="report" >
+				<div id="reportreport">
+					<a class="move z" href="${path }/covidUpdate/report.do">
 						보도자료
-					</a>	
+					</a>
 				</div>
-				<table id="reportTab" class="table table-striped">
+				<div id="reportTab">
 					<c:forEach var="r" items="${reportList }">
-						<tr>
-							<td class="reportTitle" style="text-overflow: ellipsis;"> ${r.title } </td>
-							<input type="hidden" value="${r.url }">
-						</tr>
+						<div id="reportTitle" style="text-overflow: ellipsis;"> ${r.title } </div>
+						<input type="hidden" value="${r.url }">
+						<hr id="reportHr">
 					</c:forEach>
-				</table>
-			</div>
-			<div class="report">
-				<div>뉴스</div>
-			</div>			
+				</div>
 		</div>
-		<div class="item 3rd">가</div>
-	</div>	
+			<div class="news">
+				<div id="newsMove">
+					<a class="move z" href="${pageContext.request.contextPath }/covid/news.do"  target=_blank>
+						뉴스
+					</a>					 
+				</div>
+				<c:forEach var ="news" items="${CovidNews }">
+				<div class="frontside ">
+                     <div class="card">
+                         <div class="card-body text-center">
+                             <p><img class=" img-fluid" src="${path }/resources/images/icons/hazmat.svg" alt="card image" style="width:60px;"></p>
+                             <h4 class="card-title" id="news-title"><a class="y" href="<c:out value="${news.url }"/>"  target=_blank ><c:out value="${news.title }"/></a></h4>
+                             <p class="card-text" id="news-content"><a class="y" href="<c:out value="${news.url }"/>"  target=_blank ><c:out value="${news.content }"/></a></p>
+                             <p class="card-text" id="news-date"><c:out value="${news.newsDate }"/></p>
+                         </div>
+                     </div>
+                 </div>
+                 <hr>
+                 </c:forEach>
+			</div>		
+		</div>				
+		
+		<div class="item 3rd a">
+			<div id="home-community-list">
+				 <div class="searchResult-name">2weeks 검색 결과</div>
+				<c:forEach var="list" varStatus="i" items="${searchResultCommunity}" end="8">
+					<div class="searchResult-list" >					
+						<div class="searchResult-profile"><img class="" src="${path }/resources/images/icons/two.svg"/></div>
+						<div class="searchResult-blogName" onclick="">${list.category }</div>
+				       	<div class="searchResult-vertical-divider"></div>
+				       	<div class="searchResult-date">${list.post_Dt }</div>
+						<div class="searchResult-title" onclick="location.href='${path}/freeboard/readView?no=${list.post_Sq}'">${list.post_Title }</div>
+						<div class="searchResult-content">
+							<!-- 미리보기 글자수 제한 -->
+							<c:choose>
+								<c:when test="${fn:length(list.post_Content) gt 200 }">
+									<c:out value="${fn:substring(list.post_Content,0,200)}"/>...
+								</c:when>
+								<c:otherwise>
+									<c:out value="${list.post_Content}"/>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+					<c:if test ="${not i.last}"><hr></c:if>									
+				</c:forEach>
+			</div>
+		</div>
+	</div>
 </section>
 
 <!-- 보도자료 -->
@@ -190,9 +297,26 @@ $("#home-map-area").each(function(){
         }
     }); //ajax 끝
 }); //함수 끝
+
+	/* 다크모드 */
+	document.getElementById("darkBtn").addEventListener("click", () => {	
+		const a = document.querySelectorAll(".a");
+		for ( var i = 0; i < a.length; i++ ) {
+        	a[i].classList.toggle("item");
+			a[i].classList.toggle("dark1");
+      	}
+		const z=document.querySelectorAll(".z");
+		for( var i=0; i<z.length; i++){
+			z[i].classList.toggle("darkLogo");
+			z[i].classList.toggle("move");
+		}
+		const y=document.querySelectorAll(".y");
+		for( var i=0; i<y.length; i++){
+			y[i].classList.toggle("darkNews");
+		}
+	});
+
 </script>
-
-
 
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

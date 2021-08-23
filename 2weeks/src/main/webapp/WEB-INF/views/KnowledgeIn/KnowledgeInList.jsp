@@ -53,7 +53,7 @@ outline:none;
 float:right;
 color:#ffffff;
 position: relative;
-right: 18px;
+
 
 
 }
@@ -181,7 +181,7 @@ float:right;
 color:#ffffff;
 position: relative;
 top:0px;
-left:-20px;
+right:-5px;
 
 }
 
@@ -247,11 +247,36 @@ height:13px;
 .content{
 /* border: 1px solid red; */
 }
+
+.selected{
+color:red;
+font-family: pretendard;
+font-weight:bold;
+position:relative;
+right:-280px;
+top: 30px;
+}
 </style>
 
+<script>
+
+function fn_selection(a,b,c){
+	const Writer =a;
+	const point =b;
+	const sq=c;
+	
+	console.log(Writer);
+	console.log(point);
+	
+	
+	location.assign('<%=request.getContextPath()%>/KnowledgeIn/KnowledgeInListEnd.do?Writer='+Writer+'&point='+point+'&sq='+sq); 
+}
 
 
 
+
+
+</script>
 
 
 
@@ -259,6 +284,7 @@ height:13px;
 
 
 <section class="container" style="display:flex; padding-bottom: 200px;"> 
+ 
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>	
 <div class="content" style="display:inline-block;padding-left: 220px;">	
 	<div class="question">
@@ -276,7 +302,8 @@ height:13px;
 	
 				<div>
 				<input type="hidden" name="kin_Sq" value="${KnowledgeIn.kin_Sq}">
-	 		<%-- <input type="hidden" name="count" value="${count}"> --%>
+<%-- 				<input type="hidden" name="reply_Writer" class="form-control" value="${kr.reply_Writer}" readonly="readonly">
+				<input type="hidden" name="replyPoint" class="form-control" value="${KnowledgeIn.point}" readonly="readonly">  --%>
 	 		
 		
 					<span class="QA">Q</span> 
@@ -330,10 +357,12 @@ height:13px;
 					<%-- 	<a href="${path}/KnowledgeIn/KnowledgeInA.do?sq=${KnowledgeIn.kin_Sq}"> --%><button class="qanswer">답변하기</button><!-- </a> -->
 						</c:if>	
 						</div>
-						<c:if test="${empty member.user_Id} ">
-										
-										
+						<c:if test="${empty member.user_Id} ">			
 						</c:if>
+						
+						
+						
+						
 						<c:choose>
 						<c:when test="${KnowledgeIn.category eq '코로나19'}">
 						<ul class="knowmenu"> 
@@ -447,11 +476,30 @@ height:13px;
 		
 	<img src="" alt=""> <hr width = "100%" color = "#F2F2F2">
 			<c:if test="${member.user_Id == KnowledgeIn.kin_Writer}">
-			<button class="Qcheck" value="${kr.reply_Sq }" >채택하기</button>
+			<c:choose>
+				<c:when test ="${KnowledgeIn.selected==0}">
+					<div><button class="Qcheck"  id ="${kr.reply_Writer}" name ="${KnowledgeIn.point}" value="${KnowledgeIn.kin_Sq}" onclick="fn_selection(this.id,this.name,this.value);" >채택하기</button></div>
+				</c:when>
+				<c:when test ="${KnowledgeIn.selected==1}">
+					<div class="selected"></div>
+				</c:when>
+			</c:choose>
+				
+			</c:if>
+			
+			
+			<c:if test="${member.user_Id != KnowledgeIn.kin_Writer}">
+			<c:choose>
+				<c:when test ="${KnowledgeIn.selected==1}">
+					<div class="selected"></div>
+				</c:when>
+			</c:choose>
+				
 			</c:if>
 					<div>	<span class="QA">A</span> 
 					 <c:if test="${kr.open_Yn eq 'Y'}" >
 					 	<span class="title">${kr.reply_Writer}님의 답변</span> 
+					 	<input type="hidden" name="kin_Sq" value="${KnowledgeIn.kin_Sq}">
         					</c:if>
         			       <c:if test="${kr.open_Yn eq 'N'}" >
             					<span class="title">비공개 답변</span> 
@@ -601,7 +649,7 @@ height:13px;
 
 	</div>
 		
-<!-- 			</form>		 -->
+
 			
 
 
@@ -668,24 +716,6 @@ height:13px;
 		}); */
 		
 		
- 	
-	$(".Qcheck").on("click",function(e){
-			var result = confirm("채택 하시겠습니까?");
-			var url= "${path}/KnowledgeIn/KnowledgeInList.do?sq=${KnowledgeIn.kin_Sq}";
-			let reply_sq=$(e.target).val();
-			$.ajax({
-				
-				url:url,
-				data:{sq:reply_Sq},
-				dataType:"text",
-				success : function(result){
-					console.log(result)
-					}, error:function(request,status,error){ 
-					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				         }
-				})
-
-			});
 
 	});
 
@@ -694,7 +724,12 @@ height:13px;
 
 
 
+
 </script>
+
+
+
+
 
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 <jsp:include page="/WEB-INF/views/common/pagescroll.jsp"/>

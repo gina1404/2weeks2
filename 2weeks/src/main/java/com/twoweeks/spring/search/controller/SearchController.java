@@ -1,5 +1,7 @@
 package com.twoweeks.spring.search.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
+import com.twoweeks.spring.common.Pagination;
+import com.twoweeks.spring.know.model.vo.Kin;
 import com.twoweeks.spring.search.model.service.SearchService;
 import com.twoweeks.spring.search.model.vo.DummyData;
 
@@ -32,31 +38,133 @@ public class SearchController {
 		List<String> nounList = analyzedKeyword.getNouns();
 		return nounList;
 	}
-	
-	//전체 검색 결과
+
+	//전체 검색(커뮤니티, 지식인, 외부)
 	@RequestMapping(value="/searchResult.do", method=RequestMethod.GET)
-	public ModelAndView searchResut(String searchKeyword) {
+	public ModelAndView searchResult(String searchKeyword) {
 		System.err.println("검색어 : "+searchKeyword);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("search/searchResult");
-		mv.addObject("searchKeyword", searchKeyword);
-		mv.addObject("searchResultCommunity","TEST");
-		mv.addObject("searchResultKnowledgeIn","TEST2");
-		
+		mv.addObject("searchKeyword",searchKeyword);
 		List<String> nounList = analyzeKeyword(searchKeyword); //형태소 분석 후 명사만 추출
 //		System.out.println(nounList);
 		
-		//post검색
-		List<FreeBoard> searchResultCommunity = service.searchResultCommunity(nounList);
-		
-		if (searchResultCommunity!=null) mv.addObject("searchResultCommunity", searchResultCommunity);
+		if(!nounList.isEmpty()) {
+			//post검색
+			List<FreeBoard> searchResultCommunity = service.searchResultCommunity(nounList); 			
+			if (searchResultCommunity!=null) mv.addObject("searchResultCommunity", searchResultCommunity);
+			
+			//지식인 검색
+			List<Kin> searchResultKnowledgeIn = service.searchResultKnowledgeIn(nounList);
+			if (searchResultKnowledgeIn!=null) mv.addObject("searchResultKnowledgeIn", searchResultKnowledgeIn);
+			
+			//post 개수
+			int totalData=service.selectResultComCount(nounList);
+			mv.addObject("searchResultCommunityCount", totalData);
+			
+			//지식인 개수
+			int totalData2=service.selectResultKinCount(nounList);
+			mv.addObject("searchResultKnowledgeInCount",totalData2);
+		}
 		
 		List<Map<String,String>> externalNaver = service.searchExternalNaver(searchKeyword);		
 		mv.addObject("searchResultExternalNaver", externalNaver);
 //		System.out.println("검색 결과 : "+service.searchExternalNaver(searchKeyword));
 		return mv;
 	}		
+	
+	//커뮤니티 상세 검색
+	@RequestMapping(value="/searchResult/community.do", method=RequestMethod.GET)
+	public ModelAndView searchResultCommunity(@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, ModelAndView mv, String searchKeyword) throws IOException {
+		if(searchKeyword.contains("?")) {
+			System.out.println(searchKeyword);
+			cPage=Integer.parseInt(searchKeyword.substring(searchKeyword.lastIndexOf("=")+1));
+			System.out.println(cPage);
+			searchKeyword=searchKeyword.substring(0, searchKeyword.indexOf("?"));
+		}
+		//mv.addObject("searchKeyword",searchKeyword);
 		
+		List<String> nounList = analyzeKeyword(searchKeyword); //형태소 분석 후 명사만 추출
+		//System.out.println("검색어"+searchKeyword);
+		
+		System.out.println(cPage);
+		
+		if(!nounList.isEmpty()) {
+			//post검색
+			List<FreeBoard> searchResultCom = service.searchResultCom(cPage, numPerpage, nounList);
+			int totalData=service.selectResultComCount(nounList);
+			System.out.println(totalData);
+			if (searchResultCom!=null) {
+				mv.addObject("totalContents",totalData);
+				mv.addObject("searchResultCom", searchResultCom);
+				mv.addObject("pageBar", Pagination.getPageBar(totalData, cPage, numPerpage, "community.do?searchKeyword="+searchKeyword, null));
+			}
+		}
+
+		mv.setViewName("search/searchResultCommunity");
+		return mv;
+	}
+	
+	//지식인 상세 검색
+		@RequestMapping(value="/searchResult/knowledgeIn.do", method=RequestMethod.GET)
+		public ModelAndView searchResultKnowledgeIn(@RequestParam(value="cPage", defaultValue="1") int cPage,
+				@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, ModelAndView mv, String searchKeyword) throws IOException {
+			if(searchKeyword.contains("?")) {
+				System.out.println(searchKeyword);
+				cPage=Integer.parseInt(searchKeyword.substring(searchKeyword.lastIndexOf("=")+1));
+				System.out.println(cPage);
+				searchKeyword=searchKeyword.substring(0, searchKeyword.indexOf("?"));
+			}
+			//mv.addObject("searchKeyword",searchKeyword);
+			
+			List<String> nounList = analyzeKeyword(searchKeyword); //형태소 분석 후 명사만 추출
+			//System.out.println("검색어"+searchKeyword);
+			
+			System.out.println(cPage);
+			
+			if(!nounList.isEmpty()) {
+				//지식인검색
+				List<Kin> searchResultKin = service.searchResultKin(cPage, numPerpage, nounList);
+				int totalData=service.selectResultKinCount(nounList);
+				System.out.println(totalData);
+				if (searchResultKin!=null) {
+					mv.addObject("totalContents",totalData);
+					mv.addObject("searchResultKin", searchResultKin);
+					mv.addObject("pageBar", Pagination.getPageBar(totalData, cPage, numPerpage, "knowledgeIn.do?searchKeyword="+searchKeyword, null));
+				}
+			}
+
+			mv.setViewName("search/searchResultKin");
+			return mv;
+		}
+
+		//지식인 전체 검색 결과(지식인, 네이버 지식인)
+		@RequestMapping(value="/searchResult/knowledgeInAll.do", method=RequestMethod.GET)
+		public ModelAndView searchResultKnowledgeInAll(String searchKeyword) {
+			System.err.println("검색어 : "+searchKeyword);
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("search/searchResultKinAll");
+			mv.addObject("searchKeyword",searchKeyword);
+			List<String> nounList = analyzeKeyword(searchKeyword); //형태소 분석 후 명사만 추출
+			
+			if(!nounList.isEmpty()) {
+				//지식인 검색
+				List<Kin> searchResultKnowledgeIn = service.searchResultKnowledgeIn(nounList);
+				if (searchResultKnowledgeIn!=null) mv.addObject("searchResultKnowledgeIn", searchResultKnowledgeIn);
+				
+				//지식인 개수
+				int totalData2=service.selectResultKinCount(nounList);
+				mv.addObject("searchResultKnowledgeInCount",totalData2);
+			}
+			
+			//네이버 지식인 api
+			List<Map<String,String>> externalKin = service.searchExternalKin(searchKeyword);		
+			mv.addObject("searchResultExternalKin", externalKin);
+			return mv;
+		}
+		
+	
 	//커뮤니티 데이터 크롤링 - Daum 블로그
 	//@RequestMapping("/update/blogDummy")
 	public void updateBlogDummy(String searchKeyword) {

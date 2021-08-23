@@ -10,14 +10,14 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
 
 <link href="${pageContext.request.contextPath }/resources/css/member/login.css" rel="stylesheet" />
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<jsp:include page="/WEB-INF/views/common/header2.jsp"/>
 
 <style>
 
 </style>
 
 <section class="container">
-<%-- <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/> --%>
+
 <div class="content">
 	<div class="content2">
 	<div class="row">

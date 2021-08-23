@@ -8,16 +8,36 @@
 	align-items: stretch;
 	font-family: 'Pretendard';
 }
-.item{	
-    overflow: hidden;
+
+.dark1{
+	overflow: hidden;
     position: relative;
     border-radius: 14px;
-    background-color: var(--colorBg10);
+    background-color: #394956;
+}
+
+.item{	
+	overflow: hidden;
+    position: relative;
+    border-radius: 14px;
+    background-color: #FFFFFF;
     box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px 0px;
 }
 
 .1st{
 	height: 50px;
+}
+
+.dark1:nth-child(9) {
+	grid-column: 1/4;
+	grid-template-columns: 1fr, 1fr;
+}
+.dark1:nth-child(10){
+	grid-column: 4/9;
+	grid-template-columns: 1fr, 1fr;
+}
+.dark1:nth-child(11){
+	grid-column: 1/9;
 }
 
 .item:nth-child(9) {
@@ -31,6 +51,8 @@
 .item:nth-child(11){
 	grid-column: 1/9;
 }
+
+
 #home-map-area{
 	text-align:center;
 }
@@ -45,33 +67,155 @@
     margin: 25px 15px 15px 15px;
 }
 .report{
-	width: 375px;;
+	width: 355px;
 	height: 100%;
+	display: inline-block;	
 }
 #reportTab{
-	font-size: 13px;
+	font-size: 14px;
 	width: 320px;
     margin: auto;     
     table-layout:fixed;
+    height: 85%;
 }
-#reportTab tr td{
+
+#reportTitle{
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 	cursor: pointer;
+	text-align: left;
 }
-#reportTab tr td:hover{
+
+#reportTitle:hover{
 	color: #6E6E6E;
 	font-weight: bolder;
 }
 
-.report>div{
+#reportHr{
+    margin: 7px auto 7px auto;
+}
+
+#reportreport{
 	font-weight: bolder;
 	font-size: 20px;
     text-align: center;
     margin: 25px 15px 15px 15px;
 }
-#reportMove:hover, #mapMove:hover{
+.move{
+	color: #394956;   
+}
+.move:hover{
 	color: #6E6E6E;
 	font-weight: bolder;
+}
+.darkLogo{
+	color: white;
+}
+.darkLogo:hover{
+	color: #6E6E6E;
+	font-weight: bolder;
+}
+
+
+/***해외현황***/
+.state, .flag, .flagLogo, .num{
+	/* border: solid 1px; */
+}
+
+.state{
+	width: 90px;
+    height: 25px;
+    display: flex;
+    margin: 30px auto auto auto;
+}
+.flag{
+	width: 40px;
+    height: 25px;
+    display: inline-block;
+}
+.flag img{
+	height: 12px;
+    display: block;
+    text-align: center;
+    float: right;
+    margin: 7px auto auto auto;
+}
+
+.flagLogo{
+	width: 50px;
+    height: 25px;
+    margin-left: 5px; 
+	display: inline-block;
+}
+.flagLogo h4{
+	margin-top: 3px;
+    font-weight: bolder;	
+}
+.num{
+	width: 130px;
+    height: 80px;
+    font-size: 17px;
+    margin: auto;
+    text-align: center;
+    line-height: 90px;
+    font-weight: bolder;
+}
+
+.today{
+	padding-top : 25px;
+	font-size: 18px;
+	font-weight: bolder;
+	text-align: center;
+	line-height: 40px;
+}
+
+.todayCnt{
+	text-align: center;
+	font-weight: bolder;
+	font-size: 17px;
+	padding-top : 15px;
+}
+
+
+.news{
+	width: 355px;
+	/* margin-left: 30px; */
+	height: 100%;
+	float: right;
+}
+#newsMove{
+	color: #6E6E6E;
+	font-weight: bolder;
+	font-size: 20px;
+    text-align: center;
+	font-weight: bolder;
+	font-size: 20px;
+    text-align: center;
+    margin: 25px 15px 15px 1px;
+}
+
+.image-flip:hover .frontside,
+.image-flip.hover .frontside {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.frontside .card .card-body img {
+    border-radius: 50%;
+}
+.frontside .card .card-title{
+    color: #007b5e!important;
+}
+.frontside .card {
+    min-height: 80px;
+}
+.frontside{
+	 margin-top : 10px;
+	 width: 340px;
+}
+.darkNews{
+	 color: white;
 }

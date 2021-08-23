@@ -354,6 +354,13 @@ background:#FFFFFF;
 text-align: center;
 
 }
+.selected{
+color:red;
+font-family: pretendard;
+position: relative;
+right:-100px;
+top:-10px;
+}
 </style>
 <section class="container" style="display:flex; padding-bottom: 200px;"> 	
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
@@ -363,7 +370,7 @@ text-align: center;
 						width="130px" height="130px">
 			<div class="description">전문의 상담이<br>필요할 땐,<br>지식iN 엑스퍼트</div></a>
 
-		
+			<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly">
 						
 			<div class="description"></div>
 				<!-- 	</div> -->
@@ -416,7 +423,7 @@ text-align: center;
 				
 					<c:forEach var="k" items="${MyQ }" varStatus="status">
 					 <c:if test="${status.count<=3 }"> 
-					
+				<%-- 	<input type="hidden" name="user_Id" class="form-control" value="${member.user_Id}" readonly="readonly"> --%>
 					<li class="ranking_item _item_1" >
 			
 					<span class="no"><c:out value="${status.count}"></c:out></span>
@@ -424,7 +431,16 @@ text-align: center;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
 		<!-- 			<span class="reply_num">답변수 8</span> -->
-			    	
+			    	<c:choose>
+					<c:when test ="${k.selected==1}">
+					<div class="selected">채택완료</div>
+					</c:when>
+					
+					<c:when test ="${k.selected==0}">
+					<div class="selected"></div>
+					</c:when>
+					</c:choose>
+				
 				
 					</li>
 						</c:if>
@@ -442,7 +458,16 @@ text-align: center;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
 		<!-- 			<span class="reply_num">답변수 8</span> -->
-			    	
+			    	<c:choose>
+					<c:when test ="${k.selected==1}">
+					<div class="selected">채택완료</div>
+					</c:when>
+					
+					<c:when test ="${k.selected==0}">
+					<div class="selected"></div>
+					</c:when>
+					</c:choose>
+				
 				
 					</li>
 				</c:if>
@@ -494,7 +519,16 @@ text-align: center;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
 		<!-- 			<span class="reply_num">답변수 8</span> -->
-			    	
+			    	<c:choose>
+					<c:when test ="${k.selected==1}">
+					<div class="selected">채택완료</div>
+					</c:when>
+					
+					<c:when test ="${k.selected==0}">
+					<div class="selected"></div>
+					</c:when>
+					</c:choose>
+				
 				
 					</li>
 						</c:if>
@@ -516,7 +550,16 @@ text-align: center;
 					<a href="${path}/KnowledgeIn/KnowledgeInList.do?sq=${k.kin_Sq}" class="text" target="_blank" onclick="">${k.kin_Content}</a>
 					<span class="recommend_num">조회수 ${k.kin_Cnt}</span>
 		<!-- 			<span class="reply_num">답변수 8</span> -->
-			    	
+			    	<c:choose>
+					<c:when test ="${k.selected==1}">
+					<div class="selected">채택완료</div>
+					</c:when>
+					
+					<c:when test ="${k.selected==0}">
+					<div class="selected"></div>
+					</c:when>
+					</c:choose>
+				
 				
 					</li>
 				</c:if>
