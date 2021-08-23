@@ -5,7 +5,6 @@
 	<groupId>com.twoweeks</groupId>
 	<artifactId>spring</artifactId>
 	<name>2weeks</name>
-	
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -389,6 +388,8 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            
+
         </plugins>        
     </build>
 </project>

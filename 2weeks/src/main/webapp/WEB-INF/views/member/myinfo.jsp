@@ -12,13 +12,13 @@
 <link href="${pageContext.request.contextPath }/resources/css/member/myinfo.css" rel="stylesheet" />
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <style>
-.side_bar{
+/* .side_bar{
 	left:40px;
-}
+} */
 </style>
 
 <section class="container">
-<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+<%-- <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/> --%>
 <div class="content">
 	<div class="row">
 		<div class="col-md-3">
