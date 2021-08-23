@@ -56,7 +56,7 @@ public class FreeBoardController {
 	
 	@GetMapping("/freeboard/searchBoard.do")
 	public ModelAndView searchBoard(ModelAndView mv, FreeBoard fb, HttpServletRequest request, HttpSession session,
-			@RequestParam(value="cPage", defaultValue="1") int cPage, @RequestParam(value="numPerpage",defaultValue="5") int numPerpage) {
+			@RequestParam(value="cPage", defaultValue="1") int cPage, @RequestParam(value="numPerpage",defaultValue="6") int numPerpage) {
 		String type= request.getParameter("searchType");
 		String keyword = request.getParameter("keyword");
 		
@@ -75,7 +75,7 @@ public class FreeBoardController {
 	}
 	
 	@RequestMapping("/freeboard/boardList.do")
-	public ModelAndView boardList(@RequestParam(value="cPage", defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="6")int numPerpage,
+	public ModelAndView boardList(@RequestParam(value="cPage", defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="15")int numPerpage,
 			ModelAndView mv) {
 		log.info("게시판 리스트" );
 		
