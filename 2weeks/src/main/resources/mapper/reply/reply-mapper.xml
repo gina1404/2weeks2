@@ -14,12 +14,12 @@ order SIBLINGS by  reply_ref
 
 	<!-- 댓글 작성 -->
 	<insert id="create">
-	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user01', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, DEFAULT, null, SYSDATE)
+	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, #{user_Id}, #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, DEFAULT, null, SYSDATE)
 	</insert>
 	
 	<!-- 댓댓글 추가 -->
 	<insert id="rereplyInsert">
-	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, 'user02', #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, #{reply_Level}+1,
+	INSERT INTO POST_REPLY VALUES(POST_REPLY_SEQ.NEXTVAL, #{user_Id}, #{post_Sq}, #{reply_Content}, null, DEFAULT, DEFAULT, SYSDATE, DEFAULT, #{reply_Level}+1,
 	#{reply_Ref},DEFAULT)
 	</insert>
 	

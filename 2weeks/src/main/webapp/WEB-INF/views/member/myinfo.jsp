@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <script src="${path }/resources/js/jquery-3.6.0.min.js"></script>
 <link href="${pageContext.request.contextPath }/resources/css/member/myinfo.css" rel="stylesheet" />
+
 <jsp:include page="/WEB-INF/views/common/header2.jsp"/>
 
 <section class="container">

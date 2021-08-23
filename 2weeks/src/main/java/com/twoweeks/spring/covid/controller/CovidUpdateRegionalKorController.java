@@ -20,8 +20,8 @@ public class CovidUpdateRegionalKorController {
 	private CovidUpdateRegionalKorService service;
 	
 	//코로나 지역별 현황 api를 DB에 저장
-	@Scheduled(cron = "0 0 5 * * *") //매일 아침 5시에 실행
-	//@RequestMapping("/covidUpdate/regional/kor/update.do")
+	@Scheduled(cron = "0 0 12 * * *") //매일 아침 12시에 실행
+	@RequestMapping("/covidUpdate/regional/kor/update.do")
 	//코로나 지역별 현황(한국) 데이터를 받아다가 DB에 저장
 	public void insertCovidRegionalKor() {
 		//공공데이터포털에서 한국 데이터를 받아서 ListMap에 저장

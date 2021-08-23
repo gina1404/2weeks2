@@ -44,15 +44,17 @@
 			<div class="wrap_sub_list">
 				<div class="sidebar-list">
 	                <img class="sidebar-icon" src="${path }/resources/images/icons/info.png"/>
-	                <div class="sidebar-title">Covid-19 info/guide</div>
+	                	<a class="" href="${path }/covidInfo/center.do">
+		                	<div class="sidebar-title">Covid-19 info/guide</div>
+		                </a>
                 </div>
 				<div class="sidebar-list-hide">
-					<div class="sidebar-list-sub">
+					<!-- <div class="sidebar-list-sub">
 		                <div class="sidebar-title">Covid Info</div>
 		            </div>
 		            <div class="sidebar-list-sub">
 		                <div class="sidebar-title">Quarantine</div>
-		            </div>
+		            </div> -->
 		            <div class="sidebar-list-sub">
 		                <a class="" href="${path }/covidInfo/center.do">
 		                	<div class="sidebar-title">Covid Test</div>
@@ -61,9 +63,9 @@
 		            <div class="sidebar-list-sub">
 		                <div class="sidebar-title" onclick="location.href='${path}/vaccine/vaccineCenter'" style="cursor:pointer;">Vaccination</div>
 		            </div>
-		            <div class="sidebar-list-sub">
+		            <!-- <div class="sidebar-list-sub">
 		                <div class="sidebar-title">Overseas Entry</div>
-		            </div>
+		            </div> -->
 				</div>			
 			</div>
 			

@@ -205,12 +205,13 @@
 				$("#searchKeyword").focus();
 				return false;
 			}else{ //검색어를 컨트롤러에 전달
-				var currentUrl=document.location.href; //현재 페이지 url을 받아옴 -> http://localhost:9090/ 이 부분을 잘라냄
-				currentUrl=currentUrl.substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")).substring(currentUrl.indexOf("/")+1); 
+				var currentUrl=document.location.href; //현재 페이지 url을 받아옴
 				
 				//현재 페이지 url을 매핑 주소를 비교해 분기 처리
-				if(currentUrl=='${path}/test/test.do'){ //->이건 테스트용으로 주소 설정한 것. 수정해야 됨
-					console.log("다른 주소임");
+				if(currentUrl.includes("freeboard")){  //커뮤니티에서 검색할 경우
+					location.href='${path }/searchResult/community.do?searchKeyword='+$('input[name=searchKeyword]').val();
+				}else if(currentUrl.includes("KnowledgeIn")){//지식인에서 검색할 경우
+					location.href='${path }/searchResult/knowledgeInAll.do?searchKeyword='+$('input[name=searchKeyword]').val();
 				}else{ //기본 전체 검색(커뮤니티, 지식인, 외부)
 					location.href='${path }/searchResult.do?searchKeyword='+$('input[name=searchKeyword]').val();
 				}

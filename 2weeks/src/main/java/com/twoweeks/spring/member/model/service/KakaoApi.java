@@ -40,7 +40,7 @@ public class KakaoApi {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=7b4b21f6e600d0bd834e6900c63c7084");
-			sb.append("&redirect_uri=http://localhost:9090/spring/member/kakaoLogin"); 
+			sb.append("&redirect_uri=http://http://rclass.iptime.org:9999/spring/member/kakaoLogin"); 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();

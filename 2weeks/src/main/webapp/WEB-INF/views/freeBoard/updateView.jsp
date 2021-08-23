@@ -9,9 +9,10 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
 <script src="//cdn.ckeditor.com/4.11.4/full-all/ckeditor.js"></script>
+<link rel="stylesheet"  type="text/css" href="${path }/resources/css/freeboard/updateView.css">
 
 
-<section class="container">container
+<section class="container">
 <div class="content" id="">
     <div class="content" style="width: 70%">
      <form name="boardFrm"  id="dataForm" method="post" action="${path }/freeboard/update" enctype="multipart/form-data">
@@ -27,9 +28,10 @@
             <div class="col-sm-3">
                 <div class="input-group mb-3">
                     <select class="custom-select" id="category" name="category">
-                    <option value="분류" ${list.category eq '분류' ? 'selected' : '' }>분류</option>
-                    <option value="잡담" ${list.category eq '잡담' ? 'selected' : '' }>잡담</option>
-                    <option value="배달" ${list.category eq '배달' ? 'selected' : '' }>배달</option>
+                    <option value="자유" ${list.category eq '자유' ? 'selected' : '' }>자유</option>
+                    <option value="재택근무" ${list.category eq '재택근무' ? 'selected' : '' }>재택근무</option>
+                    <option value="밀키트" ${list.category eq '밀키트' ? 'selected' : '' }>밀키트</option>
+                    <option value="취미생활" ${list.category eq '취미생활' ? 'selected' : '' }>취미생활</option>
                   </select>  
                 </div>
             </div>            
@@ -106,53 +108,6 @@ $(document).ready(function(){
 	$("#back-cancel").on("click", function(){
 		history.back();
 	});
-
-					
 </script>
 	
 
-
-
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
-.cke_editor_editor .cke_contents{ 
-     min-height:550px; 
-     min-width: 900px;
-     } 
-.content{
-	display: block;
-	margin-top: 100px;
-	margin-left: 135px;
-}
-#articlefileChange{
-	border : solid black 1px;
-}
-
-#attach{
-   width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-	
-}
-#attach + label{
-  display: inline-block;
-  padding: 10px 20px;
-  color: #999;
-  vertical-align: middle;
-  background-color: #fdfdfd;
-  cursor: pointer;
-  border: 2px solid #ebebeb;
-  border-radius: 5px;
-  font-family: 'Open Sans', sans-serif; 
-}
-#attach:focus + label,
-#attach + label:hover{
-	cursor:pointer;
-}
-</style>
-</body>
-</html>

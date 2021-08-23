@@ -99,6 +99,7 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
+									<h6 style="color:red;">[<c:out value="${b.category }"/>]</h6>
 									<h4 class="card-title">
 										<a href="${path }/freeboard/readView?no=${b.post_Sq }">
 										<c:out value="${b.post_Title }" /> </a>
@@ -120,16 +121,21 @@
 						<li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"></a> <i class="fa  fa-commenting-o"><c:out value="${b.replyNo }"/></i>
 						<li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"></a> <i class="fa fa-eye"><c:out value="${b.post_Cnt }"/></i>
 						
-						
 						</ul>
 								</div>
 							</div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
             <!-- ./Team member -->
          </c:forEach>
+         <c:if test='${not empty member.user_Id }'>
+         <button id="btn-add" class="btn btn-outline-success" onclick="location.assign('${path}/freeboard/write.do')">
+								글쓰기
+		</button>
+		</c:if>
        </div>
        <div id="pagebar-container">${pageBar }</div>
     </div>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.twoweeks.spring.board.freeboard.model.vo.FreeBoard;
 import com.twoweeks.spring.board.freeboard.model.vo.PostAttachment;
+import com.twoweeks.spring.board.freeboard.model.vo.Post_Likes;
 
 @Repository
 public class FreeBoardDaoImpl implements FreeBoardDao {
@@ -103,20 +104,37 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 
 	@Override
-	public int likeCnt(SqlSession session, int post_Sq) {
-		return session.update("freeboard.likeCnt",post_Sq);
+	public int likeCnt(SqlSession session, Post_Likes pl) {
+		return session.insert("postlike.likeCnt",pl);
 	}
 
 	@Override
 	public int getLikeCnt(SqlSession session, int post_Sq) {
-		return session.selectOne("freeboard.getLikeCnt",post_Sq);
+		return session.selectOne("postlike.getLikeCnt",post_Sq);
 	}
 
 	@Override
-	public int likeMinus(SqlSession session, int post_Sq) {
-		return session.update("freeboard.likeMinus",post_Sq);
+	public int likeMinus(SqlSession session, Post_Likes pl) {
+		return session.delete("postlike.likeMinus",pl);
 	}
 
+	@Override
+	public int likeCheck(SqlSession session, Post_Likes pl) {
+		int result = 0;
+		
+		try {
+			result = (Integer) session.selectOne("postlike.likeCheck",pl);
+		}catch(Exception e) {
+			System.out.println("likeCheck : "+ e);
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
 	@Override
 	public List<PostAttachment> listAttachment(SqlSession session) {
 		return session.selectList("freeboard.listAttachment");
@@ -126,5 +144,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	public int myBoardCount(SqlSession session, String loginId) {
 		return session.selectOne("freeboard.myBoardCount", loginId);
 	}
+
 	
 }

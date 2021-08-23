@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <style>
 	header .content{
-		padding-left:250px !important;
+		padding-left:220px !important;
 		margin-top:0;
 	}
 </style>

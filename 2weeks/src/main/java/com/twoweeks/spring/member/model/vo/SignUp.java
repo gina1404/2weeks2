@@ -14,39 +14,37 @@ import org.hibernate.validator.constraints.Length;
 import lombok.Builder;
 import lombok.Data;
 
-//회원가입 검증객체
-@Data
-public class SignUp {
-	 // 회원 ID 
-	@NotEmpty
-	@Pattern(regexp = "^[a-zA-Z0-9]{5,10}$")
-	private String user_Id;
-	
-	@NotEmpty
-    // 회원 이름 
-	private String user_Nm;
+		//회원가입 검증객체
+		@Data
+		public class SignUp {
+			 // 회원 ID 
+			@NotEmpty
+			@Pattern(regexp = "^[a-zA-Z0-9]{5,10}$")
+			private String user_Id;
+			
+			@NotEmpty
+		    // 회원 이름 
+			private String user_Nm;
+		
+		    // 회원 비밀번호 
+			@NotEmpty
+			@Pattern(regexp = "^(?=.*[0-9a-zA-Z])(?=.*[!@#$%^&*]).{6,}$")
+			private String user_Pw;
+			
+			@NotEmpty
+			private String user_Pw2;
+		
+		    // 회원 닉네임
+			@NotEmpty
+			 private String user_Nic;
+		    // 이메일 
+			 @Email
+			 @NotEmpty
+			 private String user_Email;
+			 @NotEmpty
+			 private String emailcheck;
 
-    // 회원 비밀번호 
-	@NotEmpty
-	@Pattern(regexp = "^(?=.*[0-9a-zA-Z])(?=.*[!@#$%^&*]).{6,}$")
-	private String user_Pw;
-	
-	@NotEmpty
-	//@Pattern(regexp = "^(?=.*[0-9a-zA-Z])(?=.*[!@#$%^&*]).{6,}$")
-	private String user_Pw2;
 
-    // 회원 닉네임
-	@NotEmpty
-	 private String user_Nic;
-
-    // SNS 타입 KAKAO: 카카오톡 NAVER: 네이버
-	 private String sns_Type;
-
-    // SNS 계정정보 
-	 private String sns_Id;
-
-    // SNS 연동일 
-	 private Date sns_Connected_Dt;
 
     // 회원 생일 
     //private Date user_Bday;
@@ -63,12 +61,7 @@ public class SignUp {
 	 
 	 private String user_Pfrename;
 
-    // 이메일 
-	 @Email
-	 @NotEmpty
-	 private String user_Email;
-	 @NotEmpty
-	 private String emailcheck;
+
 	 
 	// 주소 
 	//private String user_Addr;
@@ -77,5 +70,15 @@ public class SignUp {
 	 private Date enroll_Dt;
 	 
 	 private int userPoint_Cnt;
+	 
+	 
+	    // SNS 타입 KAKAO: 카카오톡 NAVER: 네이버
+		 private String sns_Type;
+
+	    // SNS 계정정보 
+		 private String sns_Id;
+
+	    // SNS 연동일 
+		 private Date sns_Connected_Dt;
 
 }

@@ -61,7 +61,7 @@ public class CovidDomesitcController {
 	return mv;
 	}
 	
-	@Scheduled(cron = "0 0 12 * * *")
+	@Scheduled(cron = "0 00 10 * * *")
 	public void kCovidDataSave() {
 		
 		ResponseEntity<String> responseEntity = service.kCovidDataSave();
