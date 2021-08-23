@@ -30,11 +30,9 @@
 
 .dark1:nth-child(9) {
 	grid-column: 1/4;
-	grid-template-columns: 1fr, 1fr;
 }
 .dark1:nth-child(10){
 	grid-column: 4/9;
-	grid-template-columns: 1fr, 1fr;
 }
 .dark1:nth-child(11){
 	grid-column: 1/9;
@@ -42,11 +40,9 @@
 
 .item:nth-child(9) {
 	grid-column: 1/4;
-	grid-template-columns: 1fr, 1fr;
 }
 .item:nth-child(10){
 	grid-column: 4/9;
-	grid-template-columns: 1fr, 1fr;
 }
 .item:nth-child(11){
 	grid-column: 1/9;
